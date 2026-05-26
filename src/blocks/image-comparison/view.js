@@ -13,61 +13,110 @@ jQuery(document).ready(function ($) {
 
             let clicked = false;
 
-            // Initial overlay clip-path and reset width to default
-            $overlay.css({
-                "width": "",
-                "clip-path": "inset(0 50% 0 0)",
-                "-webkit-clip-path": "inset(0 50% 0 0)"
-            });
+            const direction = $wrapper.attr('data-direction') || 'horizontal';
+            let offsetData = $wrapper.attr('data-offset');
+            if (offsetData) {
+                try {
+                    offsetData = JSON.parse(offsetData);
+                } catch (e) {
+                    offsetData = { Desktop: 50, Tablet: 50, Mobile: 50 };
+                }
+            } else {
+                offsetData = { Desktop: 50, Tablet: 50, Mobile: 50 };
+            }
 
-            // Create slider
+            let offset = 50;
+            const windowWidth = $(window).width();
+            if (windowWidth <= 767) {
+                offset = offsetData.Mobile !== undefined ? offsetData.Mobile : 50;
+            } else if (windowWidth <= 1024) {
+                offset = offsetData.Tablet !== undefined ? offsetData.Tablet : 50;
+            } else {
+                offset = offsetData.Desktop !== undefined ? offsetData.Desktop : 50;
+            }
+
+            const isVertical = direction === 'vertical';
+
+            if (isVertical) {
+                $overlay.css({
+                    "width": "",
+                    "clip-path": `inset(0 0 ${100 - offset}% 0)`,
+                    "-webkit-clip-path": `inset(0 0 ${100 - offset}% 0)`
+                });
+            } else {
+                $overlay.css({
+                    "width": "",
+                    "clip-path": `inset(0 ${100 - offset}% 0 0)`,
+                    "-webkit-clip-path": `inset(0 ${100 - offset}% 0 0)`
+                });
+            }
+
             const $slider = $('<div class="fb-image-comparison-slider"></div>');
-
             $wrapper.append($slider);
 
-            // Initial slider position
-            $slider.css({
-                left: "50%"
-            });
+            if (isVertical) {
+                $slider.css({
+                    top: offset + "%",
+                    left: "50%"
+                });
+            } else {
+                $slider.css({
+                    left: offset + "%",
+                    top: "50%"
+                });
+            }
 
-            // Start drag
             $slider.on("mousedown touchstart", function (e) {
                 e.preventDefault();
                 clicked = true;
             });
-
-            // Stop drag
             $(window).on("mouseup touchend", function () {
                 clicked = false;
             });
-
-            // Move slider
             $(window).on("mousemove touchmove", function (e) {
 
                 if (!clicked) return;
 
                 const rect = $wrapper[0].getBoundingClientRect();
                 const wrapperWidth = rect.width;
-                if (wrapperWidth === 0) return;
+                const wrapperHeight = rect.height;
+                if (wrapperWidth === 0 || wrapperHeight === 0) return;
 
                 const event = e.originalEvent && e.originalEvent.touches
                     ? e.originalEvent.touches[0]
                     : e;
 
-                let x = event.clientX - rect.left;
+                if (isVertical) {
+                    let y = event.clientY - rect.top;
 
-                if (x < 0) x = 0;
-                if (x > wrapperWidth) x = wrapperWidth;
+                    if (y < 0) y = 0;
+                    if (y > wrapperHeight) y = wrapperHeight;
 
-                const pct = (x / wrapperWidth) * 100;
+                    const pct = (y / wrapperHeight) * 100;
 
-                $overlay.css({
-                    "clip-path": `inset(0 ${100 - pct}% 0 0)`,
-                    "-webkit-clip-path": `inset(0 ${100 - pct}% 0 0)`
-                });
-                $slider.css({
-                    left: pct + "%"
-                });
+                    $overlay.css({
+                        "clip-path": `inset(0 0 ${100 - pct}% 0)`,
+                        "-webkit-clip-path": `inset(0 0 ${100 - pct}% 0)`
+                    });
+                    $slider.css({
+                        top: pct + "%"
+                    });
+                } else {
+                    let x = event.clientX - rect.left;
+
+                    if (x < 0) x = 0;
+                    if (x > wrapperWidth) x = wrapperWidth;
+
+                    const pct = (x / wrapperWidth) * 100;
+
+                    $overlay.css({
+                        "clip-path": `inset(0 ${100 - pct}% 0 0)`,
+                        "-webkit-clip-path": `inset(0 ${100 - pct}% 0 0)`
+                    });
+                    $slider.css({
+                        left: pct + "%"
+                    });
+                }
             });
 
         });

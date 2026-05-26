@@ -100,8 +100,12 @@ const attributes = {
 
     /** Start Initial Offset */
     comparisonInitialOffset: {
-        type: "number",
-        default: 50,
+        type: "object",
+        default: {
+            Desktop: 50,
+            Tablet: 50,
+            Mobile: 50
+        }
     },
     /** End Initial Offset */
 
@@ -124,9 +128,479 @@ const attributes = {
     comparisonDragDirection: {
         type: 'string',
         default: 'horizontal',
-    }
+    },
     /** End Comparison Drag Direction */
 
+    /** Start Comparison Margin */
+    comparisonMarginUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    comparisonMarginDesktop: {
+        type: "object",
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    comparisonMarginTablet: {
+        type: "object",
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    comparisonMarginMobile: {
+        type: "object",
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    comparisonMarginLink: {
+        type: "boolean",
+        default: true
+    },
+    /** End Comparison Margin */
+
+    /** Start Comparison Border */
+    comparisonBorder: {
+        type: 'string',
+        default: "none",
+    },
+    comparisonBorderColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    comparisonBorderColor: {
+        type: 'string',
+        default: ""
+    },
+    comparisonBorderHoverColor: {
+        type: 'string',
+    },
+    comparisonBorderUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    comparisonBorderDesktop: {
+        type: "object",
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    comparisonBorderTablet: {
+        type: "object",
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    comparisonBorderMobile: {
+        type: "object",
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    comparisonBorderLink: {
+        type: "boolean",
+        default: true
+    },
+    /** End Comparison Border */
+
+    /** Start Comparison Border Units */
+    comparisonBorderRadiusUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    comparisonBorderRadiusDesktop: {
+        type: "object",
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    comparisonBorderRadiusTablet: {
+        type: "object",
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    comparisonBorderRadiusMobile: {
+        type: "object",
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    comparisonBorderRadiusLink: {
+        type: "boolean",
+        default: true
+    },
+    /** End Comparison Border Units */
+
+    /** Start Comparison Border Radius */
+    comparisonBorderRadiusUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    comparisonBorderRadiusDesktop: {
+        type: 'object',
+        default: {
+            top: '0',
+            right: '0',
+            bottom: '0',
+            left: '0'
+        }
+    },
+    comparisonBorderRadiusTablet: {
+        type: 'object',
+        default: {
+            top: '0',
+            right: '0',
+            bottom: '0',
+            left: '0'
+        }
+    },
+    comparisonBorderRadiusMobile: {
+        type: 'object',
+        default: {
+            top: '0',
+            right: '0',
+            bottom: '0',
+            left: '0'
+        }
+    },
+    comparisonBorderRadiusLink: {
+        type: 'boolean',
+        default: true
+    },
+    /** End Comparison Border Radius */
+
+    /** Start Box Shadow */
+    comparisonBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
+    comparisonBoxShadowValues: {
+        type: 'array',
+        default: [],
+    },
+    comparisonBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+    comparisonBoxShadowHoverValues: {
+        type: 'array',
+        default: [],
+    },
+    comparisonBoxShadowHoverCssValue: {
+        type: 'string',
+        default: '',
+    },
+    /** End Box Shadow */
+
+    /** Start Comparison Labels Padding */
+    comparisonLabelsPaddingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    comparisonLabelsPaddingDesktop: {
+        type: "object",
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    comparisonLabelsPaddingTablet: {
+        type: "object",
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    comparisonLabelsPaddingMobile: {
+        type: "object",
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    comparisonLabelsPaddingLink: {
+        type: "boolean",
+        default: true
+    },
+    /** End Comparison Labels Padding */
+
+    /** Start Comparison Labels Border Radius */
+    comparisonLabelsBorderRadiusUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    comparisonLabelsBorderRadiusDesktop: {
+        type: "object",
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    comparisonLabelsBorderRadiusTablet: {
+        type: "object",
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    comparisonLabelsBorderRadiusMobile: {
+        type: "object",
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    comparisonLabelsBorderRadiusLink: {
+        type: "boolean",
+        default: true
+    },
+    /** End Comparison Labels Border Radius */
+
+    /** Start Comparison Labels Background Color */
+    comparisonLabelsBgColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    comparisonLabelsNormalBackgroundType: {
+        type: "string",
+        default: "classic",
+    },
+    comparisonLabelsNormalClassicColor: {
+        type: "string",
+        default: "",
+    },
+    comparisonLabelsNormalGradientColor: {
+        type: "string",
+        default: null,
+    },
+    comparisonLabelsNormalCustomGradientSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    comparisonLabelsNormalCustomGradientInputValue: {
+        type: "string",
+        default: "",
+    },
+
+    comparisonLabelsHoverBackgroundType: {
+        type: "string",
+        default: "classic",
+    },
+    comparisonLabelsHoverClassicColor: {
+        type: "string",
+        default: "",
+    },
+    comparisonLabelsHoverGradientColor: {
+        type: "string",
+        default: null,
+    },
+    comparisonLabelsHoverCustomGradientSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    comparisonLabelsHoverCustomGradientInputValue: {
+        type: "string",
+        default: "",
+    },
+    /** End Comparison Labels Background Color */
+
+    /** Start Comparison Labels Typography */
+    comparisonLabelsGlobalTypographyData: {
+        type: 'object',
+        default: {}
+    },
+    comparisonLabelsGlobalTypoSwitcher: {
+        type: 'object',
+        default: {
+            fontFamily: false,
+            fontSize: false,
+            fontWeight: false,
+            fontStyle: false,
+            textTransform: false,
+            textDecoration: false,
+            letterSpacing: false,
+            lineHeight: false,
+        },
+    },
+    comparisonLabelsGlobalTypoType: {
+        type: 'string',
+        default: 'default',
+    },
+    comparisonLabelsGlobalTypoOption: {
+        type: 'object',
+        default: { label: 'Default', value: 'default' },
+    },
+    comparisonLabelsFontFamily: {
+        type: 'string',
+        default: 'Default',
+    },
+    comparisonLabelsFontSize: {
+        type: 'object',
+        default: {
+            Desktop: '16',
+            Tablet: '16',
+            Mobile: '16'
+        }
+    },
+    comparisonLabelsFontSizeUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    comparisonLabelsFontWeight: {
+        type: 'string',
+        default: '700',
+    },
+    comparisonLabelsFontStyle: {
+        type: 'string',
+        default: '',
+    },
+    comparisonLabelsTextTransform: {
+        type: 'string',
+        default: '',
+    },
+    comparisonLabelsTextDecoration: {
+        type: 'string',
+        default: '',
+    },
+    comparisonLabelsLetterSpacing: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    comparisonLabelsLetterSpacingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    comparisonLabelsLineHeight: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    comparisonLabelsLineHeightUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    /** End Comparison Labels Typography */
+
+    /** Start Comparison Labels Text Color */
+    comparisonLabelsBtnTextColorSwitcher: {
+        type: "string",
+        default: "normal",
+    },
+    comparisonLabelsBtnTextColor: {
+        type: "string",
+        default: "#FFFFFF",
+    },
+    comparisonLabelsBtnTextHoverColor: {
+        type: "string",
+    },
+    /** End Comparison Labels Text Color */
+
+    /** Start Z Index */
+    comparisonGlobalZIndex: {
+        type: "string",
+        default: "1",
+    },
+    /** End Z Index */
+
+    /** Start Class & ID Setting */
+    comparisonCustomCSS: {
+        type: "string",
+        default: "",
+    },
+    comparisonWraperID: {
+        type: "string",
+        default: ""
+    },
+
+    comparisonWraperClass: {
+        type: "string",
+        default: ""
+    },
+    /** End Class & ID Setting */
 
 }
 
