@@ -115,6 +115,22 @@ const attributes = {
 			Mobile: 'px',
 		}
 	},
+	stackCardsPresetFourCardHeight: {
+		type: 'object',
+		default: {
+			Desktop: '280',
+			Tablet: '280',
+			Mobile: '280',
+		}
+	},
+	stackCardsPresetFourCardHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
 	stackCardsPresetFourOutDistance: {
 		type: 'object',
 		default: {
@@ -1173,7 +1189,7 @@ const attributes = {
 	stackCardsNavigationButtonIconSpacing: {
 		type: 'object',
 		default: {
-			Desktop: '10',
+			Desktop: '',
 			Tablet: '',
 			Mobile: '',
 		}
