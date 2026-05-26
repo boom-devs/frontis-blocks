@@ -28,7 +28,6 @@ export default function save({ attributes }) {
 		mainMenuCloseImageSize,
 		triggerType,
 		submenuShowTitleOnHover,
-
 		circleMenuGlobalWraperID,
 		circleMenuGlobalWraperClass,
 	} = attributes;

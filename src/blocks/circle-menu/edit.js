@@ -79,7 +79,6 @@ export default function Edit({
 
 	/** Block Props & Global Wrappers Setup */
 	const blockProps = useBlockProps({
-		id: circleMenuGlobalWraperID || undefined,
 		className: `fb-circle-menu-main-wrapper ${blockID} ${menuPosition} ${circleMenuGlobalWraperClass} ${
 			circleMenuDesktopSwitcher ? "fb-desktop-responsive" : ""
 		} ${circleMenuTabletSwitcher ? "fb-tablet-responsive" : ""} ${
@@ -158,7 +157,7 @@ export default function Edit({
 	/** Final Render Output for Block Editor */
 	return (
 		<>
-			<div {...blockProps}>
+			<div {...blockProps} id={circleMenuGlobalWraperID || undefined}>
 				<div
 					className={`fb-parent-wrapper ${isOpen ? "is-active" : ""}`}
 					ref={panelRef}

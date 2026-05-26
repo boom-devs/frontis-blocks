@@ -156,6 +156,100 @@ const Inspector = ({ attributes, setAttributes }) => {
 		offsetV,
 		activeOffsetH,
 		activeOffsetV,
+		// Main Menu Colors & Sizes
+		mainMenuSize,
+		mainMenuIconSize,
+		mainMenuBgColorSwitcher,
+		mainMenuBgColor,
+		mainMenuBgHoverColor,
+		mainMenuTextColorSwitcher,
+		mainMenuTextColor,
+		mainMenuTextHoverColor,
+		mainMenuBorderColorSwitcher,
+		// Sub Menu Colors & Sizes
+		submenuSize,
+		submenuIconSize,
+		submenuBgColorSwitcher,
+		submenuBgColor,
+		submenuBgHoverColor,
+		submenuIconColorSwitcher,
+		submenuIconColor,
+		submenuIconHoverColor,
+		submenuBorderColorSwitcher,
+		// Circle Menu Global Settings
+		circleMenuGlobalPaddingLink,
+		circleMenuGlobalPaddingDesktop,
+		circleMenuGlobalPaddingTablet,
+		circleMenuGlobalPaddingMobile,
+		circleMenuGlobalPaddingUnits,
+		circleMenuGlobalMarginLink,
+		circleMenuGlobalMarginDesktop,
+		circleMenuGlobalMarginTablet,
+		circleMenuGlobalMarginMobile,
+		circleMenuGlobalMarginUnits,
+		circleMenuGlobalZIndex,
+		circleMenuOverflow,
+		circleMenuPositionType,
+		circleMenuHZOrientationType,
+		circleMenuVROrientationType,
+		circleMenuHZLeftOffset,
+		circleMenuHZLeftOffsetUnits,
+		circleMenuHZRightOffset,
+		circleMenuHZRightOffsetUnits,
+		circleMenuVRTopOffset,
+		circleMenuVRTopOffsetUnits,
+		circleMenuVRBottomOffset,
+		circleMenuVRBottomOffsetUnits,
+		circleMenuGlobalWraperID,
+		circleMenuGlobalWraperClass,
+		circleMenuGlobalBgColorSwitcher,
+		circleMenuGlobalNormalBackgroundType,
+		circleMenuGlobalBgColor,
+		circleMenuGlobalNormalGradientColor,
+		circleMenuGlobalNormalCustomGradientSwitcher,
+		circleMenuGlobalNormalCustomGradientInputValue,
+		circleMenuGlobalHoverBackgroundType,
+		circleMenuGlobalBgHoverColor,
+		circleMenuGlobalHoverGradientColor,
+		circleMenuGlobalHoverCustomGradientSwitcher,
+		circleMenuGlobalHoverCustomGradientInputValue,
+		circleMenuGlobalBgImageUrl,
+		circleMenuGlobalBgImageAlt,
+		circleMenuGlobalBgImageID,
+		circleMenuGlobalBgImagePosition,
+		circleMenuGlobalBgImageAttachment,
+		circleMenuGlobalBgImageRepeat,
+		circleMenuGlobalBgImageSize,
+		circleMenuGlobalBgHoverImageUrl,
+		circleMenuGlobalBgHoverImageAlt,
+		circleMenuGlobalBgHoverImageID,
+		circleMenuGlobalBgHoverImagePosition,
+		circleMenuGlobalBgHoverImageAttachment,
+		circleMenuGlobalBgHoverImageRepeat,
+		circleMenuGlobalBgHoverImageSize,
+		circleMenuGlobalBorder,
+		circleMenuGlobalBorderColorSwitcher,
+		circleMenuGlobalBorderColor,
+		circleMenuGlobalBorderHoverColor,
+		circleMenuGlobalBorderUnits,
+		circleMenuGlobalBorderDesktop,
+		circleMenuGlobalBorderTablet,
+		circleMenuGlobalBorderMobile,
+		circleMenuGlobalBorderLink,
+		circleMenuGlobalBorderRadiusUnits,
+		circleMenuGlobalBorderRadiusDesktop,
+		circleMenuGlobalBorderRadiusTablet,
+		circleMenuGlobalBorderRadiusMobile,
+		circleMenuGlobalBorderRadiusLink,
+		circleMenuGlobalBoxShadowSwitcher,
+		circleMenuGlobalBoxShadowValues,
+		circleMenuGlobalBoxShadowCssValue,
+		circleMenuGlobalBoxShadowHoverValues,
+		circleMenuGlobalBoxShadowHoverCssValue,
+		circleMenuDesktopSwitcher,
+		circleMenuTabletSwitcher,
+		circleMenuMobileSwitcher,
+		circleMenuGlobalCustomCSS,
 	} = attributes;
 
 	/** Start Local State & Device Context */
@@ -240,9 +334,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 			}
 		} else {
 			const current =
-				attributes[`mainMenuBorder${deviceType}`] ||
-				mainMenuBorderDesktop ||
-				{};
+				deviceType === "Desktop"
+					? mainMenuBorderDesktop
+					: deviceType === "Tablet"
+					? mainMenuBorderTablet
+					: mainMenuBorderMobile || {};
 			setAttributes({
 				[`mainMenuBorder${deviceType}`]: { ...current, [position]: value },
 			});
@@ -273,9 +369,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 			}
 		} else {
 			const current =
-				attributes[`mainMenuBorderRadius${deviceType}`] ||
-				mainMenuBorderRadiusDesktop ||
-				{};
+				deviceType === "Desktop"
+					? mainMenuBorderRadiusDesktop
+					: deviceType === "Tablet"
+					? mainMenuBorderRadiusTablet
+					: mainMenuBorderRadiusMobile || {};
 			setAttributes({
 				[`mainMenuBorderRadius${deviceType}`]: {
 					...current,
@@ -312,7 +410,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 			}
 		} else {
 			const current =
-				attributes[`submenuBorder${deviceType}`] || submenuBorderDesktop || {};
+				deviceType === "Desktop"
+					? submenuBorderDesktop
+					: deviceType === "Tablet"
+					? submenuBorderTablet
+					: submenuBorderMobile || {};
 			setAttributes({
 				[`submenuBorder${deviceType}`]: { ...current, [position]: value },
 			});
@@ -343,9 +445,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 			}
 		} else {
 			const current =
-				attributes[`submenuBorderRadius${deviceType}`] ||
-				submenuBorderRadiusDesktop ||
-				{};
+				deviceType === "Desktop"
+					? submenuBorderRadiusDesktop
+					: deviceType === "Tablet"
+					? submenuBorderRadiusTablet
+					: submenuBorderRadiusMobile || {};
 			setAttributes({
 				[`submenuBorderRadius${deviceType}`]: {
 					...current,
@@ -839,7 +943,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 					min={30}
 					max={200}
 					label={__("Container Size", "frontis-blocks")}
-					rangeValue={attributes.mainMenuSize}
+					rangeValue={mainMenuSize}
 					onChangeHandler={(value) => setAttributes({ mainMenuSize: value })}
 					deviceType={deviceType}
 					setAttributes={setAttributes}
@@ -852,7 +956,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 						min={10}
 						max={100}
 						label={__("Icon Size", "frontis-blocks")}
-						rangeValue={attributes.mainMenuIconSize}
+						rangeValue={mainMenuIconSize}
 						onChangeHandler={(value) =>
 							setAttributes({ mainMenuIconSize: value })
 						}
@@ -900,7 +1004,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 								min={0}
 								max={300}
 								label={__("Offset Horizontal", "frontis-blocks")}
-								rangeValue={attributes.offsetH}
+								rangeValue={offsetH}
 								onChangeHandler={(value) => setAttributes({ offsetH: value })}
 								deviceType={deviceType}
 								setAttributes={setAttributes}
@@ -913,7 +1017,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 								min={0}
 								max={300}
 								label={__("Offset Vertical", "frontis-blocks")}
-								rangeValue={attributes.offsetV}
+								rangeValue={offsetV}
 								onChangeHandler={(value) => setAttributes({ offsetV: value })}
 								deviceType={deviceType}
 								setAttributes={setAttributes}
@@ -934,7 +1038,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 								min={0}
 								max={300}
 								label={__("Offset Horizontal", "frontis-blocks")}
-								rangeValue={attributes.activeOffsetH}
+								rangeValue={activeOffsetH}
 								onChangeHandler={(value) =>
 									setAttributes({ activeOffsetH: value })
 								}
@@ -949,7 +1053,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 								min={0}
 								max={300}
 								label={__("Offset Vertical", "frontis-blocks")}
-								rangeValue={attributes.activeOffsetV}
+								rangeValue={activeOffsetV}
 								onChangeHandler={(value) =>
 									setAttributes({ activeOffsetV: value })
 								}
@@ -964,7 +1068,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 				)}
 				<FB_BackgroundColorControl
 					label={__("Background", "frontis-blocks")}
-					bgColorSwitcher={attributes.mainMenuBgColorSwitcher || "normal"}
+					bgColorSwitcher={mainMenuBgColorSwitcher || "normal"}
 					setBgColorSwitcher={(value) =>
 						setAttributes({ mainMenuBgColorSwitcher: value })
 					}
@@ -972,7 +1076,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 					setNormalBackgroundType={(value) =>
 						setAttributes({ mainMenuNormalBackgroundType: value })
 					}
-					normalClassicColor={attributes.mainMenuBgColor}
+					normalClassicColor={mainMenuBgColor}
 					setNormalClassicColor={(value) =>
 						setAttributes({ mainMenuBgColor: value })
 					}
@@ -994,7 +1098,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 					setHoverBackgroundType={(value) =>
 						setAttributes({ mainMenuHoverBackgroundType: value })
 					}
-					hoverClassicColor={attributes.mainMenuBgHoverColor}
+					hoverClassicColor={mainMenuBgHoverColor}
 					setHoverClassicColor={(value) =>
 						setAttributes({ mainMenuBgHoverColor: value })
 					}
@@ -1015,15 +1119,15 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 				<FB_SwitcherControl
 					label={__("Icon/Text Color", "frontis-blocks")}
-					globalSwitcher={attributes.mainMenuTextColorSwitcher}
+					globalSwitcher={mainMenuTextColorSwitcher}
 					setGlobalSwitcher={(value) =>
 						setAttributes({ mainMenuTextColorSwitcher: value })
 					}
 				/>
-				{attributes.mainMenuTextColorSwitcher === "normal" ? (
+				{mainMenuTextColorSwitcher === "normal" ? (
 					<FB_ColorControl
 						label={__("Normal Color", "frontis-blocks")}
-						globalColor={attributes.mainMenuTextColor}
+						globalColor={mainMenuTextColor}
 						setGlobalColor={(value) =>
 							setAttributes({ mainMenuTextColor: value })
 						}
@@ -1031,7 +1135,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 				) : (
 					<FB_ColorControl
 						label={__("Hover Color", "frontis-blocks")}
-						globalColor={attributes.mainMenuTextHoverColor}
+						globalColor={mainMenuTextHoverColor}
 						setGlobalColor={(value) =>
 							setAttributes({ mainMenuTextHoverColor: value })
 						}
@@ -1047,13 +1151,13 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 				<FB_SwitcherControl
 					label={__("Border Color", "frontis-blocks")}
-					globalSwitcher={attributes.mainMenuBorderColorSwitcher || "normal"}
+					globalSwitcher={mainMenuBorderColorSwitcher || "normal"}
 					setGlobalSwitcher={(value) =>
 						setAttributes({ mainMenuBorderColorSwitcher: value })
 					}
 				/>
 
-				{attributes.mainMenuBorderColorSwitcher === "hover" ? (
+				{mainMenuBorderColorSwitcher === "hover" ? (
 					<FB_ColorControl
 						label={__("Hover Color", "frontis-blocks")}
 						globalColor={mainMenuBorderHoverColor}
@@ -1154,7 +1258,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 					min={30}
 					max={200}
 					label={__("Container Size", "frontis-blocks")}
-					rangeValue={attributes.submenuSize}
+					rangeValue={submenuSize}
 					onChangeHandler={(value) => setAttributes({ submenuSize: value })}
 					deviceType={deviceType}
 					setAttributes={setAttributes}
@@ -1166,7 +1270,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 					min={10}
 					max={100}
 					label={__("Icon Size", "frontis-blocks")}
-					rangeValue={attributes.submenuIconSize}
+					rangeValue={submenuIconSize}
 					onChangeHandler={(value) => setAttributes({ submenuIconSize: value })}
 					deviceType={deviceType}
 					setAttributes={setAttributes}
@@ -1176,7 +1280,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 				/>
 				<FB_BackgroundColorControl
 					label={__("Background", "frontis-blocks")}
-					bgColorSwitcher={attributes.submenuBgColorSwitcher || "normal"}
+					bgColorSwitcher={submenuBgColorSwitcher || "normal"}
 					setBgColorSwitcher={(value) =>
 						setAttributes({ submenuBgColorSwitcher: value })
 					}
@@ -1184,7 +1288,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 					setNormalBackgroundType={(value) =>
 						setAttributes({ submenuNormalBackgroundType: value })
 					}
-					normalClassicColor={attributes.submenuBgColor}
+					normalClassicColor={submenuBgColor}
 					setNormalClassicColor={(value) =>
 						setAttributes({ submenuBgColor: value })
 					}
@@ -1204,7 +1308,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 					setHoverBackgroundType={(value) =>
 						setAttributes({ submenuHoverBackgroundType: value })
 					}
-					hoverClassicColor={attributes.submenuBgHoverColor}
+					hoverClassicColor={submenuBgHoverColor}
 					setHoverClassicColor={(value) =>
 						setAttributes({ submenuBgHoverColor: value })
 					}
@@ -1225,15 +1329,15 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 				<FB_SwitcherControl
 					label={__("Icon Color", "frontis-blocks")}
-					globalSwitcher={attributes.submenuIconColorSwitcher}
+					globalSwitcher={submenuIconColorSwitcher}
 					setGlobalSwitcher={(value) =>
 						setAttributes({ submenuIconColorSwitcher: value })
 					}
 				/>
-				{attributes.submenuIconColorSwitcher === "normal" ? (
+				{submenuIconColorSwitcher === "normal" ? (
 					<FB_ColorControl
 						label={__("Normal Color", "frontis-blocks")}
-						globalColor={attributes.submenuIconColor}
+						globalColor={submenuIconColor}
 						setGlobalColor={(value) =>
 							setAttributes({ submenuIconColor: value })
 						}
@@ -1241,7 +1345,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 				) : (
 					<FB_ColorControl
 						label={__("Hover Color", "frontis-blocks")}
-						globalColor={attributes.submenuIconHoverColor}
+						globalColor={submenuIconHoverColor}
 						setGlobalColor={(value) =>
 							setAttributes({ submenuIconHoverColor: value })
 						}
@@ -1257,13 +1361,13 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 				<FB_SwitcherControl
 					label={__("Border Color", "frontis-blocks")}
-					globalSwitcher={attributes.submenuBorderColorSwitcher || "normal"}
+					globalSwitcher={submenuBorderColorSwitcher || "normal"}
 					setGlobalSwitcher={(value) =>
 						setAttributes({ submenuBorderColorSwitcher: value })
 					}
 				/>
 
-				{attributes.submenuBorderColorSwitcher === "hover" ? (
+				{submenuBorderColorSwitcher === "hover" ? (
 					<FB_ColorControl
 						label={__("Hover Color", "frontis-blocks")}
 						globalColor={submenuBorderHoverColor}
@@ -1529,7 +1633,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 	/** 7. Global Settings Event Handlers */
 	const handleGlobalPaddingUnitChange = (event, position) => {
 		const value = event.target.value;
-		if (attributes.circleMenuGlobalPaddingLink) {
+		if (circleMenuGlobalPaddingLink) {
 			switch (deviceType) {
 				case "Desktop":
 					setAttributes({
@@ -1567,7 +1671,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 				case "Desktop":
 					setAttributes({
 						circleMenuGlobalPaddingDesktop: {
-							...attributes.circleMenuGlobalPaddingDesktop,
+							...circleMenuGlobalPaddingDesktop,
 							[position]: value,
 						},
 					});
@@ -1575,7 +1679,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 				case "Tablet":
 					setAttributes({
 						circleMenuGlobalPaddingTablet: {
-							...attributes.circleMenuGlobalPaddingTablet,
+							...circleMenuGlobalPaddingTablet,
 							[position]: value,
 						},
 					});
@@ -1583,7 +1687,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 				case "Mobile":
 					setAttributes({
 						circleMenuGlobalPaddingMobile: {
-							...attributes.circleMenuGlobalPaddingMobile,
+							...circleMenuGlobalPaddingMobile,
 							[position]: value,
 						},
 					});
@@ -1593,19 +1697,19 @@ const Inspector = ({ attributes, setAttributes }) => {
 	};
 	const handleGlobalPaddingCombineBtn = () =>
 		setAttributes({
-			circleMenuGlobalPaddingLink: !attributes.circleMenuGlobalPaddingLink,
+			circleMenuGlobalPaddingLink: !circleMenuGlobalPaddingLink,
 		});
 	const handleGlobalPaddingUnitsHandler = (unit) =>
 		setAttributes({
 			circleMenuGlobalPaddingUnits: {
-				...attributes.circleMenuGlobalPaddingUnits,
+				...circleMenuGlobalPaddingUnits,
 				[deviceType]: unit,
 			},
 		});
 
 	const handleGlobalMarginUnitChange = (event, position) => {
 		const value = event.target.value;
-		if (attributes.circleMenuGlobalMarginLink) {
+		if (circleMenuGlobalMarginLink) {
 			switch (deviceType) {
 				case "Desktop":
 					setAttributes({
@@ -1643,7 +1747,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 				case "Desktop":
 					setAttributes({
 						circleMenuGlobalMarginDesktop: {
-							...attributes.circleMenuGlobalMarginDesktop,
+							...circleMenuGlobalMarginDesktop,
 							[position]: value,
 						},
 					});
@@ -1651,7 +1755,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 				case "Tablet":
 					setAttributes({
 						circleMenuGlobalMarginTablet: {
-							...attributes.circleMenuGlobalMarginTablet,
+							...circleMenuGlobalMarginTablet,
 							[position]: value,
 						},
 					});
@@ -1659,7 +1763,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 				case "Mobile":
 					setAttributes({
 						circleMenuGlobalMarginMobile: {
-							...attributes.circleMenuGlobalMarginMobile,
+							...circleMenuGlobalMarginMobile,
 							[position]: value,
 						},
 					});
@@ -1669,12 +1773,12 @@ const Inspector = ({ attributes, setAttributes }) => {
 	};
 	const handleGlobalMarginCombineBtn = () =>
 		setAttributes({
-			circleMenuGlobalMarginLink: !attributes.circleMenuGlobalMarginLink,
+			circleMenuGlobalMarginLink: !circleMenuGlobalMarginLink,
 		});
 	const handleGlobalMarginUnitsHandler = (unit) =>
 		setAttributes({
 			circleMenuGlobalMarginUnits: {
-				...attributes.circleMenuGlobalMarginUnits,
+				...circleMenuGlobalMarginUnits,
 				[deviceType]: unit,
 			},
 		});
@@ -1692,7 +1796,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 							min={0}
 							max={10000000}
 							label={__("Z Index", "frontis-blocks")}
-							rangeValue={attributes.circleMenuGlobalZIndex}
+							rangeValue={circleMenuGlobalZIndex}
 							onChangeHandler={(value) =>
 								setAttributes({
 									circleMenuGlobalZIndex: value === 0 ? undefined : value,
@@ -1707,7 +1811,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 						<SelectControl
 							label={__("Overflow", "frontis-blocks")}
-							value={attributes.circleMenuOverflow}
+							value={circleMenuOverflow}
 							options={[
 								{ label: "Default", value: "default" },
 								{ label: "Hidden", value: "hidden" },
@@ -1718,47 +1822,47 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 						<FB_PositionControl
 							deviceType={deviceType}
-							positionType={attributes.circleMenuPositionType}
+							positionType={circleMenuPositionType}
 							setPositionType={(value) =>
 								setAttributes({ circleMenuPositionType: value })
 							}
-							HZOrientationType={attributes.circleMenuHZOrientationType}
+							HZOrientationType={circleMenuHZOrientationType}
 							setHZOrientationType={(value) =>
 								setAttributes({ circleMenuHZOrientationType: value })
 							}
-							VROrientationType={attributes.circleMenuVROrientationType}
+							VROrientationType={circleMenuVROrientationType}
 							setVROrientationType={(value) =>
 								setAttributes({ circleMenuVROrientationType: value })
 							}
-							HZLeftOffset={attributes.circleMenuHZLeftOffset}
+							HZLeftOffset={circleMenuHZLeftOffset}
 							setHZLeftOffset={(value) =>
 								setAttributes({ circleMenuHZLeftOffset: value })
 							}
-							HZLeftOffsetUnits={attributes.circleMenuHZLeftOffsetUnits}
+							HZLeftOffsetUnits={circleMenuHZLeftOffsetUnits}
 							setHZLeftOffsetUnits={(value) =>
 								setAttributes({ circleMenuHZLeftOffsetUnits: value })
 							}
-							HZRightOffset={attributes.circleMenuHZRightOffset}
+							HZRightOffset={circleMenuHZRightOffset}
 							setHZRightOffset={(value) =>
 								setAttributes({ circleMenuHZRightOffset: value })
 							}
-							HZRightOffsetUnits={attributes.circleMenuHZRightOffsetUnits}
+							HZRightOffsetUnits={circleMenuHZRightOffsetUnits}
 							setHZRightOffsetUnits={(value) =>
 								setAttributes({ circleMenuHZRightOffsetUnits: value })
 							}
-							VRTopOffset={attributes.circleMenuVRTopOffset}
+							VRTopOffset={circleMenuVRTopOffset}
 							setVRTopOffset={(value) =>
 								setAttributes({ circleMenuVRTopOffset: value })
 							}
-							VRTopOffsetUnits={attributes.circleMenuVRTopOffsetUnits}
+							VRTopOffsetUnits={circleMenuVRTopOffsetUnits}
 							setVRTopOffsetUnits={(value) =>
 								setAttributes({ circleMenuVRTopOffsetUnits: value })
 							}
-							VRBottomOffset={attributes.circleMenuVRBottomOffset}
+							VRBottomOffset={circleMenuVRBottomOffset}
 							setVRBottomOffset={(value) =>
 								setAttributes({ circleMenuVRBottomOffset: value })
 							}
-							VRBottomOffsetUnits={attributes.circleMenuVRBottomOffsetUnits}
+							VRBottomOffsetUnits={circleMenuVRBottomOffsetUnits}
 							setVRBottomOffsetUnits={(value) =>
 								setAttributes({ circleMenuVRBottomOffsetUnits: value })
 							}
@@ -1767,7 +1871,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 						<FB_InputControl
 							label={__("CSS ID", "frontis-blocks")}
-							value={attributes.circleMenuGlobalWraperID}
+							value={circleMenuGlobalWraperID}
 							onChangeValue={(value) =>
 								setAttributes({ circleMenuGlobalWraperID: value })
 							}
@@ -1776,7 +1880,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 						<FB_InputControl
 							label={__("CSS Class", "frontis-blocks")}
-							value={attributes.circleMenuGlobalWraperClass}
+							value={circleMenuGlobalWraperClass}
 							onChangeValue={(value) =>
 								setAttributes({ circleMenuGlobalWraperClass: value })
 							}
@@ -1792,12 +1896,12 @@ const Inspector = ({ attributes, setAttributes }) => {
 							label={__("Padding", "frontis-blocks")}
 							deviceType={deviceType}
 							spacingUnitsHandler={handleGlobalPaddingUnitsHandler}
-							spacingUnits={attributes.circleMenuGlobalPaddingUnits}
-							spacingDesktop={attributes.circleMenuGlobalPaddingDesktop}
-							spacingTablet={attributes.circleMenuGlobalPaddingTablet}
-							spacingMobile={attributes.circleMenuGlobalPaddingMobile}
+							spacingUnits={circleMenuGlobalPaddingUnits}
+							spacingDesktop={circleMenuGlobalPaddingDesktop}
+							spacingTablet={circleMenuGlobalPaddingTablet}
+							spacingMobile={circleMenuGlobalPaddingMobile}
 							handleSpacingUnitHandler={handleGlobalPaddingUnitChange}
-							spacingCombineBtn={attributes.circleMenuGlobalPaddingLink}
+							spacingCombineBtn={circleMenuGlobalPaddingLink}
 							spacingCombineBtnHandler={handleGlobalPaddingCombineBtn}
 							setAttributes={setAttributes}
 						/>
@@ -1805,12 +1909,12 @@ const Inspector = ({ attributes, setAttributes }) => {
 							label={__("Margin", "frontis-blocks")}
 							deviceType={deviceType}
 							spacingUnitsHandler={handleGlobalMarginUnitsHandler}
-							spacingUnits={attributes.circleMenuGlobalMarginUnits}
-							spacingDesktop={attributes.circleMenuGlobalMarginDesktop}
-							spacingTablet={attributes.circleMenuGlobalMarginTablet}
-							spacingMobile={attributes.circleMenuGlobalMarginMobile}
+							spacingUnits={circleMenuGlobalMarginUnits}
+							spacingDesktop={circleMenuGlobalMarginDesktop}
+							spacingTablet={circleMenuGlobalMarginTablet}
+							spacingMobile={circleMenuGlobalMarginMobile}
 							handleSpacingUnitHandler={handleGlobalMarginUnitChange}
-							spacingCombineBtn={attributes.circleMenuGlobalMarginLink}
+							spacingCombineBtn={circleMenuGlobalMarginLink}
 							spacingCombineBtnHandler={handleGlobalMarginCombineBtn}
 							setAttributes={setAttributes}
 						/>
@@ -1823,29 +1927,29 @@ const Inspector = ({ attributes, setAttributes }) => {
 						<FB_BackgroundColorControl
 							label={__("Background", "frontis-blocks")}
 							bgColorSwitcher={
-								attributes.circleMenuGlobalBgColorSwitcher || "normal"
+								circleMenuGlobalBgColorSwitcher || "normal"
 							}
 							setBgColorSwitcher={(value) =>
 								setAttributes({ circleMenuGlobalBgColorSwitcher: value })
 							}
 							normalBackgroundType={
-								attributes.circleMenuGlobalNormalBackgroundType
+								circleMenuGlobalNormalBackgroundType
 							}
 							setNormalBackgroundType={(value) =>
 								setAttributes({ circleMenuGlobalNormalBackgroundType: value })
 							}
-							normalClassicColor={attributes.circleMenuGlobalBgColor}
+							normalClassicColor={circleMenuGlobalBgColor}
 							setNormalClassicColor={(value) =>
 								setAttributes({ circleMenuGlobalBgColor: value })
 							}
 							normalGradientColor={
-								attributes.circleMenuGlobalNormalGradientColor
+								circleMenuGlobalNormalGradientColor
 							}
 							setNormalGradientColor={(value) =>
 								setAttributes({ circleMenuGlobalNormalGradientColor: value })
 							}
 							normalCustomGradientSwitcher={
-								attributes.circleMenuGlobalNormalCustomGradientSwitcher
+								circleMenuGlobalNormalCustomGradientSwitcher
 							}
 							setNormalCustomGradientSwitcher={(value) =>
 								setAttributes({
@@ -1853,7 +1957,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 								})
 							}
 							normalCustomGradientInputValue={
-								attributes.circleMenuGlobalNormalCustomGradientInputValue
+								circleMenuGlobalNormalCustomGradientInputValue
 							}
 							setNormalCustomGradientInputValue={(value) =>
 								setAttributes({
@@ -1861,21 +1965,21 @@ const Inspector = ({ attributes, setAttributes }) => {
 								})
 							}
 							hoverBackgroundType={
-								attributes.circleMenuGlobalHoverBackgroundType
+								circleMenuGlobalHoverBackgroundType
 							}
 							setHoverBackgroundType={(value) =>
 								setAttributes({ circleMenuGlobalHoverBackgroundType: value })
 							}
-							hoverClassicColor={attributes.circleMenuGlobalBgHoverColor}
+							hoverClassicColor={circleMenuGlobalBgHoverColor}
 							setHoverClassicColor={(value) =>
 								setAttributes({ circleMenuGlobalBgHoverColor: value })
 							}
-							hoverGradientColor={attributes.circleMenuGlobalHoverGradientColor}
+							hoverGradientColor={circleMenuGlobalHoverGradientColor}
 							setHoverGradientColor={(value) =>
 								setAttributes({ circleMenuGlobalHoverGradientColor: value })
 							}
 							hoverCustomGradientSwitcher={
-								attributes.circleMenuGlobalHoverCustomGradientSwitcher
+								circleMenuGlobalHoverCustomGradientSwitcher
 							}
 							setHoverCustomGradientSwitcher={(value) =>
 								setAttributes({
@@ -1883,7 +1987,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 								})
 							}
 							hoverCustomGradientInputValue={
-								attributes.circleMenuGlobalHoverCustomGradientInputValue
+								circleMenuGlobalHoverCustomGradientInputValue
 							}
 							setHoverCustomGradientInputValue={(value) =>
 								setAttributes({
@@ -1891,76 +1995,76 @@ const Inspector = ({ attributes, setAttributes }) => {
 								})
 							}
 							isBackgroundImage={true}
-							normalBackgroundImageUrl={attributes.circleMenuGlobalBgImageUrl}
+							normalBackgroundImageUrl={circleMenuGlobalBgImageUrl}
 							setNormalBackgroundImageUrl={(value) =>
 								setAttributes({ circleMenuGlobalBgImageUrl: value })
 							}
-							normalBackgroundImageAlt={attributes.circleMenuGlobalBgImageAlt}
+							normalBackgroundImageAlt={circleMenuGlobalBgImageAlt}
 							setNormalBackgroundImageAlt={(value) =>
 								setAttributes({ circleMenuGlobalBgImageAlt: value })
 							}
-							normalBackgroundImageID={attributes.circleMenuGlobalBgImageID}
+							normalBackgroundImageID={circleMenuGlobalBgImageID}
 							setNormalBackgroundImageID={(value) =>
 								setAttributes({ circleMenuGlobalBgImageID: value })
 							}
 							normalBackgroundImagePosition={
-								attributes.circleMenuGlobalBgImagePosition
+								circleMenuGlobalBgImagePosition
 							}
 							setNormalBackgroundImagePosition={(value) =>
 								setAttributes({ circleMenuGlobalBgImagePosition: value })
 							}
 							normalBackgroundImageAttachment={
-								attributes.circleMenuGlobalBgImageAttachment
+								circleMenuGlobalBgImageAttachment
 							}
 							setNormalBackgroundImageAttachment={(value) =>
 								setAttributes({ circleMenuGlobalBgImageAttachment: value })
 							}
 							normalBackgroundImageRepeat={
-								attributes.circleMenuGlobalBgImageRepeat
+								circleMenuGlobalBgImageRepeat
 							}
 							setNormalBackgroundImageRepeat={(value) =>
 								setAttributes({ circleMenuGlobalBgImageRepeat: value })
 							}
-							normalBackgroundImageSize={attributes.circleMenuGlobalBgImageSize}
+							normalBackgroundImageSize={circleMenuGlobalBgImageSize}
 							setNormalBackgroundImageSize={(value) =>
 								setAttributes({ circleMenuGlobalBgImageSize: value })
 							}
 							hoverBackgroundImageUrl={
-								attributes.circleMenuGlobalBgHoverImageUrl
+								circleMenuGlobalBgHoverImageUrl
 							}
 							setHoverBackgroundImageUrl={(value) =>
 								setAttributes({ circleMenuGlobalBgHoverImageUrl: value })
 							}
 							hoverBackgroundImageAlt={
-								attributes.circleMenuGlobalBgHoverImageAlt
+								circleMenuGlobalBgHoverImageAlt
 							}
 							setHoverBackgroundImageAlt={(value) =>
 								setAttributes({ circleMenuGlobalBgHoverImageAlt: value })
 							}
-							hoverBackgroundImageID={attributes.circleMenuGlobalBgHoverImageID}
+							hoverBackgroundImageID={circleMenuGlobalBgHoverImageID}
 							setHoverBackgroundImageID={(value) =>
 								setAttributes({ circleMenuGlobalBgHoverImageID: value })
 							}
 							hoverBackgroundImagePosition={
-								attributes.circleMenuGlobalBgHoverImagePosition
+								circleMenuGlobalBgHoverImagePosition
 							}
 							setHoverBackgroundImagePosition={(value) =>
 								setAttributes({ circleMenuGlobalBgHoverImagePosition: value })
 							}
 							hoverBackgroundImageAttachment={
-								attributes.circleMenuGlobalBgHoverImageAttachment
+								circleMenuGlobalBgHoverImageAttachment
 							}
 							setHoverBackgroundImageAttachment={(value) =>
 								setAttributes({ circleMenuGlobalBgHoverImageAttachment: value })
 							}
 							hoverBackgroundImageRepeat={
-								attributes.circleMenuGlobalBgHoverImageRepeat
+								circleMenuGlobalBgHoverImageRepeat
 							}
 							setHoverBackgroundImageRepeat={(value) =>
 								setAttributes({ circleMenuGlobalBgHoverImageRepeat: value })
 							}
 							hoverBackgroundImageSize={
-								attributes.circleMenuGlobalBgHoverImageSize
+								circleMenuGlobalBgHoverImageSize
 							}
 							setHoverBackgroundImageSize={(value) =>
 								setAttributes({ circleMenuGlobalBgHoverImageSize: value })
@@ -1975,7 +2079,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 					>
 						<SelectControl
 							label={__("Border Style", "frontis-blocks")}
-							value={attributes.circleMenuGlobalBorder}
+							value={circleMenuGlobalBorder}
 							options={[
 								{ label: "None", value: "none" },
 								{ label: "Solid", value: "solid" },
@@ -1990,16 +2094,16 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 						<FB_SwitcherControl
 							label={__("Border Color", "frontis-blocks")}
-							globalSwitcher={attributes.circleMenuGlobalBorderColorSwitcher}
+							globalSwitcher={circleMenuGlobalBorderColorSwitcher}
 							setGlobalSwitcher={(value) =>
 								setAttributes({ circleMenuGlobalBorderColorSwitcher: value })
 							}
 						/>
 
-						{attributes.circleMenuGlobalBorderColorSwitcher === "normal" && (
+						{circleMenuGlobalBorderColorSwitcher === "normal" && (
 							<FB_ColorControl
 								label={__("Normal Color", "frontis-blocks")}
-								globalColor={attributes.circleMenuGlobalBorderColor}
+								globalColor={circleMenuGlobalBorderColor}
 								setGlobalColor={(value) =>
 									setAttributes({
 										circleMenuGlobalBorderColor:
@@ -2009,10 +2113,10 @@ const Inspector = ({ attributes, setAttributes }) => {
 							/>
 						)}
 
-						{attributes.circleMenuGlobalBorderColorSwitcher === "hover" && (
+						{circleMenuGlobalBorderColorSwitcher === "hover" && (
 							<FB_ColorControl
 								label={__("Hover Color", "frontis-blocks")}
-								globalColor={attributes.circleMenuGlobalBorderHoverColor}
+								globalColor={circleMenuGlobalBorderHoverColor}
 								setGlobalColor={(value) =>
 									setAttributes({
 										circleMenuGlobalBorderHoverColor:
@@ -2028,15 +2132,15 @@ const Inspector = ({ attributes, setAttributes }) => {
 							spacingUnitsHandler={(unit) =>
 								setAttributes({
 									circleMenuGlobalBorderUnits: {
-										...attributes.circleMenuGlobalBorderUnits,
+										...circleMenuGlobalBorderUnits,
 										[deviceType]: unit,
 									},
 								})
 							}
-							spacingUnits={attributes.circleMenuGlobalBorderUnits}
-							spacingDesktop={attributes.circleMenuGlobalBorderDesktop}
-							spacingTablet={attributes.circleMenuGlobalBorderTablet}
-							spacingMobile={attributes.circleMenuGlobalBorderMobile}
+							spacingUnits={circleMenuGlobalBorderUnits}
+							spacingDesktop={circleMenuGlobalBorderDesktop}
+							spacingTablet={circleMenuGlobalBorderTablet}
+							spacingMobile={circleMenuGlobalBorderMobile}
 							handleSpacingUnitHandler={(event, position) => {
 								const value = event.target.value;
 								const deviceAttr =
@@ -2045,7 +2149,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 										: deviceType === "Tablet"
 										? "circleMenuGlobalBorderTablet"
 										: "circleMenuGlobalBorderMobile";
-								if (attributes.circleMenuGlobalBorderLink) {
+								if (circleMenuGlobalBorderLink) {
 									setAttributes({
 										[deviceAttr]: {
 											top: value,
@@ -2055,19 +2159,25 @@ const Inspector = ({ attributes, setAttributes }) => {
 										},
 									});
 								} else {
+									const current =
+										deviceType === "Desktop"
+											? circleMenuGlobalBorderDesktop
+											: deviceType === "Tablet"
+											? circleMenuGlobalBorderTablet
+											: circleMenuGlobalBorderMobile;
 									setAttributes({
 										[deviceAttr]: {
-											...attributes[deviceAttr],
+											...current,
 											[position]: value,
 										},
 									});
 								}
 							}}
-							spacingCombineBtn={attributes.circleMenuGlobalBorderLink}
+							spacingCombineBtn={circleMenuGlobalBorderLink}
 							spacingCombineBtnHandler={() =>
 								setAttributes({
 									circleMenuGlobalBorderLink:
-										!attributes.circleMenuGlobalBorderLink,
+										!circleMenuGlobalBorderLink,
 								})
 							}
 							setAttributes={setAttributes}
@@ -2079,15 +2189,15 @@ const Inspector = ({ attributes, setAttributes }) => {
 							spacingUnitsHandler={(unit) =>
 								setAttributes({
 									circleMenuGlobalBorderRadiusUnits: {
-										...attributes.circleMenuGlobalBorderRadiusUnits,
+										...circleMenuGlobalBorderRadiusUnits,
 										[deviceType]: unit,
 									},
 								})
 							}
-							spacingUnits={attributes.circleMenuGlobalBorderRadiusUnits}
-							spacingDesktop={attributes.circleMenuGlobalBorderRadiusDesktop}
-							spacingTablet={attributes.circleMenuGlobalBorderRadiusTablet}
-							spacingMobile={attributes.circleMenuGlobalBorderRadiusMobile}
+							spacingUnits={circleMenuGlobalBorderRadiusUnits}
+							spacingDesktop={circleMenuGlobalBorderRadiusDesktop}
+							spacingTablet={circleMenuGlobalBorderRadiusTablet}
+							spacingMobile={circleMenuGlobalBorderRadiusMobile}
 							handleSpacingUnitHandler={(event, position) => {
 								const value = event.target.value;
 								const deviceAttr =
@@ -2096,7 +2206,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 										: deviceType === "Tablet"
 										? "circleMenuGlobalBorderRadiusTablet"
 										: "circleMenuGlobalBorderRadiusMobile";
-								if (attributes.circleMenuGlobalBorderRadiusLink) {
+								if (circleMenuGlobalBorderRadiusLink) {
 									setAttributes({
 										[deviceAttr]: {
 											top: value,
@@ -2106,19 +2216,25 @@ const Inspector = ({ attributes, setAttributes }) => {
 										},
 									});
 								} else {
+									const current =
+										deviceType === "Desktop"
+											? circleMenuGlobalBorderRadiusDesktop
+											: deviceType === "Tablet"
+											? circleMenuGlobalBorderRadiusTablet
+											: circleMenuGlobalBorderRadiusMobile;
 									setAttributes({
 										[deviceAttr]: {
-											...attributes[deviceAttr],
+											...current,
 											[position]: value,
 										},
 									});
 								}
 							}}
-							spacingCombineBtn={attributes.circleMenuGlobalBorderRadiusLink}
+							spacingCombineBtn={circleMenuGlobalBorderRadiusLink}
 							spacingCombineBtnHandler={() =>
 								setAttributes({
 									circleMenuGlobalBorderRadiusLink:
-										!attributes.circleMenuGlobalBorderRadiusLink,
+										!circleMenuGlobalBorderRadiusLink,
 								})
 							}
 							setAttributes={setAttributes}
@@ -2126,12 +2242,12 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 						<FB_SwitcherControl
 							label={__("Box Shadow", "frontis-blocks")}
-							globalSwitcher={attributes.circleMenuGlobalBoxShadowSwitcher}
+							globalSwitcher={circleMenuGlobalBoxShadowSwitcher}
 							setGlobalSwitcher={(value) =>
 								setAttributes({ circleMenuGlobalBoxShadowSwitcher: value })
 							}
 						/>
-						{attributes.circleMenuGlobalBoxShadowSwitcher === "normal" && (
+						{circleMenuGlobalBoxShadowSwitcher === "normal" && (
 							<FB_BoxShadowControl
 								key="global-normal-shadow"
 								label={__("Normal Shadow", "frontis-blocks")}
@@ -2139,8 +2255,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 									setAttributes({ circleMenuGlobalBoxShadowValues: value })
 								}
 								initialShadowValue={
-									Array.isArray(attributes.circleMenuGlobalBoxShadowValues)
-										? attributes.circleMenuGlobalBoxShadowValues
+									Array.isArray(circleMenuGlobalBoxShadowValues)
+										? circleMenuGlobalBoxShadowValues
 										: []
 								}
 								onBoxShadowStyleChange={(value) =>
@@ -2149,7 +2265,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 							/>
 						)}
 
-						{attributes.circleMenuGlobalBoxShadowSwitcher === "hover" && (
+						{circleMenuGlobalBoxShadowSwitcher === "hover" && (
 							<FB_BoxShadowControl
 								key="global-hover-shadow"
 								label={__("Hover Shadow", "frontis-blocks")}
@@ -2157,8 +2273,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 									setAttributes({ circleMenuGlobalBoxShadowHoverValues: value })
 								}
 								initialShadowValue={
-									Array.isArray(attributes.circleMenuGlobalBoxShadowHoverValues)
-										? attributes.circleMenuGlobalBoxShadowHoverValues
+									Array.isArray(circleMenuGlobalBoxShadowHoverValues)
+										? circleMenuGlobalBoxShadowHoverValues
 										: []
 								}
 								onBoxShadowStyleChange={(value) =>
@@ -2176,15 +2292,15 @@ const Inspector = ({ attributes, setAttributes }) => {
 						className="fb-setting-responsive-control-wrapper"
 					>
 						<FB_VisibilityControl
-							desktopValue={attributes.circleMenuDesktopSwitcher}
+							desktopValue={circleMenuDesktopSwitcher}
 							setDesktopValue={(value) =>
 								setAttributes({ circleMenuDesktopSwitcher: value })
 							}
-							tabletValue={attributes.circleMenuTabletSwitcher}
+							tabletValue={circleMenuTabletSwitcher}
 							setTabletValue={(value) =>
 								setAttributes({ circleMenuTabletSwitcher: value })
 							}
-							mobileValue={attributes.circleMenuMobileSwitcher}
+							mobileValue={circleMenuMobileSwitcher}
 							setMobileValue={(value) =>
 								setAttributes({ circleMenuMobileSwitcher: value })
 							}
@@ -2196,7 +2312,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 						initialOpen={false}
 					>
 						<FB_CustomCSSEditor
-							value={attributes.circleMenuGlobalCustomCSS}
+							value={circleMenuGlobalCustomCSS}
 							onChangeValue={(value) =>
 								setAttributes({ circleMenuGlobalCustomCSS: value })
 							}
