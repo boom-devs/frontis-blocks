@@ -1,11 +1,11 @@
 import { __ } from '@wordpress/i18n';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove } from '@dnd-kit/sortable';
-import { 
-  PanelBody, 
-  PanelRow, 
-  Button, 
-  TextareaControl, 
+import {
+  PanelBody,
+  PanelRow,
+  Button,
+  TextareaControl,
   SelectControl,
   ToggleControl
 } from '@wordpress/components';
@@ -430,7 +430,7 @@ export default function Inspector({ attributes, setAttributes }) {
       markerHoverSizeUnits: imageHotspotMarkerHoverSizeUnits,
       popoverPosition: 'top',
     };
-    setAttributes({ 
+    setAttributes({
       imageHotspotHotspots: [...(imageHotspotHotspots || []), newHotspot],
       imageHotspotSelectedHotspotId: newHotspot.id
     });
@@ -446,7 +446,7 @@ export default function Inspector({ attributes, setAttributes }) {
 
   const deleteHotspot = (id) => {
     const filtered = latestHotspots.filter(h => h.id !== id);
-    setAttributes({ 
+    setAttributes({
       imageHotspotHotspots: filtered,
       imageHotspotSelectedHotspotId: imageHotspotSelectedHotspotId === id ? filtered[0]?.id || null : imageHotspotSelectedHotspotId
     });
@@ -495,80 +495,80 @@ export default function Inspector({ attributes, setAttributes }) {
   };
 
   const imageHotspotImageBorderWidthChange = (event, position) => {
-      const value = event.target.value;
-      const attr = `imageHotspotImageBorderWidth${deviceType}`;
-      const current = attributes[attr];
-      setAttributes({
-          [attr]: imageHotspotImageBorderWidthLink
-              ? { top: value, right: value, bottom: value, left: value }
-              : { ...current, [position]: value }
-      });
+    const value = event.target.value;
+    const attr = `imageHotspotImageBorderWidth${deviceType}`;
+    const current = attributes[attr];
+    setAttributes({
+      [attr]: imageHotspotImageBorderWidthLink
+        ? { top: value, right: value, bottom: value, left: value }
+        : { ...current, [position]: value }
+    });
   };
 
   const imageHotspotImageBorderRadiusChange = (event, position) => {
-      const value = event.target.value;
-      const attr = `imageHotspotImageBorderRadius${deviceType}`;
-      const current = attributes[attr];
-      setAttributes({
-          [attr]: imageHotspotImageBorderRadiusLink
-              ? { top: value, right: value, bottom: value, left: value }
-              : { ...current, [position]: value }
-      });
+    const value = event.target.value;
+    const attr = `imageHotspotImageBorderRadius${deviceType}`;
+    const current = attributes[attr];
+    setAttributes({
+      [attr]: imageHotspotImageBorderRadiusLink
+        ? { top: value, right: value, bottom: value, left: value }
+        : { ...current, [position]: value }
+    });
   };
 
   const imageHotspotPopoverBorderWidthChange = (event, position) => {
-      const value = event.target.value;
-      const attr = `imageHotspotPopoverBorderWidth${deviceType}`;
-      const current = attributes[attr];
-      setAttributes({
-          [attr]: imageHotspotPopoverBorderWidthLink
-              ? { top: value, right: value, bottom: value, left: value }
-              : { ...current, [position]: value }
-      });
+    const value = event.target.value;
+    const attr = `imageHotspotPopoverBorderWidth${deviceType}`;
+    const current = attributes[attr];
+    setAttributes({
+      [attr]: imageHotspotPopoverBorderWidthLink
+        ? { top: value, right: value, bottom: value, left: value }
+        : { ...current, [position]: value }
+    });
   };
 
   const imageHotspotPopoverBorderRadiusChange = (event, position) => {
-      const value = event.target.value;
-      const attr = `imageHotspotPopoverBorderRadius${deviceType}`;
-      const current = attributes[attr];
-      setAttributes({
-          [attr]: imageHotspotPopoverBorderRadiusLink
-              ? { top: value, right: value, bottom: value, left: value }
-              : { ...current, [position]: value }
-      });
+    const value = event.target.value;
+    const attr = `imageHotspotPopoverBorderRadius${deviceType}`;
+    const current = attributes[attr];
+    setAttributes({
+      [attr]: imageHotspotPopoverBorderRadiusLink
+        ? { top: value, right: value, bottom: value, left: value }
+        : { ...current, [position]: value }
+    });
   };
 
   const imageHotspotPopoverImageBorderWidthChange = (event, position) => {
-      const value = event.target.value;
-      const attr = `imageHotspotPopoverImageBorderWidth${deviceType}`;
-      const current = attributes[attr];
-      setAttributes({
-          [attr]: imageHotspotPopoverImageBorderWidthLink
-              ? { top: value, right: value, bottom: value, left: value }
-              : { ...current, [position]: value }
-      });
+    const value = event.target.value;
+    const attr = `imageHotspotPopoverImageBorderWidth${deviceType}`;
+    const current = attributes[attr];
+    setAttributes({
+      [attr]: imageHotspotPopoverImageBorderWidthLink
+        ? { top: value, right: value, bottom: value, left: value }
+        : { ...current, [position]: value }
+    });
   };
 
   const imageHotspotPopoverImageBorderRadiusChange = (event, position) => {
-      const value = event.target.value;
-      const attr = `imageHotspotPopoverImageBorderRadius${deviceType}`;
-      const current = attributes[attr];
-      setAttributes({
-          [attr]: imageHotspotPopoverImageBorderRadiusLink
-              ? { top: value, right: value, bottom: value, left: value }
-              : { ...current, [position]: value }
-      });
+    const value = event.target.value;
+    const attr = `imageHotspotPopoverImageBorderRadius${deviceType}`;
+    const current = attributes[attr];
+    setAttributes({
+      [attr]: imageHotspotPopoverImageBorderRadiusLink
+        ? { top: value, right: value, bottom: value, left: value }
+        : { ...current, [position]: value }
+    });
   };
 
   const generalControls = (
     <>
       <PanelBody title={__("General", "frontis-blocks")} initialOpen={true}>
         <FB_Presets
-            presets={imageHotspotPresets}
-            value={imageHotspotPresetStyle}
-            onChangeValue="imageHotspotPresetStyle"
-            defaultPresetValue="preset-1"
-            setAttributes={setAttributes}
+          presets={imageHotspotPresets}
+          value={imageHotspotPresetStyle}
+          onChangeValue="imageHotspotPresetStyle"
+          defaultPresetValue="preset-1"
+          setAttributes={setAttributes}
         />
         <FB_ImageControl
           label={__("Select Image", "frontis-blocks")}
@@ -586,11 +586,11 @@ export default function Inspector({ attributes, setAttributes }) {
           label={__("Image Height", "frontis-blocks")}
           rangeValue={imageHotspotImageHeight}
           onChangeHandler={(value) => setAttributes({ imageHotspotImageHeight: value })}
-          rangeUnitHandler={(unit) => setAttributes({ 
-            imageHotspotImageHeightUnits: { 
-              ...imageHotspotImageHeightUnits, 
-              [deviceType]: unit 
-            } 
+          rangeUnitHandler={(unit) => setAttributes({
+            imageHotspotImageHeightUnits: {
+              ...imageHotspotImageHeightUnits,
+              [deviceType]: unit
+            }
           })}
           deviceType={deviceType}
           units={imageHotspotImageHeightUnits}
@@ -627,49 +627,49 @@ export default function Inspector({ attributes, setAttributes }) {
                       handleDeleteItem={deleteHotspot}
                       handleDuplicateItem={duplicateHotspot}
                     >
-                    <div className="fb-hotspot-selected-wrapper">
-                      <div>
-                        <h3 className="fb-hotspot-section-heading">
-                          {__('Content', 'frontis-blocks')}
-                        </h3>
-                        <FB_InputControl
-                          label={__("Category", "frontis-blocks")}
-                          value={hotspot.category || ''}
-                          onChangeValue={(value) => updateHotspot(hotspot.id, 'category', value)}
-                          placeholder={__("Enter category", "frontis-blocks")}
-                        />
+                      <div className="fb-hotspot-selected-wrapper">
+                        <div>
+                          <h3 className="fb-hotspot-section-heading">
+                            {__('Content', 'frontis-blocks')}
+                          </h3>
+                          <FB_InputControl
+                            label={__("Category", "frontis-blocks")}
+                            value={hotspot.category || ''}
+                            onChangeValue={(value) => updateHotspot(hotspot.id, 'category', value)}
+                            placeholder={__("Enter category", "frontis-blocks")}
+                          />
 
-                        <FB_InputControl
-                          label={__("Hotspot Title", "frontis-blocks")}
-                          value={hotspot.title || ''}
-                          onChangeValue={(value) => updateHotspot(hotspot.id, 'title', value)}
-                          placeholder={__("Enter title", "frontis-blocks")}
-                        />
+                          <FB_InputControl
+                            label={__("Hotspot Title", "frontis-blocks")}
+                            value={hotspot.title || ''}
+                            onChangeValue={(value) => updateHotspot(hotspot.id, 'title', value)}
+                            placeholder={__("Enter title", "frontis-blocks")}
+                          />
 
-                        <FB_UrlControl
-                          label={__("Title Link", "frontis-blocks")}
-                          url={hotspot.titleLink || ''}
-                          onChangeUrl={(value) => updateHotspot(hotspot.id, 'titleLink', value)}
-                          openInNewTab={!!hotspot.titleLinkOpenInNewTab}
-                          onChangeOpenInNewTab={(value) => updateHotspot(hotspot.id, 'titleLinkOpenInNewTab', value)}
-                        />
-                        
-                        <TextareaControl
-                          label={__("Hotspot Description", "frontis-blocks")}
-                          value={hotspot.description || ''}
-                          onChange={(value) => updateHotspot(hotspot.id, 'description', value)}
-                          placeholder={__("Enter description that will appear in popup", "frontis-blocks")}
-                          rows={4}
-                        />
+                          <FB_UrlControl
+                            label={__("Title Link", "frontis-blocks")}
+                            url={hotspot.titleLink || ''}
+                            onChangeUrl={(value) => updateHotspot(hotspot.id, 'titleLink', value)}
+                            openInNewTab={!!hotspot.titleLinkOpenInNewTab}
+                            onChangeOpenInNewTab={(value) => updateHotspot(hotspot.id, 'titleLinkOpenInNewTab', value)}
+                          />
 
-                        <FB_InputControl
-                          label={__("Price", "frontis-blocks")}
-                          value={hotspot.price || ''}
-                          onChangeValue={(value) => updateHotspot(hotspot.id, 'price', value)}
-                          placeholder={__("Enter price", "frontis-blocks")}
-                        />
+                          <TextareaControl
+                            label={__("Hotspot Description", "frontis-blocks")}
+                            value={hotspot.description || ''}
+                            onChange={(value) => updateHotspot(hotspot.id, 'description', value)}
+                            placeholder={__("Enter description that will appear in popup", "frontis-blocks")}
+                            rows={4}
+                          />
 
-                        <FB_ImageControl
+                          <FB_InputControl
+                            label={__("Price", "frontis-blocks")}
+                            value={hotspot.price || ''}
+                            onChangeValue={(value) => updateHotspot(hotspot.id, 'price', value)}
+                            placeholder={__("Enter price", "frontis-blocks")}
+                          />
+
+                          <FB_ImageControl
                             label={__("Popover Image", "frontis-blocks")}
                             globalImageUrl={hotspot.popoverImageUrl || ''}
                             setglobalImageUrl={(url) => updateHotspot(hotspot.id, 'popoverImageUrl', url)}
@@ -678,193 +678,193 @@ export default function Inspector({ attributes, setAttributes }) {
                             globalImageID={hotspot.popoverImageId || 0}
                             setglobalImageID={(id) => updateHotspot(hotspot.id, 'popoverImageId', id)}
                             isImageSize={false}
-                        />
+                          />
 
-                        <ToggleControl
+                          <ToggleControl
                             label={__("Show Popover Image", "frontis-blocks")}
                             checked={hotspot.showImage !== false}
                             onChange={(value) => updateHotspot(hotspot.id, 'showImage', value)}
-                        />
+                          />
 
-                        <SelectControl
+                          <SelectControl
                             label={__("Popover Position", "frontis-blocks")}
                             value={hotspot.popoverPosition || 'top'}
                             options={[
-                                { label: __('Top', 'frontis-blocks'), value: 'top' },
-                                { label: __('Bottom', 'frontis-blocks'), value: 'bottom' },
-                                { label: __('Left', 'frontis-blocks'), value: 'left' },
-                                { label: __('Right', 'frontis-blocks'), value: 'right' },
-                                { label: __('Top Left', 'frontis-blocks'), value: 'top-left' },
-                                { label: __('Top Right', 'frontis-blocks'), value: 'top-right' },
-                                { label: __('Bottom Left', 'frontis-blocks'), value: 'bottom-left' },
-                                { label: __('Bottom Right', 'frontis-blocks'), value: 'bottom-right' },
+                              { label: __('Top', 'frontis-blocks'), value: 'top' },
+                              { label: __('Bottom', 'frontis-blocks'), value: 'bottom' },
+                              { label: __('Left', 'frontis-blocks'), value: 'left' },
+                              { label: __('Right', 'frontis-blocks'), value: 'right' },
+                              { label: __('Top Left', 'frontis-blocks'), value: 'top-left' },
+                              { label: __('Top Right', 'frontis-blocks'), value: 'top-right' },
+                              { label: __('Bottom Left', 'frontis-blocks'), value: 'bottom-left' },
+                              { label: __('Bottom Right', 'frontis-blocks'), value: 'bottom-right' },
                             ]}
                             onChange={(value) => updateHotspot(hotspot.id, 'popoverPosition', value)}
-                        />
-                        
-                        <p className="fb-hotspot-control-label">{__("Marker Icon", "frontis-blocks")}</p>
-                        <FBIconPicker
-                          value={hotspot.icon || 'plus'}
-                          setIconHandler={(icon) => updateHotspot(hotspot.id, 'icon', icon)}
-                        />
-                      </div>
+                          />
 
-                      <div>
-                        <SelectControl
+                          <p className="fb-hotspot-control-label">{__("Marker Icon", "frontis-blocks")}</p>
+                          <FBIconPicker
+                            value={hotspot.icon || 'plus'}
+                            setIconHandler={(icon) => updateHotspot(hotspot.id, 'icon', icon)}
+                          />
+                        </div>
+
+                        <div>
+                          <SelectControl
                             label={__("Marker Animation", "frontis-blocks")}
                             value={hotspot.animation || 'none'}
                             options={[
-                                { label: __('None', 'frontis-blocks'), value: 'none' },
-                                { label: __('Pulse', 'frontis-blocks'), value: 'pulse' },
-                                { label: __('Glow', 'frontis-blocks'), value: 'glow' },
-                                { label: __('Float', 'frontis-blocks'), value: 'float' },
+                              { label: __('None', 'frontis-blocks'), value: 'none' },
+                              { label: __('Pulse', 'frontis-blocks'), value: 'pulse' },
+                              { label: __('Glow', 'frontis-blocks'), value: 'glow' },
+                              { label: __('Float', 'frontis-blocks'), value: 'float' },
                             ]}
                             onChange={(value) => updateHotspot(hotspot.id, 'animation', value)}
-                        />
-                        {(hotspot.animation || 'none') !== 'none' && (
-                          <>
-                            <ToggleControl
-                              label={__("Autoplay", "frontis-blocks")}
-                              checked={hotspot.autoplay !== false}
-                              onChange={(value) => updateHotspot(hotspot.id, 'autoplay', value)}
-                            />
-
-                            {hotspot.autoplay !== false && (
-                              <FB_Range
-                                label={__("Animation Interval (s)", "frontis-blocks")}
-                                rangeValue={{ [deviceType]: hotspot.animationInterval || 0 }}
-                                onChangeHandler={(value) => updateHotspot(hotspot.id, 'animationInterval', value[deviceType])}
-                                deviceType={deviceType}
-                                min={0}
-                                max={10}
-                                rangeStep={0.1}
-                                isRangeUnit={false}
-                                resetFallbackValue={0}
+                          />
+                          {(hotspot.animation || 'none') !== 'none' && (
+                            <>
+                              <ToggleControl
+                                label={__("Autoplay", "frontis-blocks")}
+                                checked={hotspot.autoplay !== false}
+                                onChange={(value) => updateHotspot(hotspot.id, 'autoplay', value)}
                               />
-                            )}
-                          </>
-                        )}
-                      </div>
 
-                      <div>
-                        <h3 className="fb-hotspot-section-heading">
-                          {__('Position', 'frontis-blocks')}
-                        </h3>
-                        <FB_Range
-                          label={__("X Position (%)", "frontis-blocks")}
-                          rangeValue={{ [deviceType]: hotspot.x }}
-                          onChangeHandler={(value) => updateHotspot(hotspot.id, 'x', value[deviceType])}
-                          deviceType={deviceType}
-                          min={0}
-                          max={100}
-                          rangeStep={1}
-                          isRangeUnit={false}
-                          resetFallbackValue={50}
-                        />
-                        
-                        <FB_Range
-                          label={__("Y Position (%)", "frontis-blocks")}
-                          rangeValue={{ [deviceType]: hotspot.y }}
-                          onChangeHandler={(value) => updateHotspot(hotspot.id, 'y', value[deviceType])}
-                          deviceType={deviceType}
-                          min={0}
-                          max={100}
-                          rangeStep={1}
-                          isRangeUnit={false}
-                          resetFallbackValue={50}
-                        />
-                      </div>
+                              {hotspot.autoplay !== false && (
+                                <FB_Range
+                                  label={__("Animation Interval (s)", "frontis-blocks")}
+                                  rangeValue={{ [deviceType]: hotspot.animationInterval || 0 }}
+                                  onChangeHandler={(value) => updateHotspot(hotspot.id, 'animationInterval', value[deviceType])}
+                                  deviceType={deviceType}
+                                  min={0}
+                                  max={10}
+                                  rangeStep={0.1}
+                                  isRangeUnit={false}
+                                  resetFallbackValue={0}
+                                />
+                              )}
+                            </>
+                          )}
+                        </div>
 
-                      <div>
-                        <h3 className="fb-hotspot-section-heading">
-                          {__('Styling', 'frontis-blocks')}
-                        </h3>
-                        <FB_SwitcherControl
+                        <div>
+                          <h3 className="fb-hotspot-section-heading">
+                            {__('Position', 'frontis-blocks')}
+                          </h3>
+                          <FB_Range
+                            label={__("X Position (%)", "frontis-blocks")}
+                            rangeValue={{ [deviceType]: hotspot.x }}
+                            onChangeHandler={(value) => updateHotspot(hotspot.id, 'x', value[deviceType])}
+                            deviceType={deviceType}
+                            min={0}
+                            max={100}
+                            rangeStep={1}
+                            isRangeUnit={false}
+                            resetFallbackValue={50}
+                          />
+
+                          <FB_Range
+                            label={__("Y Position (%)", "frontis-blocks")}
+                            rangeValue={{ [deviceType]: hotspot.y }}
+                            onChangeHandler={(value) => updateHotspot(hotspot.id, 'y', value[deviceType])}
+                            deviceType={deviceType}
+                            min={0}
+                            max={100}
+                            rangeStep={1}
+                            isRangeUnit={false}
+                            resetFallbackValue={50}
+                          />
+                        </div>
+
+                        <div>
+                          <h3 className="fb-hotspot-section-heading">
+                            {__('Styling', 'frontis-blocks')}
+                          </h3>
+                          <FB_SwitcherControl
                             label={__("Marker Size", "frontis-blocks")}
                             globalSwitcher={imageHotspotMarkerSizeSwitcher}
                             setGlobalSwitcher={(value) => setAttributes({ imageHotspotMarkerSizeSwitcher: value })}
-                        />
+                          />
 
-                        {imageHotspotMarkerSizeSwitcher === 'normal' && (
+                          {imageHotspotMarkerSizeSwitcher === 'normal' && (
                             <FB_Range
-                                label={__("Size", "frontis-blocks")}
-                                rangeValue={hotspot.markerSize || imageHotspotMarkerSize}
-                                onChangeHandler={(value) => updateHotspot(hotspot.id, 'markerSize', value)}
-                                rangeUnitHandler={(unit) => updateHotspot(hotspot.id, 'markerSizeUnits', {
-                                    ...(hotspot.markerSizeUnits || imageHotspotMarkerSizeUnits),
-                                    [deviceType]: unit
-                                })}
-                                deviceType={deviceType}
-                                units={hotspot.markerSizeUnits || imageHotspotMarkerSizeUnits}
-                                min={10}
-                                max={100}
-                                rangeStep={1}
-                                resetFallbackValue={35}
+                              label={__("Size", "frontis-blocks")}
+                              rangeValue={hotspot.markerSize || imageHotspotMarkerSize}
+                              onChangeHandler={(value) => updateHotspot(hotspot.id, 'markerSize', value)}
+                              rangeUnitHandler={(unit) => updateHotspot(hotspot.id, 'markerSizeUnits', {
+                                ...(hotspot.markerSizeUnits || imageHotspotMarkerSizeUnits),
+                                [deviceType]: unit
+                              })}
+                              deviceType={deviceType}
+                              units={hotspot.markerSizeUnits || imageHotspotMarkerSizeUnits}
+                              min={10}
+                              max={100}
+                              rangeStep={1}
+                              resetFallbackValue={35}
                             />
-                        )}
+                          )}
 
-                        {imageHotspotMarkerSizeSwitcher === 'hover' && (
+                          {imageHotspotMarkerSizeSwitcher === 'hover' && (
                             <FB_Range
-                                label={__("Hover Size", "frontis-blocks")}
-                                rangeValue={hotspot.markerHoverSize || imageHotspotMarkerHoverSize}
-                                onChangeHandler={(value) => updateHotspot(hotspot.id, 'markerHoverSize', value)}
-                                rangeUnitHandler={(unit) => updateHotspot(hotspot.id, 'markerHoverSizeUnits', {
-                                    ...(hotspot.markerHoverSizeUnits || imageHotspotMarkerHoverSizeUnits),
-                                    [deviceType]: unit
-                                })}
-                                deviceType={deviceType}
-                                units={hotspot.markerHoverSizeUnits || imageHotspotMarkerHoverSizeUnits}
-                                min={10}
-                                max={100}
-                                rangeStep={1}
-                                resetFallbackValue={40}
+                              label={__("Hover Size", "frontis-blocks")}
+                              rangeValue={hotspot.markerHoverSize || imageHotspotMarkerHoverSize}
+                              onChangeHandler={(value) => updateHotspot(hotspot.id, 'markerHoverSize', value)}
+                              rangeUnitHandler={(unit) => updateHotspot(hotspot.id, 'markerHoverSizeUnits', {
+                                ...(hotspot.markerHoverSizeUnits || imageHotspotMarkerHoverSizeUnits),
+                                [deviceType]: unit
+                              })}
+                              deviceType={deviceType}
+                              units={hotspot.markerHoverSizeUnits || imageHotspotMarkerHoverSizeUnits}
+                              min={10}
+                              max={100}
+                              rangeStep={1}
+                              resetFallbackValue={40}
                             />
-                        )}
+                          )}
 
-                        <FB_SwitcherControl
+                          <FB_SwitcherControl
                             label={__("Marker Color", "frontis-blocks")}
                             globalSwitcher={imageHotspotMarkerColorSwitcher}
                             setGlobalSwitcher={(value) => setAttributes({ imageHotspotMarkerColorSwitcher: value })}
-                        />
+                          />
 
-                        {imageHotspotMarkerColorSwitcher === 'normal' && (
+                          {imageHotspotMarkerColorSwitcher === 'normal' && (
                             <FB_ColorControl
-                                label={__("Color", "frontis-blocks")}
-                                globalColor={hotspot.markerColor || imageHotspotMarkerColor}
-                                setGlobalColor={(color) => updateHotspot(hotspot.id, 'markerColor', color)}
+                              label={__("Color", "frontis-blocks")}
+                              globalColor={hotspot.markerColor || imageHotspotMarkerColor}
+                              setGlobalColor={(color) => updateHotspot(hotspot.id, 'markerColor', color)}
                             />
-                        )}
+                          )}
 
-                        {imageHotspotMarkerColorSwitcher === 'hover' && (
+                          {imageHotspotMarkerColorSwitcher === 'hover' && (
                             <FB_ColorControl
-                                label={__("Hover Color", "frontis-blocks")}
-                                globalColor={hotspot.hoverBackgroundColor || ''}
-                                setGlobalColor={(color) => updateHotspot(hotspot.id, 'hoverBackgroundColor', color)}
+                              label={__("Hover Color", "frontis-blocks")}
+                              globalColor={hotspot.hoverBackgroundColor || ''}
+                              setGlobalColor={(color) => updateHotspot(hotspot.id, 'hoverBackgroundColor', color)}
                             />
-                        )}
-                        <FB_SwitcherControl
+                          )}
+                          <FB_SwitcherControl
                             label={__("Marker Icon Color", "frontis-blocks")}
                             globalSwitcher={imageHotspotIconColorSwitcher}
                             setGlobalSwitcher={(value) => setAttributes({ imageHotspotIconColorSwitcher: value })}
-                        />
+                          />
 
-                        {imageHotspotIconColorSwitcher === 'normal' && (
+                          {imageHotspotIconColorSwitcher === 'normal' && (
                             <FB_ColorControl
-                                label={__("Icon Color", "frontis-blocks")}
-                                globalColor={hotspot.iconColor || '#ffffff'}
-                                setGlobalColor={(color) => updateHotspot(hotspot.id, 'iconColor', color)}
+                              label={__("Icon Color", "frontis-blocks")}
+                              globalColor={hotspot.iconColor || '#ffffff'}
+                              setGlobalColor={(color) => updateHotspot(hotspot.id, 'iconColor', color)}
                             />
-                        )}
+                          )}
 
-                        {imageHotspotIconColorSwitcher === 'hover' && (
+                          {imageHotspotIconColorSwitcher === 'hover' && (
                             <FB_ColorControl
-                                label={__("Icon Hover Color", "frontis-blocks")}
-                                globalColor={hotspot.iconHoverColor || ''}
-                                setGlobalColor={(color) => updateHotspot(hotspot.id, 'iconHoverColor', color)}
+                              label={__("Icon Hover Color", "frontis-blocks")}
+                              globalColor={hotspot.iconHoverColor || ''}
+                              setGlobalColor={(color) => updateHotspot(hotspot.id, 'iconHoverColor', color)}
                             />
-                        )}
+                          )}
+                        </div>
                       </div>
-                    </div>
                     </SortableItem>
                   ))}
                 </ul>
@@ -916,15 +916,15 @@ export default function Inspector({ attributes, setAttributes }) {
           setGlobalColor={(value) => setAttributes({ imageHotspotDescColor: value })}
         />
         <FB_ColorControl
-            label={__("Category Color", "frontis-blocks")}
-            globalColor={imageHotspotCategoryColor}
-            setGlobalColor={(value) => setAttributes({ imageHotspotCategoryColor: value })}
+          label={__("Category Color", "frontis-blocks")}
+          globalColor={imageHotspotCategoryColor}
+          setGlobalColor={(value) => setAttributes({ imageHotspotCategoryColor: value })}
         />
 
         <FB_ColorControl
-            label={__("Price Color", "frontis-blocks")}
-            globalColor={imageHotspotPriceColor}
-            setGlobalColor={(value) => setAttributes({ imageHotspotPriceColor: value })}
+          label={__("Price Color", "frontis-blocks")}
+          globalColor={imageHotspotPriceColor}
+          setGlobalColor={(value) => setAttributes({ imageHotspotPriceColor: value })}
         />
       </PanelBody>
 
@@ -933,32 +933,32 @@ export default function Inspector({ attributes, setAttributes }) {
           label={__("Title Typography", "frontis-blocks")}
           deviceType={deviceType}
           setAttributes={setAttributes}
-          
+
           fontFamily={imageHotspotTitleFontFamily}
           onChangeFontFamily={(value) => setAttributes({ imageHotspotTitleFontFamily: value })}
-          
+
           fontSize={imageHotspotTitleFontSize}
           onChangeFontSize={(value) => setAttributes({ imageHotspotTitleFontSize: value })}
           fontSizeUnits={imageHotspotTitleFontSizeUnits}
           onChangeFontSizeUnit={(value) => setAttributes({ imageHotspotTitleFontSizeUnits: value })}
-          
+
           fontWeight={imageHotspotTitleFontWeight}
           onChangeFontWeight={(value) => setAttributes({ imageHotspotTitleFontWeight: value })}
-          
+
           fontStyle={imageHotspotTitleFontStyle}
           onChangeFontStyle={(value) => setAttributes({ imageHotspotTitleFontStyle: value })}
-          
+
           textTransform={imageHotspotTitleTextTransform}
           onChangeTextTransform={(value) => setAttributes({ imageHotspotTitleTextTransform: value })}
-          
+
           textDecoration={imageHotspotTitleTextDecoration}
           onChangeTextDecoration={(value) => setAttributes({ imageHotspotTitleTextDecoration: value })}
-          
+
           letterSpacing={imageHotspotTitleLetterSpacing}
           onChangeLetterSpacing={(value) => setAttributes({ imageHotspotTitleLetterSpacing: value })}
           letterSpacingUnits={imageHotspotTitleLetterSpacingUnits}
           onChangeLetterSpacingUnit={(value) => setAttributes({ imageHotspotTitleLetterSpacingUnits: value })}
-          
+
           lineHeight={imageHotspotTitleLineHeight}
           onChangeLineHeight={(value) => setAttributes({ imageHotspotTitleLineHeight: value })}
           lineHeightUnits={imageHotspotTitleLineHeightUnits}
@@ -968,32 +968,32 @@ export default function Inspector({ attributes, setAttributes }) {
           label={__("Description Typography", "frontis-blocks")}
           deviceType={deviceType}
           setAttributes={setAttributes}
-          
+
           fontFamily={imageHotspotDescFontFamily}
           onChangeFontFamily={(value) => setAttributes({ imageHotspotDescFontFamily: value })}
-          
+
           fontSize={imageHotspotDescFontSize}
           onChangeFontSize={(value) => setAttributes({ imageHotspotDescFontSize: value })}
           fontSizeUnits={imageHotspotDescFontSizeUnits}
           onChangeFontSizeUnit={(value) => setAttributes({ imageHotspotDescFontSizeUnits: value })}
-          
+
           fontWeight={imageHotspotDescFontWeight}
           onChangeFontWeight={(value) => setAttributes({ imageHotspotDescFontWeight: value })}
-          
+
           fontStyle={imageHotspotDescFontStyle}
           onChangeFontStyle={(value) => setAttributes({ imageHotspotDescFontStyle: value })}
-          
+
           textTransform={imageHotspotDescTextTransform}
           onChangeTextTransform={(value) => setAttributes({ imageHotspotDescTextTransform: value })}
-          
+
           textDecoration={imageHotspotDescTextDecoration}
           onChangeTextDecoration={(value) => setAttributes({ imageHotspotDescTextDecoration: value })}
-          
+
           letterSpacing={imageHotspotDescLetterSpacing}
           onChangeLetterSpacing={(value) => setAttributes({ imageHotspotDescLetterSpacing: value })}
           letterSpacingUnits={imageHotspotDescLetterSpacingUnits}
           onChangeLetterSpacingUnit={(value) => setAttributes({ imageHotspotDescLetterSpacingUnits: value })}
-          
+
           lineHeight={imageHotspotDescLineHeight}
           onChangeLineHeight={(value) => setAttributes({ imageHotspotDescLineHeight: value })}
           lineHeightUnits={imageHotspotDescLineHeightUnits}
@@ -1154,10 +1154,10 @@ export default function Inspector({ attributes, setAttributes }) {
         />
 
         <FB_BoxShadowControl
-            label={__("Box Shadow", "frontis-blocks")}
-            onBoxShadowChange={(value) => setAttributes({ imageHotspotContainerShadowValues: value })}
-            initialShadowValue={imageHotspotContainerShadowValues}
-            onBoxShadowStyleChange={(value) => setAttributes({ imageHotspotContainerShadowCssValue: value })}
+          label={__("Box Shadow", "frontis-blocks")}
+          onBoxShadowChange={(value) => setAttributes({ imageHotspotContainerShadowValues: value })}
+          initialShadowValue={imageHotspotContainerShadowValues}
+          onBoxShadowStyleChange={(value) => setAttributes({ imageHotspotContainerShadowCssValue: value })}
         />
         <FB_BoxShadowControl
           label={__("Popover Shadow", "frontis-blocks")}
