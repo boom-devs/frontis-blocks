@@ -41,6 +41,32 @@ export function generateStackCardItemsAggregateCss(blockID, innerBlocks) {
 export function generateStackCardItemStyle(blockID, attributes) {
 	const itemNumber = attributes.itemNumber ?? 1;
 	const {
+		stackCardItemBgColorSwitcher,
+		stackCardItemBgNormalBackgroundType,
+		stackCardItemBgNormalClassicColor,
+		stackCardItemBgNormalGradientColor,
+		stackCardItemBgNormalCustomGradientSwitcher,
+		stackCardItemBgNormalCustomGradientInputValue,
+		stackCardItemBgNormalImageUrl,
+		stackCardItemBgNormalImageAlt,
+		stackCardItemBgNormalImageID,
+		stackCardItemBgNormalImagePosition,
+		stackCardItemBgNormalImageAttachment,
+		stackCardItemBgNormalImageRepeat,
+		stackCardItemBgNormalImageSize,
+		stackCardItemBgHoverBackgroundType,
+		stackCardItemBgHoverClassicColor,
+		stackCardItemBgHoverGradientColor,
+		stackCardItemBgHoverCustomGradientSwitcher,
+		stackCardItemBgHoverCustomGradientInputValue,
+		stackCardItemBgHoverImageUrl,
+		stackCardItemBgHoverImageAlt,
+		stackCardItemBgHoverImageID,
+		stackCardItemBgHoverImagePosition,
+		stackCardItemBgHoverImageAttachment,
+		stackCardItemBgHoverImageRepeat,
+		stackCardItemBgHoverImageSize,
+
 		stackCardItemPaddingUnits,
 		stackCardItemPaddingDesktop,
 		stackCardItemPaddingTablet,
@@ -77,20 +103,47 @@ export function generateStackCardItemStyle(blockID, attributes) {
 	const stackCardItemMobileBorderRadiusWidth = `${stackCardItemBorderRadiusMobile?.top}${stackCardItemBorderRadiusUnits?.Mobile} ${stackCardItemBorderRadiusMobile?.right}${stackCardItemBorderRadiusUnits?.Mobile} ${stackCardItemBorderRadiusMobile?.bottom}${stackCardItemBorderRadiusUnits?.Mobile} ${stackCardItemBorderRadiusMobile?.left}${stackCardItemBorderRadiusUnits?.Mobile}`;
 
 	return `
-        ${scopedItem} {
+        .${blockID}.fb-stack-cards-main-wrapper .fb-stack-cards-frame .fb-stack-card-item {
             overflow: hidden;
-            background: var(--fb-stack-card-item-bg-normal, transparent);
+			${stackCardItemBgNormalBackgroundType === "gradient"
+			? `background: ${stackCardItemBgNormalCustomGradientSwitcher && stackCardItemBgNormalCustomGradientInputValue
+				? stackCardItemBgNormalCustomGradientInputValue
+				: stackCardItemBgNormalGradientColor
+			};`
+			: stackCardItemBgNormalImageUrl !== undefined && stackCardItemBgNormalImageUrl !== null && stackCardItemBgNormalImageUrl !== ""
+				? `
+						${stackCardItemBgNormalImageUrl !== undefined ? `background-image: url(${stackCardItemBgNormalImageUrl});` : ''}
+						${stackCardItemBgNormalImagePosition !== undefined ? `background-position: ${stackCardItemBgNormalImagePosition};` : ''}
+						${stackCardItemBgNormalImageAttachment !== undefined ? `background-attachment: ${stackCardItemBgNormalImageAttachment};` : ''}
+						${stackCardItemBgNormalImageRepeat !== undefined ? `background-repeat: ${stackCardItemBgNormalImageRepeat};` : ''}
+						${stackCardItemBgNormalImageSize !== undefined ? `background-size: ${stackCardItemBgNormalImageSize};` : ''}
+						`
+				: stackCardItemBgNormalClassicColor ? `background: ${stackCardItemBgNormalClassicColor};` : ''
+		}
             ${hasValue(stackCardItemPaddingDesktop?.top) ? `padding: ${stackCardItemDesktopPadding};` : ''}
             ${stackCardItemBorder ? `border: ${stackCardItemBorder};` : ''}
             ${hasValue(stackCardItemBorderDesktop?.top) ? `border-width: ${stackCardItemDesktopBorderWidth};` : ''}
             ${hasValue(stackCardItemBorderRadiusDesktop?.top) ? `border-radius: ${stackCardItemDesktopBorderRadiusWidth};` : ''}
             border-color: var(--fb-stack-card-item-border-color, ${stackCardItemBorderColor || 'transparent'});
-        }
-        ${scopedItem}:hover {
-            background: var(--fb-stack-card-item-bg-hover, var(--fb-stack-card-item-bg-normal, transparent));
-            border-color: var(--fb-stack-card-item-border-hover-color, var(--fb-stack-card-item-border-color, ${
-				stackCardItemBorderHoverColor || stackCardItemBorderColor || 'transparent'
-			}));
+        } 
+        .${blockID}.fb-stack-cards-main-wrapper .fb-stack-cards-frame .fb-stack-card-item:hover {
+			${stackCardItemBgHoverBackgroundType === "gradient"
+			? `background: ${stackCardItemBgHoverCustomGradientSwitcher && stackCardItemBgHoverCustomGradientInputValue
+				? stackCardItemBgHoverCustomGradientInputValue
+				: stackCardItemBgHoverGradientColor
+			};`
+			: stackCardItemBgHoverImageUrl !== undefined && stackCardItemBgHoverImageUrl !== null && stackCardItemBgHoverImageUrl !== ""
+				? `
+						${stackCardItemBgHoverImageUrl !== undefined ? `background-image: url(${stackCardItemBgHoverImageUrl});` : ''}
+						${stackCardItemBgHoverImagePosition !== undefined ? `background-position: ${stackCardItemBgHoverImagePosition};` : ''}
+						${stackCardItemBgHoverImageAttachment !== undefined ? `background-attachment: ${stackCardItemBgHoverImageAttachment};` : ''}
+						${stackCardItemBgHoverImageRepeat !== undefined ? `background-repeat: ${stackCardItemBgHoverImageRepeat};` : ''}
+						${stackCardItemBgHoverImageSize !== undefined ? `background-size: ${stackCardItemBgHoverImageSize};` : ''}
+						`
+				: stackCardItemBgHoverClassicColor ? `background: ${stackCardItemBgHoverClassicColor};` : ''
+		} 
+            border-color: var(--fb-stack-card-item-border-hover-color, var(--fb-stack-card-item-border-color, ${stackCardItemBorderHoverColor || stackCardItemBorderColor || 'transparent'
+		}));
         }
 
 		@media only screen and (max-width: 1024px) {
