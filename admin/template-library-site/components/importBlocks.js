@@ -51,6 +51,15 @@ const cleanBlockAttributes = (blocks) => {
  */
 export const importBlocksFromApi = async (patternData) => {
     try {
+        const pluginUrl = window.frontisBlocksAdmin?.pluginUrl || '';
+        if (pluginUrl) {
+            // Replace any remote domain plugin asset URL with local plugin asset URL
+            patternData.content = patternData.content.replace(
+                /https?:\/\/[^\/]+\/wp-content\/plugins\/frontis-blocks\/assets\//g,
+                pluginUrl + 'assets/'
+            );
+        }
+
         let parsedBlocks = parse(patternData.content);
         const imageUrls = extractImageUrls(parsedBlocks);
 
@@ -132,7 +141,7 @@ const extractImageUrls = (blocks) => {
     };
 
     blocks.forEach(traverseBlocks);
-    return [...new Set(imageUrls)]; // Remove duplicates
+    return [...new Set(imageUrls)].filter(url => !url.includes('/wp-content/plugins/frontis-blocks/assets/')); // Remove duplicates and exclude local plugin assets
 };
 
 /**
