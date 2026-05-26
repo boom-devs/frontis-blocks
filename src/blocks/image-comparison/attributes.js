@@ -579,6 +579,150 @@ const attributes = {
     },
     /** End Comparison Labels Text Color */
 
+     /** Start Border Radius */
+    comparisonHandlerBorderRadiusUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        },
+    },
+    comparisonHandlerBorderRadiusDesktop: {
+        type: "object",
+        default: {
+            top: '',
+            right: '',
+            bottom: '',
+            left: ''
+        },
+    },
+    comparisonHandlerBorderRadiusTablet: {
+        type: "object",
+        default: {
+            top: '',
+            right: '',
+            bottom: '',
+            left: ''
+        },
+    },
+    comparisonHandlerBorderRadiusMobile: {
+        type: "object",
+        default: {
+            top: '',
+            right: '',
+            bottom: '',
+            left: ''
+        },
+    },
+    comparisonHandlerBorderRadiusLink: {
+        type: "boolean",
+        default: true,
+    },
+    /** End Border Radius */
+
+    /**Start Handler Size */
+    comparisonHandlerSize: {
+        type: "object",
+        default: {
+            Desktop: "40",
+            Tablet: "40",
+            Mobile: "40"
+        },
+    },
+    comparisonHandlerSizeUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        }
+    },
+    /**End Handler Size */
+
+    /** Start Comparison Handler Color */
+    comparisonHandlerColorSwitcher: {
+        type: "string",
+        default: "normal",
+    },
+    comparisonHandlerColor: {
+        type: "string",
+        default: "#FFFFFF",
+    },
+    comparisonHandlerHoverColor: {
+        type: "string",
+        default: "",
+    },
+    /** End Comparison Handler Color */
+
+    /**Start Divider Width */
+    comparisonDividerWidth:{
+        type: "object",
+        default: {
+            Desktop: "2",
+            Tablet: "2",
+            Mobile: "2"
+        },
+    },
+    comparisonDividerWidthUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        },
+    },
+    /** End Divider Width */
+
+    /** Start Comparison Divider Color */
+    comparisonDividerColorSwitcher: {
+        type: "string",
+        default: "normal",
+    },
+    comparisonDividerColor: {
+        type: "string",
+        default: "#E9E9E9",
+    },
+    comparisonDividerHoverColor: {
+        type: "string",
+        default: "",
+    },
+    /** End Comparison Divider Color */
+
+    /** Start Comparison Arrow Color */
+    comparisonArrowColorSwitcher: {
+        type: "string",
+        default: "normal",
+    },
+    comparisonArrowColor: {
+        type: "string",
+        default: "#FFFFFF",
+    },
+    comparisonArrowHoverColor: {
+        type: "string",
+        default: "",
+    },
+    /** End Comparison Arrow Color */
+
+    /** Start Comparison Arrow Size */
+    comparisonArrowSize: {
+        type: "object",
+        default: {
+            Desktop: "16",
+            Tablet: "16",
+            Mobile: "16"
+        },
+    },
+    comparisonArrowSizeUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        },
+    },
+    /** End Comparison Arrow Size */
+
     /** Start Z Index */
     comparisonGlobalZIndex: {
         type: "string",
