@@ -1,0 +1,95 @@
+// .fb-vertical-timeline-item-wrapper {
+//     display: flex;
+//     align-items: center;
+//     gap: 50px;
+//     margin-bottom: 20px;
+//     position: relative; 
+
+//     .fb-vertical-timeline-side {
+//         display: flex;
+//         align-items: center;
+//         gap: 20px;
+//         position: relative; 
+
+
+//         &::before {
+//             content: '';
+//             position: absolute;
+//             left: 50%;
+//             transform: translateX(-50%);
+//             width: 2px;
+//             background-color: #0875ff; 
+//             top: calc(-100% - 10px); 
+//             bottom: calc(-100% - 10px); 
+//             z-index: 1;
+//         }
+
+//         &:first-child::before {
+//             top: 50%;
+//         }
+//     }
+// }
+
+
+// .fb-vertical-timeline-inner {
+//     position: relative;
+
+//     &::before {
+//         content: '';
+//         position: absolute;
+//         left: var(--timeline-line-left);
+//         top: var(--timeline-line-top);
+//         bottom: var(--timeline-line-bottom);
+//         width: 2px;
+//         background-color: #0875ff;
+//         z-index: 0;
+//         transform: translateX(-50%);
+//     }
+// }
+
+// .fb-vertical-timeline-inner {
+//     position: relative;
+
+//     &::after {
+//         content: '';
+//         position: absolute;
+//         left: var(--timeline-line-left);
+//         top: var(--timeline-line-top);
+//         bottom: var(--timeline-line-bottom);
+//         width: 3px;
+//         background-color: #2e3236;
+//         z-index: 0;
+//         transform: translateX(-50%);
+//     }
+// }
+
+
+.fb-vertical-timeline-inner {
+    position: relative;
+
+    // Base line
+    &::before {
+        content: '';
+        position: absolute;
+        left: var(--timeline-line-left, 125px);
+        top: var(--timeline-line-top, 60px);
+        bottom: var(--timeline-line-bottom, 60px);
+        transform: translateX(-50%);
+        width: 2px;
+        background-color: #e2e8f0;
+    }
+
+    // Progress line
+    &::after {
+        content: '';
+        position: absolute;
+        left: var(--timeline-line-left, 125px);
+        top: var(--timeline-line-top, 60px);
+        bottom: var(--timeline-line-bottom, 60px);
+        width: 2px;
+        background-color: #007cba;
+        transform: translateX(-50%) scaleY(var(--timeline-progress-scale, 0.5));
+        transform-origin: top center;
+        transition: transform 0.1s linear;
+    }
+}

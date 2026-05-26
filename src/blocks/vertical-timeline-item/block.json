@@ -1,0 +1,29 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "frontis-blocks/vertical-timeline-item",
+  "version": "1.0.0",
+  "title": "Vertical Timeline Item",
+  "category": "frontis-blocks",
+  "textdomain": "frontis-blocks",
+  "description": "A customizable vertical timeline item.",
+  "example": {},
+  "supports": {
+    "anchor": false,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "customClassName": false
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "parent": [
+    "frontis-blocks/vertical-timeline"
+  ],
+  "usesContext": [
+    "fb/timelineparentBlockID",
+    "fb/showSectionLabelSwitcher"
+  ]
+}
