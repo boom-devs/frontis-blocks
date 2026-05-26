@@ -64,7 +64,6 @@ import './editor.scss';;
 
 const Inspector = ({ attributes, setAttributes }) => {
 
-    const deviceType = useDeviceType();
     const {
         showSectionLabelSwitcher,
 
@@ -91,6 +90,8 @@ const Inspector = ({ attributes, setAttributes }) => {
         verticalTimelineWrapperClass,
         /** End Class & ID Setting */
     } = attributes;
+
+    const deviceType = useDeviceType();
 
     /**
      * Inspector General Controls
