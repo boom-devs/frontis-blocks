@@ -187,7 +187,6 @@ const TemplateGrid = ({
                     'Content-Type': 'application/json',
                 },
             }).unwrap();
-            console.log(key, response);
             return response;
         } catch (err) {
             console.error('Error:', err);
