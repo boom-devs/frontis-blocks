@@ -52,13 +52,7 @@ export default function save({ attributes }) {
 	);
 
 	const blockProps = useBlockProps.save({
-		className: ['fb-stack-card-item', `fb-card-item${itemNumber}`].filter(Boolean).join(' '),
-		style: {
-			'--fb-stack-card-item-bg-normal': normalBackground,
-			'--fb-stack-card-item-bg-hover': hoverBackground,
-			'--fb-stack-card-item-border-color': stackCardItemBorderColor || undefined,
-			'--fb-stack-card-item-border-hover-color': stackCardItemBorderHoverColor || undefined,
-		},
+		className: ['fb-stack-card-item', `fb-card-item${itemNumber}`].filter(Boolean).join(' ')
 	});
 
 	return (

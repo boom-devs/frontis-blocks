@@ -7,6 +7,10 @@ const attributes = {
         type: 'string',
         default: 'Desktop'
     },
+	stackCardsHasInitializedItems: {
+		type: 'boolean',
+		default: false,
+	},
 	blockStyle: {
         type: 'string',
         default: '',
