@@ -225,6 +225,9 @@ const imageComparisonStyle = (attributes) => {
     const comparisonHandlerBorderRadiusTabletWidth = `${comparisonHandlerBorderRadiusTablet?.top}${comparisonHandlerBorderRadiusUnits?.Tablet} ${comparisonHandlerBorderRadiusTablet?.right}${comparisonHandlerBorderRadiusUnits?.Tablet} ${comparisonHandlerBorderRadiusTablet?.bottom}${comparisonHandlerBorderRadiusUnits?.Tablet} ${comparisonHandlerBorderRadiusTablet?.left}${comparisonHandlerBorderRadiusUnits?.Tablet}`;
     const comparisonHandlerBorderRadiusMobileWidth = `${comparisonHandlerBorderRadiusMobile?.top}${comparisonHandlerBorderRadiusUnits?.Mobile} ${comparisonHandlerBorderRadiusMobile?.right}${comparisonHandlerBorderRadiusUnits?.Mobile} ${comparisonHandlerBorderRadiusMobile?.bottom}${comparisonHandlerBorderRadiusUnits?.Mobile} ${comparisonHandlerBorderRadiusMobile?.left}${comparisonHandlerBorderRadiusUnits?.Mobile}`;
 
+    const desktopArrowHalfSize = comparisonArrowSize?.Desktop ? parseFloat(comparisonArrowSize.Desktop) / 2 : '';
+    const tabletArrowHalfSize = comparisonArrowSize?.Tablet ? parseFloat(comparisonArrowSize.Tablet) / 2 : '';
+    const mobileArrowHalfSize = comparisonArrowSize?.Mobile ? parseFloat(comparisonArrowSize.Mobile) / 2 : '';
 
     const imageComparisonBlockStyle = `
 
@@ -349,9 +352,49 @@ const imageComparisonStyle = (attributes) => {
             `}
         }
 
-        .${blockID} .fb-image-comparison-slider {
-            ${comparisonHandlerBorderColor ? `border-color: ${comparisonHandlerBorderColor};` : ''}    
+        .${blockID} .fb-image-comparison-slider-wrapper .fb-image-comparison-slider {
+            ${comparisonHandlerColor ? `border-color: ${comparisonHandlerColor};` : ''}    
             ${comparisonHandlerBorderRadiusDesktopWidth && comparisonHandlerBorderRadiusDesktop?.top ? `border-radius: ${comparisonHandlerBorderRadiusDesktopWidth};` : ''}    
+            ${comparisonHandlerSize?.Desktop ? `width: ${comparisonHandlerSize.Desktop}${comparisonHandlerSizeUnits?.Desktop || 'px'};` : ''}
+            ${comparisonHandlerSize?.Desktop ? `height: ${comparisonHandlerSize.Desktop}${comparisonHandlerSizeUnits?.Desktop || 'px'};` : ''}
+        }
+
+        .${blockID} .fb-image-comparison-slider-wrapper .fb-image-comparison-slider:hover {
+            ${comparisonHandlerHoverColor ? `border-color: ${comparisonHandlerHoverColor};` : ''}
+        }
+
+        .${blockID} .fb-image-comparison-slider-wrapper .fb-image-comparison-slider::before {
+             ${comparisonDragDirection === 'vertical'
+                 ? (comparisonDividerWidth?.Desktop ? `height: ${comparisonDividerWidth.Desktop}${comparisonDividerWidthUnits?.Desktop || 'px'}; width: auto;` : '')
+                 : (comparisonDividerWidth?.Desktop ? `width: ${comparisonDividerWidth.Desktop}${comparisonDividerWidthUnits?.Desktop || 'px'}; height: auto;` : '')
+             }
+             ${comparisonDividerColor ? `background: ${comparisonDividerColor};` : ''}    
+        }
+
+        .${blockID} .fb-image-comparison-slider-wrapper .fb-image-comparison-slider:hover::before {
+             ${comparisonDividerHoverColor ? `background: ${comparisonDividerHoverColor};` : ''}
+        }
+
+        .${blockID} .fb-image-comparison-slider-wrapper .fb-image-comparison-slider .fb-arrow-left {
+             ${desktopArrowHalfSize ? `border-top-width: ${desktopArrowHalfSize}${comparisonArrowSizeUnits?.Desktop || 'px'};` : ''}
+             ${desktopArrowHalfSize ? `border-bottom-width: ${desktopArrowHalfSize}${comparisonArrowSizeUnits?.Desktop || 'px'};` : ''}
+             ${comparisonArrowSize?.Desktop ? `border-right-width: ${comparisonArrowSize.Desktop}${comparisonArrowSizeUnits?.Desktop || 'px'};` : ''}
+             ${comparisonArrowColor ? `border-right-color: ${comparisonArrowColor};` : ''}
+        }
+
+        .${blockID} .fb-image-comparison-slider-wrapper .fb-image-comparison-slider .fb-arrow-right {
+             ${desktopArrowHalfSize ? `border-top-width: ${desktopArrowHalfSize}${comparisonArrowSizeUnits?.Desktop || 'px'};` : ''}
+             ${desktopArrowHalfSize ? `border-bottom-width: ${desktopArrowHalfSize}${comparisonArrowSizeUnits?.Desktop || 'px'};` : ''}
+             ${comparisonArrowSize?.Desktop ? `border-left-width: ${comparisonArrowSize.Desktop}${comparisonArrowSizeUnits?.Desktop || 'px'};` : ''}
+             ${comparisonArrowColor ? `border-left-color: ${comparisonArrowColor};` : ''}
+        }
+
+        .${blockID} .fb-image-comparison-slider-wrapper .fb-image-comparison-slider:hover .fb-arrow-left {
+             ${comparisonArrowHoverColor ? `border-right-color: ${comparisonArrowHoverColor};` : ''}
+        }
+
+        .${blockID} .fb-image-comparison-slider-wrapper .fb-image-comparison-slider:hover .fb-arrow-right {
+             ${comparisonArrowHoverColor ? `border-left-color: ${comparisonArrowHoverColor};` : ''}
         }
 
         @media only screen and (max-width: 1024px) {
@@ -367,8 +410,29 @@ const imageComparisonStyle = (attributes) => {
                 ${comparisonLabelsBorderRadiusTabletWidth && comparisonLabelsBorderRadiusTablet?.top ? `border-radius: ${comparisonLabelsBorderRadiusTabletWidth};` : ''}
             }
 
-            .${blockID} .fb-image-comparison-slider {
+            .${blockID} .fb-image-comparison-slider-wrapper .fb-image-comparison-slider {
                 ${comparisonHandlerBorderRadiusTabletWidth && comparisonHandlerBorderRadiusTablet?.top ? `border-radius: ${comparisonHandlerBorderRadiusTabletWidth};` : ''}    
+                ${comparisonHandlerSize?.Tablet ? `width: ${comparisonHandlerSize.Tablet}${comparisonHandlerSizeUnits?.Tablet || 'px'};` : ''}
+                ${comparisonHandlerSize?.Tablet ? `height: ${comparisonHandlerSize.Tablet}${comparisonHandlerSizeUnits?.Tablet || 'px'};` : ''}
+            }
+
+            .${blockID} .fb-image-comparison-slider-wrapper .fb-image-comparison-slider::before {
+                 ${comparisonDragDirection === 'vertical'
+                     ? (comparisonDividerWidth?.Tablet ? `height: ${comparisonDividerWidth.Tablet}${comparisonDividerWidthUnits?.Tablet || 'px'};` : '')
+                     : (comparisonDividerWidth?.Tablet ? `width: ${comparisonDividerWidth.Tablet}${comparisonDividerWidthUnits?.Tablet || 'px'};` : '')
+                 }
+            }
+
+            .${blockID} .fb-image-comparison-slider-wrapper .fb-image-comparison-slider .fb-arrow-left {
+                 ${tabletArrowHalfSize ? `border-top-width: ${tabletArrowHalfSize}${comparisonArrowSizeUnits?.Tablet || 'px'};` : ''}
+                 ${tabletArrowHalfSize ? `border-bottom-width: ${tabletArrowHalfSize}${comparisonArrowSizeUnits?.Tablet || 'px'};` : ''}
+                 ${comparisonArrowSize?.Tablet ? `border-right-width: ${comparisonArrowSize.Tablet}${comparisonArrowSizeUnits?.Tablet || 'px'};` : ''}
+            }
+
+            .${blockID} .fb-image-comparison-slider-wrapper .fb-image-comparison-slider .fb-arrow-right {
+                 ${tabletArrowHalfSize ? `border-top-width: ${tabletArrowHalfSize}${comparisonArrowSizeUnits?.Tablet || 'px'};` : ''}
+                 ${tabletArrowHalfSize ? `border-bottom-width: ${tabletArrowHalfSize}${comparisonArrowSizeUnits?.Tablet || 'px'};` : ''}
+                 ${comparisonArrowSize?.Tablet ? `border-left-width: ${comparisonArrowSize.Tablet}${comparisonArrowSizeUnits?.Tablet || 'px'};` : ''}
             }
         }
 
@@ -385,8 +449,29 @@ const imageComparisonStyle = (attributes) => {
                 ${comparisonLabelsBorderRadiusMobileWidth && comparisonLabelsBorderRadiusMobile?.top ? `border-radius: ${comparisonLabelsBorderRadiusMobileWidth};` : ''}
             }
 
-            .${blockID} .fb-image-comparison-slider {
+            .${blockID} .fb-image-comparison-slider-wrapper .fb-image-comparison-slider {
                 ${comparisonHandlerBorderRadiusMobileWidth && comparisonHandlerBorderRadiusMobile?.top ? `border-radius: ${comparisonHandlerBorderRadiusMobileWidth};` : ''}    
+                ${comparisonHandlerSize?.Mobile ? `width: ${comparisonHandlerSize.Mobile}${comparisonHandlerSizeUnits?.Mobile || 'px'};` : ''}
+                ${comparisonHandlerSize?.Mobile ? `height: ${comparisonHandlerSize.Mobile}${comparisonHandlerSizeUnits?.Mobile || 'px'};` : ''}
+            }
+
+            .${blockID} .fb-image-comparison-slider-wrapper .fb-image-comparison-slider::before {
+                 ${comparisonDragDirection === 'vertical'
+                     ? (comparisonDividerWidth?.Mobile ? `height: ${comparisonDividerWidth.Mobile}${comparisonDividerWidthUnits?.Mobile || 'px'};` : '')
+                     : (comparisonDividerWidth?.Mobile ? `width: ${comparisonDividerWidth.Mobile}${comparisonDividerWidthUnits?.Mobile || 'px'};` : '')
+                 }
+            }
+
+            .${blockID} .fb-image-comparison-slider-wrapper .fb-image-comparison-slider .fb-arrow-left {
+                 ${mobileArrowHalfSize ? `border-top-width: ${mobileArrowHalfSize}${comparisonArrowSizeUnits?.Mobile || 'px'};` : ''}
+                 ${mobileArrowHalfSize ? `border-bottom-width: ${mobileArrowHalfSize}${comparisonArrowSizeUnits?.Mobile || 'px'};` : ''}
+                 ${comparisonArrowSize?.Mobile ? `border-right-width: ${comparisonArrowSize.Mobile}${comparisonArrowSizeUnits?.Mobile || 'px'};` : ''}
+            }
+
+            .${blockID} .fb-image-comparison-slider-wrapper .fb-image-comparison-slider .fb-arrow-right {
+                 ${mobileArrowHalfSize ? `border-top-width: ${mobileArrowHalfSize}${comparisonArrowSizeUnits?.Mobile || 'px'};` : ''}
+                 ${mobileArrowHalfSize ? `border-bottom-width: ${mobileArrowHalfSize}${comparisonArrowSizeUnits?.Mobile || 'px'};` : ''}
+                 ${comparisonArrowSize?.Mobile ? `border-left-width: ${comparisonArrowSize.Mobile}${comparisonArrowSizeUnits?.Mobile || 'px'};` : ''}
             }
         }
     `;
