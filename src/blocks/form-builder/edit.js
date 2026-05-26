@@ -160,7 +160,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
                     {/* Submit Button */}
                     <div className="fb-field-item fb-form-builder-submit-wrapper">
-                        <button isPrimary className="fb-submit-button" onClick={(e) => e.preventDefault()}>
+                        <button className="fb-submit-button" onClick={(e) => e.preventDefault()}>
                             <RichText
                                 tagName="span"
                                 className="fb-submit-button-label"
