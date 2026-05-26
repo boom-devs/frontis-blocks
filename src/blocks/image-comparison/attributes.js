@@ -349,28 +349,28 @@ const attributes = {
     comparisonLabelsPaddingDesktop: {
         type: "object",
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '8',
+            bottom: '8',
+            left: '14',
+            right: '14',
         },
     },
     comparisonLabelsPaddingTablet: {
         type: "object",
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '8',
+            bottom: '8',
+            left: '14',
+            right: '14',
         },
     },
     comparisonLabelsPaddingMobile: {
         type: "object",
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '6',
+            bottom: '6',
+            left: '12',
+            right: '12',
         },
     },
     comparisonLabelsPaddingLink: {
@@ -391,28 +391,28 @@ const attributes = {
     comparisonLabelsBorderRadiusDesktop: {
         type: "object",
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '6',
+            bottom: '6',
+            left: '6',
+            right: '6',
         },
     },
     comparisonLabelsBorderRadiusTablet: {
         type: "object",
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '6',
+            bottom: '6',
+            left: '6',
+            right: '6',
         },
     },
     comparisonLabelsBorderRadiusMobile: {
         type: "object",
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '6',
+            bottom: '6',
+            left: '6',
+            right: '6',
         },
     },
     comparisonLabelsBorderRadiusLink: {
@@ -432,7 +432,7 @@ const attributes = {
     },
     comparisonLabelsNormalClassicColor: {
         type: "string",
-        default: "",
+        default: "rgba(0, 0, 0, 0.5)",
     },
     comparisonLabelsNormalGradientColor: {
         type: "string",
