@@ -583,36 +583,36 @@ const attributes = {
     comparisonHandlerBorderRadiusUnits: {
         type: "object",
         default: {
-            Desktop: "px",
-            Tablet: "px",
-            Mobile: "px",
+            Desktop: "%",
+            Tablet: "%",
+            Mobile: "%",
         },
     },
     comparisonHandlerBorderRadiusDesktop: {
         type: "object",
         default: {
-            top: '',
-            right: '',
-            bottom: '',
-            left: ''
+            top: '50',
+            right: '50',
+            bottom: '50',
+            left: '50'
         },
     },
     comparisonHandlerBorderRadiusTablet: {
         type: "object",
         default: {
-            top: '',
-            right: '',
-            bottom: '',
-            left: ''
+            top: '50',
+            right: '50',
+            bottom: '50',
+            left: '50'
         },
     },
     comparisonHandlerBorderRadiusMobile: {
         type: "object",
         default: {
-            top: '',
-            right: '',
-            bottom: '',
-            left: ''
+            top: '50',
+            right: '50',
+            bottom: '50',
+            left: '50'
         },
     },
     comparisonHandlerBorderRadiusLink: {
@@ -681,7 +681,7 @@ const attributes = {
     },
     comparisonDividerColor: {
         type: "string",
-        default: "#E9E9E9",
+        default: "#ffffff",
     },
     comparisonDividerHoverColor: {
         type: "string",
@@ -708,9 +708,9 @@ const attributes = {
     comparisonArrowSize: {
         type: "object",
         default: {
-            Desktop: "16",
-            Tablet: "16",
-            Mobile: "16"
+            Desktop: "10",
+            Tablet: "10",
+            Mobile: "10"
         },
     },
     comparisonArrowSizeUnits: {
