@@ -19,27 +19,27 @@ export default function HighlightToolbar({ attributes, setAttributes }) {
     const [hoverHighlightColorValue, setHoverHighlightColorValue] = useState(null);
 
     const onHighlightColorChange = (colorValue) => {
-        const selected = globalColors.find(item => 
+        const selected = globalColors.find(item =>
             item.value === colorValue || item.color === colorValue
         ).value;
-    
-        setAttributes({highlightColor: colorValue});
+
+        setAttributes({ highlightColor: colorValue });
         setHighlightColorValue(selected);
     };
-    
+
     const onHoverColorChange = (colorValue) => {
-        const selected = globalColors.find(item => 
+        const selected = globalColors.find(item =>
             item.value === colorValue || item.color === colorValue
         ).value;
-    
-        setAttributes({ hoverHighlightColor: colorValue});
+
+        setAttributes({ hoverHighlightColor: colorValue });
         setHoverHighlightColorValue(selected);
     };
 
     const copyIcon = () => {
         return (
             <svg style={{ fill: '#fff' }} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M9 17H5C3.89543 17 3 16.1046 3 15V5C3 3.89543 3.89543 3 5 3H15C16.1046 3 17 3.89543 17 5V9M9 17V19C9 20.1046 9.89543 21 11 21H19C20.1046 21 21 20.1046 21 19V11C21 9.89543 20.1046 9 19 9H17M9 17V11C9 9.89543 9.89543 9 11 9H17" stroke="#0B0C0E" stroke-width="1.4"/>
+                <path d="M9 17H5C3.89543 17 3 16.1046 3 15V5C3 3.89543 3.89543 3 5 3H15C16.1046 3 17 3.89543 17 5V9M9 17V19C9 20.1046 9.89543 21 11 21H19C20.1046 21 21 20.1046 21 19V11C21 9.89543 20.1046 9 19 9H17M9 17V11C9 9.89543 9.89543 9 11 9H17" stroke="#0B0C0E" strokeWidth="1.4" />
             </svg>
         )
     }
@@ -80,18 +80,18 @@ export default function HighlightToolbar({ attributes, setAttributes }) {
     useEffect(() => {
         const handleSelection = () => {
             if (!highlightColor) return;
-    
+
             const selection = window.getSelection();
-    
+
             if (selection && selection.rangeCount > 0) {
                 const range = selection.getRangeAt(0);
                 const selectedText = selection.toString();
-    
+
                 if (selectedText.length === 0) return;
-    
+
                 // check parent node
                 const parentNode = selection.anchorNode?.parentElement;
-    
+
                 if (parentNode && parentNode.tagName === "MARK") {
                     parentNode.classList.add("fb-highlight-color");
                     parentNode.style.backgroundColor = highlightColor;
@@ -99,17 +99,17 @@ export default function HighlightToolbar({ attributes, setAttributes }) {
                     const mark = document.createElement("mark");
                     mark.classList.add("fb-highlight-color");
                     mark.style.backgroundColor = highlightColor;
-    
+
                     range.surroundContents(mark);
                     selection.removeAllRanges();
                     selection.addRange(range);
                 }
             }
         };
-    
+
         document.addEventListener("mouseup", handleSelection);
         document.addEventListener("keyup", handleSelection);
-    
+
         return () => {
             document.removeEventListener("mouseup", handleSelection);
             document.removeEventListener("keyup", handleSelection);
