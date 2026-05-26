@@ -872,7 +872,7 @@ export default function Inspector({ attributes, setAttributes }) {
             </DndContext>
           </div>
         )}
-        <Button variant="primary" onClick={addHotspot} className='fb-hotspot-full-btn'>
+        <Button variant="primary" onClick={addHotspot}>
           {__('Add Hotspot', 'frontis-blocks')}
         </Button>
       </PanelBody>
