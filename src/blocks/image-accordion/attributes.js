@@ -1,5 +1,11 @@
+const pluginURL =
+	typeof frontis_blocks_params !== "undefined"
+		? frontis_blocks_params.plugin_url
+		: typeof FrontisBlocksData !== "undefined"
+		? FrontisBlocksData.pluginUrl
+		: "";
+
 const attributes = {
-	/** Core */
 	blockID: {
 		type: "string",
 		default: "",
@@ -13,161 +19,115 @@ const attributes = {
 		default: "Desktop",
 	},
 
-	/** Preset Style: style-1, style-2, style-3, style-4 */
-	accordionPresetStyle: {
+	/** Preset */
+	imageAccordionPreset: {
 		type: "string",
-		default: "style-1",
+		default: "preset-1",
 	},
 
-	/** Interaction: hover | click */
-	accordionTrigger: {
+	/** Trigger */
+	imageAccordionTrigger: {
 		type: "string",
 		default: "hover",
 	},
 
-	/** Layout direction: horizontal | vertical */
-	accordionDirection: {
-		type: "string",
-		default: "horizontal",
-	},
-
-	/** Items array — each item holds its own image/icon/text */
-	accordionItems: {
+	/** Accordion Items */
+	imageAccordionItems: {
 		type: "array",
 		default: [
 			{
 				id: "item-1",
-				imageUrl: "",
-				imageAlt: "",
-				imageID: 0,
-				icon: "",
-				frontendIcon: "",
-				title: "The Journal.",
-				subtitle: "Discover unique perspectives on urban design",
-				number: "01",
-				buttonText: "Get Started",
-				buttonUrl: "",
+				image: {
+					url: `${pluginURL}assets/images/preset-bg.jpg`,
+					id: "",
+				},
+				title: "Discover Unique",
+				subTitle: "Explore amazing places",
+				mediaType: "icon",
+				selectedIcon: "map-marker-alt",
+				selectedImage: { url: "", id: "" },
+				buttonText: "Read More",
+				buttonUrl: "#",
 				buttonTarget: false,
+				buttonNofollow: false,
 			},
 			{
 				id: "item-2",
-				imageUrl: "",
-				imageAlt: "",
-				imageID: 0,
-				icon: "",
-				frontendIcon: "",
-				title: "Wild River.",
-				subtitle: "Discover unique perspectives",
-				number: "02",
-				buttonText: "Get Started",
-				buttonUrl: "",
+				image: {
+					url: `${pluginURL}assets/images/preset-bg.jpg`,
+					id: "",
+				},
+				title: "Discover Unique",
+				subTitle: "Explore amazing places",
+				mediaType: "icon",
+				selectedIcon: "heart",
+				selectedImage: { url: "", id: "" },
+				buttonText: "Read More",
+				buttonUrl: "#",
 				buttonTarget: false,
+				buttonNofollow: false,
 			},
 			{
 				id: "item-3",
-				imageUrl: "",
-				imageAlt: "",
-				imageID: 0,
-				icon: "",
-				frontendIcon: "",
-				title: "Night Sky.",
-				subtitle: "Discover unique perspectives",
-				number: "03",
-				buttonText: "Get Started",
-				buttonUrl: "",
+				image: {
+					url: `${pluginURL}assets/images/preset-bg.jpg`,
+					id: "",
+				},
+				title: "Discover Unique",
+				subTitle: "Explore amazing places",
+				mediaType: "icon",
+				selectedIcon: "map-marker-alt",
+				selectedImage: { url: "", id: "" },
+				buttonText: "Read More",
+				buttonUrl: "#",
 				buttonTarget: false,
+				buttonNofollow: false,
 			},
 			{
 				id: "item-4",
-				imageUrl: "",
-				imageAlt: "",
-				imageID: 0,
-				icon: "",
-				frontendIcon: "",
-				title: "Cold Mist.",
-				subtitle: "Discover unique perspectives",
-				number: "04",
-				buttonText: "Get Started",
-				buttonUrl: "",
+				image: {
+					url: `${pluginURL}assets/images/preset-bg.jpg`,
+					id: "",
+				},
+				title: "Discover Unique",
+				subTitle: "Explore amazing places",
+				mediaType: "icon",
+				selectedIcon: "globe",
+				selectedImage: { url: "", id: "" },
+				buttonText: "Read More",
+				buttonUrl: "#",
 				buttonTarget: false,
+				buttonNofollow: false,
 			},
 			{
 				id: "item-5",
-				imageUrl: "",
-				imageAlt: "",
-				imageID: 0,
-				icon: "",
-				frontendIcon: "",
-				title: "Sharp Peaks.",
-				subtitle: "Discover unique perspectives",
-				number: "05",
-				buttonText: "Get Started",
-				buttonUrl: "",
+				image: {
+					url: `${pluginURL}assets/images/preset-bg.jpg`,
+					id: "",
+				},
+				title: "Discover Unique",
+				subTitle: "Explore amazing places",
+				mediaType: "icon",
+				selectedIcon: "info-circle",
+				selectedImage: { url: "", id: "" },
+				buttonText: "Read More",
+				buttonUrl: "#",
 				buttonTarget: false,
+				buttonNofollow: false,
 			},
 		],
 	},
 
-	/** Default active item index */
-	accordionActiveIndex: {
-		type: "number",
-		default: 0,
-	},
-
-	/** Show/hide controls */
-	accordionShowTitle: {
-		type: "boolean",
-		default: true,
-	},
-	accordionShowSubtitle: {
-		type: "boolean",
-		default: true,
-	},
-	accordionShowNumber: {
-		type: "boolean",
-		default: true,
-	},
-	accordionShowButton: {
-		type: "boolean",
-		default: false,
-	},
-	accordionShowIcon: {
-		type: "boolean",
-		default: false,
-	},
-	accordionShowOverlay: {
-		type: "boolean",
-		default: true,
-	},
-
-	/** Accordion Container Size */
-	accordionHeight: {
+	/** Container Size */
+	imageAccordionWidth: {
 		type: "object",
 		default: {
-			Desktop: "500",
-			Tablet: "400",
-			Mobile: "300",
+			Desktop: "100",
+			Tablet: "100",
+			Mobile: "100",
 		},
 	},
-	accordionHeightUnits: {
-		type: "object",
-		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
-		},
-	},
-
-	/** Active item expanded width (for horizontal) */
-	accordionActiveWidth: {
-		type: "object",
-		default: {
-			Desktop: "60",
-			Tablet: "60",
-			Mobile: "60",
-		},
-	},
-	accordionActiveWidthUnits: {
+	imageAccordionWidthUnits: {
 		type: "object",
 		default: {
 			Desktop: "%",
@@ -175,17 +135,15 @@ const attributes = {
 			Mobile: "%",
 		},
 	},
-
-	/** Gap between items */
-	accordionGap: {
+	imageAccordionHeight: {
 		type: "object",
 		default: {
-			Desktop: "8",
-			Tablet: "6",
-			Mobile: "4",
+			Desktop: "500",
+			Tablet: "400",
+			Mobile: "300",
 		},
 	},
-	accordionGapUnits: {
+	imageAccordionHeightUnits: {
 		type: "object",
 		default: {
 			Desktop: "px",
@@ -194,240 +152,334 @@ const attributes = {
 		},
 	},
 
-	/** Border Radius */
-	accordionItemBorderRadiusUnits: {
+	/** Gap */
+	imageAccordionGap: {
 		type: "object",
-		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+		default: {
+			Desktop: "12",
+			Tablet: "12",
+			Mobile: "8",
+		},
 	},
-	accordionItemBorderRadiusDesktop: {
+	imageAccordionGapUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+
+	/** Item Border Radius */
+	imageAccordionItemBorderRadiusUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	imageAccordionItemBorderRadiusDesktop: {
+		type: "object",
+		default: { top: "50", bottom: "50", left: "50", right: "50" },
+	},
+	imageAccordionItemBorderRadiusTablet: {
+		type: "object",
+		default: { top: "50", bottom: "50", left: "50", right: "50" },
+	},
+	imageAccordionItemBorderRadiusMobile: {
 		type: "object",
 		default: { top: "16", bottom: "16", left: "16", right: "16" },
 	},
-	accordionItemBorderRadiusTablet: {
-		type: "object",
-		default: { top: "12", bottom: "12", left: "12", right: "12" },
-	},
-	accordionItemBorderRadiusMobile: {
-		type: "object",
-		default: { top: "8", bottom: "8", left: "8", right: "8" },
-	},
-	accordionItemBorderRadiusLink: {
+	imageAccordionItemBorderRadiusLink: {
 		type: "boolean",
 		default: true,
 	},
 
-	/** Transition speed */
-	accordionTransitionSpeed: {
-		type: "number",
-		default: 500,
+	/** Item Active Border Radius */
+	imageAccordionItemActiveBorderRadiusDesktop: {
+		type: "object",
+		default: { top: "25", bottom: "25", left: "25", right: "25" },
+	},
+	imageAccordionItemActiveBorderRadiusTablet: {
+		type: "object",
+		default: { top: "16", bottom: "16", left: "16", right: "16" },
+	},
+	imageAccordionItemActiveBorderRadiusMobile: {
+		type: "object",
+		default: { top: "16", bottom: "16", left: "16", right: "16" },
+	},
+	imageAccordionItemActiveBorderRadiusLink: {
+		type: "boolean",
+		default: true,
 	},
 
-	/** Overlay color */
-	accordionOverlayColor: {
+	/** Overlay Color */
+	imageAccordionOverlayColor: {
 		type: "string",
-		default: "rgba(0,0,0,0.45)",
+		default: "rgba(0,0,0,0.55)",
 	},
-	accordionOverlayActiveColor: {
+	imageAccordionOverlayHoverColor: {
 		type: "string",
-		default: "rgba(0,0,0,0.2)",
+		default: "",
 	},
 
-	/** Title Typography */
-	accordionTitleColor: {
+	/** Show Dots (Preset 2) */
+	imageAccordionShowDots: {
+		type: "boolean",
+		default: true,
+	},
+	imageAccordionDotColor: {
 		type: "string",
 		default: "#ffffff",
 	},
-	accordionTitleFontSize: {
-		type: "object",
-		default: { Desktop: "22", Tablet: "18", Mobile: "16" },
-	},
-	accordionTitleFontSizeUnits: {
-		type: "object",
-		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
-	},
-	accordionTitleFontWeight: {
-		type: "string",
-		default: "700",
-	},
-	accordionTitleTag: {
-		type: "string",
-		default: "h3",
-	},
-
-	/** Subtitle Typography */
-	accordionSubtitleColor: {
-		type: "string",
-		default: "#eeeeee",
-	},
-	accordionSubtitleFontSize: {
-		type: "object",
-		default: { Desktop: "14", Tablet: "13", Mobile: "12" },
-	},
-	accordionSubtitleFontSizeUnits: {
-		type: "object",
-		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
-	},
-
-	/** Number Typography */
-	accordionNumberColor: {
-		type: "string",
-		default: "#ffffff",
-	},
-	accordionNumberFontSize: {
+	imageAccordionDotSize: {
 		type: "object",
 		default: { Desktop: "16", Tablet: "14", Mobile: "12" },
 	},
-	accordionNumberFontSizeUnits: {
+	imageAccordionDotSizeUnits: {
 		type: "object",
 		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
 	},
 
-	/** Icon size */
-	accordionIconSize: {
-		type: "object",
-		default: { Desktop: "32", Tablet: "28", Mobile: "24" },
-	},
-	accordionIconSizeUnits: {
-		type: "object",
-		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
-	},
-	accordionIconColor: {
-		type: "string",
-		default: "#ffffff",
-	},
-	accordionIconBgColor: {
-		type: "string",
-		default: "rgba(255,255,255,0.2)",
-	},
-
-	/** Button */
-	accordionButtonColor: {
-		type: "string",
-		default: "#333333",
-	},
-	accordionButtonBgColor: {
-		type: "string",
-		default: "#ffffff",
-	},
-	accordionButtonHoverColor: {
-		type: "string",
-		default: "#ffffff",
-	},
-	accordionButtonHoverBgColor: {
-		type: "string",
-		default: "#333333",
-	},
-	accordionButtonBorderRadius: {
-		type: "string",
-		default: "6px",
-	},
-	accordionButtonFontSize: {
-		type: "object",
-		default: { Desktop: "14", Tablet: "13", Mobile: "12" },
-	},
-	accordionButtonFontSizeUnits: {
-		type: "object",
-		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
-	},
-
-	/** Global Wrapper */
-	accordionWraperID: {
-		type: "string",
-		default: "",
-	},
-	accordionWraperClass: {
-		type: "string",
-		default: "",
-	},
-
-	/** Global Padding */
-	accordionPaddingUnits: {
-		type: "object",
-		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
-	},
-	accordionPaddingDesktop: {
-		type: "object",
-		default: { top: "", bottom: "", left: "", right: "" },
-	},
-	accordionPaddingTablet: {
-		type: "object",
-		default: { top: "", bottom: "", left: "", right: "" },
-	},
-	accordionPaddingMobile: {
-		type: "object",
-		default: { top: "", bottom: "", left: "", right: "" },
-	},
-	accordionPaddingLink: {
+	/** Show Number (Preset 2 & 4) */
+	imageAccordionShowNumber: {
 		type: "boolean",
 		default: true,
 	},
-
-	/** Global Margin */
-	accordionMarginUnits: {
+	imageAccordionNumberColor: {
+		type: "string",
+		default: "#ffffff",
+	},
+	imageAccordionNumberHoverColor: {
+		type: "string",
+		default: "",
+	},
+	imageAccordionNumberFontSize: {
+		type: "object",
+		default: { Desktop: "13", Tablet: "", Mobile: "" },
+	},
+	imageAccordionNumberFontSizeUnits: {
 		type: "object",
 		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
 	},
-	accordionMarginDesktop: {
-		type: "object",
-		default: { top: "", bottom: "", left: "", right: "" },
-	},
-	accordionMarginTablet: {
-		type: "object",
-		default: { top: "", bottom: "", left: "", right: "" },
-	},
-	accordionMarginMobile: {
-		type: "object",
-		default: { top: "", bottom: "", left: "", right: "" },
-	},
-	accordionMarginLink: {
-		type: "boolean",
-		default: true,
-	},
-
-	/** Box Shadow */
-	accordionBoxShadowSwitcher: {
-		type: "string",
-		default: "normal",
-	},
-	accordionBoxShadowValues: {
-		type: "array",
-		default: [],
-	},
-	accordionBoxShadowCssValue: {
-		type: "string",
-		default: "",
-	},
-	accordionBoxShadowHoverValues: {
-		type: "array",
-		default: [],
-	},
-	accordionBoxShadowHoverCssValue: {
+	imageAccordionNumberFontWeight: {
 		type: "string",
 		default: "",
 	},
 
-	/** Global Z-Index */
-	accordionGlobalZIndex: {
+	/** Icon Circle (Preset 1) */
+	imageAccordionIconColor: {
+		type: "string",
+		default: "#0875FF",
+	},
+	imageAccordionIconHoverColor: {
+		type: "string",
+		default: "#3b82f6",
+	},
+	imageAccordionIconSize: {
+		type: "object",
+		default: { Desktop: "18", Tablet: "", Mobile: "" },
+	},
+	imageAccordionIconSizeUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+	imageAccordionIconCircleBgColor: {
+		type: "string",
+		default: "#ffffff",
+	},
+	imageAccordionIconCircleSize: {
+		type: "object",
+		default: { Desktop: "44", Tablet: "", Mobile: "" },
+	},
+	imageAccordionIconCircleSizeUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+
+	/** Typography — Title */
+	imageAccordionTitleColor: {
+		type: "string",
+		default: "#ffffff",
+	},
+	imageAccordionTitleHoverColor: {
+		type: "string",
+		default: "",
+	},
+	imageAccordionTitleFontSize: {
+		type: "object",
+		default: { Desktop: "18", Tablet: "", Mobile: "" },
+	},
+	imageAccordionTitleFontSizeUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+	imageAccordionTitleFontWeight: {
+		type: "string",
+		default: "600",
+	},
+	imageAccordionTitleLineHeight: {
 		type: "object",
 		default: { Desktop: "", Tablet: "", Mobile: "" },
 	},
+	imageAccordionTitleLineHeightUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
 
-	/** Custom CSS */
-	accordionCustomCSS: {
+	/** Typography — Subtitle */
+	imageAccordionSubtitleColor: {
+		type: "string",
+		default: "rgba(255,255,255,0.8)",
+	},
+	imageAccordionSubtitleHoverColor: {
+		type: "string",
+		default: "",
+	},
+	imageAccordionSubtitleFontSize: {
+		type: "object",
+		default: { Desktop: "13", Tablet: "", Mobile: "" },
+	},
+	imageAccordionSubtitleFontSizeUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+	imageAccordionSubtitleFontWeight: {
+		type: "string",
+		default: "",
+	},
+
+	/** Button (Preset 3) */
+	imageAccordionBtnTextColor: {
+		type: "string",
+		default: "#ffffff",
+	},
+	imageAccordionBtnHoverTextColor: {
+		type: "string",
+		default: "",
+	},
+	imageAccordionBtnBgColor: {
+		type: "string",
+		default: "rgba(255,255,255,0.18)",
+	},
+	imageAccordionBtnHoverBgColor: {
+		type: "string",
+		default: "rgba(255,255,255,0.32)",
+	},
+	imageAccordionBtnBorderColor: {
+		type: "string",
+		default: "rgba(255,255,255,0.35)",
+	},
+	imageAccordionBtnBorder: {
+		type: "string",
+		default: "solid",
+	},
+	imageAccordionBtnBorderWidthDesktop: {
+		type: "object",
+		default: { top: "1", bottom: "1", left: "1", right: "1" },
+	},
+	imageAccordionBtnBorderRadiusUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+	imageAccordionBtnBorderRadiusDesktop: {
+		type: "object",
+		default: { top: "6", bottom: "6", left: "6", right: "6" },
+	},
+	imageAccordionBtnPaddingUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+	imageAccordionBtnPaddingDesktop: {
+		type: "object",
+		default: { top: "8", bottom: "8", left: "18", right: "18" },
+	},
+	imageAccordionBtnFontSize: {
+		type: "object",
+		default: { Desktop: "13", Tablet: "", Mobile: "" },
+	},
+	imageAccordionBtnFontSizeUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+	imageAccordionBtnFontWeight: {
+		type: "string",
+		default: "",
+	},
+
+	/** Padding */
+	imageAccordionPaddingUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+	imageAccordionPaddingDesktop: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	imageAccordionPaddingTablet: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	imageAccordionPaddingMobile: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	imageAccordionPaddingLink: {
+		type: "boolean",
+		default: true,
+	},
+
+	/** Margin */
+	imageAccordionMarginUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+	imageAccordionMarginDesktop: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	imageAccordionMarginTablet: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	imageAccordionMarginMobile: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	imageAccordionMarginLink: {
+		type: "boolean",
+		default: true,
+	},
+
+	/** Global */
+	imageAccordionGlobalZIndex: {
+		type: "object",
+		default: { Desktop: "", Tablet: "", Mobile: "" },
+	},
+	imageAccordionCustomCSS: {
+		type: "string",
+		default: "",
+	},
+	imageAccordionWraperID: {
+		type: "string",
+		default: "",
+	},
+	imageAccordionWraperClass: {
 		type: "string",
 		default: "",
 	},
 
 	/** Responsive Visibility */
-	accordionDesktopSwitcher: {
+	imageAccordionDesktopSwitcher: {
 		type: "boolean",
 		default: false,
 	},
-	accordionTabletSwitcher: {
+	imageAccordionTabletSwitcher: {
 		type: "boolean",
 		default: false,
 	},
-	accordionMobileSwitcher: {
+	imageAccordionMobileSwitcher: {
 		type: "boolean",
 		default: false,
 	},
