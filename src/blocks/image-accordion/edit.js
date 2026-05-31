@@ -1,13 +1,12 @@
 import { __ } from "@wordpress/i18n";
-import { useEffect, useState } from "@wordpress/element";
 import { useBlockProps } from "@wordpress/block-editor";
+import { useEffect, useState } from "@wordpress/element";
 
 import "./editor.scss";
-
 import Inspector from "./inspector";
 import useBlockIdGenerator from "@Utils/useBlockIdGenerator";
 import generateImageAccordionStyle from "./styling";
-import renderSVG from "@Components/icon-picker/components/icon-picker/controls/renderIcon";
+import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 
 export default function Edit({
 	attributes,
@@ -18,24 +17,25 @@ export default function Edit({
 	const {
 		blockID,
 		blockStyle,
-		accordionPresetStyle,
-		accordionTrigger,
-		accordionItems,
-		accordionActiveIndex,
-		accordionShowTitle,
-		accordionShowSubtitle,
-		accordionShowNumber,
-		accordionShowButton,
-		accordionShowIcon,
-		accordionShowOverlay,
-		accordionDesktopSwitcher,
-		accordionTabletSwitcher,
-		accordionMobileSwitcher,
-		accordionWraperID,
-		accordionWraperClass,
+		imageAccordionPreset,
+		imageAccordionTrigger,
+		imageAccordionItems,
+		imageAccordionShowDots,
+		imageAccordionShowNumber,
+		imageAccordionWraperID,
+		imageAccordionWraperClass,
+		imageAccordionDesktopSwitcher,
+		imageAccordionTabletSwitcher,
+		imageAccordionMobileSwitcher,
 	} = attributes;
 
-	const [activeIndex, setActiveIndex] = useState(accordionActiveIndex || 0);
+	// State to track active item in the editor for interactive preview
+	const [activeIndex, setActiveIndex] = useState(0);
+
+	// Reset active index to 0 when trigger mode is hover and mouse leaves the container
+	const handleMouseLeave = () => {
+		if (imageAccordionTrigger === "hover") setActiveIndex(0);
+	};
 
 	// Handle block ID generation
 	useBlockIdGenerator({
@@ -47,7 +47,7 @@ export default function Edit({
 		setAttributes,
 	});
 
-	// Generate dynamic CSS on attribute change
+	// Generate block style
 	useEffect(() => {
 		if (blockID) {
 			const css = generateImageAccordionStyle(attributes);
@@ -57,14 +57,134 @@ export default function Edit({
 
 	const blockProps = useBlockProps({
 		className: `fb-image-accordion-main-wrapper ${blockID} ${
-			accordionDesktopSwitcher ? "fb-desktop-responsive" : ""
-		} ${accordionTabletSwitcher ? "fb-tablet-responsive" : ""} ${
-			accordionMobileSwitcher ? "fb-mobile-responsive" : ""
+			imageAccordionDesktopSwitcher ? "fb-desktop-responsive" : ""
+		} ${imageAccordionTabletSwitcher ? "fb-tablet-responsive" : ""} ${
+			imageAccordionMobileSwitcher ? "fb-mobile-responsive" : ""
 		}`.trim(),
 	});
 
-	const handleItemInteraction = (index) => {
-		setActiveIndex(index);
+	const renderItem = (item, index) => {
+		const numLabel = index + 1 < 10 ? `0${index + 1}` : `${index + 1}`;
+		const isActive = activeIndex === index;
+		const target = item.buttonTarget ? "_blank" : "_self";
+		const rel = item.buttonNofollow ? "nofollow" : undefined;
+
+		const handleItemInteraction = () => {
+			if (imageAccordionTrigger === "click") {
+				setActiveIndex(index);
+			}
+		};
+
+		const handleItemHover = () => {
+			if (imageAccordionTrigger === "hover") {
+				setActiveIndex(index);
+			}
+		};
+
+		return (
+			<div
+				key={item.id || index}
+				className={`pea-image-accordion-item ${isActive ? "is-active" : ""}`}
+				role="button"
+				tabIndex="0"
+				onMouseEnter={handleItemHover}
+				onClick={handleItemInteraction}
+				aria-expanded={isActive ? "true" : "false"}
+				aria-label={item.title || ""}
+				style={
+					imageAccordionPreset !== "preset-4" && item.image?.url
+						? { backgroundImage: `url('${item.image.url}')` }
+						: {}
+				}
+			>
+				{imageAccordionPreset === "preset-4" && item.image?.url && (
+					<div
+						className="pea-skew-bg"
+						style={{ backgroundImage: `url('${item.image.url}')` }}
+					/>
+				)}
+
+				<div className="pea-image-accordion-overlay" />
+
+				{imageAccordionPreset === "preset-2" && imageAccordionShowDots && (
+					<div className="pea-image-accordion-dot-wrapper">
+						<span className="pea-image-accordion-dot" />
+					</div>
+				)}
+
+				<div className="pea-image-accordion-content-wrapper">
+					{imageAccordionPreset === "preset-1" && (
+						<>
+							<div className="pea-image-accordion-icon-circle">
+								{item.mediaType === "image" && item.selectedImage?.url ? (
+									<img
+										src={item.selectedImage.url}
+										alt={item.title || ""}
+										loading="lazy"
+									/>
+								) : item.selectedIcon ? (
+									renderSVG(item.selectedIcon)
+								) : (
+									renderSVG("star")
+								)}
+							</div>
+							<div className="pea-image-accordion-text-group">
+								<h3 className="pea-image-accordion-title">{item.title}</h3>
+								{item.subTitle && (
+									<p className="pea-image-accordion-desc">{item.subTitle}</p>
+								)}
+							</div>
+						</>
+					)}
+
+					{imageAccordionPreset === "preset-2" && (
+						<div className="pea-image-accordion-preset2-content">
+							<div className="pea-image-accordion-bottom-content">
+								{imageAccordionShowNumber && (
+									<span className="pea-image-accordion-number">{numLabel}</span>
+								)}
+								<h3 className="pea-image-accordion-title">{item.title}</h3>
+								{item.subTitle && (
+									<p className="pea-sub-title">{item.subTitle}</p>
+								)}
+							</div>
+						</div>
+					)}
+
+					{imageAccordionPreset === "preset-3" && (
+						<div className="pea-image-accordion-preset3-content">
+							<div className="pea-image-accordion-left-content">
+								<h3 className="pea-image-accordion-title">{item.title}</h3>
+								{item.subTitle && (
+									<p className="pea-sub-title">{item.subTitle}</p>
+								)}
+							</div>
+							<a
+								href={item.buttonUrl || "#"}
+								target={target}
+								rel={rel}
+								className="pea-image-accordion-btn"
+								onClick={(e) => e.preventDefault()}
+							>
+								{item.buttonText || __("Read More", "frontis-blocks")}
+							</a>
+						</div>
+					)}
+
+					{imageAccordionPreset === "preset-4" && (
+						<>
+							<h3 className="pea-image-accordion-title">{item.title}</h3>
+							{imageAccordionShowNumber && (
+								<span className="pea-image-accordion-number">{numLabel}</span>
+							)}
+							{item.subTitle && (
+								<p className="pea-image-accordion-desc">{item.subTitle}</p>
+							)}
+						</>
+					)}
+				</div>
+			</div>
+		);
 	};
 
 	return (
@@ -75,76 +195,19 @@ export default function Edit({
 
 			<div {...blockProps}>
 				<div
-					className={`fb-image-accordion-wrapper ${accordionPresetStyle} ${accordionWraperClass}`}
-					id={accordionWraperID}
-					data-trigger={accordionTrigger}
+					className={`fb-image-accordion-wrapper ${imageAccordionPreset} pea-trigger-${imageAccordionTrigger} ${imageAccordionWraperClass}`}
+					id={imageAccordionWraperID}
+					data-trigger={imageAccordionTrigger}
+					onMouseLeave={handleMouseLeave}
 				>
-					{accordionItems.map((item, index) => {
-						const isActive = activeIndex === index;
-						return (
-							<div
-								key={item.id || index}
-								className={`fb-accordion-item ${
-									isActive ? "fb-accordion-active" : ""
-								}`}
-								onMouseEnter={() =>
-									accordionTrigger === "hover" && handleItemInteraction(index)
-								}
-								onClick={() =>
-									accordionTrigger === "click" && handleItemInteraction(index)
-								}
-								style={{
-									backgroundImage: item.imageUrl
-										? `url(${item.imageUrl})`
-										: undefined,
-								}}
-							>
-								{/* Overlay */}
-								{accordionShowOverlay && (
-									<div className="fb-accordion-overlay"></div>
-								)}
-
-								{/* Icon (shown when collapsed in style-1) */}
-								{accordionShowIcon && item.icon && (
-									<div className="fb-accordion-icon-wrapper">
-										{renderSVG(item.icon)}
-									</div>
-								)}
-
-								{/* Content */}
-								<div className="fb-accordion-content">
-									{accordionShowNumber && (
-										<span className="fb-accordion-number">{item.number}</span>
-									)}
-									{accordionShowTitle && (
-										<h3 className="fb-accordion-title">{item.title}</h3>
-									)}
-									{accordionShowSubtitle && (
-										<p className="fb-accordion-subtitle">{item.subtitle}</p>
-									)}
-									{accordionShowButton && item.buttonText && (
-										<div className="fb-accordion-btn-wrapper">
-											<a
-												className="fb-accordion-btn"
-												href={item.buttonUrl || "#"}
-												target={item.buttonTarget ? "_blank" : undefined}
-												rel={
-													item.buttonTarget ? "noopener noreferrer" : undefined
-												}
-												onClick={(e) => e.preventDefault()}
-											>
-												{item.buttonText}
-											</a>
-										</div>
-									)}
-								</div>
-							</div>
-						);
-					})}
+					<div className="pea-image-accordion-container">
+						{imageAccordionItems &&
+							imageAccordionItems.map((item, index) => renderItem(item, index))}
+					</div>
 				</div>
 			</div>
 
-			<style>{blockStyle}</style>
+			{blockStyle && <style>{blockStyle}</style>}
 		</>
 	);
 }

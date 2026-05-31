@@ -1,2 +1,24 @@
-// Image Accordion — frontend base styles
-// (Dynamic styles are injected via styling.js / blockStyle attribute)
+// Image Accordion — editor-only styles
+.fb-image-accordion-main-wrapper {
+	border: 1px dashed transparent;
+
+	&:hover {
+		border-color: #ccc;
+	}
+
+	&.is-selected {
+		border-color: #0875ff;
+	}
+
+	.fb-image-accordion-wrapper {
+		pointer-events: auto;
+	}
+
+	.fb-image-accordion-item:first-child {
+		.fb-image-accordion-text-group,
+		.fb-image-accordion-content-wrapper {
+			opacity: 1;
+			display: flex;
+		}
+	}
+}

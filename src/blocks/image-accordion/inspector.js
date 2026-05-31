@@ -1,834 +1,1233 @@
 import { __ } from "@wordpress/i18n";
-import { MediaUpload, MediaUploadCheck } from "@wordpress/block-editor";
+import { InspectorControls } from "@wordpress/block-editor";
 import {
 	PanelBody,
+	SelectControl,
 	ToggleControl,
 	RangeControl,
 	Button,
 	ButtonGroup,
 	BaseControl,
+	Dashicon,
 	TextControl,
-	SelectControl,
 } from "@wordpress/components";
 
 import { useState, memo } from "@wordpress/element";
-
-import "./editor.scss";
-import FBIconPicker from "@Components/icon-picker";
-import FB_Range from "@Components/range";
-import FB_Spacing from "@Components/spacing";
-import FB_ColorControl from "@Components/color-control";
-import FB_BoxShadowControl from "@Components/box-shadow";
-import FB_InputControl from "@Components/input-control";
-import FB_Presets from "@Components/presets";
-import FB_CustomCSSEditor from "@Components/custom-css-editor";
-import FB_VisibilityControl from "@Components/visibility-control";
-import FB_InspectorControls from "@Components/InspectorControls";
-import FB_SwitcherControl from "@Components/switcher-control";
 import { useDeviceType } from "@Config/displayType";
-import { imageAccordionPresets } from "./presets";
-import * as fbConstants from "@Constants/fbConstants";
 
-const TRIGGER_OPTIONS = [
-	{ label: "Hover", value: "hover" },
-	{ label: "Click", value: "click" },
-];
+import FB_Spacing from "@Components/spacing";
+import FB_Range from "@Components/range";
+import FB_ColorControl from "@Components/color-control";
+import FB_SwitcherControl from "@Components/switcher-control";
+import FB_InputControl from "@Components/input-control";
+import FB_IconPicker from "@Components/icon-picker";
+import FB_CustomCSSEditor from "@Components/custom-css-editor";
+import FB_InspectorControls from "@Components/InspectorControls";
+import FB_TypographyControl from "@Components/typography-control";
+import { BORDER_STYLES } from "@Constants/fbConstants";
+
+import { imageAccordionPresets } from "./presets";
+import "./editor.scss";
+
+const pluginURL =
+	typeof frontis_blocks_params !== "undefined"
+		? frontis_blocks_params.plugin_url
+		: typeof FrontisBlocksData !== "undefined"
+		? FrontisBlocksData.pluginUrl
+		: "";
 
 const Inspector = ({ attributes, setAttributes }) => {
 	const {
-		blockID,
-		accordionPresetStyle,
-		accordionTrigger,
-		accordionItems,
-		accordionActiveIndex,
-		accordionShowTitle,
-		accordionShowSubtitle,
-		accordionShowNumber,
-		accordionShowButton,
-		accordionShowIcon,
-		accordionShowOverlay,
+		imageAccordionPreset,
+		imageAccordionTrigger,
+		imageAccordionItems,
 
-		accordionHeight,
-		accordionHeightUnits,
-		accordionActiveWidth,
-		accordionActiveWidthUnits,
-		accordionGap,
-		accordionGapUnits,
-		accordionTransitionSpeed,
+		imageAccordionWidth,
+		imageAccordionWidthUnits,
+		imageAccordionHeight,
+		imageAccordionHeightUnits,
 
-		accordionItemBorderRadiusUnits,
-		accordionItemBorderRadiusDesktop,
-		accordionItemBorderRadiusTablet,
-		accordionItemBorderRadiusMobile,
-		accordionItemBorderRadiusLink,
+		imageAccordionGap,
+		imageAccordionGapUnits,
 
-		accordionOverlayColor,
-		accordionOverlayActiveColor,
+		imageAccordionItemBorderRadiusUnits,
+		imageAccordionItemBorderRadiusDesktop,
+		imageAccordionItemBorderRadiusTablet,
+		imageAccordionItemBorderRadiusMobile,
+		imageAccordionItemBorderRadiusLink,
 
-		accordionTitleColor,
-		accordionTitleFontSize,
-		accordionTitleFontSizeUnits,
-		accordionTitleFontWeight,
-		accordionTitleTag,
+		imageAccordionOverlayColor,
+		imageAccordionOverlayHoverColor,
 
-		accordionSubtitleColor,
-		accordionSubtitleFontSize,
-		accordionSubtitleFontSizeUnits,
+		imageAccordionShowDots,
+		imageAccordionDotColor,
+		imageAccordionDotSize,
+		imageAccordionDotSizeUnits,
 
-		accordionNumberColor,
-		accordionNumberFontSize,
-		accordionNumberFontSizeUnits,
+		imageAccordionShowNumber,
+		imageAccordionNumberColor,
+		imageAccordionNumberHoverColor,
+		imageAccordionNumberFontSize,
+		imageAccordionNumberFontSizeUnits,
+		imageAccordionNumberFontWeight,
 
-		accordionIconSize,
-		accordionIconSizeUnits,
-		accordionIconColor,
-		accordionIconBgColor,
+		imageAccordionIconColor,
+		imageAccordionIconHoverColor,
+		imageAccordionIconSize,
+		imageAccordionIconSizeUnits,
+		imageAccordionIconCircleBgColor,
+		imageAccordionIconCircleSize,
+		imageAccordionIconCircleSizeUnits,
 
-		accordionButtonColor,
-		accordionButtonBgColor,
-		accordionButtonHoverColor,
-		accordionButtonHoverBgColor,
-		accordionButtonBorderRadius,
-		accordionButtonFontSize,
-		accordionButtonFontSizeUnits,
+		imageAccordionTitleColor,
+		imageAccordionTitleHoverColor,
+		imageAccordionTitleFontSize,
+		imageAccordionTitleFontSizeUnits,
+		imageAccordionTitleFontWeight,
+		imageAccordionTitleLineHeight,
+		imageAccordionTitleLineHeightUnits,
 
-		accordionPaddingUnits,
-		accordionPaddingDesktop,
-		accordionPaddingTablet,
-		accordionPaddingMobile,
-		accordionPaddingLink,
+		imageAccordionSubtitleColor,
+		imageAccordionSubtitleHoverColor,
+		imageAccordionSubtitleFontSize,
+		imageAccordionSubtitleFontSizeUnits,
+		imageAccordionSubtitleFontWeight,
 
-		accordionMarginUnits,
-		accordionMarginDesktop,
-		accordionMarginTablet,
-		accordionMarginMobile,
-		accordionMarginLink,
+		imageAccordionBtnTextColor,
+		imageAccordionBtnHoverTextColor,
+		imageAccordionBtnBgColor,
+		imageAccordionBtnHoverBgColor,
+		imageAccordionBtnBorderColor,
+		imageAccordionBtnBorder,
+		imageAccordionBtnBorderRadiusUnits,
+		imageAccordionBtnBorderRadiusDesktop,
+		imageAccordionBtnPaddingUnits,
+		imageAccordionBtnPaddingDesktop,
+		imageAccordionBtnFontSize,
+		imageAccordionBtnFontSizeUnits,
+		imageAccordionBtnFontWeight,
 
-		accordionBoxShadowSwitcher,
-		accordionBoxShadowValues,
-		accordionBoxShadowCssValue,
-		accordionBoxShadowHoverValues,
-		accordionBoxShadowHoverCssValue,
+		imageAccordionPaddingUnits,
+		imageAccordionPaddingDesktop,
+		imageAccordionPaddingTablet,
+		imageAccordionPaddingMobile,
+		imageAccordionPaddingLink,
 
-		accordionGlobalZIndex,
-		accordionCustomCSS,
-		accordionWraperID,
-		accordionWraperClass,
+		imageAccordionMarginUnits,
+		imageAccordionMarginDesktop,
+		imageAccordionMarginTablet,
+		imageAccordionMarginMobile,
+		imageAccordionMarginLink,
 
-		accordionDesktopSwitcher,
-		accordionTabletSwitcher,
-		accordionMobileSwitcher,
+		imageAccordionGlobalZIndex,
+		imageAccordionCustomCSS,
+		imageAccordionWraperID,
+		imageAccordionWraperClass,
+
+		imageAccordionDesktopSwitcher,
+		imageAccordionTabletSwitcher,
+		imageAccordionMobileSwitcher,
 	} = attributes;
 
 	const deviceType = useDeviceType();
-	const [activeItemIndex, setActiveItemIndex] = useState(0);
+	const [openItemIndex, setOpenItemIndex] = useState(null);
+	const [borderColorTab, setBorderColorTab] = useState("normal");
+	const [btnColorTab, setBtnColorTab] = useState("normal");
+	const [iconColorTab, setIconColorTab] = useState("normal");
+	const [titleColorTab, setTitleColorTab] = useState("normal");
+	const [overlayColorTab, setOverlayColorTab] = useState("normal");
+	const [numberColorTab, setNumberColorTab] = useState("normal");
 
-	/** Start border radius helpers */
-	const handleBorderRadiusUnitChange = (event, position) => {
-		const value = event.target.value;
-		if (accordionItemBorderRadiusLink) {
-			setAttributes({
-				accordionItemBorderRadiusDesktop: {
-					top: value,
-					right: value,
-					bottom: value,
-					left: value,
-				},
-				accordionItemBorderRadiusTablet: {
-					top: value,
-					right: value,
-					bottom: value,
-					left: value,
-				},
-				accordionItemBorderRadiusMobile: {
-					top: value,
-					right: value,
-					bottom: value,
-					left: value,
-				},
-			});
-		} else {
-			const targetAttr = `accordionItemBorderRadius${deviceType}`;
-			setAttributes({
-				[targetAttr]: { ...attributes[targetAttr], [position]: value },
-			});
-		}
+	/** Apply preset */
+	const applyPreset = (preset) => {
+		const presetData = imageAccordionPresets.find((p) => p.value === preset);
+		if (!presetData) return;
+		const newAttrs = { imageAccordionPreset: preset };
+		presetData.attributes.forEach(({ label, value }) => {
+			newAttrs[label] = value;
+		});
+		setAttributes(newAttrs);
 	};
-	const handleBorderRadiusCombineBtn = () =>
-		setAttributes({
-			accordionItemBorderRadiusLink: !accordionItemBorderRadiusLink,
-		});
-	const handleBorderRadiusUnitsHandler = (unit) =>
-		setAttributes({
-			accordionItemBorderRadiusUnits: {
-				...accordionItemBorderRadiusUnits,
-				[deviceType]: unit,
-			},
-		});
 
-	/** Start Global padding helpers */
-	const handleGlobalPaddingUnitChange = (event, position) => {
-		const value = event.target.value;
-		if (accordionPaddingLink) {
-			setAttributes({
-				accordionPaddingDesktop: {
-					top: value,
-					right: value,
-					bottom: value,
-					left: value,
-				},
-				accordionPaddingTablet: {
-					top: value,
-					right: value,
-					bottom: value,
-					left: value,
-				},
-				accordionPaddingMobile: {
-					top: value,
-					right: value,
-					bottom: value,
-					left: value,
-				},
-			});
-		} else {
-			const targetAttr = `accordionPadding${deviceType}`;
-			setAttributes({
-				[targetAttr]: { ...attributes[targetAttr], [position]: value },
-			});
-		}
-	};
-	const handleGlobalPaddingCombineBtn = () =>
-		setAttributes({ accordionPaddingLink: !accordionPaddingLink });
-	const handleGlobalPaddingUnitsHandler = (unit) =>
-		setAttributes({
-			accordionPaddingUnits: { ...accordionPaddingUnits, [deviceType]: unit },
-		});
-
-	/** Start Global margin helpers */
-	const handleGlobalMarginUnitChange = (event, position) => {
-		const value = event.target.value;
-		if (accordionMarginLink) {
-			setAttributes({
-				accordionMarginDesktop: {
-					top: value,
-					right: value,
-					bottom: value,
-					left: value,
-				},
-				accordionMarginTablet: {
-					top: value,
-					right: value,
-					bottom: value,
-					left: value,
-				},
-				accordionMarginMobile: {
-					top: value,
-					right: value,
-					bottom: value,
-					left: value,
-				},
-			});
-		} else {
-			const targetAttr = `accordionMargin${deviceType}`;
-			setAttributes({
-				[targetAttr]: { ...attributes[targetAttr], [position]: value },
-			});
-		}
-	};
-	const handleGlobalMarginCombineBtn = () =>
-		setAttributes({ accordionMarginLink: !accordionMarginLink });
-	const handleGlobalMarginUnitsHandler = (unit) =>
-		setAttributes({
-			accordionMarginUnits: { ...accordionMarginUnits, [deviceType]: unit },
-		});
-
-	/** Update a specific item in the accordionItems array */
+	/** Item handlers */
 	const updateItem = (index, key, value) => {
-		const updated = accordionItems.map((item, i) => {
-			if (i === index) return { ...item, [key]: value };
-			return item;
-		});
-		setAttributes({ accordionItems: updated });
+		const newItems = [...imageAccordionItems];
+		newItems[index] = { ...newItems[index], [key]: value };
+		setAttributes({ imageAccordionItems: newItems });
 	};
 
-	/** Add a new item */
 	const addItem = () => {
 		const newItem = {
-			id: `item-${Date.now()}`,
-			imageUrl: "",
-			imageAlt: "",
-			imageID: 0,
-			icon: "",
-			frontendIcon: "",
+			id: "item-" + Date.now(),
+			image: {
+				url: `${pluginURL}assets/images/preset-bg.jpg`,
+				id: "",
+			},
 			title: "New Item",
-			subtitle: "Subtitle here",
-			number: `0${accordionItems.length + 1}`,
-			buttonText: "Get Started",
-			buttonUrl: "",
+			subTitle: "",
+			mediaType: "icon",
+			selectedIcon: "star",
+			selectedImage: { url: "", id: "" },
+			buttonText: "Read More",
+			buttonUrl: "#",
 			buttonTarget: false,
+			buttonNofollow: false,
 		};
-		setAttributes({ accordionItems: [...accordionItems, newItem] });
-		setActiveItemIndex(accordionItems.length);
+		setAttributes({ imageAccordionItems: [...imageAccordionItems, newItem] });
 	};
 
-	/** Remove an item */
 	const removeItem = (index) => {
-		const updated = accordionItems.filter((_, i) => i !== index);
-		setAttributes({ accordionItems: updated });
-		if (activeItemIndex >= updated.length) {
-			setActiveItemIndex(Math.max(0, updated.length - 1));
+		const newItems = imageAccordionItems.filter((_, i) => i !== index);
+		setAttributes({ imageAccordionItems: newItems });
+		if (openItemIndex === index) setOpenItemIndex(null);
+	};
+
+	/** Padding handlers */
+	const paddingUnitsChange = (event, position) => {
+		const value = event.target.value;
+		if (imageAccordionPaddingLink) {
+			const padded = { top: value, right: value, bottom: value, left: value };
+			if (deviceType === "Desktop")
+				setAttributes({ imageAccordionPaddingDesktop: padded });
+			else if (deviceType === "Tablet")
+				setAttributes({ imageAccordionPaddingTablet: padded });
+			else setAttributes({ imageAccordionPaddingMobile: padded });
+		} else {
+			if (deviceType === "Desktop")
+				setAttributes({
+					imageAccordionPaddingDesktop: {
+						...imageAccordionPaddingDesktop,
+						[position]: value,
+					},
+				});
+			else if (deviceType === "Tablet")
+				setAttributes({
+					imageAccordionPaddingTablet: {
+						...imageAccordionPaddingTablet,
+						[position]: value,
+					},
+				});
+			else
+				setAttributes({
+					imageAccordionPaddingMobile: {
+						...imageAccordionPaddingMobile,
+						[position]: value,
+					},
+				});
 		}
 	};
 
+	/** Margin handlers */
+	const marginUnitsChange = (event, position) => {
+		const value = event.target.value;
+		if (imageAccordionMarginLink) {
+			const margined = { top: value, right: value, bottom: value, left: value };
+			if (deviceType === "Desktop")
+				setAttributes({ imageAccordionMarginDesktop: margined });
+			else if (deviceType === "Tablet")
+				setAttributes({ imageAccordionMarginTablet: margined });
+			else setAttributes({ imageAccordionMarginMobile: margined });
+		} else {
+			if (deviceType === "Desktop")
+				setAttributes({
+					imageAccordionMarginDesktop: {
+						...imageAccordionMarginDesktop,
+						[position]: value,
+					},
+				});
+			else if (deviceType === "Tablet")
+				setAttributes({
+					imageAccordionMarginTablet: {
+						...imageAccordionMarginTablet,
+						[position]: value,
+					},
+				});
+			else
+				setAttributes({
+					imageAccordionMarginMobile: {
+						...imageAccordionMarginMobile,
+						[position]: value,
+					},
+				});
+		}
+	};
+
+	/** Border Radius handlers */
+	const borderRadiusChange = (event, position) => {
+		const value = event.target.value;
+		if (imageAccordionItemBorderRadiusLink) {
+			const val = { top: value, right: value, bottom: value, left: value };
+			if (deviceType === "Desktop")
+				setAttributes({ imageAccordionItemBorderRadiusDesktop: val });
+			else if (deviceType === "Tablet")
+				setAttributes({ imageAccordionItemBorderRadiusTablet: val });
+			else setAttributes({ imageAccordionItemBorderRadiusMobile: val });
+		} else {
+			if (deviceType === "Desktop")
+				setAttributes({
+					imageAccordionItemBorderRadiusDesktop: {
+						...imageAccordionItemBorderRadiusDesktop,
+						[position]: value,
+					},
+				});
+			else if (deviceType === "Tablet")
+				setAttributes({
+					imageAccordionItemBorderRadiusTablet: {
+						...imageAccordionItemBorderRadiusTablet,
+						[position]: value,
+					},
+				});
+			else
+				setAttributes({
+					imageAccordionItemBorderRadiusMobile: {
+						...imageAccordionItemBorderRadiusMobile,
+						[position]: value,
+					},
+				});
+		}
+	};
+
+	// ========================
+	// GENERAL (CONTENT) TAB
+	// ========================
 	const generalControls = (
 		<>
+			{/* Preset Selector */}
 			<PanelBody
-				title={__("Accordion Settings", "frontis-blocks")}
+				title={__("Preset Style", "frontis-blocks")}
 				initialOpen={true}
 			>
-				<FB_Presets
-					label={__("Preset Style", "frontis-blocks")}
-					presets={imageAccordionPresets}
-					value={accordionPresetStyle}
-					onChangeValue="accordionPresetStyle"
-					setAttributes={setAttributes}
-				/>
-				<BaseControl label={__("Interaction Trigger", "frontis-blocks")}>
-					<ButtonGroup className="fb-setting-switcher-panel-btn">
-						{TRIGGER_OPTIONS.map((opt) => (
-							<Button
-								key={opt.value}
-								isPrimary={accordionTrigger === opt.value}
-								isSecondary={accordionTrigger !== opt.value}
-								onClick={() => setAttributes({ accordionTrigger: opt.value })}
-							>
-								{opt.label}
-							</Button>
-						))}
-					</ButtonGroup>
-				</BaseControl>
+				<div className="fb-image-accordion-presets">
+					{imageAccordionPresets.map((preset) => (
+						<div
+							key={preset.value}
+							className={`fb-preset-item ${
+								imageAccordionPreset === preset.value ? "is-active" : ""
+							}`}
+							onClick={() => applyPreset(preset.value)}
+							title={preset.label}
+						>
+							<div
+								className="fb-preset-icon"
+								dangerouslySetInnerHTML={{ __html: preset.icon }}
+							/>
+							<span className="fb-preset-label">{preset.label}</span>
+						</div>
+					))}
+				</div>
+			</PanelBody>
 
-				<ToggleControl
-					label={__("Show Title", "frontis-blocks")}
-					checked={accordionShowTitle}
-					onChange={(val) => setAttributes({ accordionShowTitle: val })}
-				/>
-				<ToggleControl
-					label={__("Show Subtitle", "frontis-blocks")}
-					checked={accordionShowSubtitle}
-					onChange={(val) => setAttributes({ accordionShowSubtitle: val })}
-				/>
-				<ToggleControl
-					label={__("Show Number", "frontis-blocks")}
-					checked={accordionShowNumber}
-					onChange={(val) => setAttributes({ accordionShowNumber: val })}
-				/>
-				<ToggleControl
-					label={__("Show Button", "frontis-blocks")}
-					checked={accordionShowButton}
-					onChange={(val) => setAttributes({ accordionShowButton: val })}
-				/>
-				<ToggleControl
-					label={__("Show Icon", "frontis-blocks")}
-					checked={accordionShowIcon}
-					onChange={(val) => setAttributes({ accordionShowIcon: val })}
-				/>
-				<ToggleControl
-					label={__("Show Overlay", "frontis-blocks")}
-					checked={accordionShowOverlay}
-					onChange={(val) => setAttributes({ accordionShowOverlay: val })}
+			{/* Trigger */}
+			<PanelBody title={__("Settings", "frontis-blocks")} initialOpen={true}>
+				<SelectControl
+					label={__("Trigger On", "frontis-blocks")}
+					value={imageAccordionTrigger}
+					options={[
+						{ label: __("Hover", "frontis-blocks"), value: "hover" },
+						{ label: __("Click", "frontis-blocks"), value: "click" },
+					]}
+					onChange={(value) => setAttributes({ imageAccordionTrigger: value })}
 				/>
 			</PanelBody>
 
+			{/* Accordion Items */}
 			<PanelBody
 				title={__("Accordion Items", "frontis-blocks")}
 				initialOpen={true}
 			>
-				<BaseControl label={__("Select Item", "frontis-blocks")}>
-					<ButtonGroup
-						className="fb-setting-switcher-panel-btn"
-						style={{ flexWrap: "wrap", gap: "4px" }}
-					>
-						{accordionItems.map((item, index) => (
-							<Button
-								key={item.id || index}
-								isPrimary={activeItemIndex === index}
-								isSecondary={activeItemIndex !== index}
-								onClick={() => setActiveItemIndex(index)}
-								style={{ minWidth: "36px" }}
-							>
-								{index + 1}
-							</Button>
-						))}
-					</ButtonGroup>
-				</BaseControl>
+				{imageAccordionItems.map((item, index) => (
+					<div key={item.id || index} className="fb-accordion-item-control">
+						<div
+							className="fb-accordion-item-header"
+							onClick={() =>
+								setOpenItemIndex(openItemIndex === index ? null : index)
+							}
+						>
+							<span className="fb-accordion-item-title">
+								{item.title || __("Item", "frontis-blocks")} #{index + 1}
+							</span>
+							<div className="fb-accordion-item-actions">
+								<Dashicon
+									icon={openItemIndex === index ? "arrow-up" : "arrow-down"}
+								/>
+								{imageAccordionItems.length > 1 && (
+									<Button
+										isDestructive
+										isSmall
+										onClick={(e) => {
+											e.stopPropagation();
+											removeItem(index);
+										}}
+										icon="trash"
+										label={__("Remove Item", "frontis-blocks")}
+									/>
+								)}
+							</div>
+						</div>
 
-				{accordionItems[activeItemIndex] &&
-					(() => {
-						const item = accordionItems[activeItemIndex];
-						return (
-							<>
+						{openItemIndex === index && (
+							<div className="fb-accordion-item-body">
+								{/* Background Image */}
 								<BaseControl label={__("Background Image", "frontis-blocks")}>
-									<MediaUploadCheck>
-										<MediaUpload
-											onSelect={(media) => {
-												updateItem(activeItemIndex, "imageUrl", media.url);
-												updateItem(
-													activeItemIndex,
-													"imageAlt",
-													media.alt || "",
-												);
-												updateItem(activeItemIndex, "imageID", media.id);
-											}}
-											allowedTypes={["image"]}
-											value={item.imageID}
-											render={({ open }) => (
-												<div>
-													{item.imageUrl ? (
-														<div style={{ position: "relative" }}>
-															<img
-																src={item.imageUrl}
-																alt={item.imageAlt}
-																style={{
-																	width: "100%",
-																	borderRadius: "4px",
-																	marginBottom: "8px",
-																}}
-															/>
+									<div className="fb-image-upload-control">
+										{item.image?.url ? (
+											<div className="fb-image-preview">
+												<img src={item.image.url} alt="" />
+												<Button
+													isDestructive
+													isSmall
+													onClick={() =>
+														updateItem(index, "image", { url: "", id: "" })
+													}
+												>
+													{__("Remove", "frontis-blocks")}
+												</Button>
+											</div>
+										) : (
+											<Button
+												variant="secondary"
+												onClick={() => {
+													const frame = wp.media({
+														title: __("Select Image", "frontis-blocks"),
+														multiple: false,
+														library: { type: "image" },
+													});
+													frame.on("select", () => {
+														const attachment = frame
+															.state()
+															.get("selection")
+															.first()
+															.toJSON();
+														updateItem(index, "image", {
+															url: attachment.url,
+															id: attachment.id,
+														});
+													});
+													frame.open();
+												}}
+											>
+												{__("Choose Image", "frontis-blocks")}
+											</Button>
+										)}
+									</div>
+								</BaseControl>
+
+								{/* Title */}
+								<FB_InputControl
+									label={__("Title", "frontis-blocks")}
+									value={item.title}
+									onChangeValue={(value) => updateItem(index, "title", value)}
+								/>
+
+								{/* Sub Title */}
+								<FB_InputControl
+									label={__("Sub Title", "frontis-blocks")}
+									value={item.subTitle}
+									onChangeValue={(value) =>
+										updateItem(index, "subTitle", value)
+									}
+								/>
+
+								{/* Icon Source — Preset 1 only */}
+								{imageAccordionPreset === "preset-1" && (
+									<>
+										<BaseControl label={__("Icon Source", "frontis-blocks")}>
+											<ButtonGroup>
+												<Button
+													variant={
+														item.mediaType === "icon" ? "primary" : "secondary"
+													}
+													isSmall
+													onClick={() => updateItem(index, "mediaType", "icon")}
+												>
+													{__("Icon", "frontis-blocks")}
+												</Button>
+												<Button
+													variant={
+														item.mediaType === "image" ? "primary" : "secondary"
+													}
+													isSmall
+													onClick={() =>
+														updateItem(index, "mediaType", "image")
+													}
+												>
+													{__("Image", "frontis-blocks")}
+												</Button>
+											</ButtonGroup>
+										</BaseControl>
+
+										{item.mediaType === "icon" && (
+											<div className="fb-icon-picker-control-wrapper">
+												<BaseControl
+													label={__("Select Icon", "frontis-blocks")}
+												/>
+												<FB_IconPicker
+													value={item.selectedIcon || ""}
+													setIconHandler={(value) =>
+														updateItem(index, "selectedIcon", value)
+													}
+												/>
+											</div>
+										)}
+
+										{item.mediaType === "image" && (
+											<BaseControl label={__("Icon Image", "frontis-blocks")}>
+												<div className="fb-image-upload-control">
+													{item.selectedImage?.url ? (
+														<div className="fb-image-preview">
+															<img src={item.selectedImage.url} alt="" />
 															<Button
 																isDestructive
 																isSmall
-																onClick={() => {
-																	updateItem(activeItemIndex, "imageUrl", "");
-																	updateItem(activeItemIndex, "imageAlt", "");
-																	updateItem(activeItemIndex, "imageID", 0);
-																}}
+																onClick={() =>
+																	updateItem(index, "selectedImage", {
+																		url: "",
+																		id: "",
+																	})
+																}
 															>
-																{__("Remove Image", "frontis-blocks")}
-															</Button>
-															<Button
-																isSecondary
-																isSmall
-																onClick={open}
-																style={{ marginLeft: "6px" }}
-															>
-																{__("Replace", "frontis-blocks")}
+																{__("Remove", "frontis-blocks")}
 															</Button>
 														</div>
 													) : (
 														<Button
-															isPrimary
-															onClick={open}
-															style={{ width: "100%" }}
+															variant="secondary"
+															onClick={() => {
+																const frame = wp.media({
+																	title: __(
+																		"Select Icon Image",
+																		"frontis-blocks",
+																	),
+																	multiple: false,
+																	library: { type: "image" },
+																});
+																frame.on("select", () => {
+																	const attachment = frame
+																		.state()
+																		.get("selection")
+																		.first()
+																		.toJSON();
+																	updateItem(index, "selectedImage", {
+																		url: attachment.url,
+																		id: attachment.id,
+																	});
+																});
+																frame.open();
+															}}
 														>
-															{__("Upload Image", "frontis-blocks")}
+															{__("Choose Image", "frontis-blocks")}
 														</Button>
 													)}
 												</div>
-											)}
-										/>
-									</MediaUploadCheck>
-								</BaseControl>
-
-								{accordionShowIcon && (
-									<BaseControl label={__("Icon", "frontis-blocks")}>
-										<FBIconPicker
-											value={item.icon}
-											setIconHandler={(val) => {
-												updateItem(activeItemIndex, "icon", val);
-											}}
-										/>
-									</BaseControl>
+											</BaseControl>
+										)}
+									</>
 								)}
 
-								{accordionShowNumber && (
-									<TextControl
-										label={__("Number", "frontis-blocks")}
-										value={item.number}
-										onChange={(val) =>
-											updateItem(activeItemIndex, "number", val)
-										}
-									/>
-								)}
-								{accordionShowTitle && (
-									<TextControl
-										label={__("Title", "frontis-blocks")}
-										value={item.title}
-										onChange={(val) =>
-											updateItem(activeItemIndex, "title", val)
-										}
-									/>
-								)}
-								{accordionShowSubtitle && (
-									<TextControl
-										label={__("Subtitle", "frontis-blocks")}
-										value={item.subtitle}
-										onChange={(val) =>
-											updateItem(activeItemIndex, "subtitle", val)
-										}
-									/>
-								)}
-
-								{accordionShowButton && (
+								{/* Button — Preset 3 only */}
+								{imageAccordionPreset === "preset-3" && (
 									<>
-										<TextControl
+										<FB_InputControl
 											label={__("Button Text", "frontis-blocks")}
 											value={item.buttonText}
-											onChange={(val) =>
-												updateItem(activeItemIndex, "buttonText", val)
+											onChangeValue={(value) =>
+												updateItem(index, "buttonText", value)
 											}
 										/>
-										<TextControl
+										<FB_InputControl
 											label={__("Button URL", "frontis-blocks")}
 											value={item.buttonUrl}
-											onChange={(val) =>
-												updateItem(activeItemIndex, "buttonUrl", val)
+											onChangeValue={(value) =>
+												updateItem(index, "buttonUrl", value)
 											}
 										/>
 										<ToggleControl
 											label={__("Open in New Tab", "frontis-blocks")}
 											checked={item.buttonTarget}
-											onChange={(val) =>
-												updateItem(activeItemIndex, "buttonTarget", val)
+											onChange={(value) =>
+												updateItem(index, "buttonTarget", value)
+											}
+										/>
+										<ToggleControl
+											label={__("Nofollow", "frontis-blocks")}
+											checked={item.buttonNofollow}
+											onChange={(value) =>
+												updateItem(index, "buttonNofollow", value)
 											}
 										/>
 									</>
 								)}
-
-								{accordionItems.length > 1 && (
-									<Button
-										isDestructive
-										onClick={() => removeItem(activeItemIndex)}
-										style={{ marginTop: "8px" }}
-									>
-										{__("Remove This Item", "frontis-blocks")}
-									</Button>
-								)}
-							</>
-						);
-					})()}
+							</div>
+						)}
+					</div>
+				))}
 
 				<Button
-					isPrimary
+					variant="secondary"
 					onClick={addItem}
-					style={{ width: "100%", marginTop: "12px", justifyContent: "center" }}
+					className="fb-add-item-btn"
+					icon="plus"
 				>
-					{__("+ Add Item", "frontis-blocks")}
+					{__("Add Item", "frontis-blocks")}
 				</Button>
 			</PanelBody>
 		</>
 	);
 
+	// ========================
+	// STYLE TAB
+	// ========================
 	const styleControls = (
 		<>
-			<PanelBody title={__("Layout", "frontis-blocks")} initialOpen={true}>
+			{/* General / Container */}
+			<PanelBody title={__("General", "frontis-blocks")} initialOpen={true}>
 				<FB_Range
-					label={__("Container Height", "frontis-blocks")}
-					rangeValue={accordionHeight}
-					onChangeHandler={(val) => setAttributes({ accordionHeight: val })}
-					rangeUnitHandler={(val) =>
-						setAttributes({ accordionHeightUnits: val })
-					}
-					deviceType={deviceType}
-					units={accordionHeightUnits}
-					setAttributes={setAttributes}
-					min={100}
-					max={1000}
-					resetFallbackValue=""
-				/>
-				<FB_Range
-					label={__("Active Item Width", "frontis-blocks")}
-					rangeValue={accordionActiveWidth}
-					onChangeHandler={(val) =>
-						setAttributes({ accordionActiveWidth: val })
-					}
-					rangeUnitHandler={(val) =>
-						setAttributes({ accordionActiveWidthUnits: val })
-					}
-					deviceType={deviceType}
-					units={accordionActiveWidthUnits}
-					setAttributes={setAttributes}
-					min={20}
-					max={90}
-					resetFallbackValue=""
-				/>
-				<FB_Range
-					label={__("Gap Between Items", "frontis-blocks")}
-					rangeValue={accordionGap}
-					onChangeHandler={(val) => setAttributes({ accordionGap: val })}
-					rangeUnitHandler={(val) => setAttributes({ accordionGapUnits: val })}
-					deviceType={deviceType}
-					units={accordionGapUnits}
-					setAttributes={setAttributes}
+					label={__("Width", "frontis-blocks")}
 					min={0}
-					max={50}
-					resetFallbackValue=""
+					max={imageAccordionWidthUnits[deviceType] === "%" ? 100 : 1600}
+					rangeValue={imageAccordionWidth}
+					onChangeHandler={(value) =>
+						setAttributes({ imageAccordionWidth: value })
+					}
+					rangeUnitHandler={(value) =>
+						setAttributes({ imageAccordionWidthUnits: value })
+					}
+					deviceType={deviceType}
+					units={imageAccordionWidthUnits}
+					setAttributes={setAttributes}
+					rangeStep={1}
+					resetFallbackValue={""}
 				/>
-				<RangeControl
-					label={__("Transition Speed (ms)", "frontis-blocks")}
-					value={accordionTransitionSpeed}
-					onChange={(val) => setAttributes({ accordionTransitionSpeed: val })}
-					min={100}
-					max={2000}
-					step={50}
+				<FB_Range
+					label={__("Height", "frontis-blocks")}
+					min={0}
+					max={imageAccordionHeightUnits[deviceType] === "%" ? 100 : 1200}
+					rangeValue={imageAccordionHeight}
+					onChangeHandler={(value) =>
+						setAttributes({ imageAccordionHeight: value })
+					}
+					rangeUnitHandler={(value) =>
+						setAttributes({ imageAccordionHeightUnits: value })
+					}
+					deviceType={deviceType}
+					units={imageAccordionHeightUnits}
+					setAttributes={setAttributes}
+					rangeStep={1}
+					resetFallbackValue={""}
 				/>
-			</PanelBody>
+				{/* Gap — hide for preset-2 (seamless) */}
+				{imageAccordionPreset !== "preset-2" &&
+					imageAccordionPreset !== "preset-4" && (
+						<FB_Range
+							label={__("Gap", "frontis-blocks")}
+							min={0}
+							max={100}
+							rangeValue={imageAccordionGap}
+							onChangeHandler={(value) =>
+								setAttributes({ imageAccordionGap: value })
+							}
+							rangeUnitHandler={(value) =>
+								setAttributes({ imageAccordionGapUnits: value })
+							}
+							deviceType={deviceType}
+							units={imageAccordionGapUnits}
+							setAttributes={setAttributes}
+							rangeStep={1}
+							resetFallbackValue={""}
+						/>
+					)}
 
-			<PanelBody
-				title={__("Border Radius", "frontis-blocks")}
-				initialOpen={false}
-			>
+				{/* Item Border Radius */}
 				<FB_Spacing
-					label={__("Border Radius", "frontis-blocks")}
+					label={__("Item Border Radius", "frontis-blocks")}
 					deviceType={deviceType}
-					spacingUnitsHandler={handleBorderRadiusUnitsHandler}
-					spacingUnits={accordionItemBorderRadiusUnits}
-					spacingDesktop={accordionItemBorderRadiusDesktop}
-					spacingTablet={accordionItemBorderRadiusTablet}
-					spacingMobile={accordionItemBorderRadiusMobile}
-					handleSpacingUnitHandler={handleBorderRadiusUnitChange}
-					spacingCombineBtn={accordionItemBorderRadiusLink}
-					spacingCombineBtnHandler={handleBorderRadiusCombineBtn}
+					spacingUnitsHandler={(unit) =>
+						setAttributes({
+							imageAccordionItemBorderRadiusUnits: {
+								...imageAccordionItemBorderRadiusUnits,
+								[deviceType]: unit,
+							},
+						})
+					}
+					spacingUnits={imageAccordionItemBorderRadiusUnits}
+					spacingDesktop={imageAccordionItemBorderRadiusDesktop}
+					spacingTablet={imageAccordionItemBorderRadiusTablet}
+					spacingMobile={imageAccordionItemBorderRadiusMobile}
+					handleSpacingUnitHandler={borderRadiusChange}
+					spacingCombineBtn={imageAccordionItemBorderRadiusLink}
+					spacingCombineBtnHandler={() =>
+						setAttributes({
+							imageAccordionItemBorderRadiusLink:
+								!imageAccordionItemBorderRadiusLink,
+						})
+					}
 					setAttributes={setAttributes}
 				/>
-			</PanelBody>
 
-			<PanelBody title={__("Overlay", "frontis-blocks")} initialOpen={false}>
-				<FB_ColorControl
-					label={__("Overlay Color", "frontis-blocks")}
-					globalColor={accordionOverlayColor}
-					setGlobalColor={(val) =>
-						setAttributes({ accordionOverlayColor: val })
-					}
-				/>
-				<FB_ColorControl
-					label={__("Overlay Color (Active)", "frontis-blocks")}
-					globalColor={accordionOverlayActiveColor}
-					setGlobalColor={(val) =>
-						setAttributes({ accordionOverlayActiveColor: val })
-					}
-				/>
-			</PanelBody>
-
-			<PanelBody title={__("Title", "frontis-blocks")} initialOpen={false}>
-				<FB_ColorControl
-					label={__("Title Color", "frontis-blocks")}
-					globalColor={accordionTitleColor}
-					setGlobalColor={(val) => setAttributes({ accordionTitleColor: val })}
-				/>
-				<FB_Range
-					label={__("Font Size", "frontis-blocks")}
-					rangeValue={accordionTitleFontSize}
-					onChangeHandler={(val) =>
-						setAttributes({ accordionTitleFontSize: val })
-					}
-					rangeUnitHandler={(val) =>
-						setAttributes({ accordionTitleFontSizeUnits: val })
-					}
-					deviceType={deviceType}
-					units={accordionTitleFontSizeUnits}
-					setAttributes={setAttributes}
-					min={10}
-					max={72}
-					resetFallbackValue=""
-				/>
-				<SelectControl
-					label={__("Font Weight", "frontis-blocks")}
-					value={accordionTitleFontWeight}
-					options={fbConstants.FONT_WEIGHT}
-					onChange={(val) => setAttributes({ accordionTitleFontWeight: val })}
-				/>
-			</PanelBody>
-
-			<PanelBody title={__("Subtitle", "frontis-blocks")} initialOpen={false}>
-				<FB_ColorControl
-					label={__("Subtitle Color", "frontis-blocks")}
-					globalColor={accordionSubtitleColor}
-					setGlobalColor={(val) =>
-						setAttributes({ accordionSubtitleColor: val })
-					}
-				/>
-				<FB_Range
-					label={__("Font Size", "frontis-blocks")}
-					rangeValue={accordionSubtitleFontSize}
-					onChangeHandler={(val) =>
-						setAttributes({ accordionSubtitleFontSize: val })
-					}
-					rangeUnitHandler={(val) =>
-						setAttributes({ accordionSubtitleFontSizeUnits: val })
-					}
-					deviceType={deviceType}
-					units={accordionSubtitleFontSizeUnits}
-					setAttributes={setAttributes}
-					min={10}
-					max={36}
-					resetFallbackValue=""
-				/>
-			</PanelBody>
-
-			<PanelBody title={__("Number", "frontis-blocks")} initialOpen={false}>
-				<FB_ColorControl
-					label={__("Number Color", "frontis-blocks")}
-					globalColor={accordionNumberColor}
-					setGlobalColor={(val) => setAttributes({ accordionNumberColor: val })}
-				/>
-				<FB_Range
-					label={__("Font Size", "frontis-blocks")}
-					rangeValue={accordionNumberFontSize}
-					onChangeHandler={(val) =>
-						setAttributes({ accordionNumberFontSize: val })
-					}
-					rangeUnitHandler={(val) =>
-						setAttributes({ accordionNumberFontSizeUnits: val })
-					}
-					deviceType={deviceType}
-					units={accordionNumberFontSizeUnits}
-					setAttributes={setAttributes}
-					min={10}
-					max={48}
-					resetFallbackValue=""
-				/>
-			</PanelBody>
-
-			<PanelBody title={__("Icon", "frontis-blocks")} initialOpen={false}>
-				<FB_Range
-					label={__("Icon Size", "frontis-blocks")}
-					rangeValue={accordionIconSize}
-					onChangeHandler={(val) => setAttributes({ accordionIconSize: val })}
-					rangeUnitHandler={(val) =>
-						setAttributes({ accordionIconSizeUnits: val })
-					}
-					deviceType={deviceType}
-					units={accordionIconSizeUnits}
-					setAttributes={setAttributes}
-					min={12}
-					max={80}
-					resetFallbackValue=""
-				/>
-				<FB_ColorControl
-					label={__("Icon Color", "frontis-blocks")}
-					globalColor={accordionIconColor}
-					setGlobalColor={(val) => setAttributes({ accordionIconColor: val })}
-				/>
-				<FB_ColorControl
-					label={__("Icon Background", "frontis-blocks")}
-					globalColor={accordionIconBgColor}
-					setGlobalColor={(val) => setAttributes({ accordionIconBgColor: val })}
-				/>
-			</PanelBody>
-
-			<PanelBody title={__("Button", "frontis-blocks")} initialOpen={false}>
-				<FB_ColorControl
-					label={__("Button Text Color", "frontis-blocks")}
-					globalColor={accordionButtonColor}
-					setGlobalColor={(val) => setAttributes({ accordionButtonColor: val })}
-				/>
-				<FB_ColorControl
-					label={__("Button Background", "frontis-blocks")}
-					globalColor={accordionButtonBgColor}
-					setGlobalColor={(val) =>
-						setAttributes({ accordionButtonBgColor: val })
-					}
-				/>
-				<FB_ColorControl
-					label={__("Button Text Color (Hover)", "frontis-blocks")}
-					globalColor={accordionButtonHoverColor}
-					setGlobalColor={(val) =>
-						setAttributes({ accordionButtonHoverColor: val })
-					}
-				/>
-				<FB_ColorControl
-					label={__("Button Background (Hover)", "frontis-blocks")}
-					globalColor={accordionButtonHoverBgColor}
-					setGlobalColor={(val) =>
-						setAttributes({ accordionButtonHoverBgColor: val })
-					}
-				/>
-				<FB_Range
-					label={__("Button Font Size", "frontis-blocks")}
-					rangeValue={accordionButtonFontSize}
-					onChangeHandler={(val) =>
-						setAttributes({ accordionButtonFontSize: val })
-					}
-					rangeUnitHandler={(val) =>
-						setAttributes({ accordionButtonFontSizeUnits: val })
-					}
-					deviceType={deviceType}
-					units={accordionButtonFontSizeUnits}
-					setAttributes={setAttributes}
-					min={10}
-					max={32}
-					resetFallbackValue=""
-				/>
-			</PanelBody>
-
-			<PanelBody title={__("Box Shadow", "frontis-blocks")} initialOpen={false}>
-				<FB_SwitcherControl
-					label={__("Box Shadow", "frontis-blocks")}
-					globalSwitcher={accordionBoxShadowSwitcher}
-					setGlobalSwitcher={(val) =>
-						setAttributes({ accordionBoxShadowSwitcher: val })
-					}
-				/>
-				{accordionBoxShadowSwitcher === "normal" && (
-					<FB_BoxShadowControl
-						label={__("Normal Shadow", "frontis-blocks")}
-						initialShadowValue={accordionBoxShadowValues}
-						onBoxShadowChange={(val) =>
-							setAttributes({ accordionBoxShadowValues: val })
-						}
-						onBoxShadowStyleChange={(val) =>
-							setAttributes({ accordionBoxShadowCssValue: val })
-						}
-					/>
-				)}
-				{accordionBoxShadowSwitcher === "hover" && (
-					<FB_BoxShadowControl
-						label={__("Hover Shadow", "frontis-blocks")}
-						initialShadowValue={accordionBoxShadowHoverValues}
-						onBoxShadowChange={(val) =>
-							setAttributes({ accordionBoxShadowHoverValues: val })
-						}
-						onBoxShadowStyleChange={(val) =>
-							setAttributes({ accordionBoxShadowHoverCssValue: val })
-						}
-					/>
-				)}
-			</PanelBody>
-		</>
-	);
-
-	const advancedControls = (
-		<>
-			<PanelBody title={__("Padding", "frontis-blocks")} initialOpen={false}>
 				<FB_Spacing
 					label={__("Padding", "frontis-blocks")}
 					deviceType={deviceType}
-					spacingUnitsHandler={handleGlobalPaddingUnitsHandler}
-					spacingUnits={accordionPaddingUnits}
-					spacingDesktop={accordionPaddingDesktop}
-					spacingTablet={accordionPaddingTablet}
-					spacingMobile={accordionPaddingMobile}
-					handleSpacingUnitHandler={handleGlobalPaddingUnitChange}
-					spacingCombineBtn={accordionPaddingLink}
-					spacingCombineBtnHandler={handleGlobalPaddingCombineBtn}
+					spacingUnitsHandler={(unit) =>
+						setAttributes({
+							imageAccordionPaddingUnits: {
+								...imageAccordionPaddingUnits,
+								[deviceType]: unit,
+							},
+						})
+					}
+					spacingUnits={imageAccordionPaddingUnits}
+					spacingDesktop={imageAccordionPaddingDesktop}
+					spacingTablet={imageAccordionPaddingTablet}
+					spacingMobile={imageAccordionPaddingMobile}
+					handleSpacingUnitHandler={paddingUnitsChange}
+					spacingCombineBtn={imageAccordionPaddingLink}
+					spacingCombineBtnHandler={() =>
+						setAttributes({
+							imageAccordionPaddingLink: !imageAccordionPaddingLink,
+						})
+					}
+					setAttributes={setAttributes}
+				/>
+				<FB_Spacing
+					label={__("Margin", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={(unit) =>
+						setAttributes({
+							imageAccordionMarginUnits: {
+								...imageAccordionMarginUnits,
+								[deviceType]: unit,
+							},
+						})
+					}
+					spacingUnits={imageAccordionMarginUnits}
+					spacingDesktop={imageAccordionMarginDesktop}
+					spacingTablet={imageAccordionMarginTablet}
+					spacingMobile={imageAccordionMarginMobile}
+					handleSpacingUnitHandler={marginUnitsChange}
+					spacingCombineBtn={imageAccordionMarginLink}
+					spacingCombineBtnHandler={() =>
+						setAttributes({
+							imageAccordionMarginLink: !imageAccordionMarginLink,
+						})
+					}
 					setAttributes={setAttributes}
 				/>
 			</PanelBody>
 
-			<PanelBody title={__("Margin", "frontis-blocks")} initialOpen={false}>
-				<FB_Spacing
-					label={__("Margin", "frontis-blocks")}
+			{/* Overlay */}
+			<PanelBody title={__("Overlay", "frontis-blocks")} initialOpen={false}>
+				<FB_SwitcherControl
+					label={__("Overlay Color", "frontis-blocks")}
+					globalSwitcher={overlayColorTab}
+					setGlobalSwitcher={setOverlayColorTab}
+				/>
+				{overlayColorTab === "normal" && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={imageAccordionOverlayColor}
+						setGlobalColor={(value) =>
+							setAttributes({ imageAccordionOverlayColor: value ?? "" })
+						}
+					/>
+				)}
+				{overlayColorTab === "hover" && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={imageAccordionOverlayHoverColor}
+						setGlobalColor={(value) =>
+							setAttributes({ imageAccordionOverlayHoverColor: value ?? "" })
+						}
+					/>
+				)}
+			</PanelBody>
+
+			{/* Typography */}
+			<PanelBody title={__("Typography", "frontis-blocks")} initialOpen={false}>
+				{/* Title */}
+				<p className="fb-section-label">
+					<strong>{__("Title", "frontis-blocks")}</strong>
+				</p>
+				<FB_Range
+					label={__("Font Size", "frontis-blocks")}
+					min={0}
+					max={100}
+					rangeValue={imageAccordionTitleFontSize}
+					onChangeHandler={(value) =>
+						setAttributes({ imageAccordionTitleFontSize: value })
+					}
+					rangeUnitHandler={(value) =>
+						setAttributes({ imageAccordionTitleFontSizeUnits: value })
+					}
 					deviceType={deviceType}
-					spacingUnitsHandler={handleGlobalMarginUnitsHandler}
-					spacingUnits={accordionMarginUnits}
-					spacingDesktop={accordionMarginDesktop}
-					spacingTablet={accordionMarginTablet}
-					spacingMobile={accordionMarginMobile}
-					handleSpacingUnitHandler={handleGlobalMarginUnitChange}
-					spacingCombineBtn={accordionMarginLink}
-					spacingCombineBtnHandler={handleGlobalMarginCombineBtn}
+					units={imageAccordionTitleFontSizeUnits}
 					setAttributes={setAttributes}
+					rangeStep={1}
+					resetFallbackValue={""}
+				/>
+				<SelectControl
+					label={__("Font Weight", "frontis-blocks")}
+					value={imageAccordionTitleFontWeight}
+					options={[
+						{ label: "Default", value: "" },
+						{ label: "400", value: "400" },
+						{ label: "500", value: "500" },
+						{ label: "600", value: "600" },
+						{ label: "700", value: "700" },
+						{ label: "800", value: "800" },
+					]}
+					onChange={(value) =>
+						setAttributes({ imageAccordionTitleFontWeight: value })
+					}
+				/>
+				<FB_SwitcherControl
+					label={__("Title Color", "frontis-blocks")}
+					globalSwitcher={titleColorTab}
+					setGlobalSwitcher={setTitleColorTab}
+				/>
+				{titleColorTab === "normal" && (
+					<FB_ColorControl
+						label={__("Color", "frontis-blocks")}
+						globalColor={imageAccordionTitleColor}
+						setGlobalColor={(value) =>
+							setAttributes({ imageAccordionTitleColor: value ?? "" })
+						}
+					/>
+				)}
+				{titleColorTab === "hover" && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={imageAccordionTitleHoverColor}
+						setGlobalColor={(value) =>
+							setAttributes({ imageAccordionTitleHoverColor: value ?? "" })
+						}
+					/>
+				)}
+
+				{/* Subtitle */}
+				<p className="fb-section-label" style={{ marginTop: "16px" }}>
+					<strong>{__("Subtitle", "frontis-blocks")}</strong>
+				</p>
+				<FB_Range
+					label={__("Font Size", "frontis-blocks")}
+					min={0}
+					max={100}
+					rangeValue={imageAccordionSubtitleFontSize}
+					onChangeHandler={(value) =>
+						setAttributes({ imageAccordionSubtitleFontSize: value })
+					}
+					rangeUnitHandler={(value) =>
+						setAttributes({ imageAccordionSubtitleFontSizeUnits: value })
+					}
+					deviceType={deviceType}
+					units={imageAccordionSubtitleFontSizeUnits}
+					setAttributes={setAttributes}
+					rangeStep={1}
+					resetFallbackValue={""}
+				/>
+				<SelectControl
+					label={__("Font Weight", "frontis-blocks")}
+					value={imageAccordionSubtitleFontWeight}
+					options={[
+						{ label: "Default", value: "" },
+						{ label: "400", value: "400" },
+						{ label: "500", value: "500" },
+						{ label: "600", value: "600" },
+					]}
+					onChange={(value) =>
+						setAttributes({ imageAccordionSubtitleFontWeight: value })
+					}
+				/>
+				<FB_ColorControl
+					label={__("Subtitle Color", "frontis-blocks")}
+					globalColor={imageAccordionSubtitleColor}
+					setGlobalColor={(value) =>
+						setAttributes({ imageAccordionSubtitleColor: value ?? "" })
+					}
+				/>
+			</PanelBody>
+
+			{/* Icon — Preset 1 only */}
+			{imageAccordionPreset === "preset-1" && (
+				<PanelBody title={__("Icon", "frontis-blocks")} initialOpen={false}>
+					<FB_ColorControl
+						label={__("Circle Background", "frontis-blocks")}
+						globalColor={imageAccordionIconCircleBgColor}
+						setGlobalColor={(value) =>
+							setAttributes({ imageAccordionIconCircleBgColor: value ?? "" })
+						}
+					/>
+					<FB_Range
+						label={__("Circle Size", "frontis-blocks")}
+						min={20}
+						max={120}
+						rangeValue={imageAccordionIconCircleSize}
+						onChangeHandler={(value) =>
+							setAttributes({ imageAccordionIconCircleSize: value })
+						}
+						rangeUnitHandler={(value) =>
+							setAttributes({ imageAccordionIconCircleSizeUnits: value })
+						}
+						deviceType={deviceType}
+						units={imageAccordionIconCircleSizeUnits}
+						setAttributes={setAttributes}
+						rangeStep={1}
+						resetFallbackValue={""}
+					/>
+					<FB_SwitcherControl
+						label={__("Icon Color", "frontis-blocks")}
+						globalSwitcher={iconColorTab}
+						setGlobalSwitcher={setIconColorTab}
+					/>
+					{iconColorTab === "normal" && (
+						<FB_ColorControl
+							label={__("Color", "frontis-blocks")}
+							globalColor={imageAccordionIconColor}
+							setGlobalColor={(value) =>
+								setAttributes({ imageAccordionIconColor: value ?? "" })
+							}
+						/>
+					)}
+					{iconColorTab === "hover" && (
+						<FB_ColorControl
+							label={__("Hover Color", "frontis-blocks")}
+							globalColor={imageAccordionIconHoverColor}
+							setGlobalColor={(value) =>
+								setAttributes({ imageAccordionIconHoverColor: value ?? "" })
+							}
+						/>
+					)}
+					<FB_Range
+						label={__("Icon Size", "frontis-blocks")}
+						min={10}
+						max={100}
+						rangeValue={imageAccordionIconSize}
+						onChangeHandler={(value) =>
+							setAttributes({ imageAccordionIconSize: value })
+						}
+						rangeUnitHandler={(value) =>
+							setAttributes({ imageAccordionIconSizeUnits: value })
+						}
+						deviceType={deviceType}
+						units={imageAccordionIconSizeUnits}
+						setAttributes={setAttributes}
+						rangeStep={1}
+						resetFallbackValue={""}
+					/>
+				</PanelBody>
+			)}
+
+			{/* Dots — Preset 2 only */}
+			{imageAccordionPreset === "preset-2" && (
+				<PanelBody
+					title={__("Overlay Dots", "frontis-blocks")}
+					initialOpen={false}
+				>
+					<ToggleControl
+						label={__("Show Dots", "frontis-blocks")}
+						checked={imageAccordionShowDots}
+						onChange={(value) =>
+							setAttributes({ imageAccordionShowDots: value })
+						}
+					/>
+					{imageAccordionShowDots && (
+						<>
+							<FB_ColorControl
+								label={__("Dot Color", "frontis-blocks")}
+								globalColor={imageAccordionDotColor}
+								setGlobalColor={(value) =>
+									setAttributes({ imageAccordionDotColor: value ?? "" })
+								}
+							/>
+							<FB_Range
+								label={__("Dot Size", "frontis-blocks")}
+								min={4}
+								max={50}
+								rangeValue={imageAccordionDotSize}
+								onChangeHandler={(value) =>
+									setAttributes({ imageAccordionDotSize: value })
+								}
+								rangeUnitHandler={(value) =>
+									setAttributes({ imageAccordionDotSizeUnits: value })
+								}
+								deviceType={deviceType}
+								units={imageAccordionDotSizeUnits}
+								setAttributes={setAttributes}
+								rangeStep={1}
+								resetFallbackValue={""}
+							/>
+						</>
+					)}
+				</PanelBody>
+			)}
+
+			{/* Number — Preset 2 & 4 */}
+			{(imageAccordionPreset === "preset-2" ||
+				imageAccordionPreset === "preset-4") && (
+				<PanelBody
+					title={__("Item Number", "frontis-blocks")}
+					initialOpen={false}
+				>
+					<ToggleControl
+						label={__("Show Number", "frontis-blocks")}
+						checked={imageAccordionShowNumber}
+						onChange={(value) =>
+							setAttributes({ imageAccordionShowNumber: value })
+						}
+					/>
+					{imageAccordionShowNumber && (
+						<>
+							<FB_Range
+								label={__("Font Size", "frontis-blocks")}
+								min={8}
+								max={72}
+								rangeValue={imageAccordionNumberFontSize}
+								onChangeHandler={(value) =>
+									setAttributes({ imageAccordionNumberFontSize: value })
+								}
+								rangeUnitHandler={(value) =>
+									setAttributes({ imageAccordionNumberFontSizeUnits: value })
+								}
+								deviceType={deviceType}
+								units={imageAccordionNumberFontSizeUnits}
+								setAttributes={setAttributes}
+								rangeStep={1}
+								resetFallbackValue={""}
+							/>
+							<SelectControl
+								label={__("Font Weight", "frontis-blocks")}
+								value={imageAccordionNumberFontWeight}
+								options={[
+									{ label: "Default", value: "" },
+									{ label: "400", value: "400" },
+									{ label: "500", value: "500" },
+									{ label: "600", value: "600" },
+									{ label: "700", value: "700" },
+								]}
+								onChange={(value) =>
+									setAttributes({ imageAccordionNumberFontWeight: value })
+								}
+							/>
+							<FB_SwitcherControl
+								label={__("Number Color", "frontis-blocks")}
+								globalSwitcher={numberColorTab}
+								setGlobalSwitcher={setNumberColorTab}
+							/>
+							{numberColorTab === "normal" && (
+								<FB_ColorControl
+									label={__("Color", "frontis-blocks")}
+									globalColor={imageAccordionNumberColor}
+									setGlobalColor={(value) =>
+										setAttributes({ imageAccordionNumberColor: value ?? "" })
+									}
+								/>
+							)}
+							{numberColorTab === "hover" && (
+								<FB_ColorControl
+									label={__("Hover Color", "frontis-blocks")}
+									globalColor={imageAccordionNumberHoverColor}
+									setGlobalColor={(value) =>
+										setAttributes({
+											imageAccordionNumberHoverColor: value ?? "",
+										})
+									}
+								/>
+							)}
+						</>
+					)}
+				</PanelBody>
+			)}
+
+			{/* Button — Preset 3 only */}
+			{imageAccordionPreset === "preset-3" && (
+				<PanelBody title={__("Button", "frontis-blocks")} initialOpen={false}>
+					<FB_Range
+						label={__("Font Size", "frontis-blocks")}
+						min={8}
+						max={48}
+						rangeValue={imageAccordionBtnFontSize}
+						onChangeHandler={(value) =>
+							setAttributes({ imageAccordionBtnFontSize: value })
+						}
+						rangeUnitHandler={(value) =>
+							setAttributes({ imageAccordionBtnFontSizeUnits: value })
+						}
+						deviceType={deviceType}
+						units={imageAccordionBtnFontSizeUnits}
+						setAttributes={setAttributes}
+						rangeStep={1}
+						resetFallbackValue={""}
+					/>
+					<SelectControl
+						label={__("Font Weight", "frontis-blocks")}
+						value={imageAccordionBtnFontWeight}
+						options={[
+							{ label: "Default", value: "" },
+							{ label: "400", value: "400" },
+							{ label: "500", value: "500" },
+							{ label: "600", value: "600" },
+						]}
+						onChange={(value) =>
+							setAttributes({ imageAccordionBtnFontWeight: value })
+						}
+					/>
+					<FB_SwitcherControl
+						label={__("Button Color", "frontis-blocks")}
+						globalSwitcher={btnColorTab}
+						setGlobalSwitcher={setBtnColorTab}
+					/>
+					{btnColorTab === "normal" && (
+						<>
+							<FB_ColorControl
+								label={__("Text Color", "frontis-blocks")}
+								globalColor={imageAccordionBtnTextColor}
+								setGlobalColor={(value) =>
+									setAttributes({ imageAccordionBtnTextColor: value ?? "" })
+								}
+							/>
+							<FB_ColorControl
+								label={__("Background Color", "frontis-blocks")}
+								globalColor={imageAccordionBtnBgColor}
+								setGlobalColor={(value) =>
+									setAttributes({ imageAccordionBtnBgColor: value ?? "" })
+								}
+							/>
+						</>
+					)}
+					{btnColorTab === "hover" && (
+						<>
+							<FB_ColorControl
+								label={__("Text Hover Color", "frontis-blocks")}
+								globalColor={imageAccordionBtnHoverTextColor}
+								setGlobalColor={(value) =>
+									setAttributes({
+										imageAccordionBtnHoverTextColor: value ?? "",
+									})
+								}
+							/>
+							<FB_ColorControl
+								label={__("Background Hover Color", "frontis-blocks")}
+								globalColor={imageAccordionBtnHoverBgColor}
+								setGlobalColor={(value) =>
+									setAttributes({ imageAccordionBtnHoverBgColor: value ?? "" })
+								}
+							/>
+						</>
+					)}
+					<SelectControl
+						label={__("Border Style", "frontis-blocks")}
+						value={imageAccordionBtnBorder}
+						options={BORDER_STYLES}
+						onChange={(value) =>
+							setAttributes({ imageAccordionBtnBorder: value })
+						}
+					/>
+					{imageAccordionBtnBorder !== "none" && (
+						<FB_ColorControl
+							label={__("Border Color", "frontis-blocks")}
+							globalColor={imageAccordionBtnBorderColor}
+							setGlobalColor={(value) =>
+								setAttributes({ imageAccordionBtnBorderColor: value ?? "" })
+							}
+						/>
+					)}
+					<FB_Spacing
+						label={__("Border Radius", "frontis-blocks")}
+						deviceType={deviceType}
+						spacingUnitsHandler={(unit) =>
+							setAttributes({
+								imageAccordionBtnBorderRadiusUnits: {
+									...imageAccordionBtnBorderRadiusUnits,
+									[deviceType]: unit,
+								},
+							})
+						}
+						spacingUnits={imageAccordionBtnBorderRadiusUnits}
+						spacingDesktop={imageAccordionBtnBorderRadiusDesktop}
+						spacingTablet={imageAccordionBtnBorderRadiusDesktop}
+						spacingMobile={imageAccordionBtnBorderRadiusDesktop}
+						handleSpacingUnitHandler={(e, position) => {
+							const value = e.target.value;
+							setAttributes({
+								imageAccordionBtnBorderRadiusDesktop: {
+									...imageAccordionBtnBorderRadiusDesktop,
+									[position]: value,
+								},
+							});
+						}}
+						spacingCombineBtn={true}
+						spacingCombineBtnHandler={() => {}}
+						setAttributes={setAttributes}
+					/>
+					<FB_Spacing
+						label={__("Padding", "frontis-blocks")}
+						deviceType={deviceType}
+						spacingUnitsHandler={(unit) =>
+							setAttributes({
+								imageAccordionBtnPaddingUnits: {
+									...imageAccordionBtnPaddingUnits,
+									[deviceType]: unit,
+								},
+							})
+						}
+						spacingUnits={imageAccordionBtnPaddingUnits}
+						spacingDesktop={imageAccordionBtnPaddingDesktop}
+						spacingTablet={imageAccordionBtnPaddingDesktop}
+						spacingMobile={imageAccordionBtnPaddingDesktop}
+						handleSpacingUnitHandler={(e, position) => {
+							const value = e.target.value;
+							setAttributes({
+								imageAccordionBtnPaddingDesktop: {
+									...imageAccordionBtnPaddingDesktop,
+									[position]: value,
+								},
+							});
+						}}
+						spacingCombineBtn={false}
+						spacingCombineBtnHandler={() => {}}
+						setAttributes={setAttributes}
+					/>
+				</PanelBody>
+			)}
+		</>
+	);
+
+	// ========================
+	// ADVANCED TAB
+	// ========================
+	const advancedControls = (
+		<>
+			<PanelBody title={__("Layout", "frontis-blocks")} initialOpen={true}>
+				<FB_Range
+					min={0}
+					max={10000000}
+					label={__("Z Index", "frontis-blocks")}
+					rangeValue={imageAccordionGlobalZIndex}
+					onChangeHandler={(value) =>
+						setAttributes({
+							imageAccordionGlobalZIndex: value === 0 ? undefined : value,
+						})
+					}
+					deviceType={deviceType}
+					setAttributes={setAttributes}
+					rangeStep={1}
+					resetFallbackValue={""}
+					isRangeUnit={false}
+				/>
+				<FB_InputControl
+					label={__("CSS ID", "frontis-blocks")}
+					value={imageAccordionWraperID}
+					onChangeValue={(value) =>
+						setAttributes({ imageAccordionWraperID: value })
+					}
+					helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
+				/>
+				<FB_InputControl
+					label={__("CSS Class", "frontis-blocks")}
+					value={imageAccordionWraperClass}
+					onChangeValue={(value) =>
+						setAttributes({ imageAccordionWraperClass: value })
+					}
+					helpText={__("Separate with spaces.", "frontis-blocks")}
 				/>
 			</PanelBody>
 
@@ -836,69 +1235,48 @@ const Inspector = ({ attributes, setAttributes }) => {
 				title={__("Responsive Visibility", "frontis-blocks")}
 				initialOpen={false}
 			>
-				<FB_VisibilityControl
-					desktopValue={accordionDesktopSwitcher}
-					setDesktopValue={(val) =>
-						setAttributes({ accordionDesktopSwitcher: val })
-					}
-					tabletValue={accordionTabletSwitcher}
-					setTabletValue={(val) =>
-						setAttributes({ accordionTabletSwitcher: val })
-					}
-					mobileValue={accordionMobileSwitcher}
-					setMobileValue={(val) =>
-						setAttributes({ accordionMobileSwitcher: val })
+				<ToggleControl
+					label={__("Hide on Desktop", "frontis-blocks")}
+					checked={imageAccordionDesktopSwitcher}
+					onChange={(value) =>
+						setAttributes({ imageAccordionDesktopSwitcher: value })
 					}
 				/>
-			</PanelBody>
-
-			<PanelBody title={__("Z-Index", "frontis-blocks")} initialOpen={false}>
-				<FB_Range
-					label={__("Z-Index", "frontis-blocks")}
-					rangeValue={accordionGlobalZIndex}
-					onChangeHandler={(val) =>
-						setAttributes({ accordionGlobalZIndex: val })
+				<ToggleControl
+					label={__("Hide on Tablet", "frontis-blocks")}
+					checked={imageAccordionTabletSwitcher}
+					onChange={(value) =>
+						setAttributes({ imageAccordionTabletSwitcher: value })
 					}
-					deviceType={deviceType}
-					setAttributes={setAttributes}
-					min={0}
-					max={9999}
-					resetFallbackValue=""
-					isRangeUnit={false}
+				/>
+				<ToggleControl
+					label={__("Hide on Mobile", "frontis-blocks")}
+					checked={imageAccordionMobileSwitcher}
+					onChange={(value) =>
+						setAttributes({ imageAccordionMobileSwitcher: value })
+					}
 				/>
 			</PanelBody>
 
 			<PanelBody title={__("Custom CSS", "frontis-blocks")} initialOpen={false}>
 				<FB_CustomCSSEditor
-					value={accordionCustomCSS}
-					onChangeValue={(val) => setAttributes({ accordionCustomCSS: val })}
-				/>
-			</PanelBody>
-
-			<PanelBody
-				title={__("CSS Class & ID", "frontis-blocks")}
-				initialOpen={false}
-			>
-				<FB_InputControl
-					label={__("HTML Anchor (ID)", "frontis-blocks")}
-					value={accordionWraperID}
-					onChangeValue={(val) => setAttributes({ accordionWraperID: val })}
-				/>
-				<FB_InputControl
-					label={__("Additional CSS Class", "frontis-blocks")}
-					value={accordionWraperClass}
-					onChangeValue={(val) => setAttributes({ accordionWraperClass: val })}
+					value={imageAccordionCustomCSS}
+					onChangeValue={(value) =>
+						setAttributes({ imageAccordionCustomCSS: value })
+					}
 				/>
 			</PanelBody>
 		</>
 	);
 
 	return (
-		<FB_InspectorControls
-			generalControls={generalControls}
-			styleControls={styleControls}
-			advancedControls={advancedControls}
-		/>
+		<>
+			<FB_InspectorControls
+				generalControls={generalControls}
+				styleControls={styleControls}
+				advancedControls={advancedControls}
+			/>
+		</>
 	);
 };
 
