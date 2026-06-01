@@ -6,8 +6,8 @@
 	"use strict";
 
 	function initAccordion(wrapper) {
-		const container = wrapper.querySelector(".pea-image-accordion-container");
-		const items = wrapper.querySelectorAll(".pea-image-accordion-item");
+		const container = wrapper.querySelector(".fb-image-accordion-container");
+		const items = wrapper.querySelectorAll(".fb-image-accordion-item");
 		if (!container || !items.length) return;
 
 		const triggerMode = wrapper.dataset.trigger || "hover";
@@ -18,7 +18,7 @@
 			item.parentNode.replaceChild(clone, item);
 		});
 
-		const freshItems = wrapper.querySelectorAll(".pea-image-accordion-item");
+		const freshItems = wrapper.querySelectorAll(".fb-image-accordion-item");
 
 		// Ensure first item is expanded by default if none are active
 		if (!wrapper.querySelector(".is-active") && freshItems.length > 0) {
