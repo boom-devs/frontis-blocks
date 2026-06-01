@@ -12,6 +12,7 @@ $white_color: #ffffff;
 .fb-setting-color-panel-btn {
     display: flex !important;
     width: 100%;
+
     .fb-setting-color-panel-btn-switchr {
         width: 100%;
         justify-content: center;
@@ -23,6 +24,7 @@ $white_color: #ffffff;
         font-weight: 400;
         color: $secondary_color !important;
         box-shadow: inset 0 0 0 1px $background_color;
+
         &.active {
             background-color: $background_color;
         }
@@ -33,6 +35,7 @@ $white_color: #ffffff;
     position: absolute;
     bottom: 0;
     right: 0;
+    z-index: 9;
 
     .components-button {
         display: flex;
@@ -51,6 +54,7 @@ $white_color: #ffffff;
             font-weight: 500;
             color: #121212;
         }
+
         svg {
             fill: #121212;
         }
@@ -66,4 +70,8 @@ $white_color: #ffffff;
 .fb-submit-button,
 .fb-form-input input {
     outline: none;
+}
+
+.fb-form-builder-wrapper .block-editor-block-list__layout .block-list-appender.wp-block {
+    display: none;
 }

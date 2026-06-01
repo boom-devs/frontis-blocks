@@ -39,7 +39,7 @@ import './editor.scss';
 
 const Inspector = ({ attributes, setAttributes, clientId }) => {
 	const {
-        blockId,
+        blockID,
 		// deviceType,
 		blockStyle,
 		postType,
@@ -68,13 +68,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 
     const deviceType= useDeviceType();
     
-    useEffect(() => {
-        if (clientId && typeof clientId === 'string') {
-            setAttributes({
-                blockId: "fb-loop-builder-" + clientId.slice(0, 8),
-            });
-        }
-    }, [clientId]);
+
 
 
     useEffect(() => {

@@ -28,27 +28,28 @@ import {
     FORM_SUBMIT_BTN_POSITION,
     FORM_SUCCESS_TYPE,
 } from "@Constants/fbConstants";
-import FrontisForms_Spacing from '@Components/spacing';
-import FrontisForms_Range from '@Components/range';
+import FB_Spacing from '@Components/spacing';
+import FB_Range from '@Components/range';
 
 import './editor.scss';
 import FBIconPicker from '../../components/icon-picker';
-import FrontisForms_TypographyControl from '../../components/typography-control';
-import FrontisForms_BackgroundColorControl from '../../components/background-color-control';
-import FrontisForms_BoxShadowControl from '../../components/box-shadow';
-import FrontisForms_BackgroundImageControl from '../../components/background-image-control';
-import FrontisForms_HtmlTagControl from '../../components/html-tag-control';
+import FB_TypographyControl from '../../components/typography-control';
+import FB_BackgroundColorControl from '../../components/background-color-control';
+import FB_BoxShadowControl from '../../components/box-shadow';
+import FB_BackgroundImageControl from '../../components/background-image-control';
+import FB_HtmlTagControl from '../../components/html-tag-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
-import FrontisForms_ColorControl from '../../components/color-control';
-import FrontisForms_SwitcherControl from '../../components/switcher-control';
-import FrontisForms_InputControl from '@Components/input-control';
-import FrontisForms_CustomCSSEditor from '@Components/custom-css-editor';
+import FB_ColorControl from '../../components/color-control';
+import FB_SwitcherControl from '../../components/switcher-control';
+import FB_InputControl from '@Components/input-control';
+import FB_CustomCSSEditor from '@Components/custom-css-editor';
 
 import {useDeviceType} from "@Config/displayType";
-import FrontisForms_PositionControl from '@Components/position-control';
-import FrontisForms_VisibilityControl from '@Components/visibility-control';
-import FrontisForms_InspectorControls from '@Components/InspectorControls';
-import FrontisForms_ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
+import FB_PositionControl from '@Components/position-control';
+import FB_VisibilityControl from '@Components/visibility-control';
+import FB_InspectorControls from '@Components/InspectorControls';
+import FB_ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
+import { ITEM_POSITION } from '../../fbConstants/fbConstants';
 
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -191,11 +192,30 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         inputFieldIconGap,
         inputFieldIconGapUnits,
 
+
+        submitBtnPosition,
+        submitBtnWidth,
+        submitBtnWidthUnits,
+        submitBtnHeight,
+        submitBtnHeightUnits,
         submitBtnLabel,
         submitBtnIcon,
         submitBtnAlignment,
         submitBtnIconSwitcher,
         submitBtnIconPosition,
+
+
+        submitBtnPositionType,
+        submitBtnHZOrientationType,
+        submitBtnVROrientationType,
+        submitBtnHZLeftOffset,
+        submitBtnHZLeftOffsetUnits,
+        submitBtnHZRightOffset,
+        submitBtnHZRightOffsetUnits,
+        submitBtnVRTopOffset,
+        submitBtnVRTopOffsetUnits,
+        submitBtnVRBottomOffset,
+        submitBtnVRBottomOffsetUnits,
 
         submitBtnGlobalTypoSwitcher,
         submitBtnGlobalTypographyData,
@@ -2027,7 +2047,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 title={__("Field Gaps", "frontis-forms")}
                 initialOpen={false}
             >
-                <FrontisForms_Range
+                <FB_Range
                     min={1}
                     max={fieldColumnGapUnits[deviceType] !== 'px' ? 100 : 2000}
                     label={__("Column", "frontis-forms")}
@@ -2040,7 +2060,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     resetFallbackValue={'100'}
                 />
 
-                <FrontisForms_Range
+                <FB_Range
                     min={1}
                     max={fieldRowGapUnits[deviceType] !== 'px' ? 100 : 2000}
                     label={__("Row", "frontis-forms")}
@@ -2061,18 +2081,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     onChange={(value) => setAttributes({ submitBtnLabel: value })}
                 />
 
-                <BaseControl className={"fb-form-btn-alignment"} >
-                    <FrontisForms_ResponsiveAlignmentControl
-                        label={__("Alignment", "frontis-forms")}
-                        globalAlignment={submitBtnAlignment}
-                        setGlobalAlignment={(value) => setAttributes({ submitBtnAlignment: value })}
-                        deviceType={deviceType}
-                        setAttributes={setAttributes}
-                        options={FORM_ALIGN_ITEMS}
-                    />
-                </BaseControl>
-
-
                 <ToggleControl
                     label={__("Show Icon", "frontis-forms")}
                     checked={submitBtnIconSwitcher}
@@ -2091,7 +2099,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 )}
             
                 
-                    <FrontisForms_ResponsiveAlignmentControl
+                    <FB_ResponsiveAlignmentControl
                         label={__("Icon Position", "frontis-forms")}
                         globalAlignment={submitBtnIconPosition}
                         setGlobalAlignment={(value) => setAttributes({ submitBtnIconPosition: value })}
@@ -2100,6 +2108,92 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         options={FORM_SUBMIT_BTN_POSITION}
                     />
 
+            </PanelBody>
+
+            <PanelBody
+                title={__("Submit Button Layout", "frontis-forms")}
+                initialOpen={false}
+            >
+                <SelectControl
+                    label={__("Position", "frontis-block")}
+                    value={submitBtnPosition}
+                    options={ITEM_POSITION}
+                    onChange={(value) =>
+                        setAttributes({ submitBtnPosition: value })
+                    }
+                />
+                
+                <FB_Range
+                    min={1}
+                    max={submitBtnWidthUnits[deviceType] !== 'px' ? 100 : 2000}
+                    label={__("Width", "frontis-forms")}
+                    rangeValue={submitBtnWidth}
+                    onChangeHandler={(value) => setAttributes({ submitBtnWidth: value })}
+                    rangeUnitHandler={(value) => setAttributes({ submitBtnWidthUnits: value })}
+                    deviceType={deviceType}
+                    units={submitBtnWidthUnits}
+                    rangeStep={1}
+                    resetFallbackValue={''}
+                />
+
+                <FB_Range
+                    min={1}
+                    max={submitBtnHeightUnits[deviceType] !== 'px' ? 100 : 500}
+                    label={__("Height", "frontis-forms")}
+                    rangeValue={submitBtnHeight}
+                    onChangeHandler={(value) => setAttributes({ submitBtnHeight: value })}
+                    rangeUnitHandler={(value) => setAttributes({ submitBtnHeightUnits: value })}
+                    deviceType={deviceType}
+                    units={submitBtnHeightUnits}
+                    rangeStep={1}
+                    resetFallbackValue={''}
+                />
+
+                <BaseControl className={"fb-form-btn-alignment"} >
+                    <FB_ResponsiveAlignmentControl
+                        label={__("Alignment", "frontis-forms")}
+                        globalAlignment={submitBtnAlignment}
+                        setGlobalAlignment={(value) => setAttributes({ submitBtnAlignment: value })}
+                        deviceType={deviceType}
+                        setAttributes={setAttributes}
+                        options={FORM_ALIGN_ITEMS}
+                    />
+                </BaseControl>
+
+                <FB_PositionControl
+                    deviceType={deviceType}
+                    positionType={submitBtnPositionType}
+                    setPositionType={(value) => setAttributes({ submitBtnPositionType: value })}
+                                                                    
+                    HZOrientationType={submitBtnHZOrientationType}
+                    setHZOrientationType={(value) =>
+                        setAttributes({ submitBtnHZOrientationType: value })
+                    }
+                    VROrientationType={submitBtnVROrientationType}
+                    setVROrientationType={(value) =>
+                        setAttributes({ submitBtnVROrientationType: value })
+                    }
+                                                                        
+                    HZLeftOffset={submitBtnHZLeftOffset}
+                    setHZLeftOffset={(value) => setAttributes({ submitBtnHZLeftOffset: value })}
+                    HZLeftOffsetUnits={submitBtnHZLeftOffsetUnits}
+                    setHZLeftOffsetUnits={(value) => setAttributes({ submitBtnHZLeftOffsetUnits: value })}
+                    HZRightOffset={submitBtnHZRightOffset}
+                    setHZRightOffset={(value) => setAttributes({ submitBtnHZRightOffset: value })}
+                    HZRightOffsetUnits={submitBtnHZRightOffsetUnits}
+                    setHZRightOffsetUnits={(value) => setAttributes({ submitBtnHZRightOffsetUnits: value })}
+                                                                    
+                    VRTopOffset={submitBtnVRTopOffset}
+                    setVRTopOffset={(value) => setAttributes({ submitBtnVRTopOffset: value })}
+                    VRTopOffsetUnits={submitBtnVRTopOffsetUnits}
+                    setVRTopOffsetUnits={(value) => setAttributes({ submitBtnVRTopOffsetUnits: value })}
+                    VRBottomOffset={submitBtnVRBottomOffset}
+                    setVRBottomOffset={(value) => setAttributes({ submitBtnVRBottomOffset: value })}
+                    VRBottomOffsetUnits={submitBtnVRBottomOffsetUnits}
+                    setVRBottomOffsetUnits={(value) => setAttributes({ submitBtnVRBottomOffsetUnits: value })}
+
+                    setAttributes={setAttributes}
+                />
             </PanelBody>
 
             <PanelBody title={__("Form Settings", "frontis-forms")} initialOpen={false}>
@@ -2184,7 +2278,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     title={__("Labels", "frontis-forms")}
                     initialOpen={false}
                 >
-                    <FrontisForms_TypographyControl
+                    <FB_TypographyControl
                         globalTypoControlActive={true}
                         globalTypoSwitcher={labelGlobalTypoSwitcher}
                         storeGlobalTypographyData={(value) => setAttributes({ labelGlobalTypographyData: value })}
@@ -2237,19 +2331,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         setAttributes={setAttributes}
                     />
         
-                    <FrontisForms_ColorControl
+                    <FB_ColorControl
                         label={__("Color", "frontis-forms")}
                         globalColor={labelColor}
                         setGlobalColor={(value) => setAttributes({ labelColor: value === undefined ? '' : value })}
                     />
                     
-                    <FrontisForms_ColorControl
+                    <FB_ColorControl
                         label={__("Required Color", "frontis-forms")}
                         globalColor={labelRequiredColor}
                         setGlobalColor={(value) => setAttributes({ labelRequiredColor: value === undefined ? '' : value })}
                     />
 
-                    <FrontisForms_Spacing 
+                    <FB_Spacing 
                         label={__("Margin", "frontis-forms")}
                         deviceType={deviceType}
                         spacingUnitsHandler={handleLabelMarginUnitsHandler}
@@ -2268,7 +2362,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     title={__("Input Fields", "frontis-forms")}
                     initialOpen={false}
                 >
-                    <FrontisForms_TypographyControl
+                    <FB_TypographyControl
                         globalTypoControlActive={true}
                         globalTypoSwitcher={inputFieldGlobalTypoSwitcher}
                         storeGlobalTypographyData={(value) => setAttributes({ inputFieldGlobalTypographyData: value })}
@@ -2321,7 +2415,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         setAttributes={setAttributes}
                     />
 
-                    <FrontisForms_SwitcherControl
+                    <FB_SwitcherControl
                         label={__("Color", "frontis-forms")}
                         globalSwitcher={inputFieldColorSwitcher}
                         setGlobalSwitcher={(value) => setAttributes({ inputFieldColorSwitcher: value })}
@@ -2332,7 +2426,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     />
         
                     {inputFieldColorSwitcher === 'normal' && (
-                        <FrontisForms_ColorControl
+                        <FB_ColorControl
                             label={__("Normal Color", "frontis-forms")}
                             globalColor={inputFieldColor}
                             setGlobalColor={(value) => setAttributes({ inputFieldColor: value === undefined ? '' : value })}
@@ -2340,14 +2434,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     )}
                     
                     {inputFieldColorSwitcher === 'focus' && (
-                        <FrontisForms_ColorControl
+                        <FB_ColorControl
                             label={__("Focus Color", "frontis-forms")}
                             globalColor={inputFieldFocusColor}
                             setGlobalColor={(value) => setAttributes({ inputFieldFocusColor: value === undefined ? '' : value })}
                         />
                     )}
 
-                    <FrontisForms_SwitcherControl
+                    <FB_SwitcherControl
                         label={__("Placeholder Color", "frontis-forms")}
                         globalSwitcher={inputFieldPlaceholderColorSwitcher}
                         setGlobalSwitcher={(value) => setAttributes({ inputFieldPlaceholderColorSwitcher: value })}
@@ -2358,7 +2452,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     />
                     
                     {inputFieldPlaceholderColorSwitcher === 'normal' && (
-                        <FrontisForms_ColorControl
+                        <FB_ColorControl
                             label={__("Normal Color", "frontis-forms")}
                             globalColor={inputFieldPlaceholderColor}
                             setGlobalColor={(value) => setAttributes({ inputFieldPlaceholderColor: value === undefined ? '' : value })}
@@ -2366,7 +2460,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     )}
 
                     {inputFieldPlaceholderColorSwitcher === 'focus' && (
-                        <FrontisForms_ColorControl
+                        <FB_ColorControl
                             label={__("Focus Color", "frontis-forms")}
                             globalColor={inputFieldPlaceholderFocusColor}
                             setGlobalColor={(value) => setAttributes({ inputFieldPlaceholderFocusColor: value === undefined ? '' : value })}
@@ -2375,7 +2469,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
 
-                    <FrontisForms_BackgroundColorControl
+                    <FB_BackgroundColorControl
                         label={__("Background Color", "frontis-forms")}
                         bgColorSwitcher={inputFieldBgColorSwitcher}
                         setBgColorSwitcher={(value) =>
@@ -2523,7 +2617,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         ]}
                     />
 
-                    <FrontisForms_Spacing 
+                    <FB_Spacing 
                         label={__("Margin", "frontis-forms")}
                         deviceType={deviceType}
                         spacingUnitsHandler={handleInputFieldMarginUnitsHandler}
@@ -2537,7 +2631,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         setAttributes={setAttributes}
                     />
 
-                    <FrontisForms_Spacing 
+                    <FB_Spacing 
                         label={__("Padding", "frontis-forms")}
                         deviceType={deviceType}
                         spacingUnitsHandler={handleInputFieldPaddingUnitsHandler}
@@ -2558,7 +2652,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         onChange={(value) => setAttributes({ inputFieldBorder: value })}
                     />
         
-                    <FrontisForms_SwitcherControl
+                    <FB_SwitcherControl
                         label={__("Border Color", "frontis-forms")}
                         globalSwitcher={inputFieldBorderColorSwitcher}
                         setGlobalSwitcher={(value) => setAttributes({ inputFieldBorderColorSwitcher: value })}
@@ -2569,7 +2663,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     />
                     
                     {inputFieldBorderColorSwitcher === 'normal' && (
-                        <FrontisForms_ColorControl
+                        <FB_ColorControl
                             label={__("Normal Color", "frontis-forms")}
                             globalColor={inputFieldBorderColor}
                             setGlobalColor={(value) => setAttributes({ inputFieldBorderColor: value === undefined ? '' : value })}
@@ -2577,14 +2671,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     )}
                     
                     {inputFieldBorderColorSwitcher === 'focus' && (
-                        <FrontisForms_ColorControl
+                        <FB_ColorControl
                             label={__("Focus Color", "frontis-forms")}
                             globalColor={inputFieldBorderFocusColor}
                             setGlobalColor={(value) => setAttributes({ inputFieldBorderFocusColor: value === undefined ? '' : value })}
                         />
                     )}
         
-                    <FrontisForms_Spacing
+                    <FB_Spacing
                         label={__("Border", "frontis-forms")}
                         deviceType={deviceType}
                         spacingUnitsHandler={handleInputFieldBorderUnitsHandler}
@@ -2598,7 +2692,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         setAttributes={setAttributes}
                     />
         
-                    <FrontisForms_Spacing 
+                    <FB_Spacing 
                         label={__("Border Radius", "frontis-forms")}
                         deviceType={deviceType}
                         spacingUnitsHandler={handleInputFieldBorderRadiusUnitsHandler}
@@ -2612,7 +2706,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         setAttributes={setAttributes}
                     />
         
-                    <FrontisForms_SwitcherControl
+                    <FB_SwitcherControl
                         label={__("Box Shadow", "frontis-forms")}
                         globalSwitcher={inputFieldBoxShadowSwitcher}
                         setGlobalSwitcher={(value) => setAttributes({ inputFieldBoxShadowSwitcher: value })}
@@ -2623,7 +2717,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     />
 
                     {inputFieldBoxShadowSwitcher === 'normal' && (
-                        <FrontisForms_BoxShadowControl
+                        <FB_BoxShadowControl
                             label={__("Normal Shadow", "frontis-forms")}
                             onBoxShadowChange={(value) =>
                                 setAttributes({ inputFieldBoxShadowValues: value })
@@ -2638,7 +2732,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     )}
                     
                     {inputFieldBoxShadowSwitcher === 'focus' && (
-                        <FrontisForms_BoxShadowControl
+                        <FB_BoxShadowControl
                             label={__("Focus Shadow", "frontis-forms")}
                             onBoxShadowChange={(value) =>
                                 setAttributes({ inputFieldBoxShadowFocusValues: value })
@@ -2658,7 +2752,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         title={__("Field Icons", "frontis-forms")}
                         initialOpen={false}
                     >
-                        <FrontisForms_Range
+                        <FB_Range
                             min={1}
                             max={inputFieldIconSizeUnits[deviceType] !== 'px' ? 100 : 100}
                             label={__("Icon Size", "frontis-forms")}
@@ -2671,7 +2765,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             resetFallbackValue={'24'}
                         />
 
-                        <FrontisForms_Range
+                        <FB_Range
                             min={1}
                             max={inputFieldIconGapUnits[deviceType] !== 'px' ? 100 : 200}
                             label={__("Icon Gap", "frontis-forms")}
@@ -2690,7 +2784,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     title={__("Submit Button", "frontis-forms")}
                     initialOpen={false}
                 >
-                    <FrontisForms_TypographyControl
+                    <FB_TypographyControl
                         globalTypoControlActive={true}
                         globalTypoSwitcher={submitBtnGlobalTypoSwitcher}
                         storeGlobalTypographyData={(value) => setAttributes({ submitBtnGlobalTypographyData: value })}
@@ -2743,14 +2837,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         setAttributes={setAttributes}
                     />
 
-                    <FrontisForms_SwitcherControl
+                    <FB_SwitcherControl
                         label={__("Color", "frontis-forms")}
                         globalSwitcher={submitBtnColorSwitcher}
                         setGlobalSwitcher={(value) => setAttributes({ submitBtnColorSwitcher: value })}
                     />
                     
                     {submitBtnColorSwitcher === 'normal' && (
-                        <FrontisForms_ColorControl
+                        <FB_ColorControl
                             label={__("Normal Color", "frontis-forms")}
                             globalColor={submitBtnColor}
                             setGlobalColor={(value) => setAttributes({ submitBtnColor: value === undefined ? '' : value })}
@@ -2758,14 +2852,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     )}
                     
                     {submitBtnColorSwitcher === 'hover' && (
-                        <FrontisForms_ColorControl
+                        <FB_ColorControl
                             label={__("Hover Color", "frontis-forms")}
                             globalColor={submitBtnHoverColor}
                             setGlobalColor={(value) => setAttributes({ submitBtnHoverColor: value === undefined ? '' : value })}
                         />
                     )}
 
-                    <FrontisForms_BackgroundColorControl
+                    <FB_BackgroundColorControl
                         label={__("Background Color", "frontis-forms")}
                         bgColorSwitcher={submitBtnBgColorSwitcher}
                         setBgColorSwitcher={(value) =>
@@ -2909,7 +3003,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         }
                     />
 
-                    <FrontisForms_Spacing 
+                    <FB_Spacing 
                         label={__("Padding", "frontis-forms")}
                         deviceType={deviceType}
                         spacingUnitsHandler={handleSubmitBtnPaddingUnitsHandler}
@@ -2923,7 +3017,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         setAttributes={setAttributes}
                     />
 
-                    <FrontisForms_Spacing 
+                    <FB_Spacing 
                         label={__("Margin", "frontis-forms")}
                         deviceType={deviceType}
                         spacingUnitsHandler={handleSubmitBtnMarginUnitsHandler}
@@ -2944,14 +3038,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         onChange={(value) => setAttributes({ submitBtnBorder: value })}
                     />
 
-                    <FrontisForms_SwitcherControl
+                    <FB_SwitcherControl
                         label={__("Border Color", "frontis-forms")}
                         globalSwitcher={submitBtnBorderColorSwitcher}
                         setGlobalSwitcher={(value) => setAttributes({ submitBtnBorderColorSwitcher: value })}
                     />
                     
                     {submitBtnBorderColorSwitcher === 'normal' && (
-                        <FrontisForms_ColorControl
+                        <FB_ColorControl
                             label={__("Normal Color", "frontis-forms")}
                             globalColor={submitBtnBorderColor}
                             setGlobalColor={(value) => setAttributes({ submitBtnBorderColor: value === undefined ? '' : value })}
@@ -2959,14 +3053,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     )}
                     
                     {submitBtnBorderColorSwitcher === 'hover' && (
-                        <FrontisForms_ColorControl
+                        <FB_ColorControl
                             label={__("Hover Color", "frontis-forms")}
                             globalColor={submitBtnBorderHoverColor}
                             setGlobalColor={(value) => setAttributes({ submitBtnBorderHoverColor: value === undefined ? '' : value })}
                         />
                     )}
 
-                    <FrontisForms_Spacing 
+                    <FB_Spacing 
                         label={__("Border", "frontis-forms")}
                         deviceType={deviceType}
                         spacingUnitsHandler={handleSubmitBtnBorderUnitsHandler}
@@ -2980,7 +3074,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         setAttributes={setAttributes}
                     />
 
-                    <FrontisForms_Spacing 
+                    <FB_Spacing 
                         label={__("Border Radius", "frontis-forms")}
                         deviceType={deviceType}
                         spacingUnitsHandler={handleSubmitBtnBorderRadiusUnitsHandler}
@@ -2994,14 +3088,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         setAttributes={setAttributes}
                     />
 
-                    <FrontisForms_SwitcherControl
+                    <FB_SwitcherControl
                         label={__("Box Shadow", "frontis-forms")}
                         globalSwitcher={submitBtnBoxShadowSwitcher}
                         setGlobalSwitcher={(value) => setAttributes({ submitBtnBoxShadowSwitcher: value })}
                     />
                     
                     {submitBtnBoxShadowSwitcher === 'normal' && (
-                        <FrontisForms_BoxShadowControl
+                        <FB_BoxShadowControl
                             label={__("Normal Shadow", "frontis-forms")}
                             onBoxShadowChange={(value) =>
                                 setAttributes({ submitBtnBoxShadowValues: value })
@@ -3016,7 +3110,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     )}
                     
                     {submitBtnBoxShadowSwitcher === 'hover' && (
-                        <FrontisForms_BoxShadowControl
+                        <FB_BoxShadowControl
                             label={__("Hover Shadow", "frontis-forms")}
                             onBoxShadowChange={(value) =>
                                 setAttributes({ submitBtnBoxShadowHoverValues: value })
@@ -3030,14 +3124,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         />
                     )}
 
-                    <FrontisForms_SwitcherControl
+                    <FB_SwitcherControl
                         label={__("Icon Color", "frontis-forms")}
                         globalSwitcher={submitBtnIconColorSwitcher}
                         setGlobalSwitcher={(value) => setAttributes({ submitBtnIconColorSwitcher: value })}
                     />
                     
                     {submitBtnIconColorSwitcher === 'normal' && (
-                        <FrontisForms_ColorControl
+                        <FB_ColorControl
                             label={__("Normal Color", "frontis-forms")}
                             globalColor={submitBtnIconColor}
                             setGlobalColor={(value) => setAttributes({ submitBtnIconColor: value === undefined ? '' : value })}
@@ -3045,14 +3139,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     )}
                     
                     {submitBtnIconColorSwitcher === 'hover' && (
-                        <FrontisForms_ColorControl
+                        <FB_ColorControl
                             label={__("Hover Color", "frontis-forms")}
                             globalColor={submitBtnIconHoverColor}
                             setGlobalColor={(value) => setAttributes({ submitBtnIconHoverColor: value === undefined ? '' : value })}
                         />
                     )}
 
-                    <FrontisForms_Range
+                    <FB_Range
                         min={1}
                         max={submitBtnIconSizeUnits[deviceType] !== 'px' ? 100 : 100}
                         label={__("Icon Size", "frontis-forms")}
@@ -3065,7 +3159,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         resetFallbackValue={'24'}
                     />
 
-                    <FrontisForms_Range
+                    <FB_Range
                         min={1}
                         max={submitBtnIconGapUnits[deviceType] !== 'px' ? 100 : 200}
                         label={__("Icon Gap", "frontis-forms")}
@@ -3083,7 +3177,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     title={__("Success Message", "frontis-forms")}
                     initialOpen={false}
                 >
-                    <FrontisForms_TypographyControl
+                    <FB_TypographyControl
                         globalTypoControlActive={true}
                         globalTypoSwitcher={successMessageGlobalTypoSwitcher}
                         storeGlobalTypographyData={(value) => setAttributes({ successMessageGlobalTypographyData: value })}
@@ -3136,13 +3230,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         setAttributes={setAttributes}
                     />
 
-                    <FrontisForms_ColorControl
+                    <FB_ColorControl
                         label={__("Color", "frontis-forms")}
                         globalColor={successMessageColor}
                         setGlobalColor={(value) => setAttributes({ successMessageColor: value === undefined ? '' : value })}
                     />
 
-                    <FrontisForms_BackgroundColorControl
+                    <FB_BackgroundColorControl
                         label={__("Background Color", "frontis-forms")}
                         bgColorSwitcher={successMessageBgColorSwitcher}
                         setBgColorSwitcher={(value) =>
@@ -3219,7 +3313,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         isBackgroundHover={false}
                     />
 
-                    <FrontisForms_Spacing 
+                    <FB_Spacing 
                         label={__("Padding", "frontis-forms")}
                         deviceType={deviceType}
                         spacingUnitsHandler={handlesuccessMessagePaddingUnitsHandler}
@@ -3233,7 +3327,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         setAttributes={setAttributes}
                     />
 
-                    <FrontisForms_Spacing 
+                    <FB_Spacing 
                         label={__("Margin", "frontis-forms")}
                         deviceType={deviceType}
                         spacingUnitsHandler={handlesuccessMessageMarginUnitsHandler}
@@ -3254,13 +3348,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         onChange={(value) => setAttributes({ successMessageBorder: value })}
                     />
 
-                    <FrontisForms_ColorControl
+                    <FB_ColorControl
                         label={__("Border Color", "frontis-forms")}
                         globalColor={successMessageBorderColor}
                         setGlobalColor={(value) => setAttributes({ successMessageBorderColor: value === undefined ? '' : value })}
                     />
 
-                    <FrontisForms_Spacing 
+                    <FB_Spacing 
                         label={__("Border Width", "frontis-forms")}
                         deviceType={deviceType}
                         spacingUnitsHandler={handlesuccessMessageBorderUnitsHandler}
@@ -3274,7 +3368,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         setAttributes={setAttributes}
                     />
 
-                    <FrontisForms_Spacing 
+                    <FB_Spacing 
                         label={__("Border Radius", "frontis-forms")}
                         deviceType={deviceType}
                         spacingUnitsHandler={handlesuccessMessageBorderRadiusUnitsHandler}
@@ -3293,7 +3387,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     title={__("Error Message", "frontis-forms")}
                     initialOpen={false}
                 >
-                    <FrontisForms_TypographyControl
+                    <FB_TypographyControl
                         globalTypoControlActive={true}
                         globalTypoSwitcher={errorMessageGlobalTypoSwitcher}
                         storeGlobalTypographyData={(value) => setAttributes({ errorMessageGlobalTypographyData: value })}
@@ -3346,13 +3440,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         setAttributes={setAttributes}
                     />
                     
-                    <FrontisForms_ColorControl
+                    <FB_ColorControl
                         label={__("Color", "frontis-forms")}
                         globalColor={errorMessageColor}
                         setGlobalColor={(value) => setAttributes({ errorMessageColor: value === undefined ? '' : value })}
                     />
 
-                    <FrontisForms_BackgroundColorControl
+                    <FB_BackgroundColorControl
                         label={__("Background Color", "frontis-forms")}
                         bgColorSwitcher={errorMessageBgColorSwitcher}
                         setBgColorSwitcher={(value) =>
@@ -3429,7 +3523,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         isBackgroundHover={false}
                     />
 
-                    <FrontisForms_Spacing 
+                    <FB_Spacing 
                         label={__("Padding", "frontis-forms")}
                         deviceType={deviceType}
                         spacingUnitsHandler={handleErrorMessagePaddingUnitsHandler}
@@ -3443,7 +3537,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         setAttributes={setAttributes}
                     />
 
-                    <FrontisForms_Spacing 
+                    <FB_Spacing 
                         label={__("Margin", "frontis-forms")}
                         deviceType={deviceType}
                         spacingUnitsHandler={handleErrorMessageMarginUnitsHandler}
@@ -3464,13 +3558,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         onChange={(value) => setAttributes({ errorMessageBorder: value })}
                     />
                     
-                    <FrontisForms_ColorControl
+                    <FB_ColorControl
                         label={__("Border Color", "frontis-forms")}
                         globalColor={errorMessageBorderColor}
                         setGlobalColor={(value) => setAttributes({ errorMessageBorderColor: value === undefined ? '' : value })}
                     />
 
-                    <FrontisForms_Spacing 
+                    <FB_Spacing 
                         label={__("Border Width", "frontis-forms")}
                         deviceType={deviceType}
                         spacingUnitsHandler={handleErrorMessageBorderUnitsHandler}
@@ -3484,7 +3578,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         setAttributes={setAttributes}
                     />
 
-                    <FrontisForms_Spacing 
+                    <FB_Spacing 
                         label={__("Border Radius", "frontis-forms")}
                         deviceType={deviceType}
                         spacingUnitsHandler={handleErrorMessageBorderRadiusUnitsHandler}
@@ -3513,7 +3607,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     initialOpen={true}
                     className='fb-setting-layout-header' 
                 >
-                    <FrontisForms_Range
+                    <FB_Range
                         min={0}
                         max={10000000}
                         label={__("Z Index", "frontis-forms")}
@@ -3534,7 +3628,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         onChange={(value) => setAttributes({ formOverflow: value })}
                     />
 
-                    <FrontisForms_PositionControl
+                    <FB_PositionControl
                         deviceType={deviceType}
                         positionType={formPositionType}
                         setPositionType={(value) => setAttributes({ formPositionType: value })}
@@ -3569,14 +3663,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         setAttributes={setAttributes}
                     />
 
-                    <FrontisForms_InputControl
+                    <FB_InputControl
                         label={__("CSS ID", "frontis-forms")}
                         value={formGlobalWraperID}
                         onChangeValue={(value) => setAttributes({ formGlobalWraperID: value })}
                         helpText={__("Add an ID to the block wrapper.", "frontis-forms")}
                     />
 
-                    <FrontisForms_InputControl
+                    <FB_InputControl
                         label={__("CSS Class", "frontis-forms")}
                         value={formGlobalWraperClass}
                         onChangeValue={(value) => setAttributes({ formGlobalWraperClass: value })}
@@ -3588,7 +3682,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 title={__("Padding & Margin", "frontis-forms")}
                 initialOpen={false}
                 >
-                    <FrontisForms_Spacing
+                    <FB_Spacing
                         label={__("Margin", "frontis-forms")}
                         deviceType={deviceType}
                         spacingUnitsHandler={handleformMarginUnitsHandler}
@@ -3602,7 +3696,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         setAttributes={setAttributes}
                     />
 
-                    <FrontisForms_Spacing 
+                    <FB_Spacing 
                         label={__("Padding", "frontis-forms")}
                         deviceType={deviceType}
                         spacingUnitsHandler={handleformPaddingUnitsHandler}
@@ -3618,7 +3712,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 </PanelBody>
 
                 <PanelBody title="Background Color" initialOpen={false} >
-                    <FrontisForms_BackgroundColorControl
+                    <FB_BackgroundColorControl
                         bgColorSwitcher={formBgColorSwitcher}
                         setBgColorSwitcher={(value) =>
                             setAttributes({ formBgColorSwitcher: value })
@@ -3754,14 +3848,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             onChange={(value) => setAttributes({ formBorder: value })}
                         />
 
-                    <FrontisForms_SwitcherControl
+                    <FB_SwitcherControl
                         label={__("Border Color", "frontis-forms")}
                         globalSwitcher={formBorderColorSwitcher}
                         setGlobalSwitcher={(value) => setAttributes({ formBorderColorSwitcher: value })}
                     />
                     
                     {formBorderColorSwitcher === 'normal' && (
-                        <FrontisForms_ColorControl
+                        <FB_ColorControl
                             label={__("Normal Color", "frontis-forms")}
                             globalColor={formBorderColor}
                             setGlobalColor={(value) => setAttributes({ formBorderColor: value === undefined ? '' : value })}
@@ -3769,14 +3863,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     )}
                     
                     {formBorderColorSwitcher === 'hover' && (
-                        <FrontisForms_ColorControl
+                        <FB_ColorControl
                             label={__("Hover Color", "frontis-forms")}
                             globalColor={formBorderHoverColor}
                             setGlobalColor={(value) => setAttributes({ formBorderHoverColor: value === undefined ? '' : value })}
                         />
                     )}
 
-                    <FrontisForms_Spacing 
+                    <FB_Spacing 
                         label={__("Border", "frontis-forms")}
                         deviceType={deviceType}
                         spacingUnitsHandler={handleformBorderUnitsHandler}
@@ -3790,7 +3884,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         setAttributes={setAttributes}
                     />
 
-                    <FrontisForms_Spacing 
+                    <FB_Spacing 
                         label={__("Border Radius", "frontis-forms")}
                         deviceType={deviceType}
                         spacingUnitsHandler={handleformBorderRadiusUnitsHandler}
@@ -3804,14 +3898,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         setAttributes={setAttributes}
                     />
 
-                    <FrontisForms_SwitcherControl
+                    <FB_SwitcherControl
                         label={__("Box Shadow", "frontis-forms")}
                         globalSwitcher={formGlobalBoxShadowSwitcher}
                         setGlobalSwitcher={(value) => setAttributes({ formGlobalBoxShadowSwitcher: value })}
                     />
                     
                     {formGlobalBoxShadowSwitcher === 'normal' && (
-                        <FrontisForms_BoxShadowControl
+                        <FB_BoxShadowControl
                             label={__("Normal Shadow", "frontis-forms")}
                             onBoxShadowChange={(value) =>
                                 setAttributes({ formGlobalBoxShadowValues: value })
@@ -3826,7 +3920,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     )}
                     
                     {formGlobalBoxShadowSwitcher === 'hover' && (
-                        <FrontisForms_BoxShadowControl
+                        <FB_BoxShadowControl
                             label={__("Hover Shadow", "frontis-forms")}
                             onBoxShadowChange={(value) =>
                                 setAttributes({ formGlobalHoverBoxShadowValues: value })
@@ -3846,7 +3940,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     initialOpen={false}
                     className="fb-setting-responsive-control-wrapper"
                 >
-                    <FrontisForms_VisibilityControl
+                    <FB_VisibilityControl
                         desktopValue={formDesktopSwitcher}
                         setDesktopValue={(value) => setAttributes({ formDesktopSwitcher: value })}
 
@@ -3862,7 +3956,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     title={__("Custom CSS", "frontis-forms")}
                     initialOpen={false}
                 >
-                    <FrontisForms_CustomCSSEditor  
+                    <FB_CustomCSSEditor  
                         value={formCustomCSS} 
                         onChangeValue={(value) => setAttributes({ formCustomCSS: value })}
                     />
@@ -3875,7 +3969,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     return (
         <>
-            <FrontisForms_InspectorControls
+            <FB_InspectorControls
                 generalControls={generalControls}
                 styleControls={styleControls}
                 advancedControls={advancedControls}

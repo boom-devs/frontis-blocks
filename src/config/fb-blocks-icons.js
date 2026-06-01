@@ -1148,6 +1148,27 @@ const FB_Block_Icons = {
 			strokeWidth: 1.4,
 		})
 	),
+	back_to_top: fb(
+		'svg',
+		{
+			version: '1.1',
+			id: 'backToTopIcon',
+			xmlns: 'http://www.w3.org/2000/svg',
+			width: '24',
+			height: '24',
+			viewBox: '0 0 24 24',
+			fill: 'none',
+			className: 'frontis-blocks-editor-icons',
+		},
+		fb('path', {
+			d: `M12 15V3M12 3L17 8M12 3L7 8`,
+			fill: 'none',
+			stroke: '#0B0C0E',
+			strokeWidth: 1.4,
+			strokeLinecap: 'round',
+			strokeLinejoin: 'round',
+		}),
+	),
 
 };
 
