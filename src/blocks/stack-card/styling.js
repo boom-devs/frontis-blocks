@@ -4,16 +4,15 @@
  */
 
 import getCustomCss from '@Utils/getCustomCss';
-import { hasStackCardScalePreset, isPresetFourStackOver } from './preset-four';
-import { isPresetThreeStackRight } from './preset-three';
-import { isPresetTwoStackLeft } from './preset-two';
+import { hasStackCardScalePreset, isStackCardPresetOver as isPresetFourStackOver } from './behaviors/preset-four';
+import { isStackCardPresetRight as isPresetThreeStackRight } from './behaviors/preset-three';
+import { isStackCardPresetLeft as isPresetTwoStackLeft } from './behaviors/preset-two';
 
 const hasValue = (value) => value !== undefined && value !== null && value !== '';
 
 const generateStackCardsStyle = (attributes) => {
     const {
         blockID,
-		blockStyle,
         stackCardsPresetStyle,
 
         stackCardsOffsetTop,
@@ -24,41 +23,6 @@ const generateStackCardsStyle = (attributes) => {
 
         stackCardsCardItemGap,
         stackCardsCardItemGapUnits,
-
-        stackCardItemBgColorSwitcher,
-        stackCardItemBgNormalBackgroundType,
-        stackCardItemBgNormalClassicColor,
-        stackCardItemBgNormalGradientColor,
-        stackCardItemBgNormalCustomGradientSwitcher,
-        stackCardItemBgNormalCustomGradientInputValue,
-        stackCardItemBgHoverBackgroundType,
-        stackCardItemBgHoverClassicColor,
-        stackCardItemBgHoverGradientColor,
-        stackCardItemBgHoverCustomGradientSwitcher,
-        stackCardItemBgHoverCustomGradientInputValue,
-
-        stackCardItemPaddingUnits,
-        stackCardItemPaddingDesktop,
-        stackCardItemPaddingTablet,
-        stackCardItemPaddingMobile,
-        stackCardItemPaddingLink,
-
-        stackCardItemBorder,
-        stackCardItemBorderColor,
-        stackCardItemBorderHoverColor,
-        stackCardItemBorderColorSwitcher,
-
-        stackCardItemBorderUnits,
-        stackCardItemBorderDesktop,
-        stackCardItemBorderTablet,
-        stackCardItemBorderMobile,
-        stackCardItemBorderLink,
-
-        stackCardItemBorderRadiusUnits,
-        stackCardItemBorderRadiusDesktop,
-        stackCardItemBorderRadiusTablet,
-        stackCardItemBorderRadiusMobile,
-        stackCardItemBorderRadiusLink,
 
         /** Start stackCardsNavigation Button */
         stackCardsNavigationButtonGlobalTypoSwitcher,
@@ -227,12 +191,6 @@ const generateStackCardsStyle = (attributes) => {
     const globalMobilePadding = `${stackCardsGlobalPaddingMobile?.top}${stackCardsGlobalPaddingUnits?.Mobile} ${stackCardsGlobalPaddingMobile?.right}${stackCardsGlobalPaddingUnits?.Mobile} ${stackCardsGlobalPaddingMobile?.bottom}${stackCardsGlobalPaddingUnits?.Mobile} ${stackCardsGlobalPaddingMobile?.left}${stackCardsGlobalPaddingUnits?.Mobile}`;
     /** End Global Padding */
 
-    /** Start stack card item Padding */
-    const stackCardItemDesktopPadding = `${stackCardItemPaddingDesktop?.top}${stackCardItemPaddingUnits?.Desktop} ${stackCardItemPaddingDesktop?.right}${stackCardItemPaddingUnits?.Desktop} ${stackCardItemPaddingDesktop?.bottom}${stackCardItemPaddingUnits?.Desktop} ${stackCardItemPaddingDesktop?.left}${stackCardItemPaddingUnits?.Desktop}`;
-    const stackCardItemTabletPadding = `${stackCardItemPaddingTablet?.top}${stackCardItemPaddingUnits?.Tablet} ${stackCardItemPaddingTablet?.right}${stackCardItemPaddingUnits?.Tablet} ${stackCardItemPaddingTablet?.bottom}${stackCardItemPaddingUnits?.Tablet} ${stackCardItemPaddingTablet?.left}${stackCardItemPaddingUnits?.Tablet}`;
-    const stackCardItemMobilePadding = `${stackCardItemPaddingMobile?.top}${stackCardItemPaddingUnits?.Mobile} ${stackCardItemPaddingMobile?.right}${stackCardItemPaddingUnits?.Mobile} ${stackCardItemPaddingMobile?.bottom}${stackCardItemPaddingUnits?.Mobile} ${stackCardItemPaddingMobile?.left}${stackCardItemPaddingUnits?.Mobile}`;
-    /** End stack card item Padding */
-
     /** Start Global Margin */
     const globalDesktopMargin = `${stackCardsGlobalMarginDesktop?.top}${stackCardsGlobalMarginUnits?.Desktop} ${stackCardsGlobalMarginDesktop?.right}${stackCardsGlobalMarginUnits?.Desktop} ${stackCardsGlobalMarginDesktop?.bottom}${stackCardsGlobalMarginUnits?.Desktop} ${stackCardsGlobalMarginDesktop?.left}${stackCardsGlobalMarginUnits?.Desktop}`;
     const globalTabletMargin = `${stackCardsGlobalMarginTablet?.top}${stackCardsGlobalMarginUnits?.Tablet} ${stackCardsGlobalMarginTablet?.right}${stackCardsGlobalMarginUnits?.Tablet} ${stackCardsGlobalMarginTablet?.bottom}${stackCardsGlobalMarginUnits?.Tablet} ${stackCardsGlobalMarginTablet?.left}${stackCardsGlobalMarginUnits?.Tablet}`;
@@ -250,18 +208,6 @@ const generateStackCardsStyle = (attributes) => {
     const globalTabletBorderRadiusWidth = `${stackCardsGlobalBorderRadiusTablet?.top}${stackCardsGlobalBorderRadiusUnits?.Tablet} ${stackCardsGlobalBorderRadiusTablet?.right}${stackCardsGlobalBorderRadiusUnits?.Tablet} ${stackCardsGlobalBorderRadiusTablet?.bottom}${stackCardsGlobalBorderRadiusUnits?.Tablet} ${stackCardsGlobalBorderRadiusTablet?.left}${stackCardsGlobalBorderRadiusUnits?.Tablet}`;
     const globalMobileBorderRadiusWidth = `${stackCardsGlobalBorderRadiusMobile?.top}${stackCardsGlobalBorderRadiusUnits?.Mobile} ${stackCardsGlobalBorderRadiusMobile?.right}${stackCardsGlobalBorderRadiusUnits?.Mobile} ${stackCardsGlobalBorderRadiusMobile?.bottom}${stackCardsGlobalBorderRadiusUnits?.Mobile} ${stackCardsGlobalBorderRadiusMobile?.left}${stackCardsGlobalBorderRadiusUnits?.Mobile}`;
     /** End Global Border Radius */
-
-    /** Start stack card item Border */
-    const stackCardItemDesktopBorderWidth = `${stackCardItemBorderDesktop?.top}${stackCardItemBorderUnits?.Desktop} ${stackCardItemBorderDesktop?.right}${stackCardItemBorderUnits?.Desktop} ${stackCardItemBorderDesktop?.bottom}${stackCardItemBorderUnits?.Desktop} ${stackCardItemBorderDesktop?.left}${stackCardItemBorderUnits?.Desktop}`;
-    const stackCardItemTabletBorderWidth = `${stackCardItemBorderTablet?.top}${stackCardItemBorderUnits?.Tablet} ${stackCardItemBorderTablet?.right}${stackCardItemBorderUnits?.Tablet} ${stackCardItemBorderTablet?.bottom}${stackCardItemBorderUnits?.Tablet} ${stackCardItemBorderTablet?.left}${stackCardItemBorderUnits?.Tablet}`;
-    const stackCardItemMobileBorderWidth = `${stackCardItemBorderMobile?.top}${stackCardItemBorderUnits?.Mobile} ${stackCardItemBorderMobile?.right}${stackCardItemBorderUnits?.Mobile} ${stackCardItemBorderMobile?.bottom}${stackCardItemBorderUnits?.Mobile} ${stackCardItemBorderMobile?.left}${stackCardItemBorderUnits?.Mobile}`;
-    /** End stack card item Border */
-
-    /** Start stack card item Border Radius */
-    const stackCardItemDesktopBorderRadiusWidth = `${stackCardItemBorderRadiusDesktop?.top}${stackCardItemBorderRadiusUnits?.Desktop} ${stackCardItemBorderRadiusDesktop?.right}${stackCardItemBorderRadiusUnits?.Desktop} ${stackCardItemBorderRadiusDesktop?.bottom}${stackCardItemBorderRadiusUnits?.Desktop} ${stackCardItemBorderRadiusDesktop?.left}${stackCardItemBorderRadiusUnits?.Desktop}`;
-    const stackCardItemTabletBorderRadiusWidth = `${stackCardItemBorderRadiusTablet?.top}${stackCardItemBorderRadiusUnits?.Tablet} ${stackCardItemBorderRadiusTablet?.right}${stackCardItemBorderRadiusUnits?.Tablet} ${stackCardItemBorderRadiusTablet?.bottom}${stackCardItemBorderRadiusUnits?.Tablet} ${stackCardItemBorderRadiusTablet?.left}${stackCardItemBorderRadiusUnits?.Tablet}`;
-    const stackCardItemMobileBorderRadiusWidth = `${stackCardItemBorderRadiusMobile?.top}${stackCardItemBorderRadiusUnits?.Mobile} ${stackCardItemBorderRadiusMobile?.right}${stackCardItemBorderRadiusUnits?.Mobile} ${stackCardItemBorderRadiusMobile?.bottom}${stackCardItemBorderRadiusUnits?.Mobile} ${stackCardItemBorderRadiusMobile?.left}${stackCardItemBorderRadiusUnits?.Mobile}`;
-    /** End stacl card item Border Radius */
 
     /** navigaiton button start */
     const stackCardsNavigationButtonDesktopPaddingValue = `${stackCardsNavigationButtonDesktopPadding?.top}${stackCardsNavigationButtonPaddingUnits?.Desktop} ${stackCardsNavigationButtonDesktopPadding?.right}${stackCardsNavigationButtonPaddingUnits?.Desktop} ${stackCardsNavigationButtonDesktopPadding?.bottom}${stackCardsNavigationButtonPaddingUnits?.Desktop} ${stackCardsNavigationButtonDesktopPadding?.left}${stackCardsNavigationButtonPaddingUnits?.Desktop}`;
@@ -328,16 +274,6 @@ const generateStackCardsStyle = (attributes) => {
             ${hasValue(stackCardsGlobalBorderRadiusDesktop?.top) ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ''}
             ${stackCardsGlobalBorderColor ? `border-color: ${stackCardsGlobalBorderColor};` : ''}
             ${stackCardsGlobalBoxShadowCssValue ? `box-shadow: ${stackCardsGlobalBoxShadowCssValue};` : ''}
-            ${stackCardItemBgNormalBackgroundType === 'gradient' ? `--fb-stack-card-item-bg-normal: ${stackCardItemBgNormalCustomGradientSwitcher && stackCardItemBgNormalCustomGradientInputValue
-                ? stackCardItemBgNormalCustomGradientInputValue
-                : stackCardItemBgNormalGradientColor || stackCardItemBgNormalClassicColor
-            };` : `${stackCardItemBgNormalClassicColor ? `--fb-stack-card-item-bg-normal: ${stackCardItemBgNormalClassicColor};` : ''}`}
-            ${stackCardItemBgHoverBackgroundType === 'gradient' ? `--fb-stack-card-item-bg-hover: ${stackCardItemBgHoverCustomGradientSwitcher && stackCardItemBgHoverCustomGradientInputValue
-                ? stackCardItemBgHoverCustomGradientInputValue
-                : stackCardItemBgHoverGradientColor || stackCardItemBgHoverClassicColor || stackCardItemBgNormalGradientColor || stackCardItemBgNormalClassicColor
-            };` : `${stackCardItemBgHoverClassicColor ? `--fb-stack-card-item-bg-hover: ${stackCardItemBgHoverClassicColor};` : stackCardItemBgNormalClassicColor ? `--fb-stack-card-item-bg-hover: ${stackCardItemBgNormalClassicColor};` : ''}`}
-            ${stackCardItemBorderColor ? `--fb-stack-card-item-border-color: ${stackCardItemBorderColor};` : ''}
-            ${stackCardItemBorderHoverColor ? `--fb-stack-card-item-border-hover-color: ${stackCardItemBorderHoverColor};` : stackCardItemBorderColor ? `--fb-stack-card-item-border-hover-color: ${stackCardItemBorderColor};` : ''}
             ${stackCardsGlobalBgNormalBackgroundType === 'gradient' ? `  
                 background: ${stackCardsGlobalBgNormalCustomGradientSwitcher && stackCardsGlobalBgNormalCustomGradientInputValue
                 ? stackCardsGlobalBgNormalCustomGradientInputValue
@@ -360,21 +296,6 @@ const generateStackCardsStyle = (attributes) => {
             `} 
             ${stackCardsGlobalBorderHoverColor ? `border-color: ${stackCardsGlobalBorderHoverColor};` : ''}
             ${stackCardsGlobalBoxShadowHoverCssValue ? `box-shadow: ${stackCardsGlobalBoxShadowHoverCssValue};` : ''}
-        }
-
-        ${allItemSelector} {
-            overflow: hidden;
-            background: var(--fb-stack-card-item-bg-normal, transparent);
-            ${hasValue(stackCardItemPaddingDesktop?.top) ? `padding: ${stackCardItemDesktopPadding};` : ''}
-            ${stackCardItemBorder ? `border: ${stackCardItemBorder};` : ''} 
-            ${hasValue(stackCardItemBorderDesktop?.top) ? `border-width: ${stackCardItemDesktopBorderWidth};` : ''}
-            ${hasValue(stackCardItemBorderRadiusDesktop?.top) ? `border-radius: ${stackCardItemDesktopBorderRadiusWidth};` : ''}
-            border-color: var(--fb-stack-card-item-border-color, ${stackCardItemBorderColor || 'transparent'});
-        }
-        
-        ${allItemSelector}:hover {
-            background: var(--fb-stack-card-item-bg-hover, var(--fb-stack-card-item-bg-normal, transparent));
-            border-color: var(--fb-stack-card-item-border-hover-color, var(--fb-stack-card-item-border-color, ${stackCardItemBorderHoverColor || stackCardItemBorderColor || 'transparent'}));
         }
 
         ${isPresetTwo ? `

@@ -1,10 +1,10 @@
-.grid-layout-container {
-	position: relative;
-	border: 1px dashed #8a94a0;
+.fb-grid-layout-container.fb-grid-layout-editor-mode {
+	position: relative !important;
+	border: 1px dashed #8a94a0 !important;
 	border-radius: 2px;
 	background: #fff;
-	padding: 20px;
-	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	padding: 0;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 
 	&.mode-layout {
 		border-style: solid;
@@ -12,6 +12,27 @@
 
 	.grid-editor-workspace {
 		position: relative;
+
+		&.is-measuring {
+			.block-list-appender,
+			.block-editor-block-list__empty-block-inserter,
+			.block-editor-default-block-appender,
+			.block-editor-button-block-appender,
+			.fb-accordion-add-button-wrapper {
+				display: none !important;
+				height: 0 !important;
+				margin: 0 !important;
+				padding: 0 !important;
+				visibility: hidden !important;
+				opacity: 0 !important;
+				pointer-events: none !important;
+			}
+
+			// Ensure grid items don't have min-height that forces extra space
+			.grid-item-rendered {
+				min-height: 0 !important;
+			}
+		}
 	}
 
 	.grid-stage-header,
@@ -488,7 +509,7 @@
 }
 
 @media (max-width: 782px) {
-	.grid-layout-container {
+	.fb-grid-layout-container.fb-grid-layout-editor-mode {
 		padding: 16px;
 
 		.grid-template-grid {
