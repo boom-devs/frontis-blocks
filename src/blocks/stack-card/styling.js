@@ -102,10 +102,14 @@ const generateStackCardsStyle = (attributes) => {
         stackCardsPresetFourActiveBorderColor,
         stackCardsPresetFourShowNavigation,
         stackCardsPresetFourButtonVerticalAlign,
+
         stackCardsPresetFourButtonVerticalOffset,
         stackCardsPresetFourButtonVerticalOffsetUnits,
         stackCardsPresetFourButtonSideOffset,
         stackCardsPresetFourButtonSideOffsetUnits,
+        stackCardsPresetFourButtonGap,
+        stackCardsPresetFourButtonGapUnits,
+
         stackCardsPresetTwoCardWidth,
         stackCardsPresetTwoCardWidthUnits,
         stackCardsPresetTwoLeftOffsetStep,
@@ -270,6 +274,8 @@ const generateStackCardsStyle = (attributes) => {
         }
         
         ${frameSelector} {
+            width: 100%;
+            max-width: 100%;
             ${hasValue(stackCardsGlobalPaddingDesktop?.top) ? `padding: ${globalDesktopPadding};` : ''}
             ${hasValue(stackCardsGlobalMarginDesktop?.top) ? `margin: ${globalDesktopMargin};` : ''} 
             ${stackCardsGlobalBorder ? `border: ${stackCardsGlobalBorder};` : ''} 
@@ -324,7 +330,8 @@ const generateStackCardsStyle = (attributes) => {
                 top: auto !important;
                 min-height: 0 !important;
                 grid-area: 1 / 1;
-                max-width: ${stackCardsPresetTwoCardWidth?.Desktop || 620}${stackCardsPresetTwoCardWidthUnits?.Desktop || 'px'};
+                max-width: ${stackCardsPresetTwoCardWidth?.Desktop}${stackCardsPresetTwoCardWidthUnits?.Desktop};
+                width: 100% !important;
                 cursor: pointer;
                 will-change: transform, opacity;
             }
@@ -426,14 +433,13 @@ const generateStackCardsStyle = (attributes) => {
             ${stackOverFrameSelector} {
                 position: relative;
                 width: 100%;
-                max-width: ${stackCardsPresetFourCardWidth?.Desktop || 620}${stackCardsPresetFourCardWidthUnits?.Desktop || 'px'};
+                max-width: ${stackCardsPresetFourCardWidth?.Desktop}${stackCardsPresetFourCardWidthUnits?.Desktop};
                 ${stackCardsPresetFourCardHeight ? `min-height: ${stackCardsPresetFourCardHeight?.Desktop}${stackCardsPresetFourCardHeightUnits?.Desktop};` : ''}
-                overflow: hidden;
                 touch-action: none;
             }
 
             ${stackCardsPresetFourActiveBorder ? `
-                ${stackOverFrameItemSelector}.active,
+                ${stackOverFrameItemSelector}.active, 
                 ${stackOverEditorItemSelector}.active {
                     border: ${stackCardsPresetFourActiveBorderWidth?.Desktop || 3}${stackCardsPresetFourActiveBorderWidthUnits?.Desktop || 'px'} solid ${stackCardsPresetFourActiveBorderColor || '#000000'};
                 }
@@ -464,6 +470,7 @@ const generateStackCardsStyle = (attributes) => {
                     position: absolute;
                     z-index: 99;
                     display: flex;
+                    ${stackCardsPresetFourButtonGap && `gap: ${stackCardsPresetFourButtonGap.Desktop}${stackCardsPresetFourButtonGapUnits.Desktop};`}
                     ${stackCardsPresetFourButtonVerticalAlign === 'center' ? `
                         top: ${stackCardsPresetFourButtonVerticalOffset?.Desktop || 50}${stackCardsPresetFourButtonVerticalOffsetUnits?.Desktop || '%'};
                         width: 100%;
@@ -581,10 +588,6 @@ const generateStackCardsStyle = (attributes) => {
                     margin-right: ${stackCardsPresetFourButtonSideOffset?.Desktop}${stackCardsPresetFourButtonSideOffsetUnits?.Desktop};
                 }
 
-                ${stackOverFrameSelector} .fb-stack-card-nav-btn--icon {
-                    padding-inline: 10px;
-                }
-
                 ${stackOverFrameSelector} .fb-stack-card-nav-btn--none .fb-stack-card-nav-text {
                     display: inline-block;
                 }
@@ -644,6 +647,7 @@ const generateStackCardsStyle = (attributes) => {
 
                 ${stackCardsPresetFourShowNavigation ? `
                     ${stackOverNavigationBtnSelector} {
+                        ${stackCardsPresetFourButtonGap && `gap: ${stackCardsPresetFourButtonGap.Tablet}${stackCardsPresetFourButtonGapUnits.Tablet};`}
                         ${stackCardsPresetFourButtonVerticalAlign === 'center' ? `
                             top: ${stackCardsPresetFourButtonVerticalOffset?.Tablet}${stackCardsPresetFourButtonVerticalOffsetUnits?.Tablet};
                             width: 100%;
@@ -785,6 +789,7 @@ const generateStackCardsStyle = (attributes) => {
 
                 ${stackCardsPresetFourShowNavigation ? `
                     ${stackOverNavigationBtnSelector} {
+                        ${stackCardsPresetFourButtonGap && `gap: ${stackCardsPresetFourButtonGap.Mobile}${stackCardsPresetFourButtonGapUnits.Mobile};`}
                         ${stackCardsPresetFourButtonVerticalAlign === 'center' ? `
                             top: ${stackCardsPresetFourButtonVerticalOffset?.Mobile}${stackCardsPresetFourButtonVerticalOffsetUnits?.Mobile};
                             width: 100%;
