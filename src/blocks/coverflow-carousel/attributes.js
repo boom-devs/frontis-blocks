@@ -477,11 +477,11 @@ const attributes = {
 	coverflowCarouselItemBgImageRepeat: {
 		type: 'string',
 		default: ''
-	}, 
+	},
 	coverflowCarouselItemHoverBgType: {
 		type: 'string',
 		default: 'classic'
-	},  
+	},
 	coverflowCarouselItemBgHoverClassicColor: {
 		type: 'string',
 	},
@@ -499,7 +499,7 @@ const attributes = {
 	coverflowCarouselItemHoverBgImageUrl: {
 		type: 'string',
 		default: ''
-	}, 
+	},
 	coverflowCarouselItemHoverBgImageAlt: {
 		type: 'string',
 		default: ''
@@ -1358,15 +1358,16 @@ const attributes = {
 	},
 	carouselProgressbarBGColor: {
 		type: 'string',
-		default: '',
+		default: '#f5f5f5',
 	},
 	carouselProgressbarBGActiveColor: {
 		type: 'string',
+		default: '#000000',
 	},
 	carouselProgressbarHeight: {
 		type: 'object',
 		default: {
-			Desktop: '',
+			Desktop: '5',
 			Tablet: '',
 			Mobile: '',
 		},
@@ -1377,6 +1378,22 @@ const attributes = {
 			Desktop: 'px',
 			Tablet: 'px',
 			Mobile: 'px',
+		},
+	},
+	carouselProgressbarWidth: {
+		type: 'object',
+		default: {
+			Desktop: '100',
+			Tablet: '',
+			Mobile: '',
+		},
+	},
+	carouselProgressbarWidthUnits: {
+		type: 'object',
+		default: {
+			Desktop: '%',
+			Tablet: '%',
+			Mobile: '%',
 		},
 	},
 	/** End Progressbar */

@@ -110,8 +110,9 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		if (e) {
 			e.preventDefault();
 			e.stopPropagation();
+			// Only select block on manual user interaction, not autoplay
+			selectBlock(clientId);
 		}
-		selectBlock(clientId);
 		const totalCards = wrapperRef.current ? wrapperRef.current.querySelectorAll('.fb-coverflow-carousel-slide').length : 0;
 		if (totalCards > 0) {
 			if (editorIndex >= totalCards - 1) {
@@ -127,8 +128,9 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		if (e) {
 			e.preventDefault();
 			e.stopPropagation();
+			// Only select block on manual user interaction, not autoplay
+			selectBlock(clientId);
 		}
-		selectBlock(clientId);
 		const totalCards = wrapperRef.current ? wrapperRef.current.querySelectorAll('.fb-coverflow-carousel-slide').length : 0;
 		if (totalCards > 0) {
 			if (editorIndex <= 0) {
