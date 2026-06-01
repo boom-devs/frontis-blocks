@@ -174,6 +174,20 @@ const imageComparisonStyle = (attributes) => {
         comparisonArrowSizeUnits,
         /** End Comparison Arrow Size */
 
+        /** Start Comparison Overlay Color */
+        compareOverlayBgColorSwitcher,
+        compareOverlayNormalBackgroundType,
+        compareOverlayNormalClassicColor,
+        compareOverlayNormalGradientColor,
+        compareOverlayNormalCustomGradientSwitcher,
+        compareOverlayNormalCustomGradientInputValue,
+        compareOverlayHoverBackgroundType,
+        compareOverlayHoverClassicColor,
+        compareOverlayHoverGradientColor,
+        compareOverlayHoverCustomGradientSwitcher,
+        compareOverlayHoverCustomGradientInputValue,        
+        /** End Comparison Overlay Color */        
+
         /** Start Global Settings */
         // comparisonGlobalZIndex,
         /** End Global Settings */
@@ -396,6 +410,22 @@ const imageComparisonStyle = (attributes) => {
         .${blockID} .fb-image-comparison-slider-wrapper .fb-image-comparison-slider:hover .fb-arrow-right {
              ${comparisonArrowHoverColor ? `border-left-color: ${comparisonArrowHoverColor};` : ''}
         }
+
+        .${blockID} .fb-image-comparison-slider-wrapper::before{
+            ${compareOverlayHoverBackgroundType === 'gradient' ? `
+                ${compareOverlayHoverCustomGradientSwitcher && compareOverlayHoverCustomGradientInputValue ? `background: ${compareOverlayHoverCustomGradientInputValue};` : `background: ${compareOverlayHoverGradientColor};`}
+            `: `
+                ${compareOverlayHoverClassicColor ? `background: ${compareOverlayHoverClassicColor};` : ''}
+            `}        
+        } 
+
+        .${blockID} .fb-image-comparison-slider-wrapper::after{
+            ${compareOverlayNormalBackgroundType === 'gradient' ? `  
+                ${compareOverlayNormalCustomGradientSwitcher && compareOverlayNormalCustomGradientInputValue ? `background: ${compareOverlayNormalCustomGradientInputValue};` : `background: ${compareOverlayNormalGradientColor};`}
+            `: `
+                ${compareOverlayNormalClassicColor ? `background: ${compareOverlayNormalClassicColor};` : ''}
+            `}       
+        } 
 
         @media only screen and (max-width: 1024px) {
             .${blockID} .fb-image-comparison-slider-wrapper {

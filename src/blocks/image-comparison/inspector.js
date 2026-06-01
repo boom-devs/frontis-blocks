@@ -204,6 +204,20 @@ const Inspector = ({ attributes, setAttributes }) => {
         comparisonArrowSize,
         comparisonArrowSizeUnits,
         /** End Comparison Arrow Size */
+        
+        /** Start Comparison Overlay Color */
+        compareOverlayBgColorSwitcher,
+        compareOverlayNormalBackgroundType,
+        compareOverlayNormalClassicColor,
+        compareOverlayNormalGradientColor,
+        compareOverlayNormalCustomGradientSwitcher,
+        compareOverlayNormalCustomGradientInputValue,
+        compareOverlayHoverBackgroundType,
+        compareOverlayHoverClassicColor,
+        compareOverlayHoverGradientColor,
+        compareOverlayHoverCustomGradientSwitcher,
+        compareOverlayHoverCustomGradientInputValue,        
+        /** End Comparison Overlay Color */
 
         /** Start Global Settings */
         comparisonGlobalZIndex,
@@ -696,7 +710,7 @@ const Inspector = ({ attributes, setAttributes }) => {
             </PanelBody>
 
             <PanelBody
-                title={__("General Settings", "frontis-blocks")}
+                title={__("Settings", "frontis-blocks")}
                 initialOpen={false}
             >
                 <FB_Range
@@ -1124,6 +1138,43 @@ const Inspector = ({ attributes, setAttributes }) => {
                     setAttributes={setAttributes}
                 />
             </PanelBody>
+
+            <PanelBody
+                title={__("Overlay", "frontis-blocks")}
+                initialOpen={false}
+            >
+                <FB_BackgroundColorControl
+                    label={__("Background Color", "frontis-blocks")}
+                    bgColorSwitcher={compareOverlayBgColorSwitcher}
+                    setBgColorSwitcher={(value) => setAttributes({ compareOverlayBgColorSwitcher: value })}
+
+                    normalBackgroundType={compareOverlayNormalBackgroundType}
+                    setNormalBackgroundType={(value) => setAttributes({ compareOverlayNormalBackgroundType: value })}
+                    normalClassicColor={compareOverlayNormalClassicColor}
+                    setNormalClassicColor={(value) => setAttributes({ compareOverlayNormalClassicColor: value === undefined ? '' : value })}
+                    normalGradientColor={compareOverlayNormalGradientColor}
+                    setNormalGradientColor={(value) => setAttributes({ compareOverlayNormalGradientColor: value === undefined ? null : value })}
+                    normalCustomGradientSwitcher={compareOverlayNormalCustomGradientSwitcher}
+                    setNormalCustomGradientSwitcher={(value) => setAttributes({ compareOverlayNormalCustomGradientSwitcher: value })}
+                    normalCustomGradientInputValue={compareOverlayNormalCustomGradientInputValue}
+                    setNormalCustomGradientInputValue={(value) => setAttributes({ compareOverlayNormalCustomGradientInputValue: value })}
+
+                    hoverBackgroundType={compareOverlayHoverBackgroundType}
+                    setHoverBackgroundType={(value) => setAttributes({ compareOverlayHoverBackgroundType: value })}
+                    hoverClassicColor={compareOverlayHoverClassicColor}
+                    setHoverClassicColor={(value) => setAttributes({ compareOverlayHoverClassicColor: value === undefined ? '' : value })}
+                    hoverGradientColor={compareOverlayHoverGradientColor}
+                    setHoverGradientColor={(value) => setAttributes({ compareOverlayHoverGradientColor: value === undefined ? null : value })}
+                    hoverCustomGradientSwitcher={compareOverlayHoverCustomGradientSwitcher}
+                    setHoverCustomGradientSwitcher={(value) => setAttributes({ compareOverlayHoverCustomGradientSwitcher: value })}
+                    hoverCustomGradientInputValue={compareOverlayHoverCustomGradientInputValue}
+                    setHoverCustomGradientInputValue={(value) => setAttributes({ compareOverlayHoverCustomGradientInputValue: value })}
+
+                    isBackgroundImage={false}
+                />
+                
+            </PanelBody>
+
         </>
     );
 

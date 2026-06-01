@@ -7,6 +7,7 @@ export default function save({ attributes }) {
         beforeImageAlt,
         afterImageUrl,
         afterImageAlt,
+        blockStyle,
 
         /** Start Before Image Label */
         beforeImgShowLabelSwitcher,
