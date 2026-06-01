@@ -16,6 +16,8 @@ import {
 	Dashicon,
 	TextControl,
 } from "@wordpress/components";
+import { DndContext, closestCenter } from "@dnd-kit/core";
+import { SortableContext, arrayMove } from "@dnd-kit/sortable";
 
 import { useState, memo } from "@wordpress/element";
 import { useDeviceType } from "@Config/displayType";
@@ -29,6 +31,7 @@ import FB_IconPicker from "@Components/icon-picker";
 import FB_CustomCSSEditor from "@Components/custom-css-editor";
 import FB_InspectorControls from "@Components/InspectorControls";
 import FB_TypographyControl from "@Components/typography-control";
+import SortableItem from "./sortableItem";
 import { BORDER_STYLES } from "@Constants/fbConstants";
 
 import { imageAccordionPresets } from "./presets";
@@ -155,9 +158,18 @@ const Inspector = ({ attributes, setAttributes }) => {
 	};
 
 	/** Item handlers */
-	const updateItem = (index, key, value) => {
-		const newItems = [...imageAccordionItems];
-		newItems[index] = { ...newItems[index], [key]: value };
+	const updateItem = (id, key, value) => {
+		const newItems = imageAccordionItems.map((item) =>
+			item.id === id ? { ...item, [key]: value } : item,
+		);
+		setAttributes({ imageAccordionItems: newItems });
+	};
+
+	const duplicateItem = (id) => {
+		const itemToDuplicate = imageAccordionItems.find((i) => i.id === id);
+		if (!itemToDuplicate) return;
+		const newItem = { ...itemToDuplicate, id: "item-" + Date.now() };
+		const newItems = [...imageAccordionItems, newItem];
 		setAttributes({ imageAccordionItems: newItems });
 	};
 
@@ -181,10 +193,20 @@ const Inspector = ({ attributes, setAttributes }) => {
 		setAttributes({ imageAccordionItems: [...imageAccordionItems, newItem] });
 	};
 
-	const removeItem = (index) => {
-		const newItems = imageAccordionItems.filter((_, i) => i !== index);
+	const removeItem = (id) => {
+		const newItems = imageAccordionItems.filter((i) => i.id !== id);
 		setAttributes({ imageAccordionItems: newItems });
-		if (openItemIndex === index) setOpenItemIndex(null);
+	};
+
+	const handleDragEnd = (event) => {
+		const { active, over } = event;
+		if (active && over && active.id !== over.id) {
+			const oldIndex = imageAccordionItems.findIndex((i) => i.id === active.id);
+			const newIndex = imageAccordionItems.findIndex((i) => i.id === over.id);
+			setAttributes({
+				imageAccordionItems: arrayMove(imageAccordionItems, oldIndex, newIndex),
+			});
+		}
 	};
 
 	/** Padding handlers */
@@ -333,247 +355,29 @@ const Inspector = ({ attributes, setAttributes }) => {
 				title={__("Accordion Items", "frontis-blocks")}
 				initialOpen={true}
 			>
-				{imageAccordionItems.map((item, index) => (
-					<div key={item.id || index} className="fb-accordion-item-control">
-						<Flex
-							align="center"
-							className={`fb-accordion-item-header ${
-								openItemIndex === index ? "is-open" : ""
-							}`}
-							onClick={() =>
-								setOpenItemIndex(openItemIndex === index ? null : index)
-							}
-						>
-							<FlexItem isBlock>
-								<span className="fb-accordion-item-title">
-									{item.title || __("Item", "frontis-blocks")} #{index + 1}
-								</span>
-							</FlexItem>
-							<FlexItem>
-								<HStack spacing={1} justify="flex-end">
-									<Dashicon
-										className="fb-accordion-item-toggle"
-										icon={
-											openItemIndex === index
-												? "arrow-up-alt2"
-												: "arrow-down-alt2"
-										}
-										size={16}
+				<div className="fb-feature-wrapper">
+					<DndContext
+						collisionDetection={closestCenter}
+						onDragEnd={handleDragEnd}
+					>
+						<SortableContext items={imageAccordionItems.map((i) => i.id)}>
+							<ul className="dnd-items-wrapper">
+								{imageAccordionItems.map((item, index) => (
+									<SortableItem
+										key={item.id}
+										id={item.id}
+										item={item}
+										index={index}
+										imageAccordionPreset={imageAccordionPreset}
+										updateItem={updateItem}
+										removeItem={removeItem}
+										duplicateItem={duplicateItem}
 									/>
-									{imageAccordionItems.length > 1 && (
-										<Button
-											variant="link"
-											icon="trash"
-											iconSize={16}
-											className="fb-accordion-item-remove"
-											onClick={(e) => {
-												e.stopPropagation();
-												removeItem(index);
-											}}
-											label={__("Remove Item", "frontis-blocks")}
-										/>
-									)}
-								</HStack>
-							</FlexItem>
-						</Flex>
-
-						{openItemIndex === index && (
-							<div className="fb-accordion-item-body">
-								{/* Background Image */}
-								<BaseControl label={__("Background Image", "frontis-blocks")}>
-									<div className="fb-image-upload-control">
-										{item.image?.url ? (
-											<div className="fb-image-preview">
-												<img src={item.image.url} alt="" />
-												<Button
-													isDestructive
-													isSmall
-													onClick={() =>
-														updateItem(index, "image", { url: "", id: "" })
-													}
-												>
-													{__("Remove", "frontis-blocks")}
-												</Button>
-											</div>
-										) : (
-											<Button
-												variant="secondary"
-												onClick={() => {
-													const frame = wp.media({
-														title: __("Select Image", "frontis-blocks"),
-														multiple: false,
-														library: { type: "image" },
-													});
-													frame.on("select", () => {
-														const attachment = frame
-															.state()
-															.get("selection")
-															.first()
-															.toJSON();
-														updateItem(index, "image", {
-															url: attachment.url,
-															id: attachment.id,
-														});
-													});
-													frame.open();
-												}}
-											>
-												{__("Choose Image", "frontis-blocks")}
-											</Button>
-										)}
-									</div>
-								</BaseControl>
-
-								{/* Title */}
-								<FB_InputControl
-									label={__("Title", "frontis-blocks")}
-									value={item.title}
-									onChangeValue={(value) => updateItem(index, "title", value)}
-								/>
-
-								{/* Sub Title */}
-								<FB_InputControl
-									label={__("Sub Title", "frontis-blocks")}
-									value={item.subTitle}
-									onChangeValue={(value) =>
-										updateItem(index, "subTitle", value)
-									}
-								/>
-
-								{/* Icon Source — Preset 1 only */}
-								{imageAccordionPreset === "preset-1" && (
-									<>
-										<BaseControl label={__("Icon Source", "frontis-blocks")}>
-											<ButtonGroup>
-												<Button
-													variant={
-														item.mediaType === "icon" ? "primary" : "secondary"
-													}
-													isSmall
-													onClick={() => updateItem(index, "mediaType", "icon")}
-												>
-													{__("Icon", "frontis-blocks")}
-												</Button>
-												<Button
-													variant={
-														item.mediaType === "image" ? "primary" : "secondary"
-													}
-													isSmall
-													onClick={() =>
-														updateItem(index, "mediaType", "image")
-													}
-												>
-													{__("Image", "frontis-blocks")}
-												</Button>
-											</ButtonGroup>
-										</BaseControl>
-
-										{item.mediaType === "icon" && (
-											<div className="fb-icon-picker-control-wrapper">
-												<BaseControl
-													label={__("Select Icon", "frontis-blocks")}
-												/>
-												<FB_IconPicker
-													value={item.selectedIcon || ""}
-													setIconHandler={(value) =>
-														updateItem(index, "selectedIcon", value)
-													}
-												/>
-											</div>
-										)}
-
-										{item.mediaType === "image" && (
-											<BaseControl label={__("Icon Image", "frontis-blocks")}>
-												<div className="fb-image-upload-control">
-													{item.selectedImage?.url ? (
-														<div className="fb-image-preview">
-															<img src={item.selectedImage.url} alt="" />
-															<Button
-																isDestructive
-																isSmall
-																onClick={() =>
-																	updateItem(index, "selectedImage", {
-																		url: "",
-																		id: "",
-																	})
-																}
-															>
-																{__("Remove", "frontis-blocks")}
-															</Button>
-														</div>
-													) : (
-														<Button
-															variant="secondary"
-															onClick={() => {
-																const frame = wp.media({
-																	title: __(
-																		"Select Icon Image",
-																		"frontis-blocks",
-																	),
-																	multiple: false,
-																	library: { type: "image" },
-																});
-																frame.on("select", () => {
-																	const attachment = frame
-																		.state()
-																		.get("selection")
-																		.first()
-																		.toJSON();
-																	updateItem(index, "selectedImage", {
-																		url: attachment.url,
-																		id: attachment.id,
-																	});
-																});
-																frame.open();
-															}}
-														>
-															{__("Choose Image", "frontis-blocks")}
-														</Button>
-													)}
-												</div>
-											</BaseControl>
-										)}
-									</>
-								)}
-
-								{/* Button — Preset 3 only */}
-								{imageAccordionPreset === "preset-3" && (
-									<>
-										<FB_InputControl
-											label={__("Button Text", "frontis-blocks")}
-											value={item.buttonText}
-											onChangeValue={(value) =>
-												updateItem(index, "buttonText", value)
-											}
-										/>
-										<FB_InputControl
-											label={__("Button URL", "frontis-blocks")}
-											value={item.buttonUrl}
-											onChangeValue={(value) =>
-												updateItem(index, "buttonUrl", value)
-											}
-										/>
-										<ToggleControl
-											label={__("Open in New Tab", "frontis-blocks")}
-											checked={item.buttonTarget}
-											onChange={(value) =>
-												updateItem(index, "buttonTarget", value)
-											}
-										/>
-										<ToggleControl
-											label={__("Nofollow", "frontis-blocks")}
-											checked={item.buttonNofollow}
-											onChange={(value) =>
-												updateItem(index, "buttonNofollow", value)
-											}
-										/>
-									</>
-								)}
-							</div>
-						)}
-					</div>
-				))}
-
+								))}
+							</ul>
+						</SortableContext>
+					</DndContext>
+				</div>
 				<Button
 					variant="secondary"
 					onClick={addItem}
