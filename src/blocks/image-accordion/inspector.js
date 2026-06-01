@@ -5,6 +5,11 @@ import {
 	SelectControl,
 	ToggleControl,
 	RangeControl,
+	__experimentalItemGroup as ItemGroup,
+	__experimentalItem as Item,
+	__experimentalHStack as HStack,
+	Flex,
+	FlexItem,
 	Button,
 	ButtonGroup,
 	BaseControl,
@@ -217,7 +222,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 		}
 	};
 
-	/** Margin handlers */
 	const marginUnitsChange = (event, position) => {
 		const value = event.target.value;
 		if (imageAccordionMarginLink) {
@@ -252,7 +256,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 		}
 	};
 
-	/** Border Radius handlers */
 	const borderRadiusChange = (event, position) => {
 		const value = event.target.value;
 		if (imageAccordionItemBorderRadiusLink) {
@@ -287,12 +290,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 		}
 	};
 
-	// ========================
-	// GENERAL (CONTENT) TAB
-	// ========================
 	const generalControls = (
 		<>
-			{/* Preset Selector */}
 			<PanelBody
 				title={__("Preset Style", "frontis-blocks")}
 				initialOpen={true}
@@ -317,7 +316,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 				</div>
 			</PanelBody>
 
-			{/* Trigger */}
 			<PanelBody title={__("Settings", "frontis-blocks")} initialOpen={true}>
 				<SelectControl
 					label={__("Trigger On", "frontis-blocks")}
@@ -337,33 +335,47 @@ const Inspector = ({ attributes, setAttributes }) => {
 			>
 				{imageAccordionItems.map((item, index) => (
 					<div key={item.id || index} className="fb-accordion-item-control">
-						<div
-							className="fb-accordion-item-header"
+						<Flex
+							align="center"
+							className={`fb-accordion-item-header ${
+								openItemIndex === index ? "is-open" : ""
+							}`}
 							onClick={() =>
 								setOpenItemIndex(openItemIndex === index ? null : index)
 							}
 						>
-							<span className="fb-accordion-item-title">
-								{item.title || __("Item", "frontis-blocks")} #{index + 1}
-							</span>
-							<div className="fb-accordion-item-actions">
-								<Dashicon
-									icon={openItemIndex === index ? "arrow-up" : "arrow-down"}
-								/>
-								{imageAccordionItems.length > 1 && (
-									<Button
-										isDestructive
-										isSmall
-										onClick={(e) => {
-											e.stopPropagation();
-											removeItem(index);
-										}}
-										icon="trash"
-										label={__("Remove Item", "frontis-blocks")}
+							<FlexItem isBlock>
+								<span className="fb-accordion-item-title">
+									{item.title || __("Item", "frontis-blocks")} #{index + 1}
+								</span>
+							</FlexItem>
+							<FlexItem>
+								<HStack spacing={1} justify="flex-end">
+									<Dashicon
+										className="fb-accordion-item-toggle"
+										icon={
+											openItemIndex === index
+												? "arrow-up-alt2"
+												: "arrow-down-alt2"
+										}
+										size={16}
 									/>
-								)}
-							</div>
-						</div>
+									{imageAccordionItems.length > 1 && (
+										<Button
+											variant="link"
+											icon="trash"
+											iconSize={16}
+											className="fb-accordion-item-remove"
+											onClick={(e) => {
+												e.stopPropagation();
+												removeItem(index);
+											}}
+											label={__("Remove Item", "frontis-blocks")}
+										/>
+									)}
+								</HStack>
+							</FlexItem>
+						</Flex>
 
 						{openItemIndex === index && (
 							<div className="fb-accordion-item-body">

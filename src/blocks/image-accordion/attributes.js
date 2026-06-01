@@ -19,19 +19,16 @@ const attributes = {
 		default: "Desktop",
 	},
 
-	/** Preset */
 	imageAccordionPreset: {
 		type: "string",
 		default: "preset-1",
 	},
 
-	/** Trigger */
 	imageAccordionTrigger: {
 		type: "string",
 		default: "hover",
 	},
 
-	/** Accordion Items */
 	imageAccordionItems: {
 		type: "array",
 		default: [
@@ -44,7 +41,7 @@ const attributes = {
 				title: "Discover Unique",
 				subTitle: "Explore amazing places",
 				mediaType: "icon",
-				selectedIcon: "map-marker-alt",
+				selectedIcon: "heart",
 				selectedImage: { url: "", id: "" },
 				buttonText: "Read More",
 				buttonUrl: "#",
@@ -76,7 +73,7 @@ const attributes = {
 				title: "Discover Unique",
 				subTitle: "Explore amazing places",
 				mediaType: "icon",
-				selectedIcon: "map-marker-alt",
+				selectedIcon: "heart",
 				selectedImage: { url: "", id: "" },
 				buttonText: "Read More",
 				buttonUrl: "#",
@@ -92,7 +89,7 @@ const attributes = {
 				title: "Discover Unique",
 				subTitle: "Explore amazing places",
 				mediaType: "icon",
-				selectedIcon: "globe",
+				selectedIcon: "heart",
 				selectedImage: { url: "", id: "" },
 				buttonText: "Read More",
 				buttonUrl: "#",
@@ -108,7 +105,7 @@ const attributes = {
 				title: "Discover Unique",
 				subTitle: "Explore amazing places",
 				mediaType: "icon",
-				selectedIcon: "info-circle",
+				selectedIcon: "heart",
 				selectedImage: { url: "", id: "" },
 				buttonText: "Read More",
 				buttonUrl: "#",
@@ -118,7 +115,6 @@ const attributes = {
 		],
 	},
 
-	/** Container Size */
 	imageAccordionWidth: {
 		type: "object",
 		default: {
@@ -152,7 +148,6 @@ const attributes = {
 		},
 	},
 
-	/** Gap */
 	imageAccordionGap: {
 		type: "object",
 		default: {
@@ -170,7 +165,6 @@ const attributes = {
 		},
 	},
 
-	/** Item Border Radius */
 	imageAccordionItemBorderRadiusUnits: {
 		type: "object",
 		default: {
@@ -196,7 +190,6 @@ const attributes = {
 		default: true,
 	},
 
-	/** Item Active Border Radius */
 	imageAccordionItemActiveBorderRadiusDesktop: {
 		type: "object",
 		default: { top: "25", bottom: "25", left: "25", right: "25" },
@@ -214,7 +207,6 @@ const attributes = {
 		default: true,
 	},
 
-	/** Overlay Color */
 	imageAccordionOverlayColor: {
 		type: "string",
 		default: "rgba(0,0,0,0.55)",
@@ -224,7 +216,6 @@ const attributes = {
 		default: "",
 	},
 
-	/** Show Dots (Preset 2) */
 	imageAccordionShowDots: {
 		type: "boolean",
 		default: true,
@@ -242,7 +233,6 @@ const attributes = {
 		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
 	},
 
-	/** Show Number (Preset 2 & 4) */
 	imageAccordionShowNumber: {
 		type: "boolean",
 		default: true,
@@ -268,7 +258,6 @@ const attributes = {
 		default: "",
 	},
 
-	/** Icon Circle (Preset 1) */
 	imageAccordionIconColor: {
 		type: "string",
 		default: "#0875FF",
@@ -298,7 +287,6 @@ const attributes = {
 		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
 	},
 
-	/** Typography — Title */
 	imageAccordionTitleColor: {
 		type: "string",
 		default: "#ffffff",
@@ -328,7 +316,6 @@ const attributes = {
 		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
 	},
 
-	/** Typography — Subtitle */
 	imageAccordionSubtitleColor: {
 		type: "string",
 		default: "rgba(255,255,255,0.8)",
@@ -350,7 +337,6 @@ const attributes = {
 		default: "",
 	},
 
-	/** Button (Preset 3) */
 	imageAccordionBtnTextColor: {
 		type: "string",
 		default: "#ffffff",
@@ -408,7 +394,6 @@ const attributes = {
 		default: "",
 	},
 
-	/** Padding */
 	imageAccordionPaddingUnits: {
 		type: "object",
 		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
@@ -430,7 +415,6 @@ const attributes = {
 		default: true,
 	},
 
-	/** Margin */
 	imageAccordionMarginUnits: {
 		type: "object",
 		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
@@ -452,7 +436,6 @@ const attributes = {
 		default: true,
 	},
 
-	/** Global */
 	imageAccordionGlobalZIndex: {
 		type: "object",
 		default: { Desktop: "", Tablet: "", Mobile: "" },
@@ -470,7 +453,6 @@ const attributes = {
 		default: "",
 	},
 
-	/** Responsive Visibility */
 	imageAccordionDesktopSwitcher: {
 		type: "boolean",
 		default: false,
