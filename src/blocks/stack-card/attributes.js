@@ -44,6 +44,11 @@ const attributes = {
 		default: ''
 	},
 
+	stackedCardScaleSwitcher: {
+		type: 'string',
+		default: 'horizontal'
+	},
+
 	stackCardsOffsetTop: {
 		type: 'object',
 		default: {
@@ -241,6 +246,22 @@ const attributes = {
 			Desktop: '%',
 			Tablet: '%',
 			Mobile: '%',
+		}
+	},
+	stackCardsPresetFourButtonGap: {
+		type: 'object',
+		default: {
+			Desktop: '10',
+			Tablet: '10',
+			Mobile: '10',
+		}
+	},
+	stackCardsPresetFourButtonGapUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
 		}
 	},
 	stackCardsPresetFourButtonSideOffset: {

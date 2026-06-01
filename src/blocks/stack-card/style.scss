@@ -7,3 +7,9 @@
     position: sticky;
     top: 100px;
 }
+button.fb-stack-card-prev-btn, button.fb-stack-card-next-btn{
+    &:focus {
+        outline: none;
+        cursor: pointer;
+    }
+}
