@@ -1,18 +1,10 @@
 jQuery(document).ready(function ($) {
-
     function initImageComparison() {
-
         $(".fb-img-comp-overlay").each(function () {
-
             const $overlay = $(this);
             const $wrapper = $overlay.closest(".fb-image-comparison-slider-wrapper");
-
-            if ($wrapper.length === 0 || $wrapper.find(".fb-image-comparison-slider").length > 0) {
-                return;
-            }
-
+            if ($wrapper.length === 0 || $wrapper.find(".fb-image-comparison-slider").length > 0) {return;}
             let clicked = false;
-
             const direction = $wrapper.attr('data-direction') || 'horizontal';
             let offsetData = $wrapper.attr('data-offset');
             if (offsetData) {

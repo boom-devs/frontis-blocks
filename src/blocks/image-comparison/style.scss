@@ -2,9 +2,16 @@
     box-sizing: border-box;
 }
 
+.fb-image-comparison-main-wrapper {
+    width: 100%;
+}
+
 .fb-image-comparison-inner-wrapper {
+    width: 100%;
+
     .fb-image-comparison-slider-wrapper {
         position: relative;
+        width: 100%;
         height: 400px;
         overflow: hidden;
 
@@ -13,9 +20,18 @@
             content: "";
             position: absolute;
             inset: 0;
-            background: rgba(0, 0, 0, 0.4);
+            // background: rgba(0, 0, 0, 0.4);
             opacity: 0;
             transition: opacity 0.3s ease;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            // background: rgba(255, 0, 0, 0.171);
             z-index: 3;
             pointer-events: none;
         }
@@ -29,7 +45,7 @@
 
         .fb-image-comparison-label {
             position: absolute;
-            top: 50%;       
+            top: 50%;
             transform: translate(-50%, -50%);
             z-index: 10;
             opacity: 0;
@@ -129,7 +145,7 @@
                 border-top: 6px solid transparent;
                 border-bottom: 6px solid transparent;
                 border-left: 6px solid #fff;
-    }
+            }
         }
 
         &[data-direction="vertical"] {
@@ -146,35 +162,42 @@
                     height: 2px;
                     transform: translateY(-50%);
                 }
+
+                .fb-slider-arrows {
+                    transform: rotate(90deg);
+                }
+
             }
 
             .fb-image-comparison-label {
                 top: auto;
-                transform: none;
+                left: 50%;
+                width: auto;
+                display: inline-block;
+                white-space: nowrap;
             }
 
             .fb-image-comparison-before-label {
                 top: 20px;
-                left: 20px;
-                transform: translateY(-10px);
+                transform: translateX(-50%) translateY(-20px);
             }
 
             .fb-image-comparison-after-label {
                 bottom: 20px;
-                right: 20px;
-                transform: translateY(10px);
+                right: auto;
+                transform: translateX(-50%) translateY(20px);
             }
 
-            &:hover {
+            &:not(.fb-disable-overlay):hover:not(:has(.fb-image-comparison-slider:hover)) {
                 .fb-image-comparison-before-label {
                     opacity: 1;
-                    transform: translateY(0);
+                    transform: translateX(-50%) translateY(0);
                     pointer-events: auto;
                 }
 
                 .fb-image-comparison-after-label {
                     opacity: 1;
-                    transform: translateY(0);
+                    transform: translateX(-50%) translateY(0);
                     pointer-events: auto;
                 }
             }

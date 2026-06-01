@@ -35,7 +35,7 @@ const attributes = {
     },
     beforeImageId: {
         type: "number",
-        default: 0
+        default: "0"
     },
     afterImageUrl: {
         type: "string",
@@ -47,7 +47,7 @@ const attributes = {
     },
     afterImageId: {
         type: "number",
-        default: 0
+        default: "0"
     },
     /** End Image Comparison Attributes */
 
@@ -102,9 +102,9 @@ const attributes = {
     comparisonInitialOffset: {
         type: "object",
         default: {
-            Desktop: 50,
-            Tablet: 50,
-            Mobile: 50
+            Desktop: "50",
+            Tablet: "50",
+            Mobile: "50"
         }
     },
     /** End Initial Offset */
@@ -722,6 +722,54 @@ const attributes = {
         },
     },
     /** End Comparison Arrow Size */
+
+    /** Start Comparison Overlay Background */
+    compareOverlayBgColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    compareOverlayNormalBackgroundType: {
+        type: "string",
+        default: "classic",
+    },
+    compareOverlayNormalClassicColor: {
+        type: "string",
+        default: "",
+    },
+    compareOverlayNormalGradientColor: {
+        type: "string",
+        default: null,
+    },
+    compareOverlayNormalCustomGradientSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    compareOverlayNormalCustomGradientInputValue: {
+        type: "string",
+        default: "",
+    },
+
+    compareOverlayHoverBackgroundType: {
+        type: "string",
+        default: "classic",
+    },
+    compareOverlayHoverClassicColor: {
+        type: "string",
+        default: "rgba(0, 0, 0, 0.4)",
+    },
+    compareOverlayHoverGradientColor: {
+        type: "string",
+        default: null,
+    },
+    compareOverlayHoverCustomGradientSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    compareOverlayHoverCustomGradientInputValue: {
+        type: "string",
+        default: "",
+    },
+    /** End Comparison Overlay Background */
 
     /** Start Z Index */
     comparisonGlobalZIndex: {
