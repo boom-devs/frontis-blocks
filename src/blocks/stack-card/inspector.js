@@ -49,26 +49,33 @@ import { useDeviceType } from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
 import FB_InspectorControls from '@Components/InspectorControls';
-import getProToggleControls from '@Utils/getProToggleControls';
-import DynamicDataSourceControl from '@Components/dynamic-data-source-control';
-import DynamicDataLinkControl from '@Components/dynamic-data-link-control';
-import getProActive from '@Utils/getProActive';
 import './editor.scss';
-import { hasStackCardScalePreset, isPresetFourStackOver } from './preset-four';
-import { isPresetThreeStackRight } from './preset-three';
-import { isPresetTwoStackLeft } from './preset-two';
-import StackCardInspectorSortableItem from './stack-card-inspector-sortable-item';
+import { hasStackCardScalePreset, isStackCardPresetOver as isPresetFourStackOver } from './behaviors/preset-four';
+import { isStackCardPresetRight as isPresetThreeStackRight } from './behaviors/preset-three';
+import { isStackCardPresetLeft as isPresetTwoStackLeft } from './behaviors/preset-two';
+import StackCardInspectorSortableItem from './stack-card-sortable-item';
 import { stackedCardPresets } from './presets';
-import { createDefaultCardItemBlock } from './default-card-item';
 
 const CARD_ITEM_BLOCK = 'frontis-blocks/stack-card-item';
 const MIN_CARD_ITEMS = 2;
+
+export function createDefaultCardItemBlock(itemNumber = 1) {
+	return createBlock(
+		CARD_ITEM_BLOCK,
+		{ itemNumber },
+		[
+			createBlock('frontis-blocks/testimonial', {
+				TestimonialRatingicon: 'star',
+				RatingSwitcher: true,
+			})
+		],
+	);
+}
 
 const Inspector = ( { attributes, setAttributes, clientId } ) => {
 
 	const {
 		blockID,
-		blockStyle,
         stackCardsPresetStyle,
 
         stackCardsOffsetTop,
@@ -141,41 +148,6 @@ const Inspector = ( { attributes, setAttributes, clientId } ) => {
         stackCardsPresetFourKeyboardNavigation,
         stackCardsPresetFourCardClickToActive,
         stackCardsPresetFourShowAllLayers,
-
-        stackCardItemBgColorSwitcher,
-        stackCardItemBgNormalBackgroundType,
-        stackCardItemBgNormalClassicColor,
-        stackCardItemBgNormalGradientColor,
-        stackCardItemBgNormalCustomGradientSwitcher,
-        stackCardItemBgNormalCustomGradientInputValue,
-        stackCardItemBgHoverBackgroundType,
-        stackCardItemBgHoverClassicColor,
-        stackCardItemBgHoverGradientColor,
-        stackCardItemBgHoverCustomGradientSwitcher,
-        stackCardItemBgHoverCustomGradientInputValue,
-
-        stackCardItemPaddingUnits,
-        stackCardItemPaddingDesktop,
-        stackCardItemPaddingTablet,
-        stackCardItemPaddingMobile,
-        stackCardItemPaddingLink,
-
-        stackCardItemBorder,
-        stackCardItemBorderColor,
-        stackCardItemBorderHoverColor,
-        stackCardItemBorderColorSwitcher,
-
-        stackCardItemBorderUnits,
-        stackCardItemBorderDesktop,
-        stackCardItemBorderTablet,
-        stackCardItemBorderMobile,
-        stackCardItemBorderLink,
-
-        stackCardItemBorderRadiusUnits,
-        stackCardItemBorderRadiusDesktop,
-        stackCardItemBorderRadiusTablet,
-        stackCardItemBorderRadiusMobile,
-        stackCardItemBorderRadiusLink,
 
         /** Start stackCardsNavigation Button */
         stackCardsNavigationButtonGlobalTypoSwitcher,
@@ -334,7 +306,6 @@ const Inspector = ( { attributes, setAttributes, clientId } ) => {
 		moveBlocksToPosition,
 		removeBlock,
 		selectBlock,
-		updateBlockAttributes,
 	} = useDispatch( blockEditorStore );
 
 	const cardItems = useMemo(
@@ -448,10 +419,6 @@ const Inspector = ( { attributes, setAttributes, clientId } ) => {
 			},
 		});
 	};
-
-	const handleStackCardItemAttributes = useCallback((targetClientId, nextAttributes) => {
-		updateBlockAttributes(targetClientId, nextAttributes);
-	}, [updateBlockAttributes]);
 
     const previousButtonIconHandler = (IconName) => {
         setAttributes({ previousButtonIcon: IconName });
@@ -742,216 +709,6 @@ const Inspector = ( { attributes, setAttributes, clientId } ) => {
     }
     /** end Global border radius*/
 
-    /** Start Global padding */
-    const handleStackCardItemPaddingUnitChange = (event, position) => {
-        const value = event.target.value;
-        if (stackCardItemPaddingLink) {
-            switch (deviceType) {
-                case 'Desktop':
-                    setAttributes({
-                        stackCardItemPaddingDesktop: {
-                            top: value,
-                            right: value,
-                            bottom: value,
-                            left: value
-                        }
-                    });
-                    break;
-                case 'Tablet':
-                    setAttributes({
-                        stackCardItemPaddingTablet: {
-                            top: value,
-                            right: value,
-                            bottom: value,
-                            left: value
-                        }
-                    });
-                    break;
-                case 'Mobile':
-                    setAttributes({
-                        stackCardItemPaddingMobile: {
-                            top: value,
-                            right: value,
-                            bottom: value,
-                            left: value
-                        }
-                    });
-                    break;
-                default:
-                    break;
-            }
-        } else {
-            switch (deviceType) {
-                case 'Desktop':
-                    setAttributes({ stackCardItemPaddingDesktop: { ...stackCardItemPaddingDesktop, [position]: value } });
-                    break;
-                case 'Tablet':
-                    setAttributes({ stackCardsGlobalPaddingTablet: { ...stackCardItemPaddingTablet, [position]: value } });
-                    break;
-                case 'Mobile':
-                    setAttributes({ stackCardItemPaddingMobile: { ...stackCardItemPaddingMobile, [position]: value } });
-                    break;
-                default:
-                    break;
-            }
-        }
-
-    }
-
-    const handleStackCardItemPaddingCombineBtn = () => {
-        setAttributes({ stackCardItemPaddingLink: !stackCardItemPaddingLink });
-    }
-
-    const handleStackCardItemPaddingUnitsHandler = (unit) => {
-        setAttributes({
-            stackCardItemPaddingUnits: {
-                ...stackCardItemGlobalPaddingUnits,
-                [deviceType]: unit
-            }
-        })
-    }
-    /** End Global Padding */
-
-    /** Start Stack card item border */
-    const handleStackCardItemBorderUnitChange = (event, position) => {
-        const value = event.target.value;
-        if (stackCardItemBorderLink) {
-            switch (deviceType) {
-                case 'Desktop':
-                    setAttributes({
-                        stackCardItemBorderDesktop: {
-                            top: value,
-                            right: value,
-                            bottom: value,
-                            left: value
-                        }
-                    });
-                    break;
-                case 'Tablet':
-                    setAttributes({
-                        stackCardItemBorderTablet: {
-                            top: value,
-                            right: value,
-                            bottom: value,
-                            left: value
-                        }
-                    });
-                    break;
-                case 'Mobile':
-                    setAttributes({
-                        stackCardItemBorderMobile: {
-                            top: value,
-                            right: value,
-                            bottom: value,
-                            left: value
-                        }
-                    });
-                    break;
-                default:
-                    break;
-            }
-        } else {
-            switch (deviceType) {
-                case 'Desktop':
-                    setAttributes({ stackCardItemBorderDesktop: { ...stackCardItemBorderDesktop, [position]: value } });
-                    break;
-                case 'Tablet':
-                    setAttributes({ stackCardItemBorderTablet: { ...stackCardItemBorderTablet, [position]: value } });
-                    break;
-                case 'Mobile':
-                    setAttributes({ stackCardItemBorderMobile: { ...stackCardItemBorderMobile, [position]: value } });
-                    break;
-                default:
-                    break;
-            }
-        }
-
-    }
-
-    const handleStackCardItemBorderCombineBtn = () => {
-        setAttributes({ stackCardItemBorderLink: !stackCardItemBorderLink });
-    }
-
-    const handleStackCardItemBorderUnitsHandler = (unit) => {
-        setAttributes({
-            stackCardItemBorderUnits: {
-                ...stackCardItemBorderUnits,
-                [deviceType]: unit
-            }
-        })
-    }
-    /** End Stack Card item border */
-
-    /** Start Stack Card item border radius*/
-    const handleStackCardItemBorderRadiusUnitChange = (event, position) => {
-        const value = event.target.value;
-        if (stackCardItemBorderRadiusLink) {
-            switch (deviceType) {
-                case 'Desktop':
-                    setAttributes({
-                        stackCardItemBorderRadiusDesktop: {
-                            top: value,
-                            right: value,
-                            bottom: value,
-                            left: value
-                        }
-                    });
-                    break;
-                case 'Tablet':
-                    setAttributes({
-                        stackCardItemBorderRadiusTablet: {
-                            top: value,
-                            right: value,
-                            bottom: value,
-                            left: value
-                        }
-                    });
-                    break;
-                case 'Mobile':
-                    setAttributes({
-                        stackCardItemBorderRadiusMobile: {
-                            top: value,
-                            right: value,
-                            bottom: value,
-                            left: value
-                        }
-                    });
-                    break;
-                default:
-                    break;
-            }
-        } else {
-            switch (deviceType) {
-                case 'Desktop':
-                    setAttributes({ stackCardItemBorderRadiusDesktop: { ...stackCardItemBorderRadiusDesktop, [position]: value } });
-                    break;
-                case 'Tablet':
-                    setAttributes({ stackCardItemBorderRadiusTablet: { ...stackCardItemBorderRadiusTablet, [position]: value } });
-                    break;
-                case 'Mobile':
-                    setAttributes({ stackCardItemBorderRadiusMobile: { ...stackCardItemBorderRadiusMobile, [position]: value } });
-                    break;
-                default:
-                    break;
-            }
-        }
-
-    }
-
-    const handleStackCardItemBorderRadiusCombineBtn = () => {
-        setAttributes({ stackCardItemBorderRadiusLink: !stackCardItemBorderRadiusLink });
-    }
-
-    const handleStackCardItemBorderRadiusUnitsHandler = (unit) => {
-        setAttributes({
-            stackCardItemBorderRadiusUnits: {
-                ...stackCardItemBorderRadiusUnits,
-                [deviceType]: unit
-            }
-        })
-    }
-    /** end stack card item border radius*/
-
     /** Start stack card Button padding */
 	const handlestackCardsNavigationButtonPaddingUnitChange = ( event, position ) => {
 		const value = event.target.value;
@@ -1197,8 +954,6 @@ const Inspector = ( { attributes, setAttributes, clientId } ) => {
                                     >
                                         <ul className="dnd-items-wrapper">
                                             {cardItems.map((item, index) => {
-                                                const currentChildBlock = childBlocks.find((block) => block.clientId === item.clientId);
-                                                const itemAttributes = currentChildBlock?.attributes || {};
                                                 return (
                                                     <StackCardInspectorSortableItem
                                                         key={item.clientId}
@@ -1256,54 +1011,6 @@ const Inspector = ( { attributes, setAttributes, clientId } ) => {
                                                                 </>
                                                             )}
 
-                                                            <FB_BackgroundColorControl
-                                                                label={__("Item Background Color", "frontis-blocks")}
-                                                                bgColorSwitcher={itemAttributes.stackCardItemBgColorSwitcher}
-                                                                setBgColorSwitcher={(value) => handleStackCardItemAttributes(item.clientId, { stackCardItemBgColorSwitcher: value })}
-                                                                normalBackgroundType={itemAttributes.stackCardItemBgNormalBackgroundType}
-                                                                setNormalBackgroundType={(value) => handleStackCardItemAttributes(item.clientId, { stackCardItemBgNormalBackgroundType: value })}
-                                                                normalClassicColor={itemAttributes.stackCardItemBgNormalClassicColor}
-                                                                setNormalClassicColor={(value) => handleStackCardItemAttributes(item.clientId, { stackCardItemBgNormalClassicColor: value === undefined ? '' : value })}
-                                                                normalGradientColor={itemAttributes.stackCardItemBgNormalGradientColor}
-                                                                setNormalGradientColor={(value) => handleStackCardItemAttributes(item.clientId, { stackCardItemBgNormalGradientColor: value === undefined ? '' : value })}
-                                                                normalCustomGradientSwitcher={itemAttributes.stackCardItemBgNormalCustomGradientSwitcher}
-                                                                setNormalCustomGradientSwitcher={(value) => handleStackCardItemAttributes(item.clientId, { stackCardItemBgNormalCustomGradientSwitcher: value })}
-                                                                normalCustomGradientInputValue={itemAttributes.stackCardItemBgNormalCustomGradientInputValue}
-                                                                setNormalCustomGradientInputValue={(value) => handleStackCardItemAttributes(item.clientId, { stackCardItemBgNormalCustomGradientInputValue: value })}
-                                                                hoverBackgroundType={itemAttributes.stackCardItemBgHoverBackgroundType}
-                                                                setHoverBackgroundType={(value) => handleStackCardItemAttributes(item.clientId, { stackCardItemBgHoverBackgroundType: value })}
-                                                                hoverClassicColor={itemAttributes.stackCardItemBgHoverClassicColor}
-                                                                setHoverClassicColor={(value) => handleStackCardItemAttributes(item.clientId, { stackCardItemBgHoverClassicColor: value === undefined ? '' : value })}
-                                                                hoverGradientColor={itemAttributes.stackCardItemBgHoverGradientColor}
-                                                                setHoverGradientColor={(value) => handleStackCardItemAttributes(item.clientId, { stackCardItemBgHoverGradientColor: value === undefined ? '' : value })}
-                                                                hoverCustomGradientSwitcher={itemAttributes.stackCardItemBgHoverCustomGradientSwitcher}
-                                                                setHoverCustomGradientSwitcher={(value) => handleStackCardItemAttributes(item.clientId, { stackCardItemBgHoverCustomGradientSwitcher: value })}
-                                                                hoverCustomGradientInputValue={itemAttributes.stackCardItemBgHoverCustomGradientInputValue}
-                                                                setHoverCustomGradientInputValue={(value) => handleStackCardItemAttributes(item.clientId, { stackCardItemBgHoverCustomGradientInputValue: value })}
-                                                                isBackgroundImage={false}
-                                                            />
-
-                                                            <FB_SwitcherControl
-                                                                label={__("Item Border Color", "frontis-blocks")}
-                                                                globalSwitcher={itemAttributes.stackCardItemBorderColorSwitcher || 'normal'}
-                                                                setGlobalSwitcher={(value) => handleStackCardItemAttributes(item.clientId, { stackCardItemBorderColorSwitcher: value })}
-                                                            />
-
-                                                            {(itemAttributes.stackCardItemBorderColorSwitcher || 'normal') === 'normal' && (
-                                                                <FB_ColorControl
-                                                                    label={__("Normal Color", "frontis-blocks")}
-                                                                    globalColor={itemAttributes.stackCardItemBorderColor}
-                                                                    setGlobalColor={(value) => handleStackCardItemAttributes(item.clientId, { stackCardItemBorderColor: value === undefined ? '' : value })}
-                                                                />
-                                                            )}
-
-                                                            {(itemAttributes.stackCardItemBorderColorSwitcher || 'normal') === 'hover' && (
-                                                                <FB_ColorControl
-                                                                    label={__("Hover Color", "frontis-blocks")}
-                                                                    globalColor={itemAttributes.stackCardItemBorderHoverColor}
-                                                                    setGlobalColor={(value) => handleStackCardItemAttributes(item.clientId, { stackCardItemBorderHoverColor: value === undefined ? '' : value })}
-                                                                />
-                                                            )}
                                                         </div>
                                                     </StackCardInspectorSortableItem>
                                                 );
@@ -2020,112 +1727,6 @@ const Inspector = ( { attributes, setAttributes, clientId } ) => {
                     </div>
                 </div>
             )}
-            <PanelBody
-                title={__("Stacked Item", "frontis-blocks")}
-                initialOpen={false}
-            >
-                <FB_BackgroundColorControl
-                    label={__("Background Color", "frontis-blocks")}
-                    bgColorSwitcher={stackCardItemBgColorSwitcher}
-                    setBgColorSwitcher={(value) => setAttributes({ stackCardItemBgColorSwitcher: value })}
-
-                    normalBackgroundType={stackCardItemBgNormalBackgroundType}
-                    setNormalBackgroundType={(value) => setAttributes({ stackCardItemBgNormalBackgroundType: value })}
-                    normalClassicColor={stackCardItemBgNormalClassicColor}
-                    setNormalClassicColor={(value) => setAttributes({ stackCardItemBgNormalClassicColor: value === undefined ? '' : value })}
-                    normalGradientColor={stackCardItemBgNormalGradientColor}
-                    setNormalGradientColor={(value) => setAttributes({ stackCardItemBgNormalGradientColor: value === undefined ? '' : value })}
-                    normalCustomGradientSwitcher={stackCardItemBgNormalCustomGradientSwitcher}
-                    setNormalCustomGradientSwitcher={(value) => setAttributes({ stackCardItemBgNormalCustomGradientSwitcher: value })}
-                    normalCustomGradientInputValue={stackCardItemBgNormalCustomGradientInputValue}
-                    setNormalCustomGradientInputValue={(value) => setAttributes({ stackCardItemBgNormalCustomGradientInputValue: value })}
-
-                    hoverBackgroundType={stackCardItemBgHoverBackgroundType}
-                    setHoverBackgroundType={(value) => setAttributes({ stackCardItemBgHoverBackgroundType: value })}
-                    hoverClassicColor={stackCardItemBgHoverClassicColor}
-                    setHoverClassicColor={(value) => setAttributes({ stackCardItemBgHoverClassicColor: value === undefined ? '' : value })}
-                    hoverGradientColor={stackCardItemBgHoverGradientColor}
-                    setHoverGradientColor={(value) => setAttributes({ stackCardItemBgHoverGradientColor: value === undefined ? '' : value })}
-                    hoverCustomGradientSwitcher={stackCardItemBgHoverCustomGradientSwitcher}
-                    setHoverCustomGradientSwitcher={(value) => setAttributes({ stackCardItemBgHoverCustomGradientSwitcher: value })}
-                    hoverCustomGradientInputValue={stackCardItemBgHoverCustomGradientInputValue}
-                    setHoverCustomGradientInputValue={(value) => setAttributes({ stackCardItemBgHoverCustomGradientInputValue: value })}
-
-                    isBackgroundImage={false}
-                />
-
-                <FB_Spacing
-                    label={__("Padding", "frontis-blocks")}
-                    deviceType={deviceType}
-                    spacingUnitsHandler={handleStackCardItemPaddingUnitsHandler}
-                    spacingUnits={stackCardItemPaddingUnits}
-                    spacingDesktop={stackCardItemPaddingDesktop}
-                    spacingTablet={stackCardItemPaddingTablet}
-                    spacingMobile={stackCardItemPaddingMobile}
-                    handleSpacingUnitHandler={handleStackCardItemPaddingUnitChange}
-                    spacingCombineBtn={stackCardItemPaddingLink}
-                    spacingCombineBtnHandler={handleStackCardItemPaddingCombineBtn}
-                    setAttributes={setAttributes}
-                />
-
-                <SelectControl
-                    label={__("Border Style", "frontis-blocks")}
-                    value={stackCardItemBorder}
-                    options={BORDER_STYLES}
-                    onChange={(value) => setAttributes({ stackCardItemBorder: value })}
-                />
-
-                <FB_SwitcherControl
-                    label={__("Border Color", "frontis-blocks")}
-                    globalSwitcher={stackCardItemBorderColorSwitcher}
-                    setGlobalSwitcher={(value) => setAttributes({ stackCardItemBorderColorSwitcher: value })}
-                />
-
-                {stackCardItemBorderColorSwitcher === 'normal' && (
-                    <FB_ColorControl
-                        label={__("Normal Color", "frontis-blocks")}
-                        globalColor={stackCardItemBorderColor}
-                        setGlobalColor={(value) => setAttributes({ stackCardItemBorderColor: value === undefined ? '' : value })}
-                    />
-                )}
-
-                {stackCardItemBorderColorSwitcher === 'hover' && (
-                    <FB_ColorControl
-                        label={__("Hover Color", "frontis-blocks")}
-                        globalColor={stackCardItemBorderHoverColor}
-                        setGlobalColor={(value) => setAttributes({ stackCardItemBorderHoverColor: value === undefined ? '' : value })}
-                    />
-                )}
-
-                <FB_Spacing
-                    label={__("Border", "frontis-blocks")}
-                    deviceType={deviceType}
-                    spacingUnitsHandler={handleStackCardItemBorderUnitsHandler}
-                    spacingUnits={stackCardItemBorderUnits}
-                    spacingDesktop={stackCardItemBorderDesktop}
-                    spacingTablet={stackCardItemBorderTablet}
-                    spacingMobile={stackCardItemBorderMobile}
-                    handleSpacingUnitHandler={handleStackCardItemBorderUnitChange}
-                    spacingCombineBtn={stackCardItemBorderLink}
-                    spacingCombineBtnHandler={handleStackCardItemBorderCombineBtn}
-                    setAttributes={setAttributes}
-                />
-
-                <FB_Spacing
-                    label={__("Border Radius", "frontis-blocks")}
-                    deviceType={deviceType}
-                    spacingUnitsHandler={handleStackCardItemBorderRadiusUnitsHandler}
-                    spacingUnits={stackCardItemBorderRadiusUnits}
-                    spacingDesktop={stackCardItemBorderRadiusDesktop}
-                    spacingTablet={stackCardItemBorderRadiusTablet}
-                    spacingMobile={stackCardItemBorderRadiusMobile}
-                    handleSpacingUnitHandler={handleStackCardItemBorderRadiusUnitChange}
-                    spacingCombineBtn={stackCardItemBorderRadiusLink}
-                    spacingCombineBtnHandler={handleStackCardItemBorderRadiusCombineBtn}
-                    setAttributes={setAttributes}
-                />
-
-            </PanelBody>
 		</>
 	);
 

@@ -11,20 +11,20 @@ const FB_Block_Icons = {
 	advanced_heading: fb(
 		'svg',
 		{
-			version: '1.1',
-			id: 'bookSpineIcon',
-			xmlns: 'http://www.w3.org/2000/svg',
-			width: '24',
-			height: '24',
-			viewBox: '0 0 24 24',
-			className: 'frontis-blocks-editor-icons',
+		  version: '1.1',
+		  id: 'bookSpineIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
-			fill: 'none',
-			stroke: '#0B0C0E',
-			strokeWidth: 1.4,
-			strokeLinecap: 'round',
-			d: `M18 6H19C20.1046 6 21 6.89543 21 8V16C21 17.1046 20.1046 18 19 18H18
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  d: `M18 6H19C20.1046 6 21 6.89543 21 8V16C21 17.1046 20.1046 18 19 18H18
 			  M12 6H5C3.89543 6 3 6.89543 3 8V16C3 17.1046 3.89543 18 5 18H12
 			  M12 3H15
 			  M18 3H15
@@ -36,20 +36,20 @@ const FB_Block_Icons = {
 	animated_heading: fb(
 		'svg',
 		{
-			version: '1.1',
-			id: 'bookIcon',
-			xmlns: 'http://www.w3.org/2000/svg',
-			width: '24',
-			height: '24',
-			viewBox: '0 0 24 24',
-			className: 'frontis-blocks-editor-icons',
+		  version: '1.1',
+		  id: 'bookIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
-			fill: 'none',
-			stroke: '#0B0C0E',
-			strokeWidth: 1.4,
-			strokeLinecap: 'round',
-			d: `M18 6H19C20.1046 6 21 6.89543 21 8V16C21 17.1046 20.1046 18 19 18H18
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  d: `M18 6H19C20.1046 6 21 6.89543 21 8V16C21 17.1046 20.1046 18 19 18H18
 			  M12 6H5C3.89543 6 3 6.89543 3 8V16C3 17.1046 3.89543 18 5 18H12
 			  M12 3H15
 			  M18 3H15
@@ -62,20 +62,20 @@ const FB_Block_Icons = {
 	advanced_image: fb(
 		'svg',
 		{
-			version: '1.1',
-			id: 'imageIcon',
-			xmlns: 'http://www.w3.org/2000/svg',
-			width: '24',
-			height: '24',
-			viewBox: '0 0 24 24',
-			className: 'frontis-blocks-editor-icons',
+		  version: '1.1',
+		  id: 'imageIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
-			fill: 'none',
-			stroke: '#0B0C0E',
-			strokeWidth: 1.4,
-			strokeLinecap: 'round',
-			d: `M3.5 21H6
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  d: `M3.5 21H6
 			  M9.5 21H21
 			  M3 14V5C3 3.89543 3.89543 3 5 3H19C20.1046 3 21 3.89543 21 5V14
 			  M3 14V15C3 16.1046 3.89543 17 5 17H19C20.1046 17 21 16.1046 21 15V14
@@ -86,20 +86,20 @@ const FB_Block_Icons = {
 	advanced_video: fb(
 		'svg',
 		{
-			version: '1.1',
-			id: 'videoIcon',
-			xmlns: 'http://www.w3.org/2000/svg',
-			width: '24',
-			height: '24',
-			viewBox: '0 0 24 24',
-			className: 'frontis-blocks-editor-icons',
+		  version: '1.1',
+		  id: 'videoIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
-			fill: 'none',
-			stroke: '#0B0C0E',
-			strokeWidth: 1.4,
-			strokeLinecap: 'round',
-			d: `M3.5 21H6
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  d: `M3.5 21H6
 			  M10.5 21H21
 			  M14.7142 10.1715L10.3029 12.8183C10.1696 12.8982 10 12.8022 10 12.6468V7.35324C10 7.19778 10.1696 7.10176 10.3029 7.18174L14.7142 9.8285C14.8436 9.90618 14.8436 10.0938 14.7142 10.1715Z
 			  M19 3H5C3.89543 3 3 3.89543 3 5V15C3 16.1046 3.89543 17 5 17H19C20.1046 17 21 16.1046 21 15V5C21 3.89543 20.1046 3 19 3Z`,
@@ -108,20 +108,20 @@ const FB_Block_Icons = {
 	advanced_button: fb(
 		'svg',
 		{
-			version: '1.1',
-			id: 'menuIcon',
-			xmlns: 'http://www.w3.org/2000/svg',
-			width: '24',
-			height: '24',
-			viewBox: '0 0 24 24',
-			className: 'frontis-blocks-editor-icons',
+		  version: '1.1',
+		  id: 'menuIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
-			fill: 'none',
-			stroke: '#0B0C0E',
-			strokeWidth: 1.4,
-			strokeLinecap: 'round',
-			d: `M6 17.5H18
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  d: `M6 17.5H18
 			  M6 6.5H18
 			  M21 16V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V16C3 14.8954 3.89543 14 5 14H19C20.1046 14 21 14.8954 21 16Z
 			  M21 5V8C21 9.10457 20.1046 10 19 10H5C3.89543 10 3 9.10457 3 8V5C3 3.89543 3.89543 3 5 3H19C20.1046 3 21 3.89543 21 5Z`,
@@ -130,21 +130,21 @@ const FB_Block_Icons = {
 	call_to_action: fb(
 		'svg',
 		{
-			version: '1.1',
-			id: 'sendIcon',
-			xmlns: 'http://www.w3.org/2000/svg',
-			width: '24',
-			height: '24',
-			viewBox: '0 0 24 24',
-			className: 'frontis-blocks-editor-icons',
+		  version: '1.1',
+		  id: 'sendIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
-			fill: 'none',
-			stroke: '#0B0C0E',
-			strokeWidth: 1.4,
-			strokeLinecap: 'round',
-			strokeLinejoin: 'round',
-			d: `M21 12V5C21 3.89543 20.1046 3 19 3H5C3.89543 3 3 3.89543 3 5V10C3 11.1046 3.89543 12 5 12H6
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  strokeLinejoin: 'round',
+		  d: `M21 12V5C21 3.89543 20.1046 3 19 3H5C3.89543 3 3 3.89543 3 5V10C3 11.1046 3.89543 12 5 12H6
 			  M14.5 16.5L19 21
 			  M14.5 16.5L12.5 21L9 11L19 14.5L14.5 16.5Z`,
 		})
@@ -152,17 +152,17 @@ const FB_Block_Icons = {
 	countdown: fb(
 		'svg',
 		{
-			version: '1.1',
-			id: 'targetIcon',
-			xmlns: 'http://www.w3.org/2000/svg',
-			width: '24',
-			height: '24',
-			viewBox: '0 0 24 24',
-			className: 'frontis-blocks-editor-icons',
+		  version: '1.1',
+		  id: 'targetIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
-			fill: '#0B0C0E',
-			d: `M20.7 13C20.7 12.6134 20.3866 12.3 20 12.3C19.6134 12.3 19.3 12.6134 19.3 13H20H20.7Z
+		  fill: '#0B0C0E',
+		  d: `M20.7 13C20.7 12.6134 20.3866 12.3 20 12.3C19.6134 12.3 19.3 12.6134 19.3 13H20H20.7Z
 			  M12 21.7C12.3866 21.7 12.7 21.3866 12.7 21C12.7 20.6134 12.3866 20.3 12 20.3V21V21.7Z
 			  M17.1619 6.84817C16.8885 7.12154 16.8885 7.56475 17.1619 7.83812C17.4352 8.11149 17.8785 8.11149 18.1518 7.83812L17.6569 7.34315L17.1619 6.84817Z
 			  M19.495 6.49497C19.7683 6.22161 19.7683 5.77839 19.495 5.50503C19.2216 5.23166 18.7784 5.23166 18.505 5.50503L19 6L19.495 6.49497Z
@@ -197,21 +197,21 @@ const FB_Block_Icons = {
 	counter: fb(
 		'svg',
 		{
-			version: '1.1',
-			id: 'openBookIcon',
-			xmlns: 'http://www.w3.org/2000/svg',
-			width: '24',
-			height: '24',
-			viewBox: '0 0 24 24',
-			className: 'frontis-blocks-editor-icons',
+		  version: '1.1',
+		  id: 'openBookIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
-			fill: 'none',
-			stroke: '#0B0C0E',
-			strokeWidth: 1.4,
-			strokeLinecap: 'round',
-			strokeLinejoin: 'round',
-			d: `M12 5H5C3.89543 5 3 5.89543 3 7V17C3 18.1046 3.89543 19 5 19H12
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  strokeLinejoin: 'round',
+		  d: `M12 5H5C3.89543 5 3 5.89543 3 7V17C3 18.1046 3.89543 19 5 19H12
 			  M12 5V8
 			  M12 5H15H17.8578
 			  M12 11V13
@@ -228,43 +228,43 @@ const FB_Block_Icons = {
 	dual_button: fb(
 		'svg',
 		{
-			version: '1.1',
-			id: 'menuIcon',
-			xmlns: 'http://www.w3.org/2000/svg',
-			width: '24',
-			height: '24',
-			viewBox: '0 0 24 24',
-			className: 'frontis-blocks-editor-icons',
+		  version: '1.1',
+		  id: 'menuIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
-			fill: 'none',
-			stroke: '#0B0C0E',
-			strokeWidth: 1.4,
-			strokeLinecap: 'round',
-			d: `M6 17.5H18
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  d: `M6 17.5H18
 			  M6 6.5H18
 			  M21 16V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V16C3 14.8954 3.89543 14 5 14H19C20.1046 14 21 14.8954 21 16Z
 			  M21 5V8C21 9.10457 20.1046 10 19 10H5C3.89543 10 3 9.10457 3 8V5C3 3.89543 3.89543 3 5 3H19C20.1046 3 21 3.89543 21 5Z`,
 		})
 	),
-
+	
 	features_list: fb(
 		'svg',
 		{
-			version: '1.1',
-			id: 'listIcon',
-			xmlns: 'http://www.w3.org/2000/svg',
-			width: '24',
-			height: '24',
-			viewBox: '0 0 24 24',
-			className: 'frontis-blocks-editor-icons',
+		  version: '1.1',
+		  id: 'listIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
-			fill: 'none',
-			stroke: '#0B0C0E',
-			strokeWidth: 1.4,
-			strokeLinecap: 'round',
-			d: `M10 5H21
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  d: `M10 5H21
 			  M10 12H21
 			  M10 19H21
 			  M7 5C7 6.10457 6.10457 7 5 7C3.89543 7 3 6.10457 3 5C3 3.89543 3.89543 3 5 3C6.10457 3 7 3.89543 7 5Z
@@ -275,20 +275,20 @@ const FB_Block_Icons = {
 	image_gallery: fb(
 		'svg',
 		{
-			version: '1.1',
-			id: 'imageUploadIcon',
-			xmlns: 'http://www.w3.org/2000/svg',
-			width: '24',
-			height: '24',
-			viewBox: '0 0 24 24',
-			className: 'frontis-blocks-editor-icons',
+		  version: '1.1',
+		  id: 'imageUploadIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
-			fill: 'none',
-			stroke: '#0B0C0E',
-			strokeWidth: 1.4,
-			strokeLinecap: 'round',
-			d: `M5 8H16C17.1046 8 18 8.89543 18 10V14
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  d: `M5 8H16C17.1046 8 18 8.89543 18 10V14
 			  M5 8V8C3.89543 8 3 8.89543 3 10V19
 			  M5 8L15.1966 3.75141C16.1994 3.3336 17.3523 3.79261 17.7935 4.78529L20.3151 10.459C20.7108 11.3492 20.4075 12.395 19.5969 12.9354L18 14
 			  M18 14V19
@@ -300,20 +300,20 @@ const FB_Block_Icons = {
 	info_box: fb(
 		'svg',
 		{
-			version: '1.1',
-			id: 'profileCardIcon',
-			xmlns: 'http://www.w3.org/2000/svg',
-			width: '24',
-			height: '24',
-			viewBox: '0 0 24 24',
-			className: 'frontis-blocks-editor-icons',
+		  version: '1.1',
+		  id: 'profileCardIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
-			fill: 'none',
-			stroke: '#0B0C0E',
-			strokeWidth: 1.4,
-			strokeLinecap: 'round',
-			d: `M6 15H13
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  d: `M6 15H13
 			  M6 18H18
 			  M21 5V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V5C3 3.89543 3.89543 3 5 3H19C20.1046 3 21 3.89543 21 5Z
 			  M8 10V10C9.10457 10 10 9.10457 10 8V8C10 6.89543 9.10457 6 8 6V6C6.89543 6 6 6.89543 6 8V8C6 9.10457 6.89543 10 8 10Z`,
@@ -322,64 +322,64 @@ const FB_Block_Icons = {
 	post_grid: fb(
 		'svg',
 		{
-			version: '1.1',
-			id: 'gridIcon',
-			xmlns: 'http://www.w3.org/2000/svg',
-			width: '24',
-			height: '24',
-			viewBox: '0 0 24 24',
-			className: 'frontis-blocks-editor-icons',
+		  version: '1.1',
+		  id: 'gridIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 
 		fb('path', {
-			fill: 'none',
-			stroke: '#0B0C0E',
-			strokeWidth: 1.4,
-			strokeLinecap: 'round',
-			d: `M3 19V16C3 14.8954 3.89543 14 5 14H8C9.10457 14 10 14.8954 10 16V19C10 20.1046 9.10457 21 8 21H5C3.89543 21 3 20.1046 3 19Z`,
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  d: `M3 19V16C3 14.8954 3.89543 14 5 14H8C9.10457 14 10 14.8954 10 16V19C10 20.1046 9.10457 21 8 21H5C3.89543 21 3 20.1046 3 19Z`,
 		}),
 
 		fb('path', {
-			fill: 'none',
-			stroke: '#0B0C0E',
-			strokeWidth: 1.4,
-			strokeLinecap: 'round',
-			d: `M14 19V16C14 14.8954 14.8954 14 16 14H17.5H19C20.1046 14 21 14.8954 21 16V19C21 20.1046 20.1046 21 19 21H16C14.8954 21 14 20.1046 14 19Z`,
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  d: `M14 19V16C14 14.8954 14.8954 14 16 14H17.5H19C20.1046 14 21 14.8954 21 16V19C21 20.1046 20.1046 21 19 21H16C14.8954 21 14 20.1046 14 19Z`,
 		}),
 
 		fb('path', {
-			fill: 'none',
-			stroke: '#0B0C0E',
-			strokeWidth: 1.4,
-			strokeLinecap: 'round',
-			d: `M3 8V5C3 3.89543 3.89543 3 5 3H8C9.10457 3 10 3.89543 10 5V8C10 9.10457 9.10457 10 8 10H5C3.89543 10 3 9.10457 3 8Z`,
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  d: `M3 8V5C3 3.89543 3.89543 3 5 3H8C9.10457 3 10 3.89543 10 5V8C10 9.10457 9.10457 10 8 10H5C3.89543 10 3 9.10457 3 8Z`,
 		}),
 
 		fb('path', {
-			fill: 'none',
-			stroke: '#0B0C0E',
-			strokeWidth: 1.4,
-			strokeLinecap: 'round',
-			d: `M14 8V5C14 3.89543 14.8954 3 16 3H17.5H19C20.1046 3 21 3.89543 21 5V8C21 9.10457 20.1046 10 19 10H16C14.8954 10 14 9.10457 14 8Z`,
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  d: `M14 8V5C14 3.89543 14.8954 3 16 3H17.5H19C20.1046 3 21 3.89543 21 5V8C21 9.10457 20.1046 10 19 10H16C14.8954 10 14 9.10457 14 8Z`,
 		})
 	),
 	pricing_table: fb(
 		'svg',
 		{
-			version: '1.1',
-			id: 'documentIcon',
-			xmlns: 'http://www.w3.org/2000/svg',
-			width: '24',
-			height: '24',
-			viewBox: '0 0 24 24',
-			className: 'frontis-blocks-editor-icons',
+		  version: '1.1',
+		  id: 'documentIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
-			fill: 'none',
-			stroke: '#0B0C0E',
-			strokeWidth: 1.4,
-			strokeLinecap: 'round',
-			d: `M18 6H19C20.1046 6 21 6.89543 21 8V16C21 17.1046 20.1046 18 19 18H18
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  d: `M18 6H19C20.1046 6 21 6.89543 21 8V16C21 17.1046 20.1046 18 19 18H18
 			  M6 6H5C3.89543 6 3 6.89543 3 8V16C3 17.1046 3.89543 18 5 18H6
 			  M13.5 6H12
 			  M10.5 10H12
@@ -395,46 +395,46 @@ const FB_Block_Icons = {
 	team_members: fb(
 		'svg',
 		{
-			version: '1.1',
-			id: 'userProfileIcon',
-			xmlns: 'http://www.w3.org/2000/svg',
-			width: '24',
-			height: '24',
-			viewBox: '0 0 24 24',
-			className: 'frontis-blocks-editor-icons',
+		  version: '1.1',
+		  id: 'userProfileIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 
 		fb('path', {
-			fill: 'none',
-			stroke: '#0B0C0E',
-			strokeWidth: 1.4,
-			d: `M16.7143 14H7.28571C4.91878 14 3 15.9188 3 18.2857C3 19.2325 3.76751 20 4.71428 20H19.2857C20.2325 20 21 19.2325 21 18.2857C21 15.9188 19.0812 14 16.7143 14Z`,
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  d: `M16.7143 14H7.28571C4.91878 14 3 15.9188 3 18.2857C3 19.2325 3.76751 20 4.71428 20H19.2857C20.2325 20 21 19.2325 21 18.2857C21 15.9188 19.0812 14 16.7143 14Z`,
 		}),
 
 		fb('path', {
-			fill: 'none',
-			stroke: '#0B0C0E',
-			strokeWidth: 1.4,
-			d: `M12 4C13.6569 4 15 5.34315 15 7C15 8.65685 13.6569 10 12 10C10.3431 10 9 8.65685 9 7C9 5.34315 10.3431 4 12 4Z`,
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  d: `M12 4C13.6569 4 15 5.34315 15 7C15 8.65685 13.6569 10 12 10C10.3431 10 9 8.65685 9 7C9 5.34315 10.3431 4 12 4Z`,
 		})
 	),
 	testimonial: fb(
 		'svg',
 		{
-			version: '1.1',
-			id: 'commentBoxIcon',
-			xmlns: 'http://www.w3.org/2000/svg',
-			width: '24',
-			height: '24',
-			viewBox: '0 0 24 24',
-			className: 'frontis-blocks-editor-icons',
+		  version: '1.1',
+		  id: 'commentBoxIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
-			fill: 'none',
-			stroke: '#0B0C0E',
-			strokeWidth: 1.4,
-			strokeLinecap: 'round',
-			d: `M6 12H16
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  d: `M6 12H16
 			  M6 15H18
 			  M6 6H7
 			  M9 6H10
@@ -445,20 +445,20 @@ const FB_Block_Icons = {
 	social_icons: fb(
 		'svg',
 		{
-			version: '1.1',
-			id: 'shareIcon',
-			xmlns: 'http://www.w3.org/2000/svg',
-			width: '24',
-			height: '24',
-			viewBox: '0 0 24 24',
-			className: 'frontis-blocks-editor-icons',
+		  version: '1.1',
+		  id: 'shareIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
-			fill: 'none',
-			stroke: '#0B0C0E',
-			strokeWidth: 1.4,
-			strokeLinecap: 'round',
-			d: `M15 7L9 10.5
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  d: `M15 7L9 10.5
 			  M15 17L9 13.5
 			  M20 18.5V18.5C20 19.8807 18.8807 21 17.5 21V21C16.1193 21 15 19.8807 15 18.5V18.5C15 17.1193 16.1193 16 17.5 16V16C18.8807 16 20 17.1193 20 18.5Z
 			  M20 5.5V5.5C20 6.88071 18.8807 8 17.5 8V8C16.1193 8 15 6.88071 15 5.5V5.5C15 4.11929 16.1193 3 17.5 3V3C18.8807 3 20 4.11929 20 5.5Z
@@ -468,20 +468,20 @@ const FB_Block_Icons = {
 	contact_form: fb(
 		'svg',
 		{
-			version: '1.1',
-			id: 'formIcon',
-			xmlns: 'http://www.w3.org/2000/svg',
-			width: '24',
-			height: '24',
-			viewBox: '0 0 24 24',
-			className: 'frontis-blocks-editor-icons',
+		  version: '1.1',
+		  id: 'formIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
-			fill: 'none',
-			stroke: '#0B0C0E',
-			strokeWidth: 1.4,
-			strokeLinecap: 'round',
-			d: `M6 6H13
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  d: `M6 6H13
 			  M6 9H18
 			  M21 5V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V5C3 3.89543 3.89543 3 5 3H19C20.1046 3 21 3.89543 21 5Z
 			  M8 18H16C17.1046 18 18 17.1046 18 16V16C18 14.8954 17.1046 14 16 14H8C6.89543 14 6 14.8954 6 16V16C6 17.1046 6.89543 18 8 18Z`,
@@ -490,21 +490,21 @@ const FB_Block_Icons = {
 	progress_bar: fb(
 		'svg',
 		{
-			version: '1.1',
-			id: 'tableIcon',
-			xmlns: 'http://www.w3.org/2000/svg',
-			width: '24',
-			height: '24',
-			viewBox: '0 0 24 24',
-			className: 'frontis-blocks-editor-icons',
+		  version: '1.1',
+		  id: 'tableIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
-			fill: 'none',
-			stroke: '#0B0C0E',
-			strokeWidth: 1.4,
-			strokeLinecap: 'round',
-			strokeLinejoin: 'round',
-			d: `M3 12H17
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  strokeLinejoin: 'round',
+		  d: `M3 12H17
 			  M21 12H17
 			  M17 12V10
 			  M17 12V14
@@ -521,20 +521,20 @@ const FB_Block_Icons = {
 	icon_box: fb(
 		'svg',
 		{
-			version: '1.1',
-			id: 'idCardIcon',
-			xmlns: 'http://www.w3.org/2000/svg',
-			width: '24',
-			height: '24',
-			viewBox: '0 0 24 24',
-			className: 'frontis-blocks-editor-icons',
+		  version: '1.1',
+		  id: 'idCardIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
-			fill: 'none',
-			stroke: '#0B0C0E',
-			strokeWidth: 1.4,
-			strokeLinecap: 'round',
-			d: `M8.5 15H15.5
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  d: `M8.5 15H15.5
 			  M6 18H18
 			  M21 5V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V5C3 3.89543 3.89543 3 5 3H19C20.1046 3 21 3.89543 21 5Z
 			  M12 10V10C13.1046 10 14 9.10457 14 8V8C14 6.89543 13.1046 6 12 6V6C10.8954 6 10 6.89543 10 8V8C10 9.10457 10.8954 10 12 10Z`,
@@ -543,20 +543,20 @@ const FB_Block_Icons = {
 	fluent_form: fb(
 		'svg',
 		{
-			version: '1.1',
-			id: 'formIcon',
-			xmlns: 'http://www.w3.org/2000/svg',
-			width: '24',
-			height: '24',
-			viewBox: '0 0 24 24',
-			className: 'frontis-blocks-editor-icons',
+		  version: '1.1',
+		  id: 'formIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
-			fill: 'none',
-			stroke: '#0B0C0E',
-			strokeWidth: 1.4,
-			strokeLinecap: 'round',
-			d: `M6 6H13
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  d: `M6 6H13
 			  M6 9H18
 			  M21 5V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V5C3 3.89543 3.89543 3 5 3H19C20.1046 3 21 3.89543 21 5Z
 			  M8 18H16C17.1046 18 18 17.1046 18 16V16C18 14.8954 17.1046 14 16 14H8C6.89543 14 6 14.8954 6 16V16C6 17.1046 6.89543 18 8 18Z`,
@@ -565,20 +565,20 @@ const FB_Block_Icons = {
 	advanced_navigation: fb(
 		'svg',
 		{
-			version: '1.1',
-			id: 'menuLinesIcon',
-			xmlns: 'http://www.w3.org/2000/svg',
-			width: '24',
-			height: '24',
-			viewBox: '0 0 24 24',
-			className: 'frontis-blocks-editor-icons',
+		  version: '1.1',
+		  id: 'menuLinesIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
-			fill: 'none',
-			stroke: '#0B0C0E',
-			strokeWidth: 1.4,
-			strokeLinecap: 'round',
-			d: `M3 5H21
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  d: `M3 5H21
 			  M3 12H21
 			  M3 19H15`,
 		})
@@ -586,20 +586,20 @@ const FB_Block_Icons = {
 	flip_box: fb(
 		'svg',
 		{
-			version: '1.1',
-			id: 'pauseIcon',
-			xmlns: 'http://www.w3.org/2000/svg',
-			width: '24',
-			height: '24',
-			viewBox: '0 0 24 24',
-			className: 'frontis-blocks-editor-icons',
+		  version: '1.1',
+		  id: 'pauseIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
-			fill: 'none',
-			stroke: '#0B0C0E',
-			strokeWidth: 1.4,
-			strokeLinecap: 'round',
-			d: `M12 3V7
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  d: `M12 3V7
 			  M12 10V14
 			  M12 17V21
 			  M8.44721 17.2764L4.44721 19.2764C3.78231 19.6088 3 19.1253 3 18.382V6.61803C3 5.87465 3.78231 5.39116 4.44721 5.72361L8.44721 7.72361C8.786 7.893 9 8.23926 9 8.61803V16.382C9 16.7607 8.786 17.107 8.44721 17.2764Z
@@ -609,22 +609,22 @@ const FB_Block_Icons = {
 	accordion: fb(
 		'svg',
 		{
-			version: '1.1',
-			id: 'accordionIcon',
-			xmlns: 'http://www.w3.org/2000/svg',
-			width: '24',
-			height: '24',
-			viewBox: '0 0 24 24',
-			className: 'frontis-blocks-editor-icons',
+		  version: '1.1',
+		  id: 'accordionIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
-			fill: 'none',
-			stroke: '#0B0C0E',
-			strokeWidth: 1.4,
-			strokeLinecap: 'round',
-			strokeLinejoin: 'round',
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  strokeLinejoin: 'round',
 
-			d: `M6 17.5H13
+		  d: `M6 17.5H13
 			  M16 17L17 18L18 17
 			  M6 6.5H13
 			  M16 6L17 7L18 6
@@ -635,39 +635,39 @@ const FB_Block_Icons = {
 	container: fb(
 		'svg',
 		{
-			version: '1.1',
-			id: 'layoutIcon',
-			xmlns: 'http://www.w3.org/2000/svg',
-			width: '24',
-			height: '24',
-			viewBox: '0 0 24 24',
-			className: 'frontis-blocks-editor-icons',
+		  version: '1.1',
+		  id: 'layoutIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 
 		fb('path', {
-			fill: 'none',
-			stroke: '#0B0C0E',
-			strokeWidth: 1.4,
-			strokeLinecap: 'round',
-			d: `M3 8V5C3 3.89543 3.89543 3 5 3H19C20.1046 3 21 3.89543 21 5V8C21 9.10457 20.1046 10 19 10H5C3.89543 10 3 9.10457 3 8Z`,
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  d: `M3 8V5C3 3.89543 3.89543 3 5 3H19C20.1046 3 21 3.89543 21 5V8C21 9.10457 20.1046 10 19 10H5C3.89543 10 3 9.10457 3 8Z`,
 		}),
 
 		fb('path', {
-			fill: 'none',
-			stroke: '#0B0C0E',
-			strokeWidth: 1.4,
-			strokeLinecap: 'round',
-			d: `M3 19V16C3 14.8954 3.89543 14 5 14H8C9.10457 14 10 14.8954 10 16V19C10 20.1046 9.10457 21 8 21H5C3.89543 21 3 20.1046 3 19Z`,
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  d: `M3 19V16C3 14.8954 3.89543 14 5 14H8C9.10457 14 10 14.8954 10 16V19C10 20.1046 9.10457 21 8 21H5C3.89543 21 3 20.1046 3 19Z`,
 		}),
 
 		fb('path', {
-			fill: 'none',
-			stroke: '#0B0C0E',
-			strokeWidth: 1.4,
-			strokeLinecap: 'round',
-			d: `M14 19V16C14 14.8954 14.8954 14 16 14H19C20.1046 14 21 14.8954 21 16V19C21 20.1046 20.1046 21 19 21H16C14.8954 21 14 20.1046 14 19Z`,
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  d: `M14 19V16C14 14.8954 14.8954 14 16 14H19C20.1046 14 21 14.8954 21 16V19C21 20.1046 20.1046 21 19 21H16C14.8954 21 14 20.1046 14 19Z`,
 		})
-	),
+	  ),
 	slider: fb(
 		'svg',
 		{
@@ -693,23 +693,23 @@ const FB_Block_Icons = {
 				M21 5.5V15.5C21 16.6046 20.1046 17.5 19 17.5H5C3.89543 17.5 3 16.6046 3 15.5V5.5C3 4.39543 3.89543 3.5 5 3.5H19C20.1046 3.5 21 4.39543 21 5.5Z`,
 		})
 	),
-	carousel: fb(
+	carousel:fb(
 		'svg',
 		{
-			version: '1.1',
-			id: 'columnsIcon',
-			xmlns: 'http://www.w3.org/2000/svg',
-			width: '24',
-			height: '24',
-			viewBox: '0 0 24 24',
-			className: 'frontis-blocks-editor-icons',
+		  version: '1.1',
+		  id: 'columnsIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
-			fill: 'none',
-			stroke: '#0B0C0E',
-			strokeWidth: 1.4,
-			strokeLinecap: 'round',
-			d: `M21 5V5C19.8954 5 19 5.89543 19 7V17C19 18.1046 19.8954 19 21 19V19
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  d: `M21 5V5C19.8954 5 19 5.89543 19 7V17C19 18.1046 19.8954 19 21 19V19
 			  M3 5V5C4.10457 5 5 5.89543 5 7V17C5 18.1046 4.10457 19 3 19V19
 			  M16 7V17C16 18.1046 15.1046 19 14 19H10C8.89543 19 8 18.1046 8 17V7C8 5.89543 8.89543 5 10 5H14C15.1046 5 16 5.89543 16 7Z`,
 		})
@@ -717,20 +717,20 @@ const FB_Block_Icons = {
 	loop_builder: fb(
 		'svg',
 		{
-			version: '1.1',
-			id: 'splitScreenIcon',
-			xmlns: 'http://www.w3.org/2000/svg',
-			width: '24',
-			height: '24',
-			viewBox: '0 0 24 24',
-			className: 'frontis-blocks-editor-icons',
+		  version: '1.1',
+		  id: 'splitScreenIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
-			fill: 'none',
-			stroke: '#0B0C0E',
-			strokeWidth: 1.4,
-			strokeLinecap: 'round',
-			d: `M6 6H5C3.89543 6 3 6.89543 3 8V16C3 17.1046 3.89543 18 5 18H15
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  d: `M6 6H5C3.89543 6 3 6.89543 3 8V16C3 17.1046 3.89543 18 5 18H15
 			  M9 6H19C20.1046 6 21 6.89543 21 8V16C21 17.1046 20.1046 18 19 18H18
 			  M9 6L12 9
 			  M9 6L12 3
@@ -738,23 +738,23 @@ const FB_Block_Icons = {
 			  M15 18L12 21`,
 		})
 	),
-	google_map: fb(
+	google_map : fb(
 		'svg',
 		{
-			version: '1.1',
-			id: 'buildingIcon',
-			xmlns: 'http://www.w3.org/2000/svg',
-			width: '24',
-			height: '24',
-			viewBox: '0 0 24 24',
-			className: 'frontis-blocks-editor-icons',
+		  version: '1.1',
+		  id: 'buildingIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
-			fill: 'none',
-			stroke: '#0B0C0E',
-			strokeWidth: 1.4,
-			strokeLinecap: 'round',
-			d: `M15 7L10.1094 3.7396C9.4376 3.29173 8.5624 3.29173 7.8906 3.7396L3.8906 6.40627C3.3342 6.7772 3 7.40166 3 8.07037V19.382C3 20.1253 3.78231 20.6088 4.44721 20.2764L9 18
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  d: `M15 7L10.1094 3.7396C9.4376 3.29173 8.5624 3.29173 7.8906 3.7396L3.8906 6.40627C3.3342 6.7772 3 7.40166 3 8.07037V19.382C3 20.1253 3.78231 20.6088 4.44721 20.2764L9 18
 			  M15 7H19C20.1046 7 21 7.89543 21 9V19C21 20.1046 20.1046 21 19 21H15.4721C15.1616 21 14.8554 20.9277 14.5777 20.7889L9 18
 			  M15 7V9
 			  M9 18V16
@@ -767,21 +767,21 @@ const FB_Block_Icons = {
 	tabs: fb(
 		'svg',
 		{
-			version: '1.1',
-			id: 'tabIcon',
-			xmlns: 'http://www.w3.org/2000/svg',
-			width: '24',
-			height: '24',
-			viewBox: '0 0 24 24',
-			className: 'frontis-blocks-editor-icons',
+		  version: '1.1',
+		  id: 'tabIcon', 
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
-			fill: 'none',
-			stroke: '#0B0C0E',
-			strokeWidth: 1.4,
-			strokeLinecap: 'round',
-			strokeLinejoin: 'round',
-			d: `M9 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V8C21 6.89543 20.1046 6 19 6V6
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  strokeLinejoin: 'round',
+		  d: `M9 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V8C21 6.89543 20.1046 6 19 6V6
 			  M9 3V6H14
 			  M9 3H12C13.1046 3 14 3.89543 14 5V6
 			  M14 6H19
@@ -793,20 +793,20 @@ const FB_Block_Icons = {
 	post_title: fb(
 		'svg',
 		{
-			version: '1.1',
-			id: 'postTitleIcon',
-			xmlns: 'http://www.w3.org/2000/svg',
-			width: '24',
-			height: '24',
-			viewBox: '0 0 24 24',
-			className: 'frontis-blocks-editor-icons',
+		  version: '1.1',
+		  id: 'postTitleIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
-			fill: 'none',
-			stroke: '#0B0C0E',
-			strokeWidth: 1.4,
-			strokeLinecap: 'round',
-			d: `M3 19L5 13
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  d: `M3 19L5 13
 			  M13 19L11 13
 			  M11 13L8.93633 7.49688C8.61189 6.63171 7.38811 6.63171 7.06367 7.49688L5 13
 			  M11 13H5
@@ -817,21 +817,21 @@ const FB_Block_Icons = {
 	advanced_paragraph: fb(
 		'svg',
 		{
-			version: '1.1',
-			id: 'advancedParagraphIcon',
-			xmlns: 'http://www.w3.org/2000/svg',
-			width: '24',
-			height: '24',
-			viewBox: '0 0 24 24',
-			className: 'frontis-blocks-editor-icons',
+		  version: '1.1',
+		  id: 'advancedParagraphIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
-			fill: 'none',
-			stroke: '#0B0C0E',
-			strokeWidth: 1.4,
-			strokeLinecap: 'round',
-			strokeLinejoin: 'round',
-			d: `M12 6H21
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  strokeLinejoin: 'round',
+		  d: `M12 6H21
 			  M12 9H21
 			  M3 13H21
 			  M3 16H21
@@ -844,20 +844,20 @@ const FB_Block_Icons = {
 	post_category: fb(
 		'svg',
 		{
-			version: '1.1',
-			id: 'postCategoryIcon',
-			xmlns: 'http://www.w3.org/2000/svg',
-			width: '24',
-			height: '24',
-			viewBox: '0 0 24 24',
-			className: 'frontis-blocks-editor-icons',
+		  version: '1.1',
+		  id: 'postCategoryIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
-			fill: 'none',
-			stroke: '#0B0C0E',
-			strokeWidth: 1.4,
-			strokeLinecap: 'round',
-			d: `M6 15V13C6 12.4477 6.44772 12 7 12H12
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  d: `M6 15V13C6 12.4477 6.44772 12 7 12H12
 			  M18 15V13C18 12.4477 17.5523 12 17 12H12
 			  M12 12V9
 			  M11 9H13C14.1046 9 15 8.10457 15 7V5C15 3.89543 14.1046 3 13 3H11C9.89543 3 9 3.89543 9 5V7C9 8.10457 9.89543 9 11 9Z
@@ -868,21 +868,21 @@ const FB_Block_Icons = {
 	post_comment_form: fb(
 		'svg',
 		{
-			version: '1.1',
-			id: 'postCommentFormIcon',
-			xmlns: 'http://www.w3.org/2000/svg',
-			width: '24',
-			height: '24',
-			viewBox: '0 0 24 24',
-			className: 'frontis-blocks-editor-icons',
+		  version: '1.1',
+		  id: 'postCommentFormIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
-			fill: 'none',
-			stroke: '#0B0C0E',
-			strokeWidth: 1.4,
-			strokeLinecap: 'round',
-			strokeLinejoin: 'round',
-			d: `M18 12V16C18 17.1046 17.1046 18 16 18H13.9367C13.3432 18 12.7803 18.2636 12.4003 18.7196L10.5 21L8.59969 18.7196C8.2197 18.2636 7.65681 18 7.06325 18H5C3.89543 18 3 17.1046 3 16V8C3 6.89543 3.89543 6 5 6H12
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  strokeLinejoin: 'round',
+		  d: `M18 12V16C18 17.1046 17.1046 18 16 18H13.9367C13.3432 18 12.7803 18.2636 12.4003 18.7196L10.5 21L8.59969 18.7196C8.2197 18.2636 7.65681 18 7.06325 18H5C3.89543 18 3 17.1046 3 16V8C3 6.89543 3.89543 6 5 6H12
 			  M15 6H21
 			  M18 9V3
 			  M6 14H15
@@ -892,20 +892,20 @@ const FB_Block_Icons = {
 	post_featured_image: fb(
 		'svg',
 		{
-			version: '1.1',
-			id: 'postFeaturedImageIcon',
-			xmlns: 'http://www.w3.org/2000/svg',
-			width: '24',
-			height: '24',
-			viewBox: '0 0 24 24',
-			className: 'frontis-blocks-editor-icons',
+		  version: '1.1',
+		  id: 'postFeaturedImageIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
-			fill: 'none',
-			stroke: '#0B0C0E',
-			strokeWidth: 1.4,
-			strokeLinejoin: 'round',
-			d: `M21 17V18C21 19.1046 20.1046 20 19 20H14
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinejoin: 'round',
+		  d: `M21 17V18C21 19.1046 20.1046 20 19 20H14
 			  M21 17V7V6C21 4.89543 20.1046 4 19 4H5C3.89543 4 3 4.89543 3 6V7V16
 			  M21 17L16.5801 12.5801C15.7372 11.7372 14.3488 11.8141 13.6041 12.7449L11 16
 			  M3 16V18C3 19.1046 3.89543 20 5 20H14
@@ -917,20 +917,20 @@ const FB_Block_Icons = {
 	news_ticker: fb(
 		'svg',
 		{
-			version: '1.1',
-			id: 'newsTickerIcon',
-			xmlns: 'http://www.w3.org/2000/svg',
-			width: '20',
-			height: '16',
-			viewBox: '0 0 20 16',
-			className: 'frontis-blocks-editor-icons',
+		  version: '1.1',
+		  id: 'newsTickerIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '20',
+		  height: '16',
+		  viewBox: '0 0 20 16',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
-			fill: 'none',
-			stroke: '#0B0C0E',
-			strokeWidth: 1.4,
-			strokeLinecap: 'round',
-			d: `M4 11H11
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  d: `M4 11H11
 			  M14 11H16
 			  M8 2.5C8 3.32843 7.32843 4 6.5 4H2.5C1.67157 4 1 3.32843 1 2.5C1 1.67157 1.67157 1 2.5 1H6.5C7.32843 1 8 1.67157 8 2.5Z
 			  M3 7H17C18.1046 7 19 7.89543 19 9V13C19 14.1046 18.1046 15 17 15H3C1.89543 15 1 14.1046 1 13V9C1 7.89543 1.89543 7 3 7Z`,
@@ -939,21 +939,21 @@ const FB_Block_Icons = {
 	business_hours: fb(
 		'svg',
 		{
-			version: '1.1',
-			id: 'businessHoursIcon',
-			xmlns: 'http://www.w3.org/2000/svg',
-			width: '24',
-			height: '24',
-			viewBox: '0 0 24 24',
-			className: 'frontis-blocks-editor-icons',
+		  version: '1.1',
+		  id: 'businessHoursIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
-			fill: 'none',
-			stroke: '#0B0C0E',
-			strokeWidth: 1.4,
-			strokeLinecap: 'round',
-			strokeLinejoin: 'round',
-			d: `M10.5 18C7.23445 18 4.45636 15.913 3.42676 13
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  strokeLinejoin: 'round',
+		  d: `M10.5 18C7.23445 18 4.45636 15.913 3.42676 13
 			  M10.5 18C7 13 7 8 10.5 3
 			  M10.5 18C10.5102 17.9855 10 18 11 18
 			  M3.42676 13C3.15039 12.2181 3 11.3766 3 10.5C3 9.62341 3.15039 8.78195 3.42676 8
@@ -970,29 +970,27 @@ const FB_Block_Icons = {
 	breadcrumb: fb(
 		'svg',
 		{
-			xmlns: 'http://www.w3.org/2000/svg',
-			width: '24',
-			height: '24',
-			viewBox: '0 0 24 24',
-			fill: 'none',
-			className: 'frontis-blocks-editor-icons',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  fill: 'none',
+		  className: 'frontis-blocks-editor-icons',
 		},
-		[
-			fb('path', {
-				d: 'M7 18H3L9 12L3 6H7L13 12L7 18Z',
-				stroke: '#0B0C0E',
-				strokeWidth: 1.4,
-				strokeLinecap: 'round',
-				strokeLinejoin: 'round',
-			}),
-			fb('path', {
-				d: 'M17 12L11 6H15L21 12L15 18H11L17 12Z',
-				stroke: '#0B0C0E',
-				strokeWidth: 1.4,
-				strokeLinecap: 'round',
-				strokeLinejoin: 'round',
-			})
-		]
+		fb('path', {
+			d: 'M7 18H3L9 12L3 6H7L13 12L7 18Z',
+			stroke: '#0B0C0E',
+			strokeWidth: 1.4,
+			strokeLinecap: 'round',
+			strokeLinejoin: 'round',
+		}),
+		fb('path', {
+			d: 'M17 12L11 6H15L21 12L15 18H11L17 12Z',
+			stroke: '#0B0C0E',
+			strokeWidth: 1.4,
+			strokeLinecap: 'round',
+			strokeLinejoin: 'round',
+		})
 	),
 	off_canvas_menu: fb(
 		'svg',
@@ -1150,7 +1148,6 @@ const FB_Block_Icons = {
 			strokeWidth: 1.4,
 		})
 	),
-
 	back_to_top: fb(
 		'svg',
 		{
@@ -1213,9 +1210,9 @@ const FB_Block_Icons = {
 
 };
 
-export const renderFbBlockIcon = (blockName) => (
+export const renderFbBlockIcon = ( blockName ) => (
 	<>
-		{FB_Block_Icons[blockName]}
+		{ FB_Block_Icons[ blockName ] }
 		<div className="fb-icon--block-inserter-label">Legacy</div>
 	</>
 );

@@ -6,6 +6,11 @@
 
 		.grid-item-content {
 			min-height: 100%;
+
+			> * {
+				margin-top: 0 !important;
+				margin-bottom: 0 !important;
+			}
 		}
 	}
 }
