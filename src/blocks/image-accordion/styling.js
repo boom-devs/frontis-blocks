@@ -162,7 +162,7 @@ const generateImageAccordionStyle = (attributes) => {
 	const blockStyle = `
 
         /* ---- Container ---- */
-        .${blockID} .pea-image-accordion-container {
+        .${blockID} .fb-image-accordion-container {
             ${
 							imageAccordionWidth?.Desktop
 								? `width: ${imageAccordionWidth.Desktop}${
@@ -198,24 +198,24 @@ const generateImageAccordionStyle = (attributes) => {
         }
 
         /* ---- Item ---- */
-        .${blockID} .pea-image-accordion-item {
+        .${blockID} .fb-image-accordion-item {
             ${brDesktop ? `border-radius: ${brDesktop};` : ""}
         }
-        .${blockID} .pea-image-accordion-item.is-active,
-        .${blockID} .pea-trigger-hover .pea-image-accordion-item:hover {
+        .${blockID} .fb-image-accordion-item.is-active,
+        .${blockID} .fb-trigger-hover .fb-image-accordion-item:hover {
             ${brActiveDesktop ? `border-radius: ${brActiveDesktop};` : ""}
         }
 
         /* ---- Overlay ---- */
-        .${blockID} .pea-image-accordion-overlay {
+        .${blockID} .fb-image-accordion-overlay {
             ${
 							imageAccordionOverlayColor
 								? `background: ${imageAccordionOverlayColor};`
 								: ""
 						}
         }
-        .${blockID} .pea-image-accordion-item:hover .pea-image-accordion-overlay,
-        .${blockID} .pea-image-accordion-item.is-active .pea-image-accordion-overlay {
+        .${blockID} .fb-image-accordion-item:hover .fb-image-accordion-overlay,
+        .${blockID} .fb-image-accordion-item.is-active .fb-image-accordion-overlay {
             ${
 							imageAccordionOverlayHoverColor
 								? `background: ${imageAccordionOverlayHoverColor};`
@@ -224,7 +224,7 @@ const generateImageAccordionStyle = (attributes) => {
         }
 
         /* ---- Title ---- */
-        .${blockID} .pea-image-accordion-title {
+        .${blockID} .fb-image-accordion-title {
             ${
 							imageAccordionTitleColor
 								? `color: ${imageAccordionTitleColor};`
@@ -250,8 +250,8 @@ const generateImageAccordionStyle = (attributes) => {
 								: ""
 						}
         }
-        .${blockID} .pea-image-accordion-item:hover .pea-image-accordion-title,
-        .${blockID} .pea-image-accordion-item.is-active .pea-image-accordion-title {
+        .${blockID} .fb-image-accordion-item:hover .fb-image-accordion-title,
+        .${blockID} .fb-image-accordion-item.is-active .fb-image-accordion-title {
             ${
 							imageAccordionTitleHoverColor
 								? `color: ${imageAccordionTitleHoverColor};`
@@ -260,8 +260,8 @@ const generateImageAccordionStyle = (attributes) => {
         }
 
         /* ---- Subtitle / Desc ---- */
-        .${blockID} .pea-image-accordion-desc,
-        .${blockID} .pea-sub-title {
+        .${blockID} .fb-image-accordion-desc,
+        .${blockID} .fb-sub-title {
             ${
 							imageAccordionSubtitleColor
 								? `color: ${imageAccordionSubtitleColor};`
@@ -280,10 +280,10 @@ const generateImageAccordionStyle = (attributes) => {
 								: ""
 						}
         }
-        .${blockID} .pea-image-accordion-item:hover .pea-image-accordion-desc,
-        .${blockID} .pea-image-accordion-item:hover .pea-sub-title,
-        .${blockID} .pea-image-accordion-item.is-active .pea-image-accordion-desc,
-        .${blockID} .pea-image-accordion-item.is-active .pea-sub-title {
+        .${blockID} .fb-image-accordion-item:hover .fb-image-accordion-desc,
+        .${blockID} .fb-image-accordion-item:hover .fb-sub-title,
+        .${blockID} .fb-image-accordion-item.is-active .fb-image-accordion-desc,
+        .${blockID} .fb-image-accordion-item.is-active .fb-sub-title {
             ${
 							imageAccordionSubtitleHoverColor
 								? `color: ${imageAccordionSubtitleHoverColor};`
@@ -292,7 +292,7 @@ const generateImageAccordionStyle = (attributes) => {
         }
 
         /* ---- Icon Circle (Preset 1) ---- */
-        .${blockID} .pea-image-accordion-icon-circle {
+        .${blockID} .fb-image-accordion-icon-circle {
             ${
 							imageAccordionIconCircleBgColor
 								? `background: ${imageAccordionIconCircleBgColor};`
@@ -308,8 +308,8 @@ const generateImageAccordionStyle = (attributes) => {
 								: ""
 						}
         }
-        .${blockID} .pea-image-accordion-icon-circle i,
-        .${blockID} .pea-image-accordion-icon-circle svg {
+        .${blockID} .fb-image-accordion-icon-circle i,
+        .${blockID} .fb-image-accordion-icon-circle svg {
             ${
 							imageAccordionIconColor
 								? `color: ${imageAccordionIconColor}; fill: ${imageAccordionIconColor};`
@@ -327,10 +327,10 @@ const generateImageAccordionStyle = (attributes) => {
 								: ""
 						}
         }
-        .${blockID} .pea-image-accordion-item:hover .pea-image-accordion-icon-circle i,
-        .${blockID} .pea-image-accordion-item:hover .pea-image-accordion-icon-circle svg,
-        .${blockID} .pea-image-accordion-item.is-active .pea-image-accordion-icon-circle i,
-        .${blockID} .pea-image-accordion-item.is-active .pea-image-accordion-icon-circle svg {
+        .${blockID} .fb-image-accordion-item:hover .fb-image-accordion-icon-circle i,
+        .${blockID} .fb-image-accordion-item:hover .fb-image-accordion-icon-circle svg,
+        .${blockID} .fb-image-accordion-item.is-active .fb-image-accordion-icon-circle i,
+        .${blockID} .fb-image-accordion-item.is-active .fb-image-accordion-icon-circle svg {
             ${
 							imageAccordionIconHoverColor
 								? `color: ${imageAccordionIconHoverColor}; fill: ${imageAccordionIconHoverColor};`
@@ -339,7 +339,7 @@ const generateImageAccordionStyle = (attributes) => {
         }
 
         /* ---- Dots (Preset 2) ---- */
-        .${blockID} .pea-image-accordion-dot {
+        .${blockID} .fb-image-accordion-dot {
             ${
 							imageAccordionDotColor
 								? `background-color: ${imageAccordionDotColor};`
@@ -357,7 +357,7 @@ const generateImageAccordionStyle = (attributes) => {
         }
 
         /* ---- Number (Preset 2 & 4) ---- */
-        .${blockID} .pea-image-accordion-number {
+        .${blockID} .fb-image-accordion-number {
             ${
 							imageAccordionNumberColor
 								? `color: ${imageAccordionNumberColor};`
@@ -376,8 +376,8 @@ const generateImageAccordionStyle = (attributes) => {
 								: ""
 						}
         }
-        .${blockID} .pea-image-accordion-item:hover .pea-image-accordion-number,
-        .${blockID} .pea-image-accordion-item.is-active .pea-image-accordion-number {
+        .${blockID} .fb-image-accordion-item:hover .fb-image-accordion-number,
+        .${blockID} .fb-image-accordion-item.is-active .fb-image-accordion-number {
             ${
 							imageAccordionNumberHoverColor
 								? `color: ${imageAccordionNumberHoverColor};`
@@ -386,7 +386,7 @@ const generateImageAccordionStyle = (attributes) => {
         }
 
         /* ---- Button (Preset 3) ---- */
-        .${blockID} .pea-image-accordion-btn {
+        .${blockID} .fb-image-accordion-btn {
             ${
 							imageAccordionBtnTextColor
 								? `color: ${imageAccordionBtnTextColor};`
@@ -430,7 +430,7 @@ const generateImageAccordionStyle = (attributes) => {
 								: ""
 						}
         }
-        .${blockID} .pea-image-accordion-btn:hover {
+        .${blockID} .fb-image-accordion-btn:hover {
             ${
 							imageAccordionBtnHoverTextColor
 								? `color: ${imageAccordionBtnHoverTextColor};`
@@ -445,7 +445,7 @@ const generateImageAccordionStyle = (attributes) => {
 
         /* ---- Tablet ---- */
         @media only screen and (max-width: 1024px) {
-            .${blockID} .pea-image-accordion-container {
+            .${blockID} .fb-image-accordion-container {
                 ${
 									imageAccordionWidth?.Tablet
 										? `width: ${imageAccordionWidth.Tablet}${
@@ -482,14 +482,14 @@ const generateImageAccordionStyle = (attributes) => {
 										: ""
 								}
             }
-            .${blockID} .pea-image-accordion-item {
+            .${blockID} .fb-image-accordion-item {
                 ${brTablet ? `border-radius: ${brTablet};` : ""}
             }
-            .${blockID} .pea-image-accordion-item.is-active,
-            .${blockID} .pea-trigger-hover .pea-image-accordion-item:hover {
+            .${blockID} .fb-image-accordion-item.is-active,
+            .${blockID} .fb-trigger-hover .fb-image-accordion-item:hover {
                 ${brActiveTablet ? `border-radius: ${brActiveTablet};` : ""}
             }
-            .${blockID} .pea-image-accordion-title {
+            .${blockID} .fb-image-accordion-title {
                 ${
 									imageAccordionTitleFontSize?.Tablet
 										? `font-size: ${imageAccordionTitleFontSize.Tablet}${
@@ -498,8 +498,8 @@ const generateImageAccordionStyle = (attributes) => {
 										: ""
 								}
             }
-            .${blockID} .pea-image-accordion-desc,
-            .${blockID} .pea-sub-title {
+            .${blockID} .fb-image-accordion-desc,
+            .${blockID} .fb-sub-title {
                 ${
 									imageAccordionSubtitleFontSize?.Tablet
 										? `font-size: ${imageAccordionSubtitleFontSize.Tablet}${
@@ -508,7 +508,7 @@ const generateImageAccordionStyle = (attributes) => {
 										: ""
 								}
             }
-            .${blockID} .pea-image-accordion-dot {
+            .${blockID} .fb-image-accordion-dot {
                 ${
 									imageAccordionDotSize?.Tablet
 										? `width: ${imageAccordionDotSize.Tablet}${
@@ -523,7 +523,7 @@ const generateImageAccordionStyle = (attributes) => {
 
         /* ---- Mobile ---- */
         @media only screen and (max-width: 767px) {
-            .${blockID} .pea-image-accordion-container {
+            .${blockID} .fb-image-accordion-container {
                 ${
 									imageAccordionWidth?.Mobile
 										? `width: ${imageAccordionWidth.Mobile}${
@@ -560,14 +560,14 @@ const generateImageAccordionStyle = (attributes) => {
 										: ""
 								}
             }
-            .${blockID} .pea-image-accordion-item {
+            .${blockID} .fb-image-accordion-item {
                 ${brMobile ? `border-radius: ${brMobile};` : ""}
             }
-            .${blockID} .pea-image-accordion-item.is-active,
-            .${blockID} .pea-trigger-hover .pea-image-accordion-item:hover {
+            .${blockID} .fb-image-accordion-item.is-active,
+            .${blockID} .fb-trigger-hover .fb-image-accordion-item:hover {
                 ${brActiveMobile ? `border-radius: ${brActiveMobile};` : ""}
             }
-            .${blockID} .pea-image-accordion-title {
+            .${blockID} .fb-image-accordion-title {
                 ${
 									imageAccordionTitleFontSize?.Mobile
 										? `font-size: ${imageAccordionTitleFontSize.Mobile}${
@@ -576,8 +576,8 @@ const generateImageAccordionStyle = (attributes) => {
 										: ""
 								}
             }
-            .${blockID} .pea-image-accordion-desc,
-            .${blockID} .pea-sub-title {
+            .${blockID} .fb-image-accordion-desc,
+            .${blockID} .fb-sub-title {
                 ${
 									imageAccordionSubtitleFontSize?.Mobile
 										? `font-size: ${imageAccordionSubtitleFontSize.Mobile}${
@@ -586,7 +586,7 @@ const generateImageAccordionStyle = (attributes) => {
 										: ""
 								}
             }
-            .${blockID} .pea-image-accordion-dot {
+            .${blockID} .fb-image-accordion-dot {
                 ${
 									imageAccordionDotSize?.Mobile
 										? `width: ${imageAccordionDotSize.Mobile}${

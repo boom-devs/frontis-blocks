@@ -84,7 +84,7 @@ export default function Edit({
 		return (
 			<div
 				key={item.id || index}
-				className={`pea-image-accordion-item ${isActive ? "is-active" : ""}`}
+				className={`fb-image-accordion-item ${isActive ? "is-active" : ""}`}
 				role="button"
 				tabIndex="0"
 				onMouseEnter={handleItemHover}
@@ -99,23 +99,23 @@ export default function Edit({
 			>
 				{imageAccordionPreset === "preset-4" && item.image?.url && (
 					<div
-						className="pea-skew-bg"
+						className="fb-skew-bg"
 						style={{ backgroundImage: `url('${item.image.url}')` }}
 					/>
 				)}
 
-				<div className="pea-image-accordion-overlay" />
+				<div className="fb-image-accordion-overlay" />
 
 				{imageAccordionPreset === "preset-2" && imageAccordionShowDots && (
-					<div className="pea-image-accordion-dot-wrapper">
-						<span className="pea-image-accordion-dot" />
+					<div className="fb-image-accordion-dot-wrapper">
+						<span className="fb-image-accordion-dot" />
 					</div>
 				)}
 
-				<div className="pea-image-accordion-content-wrapper">
+				<div className="fb-image-accordion-content-wrapper">
 					{imageAccordionPreset === "preset-1" && (
 						<>
-							<div className="pea-image-accordion-icon-circle">
+							<div className="fb-image-accordion-icon-circle">
 								{item.mediaType === "image" && item.selectedImage?.url ? (
 									<img
 										src={item.selectedImage.url}
@@ -128,42 +128,42 @@ export default function Edit({
 									renderSVG("heart")
 								)}
 							</div>
-							<div className="pea-image-accordion-text-group">
-								<h3 className="pea-image-accordion-title">{item.title}</h3>
+							<div className="fb-image-accordion-text-group">
+								<h3 className="fb-image-accordion-title">{item.title}</h3>
 								{item.subTitle && (
-									<p className="pea-image-accordion-desc">{item.subTitle}</p>
+									<p className="fb-image-accordion-desc">{item.subTitle}</p>
 								)}
 							</div>
 						</>
 					)}
 
 					{imageAccordionPreset === "preset-2" && (
-						<div className="pea-image-accordion-preset2-content">
-							<div className="pea-image-accordion-bottom-content">
+						<div className="fb-image-accordion-preset2-content">
+							<div className="fb-image-accordion-bottom-content">
 								{imageAccordionShowNumber && (
-									<span className="pea-image-accordion-number">{numLabel}</span>
+									<span className="fb-image-accordion-number">{numLabel}</span>
 								)}
-								<h3 className="pea-image-accordion-title">{item.title}</h3>
+								<h3 className="fb-image-accordion-title">{item.title}</h3>
 								{item.subTitle && (
-									<p className="pea-sub-title">{item.subTitle}</p>
+									<p className="fb-sub-title">{item.subTitle}</p>
 								)}
 							</div>
 						</div>
 					)}
 
 					{imageAccordionPreset === "preset-3" && (
-						<div className="pea-image-accordion-preset3-content">
-							<div className="pea-image-accordion-left-content">
-								<h3 className="pea-image-accordion-title">{item.title}</h3>
+						<div className="fb-image-accordion-preset3-content">
+							<div className="fb-image-accordion-left-content">
+								<h3 className="fb-image-accordion-title">{item.title}</h3>
 								{item.subTitle && (
-									<p className="pea-sub-title">{item.subTitle}</p>
+									<p className="fb-sub-title">{item.subTitle}</p>
 								)}
 							</div>
 							<a
 								href={item.buttonUrl || "#"}
 								target={target}
 								rel={rel}
-								className="pea-image-accordion-btn"
+								className="fb-image-accordion-btn"
 								onClick={(e) => e.preventDefault()}
 							>
 								{item.buttonText || __("Read More", "frontis-blocks")}
@@ -173,12 +173,12 @@ export default function Edit({
 
 					{imageAccordionPreset === "preset-4" && (
 						<>
-							<h3 className="pea-image-accordion-title">{item.title}</h3>
+							<h3 className="fb-image-accordion-title">{item.title}</h3>
 							{imageAccordionShowNumber && (
-								<span className="pea-image-accordion-number">{numLabel}</span>
+								<span className="fb-image-accordion-number">{numLabel}</span>
 							)}
 							{item.subTitle && (
-								<p className="pea-image-accordion-desc">{item.subTitle}</p>
+								<p className="fb-image-accordion-desc">{item.subTitle}</p>
 							)}
 						</>
 					)}
@@ -195,12 +195,12 @@ export default function Edit({
 
 			<div {...blockProps}>
 				<div
-					className={`fb-image-accordion-wrapper ${imageAccordionPreset} pea-trigger-${imageAccordionTrigger} ${imageAccordionWraperClass}`}
+					className={`fb-image-accordion-wrapper ${imageAccordionPreset} fb-trigger-${imageAccordionTrigger} ${imageAccordionWraperClass}`}
 					id={imageAccordionWraperID}
 					data-trigger={imageAccordionTrigger}
 					onMouseLeave={handleMouseLeave}
 				>
-					<div className="pea-image-accordion-container">
+					<div className="fb-image-accordion-container">
 						{imageAccordionItems &&
 							imageAccordionItems.map((item, index) => renderItem(item, index))}
 					</div>

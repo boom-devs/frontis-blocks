@@ -6,7 +6,7 @@
 /* ---------------------------------------------------------------
    BASE CONTAINER
 --------------------------------------------------------------- */
-.pea-image-accordion-container {
+.fb-image-accordion-container {
 	display: flex;
 	gap: 12px;
 	width: 100%;
@@ -17,7 +17,7 @@
 /* ---------------------------------------------------------------
    BASE ITEM — collapsed "pill" state
 --------------------------------------------------------------- */
-.pea-image-accordion-item {
+.fb-image-accordion-item {
 	position: relative;
 	flex: 0 0 80px;
 	border-radius: 50px;
@@ -34,7 +34,7 @@
 /* ---------------------------------------------------------------
    OVERLAY
 --------------------------------------------------------------- */
-.pea-image-accordion-overlay {
+.fb-image-accordion-overlay {
 	position: absolute;
 	inset: 0;
 	background: rgba(0, 0, 0, 0.55);
@@ -46,7 +46,7 @@
 /* ---------------------------------------------------------------
    CONTENT WRAPPER — shared
 --------------------------------------------------------------- */
-.pea-image-accordion-content-wrapper {
+.fb-image-accordion-content-wrapper {
 	position: absolute;
 	left: 18px;
 	bottom: 24px;
@@ -71,7 +71,7 @@
 /* ---------------------------------------------------------------
    ICON CIRCLE (Preset 1)
 --------------------------------------------------------------- */
-.pea-image-accordion-icon-circle {
+.fb-image-accordion-icon-circle {
 	width: 44px;
 	height: 44px;
 	background: #fff;
@@ -102,13 +102,13 @@
 /* ---------------------------------------------------------------
    TEXT GROUP (Preset 1)
 --------------------------------------------------------------- */
-.preset-1 .pea-image-accordion-content-wrapper {
+.preset-1 .fb-image-accordion-content-wrapper {
 	flex-direction: row;
 	align-items: center;
 	justify-content: flex-start;
 }
 
-.pea-image-accordion-text-group {
+.fb-image-accordion-text-group {
 	display: none;
 	opacity: 0;
 	transform: translateX(-10px);
@@ -119,21 +119,21 @@
 	color: #fff;
 	min-width: 0;
 
-	.pea-image-accordion-title {
+	.fb-image-accordion-title {
 		margin: 0 0 3px;
 		font-size: 18px;
 		font-weight: 600;
 		line-height: 1.2;
 	}
 
-	.pea-image-accordion-desc {
+	.fb-image-accordion-desc {
 		margin: 0;
 		font-size: 13px;
 		opacity: 0.8;
 	}
 }
 
-.pea-image-accordion-item.is-active .pea-image-accordion-text-group {
+.fb-image-accordion-item.is-active .fb-image-accordion-text-group {
 	display: block;
 	opacity: 1;
 	transform: translateX(0);
@@ -142,26 +142,26 @@
 /* ---------------------------------------------------------------
    ACTIVE / OPEN ITEM
 --------------------------------------------------------------- */
-.pea-image-accordion-item.is-active {
+.fb-image-accordion-item.is-active {
 	flex: 1 !important;
 	border-radius: 25px;
 }
 
-.pea-trigger-hover
-	.pea-image-accordion-container:hover
-	.pea-image-accordion-item.is-active:not(:hover) {
+.fb-trigger-hover
+	.fb-image-accordion-container:hover
+	.fb-image-accordion-item.is-active:not(:hover) {
 	flex: 0 0 80px;
 }
 
 /* ---------------------------------------------------------------
    TRIGGER: HOVER - Only expand on hover if trigger is set to hover
 --------------------------------------------------------------- */
-.pea-trigger-hover {
-	.pea-image-accordion-item:hover {
+.fb-trigger-hover {
+	.fb-image-accordion-item:hover {
 		flex: 1 !important;
 		border-radius: 25px;
 
-		.pea-image-accordion-text-group {
+		.fb-image-accordion-text-group {
 			display: block;
 			opacity: 1;
 			transform: translateX(0);
@@ -172,14 +172,14 @@
 /* ---------------------------------------------------------------
    TRIGGER: CLICK
 --------------------------------------------------------------- */
-.pea-trigger-click .pea-image-accordion-item.is-active {
+.fb-trigger-click .fb-image-accordion-item.is-active {
 	flex: 1 !important;
 	border-radius: 25px;
 }
 
-.pea-trigger-click
-	.pea-image-accordion-item.is-active
-	.pea-image-accordion-text-group {
+.fb-trigger-click
+	.fb-image-accordion-item.is-active
+	.fb-image-accordion-text-group {
 	display: block;
 	opacity: 1;
 	transform: translateX(0);
@@ -189,24 +189,24 @@
    RESPONSIVE — mobile
 --------------------------------------------------------------- */
 @media screen and (max-width: 767px) {
-	.pea-image-accordion-container {
+	.fb-image-accordion-container {
 		flex-direction: column;
 		height: auto;
 		min-height: 400px;
 	}
 
-	.pea-image-accordion-item {
+	.fb-image-accordion-item {
 		flex: 0 0 60px !important;
 		border-radius: 16px !important;
 		width: 100%;
 	}
 
-	.pea-image-accordion-item.is-active {
+	.fb-image-accordion-item.is-active {
 		flex: 1 1 200px !important;
 		border-radius: 16px !important;
 	}
 
-	.pea-image-accordion-text-group {
+	.fb-image-accordion-text-group {
 		white-space: normal;
 	}
 }
@@ -215,21 +215,21 @@
    PRESET 2 — Seamless Pillars
    ============================================================= */
 .preset-2 {
-	.pea-image-accordion-container {
+	.fb-image-accordion-container {
 		gap: 0;
 	}
 
-	.pea-image-accordion-item {
+	.fb-image-accordion-item {
 		flex: 0 0 90px;
 		border-radius: 0;
 	}
 
-	.pea-image-accordion-item.is-active {
+	.fb-image-accordion-item.is-active {
 		flex: 1;
 		border-radius: 0;
 	}
 
-	.pea-image-accordion-content-wrapper {
+	.fb-image-accordion-content-wrapper {
 		position: absolute;
 		left: 18px;
 		bottom: 24px;
@@ -239,7 +239,7 @@
 		text-align: center;
 	}
 
-	.pea-image-accordion-dot-wrapper {
+	.fb-image-accordion-dot-wrapper {
 		position: absolute;
 		top: 50%;
 		left: 50%;
@@ -250,7 +250,7 @@
 		z-index: 5;
 	}
 
-	.pea-image-accordion-dot {
+	.fb-image-accordion-dot {
 		width: 16px;
 		height: 16px;
 		background: #fff;
@@ -258,25 +258,25 @@
 		border-radius: 50%;
 	}
 
-	&.pea-trigger-hover
-		.pea-image-accordion-item:hover
-		.pea-image-accordion-dot-wrapper,
-	.pea-image-accordion-item.is-active .pea-image-accordion-dot-wrapper {
+	&.fb-trigger-hover
+		.fb-image-accordion-item:hover
+		.fb-image-accordion-dot-wrapper,
+	.fb-image-accordion-item.is-active .fb-image-accordion-dot-wrapper {
 		opacity: 0;
 		visibility: hidden;
 	}
 
-	.pea-image-accordion-preset2-content {
+	.fb-image-accordion-preset2-content {
 		text-align: center;
 		color: #fff;
 		z-index: 5;
 	}
 
-	.pea-image-accordion-bottom-content {
+	.fb-image-accordion-bottom-content {
 		text-align: center;
 	}
 
-	.pea-image-accordion-number {
+	.fb-image-accordion-number {
 		display: block;
 		font-size: 13px;
 		opacity: 0.65;
@@ -284,7 +284,7 @@
 		margin-bottom: 4px;
 	}
 
-	.pea-image-accordion-title {
+	.fb-image-accordion-title {
 		font-size: 20px;
 		font-weight: 600;
 		color: #fff;
@@ -294,7 +294,7 @@
 		transition: opacity 0.45s ease;
 	}
 
-	.pea-sub-title {
+	.fb-sub-title {
 		font-size: 13px;
 		color: rgba(255, 255, 255, 0.75);
 		margin: 0;
@@ -302,17 +302,15 @@
 		transition: opacity 0.45s ease 0.05s;
 	}
 
-	&.pea-trigger-hover
-		.pea-image-accordion-item:hover
-		.pea-image-accordion-title,
-	.pea-image-accordion-item.is-active .pea-image-accordion-title,
-	&.pea-trigger-hover .pea-image-accordion-item:hover .pea-sub-title,
-	.pea-image-accordion-item.is-active .pea-sub-title {
+	&.fb-trigger-hover .fb-image-accordion-item:hover .fb-image-accordion-title,
+	.fb-image-accordion-item.is-active .fb-image-accordion-title,
+	&.fb-trigger-hover .fb-image-accordion-item:hover .fb-sub-title,
+	.fb-image-accordion-item.is-active .fb-sub-title {
 		opacity: 1;
 	}
 }
 
-.preset-2.pea-trigger-hover .pea-image-accordion-item:hover {
+.preset-2.fb-trigger-hover .fb-image-accordion-item:hover {
 	flex: 1 !important;
 	border-radius: 0 !important;
 }
@@ -321,22 +319,22 @@
    PRESET 3 — Vertical Stack
    ============================================================= */
 .preset-3 {
-	.pea-image-accordion-container {
+	.fb-image-accordion-container {
 		flex-direction: column;
 		gap: 10px;
 	}
 
-	.pea-image-accordion-item {
+	.fb-image-accordion-item {
 		flex: 0 0 64px;
 		border-radius: 12px;
 	}
 
-	.pea-image-accordion-item.is-active {
+	.fb-image-accordion-item.is-active {
 		flex: 1 !important;
 		border-radius: 12px;
 	}
 
-	.pea-image-accordion-content-wrapper {
+	.fb-image-accordion-content-wrapper {
 		display: none;
 		opacity: 0;
 		transition: opacity 0.35s ease;
@@ -347,36 +345,36 @@
 		box-sizing: border-box;
 	}
 
-	.pea-image-accordion-item.is-active .pea-image-accordion-content-wrapper {
+	.fb-image-accordion-item.is-active .fb-image-accordion-content-wrapper {
 		display: flex;
 		opacity: 1;
 	}
 
-	.pea-image-accordion-preset3-content {
+	.fb-image-accordion-preset3-content {
 		display: flex;
 		align-items: flex-end;
 		justify-content: space-between;
 		width: 100%;
 	}
 
-	.pea-image-accordion-left-content {
+	.fb-image-accordion-left-content {
 		min-width: 0;
 	}
 
-	.pea-image-accordion-title {
+	.fb-image-accordion-title {
 		font-size: 18px;
 		font-weight: 600;
 		color: #fff;
 		margin: 0 0 4px;
 	}
 
-	.pea-sub-title {
+	.fb-sub-title {
 		font-size: 13px;
 		color: rgba(255, 255, 255, 0.8);
 		margin: 0;
 	}
 
-	.pea-image-accordion-btn {
+	.fb-image-accordion-btn {
 		display: inline-block;
 		padding: 8px 18px;
 		background: rgba(255, 255, 255, 0.18);
@@ -398,7 +396,7 @@
 	}
 
 	@media screen and (max-width: 767px) {
-		.pea-image-accordion-container {
+		.fb-image-accordion-container {
 			min-height: 480px;
 		}
 	}
@@ -406,19 +404,19 @@
 
 /* Preset 3 Trigger Scoping */
 .preset-3 {
-	&.pea-trigger-hover {
-		.pea-image-accordion-item:hover {
+	&.fb-trigger-hover {
+		.fb-image-accordion-item:hover {
 			flex: 1 !important;
 			border-radius: 12px;
 
-			.pea-image-accordion-content-wrapper {
+			.fb-image-accordion-content-wrapper {
 				display: flex;
 				opacity: 1;
 			}
 		}
 
-		.pea-image-accordion-container:hover
-			.pea-image-accordion-item.is-active:not(:hover) {
+		.fb-image-accordion-container:hover
+			.fb-image-accordion-item.is-active:not(:hover) {
 			flex: 0 0 64px;
 			border-radius: 12px;
 		}
@@ -429,14 +427,14 @@
    PRESET 4 — Skewed Panels
    ============================================================= */
 .preset-4 {
-	.pea-image-accordion-container {
+	.fb-image-accordion-container {
 		gap: 0;
 		border-radius: 0;
 		overflow: hidden;
 		padding: 0;
 	}
 
-	.pea-image-accordion-item {
+	.fb-image-accordion-item {
 		position: relative;
 		flex: 1;
 		transform: skewX(-12deg);
@@ -460,7 +458,7 @@
 		}
 	}
 
-	.pea-skew-bg {
+	.fb-skew-bg {
 		position: absolute;
 		top: 0;
 		left: -55%;
@@ -473,24 +471,22 @@
 		will-change: transform;
 	}
 
-	&.pea-trigger-hover .pea-image-accordion-item:hover .pea-skew-bg,
-	.pea-image-accordion-item.is-active .pea-skew-bg {
+	&.fb-trigger-hover .fb-image-accordion-item:hover .fb-skew-bg,
+	.fb-image-accordion-item.is-active .fb-skew-bg {
 		transform: skewX(0deg) scale(1.02);
 	}
 
-	.pea-image-accordion-overlay {
+	.fb-image-accordion-overlay {
 		background: rgba(0, 0, 0, 0.48);
 		z-index: 2;
 	}
 
-	&.pea-trigger-hover
-		.pea-image-accordion-item:hover
-		.pea-image-accordion-overlay,
-	.pea-image-accordion-item.is-active .pea-image-accordion-overlay {
+	&.fb-trigger-hover .fb-image-accordion-item:hover .fb-image-accordion-overlay,
+	.fb-image-accordion-item.is-active .fb-image-accordion-overlay {
 		background: rgba(0, 0, 0, 0.25);
 	}
 
-	.pea-image-accordion-content-wrapper {
+	.fb-image-accordion-content-wrapper {
 		position: absolute;
 		top: 50% !important;
 		left: 0 !important;
@@ -508,7 +504,7 @@
 		box-sizing: border-box;
 	}
 
-	.pea-image-accordion-number {
+	.fb-image-accordion-number {
 		display: block;
 		font-size: 13px;
 		font-weight: 500;
@@ -517,7 +513,7 @@
 		letter-spacing: 0.04em;
 	}
 
-	.pea-image-accordion-title {
+	.fb-image-accordion-title {
 		display: block;
 		font-size: 18px;
 		font-weight: 600;
@@ -532,15 +528,13 @@
 			transform 0.4s ease 0.05s;
 	}
 
-	&.pea-trigger-hover
-		.pea-image-accordion-item:hover
-		.pea-image-accordion-title,
-	.pea-image-accordion-item.is-active .pea-image-accordion-title {
+	&.fb-trigger-hover .fb-image-accordion-item:hover .fb-image-accordion-title,
+	.fb-image-accordion-item.is-active .fb-image-accordion-title {
 		opacity: 1;
 		transform: translateY(0);
 	}
 
-	.pea-image-accordion-desc {
+	.fb-image-accordion-desc {
 		display: block;
 		font-size: 12px;
 		color: rgba(255, 255, 255, 0.78);
@@ -548,39 +542,39 @@
 		white-space: nowrap;
 	}
 
-	.pea-image-accordion-item.is-active {
+	.fb-image-accordion-item.is-active {
 		flex: 1.4 !important; // Increased priority for expansion
 	}
 
 	@media screen and (max-width: 767px) {
-		.pea-image-accordion-container {
+		.fb-image-accordion-container {
 			flex-direction: row !important;
 			height: 300px;
 		}
 
-		.pea-image-accordion-item {
+		.fb-image-accordion-item {
 			flex: 1 !important;
 		}
 
-		.pea-image-accordion-item.is-active {
+		.fb-image-accordion-item.is-active {
 			flex: 1.4 !important;
 		}
 
-		.pea-image-accordion-title,
-		.pea-image-accordion-desc {
+		.fb-image-accordion-title,
+		.fb-image-accordion-desc {
 			white-space: normal;
 			font-size: 11px;
 		}
 	}
 
-	&.pea-trigger-hover {
-		.pea-image-accordion-item:hover {
+	&.fb-trigger-hover {
+		.fb-image-accordion-item:hover {
 			flex: 1.4 !important;
 			z-index: 5;
 		}
 
-		.pea-image-accordion-container:hover
-			.pea-image-accordion-item.is-active:not(:hover) {
+		.fb-image-accordion-container:hover
+			.fb-image-accordion-item.is-active:not(:hover) {
 			flex: 1 !important;
 		}
 	}
