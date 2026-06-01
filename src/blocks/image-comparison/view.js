@@ -68,6 +68,7 @@ jQuery(document).ready(function ($) {
             }
 
             const hoverToSlide = $wrapper.attr('data-hover') === 'true';
+            const clickToMove = $wrapper.attr('data-click') === 'true';
 
             if (hoverToSlide) {
                 $wrapper.on("mousemove", function (e) {
@@ -131,17 +132,29 @@ jQuery(document).ready(function ($) {
                     }
                 });
             } else {
-                $slider.on("mousedown touchstart", function (e) {
+                const dragStartSelector = clickToMove ? $wrapper : $slider;
+
+                dragStartSelector.on("mousedown touchstart", function (e) {
+                    if ($(e.target).closest('.fb-image-comparison-label').length > 0) {
+                        return;
+                    }
                     e.preventDefault();
                     clicked = true;
+                    if (clickToMove) {
+                        updatePosition(e);
+                    }
                 });
+
                 $(window).on("mouseup touchend", function () {
                     clicked = false;
                 });
+
                 $(window).on("mousemove touchmove", function (e) {
-
                     if (!clicked) return;
+                    updatePosition(e);
+                });
 
+                function updatePosition(e) {
                     const rect = $wrapper[0].getBoundingClientRect();
                     const wrapperWidth = rect.width;
                     const wrapperHeight = rect.height;
@@ -182,7 +195,7 @@ jQuery(document).ready(function ($) {
                             left: pct + "%"
                         });
                     }
-                });
+                }
             }
         });
     }

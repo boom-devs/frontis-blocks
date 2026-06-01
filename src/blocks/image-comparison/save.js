@@ -35,7 +35,8 @@ export default function save({ attributes }) {
         /** End Wrapper ID */
 
         disableOverlaySwitcher,
-        hoverToSlideSwitcher
+        hoverToSlideSwitcher,
+        clickToMoveSwitcher,
 
     } = attributes;
 
@@ -51,10 +52,11 @@ export default function save({ attributes }) {
         <div {...blockProps}>
            <div className={`fb-image-comparison-inner-wrapper ${comparisonCustomCSS} `}id={comparisonWraperID}>
                 <div
-                     className={`fb-image-comparison-slider-wrapper ${disableOverlaySwitcher ? 'fb-disable-overlay' : ''}`}
+                    className={`fb-image-comparison-slider-wrapper ${disableOverlaySwitcher ? 'fb-disable-overlay' : ''}`}
                     data-direction={comparisonDragDirection || 'horizontal'}
                     data-offset={JSON.stringify(comparisonInitialOffset)}
                     data-hover={hoverToSlideSwitcher ? 'true' : 'false'}
+                    data-click={clickToMoveSwitcher ? 'true' : 'false'}
                 >
 
                     {beforeImgShowLabelSwitcher && (
