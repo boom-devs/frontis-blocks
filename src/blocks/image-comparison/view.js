@@ -67,63 +67,124 @@ jQuery(document).ready(function ($) {
                 });
             }
 
-            $slider.on("mousedown touchstart", function (e) {
-                e.preventDefault();
-                clicked = true;
-            });
-            $(window).on("mouseup touchend", function () {
-                clicked = false;
-            });
-            $(window).on("mousemove touchmove", function (e) {
+            const hoverToSlide = $wrapper.attr('data-hover') === 'true';
 
-                if (!clicked) return;
+            if (hoverToSlide) {
+                $wrapper.on("mousemove", function (e) {
+                    const rect = $wrapper[0].getBoundingClientRect();
 
-                const rect = $wrapper[0].getBoundingClientRect();
-                const wrapperWidth = rect.width;
-                const wrapperHeight = rect.height;
-                if (wrapperWidth === 0 || wrapperHeight === 0) return;
+                    if (isVertical) {
+                        let y = e.clientY - rect.top;
+                        if (y < 0) y = 0;
+                        if (y > rect.height) y = rect.height;
+                        const pct = (y / rect.height) * 100;
 
-                const event = e.originalEvent && e.originalEvent.touches
-                    ? e.originalEvent.touches[0]
-                    : e;
+                        $overlay.css({
+                            "clip-path": `inset(0 0 ${100 - pct}% 0)`,
+                            "-webkit-clip-path": `inset(0 0 ${100 - pct}% 0)`
+                        });
+                        $slider.css({ top: pct + "%" });
 
-                if (isVertical) {
-                    let y = event.clientY - rect.top;
+                    } else {
+                        let x = e.clientX - rect.left;
+                        if (x < 0) x = 0;
+                        if (x > rect.width) x = rect.width;
+                        const pct = (x / rect.width) * 100;
 
-                    if (y < 0) y = 0;
-                    if (y > wrapperHeight) y = wrapperHeight;
+                        $overlay.css({
+                            "clip-path": `inset(0 ${100 - pct}% 0 0)`,
+                            "-webkit-clip-path": `inset(0 ${100 - pct}% 0 0)`
+                        });
+                        $slider.css({ left: pct + "%" });
+                    }
+                });
 
-                    const pct = (y / wrapperHeight) * 100;
+                // Support touch screens when hoverToSlide is active
+                $wrapper.on("touchmove", function (e) {
+                    const rect = $wrapper[0].getBoundingClientRect();
+                    const event = e.originalEvent && e.originalEvent.touches
+                        ? e.originalEvent.touches[0]
+                        : e;
 
-                    $overlay.css({
-                        "clip-path": `inset(0 0 ${100 - pct}% 0)`,
-                        "-webkit-clip-path": `inset(0 0 ${100 - pct}% 0)`
-                    });
-                    $slider.css({
-                        top: pct + "%"
-                    });
-                } else {
-                    let x = event.clientX - rect.left;
+                    if (isVertical) {
+                        let y = event.clientY - rect.top;
+                        if (y < 0) y = 0;
+                        if (y > rect.height) y = rect.height;
+                        const pct = (y / rect.height) * 100;
 
-                    if (x < 0) x = 0;
-                    if (x > wrapperWidth) x = wrapperWidth;
+                        $overlay.css({
+                            "clip-path": `inset(0 0 ${100 - pct}% 0)`,
+                            "-webkit-clip-path": `inset(0 0 ${100 - pct}% 0)`
+                        });
+                        $slider.css({ top: pct + "%" });
+                    } else {
+                        let x = event.clientX - rect.left;
+                        if (x < 0) x = 0;
+                        if (x > rect.width) x = rect.width;
+                        const pct = (x / rect.width) * 100;
 
-                    const pct = (x / wrapperWidth) * 100;
+                        $overlay.css({
+                            "clip-path": `inset(0 ${100 - pct}% 0 0)`,
+                            "-webkit-clip-path": `inset(0 ${100 - pct}% 0 0)`
+                        });
+                        $slider.css({ left: pct + "%" });
+                    }
+                });
+            } else {
+                $slider.on("mousedown touchstart", function (e) {
+                    e.preventDefault();
+                    clicked = true;
+                });
+                $(window).on("mouseup touchend", function () {
+                    clicked = false;
+                });
+                $(window).on("mousemove touchmove", function (e) {
 
-                    $overlay.css({
-                        "clip-path": `inset(0 ${100 - pct}% 0 0)`,
-                        "-webkit-clip-path": `inset(0 ${100 - pct}% 0 0)`
-                    });
-                    $slider.css({
-                        left: pct + "%"
-                    });
-                }
-            });
+                    if (!clicked) return;
 
+                    const rect = $wrapper[0].getBoundingClientRect();
+                    const wrapperWidth = rect.width;
+                    const wrapperHeight = rect.height;
+                    if (wrapperWidth === 0 || wrapperHeight === 0) return;
+
+                    const event = e.originalEvent && e.originalEvent.touches
+                        ? e.originalEvent.touches[0]
+                        : e;
+
+                    if (isVertical) {
+                        let y = event.clientY - rect.top;
+
+                        if (y < 0) y = 0;
+                        if (y > wrapperHeight) y = wrapperHeight;
+
+                        const pct = (y / wrapperHeight) * 100;
+
+                        $overlay.css({
+                            "clip-path": `inset(0 0 ${100 - pct}% 0)`,
+                            "-webkit-clip-path": `inset(0 0 ${100 - pct}% 0)`
+                        });
+                        $slider.css({
+                            top: pct + "%"
+                        });
+                    } else {
+                        let x = event.clientX - rect.left;
+
+                        if (x < 0) x = 0;
+                        if (x > wrapperWidth) x = wrapperWidth;
+
+                        const pct = (x / wrapperWidth) * 100;
+
+                        $overlay.css({
+                            "clip-path": `inset(0 ${100 - pct}% 0 0)`,
+                            "-webkit-clip-path": `inset(0 ${100 - pct}% 0 0)`
+                        });
+                        $slider.css({
+                            left: pct + "%"
+                        });
+                    }
+                });
+            }
         });
-
     }
-
     initImageComparison();
-
 });

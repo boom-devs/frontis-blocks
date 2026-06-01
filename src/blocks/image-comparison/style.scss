@@ -20,7 +20,10 @@
             pointer-events: none;
         }
 
-        &:hover:not(:has(.fb-image-comparison-slider:hover))::before  {
+        // &:hover:not(:has(.fb-image-comparison-slider:hover))::before  {
+        //     opacity: 1;
+        // }
+        &:not(.fb-disable-overlay):hover:not(:has(.fb-image-comparison-slider:hover))::before {
             opacity: 1;
         }
 
@@ -44,7 +47,7 @@
             transform: translateY(10px);
         }
 
-        &:hover:not(:has(.fb-image-comparison-slider:hover)) {
+        &:not(.fb-disable-overlay):hover:not(:has(.fb-image-comparison-slider:hover)) {
             .fb-image-comparison-label {
                 opacity: 1;
                 transform: translateY(0);

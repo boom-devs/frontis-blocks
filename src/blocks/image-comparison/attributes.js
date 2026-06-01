@@ -116,7 +116,7 @@ const attributes = {
     },
     clickToMoveSwitcher: {
         type: "boolean",
-        default: true,
+        default: false,
     },
     disableOverlaySwitcher: {
         type: "boolean",
