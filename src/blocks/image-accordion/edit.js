@@ -125,7 +125,7 @@ export default function Edit({
 								) : item.selectedIcon ? (
 									renderSVG(item.selectedIcon)
 								) : (
-									renderSVG("star")
+									renderSVG("heart")
 								)}
 							</div>
 							<div className="pea-image-accordion-text-group">

@@ -28,7 +28,7 @@ export default function save({ attributes }) {
 
 	const renderItem = (item, index) => {
 		const numLabel = index + 1 < 10 ? `0${index + 1}` : `${index + 1}`;
-		const isActive = index === 0; // Default first item as active
+		const isActive = index === 0;
 		const target = item.buttonTarget ? "_blank" : "_self";
 		const rel = item.buttonNofollow ? "nofollow" : undefined;
 
@@ -74,7 +74,7 @@ export default function save({ attributes }) {
 								) : item.selectedIcon ? (
 									renderSVG(item.selectedIcon)
 								) : (
-									renderSVG("star")
+									renderSVG("heart")
 								)}
 							</div>
 							<div className="pea-image-accordion-text-group">
