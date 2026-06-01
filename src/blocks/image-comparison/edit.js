@@ -43,6 +43,16 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         comparisonInitialOffset,
         /** End Initial Offset */
 
+        /** Start Custom CSS */
+        comparisonCustomCSS,
+        /** End Custom CSS */
+
+        /** Start Wrapper ID */
+        comparisonWraperID,
+        /** End Wrapper ID */
+
+        disableOverlaySwitcher
+
     } = attributes;
 
     const activeOffset = comparisonInitialOffset?.[deviceType] !== undefined ? comparisonInitialOffset[deviceType] : 50;
@@ -97,10 +107,10 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                     setAttributes={setAttributes} />
             )}
             <div {...blockProps}>
-                <div className="fb-image-comparison-inner-wrapper">
+                <div className={`fb-image-comparison-inner-wrapper ${comparisonCustomCSS} `}id={comparisonWraperID}>
                     {hasImages ? (
                         <div
-                            className="fb-image-comparison-slider-wrapper"
+                            className={`fb-image-comparison-slider-wrapper ${disableOverlaySwitcher ? 'fb-disable-overlay' : ''}`}
                             data-direction={comparisonDragDirection || 'horizontal'}
                         >
 

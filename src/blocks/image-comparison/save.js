@@ -25,6 +25,17 @@ export default function save({ attributes }) {
         /** Start Initial Offset */
         comparisonInitialOffset,
         /** End Initial Offset */
+        
+        /** Start Custom CSS */
+        comparisonCustomCSS,
+        /** End Custom CSS */
+
+        /** Start Wrapper ID */
+        comparisonWraperID,
+        /** End Wrapper ID */
+
+        disableOverlaySwitcher,
+        hoverToSlideSwitcher
 
     } = attributes;
 
@@ -38,11 +49,12 @@ export default function save({ attributes }) {
 
     return (
         <div {...blockProps}>
-            <div className="fb-image-comparison-inner-wrapper">
+           <div className={`fb-image-comparison-inner-wrapper ${comparisonCustomCSS} `}id={comparisonWraperID}>
                 <div
-                    className="fb-image-comparison-slider-wrapper"
+                     className={`fb-image-comparison-slider-wrapper ${disableOverlaySwitcher ? 'fb-disable-overlay' : ''}`}
                     data-direction={comparisonDragDirection || 'horizontal'}
                     data-offset={JSON.stringify(comparisonInitialOffset)}
+                    data-hover={hoverToSlideSwitcher ? 'true' : 'false'}
                 >
 
                     {beforeImgShowLabelSwitcher && (

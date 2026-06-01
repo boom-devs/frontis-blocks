@@ -1123,10 +1123,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                     spacingCombineBtnHandler={comparisonLabelsBorderRadiusLinkBtn}
                     setAttributes={setAttributes}
                 />
-
-
             </PanelBody>
-
         </>
     );
 
