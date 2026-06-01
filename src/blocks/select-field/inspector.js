@@ -1423,6 +1423,32 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                     ]}
                 />
 
+                <FrontisForms_SwitcherControl
+                    label={__("Icon Color", "frontis-forms")}
+                    globalSwitcher={inputFieldIconColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ inputFieldIconColorSwitcher: value })}
+                    options={[
+                        { label: __('Normal', 'frontis-forms'), value: 'normal' },
+                        { label: __('Focus', 'frontis-forms'), value: 'focus' },
+                    ]}
+                />
+
+                {inputFieldIconColorSwitcher === 'normal' && (
+                    <FrontisForms_ColorControl
+                        label={__("Normal Color", "frontis-forms")}
+                        globalColor={inputFieldIconColor}
+                        setGlobalColor={(value) => setAttributes({ inputFieldIconColor: value === undefined ? '' : value })}
+                    />
+                )}
+
+                {inputFieldIconColorSwitcher === 'focus' && (
+                    <FrontisForms_ColorControl
+                        label={__("Focus Color", "frontis-forms")}
+                        globalColor={inputFieldIconFocusColor}
+                        setGlobalColor={(value) => setAttributes({ inputFieldIconFocusColor: value === undefined ? '' : value })}
+                    />
+                )}
+
                 <FrontisForms_Spacing
                     label={__("Margin", "frontis-forms")}
                     deviceType={deviceType}

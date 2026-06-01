@@ -298,13 +298,12 @@ const generateTextFieldStyle = (attributes) => {
             position: relative;
             display: flex;
             ${inputFieldIconGap?.Desktop ? `gap: ${inputFieldIconGap?.Desktop}${inputFieldIconGapUnits?.Desktop};` : ''}
+            ${inputFieldMarginDesktopWidth && inputFieldMarginDesktop?.top ? `margin: ${inputFieldMarginDesktopWidth};` : ''}
         }
-        .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input select::placeholder,
-        .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input input::placeholder {
+        .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input select::placeholder {
             ${inputFieldPlaceholderColor ? `color: ${inputFieldPlaceholderColor};` : ''}
         }
-        .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input select:focus,
-        .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input input:focus {
+        .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input select:focus {
             box-shadow: none;
             outline: none;
             ${inputFieldFocusColor ? `color: ${inputFieldFocusColor};` : ''}
@@ -329,12 +328,15 @@ const generateTextFieldStyle = (attributes) => {
             ${inputFieldBoxShadowFocusCssValue ? `box-shadow: ${inputFieldBoxShadowFocusCssValue};` : ""}
             transition: all 0.3s ease-in-out;
         }
-        .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input select:focus::placeholder,
-        .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input input:focus::placeholder {
+        .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input select:focus::placeholder {
             ${inputFieldPlaceholderFocusColor ? `color: ${inputFieldPlaceholderFocusColor};` : ''}
         }
-        .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input select,
-        .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input input {
+        .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+        .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input select {
             box-sizing: border-box;
             width: 100%;
             ${inputFieldHeight?.Desktop ? `height: ${inputFieldHeight?.Desktop}${inputFieldHeightUnits?.Desktop};` : ''}
@@ -382,7 +384,6 @@ const generateTextFieldStyle = (attributes) => {
             ${inputFieldBorderRadiusDesktopWidth && inputFieldBorderRadiusDesktop?.top ? `border-radius: ${inputFieldBorderRadiusDesktopWidth};` : ''}
             ${inputFieldBoxShadowCssValue ? `box-shadow: ${inputFieldBoxShadowCssValue};` : ""}
 
-            ${inputFieldMarginDesktopWidth && inputFieldMarginDesktop?.top ? `margin: ${inputFieldMarginDesktopWidth};` : ''}
             ${inputFieldPaddingDesktopWidth && inputFieldPaddingDesktop?.top ? `padding: ${inputFieldPaddingDesktopWidth};` : ''}
 
             transition: all 0.3s ease-in-out;
@@ -415,6 +416,14 @@ const generateTextFieldStyle = (attributes) => {
             display: flex;
             ${inputFieldIconSize?.Desktop ? `width: ${inputFieldIconSize?.Desktop}${inputFieldIconSizeUnits?.Desktop};` : ''}
         }
+        .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input .fb-select-field-arrow {
+            display: flex;
+            width: 12px;
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
     
         @media only screen and (max-width: 1024px) {
             .fb-text-field-wrapper.${blockID} {
@@ -440,6 +449,7 @@ const generateTextFieldStyle = (attributes) => {
             }
             .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input {
                 ${inputFieldIconGap?.Tablet ? `gap: ${inputFieldIconGap?.Tablet}${inputFieldIconGapUnits?.Tablet};` : ''}
+                ${inputFieldMarginTabletWidth && inputFieldMarginTablet?.top ? `margin: ${inputFieldMarginTabletWidth};` : ''}
             }
 
             .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input .fb-field-icon {
@@ -447,21 +457,18 @@ const generateTextFieldStyle = (attributes) => {
             }
 
             .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input select,
-            .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input input,
             .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-field-required-text {
                 ${inputFieldGlobalTypoSwitcher?.fontSize === false && inputFieldFontSize?.Tablet ? `font-size: ${inputFieldFontSize?.Tablet}${inputFieldFontSizeUnits?.Tablet};` : ''}
                 ${inputFieldGlobalTypoSwitcher?.letterSpacing === false && inputFieldLetterSpacing?.Tablet ? `letter-spacing: ${inputFieldLetterSpacing?.Tablet}${inputFieldLetterSpacingUnits?.Tablet};` : ''}
                 ${inputFieldGlobalTypoSwitcher?.lineHeight === false && inputFieldLineHeight?.Tablet ? `line-height: ${inputFieldLineHeight?.Tablet}${inputFieldLineHeightUnits?.Tablet};` : ''}
             }
 
-            .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input select,
-            .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input input {
+            .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input select {
                 ${inputFieldHeight?.Tablet ? `height: ${inputFieldHeight?.Tablet}${inputFieldHeightUnits?.Tablet};` : ''}
                 
                 ${inputFieldBorderTabletWidth && inputFieldBorderTablet?.top ? `border-width: ${inputFieldBorderTabletWidth};` : ''}
                 ${inputFieldBorderRadiusTabletWidth && inputFieldBorderRadiusTablet?.top ? `border-radius: ${inputFieldBorderRadiusTabletWidth};` : ''}
 
-                ${inputFieldMarginTabletWidth && inputFieldMarginTablet?.top ? `margin: ${inputFieldMarginTabletWidth};` : ''}
                 ${inputFieldPaddingTabletWidth && inputFieldPaddingTablet?.top ? `padding: ${inputFieldPaddingTabletWidth};` : ''}
             }
         }
@@ -490,6 +497,7 @@ const generateTextFieldStyle = (attributes) => {
             }
             .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input {
                 ${inputFieldIconGap?.Mobile ? `gap: ${inputFieldIconGap?.Mobile}${inputFieldIconGapUnits?.Mobile};` : ''}
+                ${inputFieldMarginMobileWidth && inputFieldMarginMobile?.top ? `margin: ${inputFieldMarginMobileWidth};` : ''}
             }
 
             .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input .fb-field-icon {
@@ -497,21 +505,18 @@ const generateTextFieldStyle = (attributes) => {
             }
 
             .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input select,
-            .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input input,
             .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-field-required-text {
                 ${inputFieldGlobalTypoSwitcher?.fontSize === false && inputFieldFontSize?.Mobile ? `font-size: ${inputFieldFontSize?.Mobile}${inputFieldFontSizeUnits?.Mobile};` : ''}
                 ${inputFieldGlobalTypoSwitcher?.letterSpacing === false && inputFieldLetterSpacing?.Mobile ? `letter-spacing: ${inputFieldLetterSpacing?.Mobile}${inputFieldLetterSpacingUnits?.Mobile};` : ''}
                 ${inputFieldGlobalTypoSwitcher?.lineHeight === false && inputFieldLineHeight?.Mobile ? `line-height: ${inputFieldLineHeight?.Mobile}${inputFieldLineHeightUnits?.Mobile};` : ''}
             }
 
-            .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input select,
-            .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input input {
+            .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input select {
                 ${inputFieldHeight?.Mobile ? `height: ${inputFieldHeight?.Mobile}${inputFieldHeightUnits?.Mobile};` : ''}
                 
                 ${inputFieldBorderMobileWidth && inputFieldBorderMobile?.top ? `border-width: ${inputFieldBorderMobileWidth};` : ''}
                 ${inputFieldBorderRadiusMobileWidth && inputFieldBorderRadiusMobile?.top ? `border-radius: ${inputFieldBorderRadiusMobileWidth};` : ''}
 
-                ${inputFieldMarginMobileWidth && inputFieldMarginMobile?.top ? `margin: ${inputFieldMarginMobileWidth};` : ''}
                 ${inputFieldPaddingMobileWidth && inputFieldPaddingMobile?.top ? `padding: ${inputFieldPaddingMobileWidth};` : ''}
             }
         }
