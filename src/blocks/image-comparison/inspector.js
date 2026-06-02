@@ -724,8 +724,40 @@ const Inspector = ({ attributes, setAttributes }) => {
     const generalControls = (
         <>
             <PanelBody
-                title={__("After Images", "frontis-blocks")}
+                title={__("Before Images", "frontis-blocks")}
                 initialOpen={true}
+            >
+                <FB_ImageControl
+                    label={__("Before Image", "frontis-blocks")}
+                    globalImageUrl={beforeImageUrl}
+                    setglobalImageUrl={(value) => setAttributes({ beforeImageUrl: value })}
+                    globalImageAlt={beforeImageAlt}
+                    setglobalImageAlt={(value) => setAttributes({ beforeImageAlt: value })}
+                    globalImageID={beforeImageId}
+                    setglobalImageID={(value) => setAttributes({ beforeImageId: value })}
+                    isImageSize={false}
+                />
+                <ToggleControl
+                    label={__("Show Label", "frontis-blocks")}
+                    checked={beforeImgShowLabelSwitcher}
+                    onChange={(value) => setAttributes({ beforeImgShowLabelSwitcher: value })}
+                />
+
+                {beforeImgShowLabelSwitcher && (
+                    <TextControl
+                        label={__("Label", "frontis-blocks")}
+                        value={beforeImageLabel}
+                        onChange={(value) => setAttributes({ beforeImageLabel: value })}
+                        className="fb-google-map-address-control"
+                        help={__('Enter the address or location for the map', 'frontis-blocks')}
+                    />
+                )}
+
+            </PanelBody>
+
+            <PanelBody
+                title={__("After Images", "frontis-blocks")}
+                initialOpen={false}
             >
 
                 <FB_ImageControl
@@ -754,38 +786,6 @@ const Inspector = ({ attributes, setAttributes }) => {
                         help={__('Enter the address or location for the map', 'frontis-blocks')}
                     />
                 )}
-            </PanelBody>
-
-            <PanelBody
-                title={__("Before Images", "frontis-blocks")}
-                initialOpen={false}
-            >
-                <FB_ImageControl
-                    label={__("Before Image", "frontis-blocks")}
-                    globalImageUrl={beforeImageUrl}
-                    setglobalImageUrl={(value) => setAttributes({ beforeImageUrl: value })}
-                    globalImageAlt={beforeImageAlt}
-                    setglobalImageAlt={(value) => setAttributes({ beforeImageAlt: value })}
-                    globalImageID={beforeImageId}
-                    setglobalImageID={(value) => setAttributes({ beforeImageId: value })}
-                    isImageSize={false}
-                />
-                <ToggleControl
-                    label={__("Show Label", "frontis-blocks")}
-                    checked={beforeImgShowLabelSwitcher}
-                    onChange={(value) => setAttributes({ beforeImgShowLabelSwitcher: value })}
-                />
-
-                {beforeImgShowLabelSwitcher && (
-                    <TextControl
-                        label={__("Label", "frontis-blocks")}
-                        value={beforeImageLabel}
-                        onChange={(value) => setAttributes({ beforeImageLabel: value })}
-                        className="fb-google-map-address-control"
-                        help={__('Enter the address or location for the map', 'frontis-blocks')}
-                    />
-                )}
-
             </PanelBody>
 
             <PanelBody
