@@ -33,6 +33,7 @@ import {
     IMAGE_OBJECT_FIT,
     STACKED_CARD_PRESETS,
     ICON_POSITION,
+    STACKED_CARD_SCALE,
 } from '@Constants/fbConstants';
 
 import FB_TypographyControl from '@Components/typography-control';
@@ -83,12 +84,15 @@ const Inspector = ( { attributes, setAttributes, clientId } ) => {
         stackCardsItemOffsetTop,
         stackCardsItemOffsetTopSwitcher,
         stackCardsItemScale,
+        stackedCardScaleSwitcher,
 
         stackCardsCardItemGap,
         stackCardsCardItemGapUnits,
 
         stackCardsPresetFourCardWidth,
         stackCardsPresetFourCardWidthUnits,
+        stackCardsPresetFourCardHeight,
+        stackCardsPresetFourCardHeightUnits,
         stackCardsPresetFourOutDistance,
         stackCardsPresetFourMinScale,
         stackCardsPresetFourScaleStep,
@@ -104,10 +108,14 @@ const Inspector = ( { attributes, setAttributes, clientId } ) => {
         stackCardsPresetFourActiveBorderColor,
         stackCardsPresetFourShowNavigation,
         stackCardsPresetFourButtonVerticalAlign,
+
         stackCardsPresetFourButtonVerticalOffset,
         stackCardsPresetFourButtonVerticalOffsetUnits,
         stackCardsPresetFourButtonSideOffset,
         stackCardsPresetFourButtonSideOffsetUnits,
+        stackCardsPresetFourButtonGap,
+        stackCardsPresetFourButtonGapUnits,
+
         stackCardsPresetTwoCardWidth,
         stackCardsPresetTwoCardWidthUnits,
         stackCardsPresetTwoLeftOffsetStep,
@@ -1027,36 +1035,7 @@ const Inspector = ( { attributes, setAttributes, clientId } ) => {
                                 </DndContext>
                             </div>
                         </BaseControl>
-                        {hasStackCardScalePreset(stackCardsPresetStyle) && (
-                            <>  
-                                <FB_Range
-                                    min={0}
-                                    max={stackCardsOffsetTopUnits?.[deviceType] === '%' ? 100 : 200}
-                                    label={__("Offset Top", "frontis-blocks")}
-                                    rangeValue={stackCardsOffsetTop} 
-                                    onChangeHandler={(value) => setAttributes({ stackCardsOffsetTop: value })}
-                                    rangeUnitHandler={(value) => setAttributes({ stackCardsOffsetTopUnits: value })}
-                                    deviceType={deviceType}
-                                    units={stackCardsOffsetTopUnits}
-                                    setAttributes={setAttributes}
-                                    rangeStep={1}
-                                    resetFallbackValue={""}
-                                />
-
-                                <FB_Range
-                                    label={__("Card Item Gap", "frontis-blocks")}
-                                    rangeValue={stackCardsCardItemGap} 
-                                    onChangeHandler={(value) => setAttributes({ stackCardsCardItemGap: value })}
-                                    rangeUnitHandler={(value) => setAttributes({ stackCardsCardItemGapUnits: value })}
-                                    deviceType={deviceType}
-                                    units={stackCardsCardItemGapUnits}
-                                    setAttributes={setAttributes}
-                                    rangeStep={1}
-                                    resetFallbackValue={""}   
-                                />
-
-                            </>
-                        )}
+                        
                         {(isPresetFour || isPresetTwo || isPresetThree) && (
                             <>
                                 {isPresetThree && (
@@ -1159,32 +1138,39 @@ const Inspector = ( { attributes, setAttributes, clientId } ) => {
                                             isRangeUnit={false}
                                         />
 
-                                        <FB_Range
-                                            min={0}
-                                            max={0.5}
-                                            label={__('Scale(Horizontal)', 'frontis-blocks')}
-                                            rangeValue={isPresetTwo ? stackCardsPresetTwoScaleStep : stackCardsPresetFourScaleStep}
-                                            onChangeHandler={(value) => setAttributes(isPresetTwo ? { stackCardsPresetTwoScaleStep: value } : { stackCardsPresetFourScaleStep: value })}
-                                            deviceType={deviceType}
-                                            setAttributes={setAttributes}
-                                            rangeStep={0.01}
-                                            resetFallbackValue={""}
-                                            isRangeUnit={false}
+                                        <FB_SwitcherControl
+                                            label={__("Scale", "frontis-blocks")}
+                                            options={STACKED_CARD_SCALE} 
+                                            globalSwitcher={stackedCardScaleSwitcher}
+                                            setGlobalSwitcher={(value) => setAttributes({ stackedCardScaleSwitcher: value })}
                                         />
-
-                                        <FB_Range
-                                            min={0}
-                                            max={0.5}
-                                            label={__('Scale(Vertical)', 'frontis-blocks')}
-                                            rangeValue={isPresetTwo ? stackCardsPresetTwoScaleYStep : stackCardsPresetFourScaleYStep}
-                                            onChangeHandler={(value) => setAttributes(isPresetTwo ? { stackCardsPresetTwoScaleYStep: value } : { stackCardsPresetFourScaleYStep: value })}
-                                            deviceType={deviceType}
-                                            setAttributes={setAttributes}
-                                            rangeStep={0.01}
-                                            resetFallbackValue={""}
-                                            isRangeUnit={false}
-                                        />
-
+                                        {stackedCardScaleSwitcher === 'horizontal' && (
+                                             <FB_Range
+                                                min={0}
+                                                max={0.5}
+                                                rangeValue={isPresetTwo ? stackCardsPresetTwoScaleStep : stackCardsPresetFourScaleStep}
+                                                onChangeHandler={(value) => setAttributes(isPresetTwo ? { stackCardsPresetTwoScaleStep: value } : { stackCardsPresetFourScaleStep: value })}
+                                                deviceType={deviceType}
+                                                setAttributes={setAttributes}
+                                                rangeStep={0.01}
+                                                resetFallbackValue={""}
+                                                isRangeUnit={false}
+                                            />
+                                        )}
+                                        {stackedCardScaleSwitcher === 'vertical' && (
+                                            <FB_Range
+                                                min={0}
+                                                max={0.5}
+                                                rangeValue={isPresetTwo ? stackCardsPresetTwoScaleYStep : stackCardsPresetFourScaleYStep}
+                                                onChangeHandler={(value) => setAttributes(isPresetTwo ? { stackCardsPresetTwoScaleYStep: value } : { stackCardsPresetFourScaleYStep: value })}
+                                                deviceType={deviceType}
+                                                setAttributes={setAttributes}
+                                                rangeStep={0.01}
+                                                resetFallbackValue={""}
+                                                isRangeUnit={false}
+                                            />
+                                        )}
+                                        
                                         <FB_Range
                                             min={0}
                                             max={0.5}
@@ -1209,7 +1195,7 @@ const Inspector = ( { attributes, setAttributes, clientId } ) => {
                                 {!(isPresetTwo ? stackCardsPresetTwoShowAllLayers : isPresetThree ? stackCardsPresetThreeShowAllLayers : stackCardsPresetFourShowAllLayers) && (
                                     <FB_Range
                                         min={1}
-                                        max={12}
+                                        max={100}
                                         label={__('Visible Layers', 'frontis-blocks')}
                                         rangeValue={isPresetTwo ? stackCardsPresetTwoVisibleLayers : isPresetThree ? stackCardsPresetThreeVisibleLayers : stackCardsPresetFourVisibleLayers}
                                         onChangeHandler={(value) => setAttributes(isPresetTwo ? { stackCardsPresetTwoVisibleLayers: value } : isPresetThree ? { stackCardsPresetThreeVisibleLayers: value } : { stackCardsPresetFourVisibleLayers: value })}
@@ -1339,6 +1325,37 @@ const Inspector = ( { attributes, setAttributes, clientId } ) => {
 	const styleControls = (
 		<>
 
+            {hasStackCardScalePreset(stackCardsPresetStyle) && (
+                <>  
+                    <FB_Range
+                        min={0}
+                        max={stackCardsOffsetTopUnits?.[deviceType] === '%' ? 100 : 200}
+                        label={__("Offset Top", "frontis-blocks")}
+                        rangeValue={stackCardsOffsetTop} 
+                        onChangeHandler={(value) => setAttributes({ stackCardsOffsetTop: value })}
+                        rangeUnitHandler={(value) => setAttributes({ stackCardsOffsetTopUnits: value })}
+                        deviceType={deviceType}
+                        units={stackCardsOffsetTopUnits}
+                        setAttributes={setAttributes}
+                        rangeStep={1}
+                        resetFallbackValue={""}
+                    />
+
+                    <FB_Range
+                        label={__("Card Item Gap", "frontis-blocks")}
+                        rangeValue={stackCardsCardItemGap} 
+                        onChangeHandler={(value) => setAttributes({ stackCardsCardItemGap: value })}
+                        rangeUnitHandler={(value) => setAttributes({ stackCardsCardItemGapUnits: value })}
+                        deviceType={deviceType}
+                        units={stackCardsCardItemGapUnits}
+                        setAttributes={setAttributes}
+                        rangeStep={1}
+                        resetFallbackValue={""}   
+                    />
+
+                </>
+            )}
+
             {(isPresetFour || isPresetTwo || isPresetThree) && (
                 <div className="fb-setting-style-tab-wrapper">
                     <div className="fb-setting-inner-wrapper">
@@ -1347,35 +1364,6 @@ const Inspector = ( { attributes, setAttributes, clientId } ) => {
                             title={isPresetTwo ? __('Stack Left', 'frontis-blocks') : isPresetThree ? __('Stack Right', 'frontis-blocks') : __('Stack Over', 'frontis-blocks')}
                             initialOpen={true}
                         >
-                            <FB_Range
-                                min={100}
-                                max={2000}
-                                label={isPresetThree ? __('Item Width', 'frontis-blocks') : __('Width', 'frontis-blocks')}
-                                rangeValue={isPresetTwo ? stackCardsPresetTwoCardWidth : isPresetThree ? stackCardsPresetThreeItemWidth : stackCardsPresetFourCardWidth}
-                                onChangeHandler={(value) => setAttributes(isPresetTwo ? { stackCardsPresetTwoCardWidth: value } : isPresetThree ? { stackCardsPresetThreeItemWidth: value } : { stackCardsPresetFourCardWidth: value })}
-                                rangeUnitHandler={(value) => setAttributes(isPresetTwo ? { stackCardsPresetTwoCardWidthUnits: value } : isPresetThree ? { stackCardsPresetThreeItemWidthUnits: value } : { stackCardsPresetFourCardWidthUnits: value })}
-                                deviceType={deviceType}
-                                units={isPresetTwo ? stackCardsPresetTwoCardWidthUnits : isPresetThree ? stackCardsPresetThreeItemWidthUnits : stackCardsPresetFourCardWidthUnits}
-                                setAttributes={setAttributes}
-                                rangeStep={1}
-                                resetFallbackValue={""}
-                            />
-
-                            {isPresetTwo && (
-                                <FB_Range
-                                    min={0}
-                                    max={200}
-                                    label={__('Left Offset Step', 'frontis-blocks')}
-                                    rangeValue={stackCardsPresetTwoLeftOffsetStep}
-                                    onChangeHandler={(value) => setAttributes({ stackCardsPresetTwoLeftOffsetStep: value })}
-                                    deviceType={deviceType}
-                                    setAttributes={setAttributes}
-                                    rangeStep={1}
-                                    resetFallbackValue={""}
-                                    isRangeUnit={false}
-                                />
-                            )}
-
                             {isPresetThree && (
                                 <>
                                     <FB_Range
@@ -1420,9 +1408,51 @@ const Inspector = ( { attributes, setAttributes, clientId } ) => {
                                     />
                                 </>
                             )}
+                            <FB_Range
+                                min={1}
+                                max={2000}
+                                label={isPresetThree ? __('Item Width', 'frontis-blocks') : __('Width', 'frontis-blocks')}
+                                rangeValue={isPresetTwo ? stackCardsPresetTwoCardWidth : isPresetThree ? stackCardsPresetThreeItemWidth : stackCardsPresetFourCardWidth}
+                                onChangeHandler={(value) => setAttributes(isPresetTwo ? { stackCardsPresetTwoCardWidth: value } : isPresetThree ? { stackCardsPresetThreeItemWidth: value } : { stackCardsPresetFourCardWidth: value })}
+                                rangeUnitHandler={(value) => setAttributes(isPresetTwo ? { stackCardsPresetTwoCardWidthUnits: value } : isPresetThree ? { stackCardsPresetThreeItemWidthUnits: value } : { stackCardsPresetFourCardWidthUnits: value })}
+                                deviceType={deviceType}
+                                units={isPresetTwo ? stackCardsPresetTwoCardWidthUnits : isPresetThree ? stackCardsPresetThreeItemWidthUnits : stackCardsPresetFourCardWidthUnits}
+                                setAttributes={setAttributes}
+                                rangeStep={1}
+                                resetFallbackValue={""}
+                            />
+
+                            {isPresetTwo && (
+                                <FB_Range
+                                    min={0}
+                                    max={200}
+                                    label={__('Left Offset Step', 'frontis-blocks')}
+                                    rangeValue={stackCardsPresetTwoLeftOffsetStep}
+                                    onChangeHandler={(value) => setAttributes({ stackCardsPresetTwoLeftOffsetStep: value })}
+                                    deviceType={deviceType}
+                                    setAttributes={setAttributes}
+                                    rangeStep={1}
+                                    resetFallbackValue={""}
+                                    isRangeUnit={false}
+                                />
+                            )}
 
                             {isPresetFour && (
                                 <>
+                                    <FB_Range
+                                        min={0}
+                                        max={3000}
+                                        label={__("Height", "frontis-blocks")}
+                                        rangeValue={stackCardsPresetFourCardHeight}
+                                        onChangeHandler={(value) => setAttributes({ stackCardsPresetFourCardHeight: value })}
+                                        rangeUnitHandler={(value) => setAttributes({ stackCardsPresetFourCardHeightUnits: value })}
+                                        deviceType={deviceType}
+                                        units={stackCardsPresetFourCardHeightUnits}
+                                        setAttributes={setAttributes}
+                                        rangeStep={1}
+                                        resetFallbackValue={"280"}
+                                    />
+
                                     <ToggleControl
                                         label={__('Active Border', 'frontis-blocks')}
                                         checked={!!stackCardsPresetFourActiveBorder}
@@ -1464,14 +1494,18 @@ const Inspector = ( { attributes, setAttributes, clientId } ) => {
                                 value={stackCardsPresetFourButtonVerticalAlign}
                                 options={[
                                     { label: __('Center', 'frontis-blocks'), value: 'center' },
-                                    { label: __('Top', 'frontis-blocks'), value: 'top' },
-                                    { label: __('Bottom', 'frontis-blocks'), value: 'bottom' },
+                                    { label: __('Top Left', 'frontis-blocks'), value: 'top-left' },
+                                    { label: __('Top Center', 'frontis-blocks'), value: 'top-center' },
+                                    { label: __('Top Right', 'frontis-blocks'), value: 'top-right' },
+                                    { label: __('Bottom Left', 'frontis-blocks'), value: 'bottom-left' },
+                                    { label: __('Bottom Center', 'frontis-blocks'), value: 'bottom-center' },
+                                    { label: __('Bottom Right', 'frontis-blocks'), value: 'bottom-right' },
                                 ]}
                                 onChange={(value) => setAttributes({ stackCardsPresetFourButtonVerticalAlign: value })}
                             />
 
                             <FB_Range
-                                min={0}
+                                min={-200}
                                 max={100}
                                 label={__('Vertical Offset', 'frontis-blocks')}
                                 rangeValue={stackCardsPresetFourButtonVerticalOffset}
@@ -1497,6 +1531,21 @@ const Inspector = ( { attributes, setAttributes, clientId } ) => {
                                 rangeStep={1}
                                 resetFallbackValue={""}
                             />
+
+                            <FB_Range
+                                min={100}
+                                max={100}
+                                label={__('Button Gap', 'frontis-blocks')}
+                                rangeValue={stackCardsPresetFourButtonGap}
+                                onChangeHandler={(value) => setAttributes({ stackCardsPresetFourButtonGap: value })}
+                                rangeUnitHandler={(value) => setAttributes({ stackCardsPresetFourButtonGapUnits: value })}
+                                deviceType={deviceType}
+                                units={stackCardsPresetFourButtonGapUnits}
+                                setAttributes={setAttributes}
+                                rangeStep={1}
+                                resetFallbackValue={"10"}
+                            />
+
                             <FB_TypographyControl
                                 globalTypoControlActive={true}
                                 globalTypoSwitcher={stackCardsNavigationButtonGlobalTypoSwitcher}
