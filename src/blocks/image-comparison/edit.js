@@ -51,7 +51,9 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         comparisonWraperID,
         /** End Wrapper ID */
 
-        disableOverlaySwitcher
+        disableOverlaySwitcher,
+        hoverToSlideSwitcher,
+        clickToMoveSwitcher
 
     } = attributes;
 
@@ -93,6 +95,101 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
     }, [attributes, blockID]);
     /** End Generate Block Style */
 
+    const updatePosition = (clientX, clientY, wrapper) => {
+        if (clientX === undefined || clientY === undefined) return;
+        const rect = wrapper.getBoundingClientRect();
+        let pct;
+        if (isVertical) {
+            let y = clientY - rect.top;
+            if (y < 0) y = 0;
+            if (y > rect.height) y = rect.height;
+            pct = (y / rect.height) * 100;
+        } else {
+            let x = clientX - rect.left;
+            if (x < 0) x = 0;
+            if (x > rect.width) x = rect.width;
+            pct = (x / rect.width) * 100;
+        }
+
+        let currentOffsetObj = {};
+        if (typeof comparisonInitialOffset === 'object' && comparisonInitialOffset !== null) {
+            currentOffsetObj = { ...comparisonInitialOffset };
+        } else if (typeof comparisonInitialOffset === 'string' || typeof comparisonInitialOffset === 'number') {
+            currentOffsetObj = {
+                Desktop: String(comparisonInitialOffset),
+                Tablet: String(comparisonInitialOffset),
+                Mobile: String(comparisonInitialOffset)
+            };
+        }
+
+        setAttributes({
+            comparisonInitialOffset: {
+                ...currentOffsetObj,
+                [deviceType]: String(Math.round(pct))
+            }
+        });
+    };
+
+    const handleMouseMoveHover = (e) => {
+        if (!hoverToSlideSwitcher) return;
+        const wrapper = e.currentTarget;
+        updatePosition(e.clientX, e.clientY, wrapper);
+    };
+
+    const handleTouchMoveHover = (e) => {
+        if (!hoverToSlideSwitcher) return;
+        const wrapper = e.currentTarget;
+        const touch = e.touches && e.touches.length > 0 ? e.touches[0] : null;
+        if (touch) {
+            updatePosition(touch.clientX, touch.clientY, wrapper);
+        }
+    };
+
+    const handleStartDrag = (e) => {
+        if (hoverToSlideSwitcher) return;
+
+        if (!clickToMoveSwitcher && !e.target.closest('.fb-image-comparison-slider')) {
+            return;
+        }
+
+        if (e.target.closest('.fb-image-comparison-label')) {
+            return;
+        }
+
+        e.preventDefault();
+        const wrapper = e.currentTarget.closest('.fb-image-comparison-slider-wrapper');
+        if (!wrapper) return;
+
+        const touches = e.touches || (e.nativeEvent && e.nativeEvent.touches);
+        const hasTouch = touches && touches.length > 0;
+
+        if (clickToMoveSwitcher) {
+            const clientX = hasTouch ? touches[0].clientX : e.clientX;
+            const clientY = hasTouch ? touches[0].clientY : e.clientY;
+            updatePosition(clientX, clientY, wrapper);
+        }
+
+        const onDragMove = (event) => {
+            const dragTouches = event.touches || (event.nativeEvent && event.nativeEvent.touches);
+            const hasDragTouch = dragTouches && dragTouches.length > 0;
+            const clientX = hasDragTouch ? dragTouches[0].clientX : event.clientX;
+            const clientY = hasDragTouch ? dragTouches[0].clientY : event.clientY;
+            updatePosition(clientX, clientY, wrapper);
+        };
+
+        const onDragEnd = () => {
+            document.removeEventListener('mousemove', onDragMove, true);
+            document.removeEventListener('mouseup', onDragEnd, true);
+            document.removeEventListener('touchmove', onDragMove, true);
+            document.removeEventListener('touchend', onDragEnd, true);
+        };
+
+        document.addEventListener('mousemove', onDragMove, true);
+        document.addEventListener('mouseup', onDragEnd, true);
+        document.addEventListener('touchmove', onDragMove, true);
+        document.addEventListener('touchend', onDragEnd, true);
+    };
+
     const blockProps = useBlockProps({
         className: `fb-image-comparison-main-wrapper ${blockID}`,
     });
@@ -112,6 +209,10 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                         <div
                             className={`fb-image-comparison-slider-wrapper ${disableOverlaySwitcher ? 'fb-disable-overlay' : ''}`}
                             data-direction={comparisonDragDirection || 'horizontal'}
+                            onMouseMove={handleMouseMoveHover}
+                            onTouchMove={handleTouchMoveHover}
+                            onMouseDown={handleStartDrag}
+                            onTouchStart={handleStartDrag}
                         >
 
                             {beforeImgShowLabelSwitcher && (
@@ -132,7 +233,10 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                             <div className="fb-image-comparison-after-image">
                                 <img src={afterImageUrl} alt={afterImageAlt || ""} />
                             </div>
-                            <div className="fb-image-comparison-slider" style={sliderStyle}>
+                            <div 
+                                className="fb-image-comparison-slider" 
+                                style={sliderStyle}
+                            >
                                 <div className="fb-slider-arrows">
                                     <span className="fb-arrow-left"></span>
                                     <span className="fb-arrow-right"></span>

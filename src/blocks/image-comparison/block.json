@@ -14,7 +14,8 @@
             "wide",
             "full"
         ],
-        "customClassName": false
+        "customClassName": false,
+        "customCSS": false
     },
     "textdomain": "frontis-blocks",
     "editorScript": "file:./index.js",

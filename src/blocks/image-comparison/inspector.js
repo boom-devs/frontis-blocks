@@ -806,6 +806,19 @@ const Inspector = ({ attributes, setAttributes }) => {
                     resetFallbackValue={""}
                 />
 
+                <FB_Range
+                    min={0}
+                    max={100}
+                    label={__("Initial Offset", "frontis-blocks")}
+                    rangeValue={comparisonInitialOffset}
+                    onChangeHandler={(value) => setAttributes({ comparisonInitialOffset: value })}
+                    deviceType={deviceType}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={""}
+                    isRangeUnit={false}
+                />
+
                 <FB_SwitcherControl
                     label={__('Drag Direction', 'frontis-blocks')}
                     options={[
