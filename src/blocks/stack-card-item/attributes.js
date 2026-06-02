@@ -1,4 +1,8 @@
 const attributes = {
+	blockID: {
+		type: 'string',
+		default: ''
+	},
 	itemNumber: {
 		type: 'number',
 		default: 1,
