@@ -12,17 +12,17 @@ const attributes = {
 		type: "string",
 		default: "",
 	},
-	imageHotspotImageId: { 
-		type: "string", 
-		default: "" 
+	imageHotspotImageId: {
+		type: "string",
+		default: ""
 	},
-	imageHotspotImageAlt: { 
-		type: "string", 
-		default: "" 
+	imageHotspotImageAlt: {
+		type: "string",
+		default: ""
 	},
-	imageHotspotImageSize: { 
-		type: "string", 
-		default: "cover" 
+	imageHotspotImageSize: {
+		type: "string",
+		default: "cover"
 	},
 	imageHotspotImageHeight: {
 		type: "object",
@@ -40,32 +40,32 @@ const attributes = {
 			Mobile: 'px'
 		}
 	},
-	imageHotspotImageBorderWidthDesktop: { 
-		type: "object", 
-		default: { 
-			top: '', 
-			right: '', 
-			bottom: '', 
-			left: '' 
-		} 
+	imageHotspotImageBorderWidthDesktop: {
+		type: "object",
+		default: {
+			top: '',
+			right: '',
+			bottom: '',
+			left: ''
+		}
 	},
-	imageHotspotImageBorderWidthTablet: { 
-		type: "object", 
-		default: { 
-			top: '', 
-			right: '', 
-			bottom: '', 
-			left: '' 
-		} 
+	imageHotspotImageBorderWidthTablet: {
+		type: "object",
+		default: {
+			top: '',
+			right: '',
+			bottom: '',
+			left: ''
+		}
 	},
-	imageHotspotImageBorderWidthMobile: { 
-		type: "object", 
-		default: { 
-			top: '', 
-			right: '', 
-			bottom: '', 
-			left: '' 
-		} 
+	imageHotspotImageBorderWidthMobile: {
+		type: "object",
+		default: {
+			top: '',
+			right: '',
+			bottom: '',
+			left: ''
+		}
 	},
 	imageHotspotImageBorderWidthUnits: {
 		type: "object",
@@ -83,32 +83,32 @@ const attributes = {
 		type: "boolean",
 		default: true
 	},
-	imageHotspotImageBorderRadiusDesktop: { 
-		type: "object", 
-		default: { 
-			top: '', 
-			right: '', 
-			bottom: '', 
-			left: '' 
-		} 
+	imageHotspotImageBorderRadiusDesktop: {
+		type: "object",
+		default: {
+			top: '',
+			right: '',
+			bottom: '',
+			left: ''
+		}
 	},
-	imageHotspotImageBorderRadiusTablet: { 
-		type: "object", 
-		default: { 
-			top: '', 
-			right: '', 
-			bottom: '', 
-			left: '' 
-		} 
+	imageHotspotImageBorderRadiusTablet: {
+		type: "object",
+		default: {
+			top: '',
+			right: '',
+			bottom: '',
+			left: ''
+		}
 	},
-	imageHotspotImageBorderRadiusMobile: { 
-		type: "object", 
-		default: { 
-			top: '', 
-			right: '', 
-			bottom: '', 
-			left: '' 
-		} 
+	imageHotspotImageBorderRadiusMobile: {
+		type: "object",
+		default: {
+			top: '',
+			right: '',
+			bottom: '',
+			left: ''
+		}
 	},
 	imageHotspotImageBorderRadiusUnits: {
 		type: "object",
@@ -170,14 +170,14 @@ const attributes = {
 			},
 		]
 	},
-	imageHotspotSelectedHotspotId: { 
-		type: "string", 
-		default: "" 
+	imageHotspotSelectedHotspotId: {
+		type: "string",
+		default: ""
 	},
 
-	imageHotspotDeviceType: { 
-		type: "string", 
-		default: "Desktop" 
+	imageHotspotDeviceType: {
+		type: "string",
+		default: "Desktop"
 	},
 	imageHotspotContainerShadowValues: {
 		type: "array",
@@ -189,16 +189,16 @@ const attributes = {
 	},
 
 	// Hotspot marker styles
-	imageHotspotMarkerSize: { 
-		type: "object", 
+	imageHotspotMarkerSize: {
+		type: "object",
 		default: {
 			Desktop: '35',
 			Tablet: '32',
 			Mobile: '30'
 		}
 	},
-	imageHotspotMarkerSizeUnits: { 
-		type: "object", 
+	imageHotspotMarkerSizeUnits: {
+		type: "object",
 		default: {
 			Desktop: 'px',
 			Tablet: 'px',
@@ -221,13 +221,13 @@ const attributes = {
 			Mobile: 'px'
 		}
 	},
-	imageHotspotMarkerColor: { 
-		type: "string", 
-		default: "" 
+	imageHotspotMarkerColor: {
+		type: "string",
+		default: ""
 	},
-	imageHotspotMarkerHoverColor: { 
-		type: "string", 
-		default: "" 
+	imageHotspotMarkerHoverColor: {
+		type: "string",
+		default: ""
 	},
 	imageHotspotMarkerColorSwitcher: {
 		type: "string",
@@ -237,36 +237,36 @@ const attributes = {
 		type: "string",
 		default: "normal"
 	},
-	imageHotspotMarkerBorderWidth: { 
-		type: "object", 
+	imageHotspotMarkerBorderWidth: {
+		type: "object",
 		default: {
 			Desktop: '',
 			Tablet: '',
 			Mobile: ''
 		}
 	},
-	imageHotspotMarkerBorderWidthUnits: { 
-		type: "object", 
+	imageHotspotMarkerBorderWidthUnits: {
+		type: "object",
 		default: {
 			Desktop: 'px',
 			Tablet: 'px',
 			Mobile: 'px'
 		}
 	},
-	imageHotspotMarkerBorderColor: { 
-		type: "string", 
-		default: "transparent" 
+	imageHotspotMarkerBorderColor: {
+		type: "string",
+		default: "transparent"
 	},
-	imageHotspotMarkerBorderRadius: { 
-		type: "object", 
+	imageHotspotMarkerBorderRadius: {
+		type: "object",
 		default: {
 			Desktop: '50',
 			Tablet: '50',
 			Mobile: '50'
 		}
 	},
-	imageHotspotMarkerBorderRadiusUnits: { 
-		type: "object", 
+	imageHotspotMarkerBorderRadiusUnits: {
+		type: "object",
 		default: {
 			Desktop: '%',
 			Tablet: '%',
@@ -275,99 +275,102 @@ const attributes = {
 	},
 
 	// Popover styles
-	imageHotspotPopoverBgColor: { 
-		type: "string", 
-		default: "#ffffff" 
+	imageHotspotPopoverBgColor: {
+		type: "string",
+		default: "#ffffff"
 	},
-	imageHotspotPopoverWidth: { 
-		type: "object", 
+	imageHotspotPopoverWidth: {
+		type: "object",
 		default: {
 			Desktop: '250',
 			Tablet: '225',
 			Mobile: '200'
 		}
 	},
-	imageHotspotPopoverWidthUnits: { 
-		type: "object", 
+	imageHotspotPopoverWidthUnits: {
+		type: "object",
 		default: {
 			Desktop: 'px',
 			Tablet: 'px',
 			Mobile: 'px'
 		}
 	},
-	imageHotspotPopoverPadding: { 
-		type: "object", 
+	imageHotspotPopoverPadding: {
+		type: "object",
 		default: {
 			Desktop: '',
 			Tablet: '',
 			Mobile: ''
 		}
 	},
-	imageHotspotPopoverPaddingUnits: { 
-		type: "object", 
+	imageHotspotPopoverPaddingUnits: {
+		type: "object",
 		default: {
 			Desktop: 'px',
 			Tablet: 'px',
 			Mobile: 'px'
 		}
 	},
-	imageHotspotPopoverPaddingDesktop: { 
-		type: "object", 
-		default: { top: '', 
-			right: '', 
-			bottom: '', 
-			left: '' 
-		} 
+	imageHotspotPopoverPaddingDesktop: {
+		type: "object",
+		default: {
+			top: '',
+			right: '',
+			bottom: '',
+			left: ''
+		}
 	},
-	imageHotspotPopoverPaddingTablet: { 
-		type: "object", 
-		default: { top: '', 
-			right: '', 
-			bottom: '', 
-			left: '' 
-		} 
+	imageHotspotPopoverPaddingTablet: {
+		type: "object",
+		default: {
+			top: '',
+			right: '',
+			bottom: '',
+			left: ''
+		}
 	},
-	imageHotspotPopoverPaddingMobile: { 
-		type: "object", 
-		default: { top: '', 
-			right: '', 
-			bottom: '', 
-			left: '' 
-		} 
+	imageHotspotPopoverPaddingMobile: {
+		type: "object",
+		default: {
+			top: '',
+			right: '',
+			bottom: '',
+			left: ''
+		}
 	},
-	imageHotspotPopoverPaddingLink: { 
-		type: "boolean", 
-		default: true 
+	imageHotspotPopoverPaddingLink: {
+		type: "boolean",
+		default: true
 	},
-	imageHotspotPopoverBorderRadiusDesktop: { 
-		type: "object", 
-		default: { 
-			top: '', 
-			right: '', 
-			bottom: '', 
-			left: '' 
+	imageHotspotPopoverBorderRadiusDesktop: {
+		type: "object",
+		default: {
+			top: '',
+			right: '',
+			bottom: '',
+			left: ''
 		},
 	},
-	imageHotspotPopoverBorderRadiusTablet: { 
-		type: "object", 
-		default: { 
-			top: '', 
-			right: '', 
-			bottom: '', 
-			left: '' 
+	imageHotspotPopoverBorderRadiusTablet: {
+		type: "object",
+		default: {
+			top: '',
+			right: '',
+			bottom: '',
+			left: ''
 		},
 	},
-	imageHotspotPopoverBorderRadiusMobile: { 
-		type: "object", 
-		default: { 
-			top: '', 
-			right: '', 
-			bottom: '', 
-			left: '' 
+	imageHotspotPopoverBorderRadiusMobile: {
+		type: "object",
+		default: {
+			top: '',
+			right: '',
+			bottom: '',
+			left: ''
 		},
 	},
-	imageHotspotPopoverBorderRadiusUnits: { 
-		type: "object", 
+	imageHotspotPopoverBorderRadiusUnits: {
+		type: "object",
 		default: {
 			Desktop: 'px',
 			Tablet: 'px',
@@ -378,29 +381,32 @@ const attributes = {
 		type: "boolean",
 		default: true
 	},
-	imageHotspotPopoverBorderWidthDesktop: { 
-		type: "object", 
-		default: { top: '', 
-			right: '', 
-			bottom: '', 
-			left: '' 
-		} 
+	imageHotspotPopoverBorderWidthDesktop: {
+		type: "object",
+		default: {
+			top: '',
+			right: '',
+			bottom: '',
+			left: ''
+		}
 	},
-	imageHotspotPopoverBorderWidthTablet: { 
-		type: "object", 
-		default: { top: '', 
-			right: '', 
-			bottom: '', 
-			left: '' 
-		} 
+	imageHotspotPopoverBorderWidthTablet: {
+		type: "object",
+		default: {
+			top: '',
+			right: '',
+			bottom: '',
+			left: ''
+		}
 	},
-	imageHotspotPopoverBorderWidthMobile: { 
-		type: "object", 
-		default: { top: '', 
-			right: '', 
-			bottom: '', 
-			left: '' 
-		} 
+	imageHotspotPopoverBorderWidthMobile: {
+		type: "object",
+		default: {
+			top: '',
+			right: '',
+			bottom: '',
+			left: ''
+		}
 	},
 	imageHotspotPopoverBorderWidthUnits: {
 		type: "object",
@@ -420,28 +426,28 @@ const attributes = {
 	},
 	imageHotspotPopoverImageBorderWidthDesktop: {
 		type: "object",
-		default: { 
-			top: '', 
-			right: '', 
-			bottom: '', 
+		default: {
+			top: '',
+			right: '',
+			bottom: '',
 			left: ''
 		},
 	},
 	imageHotspotPopoverImageBorderWidthTablet: {
 		type: "object",
-		default: { 
-			top: '', 
-			right: '', 
-			bottom: '', 
+		default: {
+			top: '',
+			right: '',
+			bottom: '',
 			left: ''
 		},
 	},
 	imageHotspotPopoverImageBorderWidthMobile: {
 		type: "object",
-		default: { 
-			top: '', 
-			right: '', 
-			bottom: '', 
+		default: {
+			top: '',
+			right: '',
+			bottom: '',
 			left: ''
 		},
 	},
@@ -456,27 +462,27 @@ const attributes = {
 	imageHotspotPopoverImageBorderRadiusDesktop: {
 		type: "object",
 		default: {
-			top: '', 
-			right: '', 
-			bottom: '', 
+			top: '',
+			right: '',
+			bottom: '',
 			left: ''
 		},
 	},
 	imageHotspotPopoverImageBorderRadiusTablet: {
 		type: "object",
 		default: {
-			top: '', 
-			right: '', 
-			bottom: '', 
+			top: '',
+			right: '',
+			bottom: '',
 			left: ''
 		},
 	},
 	imageHotspotPopoverImageBorderRadiusMobile: {
 		type: "object",
 		default: {
-			top: '', 
-			right: '', 
-			bottom: '', 
+			top: '',
+			right: '',
+			bottom: '',
 			left: ''
 		},
 	},
@@ -510,37 +516,37 @@ const attributes = {
 	},
 
 	// Title typography
-	imageHotspotTitleFontFamily: { 
-		type: "string", 
-		default: "" 
+	imageHotspotTitleFontFamily: {
+		type: "string",
+		default: ""
 	},
-	imageHotspotTitleFontSize: { 
-		type: "object", 
+	imageHotspotTitleFontSize: {
+		type: "object",
 		default: {
 			Desktop: '1.1',
 			Tablet: '1.1',
 			Mobile: '1.1'
 		}
 	},
-	imageHotspotTitleFontSizeUnits: { 
-		type: "object", 
+	imageHotspotTitleFontSizeUnits: {
+		type: "object",
 		default: {
 			Desktop: 'rem',
 			Tablet: 'rem',
 			Mobile: 'rem'
 		}
 	},
-	imageHotspotTitleFontWeight: { 
-		type: "string", 
-		default: "600" 
+	imageHotspotTitleFontWeight: {
+		type: "string",
+		default: "600"
 	},
-	imageHotspotTitleFontStyle: { 
-		type: "string", 
-		default: "normal" 
+	imageHotspotTitleFontStyle: {
+		type: "string",
+		default: "normal"
 	},
-	imageHotspotTitleColor: { 
-		type: "string", 
-		default: "#333333" 
+	imageHotspotTitleColor: {
+		type: "string",
+		default: "#333333"
 	},
 	imageHotspotTitleHoverColor: {
 		type: "string",
@@ -550,16 +556,16 @@ const attributes = {
 		type: "string",
 		default: "normal"
 	},
-	imageHotspotTitleMargin: { 
-		type: "object", 
+	imageHotspotTitleMargin: {
+		type: "object",
 		default: {
 			Desktop: '',
 			Tablet: '',
 			Mobile: ''
 		}
 	},
-	imageHotspotTitleMarginUnits: { 
-		type: "object", 
+	imageHotspotTitleMarginUnits: {
+		type: "object",
 		default: {
 			Desktop: 'px',
 			Tablet: 'px',
@@ -568,48 +574,48 @@ const attributes = {
 	},
 
 	// Description typography
-	imageHotspotDescFontFamily: { 
-		type: "string", 
-		default: "" 
+	imageHotspotDescFontFamily: {
+		type: "string",
+		default: ""
 	},
-	imageHotspotDescFontSize: { 
-		type: "object", 
+	imageHotspotDescFontSize: {
+		type: "object",
 		default: {
 			Desktop: '1',
 			Tablet: '1',
 			Mobile: '1'
 		}
 	},
-	imageHotspotDescFontSizeUnits: { 
-		type: "object", 
+	imageHotspotDescFontSizeUnits: {
+		type: "object",
 		default: {
 			Desktop: 'rem',
 			Tablet: 'rem',
 			Mobile: 'rem'
 		}
 	},
-	imageHotspotDescFontWeight: { 
-		type: "string", 
-		default: "400" 
+	imageHotspotDescFontWeight: {
+		type: "string",
+		default: "400"
 	},
-	imageHotspotDescFontStyle: { 
-		type: "string", 
-		default: "normal" 
+	imageHotspotDescFontStyle: {
+		type: "string",
+		default: "normal"
 	},
-	imageHotspotDescColor: { 
-		type: "string", 
-		default: "#666666" 
+	imageHotspotDescColor: {
+		type: "string",
+		default: "#666666"
 	},
-	imageHotspotDescMargin: { 
-		type: "object", 
+	imageHotspotDescMargin: {
+		type: "object",
 		default: {
 			Desktop: '',
 			Tablet: '',
 			Mobile: ''
 		}
 	},
-	imageHotspotDescMarginUnits: { 
-		type: "object", 
+	imageHotspotDescMarginUnits: {
+		type: "object",
 		default: {
 			Desktop: 'px',
 			Tablet: 'px',
@@ -618,109 +624,109 @@ const attributes = {
 	},
 
 	// Title additional typography (missing from current attributes)
-	imageHotspotTitleTextTransform: { 
-		type: "string", 
-		default: "none" 
+	imageHotspotTitleTextTransform: {
+		type: "string",
+		default: "none"
 	},
-	imageHotspotTitleTextDecoration: { 
-		type: "string", 
-		default: "none" 
+	imageHotspotTitleTextDecoration: {
+		type: "string",
+		default: "none"
 	},
-	imageHotspotTitleLetterSpacing: { 
-		type: "object", 
+	imageHotspotTitleLetterSpacing: {
+		type: "object",
 		default: {
 			Desktop: '',
 			Tablet: '',
 			Mobile: ''
-		} 
+		}
 	},
-	imageHotspotTitleLetterSpacingUnits: { 
-		type: "object", 
+	imageHotspotTitleLetterSpacingUnits: {
+		type: "object",
 		default: {
 			Desktop: 'px',
 			Tablet: 'px',
 			Mobile: 'px'
-		} 
+		}
 	},
-	imageHotspotTitleLineHeight: { 
-		type: "object", 
+	imageHotspotTitleLineHeight: {
+		type: "object",
 		default: {
 			Desktop: '',
 			Tablet: '',
 			Mobile: ''
-		} 
+		}
 	},
-	imageHotspotTitleLineHeightUnits: { 
-		type: "object", 
+	imageHotspotTitleLineHeightUnits: {
+		type: "object",
 		default: {
 			Desktop: 'px',
 			Tablet: 'px',
 			Mobile: 'px'
-		} 
+		}
 	},
 
 	// Description additional typography (missing from current attributes)
-	imageHotspotDescTextTransform: { 
-		type: "string", 
-		default: "none" 
+	imageHotspotDescTextTransform: {
+		type: "string",
+		default: "none"
 	},
-	imageHotspotDescTextDecoration: { 
-		type: "string", 
-		default: "none" 
+	imageHotspotDescTextDecoration: {
+		type: "string",
+		default: "none"
 	},
-	imageHotspotDescLetterSpacing: { 
-		type: "object", 
+	imageHotspotDescLetterSpacing: {
+		type: "object",
 		default: {
 			Desktop: '',
 			Tablet: '',
 			Mobile: ''
-		} 
+		}
 	},
-	imageHotspotDescLetterSpacingUnits: { 
-		type: "object", 
+	imageHotspotDescLetterSpacingUnits: {
+		type: "object",
 		default: {
 			Desktop: 'px',
 			Tablet: 'px',
 			Mobile: 'px'
-		} 
+		}
 	},
-	imageHotspotDescLineHeight: { 
-		type: "object", 
+	imageHotspotDescLineHeight: {
+		type: "object",
 		default: {
 			Desktop: '',
 			Tablet: '',
 			Mobile: ''
-		} 
+		}
 	},
-	imageHotspotDescLineHeightUnits: { 
-		type: "object", 
+	imageHotspotDescLineHeightUnits: {
+		type: "object",
 		default: {
 			Desktop: 'px',
 			Tablet: 'px',
 			Mobile: 'px'
-		} 
+		}
 	},
 
 	// Icon styles
-	imageHotspotIconSize: { 
-		type: "object", 
+	imageHotspotIconSize: {
+		type: "object",
 		default: {
 			Desktop: '',
 			Tablet: '',
 			Mobile: ''
 		}
 	},
-	imageHotspotIconSizeUnits: { 
-		type: "object", 
+	imageHotspotIconSizeUnits: {
+		type: "object",
 		default: {
 			Desktop: 'px',
 			Tablet: 'px',
 			Mobile: 'px'
 		}
 	},
-	imageHotspotIconColor: { 
-		type: "string", 
-		default: "#ffffff" 
+	imageHotspotIconColor: {
+		type: "string",
+		default: "#ffffff"
 	},
 	imageHotspotIconColorSwitcher: {
 		type: "string",
@@ -728,16 +734,16 @@ const attributes = {
 	},
 
 	// Padding
-	imageHotspotPaddingUnits: { 
-		type: "object", 
+	imageHotspotPaddingUnits: {
+		type: "object",
 		default: {
 			Desktop: 'px',
 			Tablet: 'px',
 			Mobile: 'px'
 		}
 	},
-	imageHotspotPaddingDesktop: { 
-		type: "object", 
+	imageHotspotPaddingDesktop: {
+		type: "object",
 		default: {
 			top: '',
 			right: '',
@@ -745,8 +751,8 @@ const attributes = {
 			left: ''
 		}
 	},
-	imageHotspotPaddingTablet: { 
-		type: "object", 
+	imageHotspotPaddingTablet: {
+		type: "object",
 		default: {
 			top: '',
 			right: '',
@@ -754,8 +760,8 @@ const attributes = {
 			left: ''
 		}
 	},
-	imageHotspotPaddingMobile: { 
-		type: "object", 
+	imageHotspotPaddingMobile: {
+		type: "object",
 		default: {
 			top: '',
 			right: '',
@@ -763,22 +769,22 @@ const attributes = {
 			left: ''
 		}
 	},
-	imageHotspotPaddingLink: { 
-		type: "boolean", 
-		default: true 
+	imageHotspotPaddingLink: {
+		type: "boolean",
+		default: true
 	},
 
 	// Margin
-	imageHotspotMarginUnits: { 
-		type: "object", 
+	imageHotspotMarginUnits: {
+		type: "object",
 		default: {
 			Desktop: 'px',
 			Tablet: 'px',
 			Mobile: 'px'
 		}
 	},
-	imageHotspotMarginDesktop: { 
-		type: "object", 
+	imageHotspotMarginDesktop: {
+		type: "object",
 		default: {
 			top: '',
 			right: '',
@@ -786,8 +792,8 @@ const attributes = {
 			left: ''
 		}
 	},
-	imageHotspotMarginTablet: { 
-		type: "object", 
+	imageHotspotMarginTablet: {
+		type: "object",
 		default: {
 			top: '',
 			right: '',
@@ -795,8 +801,8 @@ const attributes = {
 			left: ''
 		}
 	},
-	imageHotspotMarginMobile: { 
-		type: "object", 
+	imageHotspotMarginMobile: {
+		type: "object",
 		default: {
 			top: '',
 			right: '',
@@ -804,22 +810,22 @@ const attributes = {
 			left: ''
 		}
 	},
-	imageHotspotMarginLink: { 
-		type: "boolean", 
-		default: true 
+	imageHotspotMarginLink: {
+		type: "boolean",
+		default: true
 	},
 
 	// Border
-	imageHotspotBorderUnits: { 
-		type: "object", 
+	imageHotspotBorderUnits: {
+		type: "object",
 		default: {
 			Desktop: 'px',
 			Tablet: 'px',
 			Mobile: 'px'
 		}
 	},
-	imageHotspotBorderDesktop: { 
-		type: "object", 
+	imageHotspotBorderDesktop: {
+		type: "object",
 		default: {
 			top: '',
 			right: '',
@@ -827,8 +833,8 @@ const attributes = {
 			left: ''
 		}
 	},
-	imageHotspotBorderTablet: { 
-		type: "object", 
+	imageHotspotBorderTablet: {
+		type: "object",
 		default: {
 			top: '',
 			right: '',
@@ -836,8 +842,8 @@ const attributes = {
 			left: ''
 		}
 	},
-	imageHotspotBorderMobile: { 
-		type: "object", 
+	imageHotspotBorderMobile: {
+		type: "object",
 		default: {
 			top: '',
 			right: '',
@@ -845,22 +851,22 @@ const attributes = {
 			left: ''
 		}
 	},
-	imageHotspotBorderLink: { 
-		type: "boolean", 
-		default: true 
+	imageHotspotBorderLink: {
+		type: "boolean",
+		default: true
 	},
 
 	// Border Radius
-	imageHotspotBorderRadiusUnits: { 
-		type: "object", 
+	imageHotspotBorderRadiusUnits: {
+		type: "object",
 		default: {
 			Desktop: 'px',
 			Tablet: 'px',
 			Mobile: 'px'
 		}
 	},
-	imageHotspotBorderRadiusDesktop: { 
-		type: "object", 
+	imageHotspotBorderRadiusDesktop: {
+		type: "object",
 		default: {
 			top: '',
 			right: '',
@@ -868,8 +874,8 @@ const attributes = {
 			left: ''
 		}
 	},
-	imageHotspotBorderRadiusTablet: { 
-		type: "object", 
+	imageHotspotBorderRadiusTablet: {
+		type: "object",
 		default: {
 			top: '',
 			right: '',
@@ -877,8 +883,8 @@ const attributes = {
 			left: ''
 		}
 	},
-	imageHotspotBorderRadiusMobile: { 
-		type: "object", 
+	imageHotspotBorderRadiusMobile: {
+		type: "object",
 		default: {
 			top: '',
 			right: '',
@@ -886,9 +892,9 @@ const attributes = {
 			left: ''
 		}
 	},
-	imageHotspotBorderRadiusLink: { 
-		type: "boolean", 
-		default: true 
+	imageHotspotBorderRadiusLink: {
+		type: "boolean",
+		default: true
 	},
 	imageHotspotDesktopSwitcher: {
 		type: "boolean",
@@ -904,11 +910,20 @@ const attributes = {
 	},
 
 	// Custom CSS
-	imageHotspotCustomCSS: { 
-		type: "string", 
-		default: "" 
+	imageHotspotCustomCSS: {
+		type: "string",
+		default: ""
 	},
 
+	imageHotspotGlobalWraperID: {
+		type: "string",
+		default: ""
+	},
+
+	imageHotspotGlobalWraperClass: {
+		type: "string",
+		default: ""
+	},
 	imageHotspotShowPopoverImage: {
 		type: "boolean",
 		default: true
@@ -920,6 +935,317 @@ const attributes = {
 	imageHotspotPriceColor: {
 		type: "string",
 		default: "#333333"
+	},
+	// Global Settings
+	globalZIndex: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
+		}
+	},
+	imageHotspotOverflow: {
+		type: 'string',
+		default: "default",
+	},
+	globalPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	globalPaddingDesktop: {
+		type: "object",
+		default: {
+			top: '32',
+			bottom: '32',
+			left: '16',
+			right: '16',
+		},
+	},
+	globalPaddingTablet: {
+		type: "object",
+		default: {
+			top: '32',
+			bottom: '32',
+			left: '16',
+			right: '16',
+		},
+	},
+	globalPaddingMobile: {
+		type: "object",
+		default: {
+			top: '32',
+			bottom: '32',
+			left: '16',
+			right: '16',
+		},
+	},
+	globalPaddingLink: {
+		type: "boolean",
+		default: true
+	},
+	globalMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	globalMarginDesktop: {
+		type: "object",
+		default: {
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
+	},
+	globalMarginTablet: {
+		type: "object",
+		default: {
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
+	},
+	globalMarginMobile: {
+		type: "object",
+		default: {
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
+	},
+	globalMarginLink: {
+		type: "boolean",
+		default: true
+	},
+	globalBgColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	globalBgColor: {
+		type: "string",
+		default: '#EBF5FF'
+	},
+	globalBgHoverColor: {
+		type: "string",
+		default: "#399CFF"
+	},
+	globalBorder: {
+		type: 'string',
+		default: "none",
+	},
+	globalBorderColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	globalBorderColor: {
+		type: 'string',
+	},
+	globalBorderHoverColor: {
+		type: 'string',
+	},
+	globalBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	globalBorderDesktop: {
+		type: "object",
+		default: {
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
+	},
+	globalBorderTablet: {
+		type: "object",
+		default: {
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
+	},
+	globalBorderMobile: {
+		type: "object",
+		default: {
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
+	},
+	globalBorderLink: {
+		type: "boolean",
+		default: true
+	},
+	globalBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	globalBorderRadiusDesktop: {
+		type: "object",
+		default: {
+			top: '6',
+			bottom: '6',
+			left: '6',
+			right: '6',
+		},
+	},
+	globalBorderRadiusTablet: {
+		type: "object",
+		default: {
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
+	},
+	globalBorderRadiusMobile: {
+		type: "object",
+		default: {
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
+	},
+	globalBorderRadiusLink: {
+		type: "boolean",
+		default: true
+	},
+	imageHotspotGlobalimageHotspotShadowSwitcher: {
+		type: 'string',
+		default: 'normal',
+	},
+	imageHotspotGlobalimageHotspotShadowValues: {
+		type: 'array',
+		default: [],
+	},
+	imageHotspotGlobalimageHotspotShadowCssValue: {
+		type: 'string',
+		default: '',
+	},
+	imageHotspotGlobalHoverimageHotspotShadowValues: {
+		type: 'array',
+		default: [],
+	},
+	imageHotspotGlobalHoverimageHotspotShadowCssValue: {
+		type: 'string',
+		default: '',
+	},
+	imageHotspotPositionType: {
+		type: "string",
+		default: "default"
+	},
+	imageHotspotHZOrientationType: {
+		type: "string",
+		default: "left"
+	},
+	imageHotspotVROrientationType: {
+		type: "string",
+		default: "top"
+	},
+	imageHotspotHZLeftOffset: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	imageHotspotHZLeftOffsetUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	imageHotspotHZRightOffset: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	imageHotspotHZRightOffsetUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	imageHotspotVRTopOffset: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	imageHotspotVRTopOffsetUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	imageHotspotVRBottomOffset: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	imageHotspotVRBottomOffsetUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	imageHotspotBoxShadowSwitcher: {
+		type: 'string',
+		default: 'normal',
+	},
+	imageHotspotBoxShadowValues: {
+		type: 'array',
+		default: [],
+	},
+	imageHotspotBoxShadowCssValue: {
+		type: 'string',
+		default: '',
+	},
+	imageHotspotHoverBoxShadowValues: {
+		type: 'array',
+		default: [],
+	},
+	imageHotspotHoverBoxShadowCssValue: {
+		type: 'string',
+		default: '',
 	},
 }
 

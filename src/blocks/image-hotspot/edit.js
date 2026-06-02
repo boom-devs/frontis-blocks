@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { useEffect, useState } from '@wordpress/element';
+import { useEffect, useState, useRef } from '@wordpress/element';
 import { useBlockProps, MediaPlaceholder } from '@wordpress/block-editor';
 import Inspector from './inspector';
 import './editor.scss';
@@ -8,20 +8,23 @@ import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
 import { useDeviceType } from '@Config/displayType';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import { markerSvgs } from './preset';
+import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 
 function Edit({ attributes, setAttributes, clientId, isSelected }) {
-  const { 
-    imageHotspotImageUrl, 
-    imageHotspotImageAlt, 
-    imageHotspotImageSize, 
-    imageHotspotHotspots, 
+  const {
+    imageHotspotImageUrl,
+    imageHotspotImageAlt,
+    imageHotspotImageSize,
+    imageHotspotHotspots,
     imageHotspotSelectedHotspotId,
     imageHotspotMarkerSvg,
     imageHotspotMarkerColor,
     imageHotspotMarkerHoverColor,
     imageHotspotShowPopoverImage,
     blockID,
-    blockStyle
+    blockStyle,
+    imageHotspotGlobalWraperClass,
+    imageHotspotGlobalWraperID
   } = attributes;
 
   const deviceType = useDeviceType();
@@ -55,15 +58,21 @@ function Edit({ attributes, setAttributes, clientId, isSelected }) {
     className: `fb-hotspot-main-wrapper ${blockID}`,
   });
 
+  /**
+    * Manages tab button settings and switches to block settings on click
+    */
+  const panelRef = useRef(null);
+  SwitchToBlockSettings(panelRef);
+
   return (
     <>
       {isSelected && (
-        <Inspector 
+        <Inspector
           attributes={attributes}
           setAttributes={setAttributes}
         />
       )}
-      
+
       <div {...blockProps}>
         {!imageHotspotImageUrl ? (
           <MediaPlaceholder
@@ -83,13 +92,13 @@ function Edit({ attributes, setAttributes, clientId, isSelected }) {
             allowedTypes={['image']}
           />
         ) : (
-          <div className="fb-hotspot-editor-container">
-            <img 
-              src={imageHotspotImageUrl} 
+          <div className={`fb-parent-wrapper fb-image-hotspot-wrapper ${blockID} ${imageHotspotGlobalWraperClass}`} id={imageHotspotGlobalWraperID} ref={panelRef}>
+            <img
+              src={imageHotspotImageUrl}
               alt={imageHotspotImageAlt || __('Hotspot base', 'frontis-blocks')}
               className="fb-hotspot-base-image"
             />
-            
+
             {imageHotspotHotspots?.map((hotspot) => !isHidden(hotspot) && (
               <div
                 key={hotspot.id}
@@ -102,23 +111,23 @@ function Edit({ attributes, setAttributes, clientId, isSelected }) {
                 }}
               >
                 <div className="fb-hotspot-trigger">
-                    {imageHotspotMarkerSvg && markerSvgs[imageHotspotMarkerSvg] && (
-                        <span className="fb-hotspot-marker-svg">
-                            {markerSvgs[imageHotspotMarkerSvg](hotspot.markerColor || imageHotspotMarkerColor)}
-                        </span>
-                    )}
-                    <span className="fb-hotspot-icon">
-                        {renderSVG(hotspot.icon || 'plus')}
+                  {imageHotspotMarkerSvg && markerSvgs[imageHotspotMarkerSvg] && (
+                    <span className="fb-hotspot-marker-svg">
+                      {markerSvgs[imageHotspotMarkerSvg](hotspot.markerColor || imageHotspotMarkerColor)}
                     </span>
+                  )}
+                  <span className="fb-hotspot-icon">
+                    {renderSVG(hotspot.icon || 'plus')}
+                  </span>
                 </div>
-                
+
                 <div className="fb-hotspot-popover">
                   {imageHotspotShowPopoverImage && hotspot.popoverImageUrl && (
-                      <img 
-                          src={hotspot.popoverImageUrl}
-                          alt={hotspot.popoverImageAlt || ''}
-                          className="fb-hotspot-popover-image"
-                      />
+                    <img
+                      src={hotspot.popoverImageUrl}
+                      alt={hotspot.popoverImageAlt || ''}
+                      className="fb-hotspot-popover-image"
+                    />
                   )}
                   {hotspot.category && <div className="fb-hotspot-popover-category">{hotspot.category}</div>}
                   {hotspot.title && (
