@@ -42,14 +42,24 @@ export default function save({ attributes }) {
 				aria-label={item.title || ""}
 				style={
 					imageAccordionPreset !== "preset-4" && item.image?.url
-						? { backgroundImage: `url('${item.image.url}')` }
+						? {
+								backgroundImage: `url('${item.image.url}')`,
+								backgroundPosition: item.image?.position,
+								backgroundAttachment: item.image?.attachment,
+								backgroundRepeat: item.image?.repeat,
+								backgroundSize: item.image?.size,
+						  }
 						: {}
 				}
 			>
 				{imageAccordionPreset === "preset-4" && item.image?.url && (
 					<div
 						className="fb-skew-bg"
-						style={{ backgroundImage: `url('${item.image.url}')` }}
+						style={{
+							backgroundImage: `url('${item.image.url}')`,
+							backgroundPosition: item.image?.position,
+							backgroundSize: item.image?.size,
+						}}
 					/>
 				)}
 
