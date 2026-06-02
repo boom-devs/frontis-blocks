@@ -126,10 +126,10 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                                 </div>
                             )}
 
-                            <div className="fb-image-comparison-before-image">
+                            <div className="fb-image-comparison-before-image fb-img-comp-overlay" style={overlayStyle}>
                                 <img src={beforeImageUrl} alt={beforeImageAlt || ""} />
                             </div>
-                            <div className="fb-image-comparison-after-image fb-img-comp-overlay" style={overlayStyle}>
+                            <div className="fb-image-comparison-after-image">
                                 <img src={afterImageUrl} alt={afterImageAlt || ""} />
                             </div>
                             <div className="fb-image-comparison-slider" style={sliderStyle}>

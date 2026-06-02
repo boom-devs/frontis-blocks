@@ -72,10 +72,10 @@ export default function save({ attributes }) {
                         </div>
                     )}
 
-                    <div className="fb-image-comparison-before-image">
+                    <div className="fb-image-comparison-before-image fb-img-comp-overlay">
                         <img src={beforeImageUrl} alt={beforeImageAlt || ""} />
                     </div>
-                    <div className="fb-image-comparison-after-image fb-img-comp-overlay">
+                    <div className="fb-image-comparison-after-image">
                         <img src={afterImageUrl} alt={afterImageAlt || ""} />
                     </div>
                 </div>
