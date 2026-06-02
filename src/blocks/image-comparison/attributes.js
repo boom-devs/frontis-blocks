@@ -131,6 +131,48 @@ const attributes = {
     },
     /** End Comparison Drag Direction */
 
+    /** Start Padding */
+    comparisonPaddingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    comparisonPaddingDesktop: {
+        type: "object",
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    comparisonPaddingTablet: {
+        type: "object",
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    comparisonPaddingMobile: {
+        type: "object",
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    comparisonPaddingLink: {
+        type: "boolean",
+        default: true
+    },
+    /** End Padding */
+
     /** Start Comparison Margin */
     comparisonMarginUnits: {
         type: 'object',
@@ -579,7 +621,7 @@ const attributes = {
     },
     /** End Comparison Labels Text Color */
 
-     /** Start Border Radius */
+    /** Start Border Radius */
     comparisonHandlerBorderRadiusUnits: {
         type: "object",
         default: {
@@ -656,7 +698,7 @@ const attributes = {
     /** End Comparison Handler Color */
 
     /**Start Divider Width */
-    comparisonDividerWidth:{
+    comparisonDividerWidth: {
         type: "object",
         default: {
             Desktop: "2",

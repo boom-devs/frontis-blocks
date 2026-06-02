@@ -48,6 +48,14 @@ const imageComparisonStyle = (attributes) => {
         comparisonMarginLink,
         /** End Comparison Margin */
 
+        /** Start Comparison Padding */
+        comparisonPaddingUnits,
+        comparisonPaddingDesktop,
+        comparisonPaddingTablet,
+        comparisonPaddingMobile,
+        comparisonPaddingLink,
+        /** End Comparison Padding */
+
         /** Start Comparison Border */
         comparisonBorder,
         comparisonBorderColorSwitcher,
@@ -133,7 +141,7 @@ const imageComparisonStyle = (attributes) => {
         comparisonLabelsBtnTextHoverColor,
         /** End Comparison Labels Text Color */
 
-  /** Start Comparison Handler Border Radius */
+        /** Start Comparison Handler Border Radius */
         comparisonHandlerBorderRadiusUnits,
         comparisonHandlerBorderRadiusDesktop,
         comparisonHandlerBorderRadiusTablet,
@@ -185,8 +193,8 @@ const imageComparisonStyle = (attributes) => {
         compareOverlayHoverClassicColor,
         compareOverlayHoverGradientColor,
         compareOverlayHoverCustomGradientSwitcher,
-        compareOverlayHoverCustomGradientInputValue,        
-        /** End Comparison Overlay Color */        
+        compareOverlayHoverCustomGradientInputValue,
+        /** End Comparison Overlay Color */
 
         /** Start Global Settings */
         // comparisonGlobalZIndex,
@@ -214,6 +222,11 @@ const imageComparisonStyle = (attributes) => {
     const comparisonMarginTabletWidth = `${comparisonMarginTablet?.top}${comparisonMarginUnits?.Tablet} ${comparisonMarginTablet?.right}${comparisonMarginUnits?.Tablet} ${comparisonMarginTablet?.bottom}${comparisonMarginUnits?.Tablet} ${comparisonMarginTablet?.left}${comparisonMarginUnits?.Tablet}`;
     const comparisonMarginMobileWidth = `${comparisonMarginMobile?.top}${comparisonMarginUnits?.Mobile} ${comparisonMarginMobile?.right}${comparisonMarginUnits?.Mobile} ${comparisonMarginMobile?.bottom}${comparisonMarginUnits?.Mobile} ${comparisonMarginMobile?.left}${comparisonMarginUnits?.Mobile}`;
 
+    /** Default padding for Comparison */
+    const comparisonPaddingDesktopWidth = `${comparisonPaddingDesktop?.top}${comparisonPaddingUnits?.Desktop} ${comparisonPaddingDesktop?.right}${comparisonPaddingUnits?.Desktop} ${comparisonPaddingDesktop?.bottom}${comparisonPaddingUnits?.Desktop} ${comparisonPaddingDesktop?.left}${comparisonPaddingUnits?.Desktop}`;
+    const comparisonPaddingTabletWidth = `${comparisonPaddingTablet?.top}${comparisonPaddingUnits?.Tablet} ${comparisonPaddingTablet?.right}${comparisonPaddingUnits?.Tablet} ${comparisonPaddingTablet?.bottom}${comparisonPaddingUnits?.Tablet} ${comparisonPaddingTablet?.left}${comparisonPaddingUnits?.Tablet}`;
+    const comparisonPaddingMobileWidth = `${comparisonPaddingMobile?.top}${comparisonPaddingUnits?.Mobile} ${comparisonPaddingMobile?.right}${comparisonPaddingUnits?.Mobile} ${comparisonPaddingMobile?.bottom}${comparisonPaddingUnits?.Mobile} ${comparisonPaddingMobile?.left}${comparisonPaddingUnits?.Mobile}`;
+
     /** Default border for Comparison */
     const comparisonBorderDesktopWidth = `${comparisonBorderDesktop?.top}${comparisonBorderUnits?.Desktop} ${comparisonBorderDesktop?.right}${comparisonBorderUnits?.Desktop} ${comparisonBorderDesktop?.bottom}${comparisonBorderUnits?.Desktop} ${comparisonBorderDesktop?.left}${comparisonBorderUnits?.Desktop}`;
     const comparisonBorderTabletWidth = `${comparisonBorderTablet?.top}${comparisonBorderUnits?.Tablet} ${comparisonBorderTablet?.right}${comparisonBorderUnits?.Tablet} ${comparisonBorderTablet?.bottom}${comparisonBorderUnits?.Tablet} ${comparisonBorderTablet?.left}${comparisonBorderUnits?.Tablet}`;
@@ -230,7 +243,7 @@ const imageComparisonStyle = (attributes) => {
     const comparisonLabelsBorderRadiusMobileWidth = `${comparisonLabelsBorderRadiusMobile?.top}${comparisonLabelsBorderRadiusUnits?.Mobile} ${comparisonLabelsBorderRadiusMobile?.right}${comparisonLabelsBorderRadiusUnits?.Mobile} ${comparisonLabelsBorderRadiusMobile?.bottom}${comparisonLabelsBorderRadiusUnits?.Mobile} ${comparisonLabelsBorderRadiusMobile?.left}${comparisonLabelsBorderRadiusUnits?.Mobile}`;
 
     /** Default padding for Comparison Labels */
-    const comparisonLabelsPaddingDesktopWidth = `${comparisonLabelsPaddingDesktop?.top}${comparisonLabelsPaddingUnits?.Desktop} ${comparisonLabelsPaddingDesktop?.right}${comparisonLabelsPaddingUnits?.Desktop} ${comparisonLabelsPaddingDesktop?.bottom}${comparisonLabelsPaddingUnits?.Desktop} ${comparisonLabelsPaddingDesktop?.left}${comparisonLabelsPaddingUnits?.Desktop}`; 
+    const comparisonLabelsPaddingDesktopWidth = `${comparisonLabelsPaddingDesktop?.top}${comparisonLabelsPaddingUnits?.Desktop} ${comparisonLabelsPaddingDesktop?.right}${comparisonLabelsPaddingUnits?.Desktop} ${comparisonLabelsPaddingDesktop?.bottom}${comparisonLabelsPaddingUnits?.Desktop} ${comparisonLabelsPaddingDesktop?.left}${comparisonLabelsPaddingUnits?.Desktop}`;
     const comparisonLabelsPaddingTabletWidth = `${comparisonLabelsPaddingTablet?.top}${comparisonLabelsPaddingUnits?.Tablet} ${comparisonLabelsPaddingTablet?.right}${comparisonLabelsPaddingUnits?.Tablet} ${comparisonLabelsPaddingTablet?.bottom}${comparisonLabelsPaddingUnits?.Tablet} ${comparisonLabelsPaddingTablet?.left}${comparisonLabelsPaddingUnits?.Tablet}`;
     const comparisonLabelsPaddingMobileWidth = `${comparisonLabelsPaddingMobile?.top}${comparisonLabelsPaddingUnits?.Mobile} ${comparisonLabelsPaddingMobile?.right}${comparisonLabelsPaddingUnits?.Mobile} ${comparisonLabelsPaddingMobile?.bottom}${comparisonLabelsPaddingUnits?.Mobile} ${comparisonLabelsPaddingMobile?.left}${comparisonLabelsPaddingUnits?.Mobile}`;
 
@@ -248,6 +261,7 @@ const imageComparisonStyle = (attributes) => {
         .${blockID} .fb-image-comparison-slider-wrapper {
             ${comparisonHeight?.Desktop ? `height: ${comparisonHeight.Desktop}${comparisonHeightUnits?.Desktop || 'px'};` : ''}
             ${comparisonMarginDesktopWidth && comparisonMarginDesktop?.top ? `margin: ${comparisonMarginDesktopWidth};` : ''} 
+            ${comparisonPaddingDesktopWidth && comparisonPaddingDesktop?.top ? `padding: ${comparisonPaddingDesktopWidth};` : ''} 
             ${comparisonBorder ? `border: ${comparisonBorder};` : ''} 
             ${comparisonBorderDesktopWidth && comparisonBorderDesktop?.top ? `border-width: ${comparisonBorderDesktopWidth};` : ''}
             ${comparisonBorderRadiusDesktopWidth && comparisonBorderRadiusDesktop?.top ? `border-radius: ${comparisonBorderRadiusDesktopWidth};` : ''}
@@ -256,8 +270,8 @@ const imageComparisonStyle = (attributes) => {
         }
 
         .${blockID} .fb-image-comparison-label {
-            ${comparisonLabelsBorderRadiusDesktopWidth && comparisonLabelsBorderRadiusDesktop?.top? `border-radius: ${comparisonLabelsBorderRadiusDesktopWidth};` : ''}
-            ${comparisonLabelsPaddingDesktopWidth && comparisonLabelsPaddingDesktop?.top? `padding: ${comparisonLabelsPaddingDesktopWidth};` : ''}
+            ${comparisonLabelsBorderRadiusDesktopWidth && comparisonLabelsBorderRadiusDesktop?.top ? `border-radius: ${comparisonLabelsBorderRadiusDesktopWidth};` : ''}
+            ${comparisonLabelsPaddingDesktopWidth && comparisonLabelsPaddingDesktop?.top ? `padding: ${comparisonLabelsPaddingDesktopWidth};` : ''}
             ${comparisonLabelsBtnTextColor ? `color: ${comparisonLabelsBtnTextColor};` : ""}
             ${comparisonLabelsGlobalTypoSwitcher.fontFamily === true &&
             comparisonLabelsGlobalTypographyData.fontFamily
@@ -379,9 +393,9 @@ const imageComparisonStyle = (attributes) => {
 
         .${blockID} .fb-image-comparison-slider-wrapper .fb-image-comparison-slider::before {
              ${comparisonDragDirection === 'vertical'
-                 ? (comparisonDividerWidth?.Desktop ? `height: ${comparisonDividerWidth.Desktop}${comparisonDividerWidthUnits?.Desktop || 'px'}; width: auto;` : '')
-                 : (comparisonDividerWidth?.Desktop ? `width: ${comparisonDividerWidth.Desktop}${comparisonDividerWidthUnits?.Desktop || 'px'}; height: auto;` : '')
-             }
+            ? (comparisonDividerWidth?.Desktop ? `height: ${comparisonDividerWidth.Desktop}${comparisonDividerWidthUnits?.Desktop || 'px'}; width: auto;` : '')
+            : (comparisonDividerWidth?.Desktop ? `width: ${comparisonDividerWidth.Desktop}${comparisonDividerWidthUnits?.Desktop || 'px'}; height: auto;` : '')
+        }
              ${comparisonDividerColor ? `background: ${comparisonDividerColor};` : ''}    
         }
 
@@ -431,6 +445,7 @@ const imageComparisonStyle = (attributes) => {
             .${blockID} .fb-image-comparison-slider-wrapper {
                 ${comparisonHeight?.Tablet ? `height: ${comparisonHeight.Tablet}${comparisonHeightUnits?.Tablet || 'px'};` : ''}
                 ${comparisonMarginTabletWidth && comparisonMarginTablet?.top ? `margin: ${comparisonMarginTabletWidth};` : ''} 
+                ${comparisonPaddingTabletWidth && comparisonPaddingTablet?.top ? `padding: ${comparisonPaddingTabletWidth};` : ''} 
                 ${comparisonBorderTabletWidth && comparisonBorderTablet?.top ? `border-width: ${comparisonBorderTabletWidth};` : ''}
                 ${comparisonBorderRadiusTabletWidth && comparisonBorderRadiusTablet?.top ? `border-radius: ${comparisonBorderRadiusTabletWidth};` : ''}
             }
@@ -448,9 +463,9 @@ const imageComparisonStyle = (attributes) => {
 
             .${blockID} .fb-image-comparison-slider-wrapper .fb-image-comparison-slider::before {
                  ${comparisonDragDirection === 'vertical'
-                     ? (comparisonDividerWidth?.Tablet ? `height: ${comparisonDividerWidth.Tablet}${comparisonDividerWidthUnits?.Tablet || 'px'};` : '')
-                     : (comparisonDividerWidth?.Tablet ? `width: ${comparisonDividerWidth.Tablet}${comparisonDividerWidthUnits?.Tablet || 'px'};` : '')
-                 }
+            ? (comparisonDividerWidth?.Tablet ? `height: ${comparisonDividerWidth.Tablet}${comparisonDividerWidthUnits?.Tablet || 'px'};` : '')
+            : (comparisonDividerWidth?.Tablet ? `width: ${comparisonDividerWidth.Tablet}${comparisonDividerWidthUnits?.Tablet || 'px'};` : '')
+        }
             }
 
             .${blockID} .fb-image-comparison-slider-wrapper .fb-image-comparison-slider .fb-arrow-left {
@@ -470,6 +485,7 @@ const imageComparisonStyle = (attributes) => {
             .${blockID} .fb-image-comparison-slider-wrapper {
                 ${comparisonHeight?.Mobile ? `height: ${comparisonHeight.Mobile}${comparisonHeightUnits?.Mobile || 'px'};` : ''}
                 ${comparisonMarginMobileWidth && comparisonMarginMobile?.top ? `margin: ${comparisonMarginMobileWidth};` : ''} 
+                ${comparisonPaddingMobileWidth && comparisonPaddingMobile?.top ? `padding: ${comparisonPaddingMobileWidth};` : ''} 
                 ${comparisonBorderMobileWidth && comparisonBorderTablet?.top ? `border-width: ${comparisonBorderMobileWidth};` : ''}
                 ${comparisonBorderRadiusMobileWidth && comparisonBorderRadiusTablet?.top ? `border-radius: ${comparisonBorderRadiusMobileWidth};` : ''}
             }
@@ -487,9 +503,9 @@ const imageComparisonStyle = (attributes) => {
 
             .${blockID} .fb-image-comparison-slider-wrapper .fb-image-comparison-slider::before {
                  ${comparisonDragDirection === 'vertical'
-                     ? (comparisonDividerWidth?.Mobile ? `height: ${comparisonDividerWidth.Mobile}${comparisonDividerWidthUnits?.Mobile || 'px'};` : '')
-                     : (comparisonDividerWidth?.Mobile ? `width: ${comparisonDividerWidth.Mobile}${comparisonDividerWidthUnits?.Mobile || 'px'};` : '')
-                 }
+            ? (comparisonDividerWidth?.Mobile ? `height: ${comparisonDividerWidth.Mobile}${comparisonDividerWidthUnits?.Mobile || 'px'};` : '')
+            : (comparisonDividerWidth?.Mobile ? `width: ${comparisonDividerWidth.Mobile}${comparisonDividerWidthUnits?.Mobile || 'px'};` : '')
+        }
             }
 
             .${blockID} .fb-image-comparison-slider-wrapper .fb-image-comparison-slider .fb-arrow-left {
