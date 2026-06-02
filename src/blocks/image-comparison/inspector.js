@@ -204,7 +204,7 @@ const Inspector = ({ attributes, setAttributes }) => {
         comparisonArrowSize,
         comparisonArrowSizeUnits,
         /** End Comparison Arrow Size */
-        
+
         /** Start Comparison Overlay Color */
         compareOverlayBgColorSwitcher,
         compareOverlayNormalBackgroundType,
@@ -216,8 +216,16 @@ const Inspector = ({ attributes, setAttributes }) => {
         compareOverlayHoverClassicColor,
         compareOverlayHoverGradientColor,
         compareOverlayHoverCustomGradientSwitcher,
-        compareOverlayHoverCustomGradientInputValue,        
+        compareOverlayHoverCustomGradientInputValue,
         /** End Comparison Overlay Color */
+
+        /** Start Comparison Padding */
+        comparisonPaddingUnits,
+        comparisonPaddingDesktop,
+        comparisonPaddingTablet,
+        comparisonPaddingMobile,
+        comparisonPaddingLink,
+        /** End Comparison Padding */
 
         /** Start Global Settings */
         comparisonGlobalZIndex,
@@ -239,7 +247,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 
     const deviceType = useDeviceType();
 
-    /** Start Google Map Margin */
+    /** Start Comparison Margin */
     const comparisonMarginUnitsChange = (event, position) => {
         const value = event.target.value;
         if (comparisonMarginLink) {
@@ -308,7 +316,78 @@ const Inspector = ({ attributes, setAttributes }) => {
             }
         });
     };
-    /** End Google Map Margin */
+    /** End Comparison Margin */
+
+        /** Start Comparison Padding */
+    const comparisonPaddingUnitsChange = (event, position) => {
+        const value = event.target.value;
+        if (comparisonPaddingLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        comparisonPaddingDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        comparisonPaddingTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        comparisonPaddingMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ comparisonPaddingDesktop: { ...comparisonPaddingDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ comparisonPaddingTablet: { ...comparisonPaddingTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ comparisonPaddingMobile: { ...comparisonPaddingMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    const comparisonPaddingLinkBtn = () => {
+        setAttributes({
+            comparisonPaddingLink: !comparisonPaddingLink
+        });
+    };
+
+    const comparisonPaddingUnitsHandler = (unit) => {
+        setAttributes({
+            comparisonPaddingUnits: {
+                ...comparisonPaddingUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+    /** End Comparison Padding */
 
     /** Start Comparison Border */
     const comparisonBorderUnitsChange = (event, position) => {
@@ -764,112 +843,10 @@ const Inspector = ({ attributes, setAttributes }) => {
      */
     const styleControls = (
         <>
-            <PanelBody
-                title={__("Container", "frontis-blocks")}
-                initialOpen={false}
-            >
-
-                <SelectControl
-                    label={__("Border Style", "frontis-blocks")}
-                    value={comparisonBorder}
-                    options={BORDER_STYLES}
-                    onChange={(value) => setAttributes({ comparisonBorder: value })}
-                />
-
-
-                <FB_SwitcherControl
-                    label={__("Border Color", "frontis-blocks")}
-                    globalSwitcher={comparisonBorderColorSwitcher}
-                    setGlobalSwitcher={(value) => setAttributes({ comparisonBorderColorSwitcher: value })}
-                />
-
-                {comparisonBorderColorSwitcher === 'normal' && (
-                    <FB_ColorControl
-                        label={__("Normal Color", "frontis-blocks")}
-                        globalColor={comparisonBorderColor}
-                        setGlobalColor={(value) => setAttributes({ comparisonBorderColor: value === undefined ? '' : value })}
-                    />
-                )}
-
-                {comparisonBorderColorSwitcher === 'hover' && (
-                    <FB_ColorControl
-                        label={__("Hover Color", "frontis-blocks")}
-                        globalColor={comparisonBorderHoverColor}
-                        setGlobalColor={(value) => setAttributes({ comparisonBorderHoverColor: value === undefined ? '' : value })}
-                    />
-                )}
-
-                <FB_Spacing
-                    label={__("Border", "frontis-blocks")}
-                    deviceType={deviceType}
-                    spacingUnitsHandler={comparisonBorderUnitsHandler}
-                    spacingUnits={comparisonBorderUnits}
-                    spacingDesktop={comparisonBorderDesktop}
-                    spacingTablet={comparisonBorderTablet}
-                    spacingMobile={comparisonBorderMobile}
-                    handleSpacingUnitHandler={comparisonBorderUnitsChange}
-                    spacingCombineBtn={comparisonBorderLink}
-                    spacingCombineBtnHandler={comparisonBorderLinkBtn}
-                    setAttributes={setAttributes}
-                />
-
-                <FB_Spacing
-                    label={__("Border Radius", "frontis-blocks")}
-                    deviceType={deviceType}
-                    spacingUnitsHandler={comparisonBorderRadiusUnitsHandler}
-                    spacingUnits={comparisonBorderRadiusUnits}
-                    spacingDesktop={comparisonBorderRadiusDesktop}
-                    spacingTablet={comparisonBorderRadiusTablet}
-                    spacingMobile={comparisonBorderRadiusMobile}
-                    handleSpacingUnitHandler={comparisonBorderRadiusUnitsChange}
-                    spacingCombineBtn={comparisonBorderRadiusLink}
-                    spacingCombineBtnHandler={comparisonBorderRadiusLinkBtn}
-                    setAttributes={setAttributes}
-                />
-
-                <FB_Spacing
-                    label={__("Margin", "frontis-blocks")}
-                    deviceType={deviceType}
-                    spacingUnitsHandler={comparisonMarginUnitsHandler}
-                    spacingUnits={comparisonMarginUnits}
-                    spacingDesktop={comparisonMarginDesktop}
-                    spacingTablet={comparisonMarginTablet}
-                    spacingMobile={comparisonMarginMobile}
-                    handleSpacingUnitHandler={comparisonMarginUnitsChange}
-                    spacingCombineBtn={comparisonMarginLink}
-                    spacingCombineBtnHandler={comparisonMarginLinkBtn}
-                    setAttributes={setAttributes}
-                />
-
-                <FB_SwitcherControl
-                    label={__("Box Shadow", "frontis-blocks")}
-                    globalSwitcher={comparisonBoxShadowSwitcher}
-                    setGlobalSwitcher={(value) => setAttributes({ comparisonBoxShadowSwitcher: value })}
-                />
-
-                {comparisonBoxShadowSwitcher === 'normal' && (
-                    <FB_BoxShadowControl
-                        label={__("Normal Shadow", "frontis-blocks")}
-                        onBoxShadowChange={(value) => setAttributes({ comparisonBoxShadowValues: value })}
-                        initialShadowValue={comparisonBoxShadowValues}
-                        onBoxShadowStyleChange={(value) => setAttributes({ comparisonBoxShadowCssValue: value })}
-                    />
-                )}
-
-                {comparisonBoxShadowSwitcher === 'hover' && (
-                    <FB_BoxShadowControl
-                        label={__("Hover Shadow", "frontis-blocks")}
-                        onBoxShadowChange={(value) => setAttributes({ comparisonBoxShadowHoverValues: value })}
-                        initialShadowValue={comparisonBoxShadowHoverValues}
-                        onBoxShadowStyleChange={(value) => setAttributes({ comparisonBoxShadowHoverCssValue: value })}
-                    />
-                )}
-
-            </PanelBody>
 
             <PanelBody
                 title={__("Divider", "frontis-blocks")}
-                initialOpen={false} 
+                initialOpen={false}
             >
 
                 <FB_Range
@@ -912,8 +889,8 @@ const Inspector = ({ attributes, setAttributes }) => {
                         }
                     />
                 )}
-                
-                 <FB_Range
+
+                <FB_Range
                     min={0}
                     max={200}
                     label={__("Divider Width", "frontis-blocks")}
@@ -927,7 +904,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                     resetFallbackValue={""}
                     isRangeUnit={true}
                 />
-            
+
                 <FB_SwitcherControl
                     label={__("Divider Color", "frontis-blocks")}
                     globalSwitcher={comparisonDividerColorSwitcher}
@@ -976,14 +953,14 @@ const Inspector = ({ attributes, setAttributes }) => {
                         setAttributes({ comparisonHandlerColorSwitcher: value })
                     }
                 />
-                    
+
                 {comparisonHandlerColorSwitcher === "normal" && (
                     <FB_ColorControl
-                            label={__("Normal Color", "frontis-blocks")}
-                            globalColor={comparisonHandlerColor}
-                            setGlobalColor={(value) =>
-                                setAttributes({ comparisonHandlerColor: value })
-                            }
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={comparisonHandlerColor}
+                        setGlobalColor={(value) =>
+                            setAttributes({ comparisonHandlerColor: value })
+                        }
                     />
                 )}
 
@@ -1172,7 +1149,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 
                     isBackgroundImage={false}
                 />
-                
+
             </PanelBody>
 
         </>
@@ -1224,6 +1201,130 @@ const Inspector = ({ attributes, setAttributes }) => {
                     value={comparisonCustomCSS}
                     onChangeValue={(value) => setAttributes({ comparisonCustomCSS: value })}
                 />
+            </PanelBody>
+
+            <PanelBody
+                title={__("Padding and Margin", "frontis-blocks")}
+                initialOpen={false}
+            >
+
+                <FB_Spacing
+                    label={__("Padding", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={comparisonPaddingUnitsHandler}
+                    spacingUnits={comparisonPaddingUnits}
+                    spacingDesktop={comparisonPaddingDesktop}
+                    spacingTablet={comparisonPaddingTablet}
+                    spacingMobile={comparisonPaddingMobile}
+                    handleSpacingUnitHandler={comparisonPaddingUnitsChange}
+                    spacingCombineBtn={comparisonPaddingLink}
+                    spacingCombineBtnHandler={comparisonPaddingLinkBtn}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_Spacing
+                    label={__("Margin", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={comparisonMarginUnitsHandler}
+                    spacingUnits={comparisonMarginUnits}
+                    spacingDesktop={comparisonMarginDesktop}
+                    spacingTablet={comparisonMarginTablet}
+                    spacingMobile={comparisonMarginMobile}
+                    handleSpacingUnitHandler={comparisonMarginUnitsChange}
+                    spacingCombineBtn={comparisonMarginLink}
+                    spacingCombineBtnHandler={comparisonMarginLinkBtn}
+                    setAttributes={setAttributes}
+                />
+
+            </PanelBody>
+
+            <PanelBody
+                title={__("Border and Shadow", "frontis-blocks")}
+                initialOpen={false}
+            >
+
+                <SelectControl
+                    label={__("Border Style", "frontis-blocks")}
+                    value={comparisonBorder}
+                    options={BORDER_STYLES}
+                    onChange={(value) => setAttributes({ comparisonBorder: value })}
+                />
+
+
+                <FB_SwitcherControl
+                    label={__("Border Color", "frontis-blocks")}
+                    globalSwitcher={comparisonBorderColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ comparisonBorderColorSwitcher: value })}
+                />
+
+                {comparisonBorderColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={comparisonBorderColor}
+                        setGlobalColor={(value) => setAttributes({ comparisonBorderColor: value === undefined ? '' : value })}
+                    />
+                )}
+
+                {comparisonBorderColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={comparisonBorderHoverColor}
+                        setGlobalColor={(value) => setAttributes({ comparisonBorderHoverColor: value === undefined ? '' : value })}
+                    />
+                )}
+
+                <FB_Spacing
+                    label={__("Border", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={comparisonBorderUnitsHandler}
+                    spacingUnits={comparisonBorderUnits}
+                    spacingDesktop={comparisonBorderDesktop}
+                    spacingTablet={comparisonBorderTablet}
+                    spacingMobile={comparisonBorderMobile}
+                    handleSpacingUnitHandler={comparisonBorderUnitsChange}
+                    spacingCombineBtn={comparisonBorderLink}
+                    spacingCombineBtnHandler={comparisonBorderLinkBtn}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_Spacing
+                    label={__("Border Radius", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={comparisonBorderRadiusUnitsHandler}
+                    spacingUnits={comparisonBorderRadiusUnits}
+                    spacingDesktop={comparisonBorderRadiusDesktop}
+                    spacingTablet={comparisonBorderRadiusTablet}
+                    spacingMobile={comparisonBorderRadiusMobile}
+                    handleSpacingUnitHandler={comparisonBorderRadiusUnitsChange}
+                    spacingCombineBtn={comparisonBorderRadiusLink}
+                    spacingCombineBtnHandler={comparisonBorderRadiusLinkBtn}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_SwitcherControl
+                    label={__("Box Shadow", "frontis-blocks")}
+                    globalSwitcher={comparisonBoxShadowSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ comparisonBoxShadowSwitcher: value })}
+                />
+
+                {comparisonBoxShadowSwitcher === 'normal' && (
+                    <FB_BoxShadowControl
+                        label={__("Normal Shadow", "frontis-blocks")}
+                        onBoxShadowChange={(value) => setAttributes({ comparisonBoxShadowValues: value })}
+                        initialShadowValue={comparisonBoxShadowValues}
+                        onBoxShadowStyleChange={(value) => setAttributes({ comparisonBoxShadowCssValue: value })}
+                    />
+                )}
+
+                {comparisonBoxShadowSwitcher === 'hover' && (
+                    <FB_BoxShadowControl
+                        label={__("Hover Shadow", "frontis-blocks")}
+                        onBoxShadowChange={(value) => setAttributes({ comparisonBoxShadowHoverValues: value })}
+                        initialShadowValue={comparisonBoxShadowHoverValues}
+                        onBoxShadowStyleChange={(value) => setAttributes({ comparisonBoxShadowHoverCssValue: value })}
+                    />
+                )}
+
             </PanelBody>
 
         </>
