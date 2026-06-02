@@ -44,7 +44,7 @@ const pluginURL =
 		? FrontisBlocksData.pluginUrl
 		: "";
 
-const Inspector = ({ attributes, setAttributes }) => {
+const Inspector = ({ attributes, setAttributes, clientId }) => {
 	const {
 		imageAccordionPreset,
 		imageAccordionTrigger,
@@ -158,10 +158,28 @@ const Inspector = ({ attributes, setAttributes }) => {
 	};
 
 	/** Item handlers */
-	const updateItem = (id, key, value) => {
-		const newItems = imageAccordionItems.map((item) =>
-			item.id === id ? { ...item, [key]: value } : item,
-		);
+	const updateItem = (id, keyOrUpdates, value) => {
+		// সরাসরি স্টোর থেকে লেটেস্ট অ্যাট্রিবিউট সংগ্রহ করা হচ্ছে যেন Race Condition না হয়
+		const latestAttributes = wp.data
+			.select("core/block-editor")
+			.getBlockAttributes(clientId);
+		const latestItems =
+			latestAttributes?.imageAccordionItems || imageAccordionItems;
+
+		const newItems = latestItems.map((item) => {
+			if (item.id === id) {
+				if (typeof keyOrUpdates === "object") {
+					return { ...item, ...keyOrUpdates };
+				}
+				const key = keyOrUpdates;
+				const updatedValue =
+					typeof value === "object" && !Array.isArray(value) && item[key]
+						? { ...item[key], ...value }
+						: value;
+				return { ...item, [key]: updatedValue };
+			}
+			return item;
+		});
 		setAttributes({ imageAccordionItems: newItems });
 	};
 
@@ -179,6 +197,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 			image: {
 				url: `${pluginURL}assets/images/preset-bg.jpg`,
 				id: "",
+				alt: "",
+				position: "center center",
+				attachment: "scroll",
+				repeat: "no-repeat",
+				size: "cover",
 			},
 			title: "New Item",
 			subTitle: "",

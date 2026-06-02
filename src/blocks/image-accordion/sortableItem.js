@@ -2,9 +2,10 @@ import { useState } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { Button, BaseControl } from "@wordpress/components";
+import { Button, ToggleControl } from "@wordpress/components";
 import FB_InputControl from "@Components/input-control";
 import FB_IconPicker from "@Components/icon-picker";
+import FB_BackgroundImageControl from "@Components/background-image-control";
 
 export default function SortableItem({
 	id,
@@ -132,49 +133,37 @@ export default function SortableItem({
 
 			{isOpen && (
 				<div className="sortable-item-content">
-					<BaseControl label={__("Background Image", "frontis-blocks")}>
-						<div className="fb-image-upload-control">
-							{item.image?.url ? (
-								<div className="fb-image-preview">
-									<img src={item.image.url} alt="" />
-									<Button
-										isDestructive
-										isSmall
-										onClick={() =>
-											updateItem(item.id, "image", { url: "", id: "" })
-										}
-									>
-										{__("Remove", "frontis-blocks")}
-									</Button>
-								</div>
-							) : (
-								<Button
-									variant="secondary"
-									onClick={() => {
-										const frame = wp.media({
-											title: __("Select Image", "frontis-blocks"),
-											multiple: false,
-											library: { type: "image" },
-										});
-										frame.on("select", () => {
-											const attachment = frame
-												.state()
-												.get("selection")
-												.first()
-												.toJSON();
-											updateItem(item.id, "image", {
-												url: attachment.url,
-												id: attachment.id,
-											});
-										});
-										frame.open();
-									}}
-								>
-									{__("Choose Image", "frontis-blocks")}
-								</Button>
-							)}
-						</div>
-					</BaseControl>
+					<FB_BackgroundImageControl
+						label={__("Background Image", "frontis-blocks")}
+						globalBackgroundImageUrl={item.image?.url}
+						setGlobalBackgroundImageUrl={(url) =>
+							updateItem(item.id, "image", { url: url || "" })
+						}
+						globalBackgroundImageID={item.image?.id}
+						setGlobalBackgroundImageID={(imageId) =>
+							updateItem(item.id, "image", { id: imageId || "" })
+						}
+						globalBackgroundImageAlt={item.image?.alt}
+						setGlobalBackgroundImageAlt={(alt) =>
+							updateItem(item.id, "image", { alt: alt || "" })
+						}
+						globalBackgroundImagePosition={item.image?.position}
+						setGlobalBackgroundImagePosition={(value) => {
+							updateItem(item.id, "image", { position: value });
+						}}
+						globalBackgroundImageAttachment={item.image?.attachment}
+						setGlobalBackgroundImageAttachment={(value) => {
+							updateItem(item.id, "image", { attachment: value });
+						}}
+						globalBackgroundImageRepeat={item.image?.repeat}
+						setGlobalBackgroundImageRepeat={(value) => {
+							updateItem(item.id, "image", { repeat: value });
+						}}
+						globalBackgroundImageSize={item.image?.size}
+						setGlobalBackgroundImageSize={(value) => {
+							updateItem(item.id, "image", { size: value });
+						}}
+					/>
 
 					<FB_InputControl
 						label={__("Title", "frontis-blocks")}
@@ -198,13 +187,39 @@ export default function SortableItem({
 					)}
 
 					{imageAccordionPreset === "preset-3" && (
-						<FB_InputControl
-							label={__("Button Text", "frontis-blocks")}
-							value={item.buttonText}
-							onChangeValue={(value) =>
-								updateItem(item.id, "buttonText", value)
-							}
-						/>
+						<>
+							<FB_InputControl
+								label={__("Button Text", "frontis-blocks")}
+								value={item.buttonText}
+								onChangeValue={(value) =>
+									updateItem(item.id, "buttonText", value)
+								}
+							/>
+							<FB_InputControl
+								label={__("Button URL", "frontis-blocks")}
+								value={item.buttonUrl}
+								onChangeValue={(value) =>
+									updateItem(item.id, "buttonUrl", value)
+								}
+								placeholder="https://..."
+							/>
+							<div style={{ marginTop: "10px" }}>
+								<ToggleControl
+									label={__("Open in New Tab", "frontis-blocks")}
+									checked={item.buttonTarget}
+									onChange={(value) =>
+										updateItem(item.id, "buttonTarget", value)
+									}
+								/>
+								<ToggleControl
+									label={__("Add nofollow", "frontis-blocks")}
+									checked={item.buttonNofollow}
+									onChange={(value) =>
+										updateItem(item.id, "buttonNofollow", value)
+									}
+								/>
+							</div>
+						</>
 					)}
 				</div>
 			)}

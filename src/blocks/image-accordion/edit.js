@@ -27,6 +27,68 @@ export default function Edit({
 		imageAccordionDesktopSwitcher,
 		imageAccordionTabletSwitcher,
 		imageAccordionMobileSwitcher,
+		imageAccordionWidth,
+		imageAccordionWidthUnits,
+		imageAccordionHeight,
+		imageAccordionHeightUnits,
+		imageAccordionGap,
+		imageAccordionGapUnits,
+		imageAccordionItemBorderRadiusUnits,
+		imageAccordionItemBorderRadiusDesktop,
+		imageAccordionItemBorderRadiusTablet,
+		imageAccordionItemBorderRadiusMobile,
+		imageAccordionOverlayColor,
+		imageAccordionOverlayHoverColor,
+		imageAccordionDotColor,
+		imageAccordionDotSize,
+		imageAccordionDotSizeUnits,
+		imageAccordionNumberColor,
+		imageAccordionNumberHoverColor,
+		imageAccordionNumberFontSize,
+		imageAccordionNumberFontSizeUnits,
+		imageAccordionNumberFontWeight,
+		imageAccordionIconColor,
+		imageAccordionIconHoverColor,
+		imageAccordionIconSize,
+		imageAccordionIconSizeUnits,
+		imageAccordionIconCircleBgColor,
+		imageAccordionIconCircleSize,
+		imageAccordionIconCircleSizeUnits,
+		imageAccordionTitleColor,
+		imageAccordionTitleHoverColor,
+		imageAccordionTitleFontSize,
+		imageAccordionTitleFontSizeUnits,
+		imageAccordionTitleFontWeight,
+		imageAccordionTitleLineHeight,
+		imageAccordionTitleLineHeightUnits,
+		imageAccordionSubtitleColor,
+		imageAccordionSubtitleHoverColor,
+		imageAccordionSubtitleFontSize,
+		imageAccordionSubtitleFontSizeUnits,
+		imageAccordionSubtitleFontWeight,
+		imageAccordionBtnTextColor,
+		imageAccordionBtnHoverTextColor,
+		imageAccordionBtnBgColor,
+		imageAccordionBtnHoverBgColor,
+		imageAccordionBtnBorderColor,
+		imageAccordionBtnBorder,
+		imageAccordionBtnBorderRadiusUnits,
+		imageAccordionBtnBorderRadiusDesktop,
+		imageAccordionBtnPaddingUnits,
+		imageAccordionBtnPaddingDesktop,
+		imageAccordionBtnFontSize,
+		imageAccordionBtnFontSizeUnits,
+		imageAccordionBtnFontWeight,
+		imageAccordionPaddingUnits,
+		imageAccordionPaddingDesktop,
+		imageAccordionPaddingTablet,
+		imageAccordionPaddingMobile,
+		imageAccordionMarginUnits,
+		imageAccordionMarginDesktop,
+		imageAccordionMarginTablet,
+		imageAccordionMarginMobile,
+		imageAccordionGlobalZIndex,
+		imageAccordionCustomCSS,
 	} = attributes;
 
 	// State to track active item in the editor for interactive preview
@@ -49,11 +111,79 @@ export default function Edit({
 
 	// Generate block style
 	useEffect(() => {
-		if (blockID) {
-			const css = generateImageAccordionStyle(attributes);
+		if (!blockID) return;
+		const css = generateImageAccordionStyle(attributes);
+		if (css !== blockStyle) {
 			setAttributes({ blockStyle: css });
 		}
-	}, [attributes, blockID]);
+	}, [
+		imageAccordionPreset,
+		imageAccordionWidth,
+		imageAccordionWidthUnits,
+		imageAccordionHeight,
+		imageAccordionHeightUnits,
+		imageAccordionGap,
+		imageAccordionGapUnits,
+		imageAccordionItemBorderRadiusUnits,
+		imageAccordionItemBorderRadiusDesktop,
+		imageAccordionItemBorderRadiusTablet,
+		imageAccordionItemBorderRadiusMobile,
+		imageAccordionOverlayColor,
+		imageAccordionOverlayHoverColor,
+		imageAccordionShowDots,
+		imageAccordionDotColor,
+		imageAccordionDotSize,
+		imageAccordionDotSizeUnits,
+		imageAccordionShowNumber,
+		imageAccordionNumberColor,
+		imageAccordionNumberHoverColor,
+		imageAccordionNumberFontSize,
+		imageAccordionNumberFontSizeUnits,
+		imageAccordionNumberFontWeight,
+		imageAccordionIconColor,
+		imageAccordionIconHoverColor,
+		imageAccordionIconSize,
+		imageAccordionIconSizeUnits,
+		imageAccordionIconCircleBgColor,
+		imageAccordionIconCircleSize,
+		imageAccordionIconCircleSizeUnits,
+		imageAccordionTitleColor,
+		imageAccordionTitleHoverColor,
+		imageAccordionTitleFontSize,
+		imageAccordionTitleFontSizeUnits,
+		imageAccordionTitleFontWeight,
+		imageAccordionTitleLineHeight,
+		imageAccordionTitleLineHeightUnits,
+		imageAccordionSubtitleColor,
+		imageAccordionSubtitleHoverColor,
+		imageAccordionSubtitleFontSize,
+		imageAccordionSubtitleFontSizeUnits,
+		imageAccordionSubtitleFontWeight,
+		imageAccordionBtnTextColor,
+		imageAccordionBtnHoverTextColor,
+		imageAccordionBtnBgColor,
+		imageAccordionBtnHoverBgColor,
+		imageAccordionBtnBorderColor,
+		imageAccordionBtnBorder,
+		imageAccordionBtnBorderRadiusUnits,
+		imageAccordionBtnBorderRadiusDesktop,
+		imageAccordionBtnPaddingUnits,
+		imageAccordionBtnPaddingDesktop,
+		imageAccordionBtnFontSize,
+		imageAccordionBtnFontSizeUnits,
+		imageAccordionBtnFontWeight,
+		imageAccordionPaddingUnits,
+		imageAccordionPaddingDesktop,
+		imageAccordionPaddingTablet,
+		imageAccordionPaddingMobile,
+		imageAccordionMarginUnits,
+		imageAccordionMarginDesktop,
+		imageAccordionMarginTablet,
+		imageAccordionMarginMobile,
+		imageAccordionGlobalZIndex,
+		imageAccordionCustomCSS,
+		blockID,
+	]);
 
 	const blockProps = useBlockProps({
 		className: `fb-image-accordion-main-wrapper ${blockID} ${
@@ -93,14 +223,24 @@ export default function Edit({
 				aria-label={item.title || ""}
 				style={
 					imageAccordionPreset !== "preset-4" && item.image?.url
-						? { backgroundImage: `url('${item.image.url}')` }
+						? {
+								backgroundImage: `url('${item.image.url}')`,
+								backgroundPosition: item.image?.position,
+								backgroundAttachment: item.image?.attachment,
+								backgroundRepeat: item.image?.repeat,
+								backgroundSize: item.image?.size,
+						  }
 						: {}
 				}
 			>
 				{imageAccordionPreset === "preset-4" && item.image?.url && (
 					<div
 						className="fb-skew-bg"
-						style={{ backgroundImage: `url('${item.image.url}')` }}
+						style={{
+							backgroundImage: `url('${item.image.url}')`,
+							backgroundPosition: item.image?.position,
+							backgroundSize: item.image?.size,
+						}}
 					/>
 				)}
 
@@ -190,7 +330,11 @@ export default function Edit({
 	return (
 		<>
 			{isSelected && (
-				<Inspector attributes={attributes} setAttributes={setAttributes} />
+				<Inspector
+					attributes={attributes}
+					setAttributes={setAttributes}
+					clientId={clientId}
+				/>
 			)}
 
 			<div {...blockProps}>
