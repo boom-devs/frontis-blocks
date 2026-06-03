@@ -160,6 +160,8 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         const wrapper = e.currentTarget.closest('.fb-image-comparison-slider-wrapper');
         if (!wrapper) return;
 
+        const ownerDoc = wrapper.ownerDocument || document;
+
         const touches = e.touches || (e.nativeEvent && e.nativeEvent.touches);
         const hasTouch = touches && touches.length > 0;
 
@@ -178,16 +180,30 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         };
 
         const onDragEnd = () => {
-            document.removeEventListener('mousemove', onDragMove, true);
-            document.removeEventListener('mouseup', onDragEnd, true);
-            document.removeEventListener('touchmove', onDragMove, true);
-            document.removeEventListener('touchend', onDragEnd, true);
+            ownerDoc.removeEventListener('mousemove', onDragMove, true);
+            ownerDoc.removeEventListener('mouseup', onDragEnd, true);
+            ownerDoc.removeEventListener('touchmove', onDragMove, true);
+            ownerDoc.removeEventListener('touchend', onDragEnd, true);
+
+            if (ownerDoc !== document) {
+                document.removeEventListener('mousemove', onDragMove, true);
+                document.removeEventListener('mouseup', onDragEnd, true);
+                document.removeEventListener('touchmove', onDragMove, true);
+                document.removeEventListener('touchend', onDragEnd, true);
+            }
         };
 
-        document.addEventListener('mousemove', onDragMove, true);
-        document.addEventListener('mouseup', onDragEnd, true);
-        document.addEventListener('touchmove', onDragMove, true);
-        document.addEventListener('touchend', onDragEnd, true);
+        ownerDoc.addEventListener('mousemove', onDragMove, true);
+        ownerDoc.addEventListener('mouseup', onDragEnd, true);
+        ownerDoc.addEventListener('touchmove', onDragMove, true);
+        ownerDoc.addEventListener('touchend', onDragEnd, true);
+
+        if (ownerDoc !== document) {
+            document.addEventListener('mousemove', onDragMove, true);
+            document.addEventListener('mouseup', onDragEnd, true);
+            document.addEventListener('touchmove', onDragMove, true);
+            document.addEventListener('touchend', onDragEnd, true);
+        }
     };
 
     const blockProps = useBlockProps({
