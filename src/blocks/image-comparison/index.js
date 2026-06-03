@@ -1,4 +1,4 @@
-import { __, sprintf } from '@wordpress/i18n';
+import { __ } from '@wordpress/i18n';
 import { registerBlockType } from "@wordpress/blocks";
 import metadata from "./block.json";
 import attributes from "./attributes";

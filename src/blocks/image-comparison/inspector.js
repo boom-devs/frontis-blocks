@@ -24,8 +24,6 @@ import { useDeviceType } from "@Config/displayType";
 import FB_InspectorControls from '@Components/InspectorControls';
 import FB_BackgroundColorControl from '@Components/background-color-control';
 import FB_ImageControl from '@Components/image-control';
-import FB_VisibilityControl from '@Components/visibility-control';
-
 import './editor.scss';
 
 const Inspector = ({ attributes, setAttributes }) => {
@@ -746,7 +744,6 @@ const Inspector = ({ attributes, setAttributes }) => {
     };
     /** End Comparison Handler Border Radius */
 
-
     /**
      * Inspector General Controls
      */
@@ -1126,7 +1123,6 @@ const Inspector = ({ attributes, setAttributes }) => {
                     setHoverCustomGradientInputValue={(value) => setAttributes({ comparisonLabelsHoverCustomGradientInputValue: value })}
 
                     isBackgroundImage={false}
-
                 />
 
                 <FB_Spacing
@@ -1156,6 +1152,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                     spacingCombineBtnHandler={comparisonLabelsBorderRadiusLinkBtn}
                     setAttributes={setAttributes}
                 />
+                
             </PanelBody>
 
             <PanelBody
