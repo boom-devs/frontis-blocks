@@ -28,7 +28,7 @@ export default function save({ attributes }) {
         /** End Initial Offset */
         
         /** Start Custom CSS */
-        comparisonCustomCSS,
+        comparisonWraperClass,
         /** End Custom CSS */
 
         /** Start Wrapper ID */
@@ -51,7 +51,7 @@ export default function save({ attributes }) {
 
     return (
         <div {...blockProps}>
-           <div className={`fb-image-comparison-inner-wrapper ${comparisonCustomCSS} `}id={comparisonWraperID}>
+           <div className={`fb-image-comparison-inner-wrapper ${comparisonWraperClass} `}id={comparisonWraperID}>
                 <div
                     className={`fb-image-comparison-slider-wrapper ${disableOverlaySwitcher ? 'fb-disable-overlay' : ''}`}
                     data-direction={comparisonDragDirection || 'horizontal'}

@@ -3,7 +3,7 @@ import getCustomCss from '@Utils/getCustomCss';
 const imageComparisonStyle = (attributes) => {
     const {
         blockID,
-        imageComparisonCustomCSS,
+        comparisonCustomCSS,
 
         /** Start Comparison Height */
         comparisonHeight,
@@ -554,7 +554,7 @@ const imageComparisonStyle = (attributes) => {
         }
     `;
 
-    const customCss = getCustomCss(imageComparisonCustomCSS, `.${blockID}`);
+    const customCss = getCustomCss(comparisonCustomCSS, `.${blockID}`);
     return `${imageComparisonBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 }
 
