@@ -820,6 +820,113 @@ const attributes = {
     },
     /** End Z Index */
 
+    /** Start Comparison Background */
+    comparisonBgColorSwitcher: {
+        type: 'string',
+        default: 'normal'
+    },
+    comparisonBgType: {
+        type: 'string',
+        default: 'classic'
+    },
+    comparisonBgClassicColor: {
+        type: 'string',
+    },
+    comparisonBgGradientColor: {
+        type: 'string',
+    },
+    comparisonBgCustomGradientSwitcher: {
+        type: 'boolean',
+        default: false
+    },
+    comparisonBgCustomGradientInputValue: {
+        type: 'string',
+        default: ''
+    },
+    comparisonBgColorStyle: {
+        type: 'string',
+        default: ''
+    },
+    comparisonBgImageUrl: {
+        type: 'string',
+        default: ''
+    },
+    comparisonBgImageAlt: {
+        type: 'string',
+        default: ''
+    },
+    comparisonBgImageID: {
+        type: 'string',
+        default: ''
+    },
+    comparisonBgImagePosition: {
+        type: 'string',
+        default: ''
+    },
+    comparisonBgImageAttachment: {
+        type: 'string',
+        default: ''
+    },
+    comparisonBgImageSize: {
+        type: 'string',
+        default: ''
+    },
+    comparisonBgImageRepeat: {
+        type: 'string',
+        default: ''
+    },
+    comparisonBgHoverType: {
+        type: 'string',
+        default: 'classic'
+    },
+    comparisonBgHoverClassicColor: {
+        type: 'string',
+    },
+    comparisonBgHoverGradientColor: {
+        type: 'string',
+    },
+    comparisonBgHoverCustomGradientSwitcher: {
+        type: 'boolean',
+        default: false
+    },
+    comparisonBgHoverCustomGradientInputValue: {
+        type: 'string',
+        default: ''
+    },
+    comparisonBgHoverColorStyle: {
+        type: 'string',
+        default: ''
+    },
+    comparisonBgHoverImageUrl: {
+        type: 'string',
+        default: ''
+    },
+    comparisonBgHoverImageAlt: {
+        type: 'string',
+        default: ''
+    },
+    comparisonBgHoverImageID: {
+        type: 'string',
+        default: ''
+    },
+    comparisonBgHoverImagePosition: {
+        type: 'string',
+        default: ''
+    },
+    comparisonBgHoverImageAttachment: {
+        type: 'string',
+        default: ''
+    },
+    comparisonBgHoverImageSize: {
+        type: 'string',
+        default: ''
+    },
+    comparisonBgHoverImageRepeat: {
+        type: 'string',
+        default: ''
+    },
+    /** End Comparison Background */
+
     /** Start Class & ID Setting */
     comparisonCustomCSS: {
         type: "string",
