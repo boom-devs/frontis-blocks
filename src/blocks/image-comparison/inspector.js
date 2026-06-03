@@ -24,6 +24,7 @@ import { useDeviceType } from "@Config/displayType";
 import FB_InspectorControls from '@Components/InspectorControls';
 import FB_BackgroundColorControl from '@Components/background-color-control';
 import FB_ImageControl from '@Components/image-control';
+import FB_VisibilityControl from '@Components/visibility-control';
 
 import './editor.scss';
 
@@ -230,6 +231,34 @@ const Inspector = ({ attributes, setAttributes }) => {
         /** Start Global Settings */
         comparisonGlobalZIndex,
         /** End Global Settings */
+
+        /**Start Comparison Background */
+        comparisonBgColorSwitcher,
+        comparisonBgType,
+        comparisonBgClassicColor,
+        comparisonBgGradientColor,
+        comparisonBgCustomGradientSwitcher,
+        comparisonBgCustomGradientInputValue,
+        comparisonBgImageUrl,
+        comparisonBgImageAlt,
+        comparisonBgImageID,
+        comparisonBgImagePosition,
+        comparisonBgImageAttachment,
+        comparisonBgImageRepeat,
+        comparisonBgImageSize,
+        comparisonBgHoverType,
+        comparisonBgHoverClassicColor,
+        comparisonBgHoverGradientColor,
+        comparisonBgHoverCustomGradientSwitcher,
+        comparisonBgHoverCustomGradientInputValue,
+        comparisonBgHoverImageUrl,
+        comparisonBgHoverImageAlt,
+        comparisonBgHoverImageID,
+        comparisonBgHoverImagePosition,
+        comparisonBgHoverImageAttachment,
+        comparisonBgHoverImageRepeat,
+        comparisonBgHoverImageSize,
+        /**End Comparison Background */
 
         /** Start Custom CSS */
         comparisonCustomCSS,
@@ -1241,6 +1270,60 @@ const Inspector = ({ attributes, setAttributes }) => {
 
             </PanelBody>
 
+            <PanelBody title="Background Color" initialOpen={false} >
+                <FB_BackgroundColorControl
+                    bgColorSwitcher={comparisonBgColorSwitcher} setBgColorSwitcher={(value) => setAttributes({ comparisonBgColorSwitcher: value })}
+                    normalBackgroundType={comparisonBgType}
+                    setNormalBackgroundType={(value) => setAttributes({ comparisonBgType: value })}
+                    normalClassicColor={comparisonBgClassicColor}
+                    setNormalClassicColor={(value) => setAttributes({ comparisonBgClassicColor: value === undefined ? '' : value })}
+                    normalGradientColor={comparisonBgGradientColor}
+                    setNormalGradientColor={(value) => setAttributes({ comparisonBgGradientColor: value === undefined ? null : value })}
+                    normalCustomGradientSwitcher={comparisonBgCustomGradientSwitcher}
+                    setNormalCustomGradientSwitcher={(value) => setAttributes({ comparisonBgCustomGradientSwitcher: value, })}
+                    normalCustomGradientInputValue={comparisonBgCustomGradientInputValue}
+                    setNormalCustomGradientInputValue={(value) => setAttributes({ comparisonBgCustomGradientInputValue: value, })}
+                    normalBackgroundImageUrl={comparisonBgImageUrl}
+                    setNormalBackgroundImageUrl={(value) => setAttributes({ comparisonBgImageUrl: value })}
+                    normalBackgroundImageAlt={comparisonBgImageAlt}
+                    setNormalBackgroundImageAlt={(value) => setAttributes({ comparisonBgImageAlt: value })}
+                    normalBackgroundImageID={comparisonBgImageID}
+                    setNormalBackgroundImageID={(value) => setAttributes({ comparisonBgImageID: value })}
+                    normalBackgroundImagePosition={comparisonBgImagePosition}
+                    setNormalBackgroundImagePosition={(value) => setAttributes({ comparisonBgImagePosition: value })}
+                    normalBackgroundImageAttachment={comparisonBgImageAttachment}
+                    setNormalBackgroundImageAttachment={(value) => setAttributes({ comparisonBgImageAttachment: value })}
+                    normalBackgroundImageRepeat={comparisonBgImageRepeat}
+                    setNormalBackgroundImageRepeat={(value) => setAttributes({ comparisonBgImageRepeat: value, })}
+                    normalBackgroundImageSize={comparisonBgImageSize}
+                    setNormalBackgroundImageSize={(value) => setAttributes({ comparisonBgImageSize: value })}
+                    hoverBackgroundType={comparisonBgHoverType}
+                    setHoverBackgroundType={(value) => setAttributes({ comparisonBgHoverType: value })}
+                    hoverClassicColor={comparisonBgHoverClassicColor}
+                    setHoverClassicColor={(value) => setAttributes({ comparisonBgHoverClassicColor: value === undefined ? '' : value })}
+                    hoverGradientColor={comparisonBgHoverGradientColor}
+                    setHoverGradientColor={(value) => setAttributes({ comparisonBgHoverGradientColor: value === undefined ? null : value })}
+                    hoverCustomGradientSwitcher={comparisonBgHoverCustomGradientSwitcher}
+                    setHoverCustomGradientSwitcher={(value) => setAttributes({ comparisonBgHoverCustomGradientSwitcher: value, })}
+                    hoverCustomGradientInputValue={comparisonBgHoverCustomGradientInputValue}
+                    setHoverCustomGradientInputValue={(value) => setAttributes({ comparisonBgHoverCustomGradientInputValue: value, })}
+                    hoverBackgroundImageUrl={comparisonBgHoverImageUrl}
+                    setBgHoverImageUrl={(value) => setAttributes({ comparisonBgHoverImageUrl: value })}
+                    hoverBackgroundImageAlt={comparisonBgHoverImageAlt}
+                    setBgHoverImageAlt={(value) => setAttributes({ comparisonBgHoverImageAlt: value })}
+                    hoverBackgroundImageID={comparisonBgHoverImageID}
+                    setBgHoverImageID={(value) => setAttributes({ comparisonBgHoverImageID: value })}
+                    hoverBackgroundImagePosition={comparisonBgHoverImagePosition}
+                    setBgHoverImagePosition={(value) => setAttributes({ comparisonBgHoverImagePosition: value, })}
+                    hoverBackgroundImageAttachment={comparisonBgHoverImageAttachment}
+                    setBgHoverImageAttachment={(value) => setAttributes({ comparisonBgHoverImageAttachment: value, })}
+                    hoverBackgroundImageRepeat={comparisonBgHoverImageRepeat}
+                    setBgHoverImageRepeat={(value) => setAttributes({ comparisonBgHoverImageRepeat: value, })}
+                    hoverBackgroundImageSize={comparisonBgHoverImageSize}
+                    setBgHoverImageSize={(value) => setAttributes({ comparisonBgHoverImageSize: value })}
+                />
+            </PanelBody>
+
             <PanelBody
                 title={__("Border and Shadow", "frontis-blocks")}
                 initialOpen={false}
@@ -1327,7 +1410,6 @@ const Inspector = ({ attributes, setAttributes }) => {
                         onBoxShadowStyleChange={(value) => setAttributes({ comparisonBoxShadowHoverCssValue: value })}
                     />
                 )}
-
             </PanelBody>
 
             <PanelBody

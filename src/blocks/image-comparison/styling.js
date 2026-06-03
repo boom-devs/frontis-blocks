@@ -196,6 +196,34 @@ const imageComparisonStyle = (attributes) => {
         compareOverlayHoverCustomGradientInputValue,
         /** End Comparison Overlay Color */
 
+        /** Start Comparison Background */
+        comparisonBgColorSwitcher,
+        comparisonBgType,
+        comparisonBgClassicColor,
+        comparisonBgGradientColor,
+        comparisonBgCustomGradientSwitcher,
+        comparisonBgCustomGradientInputValue,
+        comparisonBgImageUrl,
+        comparisonBgImageAlt,
+        comparisonBgImageID,
+        comparisonBgImagePosition,
+        comparisonBgImageAttachment,
+        comparisonBgImageRepeat,
+        comparisonBgImageSize,
+        comparisonBgHoverType,
+        comparisonBgHoverClassicColor,
+        comparisonBgHoverGradientColor,
+        comparisonBgHoverCustomGradientSwitcher,
+        comparisonBgHoverCustomGradientInputValue,
+        comparisonBgHoverImageUrl,
+        comparisonBgHoverImageAlt,
+        comparisonBgHoverImageID,
+        comparisonBgHoverImagePosition,
+        comparisonBgHoverImageAttachment,
+        comparisonBgHoverImageRepeat,
+        comparisonBgHoverImageSize,
+        /** End Comparison Background */
+
         /** Start Global Settings */
         // comparisonGlobalZIndex,
         /** End Global Settings */
@@ -260,13 +288,6 @@ const imageComparisonStyle = (attributes) => {
 
         .${blockID} .fb-image-comparison-slider-wrapper {
             ${comparisonHeight?.Desktop ? `height: ${comparisonHeight.Desktop}${comparisonHeightUnits?.Desktop || 'px'};` : ''}
-            ${comparisonMarginDesktopWidth && comparisonMarginDesktop?.top ? `margin: ${comparisonMarginDesktopWidth};` : ''} 
-            ${comparisonPaddingDesktopWidth && comparisonPaddingDesktop?.top ? `padding: ${comparisonPaddingDesktopWidth};` : ''} 
-            ${comparisonBorder ? `border: ${comparisonBorder};` : ''} 
-            ${comparisonBorderDesktopWidth && comparisonBorderDesktop?.top ? `border-width: ${comparisonBorderDesktopWidth};` : ''}
-            ${comparisonBorderRadiusDesktopWidth && comparisonBorderRadiusDesktop?.top ? `border-radius: ${comparisonBorderRadiusDesktopWidth};` : ''}
-            ${comparisonBorderColor ? `border-color: ${comparisonBorderColor};` : ''}
-            ${comparisonBoxShadowCssValue ? `box-shadow: ${comparisonBoxShadowCssValue};` : ''}
         }
 
         .${blockID} .fb-image-comparison-label {
@@ -366,11 +387,6 @@ const imageComparisonStyle = (attributes) => {
         `}
         }
 
-        .${blockID} .fb-image-comparison-slider-wrapper:hover {
-            ${comparisonBorderHoverColor ? `border-color: ${comparisonBorderHoverColor};` : ''}
-            ${comparisonBoxShadowHoverCssValue ? `box-shadow: ${comparisonBoxShadowHoverCssValue};` : ''}
-        }
-
         .${blockID} .fb-image-comparison-label:hover {
             ${comparisonLabelsBtnTextHoverColor ? `color: ${comparisonLabelsBtnTextHoverColor};` : ""}
             ${comparisonLabelsHoverBackgroundType === 'gradient' ? `
@@ -441,13 +457,61 @@ const imageComparisonStyle = (attributes) => {
             `}       
         } 
 
+        .fb-image-comparison-main-wrapper.${blockID} {
+            ${comparisonBgType === "gradient"
+            ? `background: ${comparisonBgCustomGradientSwitcher && comparisonBgCustomGradientInputValue
+                ? comparisonBgCustomGradientInputValue
+                : comparisonBgGradientColor
+            };`
+            : comparisonBgImageUrl !== undefined && comparisonBgImageUrl !== null && comparisonBgImageUrl !== ""
+                ? `
+                    ${comparisonBgImageUrl !== undefined ? `background-image: url(${comparisonBgImageUrl});` : ''}
+                    ${comparisonBgImagePosition !== undefined ? `background-position: ${comparisonBgImagePosition};` : ''}
+                    ${comparisonBgImageAttachment !== undefined ? `background-attachment: ${comparisonBgImageAttachment};` : ''}
+                    ${comparisonBgImageRepeat !== undefined ? `background-repeat: ${comparisonBgImageRepeat};` : ''}
+                    ${comparisonBgImageSize !== undefined ? `background-size: ${comparisonBgImageSize};` : ''}
+                    `
+                : comparisonBgClassicColor ? `background: ${comparisonBgClassicColor};` : ''
+        }
+            ${comparisonMarginDesktopWidth && comparisonMarginDesktop?.top ? `margin: ${comparisonMarginDesktopWidth};` : ''} 
+            ${comparisonPaddingDesktopWidth && comparisonPaddingDesktop?.top ? `padding: ${comparisonPaddingDesktopWidth};` : ''} 
+            ${comparisonBorder ? `border: ${comparisonBorder};` : ''} 
+            ${comparisonBorderDesktopWidth && comparisonBorderDesktop?.top ? `border-width: ${comparisonBorderDesktopWidth};` : ''}
+            ${comparisonBorderRadiusDesktopWidth && comparisonBorderRadiusDesktop?.top ? `border-radius: ${comparisonBorderRadiusDesktopWidth};` : ''}
+            ${comparisonBorderColor ? `border-color: ${comparisonBorderColor};` : ''}
+            ${comparisonBoxShadowCssValue ? `box-shadow: ${comparisonBoxShadowCssValue};` : ''}
+        }
+
+        .fb-image-comparison-main-wrapper.${blockID}:hover{
+            ${comparisonBgHoverType === "gradient"
+            ? `background: ${comparisonBgHoverCustomGradientSwitcher && comparisonBgHoverCustomGradientInputValue
+                ? comparisonBgHoverCustomGradientInputValue
+                : comparisonBgHoverGradientColor
+            };`
+            : comparisonBgHoverImageUrl !== undefined && comparisonBgHoverImageUrl !== null && comparisonBgHoverImageUrl !== ""
+                ? `
+                    ${comparisonBgHoverImageUrl !== undefined ? `background-image: url(${comparisonBgHoverImageUrl});` : ''}
+                    ${comparisonBgHoverImagePosition !== undefined ? `background-position: ${comparisonBgHoverImagePosition};` : ''}
+                    ${comparisonBgHoverImageAttachment !== undefined ? `background-attachment: ${comparisonBgHoverImageAttachment};` : ''}
+                    ${comparisonBgHoverImageRepeat !== undefined ? `background-repeat: ${comparisonBgHoverImageRepeat};` : ''}
+                    ${comparisonBgHoverImageSize !== undefined ? `background-size: ${comparisonBgHoverImageSize};` : ''}
+                    `
+                : comparisonBgHoverClassicColor ? `background: ${comparisonBgHoverClassicColor};` : ''
+            }
+            ${comparisonBorderHoverColor ? `border-color: ${comparisonBorderHoverColor};` : ''}
+            ${comparisonBoxShadowHoverCssValue ? `box-shadow: ${comparisonBoxShadowHoverCssValue};` : ''}
+        }
+
         @media only screen and (max-width: 1024px) {
             .${blockID} .fb-image-comparison-slider-wrapper {
                 ${comparisonHeight?.Tablet ? `height: ${comparisonHeight.Tablet}${comparisonHeightUnits?.Tablet || 'px'};` : ''}
+            }
+            
+            .fb-image-comparison-main-wrapper.${blockID} {
                 ${comparisonMarginTabletWidth && comparisonMarginTablet?.top ? `margin: ${comparisonMarginTabletWidth};` : ''} 
                 ${comparisonPaddingTabletWidth && comparisonPaddingTablet?.top ? `padding: ${comparisonPaddingTabletWidth};` : ''} 
                 ${comparisonBorderTabletWidth && comparisonBorderTablet?.top ? `border-width: ${comparisonBorderTabletWidth};` : ''}
-                ${comparisonBorderRadiusTabletWidth && comparisonBorderRadiusTablet?.top ? `border-radius: ${comparisonBorderRadiusTabletWidth};` : ''}
+                ${comparisonBorderRadiusTabletWidth && comparisonBorderRadiusTablet?.top ? `border-radius: ${comparisonBorderRadiusTabletWidth};` : ''}       
             }
 
             .${blockID} .fb-image-comparison-label {
@@ -484,6 +548,9 @@ const imageComparisonStyle = (attributes) => {
         @media only screen and (max-width: 767px) {
             .${blockID} .fb-image-comparison-slider-wrapper {
                 ${comparisonHeight?.Mobile ? `height: ${comparisonHeight.Mobile}${comparisonHeightUnits?.Mobile || 'px'};` : ''}
+            }
+
+            .fb-image-comparison-main-wrapper.${blockID} {
                 ${comparisonMarginMobileWidth && comparisonMarginMobile?.top ? `margin: ${comparisonMarginMobileWidth};` : ''} 
                 ${comparisonPaddingMobileWidth && comparisonPaddingMobile?.top ? `padding: ${comparisonPaddingMobileWidth};` : ''} 
                 ${comparisonBorderMobileWidth && comparisonBorderTablet?.top ? `border-width: ${comparisonBorderMobileWidth};` : ''}
