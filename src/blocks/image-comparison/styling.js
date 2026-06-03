@@ -10,32 +10,6 @@ const imageComparisonStyle = (attributes) => {
         comparisonHeightUnits,
         /** End Comparison Height */
 
-        /** Start Before Image */
-        beforeImgShowLabelSwitcher,
-        /** End Before Image */
-
-        /** Start After Image */
-        afterImgShowLabelSwitcher,
-        /** End After Image */
-
-        /** Start After Image */
-        afterImageLabel,
-        /** End After Image */
-
-        /** Start Before Image */
-        beforeImageLabel,
-        /** End Before Image */
-
-        /** Start Initial Offset */
-        comparisonInitialOffset,
-        /** End Initial Offset */
-
-        /** Start Comparison Settings */
-        hoverToSlideSwitcher,
-        clickToMoveSwitcher,
-        disableOverlaySwitcher,
-        /** End Comparison Settings */
-
         /** Start Comparison Drag Direction */
         comparisonDragDirection,
         /** End Comparison Drag Direction */
@@ -224,14 +198,6 @@ const imageComparisonStyle = (attributes) => {
         comparisonBgHoverImageSize,
         /** End Comparison Background */
 
-        /** Start Global Settings */
-        // comparisonGlobalZIndex,
-        /** End Global Settings */
-
-        /** Start Custom CSS */
-        // comparisonCustomCSS,
-        /** End Custom CSS */
-
         /** Start Wrapper ID */
         comparisonWraperID,
         /** End Wrapper ID */
@@ -239,7 +205,6 @@ const imageComparisonStyle = (attributes) => {
         /** Start Wrapper Class */
         comparisonWraperClass,
         /** End Wrapper Class */
-
 
         comparisonGlobalZIndex,
 

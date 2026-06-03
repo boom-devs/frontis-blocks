@@ -20,7 +20,6 @@
             content: "";
             position: absolute;
             inset: 0;
-            // background: rgba(0, 0, 0, 0.4);
             opacity: 0;
             transition: opacity 0.3s ease;
             z-index: 3;
@@ -31,14 +30,10 @@
             content: "";
             position: absolute;
             inset: 0;
-            // background: rgba(255, 0, 0, 0.171);
             z-index: 3;
             pointer-events: none;
         }
 
-        // &:hover:not(:has(.fb-image-comparison-slider:hover))::before  {
-        //     opacity: 1;
-        // }
         &:not(.fb-disable-overlay):hover:not(:has(.fb-image-comparison-slider:hover))::before {
             opacity: 1;
         }
@@ -109,7 +104,6 @@
             align-items: center;
             border: 2px solid;
             opacity: 0.7;
-
             cursor: ew-resize;
 
             &::before {

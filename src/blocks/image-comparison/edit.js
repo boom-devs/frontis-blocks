@@ -11,7 +11,6 @@ import './editor.scss';
 
 import Inspector from "./inspector";
 import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
-import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import imageComparisonStyle from "./styling";
 import { useDeviceType } from '@Config/displayType';
 
@@ -178,7 +177,6 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         if (!wrapper) return;
 
         const ownerDoc = wrapper.ownerDocument || document;
-
         const touches = e.touches || (e.nativeEvent && e.nativeEvent.touches);
         const hasTouch = touches && touches.length > 0;
 
@@ -227,8 +225,6 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         className: `fb-image-comparison-main-wrapper ${blockID}`,
     });
 
-    const hasImages = beforeImageUrl && afterImageUrl;
-
     return (
         <>
             {isSelected && (
@@ -246,19 +242,16 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                         onMouseDown={handleStartDrag}
                         onTouchStart={handleStartDrag}
                     >
-
                         {beforeImgShowLabelSwitcher && (
                             <div className="fb-image-comparison-label fb-image-comparison-before-label">
                                 {beforeImageLabel || "Before"}
                             </div>
                         )}
-
                         {afterImgShowLabelSwitcher && (
                             <div className="fb-image-comparison-label fb-image-comparison-after-label">
                                 {afterImageLabel || "After"}
                             </div>
                         )}
-
                         <div className="fb-image-comparison-before-image fb-img-comp-overlay" style={overlayStyle}>
                             <img src={beforeImageUrl} alt={beforeImageAlt || ""} />
                         </div>
