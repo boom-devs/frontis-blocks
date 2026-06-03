@@ -20,6 +20,55 @@ const attributes = {
 		type: "boolean",
 		default: true,
 	},
+	showCategoryImage: {
+		type: "boolean",
+		default: true,
+	},
+	/** Image Size */
+	mediaSize: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	mediaHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	mediaSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: '%',
+			Tablet: '%',
+			Mobile: '%',
+		}
+	},
+	mediaHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: '%',
+			Tablet: '%',
+			Mobile: '%',
+		}
+	},
+	autoFitSwitch: {
+		type: 'boolean',
+		default: false,
+	},
+	imageFit: {
+		type: 'string',
+		default: 'cover',
+	},
+	imagePosition: {
+		type: "string",
+		default: "left",
+	},
 	categoryCreators: {
         type: "object",
         default: {}
@@ -189,7 +238,7 @@ const attributes = {
 	},
 	listStyle: {
 		type: "string",
-		default: "bullet", // 'none', 'bullet', 'number'
+		default: "bullet",
 	},
 	listIndentation: {
 		type: "object",

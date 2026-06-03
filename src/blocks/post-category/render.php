@@ -46,6 +46,7 @@ $per_page = isset($attributes['perPage']) ? (int) $attributes['perPage'] : 6;
 $show_post_type_label = !empty($attributes['showLabel']);
 // $show_post_type_label = isset($attributes['showLabel']) ? (bool) $attributes['showLabel'] : true;
 $show_author = isset($attributes['showAuthor']) ? (bool) $attributes['showAuthor'] : true;
+$show_category_image = isset($attributes['showCategoryImage']) ? (bool) $attributes['showCategoryImage'] : true;
 
 // Layout attributes
 $layout_type = fb_norm_str(isset($attributes['layoutType']) ? $attributes['layoutType'] : 'grid');
@@ -409,9 +410,9 @@ if (empty($taxonomy_type)) {
 
         $should_render_image = false;
 
-        if ($premade_style === 'style-3') {
+        if ($premade_style === 'style-3' && $show_category_image) {
             $should_render_image = true;
-        } elseif ($premade_style === 'style-4') {
+        } elseif ($premade_style === 'style-4' && $show_category_image) {
             $should_render_image = true;
         }
 
