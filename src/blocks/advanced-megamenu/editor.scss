@@ -120,3 +120,17 @@
         max-width: 600px;
     }
 }
+
+.fb-mega-menu-editor-mobile-logo {
+    display: inline-flex !important;
+
+    a {
+        line-height: 0;
+    }
+
+    img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+    }
+}
