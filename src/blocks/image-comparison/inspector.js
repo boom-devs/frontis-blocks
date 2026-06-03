@@ -318,7 +318,7 @@ const Inspector = ({ attributes, setAttributes }) => {
     };
     /** End Comparison Margin */
 
-        /** Start Comparison Padding */
+    /** Start Comparison Padding */
     const comparisonPaddingUnitsChange = (event, position) => {
         const value = event.target.value;
         if (comparisonPaddingLink) {
@@ -1207,16 +1207,6 @@ const Inspector = ({ attributes, setAttributes }) => {
             </PanelBody>
 
             <PanelBody
-                title={__("Custom CSS", "frontis-blocks")}
-                initialOpen={false}
-            >
-                <FB_CustomCSSEditor
-                    value={comparisonCustomCSS}
-                    onChangeValue={(value) => setAttributes({ comparisonCustomCSS: value })}
-                />
-            </PanelBody>
-
-            <PanelBody
                 title={__("Padding and Margin", "frontis-blocks")}
                 initialOpen={false}
             >
@@ -1338,6 +1328,16 @@ const Inspector = ({ attributes, setAttributes }) => {
                     />
                 )}
 
+            </PanelBody>
+
+            <PanelBody
+                title={__("Custom CSS", "frontis-blocks")}
+                initialOpen={false}
+            >
+                <FB_CustomCSSEditor
+                    value={comparisonCustomCSS}
+                    onChangeValue={(value) => setAttributes({ comparisonCustomCSS: value })}
+                />
             </PanelBody>
 
         </>
