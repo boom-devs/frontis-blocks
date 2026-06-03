@@ -645,6 +645,56 @@ export default {
         default: "hover"
     },
 
+    /** Start Mobile Menu Logo */
+    megaMenuMobileLogoUrl: {
+        type: 'string',
+        default: '',
+    },
+    megaMenuMobileLogoAlt: {
+        type: 'string',
+        default: '',
+    },
+    megaMenuMobileLogoID: {
+        type: 'number',
+    },
+    megaMenuMobileLogoWidth: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: '',
+        },
+    },
+    megaMenuMobileLogoWidthUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        },
+    },
+    megaMenuMobileLogoHeight: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: '',
+        },
+    },
+    megaMenuMobileLogoHeightUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        },
+    },
+    megaMenuMobileLogoObjectFit: {
+        type: 'string',
+        default: 'default',
+    },
+    /** End Mobile Menu Logo */
+
     // Start Mega Menu Border
     megaMenuBorder: {
         type: 'string',
