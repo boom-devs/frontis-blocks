@@ -43,7 +43,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         /** End Initial Offset */
 
         /** Start Custom CSS */
-        comparisonCustomCSS,
+        comparisonWraperClass,
         /** End Custom CSS */
 
         /** Start Wrapper ID */
@@ -233,7 +233,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                     setAttributes={setAttributes} />
             )}
             <div {...blockProps}>
-                <div className={`fb-image-comparison-inner-wrapper ${comparisonCustomCSS} `} id={comparisonWraperID}>
+                <div className={`fb-image-comparison-inner-wrapper ${comparisonWraperClass} `} id={comparisonWraperID}>
                     <div
                         className={`fb-image-comparison-slider-wrapper ${disableOverlaySwitcher ? 'fb-disable-overlay' : ''}`}
                         data-direction={comparisonDragDirection || 'horizontal'}
