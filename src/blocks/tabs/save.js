@@ -5,6 +5,7 @@ import renderSVG from "@Components/icon-picker/components/icon-picker/controls/r
 export default function save({ attributes }) {
   const {
     blockID,
+    blockStyle,
     tabItems,
     tabActiveFrontend,
     tabTitleTag,
@@ -112,6 +113,7 @@ export default function save({ attributes }) {
         <div className="fb-tabs-body-wrap" id={contentId}>
           <InnerBlocks.Content />
         </div>
+        <style>{blockStyle}</style>
       </div>
     </div>
   );
