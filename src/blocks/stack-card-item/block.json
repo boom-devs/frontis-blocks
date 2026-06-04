@@ -7,11 +7,14 @@
 	"category": "frontis-blocks",
 	"description": "Single card item inside Stack Card. Drop any blocks inside.",
 	"example": {},
-	"parent": ["frontis-blocks/stack-card"],
+	"parent": [
+		"frontis-blocks/stack-card"
+	],
 	"supports": {
 		"anchor": false,
 		"reusable": false,
-		"customClassName": false
+		"customClassName": false,
+		"customCSS": false
 	},
 	"textdomain": "frontis-blocks",
 	"editorScript": "file:./index.js",
