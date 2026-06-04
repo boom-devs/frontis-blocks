@@ -22,6 +22,12 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         blockID,
         blockStyle,
         timelineChildCount,
+
+        /** Start Responsive Controls */
+        verticalTimelineDesktopSwitcher,
+        verticalTimelineTabletSwitcher,
+        verticalTimelineMobileSwitcher,
+        /** End Responsive Controls */
         
         /** Start Class & ID Setting */
         verticalTimelineGlobalZIndex,
@@ -162,7 +168,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
 
     const blockProps = useBlockProps({
-        className: `fb-vertical-timeline-main-wrapper ${blockID}`,
+        className: `fb-vertical-timeline-main-wrapper ${blockID} ${verticalTimelineDesktopSwitcher ? 'fb-desktop-responsive' : ''} ${verticalTimelineTabletSwitcher ? 'fb-tablet-responsive' : ''} ${verticalTimelineMobileSwitcher ? 'fb-mobile-responsive' : ''}`.trim(),
     });
 
     const addTimelineItem = () => {

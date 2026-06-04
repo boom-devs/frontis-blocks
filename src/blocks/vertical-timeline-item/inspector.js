@@ -300,6 +300,12 @@ const Inspector = ({ attributes, setAttributes }) => {
         verticalTimelineIconSizeUnits,
         /** End Icon Size */
 
+        /** Start Responsive Controls */
+        verticalTimelineItemDesktopSwitcher,
+        verticalTimelineItemTabletSwitcher,
+        verticalTimelineItemMobileSwitcher,
+        /** End Responsive Controls */
+
         /** Start Class & ID Setting */
         verticalTimelineItemGlobalZIndex,
         verticalTimelineItemCustomCSS,
@@ -1652,6 +1658,31 @@ const Inspector = ({ attributes, setAttributes }) => {
                     value={verticalTimelineItemWraperClass}
                     onChangeValue={(value) => setAttributes({ verticalTimelineItemWraperClass: value })}
                     helpText={__("Separate with spaces key.", "frontis-blocks")}
+                />
+            </PanelBody>
+
+            <PanelBody
+                title={__("Responsive Control", "frontis-blocks")}
+                initialOpen={false}
+                className="fb-setting-responsive-control-wrapper"
+            >
+                <ToggleControl
+                    label={__("Hide on Desktop", "frontis-blocks")}
+                    className="fb-setting-responsive-control"
+                    checked={verticalTimelineItemDesktopSwitcher}
+                    onChange={(value) => setAttributes({ verticalTimelineItemDesktopSwitcher: value })}
+                />
+                <ToggleControl
+                    label={__("Hide on Tablet", "frontis-blocks")}
+                    className="fb-setting-responsive-control"
+                    checked={verticalTimelineItemTabletSwitcher}
+                    onChange={(value) => setAttributes({ verticalTimelineItemTabletSwitcher: value })}
+                />
+                <ToggleControl
+                    label={__("Hide on Mobile", "frontis-blocks")}
+                    className="fb-setting-responsive-control"
+                    checked={verticalTimelineItemMobileSwitcher}
+                    onChange={(value) => setAttributes({ verticalTimelineItemMobileSwitcher: value })}
                 />
             </PanelBody>
 

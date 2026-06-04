@@ -1085,6 +1085,21 @@ const attributes = {
     },
     /** End Icon Size */
 
+    /** Start Responsive Controls */
+    verticalTimelineItemDesktopSwitcher: {
+        type: 'boolean',
+        default: false,
+    },
+    verticalTimelineItemTabletSwitcher: {
+        type: 'boolean',
+        default: false,
+    },
+    verticalTimelineItemMobileSwitcher: {
+        type: 'boolean',
+        default: false,
+    },
+    /** End Responsive Controls */
+
     /** Start Class & ID Setting */
     verticalTimelineItemGlobalZIndex: {
         type: "object",
