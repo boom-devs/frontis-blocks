@@ -6,6 +6,10 @@
 .fb-stack-cards-main-wrapper .fb-stack-card-item {
     position: sticky;
     top: 100px;
-    border: 1px solid #d8dee5;
-    border-radius: 10px;
+}
+button.fb-stack-card-prev-btn, button.fb-stack-card-next-btn{
+    &:focus {
+        outline: none;
+        cursor: pointer;
+    }
 }

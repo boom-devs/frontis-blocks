@@ -362,7 +362,7 @@ export function bindStackCardPresetLeftBehavior(root, options = {}) {
 	 * Starts the auto-play timer.
 	 */
 	function startAutoCycle() {
-		if (isBlockEditor || !isSliderActive || !runtimeConfig.autoPlay) return;
+		if (!isSliderActive || !runtimeConfig.autoPlay) return;
 		stopAutoCycle();
 		autoPlayTimer = setInterval(() => handleMoveNext('left', false), runtimeConfig.autoPlayDelay);
 	}
@@ -511,6 +511,7 @@ export function bindStackCardPresetLeftBehavior(root, options = {}) {
 
 	// Initial render
 	updateStackPositions();
+	startAutoCycle();
 
 	/**
 	 * Cleanup function to remove listeners and reset styles.
