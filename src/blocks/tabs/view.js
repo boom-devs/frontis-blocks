@@ -1,5 +1,5 @@
 (function () {
-	function initTabs(root) {
+	function initTabs(root, outerRoot) {
 		if (!root) return;
 
 		const tablist = root.querySelector('.fb-tabs-panel');
@@ -34,20 +34,30 @@
 				li.setAttribute('tabIndex', isActive ? '0' : '-1');
 			});
 
-			// update panels visibility
+			// update panels — stack in same grid cell; toggle visibility via class
 			panels.forEach((panelEl, idx) => {
-				// Multiple matching strategies
 				const matchByClass = panelEl.classList.contains(`fb-inner-tab-${i}`);
-				const matchById = panelEl.id === `fb-tabs-panel-${root.dataset.blockID || 'x'}-${i}`;
+				const matchById = panelEl.id === `fb-tabs-panel${i}` || panelEl.id === `fb-tabs-panel-${root.dataset.blockID || 'x'}-${i}`;
 				const fallbackMatch = idx === i;
-				
+
 				const isActive = matchByClass || matchById || fallbackMatch;
-				panelEl.style.display = isActive ? 'block' : 'none';
+				const wrapper = panelEl.closest('.fb-tabs-item-wrapper');
+
+				if (wrapper) {
+					wrapper.style.display = isActive ? 'block' : 'none';
+					wrapper.classList.toggle('fb-tabs-panel-active', isActive);
+					wrapper.setAttribute('aria-hidden', String(!isActive));
+				} else {
+					panelEl.style.display = isActive ? 'block' : 'none';
+				}
+
+				panelEl.setAttribute('aria-hidden', String(!isActive));
 			});
 		}
 
-		// initial setup
-		const initial = parseInt(root.getAttribute('data-tab-active') || '0', 10) || 0;
+		// initial setup — data-tab-active is on the outer .fb-tabs-wrapper, not .fb-tabs-wrap
+		const dataSource = outerRoot || root.closest('.fb-tabs-wrapper') || root;
+		const initial = parseInt(dataSource.getAttribute('data-tab-active') || '0', 10) || 0;
 		setActive(initial);
 
 		// click handlers - li element এ
@@ -102,7 +112,7 @@
 		roots.forEach(root => {
 			const tabsWrap = root.querySelector('.fb-tabs-wrap');
 			if (tabsWrap) {
-				initTabs(tabsWrap);
+				initTabs(tabsWrap, root); // pass outer root so data-tab-active can be read correctly
 			}
 		});
 	}
