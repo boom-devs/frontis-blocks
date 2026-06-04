@@ -1,0 +1,244 @@
+.fb-hotspot-placeholder {
+  padding: 40px;
+  text-align: center;
+  background: #f0f0f0;
+  border-radius: 8px;
+}
+
+.fb-hotspot-editor-container {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.fb-hotspot-repeater-wrapper {
+  .dnd-items-wrapper {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li.sortable-item {
+    margin: 10px 0;
+  }
+
+  .sortable-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #f9f9f9;
+  }
+
+  .sortable-title {
+    flex: 1;
+    min-width: 0;
+    padding-left: 5px;
+    overflow: hidden;
+    cursor: pointer;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .sortable-sort button:focus,
+  .sortable-delete button:focus {
+    box-shadow: none;
+    outline: none;
+  }
+
+  .sortable-sort {
+    cursor: grab;
+  }
+
+  .sortable-delete button {
+    color: #d63638;
+  }
+
+  .sortable-item-content {
+    padding-top: 10px;
+  }
+}
+
+.fb-hotspot-base-image {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.fb-hotspot-marker {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  z-index: 10;
+
+  .fb-hotspot-trigger {
+    box-sizing: border-box;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    position: relative;
+    transform-origin: center;
+    transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0;
+    font-size: 0;
+
+    .fb-hotspot-marker-svg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+
+        svg {
+            width: 100%;
+            height: 100%;
+            
+            rect, circle, path {
+                stroke: currentColor;
+                fill: currentColor;
+                transition: stroke 0.2s ease, fill 0.2s ease;
+            }
+            rect[fill="none"], circle[fill="none"], path[fill="none"] {
+                fill: none;
+            }
+        }
+    }
+
+    &:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .fb-hotspot-icon {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 0;
+      width: 50%;
+      height: 50%;
+
+      svg {
+          width: 100%;
+          height: 100%;
+          transition: 0.3s ease;
+      }
+    }
+  }
+
+  &.selected {
+    z-index: 20;
+
+    .fb-hotspot-trigger {
+      box-shadow: 0 0 0 2px #007cba, 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+
+  .fb-hotspot-popover {
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    position: absolute;
+    bottom: calc(50% + 25px);
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+    margin: 0;
+    background: #fff;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 12px;
+    z-index: 20;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 8px;
+      border-style: solid;
+      border-color: #fff transparent transparent transparent;
+    }
+
+    .fb-hotspot-popover-image {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+
+    .fb-hotspot-popover-category {
+      margin-bottom: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .fb-hotspot-popover-title a {
+      color: inherit;
+      text-decoration: inherit;
+    }
+
+    .fb-hotspot-popover-price {
+      margin-top: 8px;
+      font-weight: 600;
+    }
+  }
+
+  &:hover .fb-hotspot-popover,
+  &.locked .fb-hotspot-popover {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.fb-hotspot-full-btn {
+    width: 100%;
+}
+
+.fb-hotspot-selected-wrapper {
+    margin-top: 16px;
+    border-top: 1px solid #e0e0e0;
+    padding-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.fb-hotspot-section-heading {
+    margin: 0 0 12px 0;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.fb-hotspot-label-normal {
+    margin: 0 0 8px;
+    font-weight: 500;
+}
+
+.fb-hotspot-label-hover {
+    margin: 12px 0 8px;
+    font-weight: 500;
+}
+
+// Responsive visibility in editor
+@media (min-width: 1024px) {
+  .fb-hotspot-marker.hide-desktop { display: none; }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .fb-hotspot-marker.hide-tablet { display: none; }
+}
+@media (max-width: 767px) {
+  .fb-hotspot-marker.hide-mobile { display: none; }
+}
