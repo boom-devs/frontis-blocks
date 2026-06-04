@@ -1,13 +1,12 @@
 import './editor.scss';
 import {
-	InnerBlocks,
-	InspectorControls,
 	useBlockProps,
 	useInnerBlocksProps,
-	store as blockEditorStore,
+	InnerBlocks,
+	InspectorControls,
 } from '@wordpress/block-editor';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { useLayoutEffect, useRef, useEffect } from '@wordpress/element';
+import { useSelect, store as blockEditorStore } from '@wordpress/data';
+import { useEffect } from '@wordpress/element';
 import StackCardItemInspector from './inspector';
 
 export default function Edit({ attributes, isSelected, clientId, setAttributes }) {
