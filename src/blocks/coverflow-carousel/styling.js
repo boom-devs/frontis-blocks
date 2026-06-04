@@ -438,7 +438,7 @@ const generatecoverflowCarouselNumberStyle = (attributes) => {
             ${globalDesktopBorderWidth && coverflowCarouselGlobalBorderDesktop?.top ? `border-width: ${globalDesktopBorderWidth};` : ""}
             ${globalDesktopBorderRadiusWidth && coverflowCarouselGlobalBorderRadiusDesktop?.top ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ""}
             ${coverflowCarouselGlobalBoxShadowCssValue ? `box-shadow: ${coverflowCarouselGlobalBoxShadowCssValue};` : ""}
-            ${carouselPerspective ? `perspective: ${carouselPerspective?.Desktop}${CarouselHeightUnits?.Desktop};` : ''}
+            ${carouselPerspective ? `perspective: ${carouselPerspective?.Desktop}${carouselPerspectiveUnits?.Desktop};` : ''}
         }     
         .fb-coverflowCarousel-wrapper.${blockID}:hover{
             ${coverflowCarouselGlobalBghoverBackgroundType === "gradient"
@@ -628,7 +628,7 @@ const generatecoverflowCarouselNumberStyle = (attributes) => {
                 ${globalTabletMargin && coverflowCarouselGlobalMarginTablet?.top ? `margin: ${globalTabletMargin};` : ""}
                 ${globalTabletBorderWidth && coverflowCarouselGlobalBorderTablet?.top ? `border-width: ${globalTabletBorderWidth};` : ""}
                 ${globalTabletBorderRadiusWidth && coverflowCarouselGlobalBorderRadiusTablet?.top ? `border-radius: ${globalTabletBorderRadiusWidth};` : ""}
-                ${carouselPerspective ? `perspective: ${carouselPerspective?.Tablet}${CarouselHeightUnits?.Tablet};` : ''}
+                ${carouselPerspective ? `perspective: ${carouselPerspective?.Tablet}${carouselPerspectiveUnits?.Tablet};` : ''}
             }
             
             .${blockID} .fb-coverflow-carousel-slide{
@@ -698,8 +698,8 @@ const generatecoverflowCarouselNumberStyle = (attributes) => {
             .${blockID} .fb-coverflow-carousel-pagination.pagination-progressbar .fb-coverflow-carousel-pagination-progressbar-fill,
             .${blockID} .fb-coverflow-carousel-pagination.pagination-progressbar {
                 ${carouselProgressbarHeight?.Tablet ? `height: ${carouselProgressbarHeight?.Tablet}${carouselProgressbarHeightUnits?.Tablet};` : ''}
-            }
-        }
+            } 
+        } 
         @media only screen and (max-width: 767px) {
             .fb-coverflowCarousel-main-wrapper.${blockID}{
                 ${coverflowCarouselPositionType !== 'default' && coverflowCarouselPositionType !== 'relative' && coverflowCarouselHZOrientationType === 'left' && coverflowCarouselHZLeftOffset?.Mobile ? `left: ${coverflowCarouselHZLeftOffset?.Mobile}${coverflowCarouselHZLeftOffsetUnits?.Mobile};` : ''}
@@ -713,7 +713,7 @@ const generatecoverflowCarouselNumberStyle = (attributes) => {
                 ${globalMobileMargin && coverflowCarouselGlobalMarginMobile?.top ? `margin: ${globalMobileMargin};` : ""}
                 ${globalMobileBorderWidth && coverflowCarouselGlobalBorderMobile?.top ? `border-width: ${globalMobileBorderWidth};` : ""}
                 ${globalMobileBorderRadiusWidth && coverflowCarouselGlobalBorderRadiusMobile?.top ? `border-radius: ${globalMobileBorderRadiusWidth};` : ""}
-                ${carouselPerspective ? `perspective: ${carouselPerspective?.Mobile}${CarouselHeightUnits?.Mobile};` : ''}
+                ${carouselPerspective ? `perspective: ${carouselPerspective?.Mobile}${carouselPerspectiveUnits?.Mobile};` : ''}
             }
 
             .${blockID} .fb-coverflow-carousel-slide{
