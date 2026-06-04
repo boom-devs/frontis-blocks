@@ -32,7 +32,8 @@ if (!function_exists('fb_trim_words')) {
 // Extract attributes
 $block_id = fb_norm_str(isset($attributes['blockID']) ? $attributes['blockID'] : '');
 $premade_style = fb_norm_str(isset($attributes['premadeStyle']) ? $attributes['premadeStyle'] : 'style-1');
-$taxonomy_type = fb_norm_str(isset($attributes['taxonomyType']) ? $attributes['taxonomyType'] : '');
+$taxonomy_type = fb_norm_str(isset($attributes['taxonomyType']) ? $attributes['taxonomyType'] : 'category');
+
 $show_count = isset($attributes['showCount']) ? (bool) $attributes['showCount'] : true;
 $show_description = isset($attributes['showDescription']) ? (bool) $attributes['showDescription'] : true;
 $show_empty = isset($attributes['showEmpty']) ? (bool) $attributes['showEmpty'] : false;
@@ -203,6 +204,7 @@ if (!function_exists('fb_format_count_with_label_html')) {
 
 // Get taxonomy terms
 $taxonomy_terms = [];
+
 if ($taxonomy_type) {
     $args = [
         'taxonomy' => $taxonomy_type,

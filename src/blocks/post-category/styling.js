@@ -1099,7 +1099,7 @@ const generatePostCategoryStyle = (attributes) => {
                 overflow: hidden;
                 width: 100%;
                 ${mediaSize?.Desktop ? `width: ${mediaSize?.Desktop}${mediaSizeUnits?.Desktop};` : ''}
-                ${mediaHeight?.Desktop ? `height: ${mediaHeight?.Desktop}${mediaHeightUnits?.Desktop};` : `height: auto;`}
+                ${mediaHeight?.Desktop ? `height: ${mediaHeight?.Desktop}${mediaHeightUnits?.Desktop};` : `height: 100%;`}
             }
 
             .${blockID} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-card-content,
@@ -1108,7 +1108,6 @@ const generatePostCategoryStyle = (attributes) => {
                 padding: 32px 24px;
                 display: flex;
                 flex-direction: column;
-                justify-content: space-between;
             }
 
             .${blockID} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-image-container .fb-taxonomy-image,
