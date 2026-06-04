@@ -203,7 +203,7 @@ const attributes = {
 
 	transitionSpeed: {
 		type: 'number',
-		default: 500,
+		default: 1000,
 	},
 	carouselReflection: {
 		type: 'boolean',
