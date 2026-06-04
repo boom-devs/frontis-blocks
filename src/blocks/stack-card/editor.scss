@@ -46,16 +46,14 @@
 .fb-stack-card-item {
     position: sticky !important;
     top: 100px;
-    border: 1px solid #d8dee5;
-    border-radius: 10px;
 }
 
 .fb-stack-card-item__content {
-    min-height: 72px;
+    min-height: 120px;
 }
 
 .fb-stack-card-item__content > .block-editor-inner-blocks > .block-editor-block-list__layout {
-    min-height: 72px;
+    min-height: 120px;
 }
 
 .fb-stack-card-item__content > .block-editor-inner-blocks > .block-editor-block-list__layout:empty {
@@ -69,6 +67,7 @@
 }
 
 .fb-stack-card-item__content--empty {
+    display: flex;
     border: 1px dashed #cbd5e1;
     border-radius: 8px;
     background: rgba(255, 255, 255, 0.9);
@@ -77,7 +76,7 @@
 
 .fb-stack-card-item__content--empty > .block-editor-inner-blocks,
 .fb-stack-card-item__content--empty > .block-editor-inner-blocks > .block-editor-block-list__layout {
-    min-height: 72px;
+    min-height: 120px;
 }
 
 .fb-stack-card-item__content--empty > .block-editor-inner-blocks > .block-editor-block-list__layout {

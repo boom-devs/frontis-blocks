@@ -153,10 +153,12 @@ export function bindStackCardPresetRightBehavior(root, options = {}) {
 		item.style.position = 'absolute';
 		item.style.left = 'auto';
 		item.style.top = 'auto';
+		item.style.right = '0';
+		item.style.bottom = '0';
 		item.style.transform = 'none';
-		item.style.width = `${runtimeConfig.itemWidth}${runtimeConfig.itemWidthUnit}`;
+		item.style.width = `min(100%, ${runtimeConfig.itemWidth}${runtimeConfig.itemWidthUnit})`;
 		item.style.maxWidth = `${runtimeConfig.itemWidth}${runtimeConfig.itemWidthUnit}`;
-		item.style.transition = `right ${runtimeConfig.animationSpeed}s ease, bottom ${runtimeConfig.animationSpeed}s ease, opacity ${runtimeConfig.animationSpeed}s ease`;
+		item.style.transition = `transform ${runtimeConfig.animationSpeed}s ease, opacity ${runtimeConfig.animationSpeed}s ease`;
 	});
 
 	function getVisibleLayersCount() {
@@ -170,7 +172,7 @@ export function bindStackCardPresetRightBehavior(root, options = {}) {
 
 	function syncFrameLayout() {
 		cardFrame.style.position = 'relative';
-		cardFrame.style.width = `${runtimeConfig.frameWidth}${runtimeConfig.frameWidthUnit}`;
+		cardFrame.style.width = '100%';
 		cardFrame.style.maxWidth = `${runtimeConfig.frameWidth}${runtimeConfig.frameWidthUnit}`;
 		cardFrame.style.height = `${runtimeConfig.frameHeight}${runtimeConfig.frameHeightUnit}`;
 		cardFrame.style.minHeight = `${runtimeConfig.frameHeight}${runtimeConfig.frameHeightUnit}`;
@@ -178,11 +180,10 @@ export function bindStackCardPresetRightBehavior(root, options = {}) {
 
 	function applyCardItemStyle(item, index, speed = runtimeConfig.animationSpeed, visibleCount = getVisibleLayersCount()) {
 		const offset = getLayerOffset(index, visibleCount);
-		item.style.transition = `right ${speed}s ease, bottom ${speed}s ease, opacity ${speed}s ease`;
-		item.style.width = `${runtimeConfig.itemWidth}${runtimeConfig.itemWidthUnit}`;
+		item.style.transition = `transform ${speed}s ease, opacity ${speed}s ease`;
+		item.style.width = `min(100%, ${runtimeConfig.itemWidth}${runtimeConfig.itemWidthUnit})`;
 		item.style.maxWidth = `${runtimeConfig.itemWidth}${runtimeConfig.itemWidthUnit}`;
-		item.style.right = `${offset}px`;
-		item.style.bottom = `${offset}px`;
+		item.style.transform = `translate(-${offset}px, -${offset}px)`;
 		item.style.opacity = '1';
 		item.style.visibility = 'visible';
 		item.style.pointerEvents = 'auto';
@@ -192,10 +193,9 @@ export function bindStackCardPresetRightBehavior(root, options = {}) {
 	function hideCardItem(item, fallbackIdx, visibleCount = getVisibleLayersCount()) {
 		const offset = getLayerOffset(fallbackIdx, visibleCount);
 		item.classList.remove('active');
-		item.style.width = `${runtimeConfig.itemWidth}${runtimeConfig.itemWidthUnit}`;
+		item.style.width = `min(100%, ${runtimeConfig.itemWidth}${runtimeConfig.itemWidthUnit})`;
 		item.style.maxWidth = `${runtimeConfig.itemWidth}${runtimeConfig.itemWidthUnit}`;
-		item.style.right = `${offset}px`;
-		item.style.bottom = `${offset}px`;
+		item.style.transform = `translate(-${offset}px, -${offset}px)`;
 		item.style.opacity = '0';
 		item.style.visibility = 'hidden';
 		item.style.pointerEvents = 'none';
@@ -225,9 +225,9 @@ export function bindStackCardPresetRightBehavior(root, options = {}) {
 		Object.assign(baseConfig, nextConfig);
 		runtimeConfig = resolveStackCardRuntimeConfig(baseConfig, windowRef.innerWidth || 1440);
 		cardItems.forEach((item) => {
-			item.style.width = `${runtimeConfig.itemWidth}${runtimeConfig.itemWidthUnit}`;
+			item.style.width = `min(100%, ${runtimeConfig.itemWidth}${runtimeConfig.itemWidthUnit})`;
 			item.style.maxWidth = `${runtimeConfig.itemWidth}${runtimeConfig.itemWidthUnit}`;
-			item.style.transition = `right ${runtimeConfig.animationSpeed}s ease, bottom ${runtimeConfig.animationSpeed}s ease, opacity ${runtimeConfig.animationSpeed}s ease`;
+			item.style.transition = `transform ${runtimeConfig.animationSpeed}s ease, opacity ${runtimeConfig.animationSpeed}s ease`;
 		});
 		updateStackPositions(0);
 		restartAutoCycle();

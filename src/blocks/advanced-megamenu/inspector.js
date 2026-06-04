@@ -18,9 +18,11 @@ import {
     BORDER_STYLES,
     OVERFLOW_OP,
     BACKGROUND_TYPES,
+    MEGA_MENU_TRIGGERS,
+    IMAGE_OBJECT_FIT
 } from '@Constants/fbConstants';
 
-import { MEGA_MENU_TRIGGERS } from '@Constants/fbConstants';
+import FB_ImageControl from '@Components/image-control';
 import FB_InspectorControls from '@Components/InspectorControls';
 import FB_ColorControl from '@Components/color-control';
 import FB_TypographyControl from '@Components/typography-control';
@@ -248,7 +250,15 @@ const Inspector = ({ attributes, setAttributes }) => {
         megaMenuOpenIconSizeUnits,
         megaMenuOpenIconRotateSwitcher,
         megaMenuOpenIconRotation,
-        megaMenuOpenIconRotateHover
+        megaMenuOpenIconRotateHover,
+        megaMenuMobileLogoUrl,
+        megaMenuMobileLogoAlt,
+        megaMenuMobileLogoID,
+        megaMenuMobileLogoWidth,
+        megaMenuMobileLogoWidthUnits,
+        megaMenuMobileLogoHeight,
+        megaMenuMobileLogoHeightUnits,
+        megaMenuMobileLogoObjectFit,
     } = attributes;
 
     const deviceType = useDeviceType();
@@ -969,6 +979,19 @@ const Inspector = ({ attributes, setAttributes }) => {
                     </DndContext>
                 </div>
             </PanelBody>
+
+            <PanelBody title={__('Mobile Menu', 'frontis-blocks')} initialOpen={false}>
+                <FB_ImageControl
+                    label={__('Mobile Logo', 'frontis-blocks')}
+                    globalImageUrl={megaMenuMobileLogoUrl}
+                    setglobalImageUrl={(value) => setAttributes({ megaMenuMobileLogoUrl: value || '' })}
+                    globalImageAlt={megaMenuMobileLogoAlt}
+                    setglobalImageAlt={(value) => setAttributes({ megaMenuMobileLogoAlt: value || '' })}
+                    globalImageID={megaMenuMobileLogoID}
+                    setglobalImageID={(value) => setAttributes({ megaMenuMobileLogoID: value || 0 })}
+                    isImageSize={false}
+                />
+            </PanelBody>
         </>
     );
 
@@ -1035,6 +1058,41 @@ const Inspector = ({ attributes, setAttributes }) => {
 
                 )}
 
+            </PanelBody>
+            <PanelBody title={__("Mobile Menu", "frontis-blocks")} initialOpen={false}>
+                <FB_Range
+                    min={1}
+                    max={megaMenuMobileLogoWidthUnits[deviceType] === '%' ? 100 : 500}
+                    label={__("Image Width", "frontis-blocks")}
+                    rangeValue={megaMenuMobileLogoWidth}
+                    onChangeHandler={(value) => setAttributes({ megaMenuMobileLogoWidth: value })}
+                    rangeUnitHandler={(value) => setAttributes({ megaMenuMobileLogoWidthUnits: value })}
+                    deviceType={deviceType}
+                    units={megaMenuMobileLogoWidthUnits}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={''}
+                />
+                <FB_Range
+                    min={1}
+                    max={megaMenuMobileLogoHeightUnits[deviceType] === '%' ? 100 : 500}
+                    label={__("Image Height", "frontis-blocks")}
+                    rangeValue={megaMenuMobileLogoHeight}
+                    onChangeHandler={(value) => setAttributes({ megaMenuMobileLogoHeight: value })}
+                    rangeUnitHandler={(value) => setAttributes({ megaMenuMobileLogoHeightUnits: value })}
+                    deviceType={deviceType}
+                    units={megaMenuMobileLogoHeightUnits}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={''}
+                />
+                <SelectControl
+                    label={__("Object Fit", "frontis-blocks")}
+                    value={megaMenuMobileLogoObjectFit}
+                    options={IMAGE_OBJECT_FIT}
+                    onChange={(value) => setAttributes({ megaMenuMobileLogoObjectFit: value })}
+                    __nextHasNoMarginBottom
+                />
             </PanelBody>
             <PanelBody title={__("Menu Item", "frontis-blocks")} initialOpen={false}>
                 <FB_TypographyControl

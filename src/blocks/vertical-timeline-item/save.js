@@ -1,6 +1,6 @@
 import { InnerBlocks, RichText, useBlockProps } from "@wordpress/block-editor";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-const save = ({ attributes }) => {
+export default function save({ attributes }) {
     const {
         blockID,
         parentBlockID,
@@ -53,9 +53,8 @@ const save = ({ attributes }) => {
                         <InnerBlocks.Content />
                     </div>
                 </div>
-            </div>
+            </div>    
         </div>
     );
 };
 
-export default save;
