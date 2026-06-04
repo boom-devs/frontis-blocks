@@ -2,13 +2,13 @@
 Contributors: wpmessiah
 Tags: block, blocks, blocks-editor, gutenberg,  gutenberg blocks,
 Requires at least: 6.0
-Tested up to: 6.9
-Stable tag: 1.2.0
+Tested up to: 7.0
+Stable tag: 1.2.3
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html 
 
-Frontis Blocks is a block library with 40+ blocks, global styles, sliders/galleries, CTAs, and map/form integrations, plus ready-made patterns to help you build pages faster in the Block Editor.
+Frontis Blocks - WordPress block library for Gutenberg Editor with 40+ blocks, patterns, sliders, galleries, CTAs, maps, forms, and global styles.
 
 == Description ==
 
@@ -248,6 +248,37 @@ There is no prerequisites for installing **Frontis Blocks**. You can follow the 
 
 == Changelog ==
 
+= 1.2.3 – 15 May 2026 =
+- **New**: Added Stacked Card block with Pro features support.
+- **Fixed**: Resolved PHP 7.4 compatibility issue in typography CSS selector logic.
+- **Fixed**: Resolved asset generation issue for pages without wp:post-content block.
+- **Fixed**: Ensured customized colors are persisted during full site import.
+- **Fixed**: Resolved Google Fonts loading issues in typography preview iframe.
+- **Fixed**: Resolved various template CSS rendering and generation issues.
+- **Fixed**: Resolved navigation active menu style and logo system issues.
+- **Fixed**: Resolved critical data loss in list-based blocks (Features List, Tabs, Advanced Megamenu) by removing dual-state synchronization conflicts.
+- **Improved**: Implemented unique timestamp-based ID generation for list items to prevent state corruption.
+- **Improved**: Updated Mega Menu icons and optimized for production release.
+- **Improved**: Added automatic asset regeneration when synced patterns are updated.
+- **Improved**: Enhanced child block registration for better stability.
+
+= 1.2.2 – 27 April 2026 =
+- **New**: Redesigned the Design Library with additional features and improved UI.
+- **Fixed**: Resolved Slider block outside padding reset issue.
+- **Fixed**: Resolved Global Settings related issues.
+- **Fixed**: Resolved child Container padding issues on initial insert.
+- **Improved**: Resolved Advanced Search block issues and added custom icon, updated description and attributes.
+- **Improved**: Styled Global Settings save button for better UI consistency.
+- **Improved**: Updated core plugin file for compatibility.
+
+= 1.2.1 – 03 April 2026 =
+- **New**: Added Full-site import functionality in the Template Library for faster site building.
+- **Fixed**: Resolved import-related issues in the Slider block on both editor and frontend.
+- **Fixed**: Resolved SureCart conflict issue to ensure smooth functionality.
+- **Improved**: Added permalink update system for better site structure.
+- **Improved**: Optimized Template Library metadata and removed internal unused code for better performance.
+- **Improved**: Updated dependencies for better stability and build consistency.
+
 = 1.2.0 – 17 March 2026 =
 - **New**: Added Google Fonts preload toggle in Performance settings.
 - **Fixed**: Resolved Google Fonts URL sanitization issues.
@@ -289,7 +320,6 @@ There is no prerequisites for installing **Frontis Blocks**. You can follow the 
 - **Improved**: Updated form-builder message body format and added Composer support for deployment workflow.
 - **Refactor**: Cleaned up unnecessary files and code across multiple blocks (Advanced Heading, Container, Slider, Form Builder, etc.) to improve plugin footprint.
 - **Deprecation**: Improved handling for deprecated block versions and file organization.
-
 
 = 1.1.8 – 13 February 2026 =
 - **New**: Added Rive Animation block.

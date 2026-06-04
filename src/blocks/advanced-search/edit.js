@@ -1,7 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import {
-	useBlockProps,
-	RichText
+	useBlockProps
 } from '@wordpress/block-editor';
 import Inspector from './inspector';
 import renderSVG from "@Components/icon-picker/components/icon-picker/controls/renderIcon";
@@ -124,13 +123,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 							)}
 						</div>
 						{showButtonSwitcher && (
-							<span>
-								<RichText
-									value={searchButtonText}
-									onChange={(value) => setAttributes({ searchButtonText: value })}
-									placeholder={__('Search', 'frontis-blocks')}
-								/>
-							</span>
+							<span>{searchButtonText || __('Search', 'frontis-blocks')}</span>
 						)}
 					</div>
 

@@ -24,7 +24,7 @@ if (!function_exists('render_loop_builder')):
 			 * Attributes
 			 */
 			$attributes = isset($block['attrs']) ? $block['attrs'] : [];
-			$blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
+			$blockId = isset($attributes['blockID']) ? $attributes['blockID'] : (isset($attributes['blockId']) ? $attributes['blockId'] : '');
 			$align_class = isset($attributes['align']) ? 'align' . $attributes['align'] : 'alignwide';
 
 			$query_args = (isset($attributes['query']) && is_array($attributes['query'])) ? $attributes['query'] : [];
@@ -57,6 +57,26 @@ if (!function_exists('render_loop_builder')):
 				'offset' => $postOffset,
 				'post_status' => 'publish',
 			];
+
+			/**
+			 * Sticky posts
+			 */
+			$sticky = isset($query_args['sticky']) ? $query_args['sticky'] : '';
+			if (empty($sticky) || $sticky === 'ignore') {
+				$default_query_args['ignore_sticky_posts'] = true;
+			} elseif ($sticky === 'exclude') {
+				$default_query_args['ignore_sticky_posts'] = true;
+				$sticky_posts = get_option('sticky_posts');
+				if (is_array($sticky_posts) && !empty($sticky_posts)) {
+					$default_query_args['post__not_in'] = isset($default_query_args['post__not_in'])
+						? array_merge($default_query_args['post__not_in'], array_map('intval', $sticky_posts))
+						: array_map('intval', $sticky_posts);
+				}
+			} elseif ($sticky === 'only') {
+				$default_query_args['ignore_sticky_posts'] = true;
+				$sticky_posts = get_option('sticky_posts');
+				$default_query_args['post__in'] = is_array($sticky_posts) && !empty($sticky_posts) ? array_map('intval', $sticky_posts) : [0];
+			}
 
 			/**
 			 * Author filter
@@ -92,10 +112,20 @@ if (!function_exists('render_loop_builder')):
 			 * Inner blocks (layout + pagination)
 			 */
 			$inner_blocks = isset($block['innerBlocks']) ? $block['innerBlocks'] : [];
-			$inner_block_attributes = isset($inner_blocks[0]['attrs']) ? $inner_blocks[0]['attrs'] : [];
 
-			$inner_block_id = $inner_block_attributes['blockId'] ?? '';
-			$postSwitcher = $inner_block_attributes['postSwitcher'] ?? 'grid';
+			$item_block = null;
+			foreach ($inner_blocks as $ib) {
+				if (($ib['blockName'] ?? '') === 'frontis-blocks/loop-builder-item') {
+					$item_block = $ib;
+					break;
+				}
+			}
+
+			$item_attrs = $item_block['attrs'] ?? [];
+			$inner_block_id = isset($item_attrs['blockID']) ? $item_attrs['blockID'] : (isset($item_attrs['blockId']) ? $item_attrs['blockId'] : '');
+			$postSwitcher = $item_attrs['postSwitcher'] ?? 'grid';
+			$loop_builder_item_class = $item_attrs['loopBuilderItemClass'] ?? '';
+			$layout_class = ($postSwitcher === 'list') ? 'list-layout' : 'grid-layout';
 
 			/**
 			 * Find pagination block
@@ -164,25 +194,29 @@ if (!function_exists('render_loop_builder')):
 			ob_start();
 			?>
 
-			<div class="<?php echo esc_attr($blockId); ?> wp-block-frontis-blocks-loop-builder fb-loop-builder <?php echo esc_attr($align_class); ?>"
+			<div class="<?php echo esc_attr(trim("{$blockId} wp-block-frontis-blocks-loop-builder fb-loop-builder fb-query-content-container {$align_class}")); ?>"
 				data-fb-block-id="<?php echo esc_attr($blockId); ?>">
 				<div
-					class="<?php echo esc_attr($inner_block_id); ?> fb-loop-builder-wrapper-main-container <?php echo esc_attr($postSwitcher); ?>-layout">
+					class="<?php echo esc_attr(trim("{$inner_block_id} wp-block-frontis-blocks-loop-builder-item fb-loop-builder-item-main-container {$layout_class}")); ?>">
 					<?php
 					if ($query->have_posts()):
 						while ($query->have_posts()):
 							$query->the_post();
-
-							foreach ($inner_blocks as $inner_block):
-								if (($inner_block['blockName'] ?? '') === 'frontis-blocks/loop-builder-wrapper'):
-									$wrapper_inner_blocks = $inner_block['innerBlocks'] ?? [];
-									foreach ($wrapper_inner_blocks as $wrapper_inner_block):
-										$wrapper_inner_block['context'] = ['postId' => get_the_ID()];
-										echo render_block($wrapper_inner_block); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-									endforeach;
-								endif;
-							endforeach;
-
+							$post_id = get_the_ID();
+							$post_classes = implode(' ', get_post_class('wp-block-post', $post_id));
+							$item_classes = trim("{$post_classes} fb-loop-builder-item-block-context-container {$loop_builder_item_class} fb-loop-builder-item-inner-container");
+							?>
+							<div class="<?php echo esc_attr($item_classes); ?>">
+								<?php
+								if ($item_block) {
+									foreach (($item_block['innerBlocks'] ?? []) as $item_inner_block) {
+										$item_inner_block['context'] = ['postId' => $post_id];
+										echo render_block($item_inner_block); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+									}
+								}
+								?>
+							</div>
+							<?php
 						endwhile;
 						wp_reset_postdata();
 					else:

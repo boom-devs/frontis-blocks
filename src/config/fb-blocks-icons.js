@@ -977,22 +977,20 @@ const FB_Block_Icons = {
 		  fill: 'none',
 		  className: 'frontis-blocks-editor-icons',
 		},
-		[
-		  fb('path', {
+		fb('path', {
 			d: 'M7 18H3L9 12L3 6H7L13 12L7 18Z',
 			stroke: '#0B0C0E',
 			strokeWidth: 1.4,
 			strokeLinecap: 'round',
 			strokeLinejoin: 'round',
-		  }),
-		  fb('path', {
+		}),
+		fb('path', {
 			d: 'M17 12L11 6H15L21 12L15 18H11L17 12Z',
 			stroke: '#0B0C0E',
 			strokeWidth: 1.4,
 			strokeLinecap: 'round',
 			strokeLinejoin: 'round',
-		  })
-		]
+		})
 	),
 	off_canvas_menu: fb(
 		'svg',
@@ -1087,7 +1085,90 @@ const FB_Block_Icons = {
 			strokeLinecap: 'round',
 			strokeLinejoin: 'round',
 		})
-	),	
+	),
+	advanced_search: fb(
+		'svg',
+		{
+			version: '1.1',
+			id: 'advancedSearchIcon',
+			xmlns: 'http://www.w3.org/2000/svg',
+			width: '24',
+			height: '24',
+			viewBox: '0 0 24 24',
+			fill: 'none',
+			className: 'frontis-blocks-editor-icons',
+		},
+		fb('path', {
+			d: `M6.21429 10.5C6.21429 8.35714 8.35714 6.21429 10.5 6.21429M21 21L15.8033 15.8033M15.8033 15.8033C17.1605 14.4461 18 12.5711 18 10.5C18 6.35786 14.6421 3 10.5 3C6.35786 3 3 6.35786 3 10.5C3 14.6421 6.35786 18 10.5 18C12.5711 18 14.4461 17.1605 15.8033 15.8033Z`,
+			fill: 'none',
+			stroke: '#0B0C0E',
+			strokeWidth: 1.4,
+			strokeLinecap: 'round',
+		}),
+	),
+	stacked_cards: fb(
+		'svg',
+		{
+			version: '1.1',
+			id: 'stackedCardsIcon',
+			xmlns: 'http://www.w3.org/2000/svg',
+			width: '24',
+			height: '24',
+			viewBox: '0 0 24 24',
+			className: 'frontis-blocks-editor-icons',
+		},
+		fb('rect', {
+			x: '3',
+			y: '7',
+			width: '12',
+			height: '14',
+			rx: '2',
+			fill: 'none',
+			stroke: '#0B0C0E',
+			strokeWidth: 1.4,
+		}),
+		fb('rect', {
+			x: '6',
+			y: '5',
+			width: '12',
+			height: '14',
+			rx: '2',
+			fill: 'none',
+			stroke: '#0B0C0E',
+			strokeWidth: 1.4,
+		}),
+		fb('rect', {
+			x: '9',
+			y: '3',
+			width: '12',
+			height: '14',
+			rx: '2',
+			fill: 'none',
+			stroke: '#0B0C0E',
+			strokeWidth: 1.4,
+		})
+	),
+	back_to_top: fb(
+		'svg',
+		{
+			version: '1.1',
+			id: 'backToTopIcon',
+			xmlns: 'http://www.w3.org/2000/svg',
+			width: '24',
+			height: '24',
+			viewBox: '0 0 24 24',
+			fill: 'none',
+			className: 'frontis-blocks-editor-icons',
+		},
+		fb('path', {
+			d: `M12 15V3M12 3L17 8M12 3L7 8`,
+			fill: 'none',
+			stroke: '#0B0C0E',
+			strokeWidth: 1.4,
+			strokeLinecap: 'round',
+			strokeLinejoin: 'round',
+		}),
+	),
 
 };
 

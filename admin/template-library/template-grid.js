@@ -68,7 +68,7 @@ const TemplateGrid = ({
     const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
-    
+
     const [freeTemplate, setFreeTemplate] = useState(false);
 
     const isAlreadySaved = alreadySaved(savedItems, id, activeTab)
@@ -120,9 +120,9 @@ const TemplateGrid = ({
         if (isProPlugin && is_premium) {
             const verified = await verifySubscription();
             console.log(id);
-            
 
-            if(verified.status) {
+
+            if (verified.status) {
                 console.log('Now import the pro pattern.');
                 setIsImporting(false);
                 setIsVisible(false);
@@ -158,7 +158,7 @@ const TemplateGrid = ({
     }, []);
 
     useEffect(() => {
-        if(!userData?.email) {
+        if (!userData?.email) {
             handleCloseModal();
         }
     }, [userData?.email]);
@@ -187,7 +187,6 @@ const TemplateGrid = ({
                     'Content-Type': 'application/json',
                 },
             }).unwrap();
-            console.log(key, response);
             return response;
         } catch (err) {
             console.error('Error:', err);
@@ -221,7 +220,7 @@ const TemplateGrid = ({
         return responseData;
     }
 
-    
+
 
     const importPattern = async (id) => {
         if (!userData) {
@@ -232,12 +231,12 @@ const TemplateGrid = ({
             setIsPluginUpgradeModalOpen(true);
             return;
         }
-    
+
         setIsImporting(true);
-    
+
         if (is_premium) {
             const verified = await verifySubscription();
-    
+
             if (verified.status) {
                 console.log("Now import the pro pattern.");
                 setIsImporting(false);
@@ -255,28 +254,28 @@ const TemplateGrid = ({
                     pauseOnHover: true,
                     theme: "light",
                 });
-    
+
                 setIsImporting(false);
                 return;
             }
         } else {
             console.log("Free pattern will be imported directly.");
         }
-    
+
         // 🔹 Fetch pattern from API
         const pattern = await getTemplatesData("import/pattern", "pattern_id", id);
         if (pattern.data) {
             try {
                 const patternData = JSON.parse(pattern.data);
-    
+
                 // Safe importer call
                 await importBlocksFromApi(patternData);
-    
+
                 toast.success("Pattern imported successfully!", {
                     position: "top-right",
                     autoClose: 3000,
                 });
-    
+
             } catch (err) {
                 console.error("Import error:", err);
                 toast.error("Failed to import pattern", {
@@ -285,25 +284,25 @@ const TemplateGrid = ({
                 });
             }
         }
-    
+
         setIsImporting(false);
         setIsVisible(false);
     };
-    
+
 
     const importPage = async (id) => {
         if (!userData) {
             setIsLoginModalOpen(true);
             return;
         }
-    
+
         if (is_premium === true && !isProPlugin) {
             setIsPluginUpgradeModalOpen(true);
             return;
         }
-    
+
         setIsImporting(true);
-    
+
         if (is_premium) {
             const verified = await verifySubscription();
             if (!verified.status) {
@@ -312,13 +311,13 @@ const TemplateGrid = ({
                 return;
             }
         }
-    
+
         try {
             const page = await getTemplatesData("import/page", "page_id", id);
-    
+
             if (page) {
                 const pageData = JSON.parse(page.data).content;
-    
+
                 await importBlocksFromApi({ content: pageData });
             }
         } catch (error) {
@@ -328,7 +327,7 @@ const TemplateGrid = ({
                 autoClose: 3000,
             });
         }
-    
+
         setIsImporting(false);
         setIsVisible(false);
     };
@@ -387,8 +386,8 @@ const TemplateGrid = ({
                                 <button className="fb-demo-btn" onClick={handleDemo}>
                                     <span>Demo</span>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-                                        <path d="M8.32425 2.25C5.58753 2.25493 4.15442 2.32213 3.23856 3.23814C2.25018 4.22667 2.25018 5.81769 2.25018 8.99968C2.25018 12.1817 2.25018 13.7728 3.23856 14.7613C4.22692 15.7498 5.81769 15.7498 8.99925 15.7498C12.1807 15.7498 13.7715 15.7498 14.7599 14.7613C15.6757 13.8453 15.7429 12.4119 15.7478 9.67476" stroke="white" stroke-width="1.125" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M15.4169 2.62224L8.28644 9.7941M15.4169 2.62224C15.0464 2.25128 12.5506 2.28586 12.023 2.29337M15.4169 2.62224C15.7874 2.99321 15.7528 5.4922 15.7453 6.02051" stroke="white" stroke-width="1.125" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M8.32425 2.25C5.58753 2.25493 4.15442 2.32213 3.23856 3.23814C2.25018 4.22667 2.25018 5.81769 2.25018 8.99968C2.25018 12.1817 2.25018 13.7728 3.23856 14.7613C4.22692 15.7498 5.81769 15.7498 8.99925 15.7498C12.1807 15.7498 13.7715 15.7498 14.7599 14.7613C15.6757 13.8453 15.7429 12.4119 15.7478 9.67476" stroke="white" strokeWidth="1.125" strokeLinecap="round" strokeLinejoin="round" />
+                                        <path d="M15.4169 2.62224L8.28644 9.7941M15.4169 2.62224C15.0464 2.25128 12.5506 2.28586 12.023 2.29337M15.4169 2.62224C15.7874 2.99321 15.7528 5.4922 15.7453 6.02051" stroke="white" strokeWidth="1.125" strokeLinecap="round" strokeLinejoin="round" />
                                     </svg>
                                 </button>
                             </div>
@@ -452,7 +451,7 @@ const TemplateGrid = ({
                     <button
                         className={`fb-template-save-my-cloud ${isProPlugin && saveLoading ? "loading" : ""}`}
                         onClick={() => {
-                            if(isProPlugin && saveLoading) return;
+                            if (isProPlugin && saveLoading) return;
                             isLibrary ? handleRemoveLibraryItem(id, templateType) : onSaveLibrary(templateData, isAlreadySaved);
                         }}
                         disabled={saveLoading || saved}

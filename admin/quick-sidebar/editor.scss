@@ -46,12 +46,15 @@
 		.frontis-blocks-ee-quick-access__sidebar--tabs {
 			display: flex;
 			flex-direction: column;
+
 			.frontis-blocks-sidebar-actions {
 				&.active {
 					.frontis-blocks-ee-quick-access__sidebar--actions {
 						.frontis-blocks-ee-quick-access__sidebar--actions--plus {
 							.frontis-blocks-quick-action-sidebar-wrap {
-								#plus-icon, #rearrange-icon {
+
+								#plus-icon,
+								#rearrange-icon {
 									background-color: #1d2939;
 									color: #fff;
 								}
@@ -59,10 +62,13 @@
 						}
 					}
 				}
+
 				.frontis-blocks-ee-quick-access__sidebar--actions {
 					.frontis-blocks-ee-quick-access__sidebar--actions--plus {
 						.frontis-blocks-quick-action-sidebar-wrap {
-							#plus-icon, #rearrange-icon {
+
+							#plus-icon,
+							#rearrange-icon {
 								display: flex;
 								align-content: center;
 								justify-content: center;
@@ -102,7 +108,7 @@
 
 			&:hover {
 				background: #1d2939;
-				
+
 				span:not(.dashicon) {
 					display: none;
 				}
@@ -247,7 +253,8 @@
 					gap: 10px;
 				}
 
-				svg.frontis-blocks-editor-icons{
+				svg.frontis-blocks-editor-icons {
+
 					rect,
 					path {
 						stroke: #0B0C0E !important;
@@ -317,6 +324,7 @@
 }
 
 div#widgets-editor {
+
 	.spectra-ee-quick-access__sidebar--blocks,
 	.spectra-ee-quick-access__sidebar--actions {
 		max-height: calc(100vh - 180px);
@@ -330,26 +338,29 @@ div#widgets-editor {
 		.spectra-ee-quick-access__sidebar--blocks {
 			.spectra-ee-quick-access__sidebar--blocks--block {
 				.spectra-ee-quick-access__sidebar--blocks--block--icon {
+
 					&.spectra-ee-quick-access__sidebar-icon__core,
 					&.spectra-ee-quick-access__sidebar-icon__wcfb,
 					&.spectra-ee-quick-access__sidebar-icon__wpsp {
 						svg {
+
 							path,
 							rect,
 							circle {
 								fill: #fff;
-								stroke-width: 1.4px;
+								strokeWidth: 1.4px;
 							}
 						}
 					}
 
 					&.spectra-ee-quick-access__sidebar-icon__woocommerce {
 						svg {
+
 							path,
 							rect,
 							circle {
 								fill: #fff;
-								stroke-width: 1.4px;
+								strokeWidth: 1.4px;
 							}
 						}
 
@@ -365,6 +376,7 @@ div#widgets-editor {
 					}
 
 					&.spectra-ee-quick-access__sidebar-icon__jetpack {
+
 						&--gif path:last-child,
 						&--map path:last-child,
 						&--markdown path:last-child {
@@ -381,10 +393,12 @@ div#widgets-editor {
 	&--blocks-sortable {
 		display: flex;
 		flex-direction: column;
-		overflow: auto; /* Prevent horizontal scrolling */
+		overflow: auto;
+		/* Prevent horizontal scrolling */
 
 		&--block {
-			margin-bottom: 10px; /* Adjust as needed */
+			margin-bottom: 10px;
+			/* Adjust as needed */
 		}
 	}
 

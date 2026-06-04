@@ -374,7 +374,7 @@ export const advancedHeadingPresets = [
                     <g filter="url(#filter0_d_16980_14930)">
                     <path d="M64 98C64 90.8203 69.8203 85 77 85H271C278.18 85 284 90.8203 284 98C284 105.18 278.18 111 271 111H77C69.8203 111 64 105.18 64 98Z" fill="white"/>
                     </g>
-                    <line x1="64" y1="130.25" x2="284" y2="130.25" stroke="#6A758E" stroke-width="1.5" stroke-dasharray="8 8"/>
+                    <line x1="64" y1="130.25" x2="284" y2="130.25" stroke="#6A758E" strokeWidth="1.5" stroke-dasharray="8 8"/>
                     <g filter="url(#filter1_d_16980_14930)">
                     <rect x="64" y="151" width="162" height="16" rx="8" fill="white"/>
                     </g>

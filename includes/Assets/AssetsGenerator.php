@@ -43,8 +43,6 @@ class AssetsGenerator
 
 	private function reset()
 	{
-		update_post_meta($this->post_id, 'fb_page_assets_generation', 'compiling');
-
 		$this->post_id = null;
 		$this->post = null;
 		$this->used_blocks = [];
@@ -70,19 +68,31 @@ class AssetsGenerator
 	public function generate_page_assets($post_id, $post, $generate_critical_css = false)
 	{
 		$this->genrating_critical_css = $generate_critical_css;
+		$post_type = get_post_type($post_id);
+		$source_post_name = !empty($post->post_name) ? $post->post_name : 'frontis-template';
 
-		if (get_post_type($post_id) != 'wp_template_part') {
+		if ($post_type !== 'wp_template_part') {
 			$this->post = $post;
 			$this->post_id = $post_id;
 
-			if (get_post_type($post_id) === 'wp_template') {
+			if ($post_type === 'wp_template') {
 				$post_data[] = $this->post;
 				$this->post->post_content = TemplateProcessor::get_instance()->process_template($post_data);
 			}
 
-			if (get_post_type($post_id) !== 'wp_template') {
+			if ($post_type !== 'wp_template') {
 				$this->post->post_content = $this->get_page_content_with_template_parts();
 			}
+
+			// var_dump($this->post->post_content);
+			// die();
+			$frontis_blocks_used = preg_match('/frontis-blocks/i', $this->post->post_content) > 0;
+			$critical_css_used = preg_match('/frontis-blocks\/critical-css/i', $this->post->post_content) > 0;
+
+			update_post_meta($post_id, 'frontis_blocks_used', $frontis_blocks_used);
+			update_post_meta($post_id, 'generate_critical_css', $critical_css_used);
+
+			$this->genrating_critical_css = $critical_css_used;
 
 			$this->generate_all_blocks_assets();
 			$this->combine_static_assets();
@@ -95,10 +105,10 @@ class AssetsGenerator
 			update_post_meta($post_id, 'fb_page_assets_generation', 'compiled');
 		}
 
-		if (Helper::check_url_has_fse_template() || get_post_type($post_id) === 'wp_template') {
-			global $wpdb;
-			$table_name = $wpdb->prefix . 'fb_job_schedule';
-
+		if (
+			!wp_doing_cron()
+			&& (Helper::check_url_has_fse_template() || in_array($post_type, ['wp_template', 'wp_template_part'], true))
+		) {
 			try {
 				$post_ids = Helper::get_all_post_ids();
 
@@ -110,25 +120,51 @@ class AssetsGenerator
 
 						update_post_meta($single_post_id, 'fb_page_assets_generation', 'compiling');
 
-						$post_content = $single_post->post_content;
-						$pattern = "/frontis-blocks/i";
-
-						if (
-							get_post_type($single_post_id) !== 'wp_template' &&
-							preg_match_all($pattern, $post_content) === 0
-						) {
-							continue;
-						}
-
-						// Insert job using your existing Helper method
-						if (!empty($this->post) && !empty($this->post->post_name)) {
-							Helper::insert_job($single_post_id, $this->post->post_name . $single_post_id);
-						}
+						Helper::insert_job($single_post_id, $source_post_name . $single_post_id);
 					}
 				}
-			} catch (Exception $e) {
+			} catch (\Exception $e) {
 				error_log('Failed to schedule assets generation: ' . $e->getMessage());
 			}
+		}
+
+		return true;
+	}
+
+	public function generate_template_assets($template_name, $template_content, $post_id = 0)
+	{
+		$template_name = sanitize_title($template_name);
+		$template_content = TemplateProcessor::get_instance()->process_template((string) $template_content);
+
+		if ($template_name === '' || $template_content === '') {
+			return false;
+		}
+
+		$this->post_id = absint($post_id);
+		$this->post = (object) [
+			'ID' => $this->post_id,
+			'post_name' => $template_name,
+			'post_type' => 'wp_template',
+			'post_content' => $template_content,
+		];
+
+		$critical_css_used = preg_match('/frontis-blocks\/critical-css/i', $template_content) > 0;
+		$this->genrating_critical_css = $critical_css_used;
+
+		if (!empty($this->post_id)) {
+			update_post_meta($this->post_id, 'frontis_blocks_used', preg_match('/frontis-blocks/i', $template_content) > 0);
+			update_post_meta($this->post_id, 'generate_critical_css', $critical_css_used);
+		}
+
+		$this->generate_all_blocks_assets();
+		$this->combine_static_assets();
+		$this->combine_and_save_css_file($template_name);
+		$this->persist_page_google_fonts_url($this->block_fonts);
+
+		$this->reset();
+
+		if (!empty($post_id)) {
+			update_post_meta($post_id, 'fb_page_assets_generation', 'compiled');
 		}
 
 		return true;
@@ -188,6 +224,8 @@ class AssetsGenerator
 	{
 		$template_contents = Helper::get_template_content($this->post->ID);
 
+		
+
 		if (empty($template_contents)) {
 			$template_contents = $this->post;
 		}
@@ -206,6 +244,8 @@ class AssetsGenerator
 						);
 					}
 				}
+			} else {
+				$template_contents .= "\n" . $this->post->post_content;
 			}
 
 			$megamenu_block_exists = preg_match_all(
@@ -739,9 +779,8 @@ class AssetsGenerator
 			$combinedHeadingStyles = '';
 
 			// Process global properties for each element
-
-			$array_keys = array_keys($typography_data);
-			if ($typography_data) {
+			if (is_array($typography_data)) {
+				$array_keys = array_keys($typography_data);
 				foreach ($array_keys as $key) {
 					if (!isset($typography_data[$key]))
 						continue;
@@ -1074,41 +1113,7 @@ class AssetsGenerator
 
 	public function get_template_css()
 	{
-		global $wpdb;
-
-		$post_name = Helper::is_custom_post_type($this->post->ID) || get_post_type($this->post->ID) === 'post' ? 'single' : 'page';
-
-		$assigned_template = get_post_meta($this->post->ID, '_wp_page_template', true);
-
-		if ($assigned_template !== '') {
-			$post_name = $assigned_template;
-		}
-
-		$query = $wpdb->prepare(
-			"SELECT
-                ID,
-                post_type,
-                post_content
-            FROM
-                {$wpdb->posts}
-            WHERE
-                post_type = 'wp_template'
-                AND post_status = 'publish'
-                AND post_name = %s
-            ORDER BY
-                post_modified DESC",
-			$post_name
-		);
-
-		// Execute the query
-		$cache_key_tpl = 'fb_assets_wp_tpl_' . md5($post_name);
-		$template_contents = wp_cache_get($cache_key_tpl, 'frontis_blocks');
-
-		if (false === $template_contents) {
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
-			$template_contents = $wpdb->get_results($query);
-			wp_cache_set($cache_key_tpl, $template_contents, 'frontis_blocks', 300);
-		}
+		$template_contents = Helper::get_template_content($this->post->ID);
 
 		if ($template_contents) {
 			foreach ($template_contents as $template) {

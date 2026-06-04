@@ -1,6 +1,6 @@
 // attributes.js
 const attributes = {
-    blockId: {
+    blockID: {
         type: "string",
         default: ""
     },
@@ -54,7 +54,7 @@ const attributes = {
 			search: "",
 			exclude: [],
 			sticky: "",
-			inherit: true,
+			inherit: false,
 			taxQuery: null,
 			parents: [],
 			format: [],

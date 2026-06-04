@@ -356,17 +356,17 @@ const Edit = (props) => {
 
     // Add this new useEffect for pause on hover
     useEffect(() => {
-        if (swiperInstance && autoplay && pauseOnHover) {
+        if (swiperInstance && swiperInstance.el && autoplay && pauseOnHover) {
             const swiperEl = swiperInstance.el;
 
             const handleMouseEnter = () => {
-                if (swiperInstance.autoplay.running) {
+                if (swiperInstance.autoplay && swiperInstance.autoplay.running) {
                     swiperInstance.autoplay.stop();
                 }
             };
 
             const handleMouseLeave = () => {
-                if (autoplay && !stopOnLastSlide) {
+                if (autoplay && !stopOnLastSlide && swiperInstance.autoplay) {
                     swiperInstance.autoplay.start();
                 }
             };
@@ -375,11 +375,13 @@ const Edit = (props) => {
             swiperEl.addEventListener('mouseleave', handleMouseLeave);
 
             return () => {
-                swiperEl.removeEventListener('mouseenter', handleMouseEnter);
-                swiperEl.removeEventListener('mouseleave', handleMouseLeave);
+                if (swiperEl) {
+                    swiperEl.removeEventListener('mouseenter', handleMouseEnter);
+                    swiperEl.removeEventListener('mouseleave', handleMouseLeave);
+                }
             };
         }
-    }, [swiperInstance, autoplay, pauseOnHover, stopOnLastSlide]);
+    }, [swiperInstance, swiperInstance?.el, autoplay, pauseOnHover, stopOnLastSlide]);
 
     /** 
      * Unlimited Updates (useEffect dependency): edit.js e ekta useEffect silo jar dependency silo [props]. React e props object protibar render e notun hoy (change na holeo react mone kore change hoyese). Tai useEffect ta bar bar run hos silo.

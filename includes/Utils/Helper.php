@@ -571,9 +571,14 @@ class Helper
 
     public static function generate_css($styles, $container_css)
     {
+        if (!is_array($container_css)) {
+            return '';
+        }
+
         // Generate CSS for the block ID
         $css = array_map(
             function ($selector, $styles) {
+                $styles = (array) $styles;
                 $filtered_styles = implode("; ", array_map(
                     fn($key, $value) => (trim($value) !== "" && preg_match('/^\D+$/', $value) === 0) ? "$key: $value" : "",
                     array_keys($styles),
@@ -619,6 +624,9 @@ class Helper
      */
     public static function get_fonts_family($attributes)
     {
+        if (!is_array($attributes)) {
+            return [];
+        }
         $font_family_keys = preg_grep('/^(\w+)FontFamily/i', array_keys($attributes), 0);
         $font_data = [];
 
@@ -805,6 +813,7 @@ class Helper
             // Check if any of the terms exist in the 'p' parameter
             $contains_template_terms = (
                 strpos($param_p, 'wp_block') !== false ||
+                strpos($param_p, 'wp_template') !== false ||
                 strpos($param_p, 'wp_template_part') !== false
             );
         }
@@ -1191,27 +1200,95 @@ class Helper
         }
     }
 
+    public static function resolve_template_slug($post_id)
+    {
+        if (empty($post_id)) {
+            return 'single';
+        }
+
+        $post = get_post($post_id);
+        if (!$post) {
+            return 'single';
+        }
+
+        $post_type = $post->post_type;
+
+        // 1. Check custom page template assigned to the post/page
+        $assigned_template = get_post_meta($post_id, '_wp_page_template', true);
+        if ($assigned_template && $assigned_template !== 'default') {
+            return $assigned_template;
+        }
+
+        // 2. Check WooCommerce templates based on post type
+        if (class_exists('WooCommerce')) {
+            if ($post_type === 'product') {
+                $template_types = function_exists('get_block_templates') ? get_block_templates() : [];
+                $template_type_slug = !empty($template_types) ? array_column($template_types, 'slug') : [];
+                $specific_slug = 'single-product-' . $post->post_name;
+                if (in_array($specific_slug, $template_type_slug, true)) {
+                    return $specific_slug;
+                }
+                return 'single-product';
+            }
+        }
+
+        // 3. Check for custom post types
+        if (self::is_custom_post_type($post_id)) {
+            $template_types = function_exists('get_block_templates') ? get_block_templates() : [];
+            $template_type_slug = !empty($template_types) ? array_column($template_types, 'slug') : [];
+            
+            $slugs = [
+                'single-' . $post_type . '-' . $post->post_name,
+                'single-' . $post_type,
+                'single'
+            ];
+            foreach ($slugs as $slug) {
+                if (in_array($slug, $template_type_slug, true)) {
+                    return $slug;
+                }
+            }
+            return 'single';
+        }
+
+        // 4. Default WordPress types
+        if ($post_type === 'page') {
+            return 'page';
+        }
+
+        return 'single';
+    }
+
     public static function get_template_content($post_id)
     {
         global $wpdb;
 
-        $post_name = Helper::is_custom_post_type($post_id) || get_post_type($post_id) === 'post' ? 'single' : get_post_type($post_id);
-        $assigned_template = get_post_meta($post_id, '_wp_page_template', true);
-
-        if ($assigned_template !== '') {
-            if ($assigned_template !== 'default') {
-                $post_name = $assigned_template;
-            }
-        }
+        $post_name = Helper::resolve_template_slug($post_id);
 
         $cache_key = 'fb_template_content_' . md5($post_name);
         $template_contents = wp_cache_get($cache_key, 'frontis_blocks');
 
         if (false === $template_contents) {
+            $template_contents = [];
+            $stylesheet = function_exists('get_stylesheet') ? get_stylesheet() : '';
+
+            if ($stylesheet && function_exists('get_block_template')) {
+                $block_template = get_block_template($stylesheet . '//' . $post_name, 'wp_template');
+
+                if ($block_template && !empty($block_template->content)) {
+                    $template_contents[] = (object) [
+                        'ID' => isset($block_template->wp_id) ? (int) $block_template->wp_id : 0,
+                        'post_type' => 'wp_template',
+                        'post_name' => $post_name,
+                        'post_content' => (string) $block_template->content,
+                    ];
+                }
+            }
+
             $query = $wpdb->prepare(
                 "SELECT
                     ID,
                     post_type,
+                    post_name,
                     post_content
                 FROM
                     {$wpdb->posts}
@@ -1224,8 +1301,11 @@ class Helper
                 $post_name
             );
 
-            // Execute the query
-            $template_contents = $wpdb->get_results($query); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
+            if (empty($template_contents)) {
+                // Execute the query
+                $template_contents = $wpdb->get_results($query); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
+            }
+
             wp_cache_set($cache_key, $template_contents, 'frontis_blocks', 300);
         }
 
@@ -1236,14 +1316,7 @@ class Helper
     {
         global $wpdb;
 
-        $post_name = Helper::is_custom_post_type($post_id) || get_post_type($post_id) === 'post' ? 'single' : get_post_type($post_id);
-        $assigned_template = get_post_meta($post_id, '_wp_page_template', true);
-
-        if ($assigned_template !== '') {
-            if ($assigned_template !== 'default') {
-                $post_name = $assigned_template;
-            }
-        }
+        $post_name = Helper::resolve_template_slug($post_id);
 
         $cache_key = 'fb_template_id_' . md5($post_name);
         $template_id = wp_cache_get($cache_key, 'frontis_blocks');
@@ -1374,7 +1447,7 @@ class Helper
      * Call this function when you need to manually clear cached data.
      * Caches are also automatically cleared on post save, term changes, and user updates.
      * 
-     * @since 1.2.0
+     * @since 1.2.2
      * @return void
      */
     /**
@@ -1383,7 +1456,7 @@ class Helper
      * Call this function when you need to manually clear cached data.
      * Caches are also automatically cleared on post save, term changes, and user updates.
      * 
-     * @since 1.2.0
+     * @since 1.2.2
      * @return void
      */
     public static function clear_frontis_caches()

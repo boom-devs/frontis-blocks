@@ -12,6 +12,8 @@ if (!defined('ABSPATH')) {
 
 $items = isset($attributes['menuItems']) ? $attributes['menuItems'] : array();
 $trigger_type = isset($attributes['triggerType']) ? $attributes['triggerType'] : 'hover';
+$mobile_logo_url = isset($attributes['megaMenuMobileLogoUrl']) ? $attributes['megaMenuMobileLogoUrl'] : '';
+$mobile_logo_alt = isset($attributes['megaMenuMobileLogoAlt']) ? $attributes['megaMenuMobileLogoAlt'] : '';
 $block_id = isset($attributes['blockID']) ? $attributes['blockID'] : '';
 $mega_menu_desktop_switcher = isset($attributes['megaMenuDesktopSwitcher']) ? $attributes['megaMenuDesktopSwitcher'] : '';
 $mega_menu_tablet_switcher = isset($attributes['megaMenuTabletSwitcher']) ? $attributes['megaMenuTabletSwitcher'] : '';
@@ -50,7 +52,7 @@ if (empty($items)) {
             <button class="fb-advanced-mega-menu-toggle" aria-label="Toggle menu">
                 <span class="hamburger-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" strokeLinejoin="round">
                         <line x1="3" y1="6" x2="21" y2="6"></line>
                         <line x1="3" y1="12" x2="21" y2="12"></line>
                         <line x1="3" y1="18" x2="21" y2="18"></line>
@@ -58,7 +60,7 @@ if (empty($items)) {
                 </span>
                 <span class="close-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" strokeLinejoin="round">
                         <line x1="18" y1="6" x2="6" y2="18"></line>
                         <line x1="6" y1="6" x2="18" y2="18"></line>
                     </svg>
@@ -66,11 +68,13 @@ if (empty($items)) {
 
             </button>
             <ul class="fb-advanced-mega-menu-list">
-                <div class="mobile-logo">
-                    <a href="https://frontiswp.com/frontis-blocks">
-                        <img src="https://frontiswp.com/wp-content/uploads/2025/06/logo-black.svg" alt="">
-                    </a>
-                </div>
+                <?php if (!empty($mobile_logo_url)) : ?>
+                    <li class="mobile-logo">
+                        <a href="<?php echo esc_url(home_url('/')); ?>">
+                            <img src="<?php echo esc_url($mobile_logo_url); ?>" alt="<?php echo esc_attr($mobile_logo_alt); ?>">
+                        </a>
+                    </li>
+                <?php endif; ?>
                 <?php foreach ($items as $item):
                     $item_icon = isset($item['megaMenuIconFrontend']) ? $item['megaMenuIconFrontend'] : '';
                     ?>

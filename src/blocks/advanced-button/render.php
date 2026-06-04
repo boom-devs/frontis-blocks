@@ -486,7 +486,8 @@ $btn_dyn = fb_compute_dynamic_text([
 ]);
 
 // final text (dynamic or manual)
-$final_button_text = $dynamic_enabled ? $btn_dyn['value'] : $button_text;
+$preserve_button_label = !empty($attributes['dynamicTextPreserveButtonLabel']);
+$final_button_text = ($dynamic_enabled && !$preserve_button_label) ? $btn_dyn['value'] : $button_text;
 
 // final link (dynamic takes priority when enabled & URL exists)
 $final_href = '';

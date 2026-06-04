@@ -18,6 +18,7 @@ use FrontisBlocks\Core\InitialActivatedBlocks;
 use FrontisBlocks\Core\SupportSVG;
 use FrontisBlocks\Core\SupportRive;
 use FrontisBlocks\Core\Enqueues;
+use FrontisBlocks\Core\DemoContentImporter;
 use FrontisBlocks\RestApi\RestApi;
 use FrontisBlocks\BackgroundProcess\AssetsGenerationProcess;
 use FrontisBlocks\Assets\AssetsGenerationStatus;
@@ -29,7 +30,7 @@ final class Plugin
 	 *
 	 * @var string
 	 */
-	const VERSION = '1.2.0';
+	const VERSION = '1.2.3';
 
 	/**
 	 * Plugin slug
@@ -160,6 +161,7 @@ final class Plugin
 		FormBuilder::get_instance()->register_ajax_events();
 		SupportSVG::get_instance();
 		SupportRive::get_instance();
+		DemoContentImporter::get_instance();
 		RestApi::get_instance();
 		AssetsGenerationStatus::get_instance();
 		AssetsGenerationProcess::get_instance();

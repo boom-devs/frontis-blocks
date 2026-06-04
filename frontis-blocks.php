@@ -4,7 +4,7 @@
  * Plugin Name:       Frontis Blocks — Block Library for the Block Editor
  * Plugin URI:        https://wpmessiah.com/products/frontis-blocks/
  * Description:       A blocks library for the Gutenberg editor.
- * Version:           1.2.0
+ * Version:           1.2.3
  * Author:            WPmessiah
  * Author URI:        https://wpmessiah.com/
  * License:           GPL-2.0+

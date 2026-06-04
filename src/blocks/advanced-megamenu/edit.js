@@ -12,6 +12,7 @@ import { applyFilters } from '@wordpress/hooks';
 import UpgradeToProPopup from '@Utils/upgradeToProPopup';
 import useBlockIdGenerator from "@Utils/useBlockIdGenerator";
 import generateAdvancedMegaMenuStyle from "./styling";
+import getProActive from '@Utils/getProActive';
 
 // Global set to track loaded fonts across all block instances
 const loadedFonts = new Set();
@@ -31,6 +32,14 @@ export default function Edit({ attributes, setAttributes, clientId, context, isS
 		megaMenuGlobalWraperID,
 		megaMenuIcon,
 		megaMenuFontFamily,
+		megaMenuMobileLogoUrl,
+		megaMenuMobileLogoAlt,
+		megaMenuMobileLogoID,
+		megaMenuMobileLogoWidth,
+		megaMenuMobileLogoWidthUnits,
+		megaMenuMobileLogoHeight,
+		megaMenuMobileLogoHeightUnits,
+		megaMenuMobileLogoObjectFit,
 	} = attributes;
 
 	// Handle block ID generation (handles duplication and initial ID)
@@ -74,9 +83,10 @@ export default function Edit({ attributes, setAttributes, clientId, context, isS
 	const panelRef = useRef(null);
 	SwitchToBlockSettings(panelRef);
 
+	const isProActive = getProActive();
 	const advancedMegamenuAvailable = applyFilters('frontisblocks-advanced-megamenu-available', false);
 
-	if (!advancedMegamenuAvailable) {
+	if (!advancedMegamenuAvailable || !isProActive) {
 		return (
 			<UpgradeToProPopup />
 		)
@@ -94,7 +104,7 @@ export default function Edit({ attributes, setAttributes, clientId, context, isS
 			<div {...blockProps}>
 				<div className={`fb-parent-wrapper fb-advanced-mega-menu-wrapper ${megaMenuGlobalWraperClass}`} id={megaMenuGlobalWraperID} ref={panelRef}>
 					<div className="fb-mega-menu-editor">
-						{menuItems.length > 0 ? (
+						{(menuItems.length > 0 || megaMenuMobileLogoUrl) ? (
 							<ul className={`fb-advanced-mega-menu-list fb-device-${deviceType}`}>
 								{menuItems.map((item, index) => (
 									<li

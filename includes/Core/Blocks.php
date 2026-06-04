@@ -140,7 +140,8 @@ class Blocks
 			foreach ($blocks_list as $block) {
 				$slug = $block['slug'];
 				$complete = $block['complete'];
-				if (is_array($active_blocks) && !empty($active_blocks)) {
+				$is_child_block = isset($block['child']) && $block['child'] === 'true';
+				if (!$is_child_block && is_array($active_blocks) && !empty($active_blocks)) {
 					if (array_key_exists($slug, $active_blocks) && !$active_blocks[$slug]) {
 						continue;
 					}
@@ -389,7 +390,28 @@ class Blocks
 		// 2) Get merged settings (global -> template -> page)
 		$settings = Helper::resolve_frontis_settings($post_id);
 
-		// 3) Handle Page Title disable for core/post-title block
+		/**
+		 * 3) Pro Block Security Check
+		 * Check if the block is a Pro block and if it's allowed to render.
+		 */
+		if (!empty($parsed_block['blockName']) && str_contains($parsed_block['blockName'], 'frontis-blocks/')) {
+			$slug = str_replace('frontis-blocks/', '', $parsed_block['blockName']);
+			$blocks_list = BlockList::get_instance()->get_blocks();
+			$block_info = isset($blocks_list[$slug]) ? $blocks_list[$slug] : null;
+
+			if ($block_info && isset($block_info['package']) && $block_info['package'] === 'pro') {
+				if (!defined('FB_IS_PRO_ACTIVE') || !FB_IS_PRO_ACTIVE) {
+					return '';
+				}
+
+				$filter_name = 'frontisblocks_' . str_replace('-', '_', $slug) . '_available';
+				if (!apply_filters($filter_name, false)) {
+					return '';
+				}
+			}
+		}
+
+		// 4) Handle Page Title disable for core/post-title block
 		if (
 			!empty($parsed_block['blockName'])
 			&& $parsed_block['blockName'] === 'core/post-title'
@@ -422,7 +444,9 @@ class Blocks
 		AssetsGenerator::generate_global_assets();
 
 		$pattern = "/frontis-blocks/i";
-		if ((!preg_match_all($pattern, $post->post_content) > 0 && get_post_type($post_id) !== 'wp_template')) {
+		$has_frontis_block = preg_match_all($pattern, $post->post_content) > 0;
+
+		if (!$has_frontis_block && !in_array(get_post_type($post_id), ['wp_template', 'wp_template_part'], true)) {
 			return;
 		}
 

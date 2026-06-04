@@ -1,0 +1,16 @@
+.wp-block-frontis-blocks-grid-item {
+	&.grid-item-rendered {
+		box-sizing: border-box;
+		height: 100%;
+		overflow: hidden;
+
+		.grid-item-content {
+			min-height: 100%;
+
+			> * {
+				margin-top: 0 !important;
+				margin-bottom: 0 !important;
+			}
+		}
+	}
+}

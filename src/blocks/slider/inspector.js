@@ -1554,7 +1554,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                             units={sliderArrowPositionOutsidePaddingUnits}
                             setAttributes={setAttributes}
                             rangeStep={1}
-                            resetFallbackValue={"60"}
+                            resetFallbackValue={""}
                         />
                     )}
                     {sliderArrowPosition !== 'center' && (
