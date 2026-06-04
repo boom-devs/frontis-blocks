@@ -1559,7 +1559,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                 <FB_Range
                     min={400}
                     max={3000}
-                    label={__("Perspective", "frontis-blocks")}
+                    label={__("Perspective", "frontis-blocks")} 
                     rangeValue={carouselPerspective}
                     onChangeHandler={(value) => setAttributes({ carouselPerspective: value })}
                     rangeUnitHandler={(value) => setAttributes({ carouselPerspectiveUnits: value })}
