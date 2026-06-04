@@ -59,6 +59,26 @@ if (!function_exists('render_loop_builder')):
 			];
 
 			/**
+			 * Sticky posts
+			 */
+			$sticky = isset($query_args['sticky']) ? $query_args['sticky'] : '';
+			if (empty($sticky) || $sticky === 'ignore') {
+				$default_query_args['ignore_sticky_posts'] = true;
+			} elseif ($sticky === 'exclude') {
+				$default_query_args['ignore_sticky_posts'] = true;
+				$sticky_posts = get_option('sticky_posts');
+				if (is_array($sticky_posts) && !empty($sticky_posts)) {
+					$default_query_args['post__not_in'] = isset($default_query_args['post__not_in'])
+						? array_merge($default_query_args['post__not_in'], array_map('intval', $sticky_posts))
+						: array_map('intval', $sticky_posts);
+				}
+			} elseif ($sticky === 'only') {
+				$default_query_args['ignore_sticky_posts'] = true;
+				$sticky_posts = get_option('sticky_posts');
+				$default_query_args['post__in'] = is_array($sticky_posts) && !empty($sticky_posts) ? array_map('intval', $sticky_posts) : [0];
+			}
+
+			/**
 			 * Author filter
 			 */
 			if ($selectedAuthorSwitcher === 'include' && is_array($selectedAuthor) && $selectedAuthor) {

@@ -64,7 +64,6 @@ import './editor.scss';;
 
 const Inspector = ({ attributes, setAttributes }) => {
 
-    const deviceType = useDeviceType();
     const {
         showSectionLabelSwitcher,
 
@@ -84,6 +83,81 @@ const Inspector = ({ attributes, setAttributes }) => {
         verticalTimelineProgressLineWidthUnits,
         /** End Progress Line Size */
 
+        /** Start Responsive Controls */
+        verticalTimelineDesktopSwitcher,
+        verticalTimelineTabletSwitcher,
+        verticalTimelineMobileSwitcher,
+        /** End Responsive Controls */
+
+        /** Start Box Shadow */
+        verticalTimelineGlobalBoxShadowSwitcher,
+        verticalTimelineGlobalBoxShadowValues,
+        verticalTimelineGlobalBoxShadowCssValue,
+        verticalTimelineGlobalHoverBoxShadowValues,
+        verticalTimelineGlobalHoverBoxShadowCssValue,
+        /** End Box Shadow */
+
+        /** Start Border */
+        verticalTimelineBorder,
+        verticalTimelineBorderColor,
+        verticalTimelineBorderHoverColor,
+        verticalTimelineBorderColorSwitcher,
+        verticalTimelineBorderUnits,
+        verticalTimelineDesktopBorderWidth,
+        verticalTimelineTabBorderWidth,
+        verticalTimelineMobileBorderWidth,
+        verticalTimelineBorderLink,
+        verticalTimelineBorderRadiusUnits,
+        verticalTimelineDesktopBorderRadiusWidth,
+        verticalTimelineTabBorderRadiusWidth,
+        verticalTimelineMobileBorderRadiusWidth,
+        verticalTimelineBorderRadiusLink,
+        /** End Border */
+
+        /** Start Background */
+        verticalTimelineBgColorSwitcher,
+        verticalTimelineBgType,
+        verticalTimelineBgClassicColor,
+        verticalTimelineBgGradientColor,
+        verticalTimelineBgCustomGradientSwitcher,
+        verticalTimelineBgCustomGradientInputValue,
+        verticalTimelineBgImageUrl,
+        verticalTimelineBgImageAlt,
+        verticalTimelineBgImageID,
+        verticalTimelineBgImagePosition,
+        verticalTimelineBgImageAttachment,
+        verticalTimelineBgImageRepeat,
+        verticalTimelineBgImageSize,
+        verticalTimelineBgHoverType,
+        verticalTimelineBgHoverClassicColor,
+        verticalTimelineBgHoverGradientColor,
+        verticalTimelineBgHoverCustomGradientSwitcher,
+        verticalTimelineBgHoverCustomGradientInputValue,
+        verticalTimelineBgHoverImageUrl,
+        verticalTimelineBgHoverImageAlt,
+        verticalTimelineBgHoverImageID,
+        verticalTimelineBgHoverImagePosition,
+        verticalTimelineBgHoverImageAttachment,
+        verticalTimelineBgHoverImageRepeat,
+        verticalTimelineBgHoverImageSize,
+        /** End Background */
+
+        /** Start Padding */
+        verticalTimelinePaddingUnits,
+        verticalTimelineDesktopPadding,
+        verticalTimelineTabPadding,
+        verticalTimelineMobilePadding,
+        verticalTimelinePaddingLink,
+        /** End Padding */
+
+        /** Start Margin */
+        verticalTimelineMarginUnits,
+        verticalTimelineDesktopMargin,
+        verticalTimelineTabMargin,
+        verticalTimelineMobileMargin,
+        verticalTimelineMarginLink,
+        /** End Margin */
+
         /** Start Class & ID Setting */
         verticalTimelineGlobalZIndex,
         verticalTimelineCustomCSS,
@@ -91,6 +165,283 @@ const Inspector = ({ attributes, setAttributes }) => {
         verticalTimelineWrapperClass,
         /** End Class & ID Setting */
     } = attributes;
+
+    // verticalTimeline BorderWidth Function
+    const handleverticalTimelineBorderUnitChange = (event, position) => {
+        const value = event.target.value;
+        if (verticalTimelineBorderLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        verticalTimelineDesktopBorderWidth: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        verticalTimelineTabBorderWidth: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        verticalTimelineMobileBorderWidth: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ verticalTimelineDesktopBorderWidth: { ...verticalTimelineDesktopBorderWidth, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ verticalTimelineTabBorderWidth: { ...verticalTimelineTabBorderWidth, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ verticalTimelineMobileBorderWidth: { ...verticalTimelineMobileBorderWidth, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleverticalTimelineBorderCombineBtn = () => {
+        setAttributes({ verticalTimelineBorderLink: !verticalTimelineBorderLink });
+    }
+
+    const handleverticalTimelineBorderUnitsHandler = (unit) => {
+        setAttributes({
+            verticalTimelineBorderUnits: {
+                ...verticalTimelineBorderUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+
+    // verticalTimeline BorderRadiusWidth Function
+    const handleverticalTimelineBorderRadiusUnitChange = (event, position) => {
+        const value = event.target.value;
+        if (verticalTimelineBorderRadiusLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        verticalTimelineDesktopBorderRadiusWidth: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        verticalTimelineTabBorderRadiusWidth: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        verticalTimelineMobileBorderRadiusWidth: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ verticalTimelineDesktopBorderRadiusWidth: { ...verticalTimelineDesktopBorderRadiusWidth, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ verticalTimelineTabBorderRadiusWidth: { ...verticalTimelineTabBorderRadiusWidth, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ verticalTimelineMobileBorderRadiusWidth: { ...verticalTimelineMobileBorderRadiusWidth, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleverticalTimelineBorderRadiusCombineBtn = () => {
+        setAttributes({ verticalTimelineBorderRadiusLink: !verticalTimelineBorderRadiusLink });
+    }
+
+    const handleverticalTimelineBorderRadiusUnitsHandler = (unit) => {
+        setAttributes({
+            verticalTimelineBorderRadiusUnits: {
+                ...verticalTimelineBorderRadiusUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+    // verticalTimeline Padding Functionb
+    const handleverticalTimelinePaddingUnitChange = (event, position) => {
+        const value = event.target.value;
+        if (verticalTimelinePaddingLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        verticalTimelineDesktopPadding: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        verticalTimelineTabPadding: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        verticalTimelineMobilePadding: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ verticalTimelineDesktopPadding: { ...verticalTimelineDesktopPadding, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ verticalTimelineTabPadding: { ...verticalTimelineTabPadding, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ verticalTimelineMobilePadding: { ...verticalTimelineMobilePadding, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleverticalTimelinePaddingCombineBtn = () => {
+        setAttributes({ verticalTimelinePaddingLink: !verticalTimelinePaddingLink });
+    }
+
+    const handleverticalTimelinePaddingUnitsHandler = (unit) => {
+        setAttributes({
+            verticalTimelinePaddingUnits: {
+                ...verticalTimelinePaddingUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+
+    // verticalTimeline content margin
+    const handleverticalTimelineMarginUnitChange = (event, position) => {
+        const value = event.target.value;
+        if (verticalTimelineMarginLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        verticalTimelineDesktopMargin: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        verticalTimelineTabMargin: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        verticalTimelineMobileMargin: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ verticalTimelineDesktopMargin: { ...verticalTimelineDesktopMargin, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ verticalTimelineTabMargin: { ...verticalTimelineTabMargin, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ verticalTimelineMobileMargin: { ...verticalTimelineMobileMargin, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleverticalTimelineMarginCombineBtn = () => {
+        setAttributes({ verticalTimelineMarginLink: !verticalTimelineMarginLink });
+    }
+
+    const handleverticalTimelineMarginUnitsHandler = (unit) => {
+        setAttributes({
+            verticalTimelineMarginUnits: {
+                ...verticalTimelineMarginUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+
+    const deviceType = useDeviceType();
 
     /**
      * Inspector General Controls
@@ -216,6 +567,210 @@ const Inspector = ({ attributes, setAttributes }) => {
                     value={verticalTimelineWrapperClass}
                     onChangeValue={(value) => setAttributes({ verticalTimelineWrapperClass: value })}
                     helpText={__("Separate with spaces key.", "frontis-blocks")}
+                />
+            </PanelBody>
+
+            <PanelBody
+                title={__("Padding & Margin", "frontis-blocks")}
+                initialOpen={false}
+            >
+                <FB_Spacing
+                    label={__("Margin", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleverticalTimelineMarginUnitsHandler}
+                    spacingUnits={verticalTimelineMarginUnits}
+                    spacingDesktop={verticalTimelineDesktopMargin}
+                    spacingTablet={verticalTimelineTabMargin}
+                    spacingMobile={verticalTimelineMobileMargin}
+                    handleSpacingUnitHandler={handleverticalTimelineMarginUnitChange}
+                    spacingCombineBtn={verticalTimelineMarginLink}
+                    spacingCombineBtnHandler={handleverticalTimelineMarginCombineBtn}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_Spacing
+                    label={__("Padding", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleverticalTimelinePaddingUnitsHandler}
+                    spacingUnits={verticalTimelinePaddingUnits}
+                    spacingDesktop={verticalTimelineDesktopPadding}
+                    spacingTablet={verticalTimelineTabPadding}
+                    spacingMobile={verticalTimelineMobilePadding}
+                    handleSpacingUnitHandler={handleverticalTimelinePaddingUnitChange}
+                    spacingCombineBtn={verticalTimelinePaddingLink}
+                    spacingCombineBtnHandler={handleverticalTimelinePaddingCombineBtn}
+                    setAttributes={setAttributes}
+                />
+            </PanelBody>
+
+            <PanelBody title="Background Color" initialOpen={false} >
+                <FB_BackgroundColorControl
+                    bgColorSwitcher={verticalTimelineBgColorSwitcher}
+                    setBgColorSwitcher={(value) => setAttributes({ verticalTimelineBgColorSwitcher: value })}
+                    normalBackgroundType={verticalTimelineBgType}
+                    setNormalBackgroundType={(value) => setAttributes({ verticalTimelineBgType: value })}
+                    normalClassicColor={verticalTimelineBgClassicColor}
+                    setNormalClassicColor={(value) => setAttributes({ verticalTimelineBgClassicColor: value === undefined ? '' : value })}
+                    normalGradientColor={verticalTimelineBgGradientColor}
+                    setNormalGradientColor={(value) => setAttributes({ verticalTimelineBgGradientColor: value === undefined ? null : value })}
+                    normalCustomGradientSwitcher={verticalTimelineBgCustomGradientSwitcher}
+                    setNormalCustomGradientSwitcher={(value) => setAttributes({ verticalTimelineBgCustomGradientSwitcher: value })}
+                    normalCustomGradientInputValue={verticalTimelineBgCustomGradientInputValue}
+                    setNormalCustomGradientInputValue={(value) => setAttributes({ verticalTimelineBgCustomGradientInputValue: value })}
+                    normalBackgroundImageUrl={verticalTimelineBgImageUrl}
+                    setNormalBackgroundImageUrl={(value) => setAttributes({ verticalTimelineBgImageUrl: value })}
+                    normalBackgroundImageAlt={verticalTimelineBgImageAlt}
+                    setNormalBackgroundImageAlt={(value) => setAttributes({ verticalTimelineBgImageAlt: value })}
+                    normalBackgroundImageID={verticalTimelineBgImageID}
+                    setNormalBackgroundImageID={(value) => setAttributes({ verticalTimelineBgImageID: value })}
+                    normalBackgroundImagePosition={verticalTimelineBgImagePosition}
+                    setNormalBackgroundImagePosition={(value) => setAttributes({ verticalTimelineBgImagePosition: value })}
+                    normalBackgroundImageAttachment={verticalTimelineBgImageAttachment}
+                    setNormalBackgroundImageAttachment={(value) => setAttributes({ verticalTimelineBgImageAttachment: value })}
+                    normalBackgroundImageRepeat={verticalTimelineBgImageRepeat}
+                    setNormalBackgroundImageRepeat={(value) => setAttributes({ verticalTimelineBgImageRepeat: value })}
+                    normalBackgroundImageSize={verticalTimelineBgImageSize}
+                    setNormalBackgroundImageSize={(value) => setAttributes({ verticalTimelineBgImageSize: value })}
+                    hoverBackgroundType={verticalTimelineBgHoverType}
+                    setHoverBackgroundType={(value) => setAttributes({ verticalTimelineBgHoverType: value })}
+                    hoverClassicColor={verticalTimelineBgHoverClassicColor}
+                    setHoverClassicColor={(value) => setAttributes({ verticalTimelineBgHoverClassicColor: value === undefined ? '' : value })}
+                    hoverGradientColor={verticalTimelineBgHoverGradientColor}
+                    setHoverGradientColor={(value) => setAttributes({ verticalTimelineBgHoverGradientColor: value === undefined ? null : value })}
+                    hoverCustomGradientSwitcher={verticalTimelineBgHoverCustomGradientSwitcher}
+                    setHoverCustomGradientSwitcher={(value) => setAttributes({ verticalTimelineBgHoverCustomGradientSwitcher: value })}
+                    hoverCustomGradientInputValue={verticalTimelineBgHoverCustomGradientInputValue}
+                    setHoverCustomGradientInputValue={(value) => setAttributes({ verticalTimelineBgHoverCustomGradientInputValue: value })}
+                    hoverBackgroundImageUrl={verticalTimelineBgHoverImageUrl}
+                    setBgHoverImageUrl={(value) => setAttributes({ verticalTimelineBgHoverImageUrl: value })}
+                    hoverBackgroundImageAlt={verticalTimelineBgHoverImageAlt}
+                    setBgHoverImageAlt={(value) => setAttributes({ verticalTimelineBgHoverImageAlt: value })}
+                    hoverBackgroundImageID={verticalTimelineBgHoverImageID}
+                    setBgHoverImageID={(value) => setAttributes({ verticalTimelineBgHoverImageID: value })}
+                    hoverBackgroundImagePosition={verticalTimelineBgHoverImagePosition}
+                    setBgHoverImagePosition={(value) => setAttributes({ verticalTimelineBgHoverImagePosition: value })}
+                    hoverBackgroundImageAttachment={verticalTimelineBgHoverImageAttachment}
+                    setBgHoverImageAttachment={(value) => setAttributes({ verticalTimelineBgHoverImageAttachment: value })}
+                    hoverBackgroundImageRepeat={verticalTimelineBgHoverImageRepeat}
+                    setBgHoverImageRepeat={(value) => setAttributes({ verticalTimelineBgHoverImageRepeat: value })}
+                    hoverBackgroundImageSize={verticalTimelineBgHoverImageSize}
+                    setBgHoverImageSize={(value) => setAttributes({ verticalTimelineBgHoverImageSize: value })}
+                />
+            </PanelBody>
+
+            <PanelBody
+                title={__("Border & Border Radius", "frontis-blocks")}
+                initialOpen={false}
+                className="fb-setting-border-setting-wrapper"
+            >
+                <SelectControl
+                    label={__("Border Style", "frontis-blocks")}
+                    value={verticalTimelineBorder}
+                    options={BORDER_STYLES}
+                    onChange={(value) => setAttributes({ verticalTimelineBorder: value })}
+                />
+
+                <FB_SwitcherControl
+                    label={__("Border Color", "frontis-blocks")}
+                    globalSwitcher={verticalTimelineBorderColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ verticalTimelineBorderColorSwitcher: value })}
+                />
+
+                {verticalTimelineBorderColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={verticalTimelineBorderColor}
+                        setGlobalColor={(value) => setAttributes({ verticalTimelineBorderColor: value === undefined ? '' : value })}
+                    />
+                )}
+
+                {verticalTimelineBorderColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={verticalTimelineBorderHoverColor}
+                        setGlobalColor={(value) => setAttributes({ verticalTimelineBorderHoverColor: value === undefined ? '' : value })}
+                    />
+                )}
+
+                <FB_Spacing
+                    label={__("Border", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleverticalTimelineBorderUnitsHandler}
+                    spacingUnits={verticalTimelineBorderUnits}
+                    spacingDesktop={verticalTimelineDesktopBorderWidth}
+                    spacingTablet={verticalTimelineTabBorderWidth}
+                    spacingMobile={verticalTimelineMobileBorderWidth}
+                    handleSpacingUnitHandler={handleverticalTimelineBorderUnitChange}
+                    spacingCombineBtn={verticalTimelineBorderLink}
+                    spacingCombineBtnHandler={handleverticalTimelineBorderCombineBtn}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_Spacing
+                    label={__("Border Radius", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleverticalTimelineBorderRadiusUnitsHandler}
+                    spacingUnits={verticalTimelineBorderRadiusUnits}
+                    spacingDesktop={verticalTimelineDesktopBorderRadiusWidth}
+                    spacingTablet={verticalTimelineTabBorderRadiusWidth}
+                    spacingMobile={verticalTimelineMobileBorderRadiusWidth}
+                    handleSpacingUnitHandler={handleverticalTimelineBorderRadiusUnitChange}
+                    spacingCombineBtn={verticalTimelineBorderRadiusLink}
+                    spacingCombineBtnHandler={handleverticalTimelineBorderRadiusCombineBtn}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_SwitcherControl
+                    label={__("Box Shadow", "frontis-blocks")}
+                    globalSwitcher={verticalTimelineGlobalBoxShadowSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ verticalTimelineGlobalBoxShadowSwitcher: value })}
+                />
+
+                {verticalTimelineGlobalBoxShadowSwitcher === 'normal' && (
+                    <FB_BoxShadowControl
+                        label={__("Normal Shadow", "frontis-blocks")}
+                        onBoxShadowChange={(value) =>
+                            setAttributes({ verticalTimelineGlobalBoxShadowValues: value })
+                        }
+                        initialShadowValue={verticalTimelineGlobalBoxShadowValues}
+                        onBoxShadowStyleChange={(value) =>
+                            setAttributes({
+                                verticalTimelineGlobalBoxShadowCssValue: value,
+                            })
+                        }
+                    />
+                )}
+
+                {verticalTimelineGlobalBoxShadowSwitcher === 'hover' && (
+                    <FB_BoxShadowControl
+                        label={__("Hover Shadow", "frontis-blocks")}
+                        onBoxShadowChange={(value) =>
+                            setAttributes({ verticalTimelineGlobalHoverBoxShadowValues: value })
+                        }
+                        initialShadowValue={verticalTimelineGlobalHoverBoxShadowValues}
+                        onBoxShadowStyleChange={(value) =>
+                            setAttributes({
+                                verticalTimelineGlobalHoverBoxShadowCssValue: value,
+                            })
+                        }
+                    />
+                )}
+            </PanelBody>
+
+            <PanelBody
+                title={__("Responsive Control", "frontis-blocks")}
+                initialOpen={false}
+                className="fb-setting-responsive-control-wrapper"
+            >
+                <FB_VisibilityControl
+                    desktopValue={verticalTimelineDesktopSwitcher}
+                    setDesktopValue={(value) => setAttributes({ verticalTimelineDesktopSwitcher: value })}
+
+                    tabletValue={verticalTimelineTabletSwitcher}
+                    setTabletValue={(value) => setAttributes({ verticalTimelineTabletSwitcher: value })}
+
+                    mobileValue={verticalTimelineMobileSwitcher}
+                    setMobileValue={(value) => setAttributes({ verticalTimelineMobileSwitcher: value })}
                 />
             </PanelBody>
 

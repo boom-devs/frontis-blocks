@@ -251,6 +251,12 @@ const generateVerticalTimelineItemStyle = (attributes) => {
         verticalTimelineIconSizeUnits,
         /** End Icon Size */
 
+        /** Start Responsive Controls */
+        verticalTimelineItemDesktopSwitcher,
+        verticalTimelineItemTabletSwitcher,
+        verticalTimelineItemMobileSwitcher,
+        /** End Responsive Controls */
+
         /** Start Class & ID Setting */
         verticalTimelineItemGlobalZIndex,
         verticalTimelineItemCustomCSS,
@@ -383,91 +389,25 @@ const generateVerticalTimelineItemStyle = (attributes) => {
 
         .${blockID} .fb-vertical-timeline-label {
             ${sectionLebelBtnTextColorSwitcher && sectionLebelBtnTextColor ? `color: ${sectionLebelBtnTextColor};` : ""}
-            ${sectionLebelTypoSwitcher.fontFamily === true &&
-            sectionLebelTypographyData.fontFamily
-            ? `font-family: ${sectionLebelTypographyData.fontFamily};`
-            : ""
-        }
-            ${sectionLebelTypoSwitcher.fontSize === true &&
-            sectionLebelTypographyData.fontSize
-            ? `font-size: ${sectionLebelTypographyData.fontSize};`
-            : ""
-        }
-            ${sectionLebelTypoSwitcher.fontWeight === true &&
-            sectionLebelTypographyData.fontWeight
-            ? `font-weight: ${sectionLebelTypographyData.fontWeight};`
-            : ""
-        }
-            ${sectionLebelTypoSwitcher.fontStyle === true &&
-            sectionLebelTypographyData.fontStyle
-            ? `font-style: ${sectionLebelTypographyData.fontStyle};`
-            : ""
-        }
-            ${sectionLebelTypoSwitcher.textTransform === true &&
-            sectionLebelTypographyData.textTransform
-            ? `text-transform: ${sectionLebelTypographyData.textTransform};`
-            : ""
-        }
-            ${sectionLebelTypoSwitcher.textDecoration === true &&
-            sectionLebelTypographyData.textDecoration
-            ? `text-decoration: ${sectionLebelTypographyData.textDecoration};`
-            : ""
-        }
-            ${sectionLebelTypoSwitcher.letterSpacing === true &&
-            sectionLebelTypographyData.letterSpacing
-            ? `letter-spacing: ${sectionLebelTypographyData.letterSpacing};`
-            : ""
-        }
-            ${sectionLebelTypoSwitcher.lineHeight === true &&
-            sectionLebelTypographyData.lineHeight
-            ? `line-height: ${sectionLebelTypographyData.lineHeight};`
-            : ""
+            ${sectionLebelTypoSwitcher.fontFamily === true && sectionLebelTypographyData.fontFamily ? `font-family: ${sectionLebelTypographyData.fontFamily};` : ""}
+            ${sectionLebelTypoSwitcher.fontSize === true && sectionLebelTypographyData.fontSize ? `font-size: ${sectionLebelTypographyData.fontSize};` : ""}
+            ${sectionLebelTypoSwitcher.fontWeight === true && sectionLebelTypographyData.fontWeight ? `font-weight: ${sectionLebelTypographyData.fontWeight};` : ""}
+            ${sectionLebelTypoSwitcher.fontStyle === true && sectionLebelTypographyData.fontStyle ? `font-style: ${sectionLebelTypographyData.fontStyle};` : ""}
+            ${sectionLebelTypoSwitcher.textTransform === true && sectionLebelTypographyData.textTransform ? `text-transform: ${sectionLebelTypographyData.textTransform};` : ""}
+            ${sectionLebelTypoSwitcher.textDecoration === true && sectionLebelTypographyData.textDecoration ? `text-decoration: ${sectionLebelTypographyData.textDecoration};` : ""}
+            ${sectionLebelTypoSwitcher.letterSpacing === true && sectionLebelTypographyData.letterSpacing ? `letter-spacing: ${sectionLebelTypographyData.letterSpacing};` : ""}
+            ${sectionLebelTypoSwitcher.lineHeight === true && sectionLebelTypographyData.lineHeight ? `line-height: ${sectionLebelTypographyData.lineHeight};` : ""}
         }
 
-           ${sectionLebelTypoSwitcher.fontFamily === false &&
-            sectionLebelFontFamily &&
-            sectionLebelFontFamily !== "Default"
-            ? `font-family: ${sectionLebelFontFamily};`
-            : ""
-        }
-           ${sectionLebelTypoSwitcher.fontSize === false &&
-            sectionLebelFontSize.Desktop &&
-            sectionLebelFontSizeUnits.Desktop
-            ? `font-size: ${sectionLebelFontSize.Desktop}${sectionLebelFontSizeUnits.Desktop};`
-            : ""
-        }
-           ${sectionLebelTypoSwitcher.fontWeight === false &&
-            sectionLebelFontWeight
-            ? `font-weight: ${sectionLebelFontWeight};`
-            : ""
-        }
-           ${sectionLebelTypoSwitcher.fontStyle === false &&
-            sectionLebelFontStyle
-            ? `font-style: ${sectionLebelFontStyle};`
-            : ""
-        }
-           ${sectionLebelTypoSwitcher.textTransform === false &&
-            sectionLebelTextTransform
-            ? `text-transform: ${sectionLebelTextTransform};`
-            : ""
-        }
-           ${sectionLebelTypoSwitcher.textDecoration === false &&
-            sectionLebelTextDecoration
-            ? `text-decoration: ${sectionLebelTextDecoration};`
-            : ""
-        }
-           ${sectionLebelTypoSwitcher.letterSpacing === false &&
-            sectionLebelLetterSpacing.Desktop &&
-            sectionLebelLetterSpacingUnits.Desktop
-            ? `letter-spacing: ${sectionLebelLetterSpacing.Desktop}${sectionLebelLetterSpacingUnits.Desktop};`
-            : ""
-        }
-           ${sectionLebelTypoSwitcher.lineHeight === false &&
-            sectionLebelLineHeight.Desktop &&
-            sectionLebelLineHeightUnits.Desktop
-            ? `line-height: ${sectionLebelLineHeight.Desktop}${sectionLebelLineHeightUnits.Desktop};`
-            : ""
-        }
+        .${blockID} .fb-vertical-timeline-label p {
+           ${sectionLebelTypoSwitcher.fontFamily === false && sectionLebelFontFamily && sectionLebelFontFamily !== "Default" ? `font-family: ${sectionLebelFontFamily};` : ""}
+           ${sectionLebelTypoSwitcher.fontSize === false && sectionLebelFontSize.Desktop && sectionLebelFontSizeUnits.Desktop ? `font-size: ${sectionLebelFontSize.Desktop}${sectionLebelFontSizeUnits.Desktop};` : ""}
+           ${sectionLebelTypoSwitcher.fontWeight === false && sectionLebelFontWeight ? `font-weight: ${sectionLebelFontWeight};` : ""}
+           ${sectionLebelTypoSwitcher.fontStyle === false && sectionLebelFontStyle ? `font-style: ${sectionLebelFontStyle};` : ""}
+           ${sectionLebelTypoSwitcher.textTransform === false && sectionLebelTextTransform ? `text-transform: ${sectionLebelTextTransform};` : ""}
+           ${sectionLebelTypoSwitcher.textDecoration === false && sectionLebelTextDecoration ? `text-decoration: ${sectionLebelTextDecoration};` : ""}
+           ${sectionLebelTypoSwitcher.letterSpacing === false && sectionLebelLetterSpacing.Desktop && sectionLebelLetterSpacingUnits.Desktop ? `letter-spacing: ${sectionLebelLetterSpacing.Desktop}${sectionLebelLetterSpacingUnits.Desktop};` : ""}
+           ${sectionLebelTypoSwitcher.lineHeight === false && sectionLebelLineHeight.Desktop && sectionLebelLineHeightUnits.Desktop ? `line-height: ${sectionLebelLineHeight.Desktop}${sectionLebelLineHeightUnits.Desktop};` : ""} 
         }
 
         .${blockID} .fb-vertical-timeline-label:hover {
@@ -526,92 +466,23 @@ const generateVerticalTimelineItemStyle = (attributes) => {
          }
 
           .${blockID} .fb-vertical-timeline-item-phase-title p {
-             ${phaseTitleTypoSwitcher.fontFamily === true &&
-            phaseTitleTypographyData.fontFamily
-            ? `font-family: ${phaseTitleTypographyData.fontFamily};`
-            : ""
-        }
-            ${phaseTitleTypoSwitcher.fontSize === true &&
-            phaseTitleTypographyData.fontSize
-            ? `font-size: ${phaseTitleTypographyData.fontSize};`
-            : ""
-        }
-            ${phaseTitleTypoSwitcher.fontWeight === true &&
-            phaseTitleTypographyData.fontWeight
-            ? `font-weight: ${phaseTitleTypographyData.fontWeight};`
-            : ""
-        }
-            ${phaseTitleTypoSwitcher.fontStyle === true &&
-            phaseTitleTypographyData.fontStyle
-            ? `font-style: ${phaseTitleTypographyData.fontStyle};`
-            : ""
-        }
-            ${phaseTitleTypoSwitcher.textTransform === true &&
-            phaseTitleTypographyData.textTransform
-            ? `text-transform: ${phaseTitleTypographyData.textTransform};`
-            : ""
-        }
-            ${phaseTitleTypoSwitcher.textDecoration === true &&
-            phaseTitleTypographyData.textDecoration
-            ? `text-decoration: ${phaseTitleTypographyData.textDecoration};`
-            : ""
-        }
-            ${phaseTitleTypoSwitcher.letterSpacing === true &&
-            phaseTitleTypographyData.letterSpacing
-            ? `letter-spacing: ${phaseTitleTypographyData.letterSpacing};`
-            : ""
-        }
-            ${phaseTitleTypoSwitcher.lineHeight === true &&
-            phaseTitleTypographyData.lineHeight
-            ? `line-height: ${phaseTitleTypographyData.lineHeight};`
-            : ""
-        }
+             ${phaseTitleTypoSwitcher.fontFamily === true && phaseTitleTypographyData.fontFamily ? `font-family: ${phaseTitleTypographyData.fontFamily};` : ""}
+            ${phaseTitleTypoSwitcher.fontSize === true && phaseTitleTypographyData.fontSize ? `font-size: ${phaseTitleTypographyData.fontSize};` : ""}
+            ${phaseTitleTypoSwitcher.fontWeight === true && phaseTitleTypographyData.fontWeight ? `font-weight: ${phaseTitleTypographyData.fontWeight};` : ""}
+            ${phaseTitleTypoSwitcher.fontStyle === true && phaseTitleTypographyData.fontStyle ? `font-style: ${phaseTitleTypographyData.fontStyle};` : ""}
+            ${phaseTitleTypoSwitcher.textTransform === true && phaseTitleTypographyData.textTransform ? `text-transform: ${phaseTitleTypographyData.textTransform};` : ""}
+            ${phaseTitleTypoSwitcher.textDecoration === true && phaseTitleTypographyData.textDecoration ? `text-decoration: ${phaseTitleTypographyData.textDecoration};` : ""}
+            ${phaseTitleTypoSwitcher.letterSpacing === true && phaseTitleTypographyData.letterSpacing ? `letter-spacing: ${phaseTitleTypographyData.letterSpacing};` : ""}
+            ${phaseTitleTypoSwitcher.lineHeight === true && phaseTitleTypographyData.lineHeight ? `line-height: ${phaseTitleTypographyData.lineHeight};` : ""}
 
-           ${phaseTitleTypoSwitcher.fontFamily === false &&
-            phaseTitleFontFamily &&
-            phaseTitleFontFamily !== "Default"
-            ? `font-family: ${phaseTitleFontFamily};`
-            : ""
-        }
-           ${phaseTitleTypoSwitcher.fontSize === false &&
-            phaseTitleFontSize.Desktop &&
-            phaseTitleFontSizeUnits.Desktop
-            ? `font-size: ${phaseTitleFontSize.Desktop}${phaseTitleFontSizeUnits.Desktop};`
-            : ""
-        }
-           ${phaseTitleTypoSwitcher.fontWeight === false &&
-            phaseTitleFontWeight
-            ? `font-weight: ${phaseTitleFontWeight};`
-            : ""
-        }
-           ${phaseTitleTypoSwitcher.fontStyle === false &&
-            phaseTitleFontStyle
-            ? `font-style: ${phaseTitleFontStyle};`
-            : ""
-        }
-           ${phaseTitleTypoSwitcher.textTransform === false &&
-            phaseTitleTextTransform
-            ? `text-transform: ${phaseTitleTextTransform};`
-            : ""
-        }
-           ${phaseTitleTypoSwitcher.textDecoration === false &&
-            phaseTitleTextDecoration
-            ? `text-decoration: ${phaseTitleTextDecoration};`
-            : ""
-        }
-           ${phaseTitleTypoSwitcher.letterSpacing === false &&
-            phaseTitleLetterSpacing.Desktop &&
-            phaseTitleLetterSpacingUnits.Desktop
-            ? `letter-spacing: ${phaseTitleLetterSpacing.Desktop}${phaseTitleLetterSpacingUnits.Desktop};`
-            : ""
-        }
-           ${phaseTitleTypoSwitcher.lineHeight === false &&
-            phaseTitleLineHeight.Desktop &&
-            phaseTitleLineHeightUnits.Desktop
-            ? `line-height: ${phaseTitleLineHeight.Desktop}${phaseTitleLineHeightUnits.Desktop};`
-            : ""
-        }
-          } 
+           ${phaseTitleTypoSwitcher.fontFamily === false && phaseTitleFontFamily && phaseTitleFontFamily !== "Default" ? `font-family: ${phaseTitleFontFamily};` : ""}
+           ${phaseTitleTypoSwitcher.fontSize === false && phaseTitleFontSize.Desktop && phaseTitleFontSizeUnits.Desktop ? `font-size: ${phaseTitleFontSize.Desktop}${phaseTitleFontSizeUnits.Desktop};` : ""}
+           ${phaseTitleTypoSwitcher.fontWeight === false && phaseTitleFontWeight ? `font-weight: ${phaseTitleFontWeight};` : ""}
+           ${phaseTitleTypoSwitcher.fontStyle === false && phaseTitleFontStyle ? `font-style: ${phaseTitleFontStyle};` : ""}
+           ${phaseTitleTypoSwitcher.textTransform === false && phaseTitleTextTransform ? `text-transform: ${phaseTitleTextTransform};` : ""}
+           ${phaseTitleTypoSwitcher.textDecoration === false && phaseTitleTextDecoration ? `text-decoration: ${phaseTitleTextDecoration};` : ""}
+           ${phaseTitleTypoSwitcher.letterSpacing === false && phaseTitleLetterSpacing.Desktop && phaseTitleLetterSpacingUnits.Desktop ? `letter-spacing: ${phaseTitleLetterSpacing.Desktop}${phaseTitleLetterSpacingUnits.Desktop};` : ""}
+           ${phaseTitleTypoSwitcher.lineHeight === false && phaseTitleLineHeight.Desktop && phaseTitleLineHeightUnits.Desktop ? `line-height: ${phaseTitleLineHeight.Desktop}${phaseTitleLineHeightUnits.Desktop};` : ""}
         }
 
        @media only screen and (max-width: 767px) {

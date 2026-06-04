@@ -7,8 +7,7 @@ import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
 import generateVerticalTimelineItemStyle from './styling';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 
-export default function Edit(props) {
-    const { attributes, setAttributes, isSelected, clientId, context } = props;
+export default function Edit({ attributes, setAttributes, isSelected, clientId, context }) {
 
     const {
         parentBlockID,
@@ -71,9 +70,38 @@ export default function Edit(props) {
         className: `fb-vertical-timeline-item-main-wrapper ${parentBlockID} ${blockID}`,
     });
 
+    const defaultTemplate = [
+        [
+            'frontis-blocks/advanced-heading',
+            {
+                headingText: 'Defining the Blueprint',
+                headingTag: 'h2',
+                headingMarginUnits: 'px',
+                headingDesktopMargin: {
+                    top: '15',
+                    bottom: '10',
+                    left: '0',
+                    right: '0',
+                },
+            },
+        ],
+        [
+            'frontis-blocks/advanced-paragraph',
+            {
+                paragraphText:
+                    'Every great project starts with a deep dive into data. We analyze user needs and market gaps to build a solid foundation.',
+            },
+        ],
+    ];
+
     return (
         <>
-            <Inspector {...props} />
+            {isSelected && (
+                <Inspector
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                />
+            )}
             <div {...blockProps}>
                 <div className={`fb-vertical-timeline-item-wrapper ${verticalTimelineItemWraperClass}`} id={verticalTimelineItemWraperID} >
 
@@ -96,30 +124,7 @@ export default function Edit(props) {
                         {/* WYSIWYG Content  */}
                         <div className="fb-vertical-timeline-item-content">
                             <InnerBlocks
-                                template={[
-                                    [
-                                        'frontis-blocks/advanced-heading',
-                                        {
-                                            headingText: 'Defining the Blueprint',
-                                            headingTag: 'h2',
-                                            headingMarginUnits: 'px',
-                                            headingDesktopMargin: {
-                                                top: '15',
-                                                bottom: '10',
-                                                left: '0',
-                                                right: '0',
-                                            },
-                                        },
-                                    ],
-                                    [
-                                        'frontis-blocks/advanced-paragraph',
-                                        {
-                                            paragraphText:
-                                                'Every great project starts with a deep dive into data. We analyze user needs and market gaps to build a solid foundation.',
-                                        },
-                                    ],
-                                ]
-                                }
+                                template={defaultTemplate}
                                 templateLock={false}
                             />
                         </div>
