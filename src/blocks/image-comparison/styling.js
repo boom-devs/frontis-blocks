@@ -264,7 +264,7 @@ const imageComparisonStyle = (attributes) => {
             ? `font-family: ${comparisonLabelsGlobalTypographyData.fontFamily};`
             : ""
         }
-            ${comparisonLabelsGlobalTypoSwitcher.fontSize === true &&
+        ${comparisonLabelsGlobalTypoSwitcher.fontSize === true &&
             comparisonLabelsGlobalTypographyData.fontSize
             ? `font-size: ${comparisonLabelsGlobalTypographyData.fontSize};`
             : ""
