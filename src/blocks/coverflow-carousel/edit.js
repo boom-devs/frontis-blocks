@@ -16,9 +16,9 @@ import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
 import generatecoverflowCarouselNumberStyle from "./styling";
 import { useDeviceType } from "@Config/displayType";
 
-import { applyFilters } from '@wordpress/hooks';
-import UpgradeToProPopup from '@Utils/upgradeToProPopup';
-import getProActive from '@Utils/getProActive';
+// import { applyFilters } from '@wordpress/hooks';
+// import UpgradeToProPopup from '@Utils/upgradeToProPopup';
+// import getProActive from '@Utils/getProActive';
 
 export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
 	const {
@@ -110,8 +110,9 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		if (e) {
 			e.preventDefault();
 			e.stopPropagation();
+			// Only select block on manual user interaction, not autoplay
+			selectBlock(clientId);
 		}
-		selectBlock(clientId);
 		const totalCards = wrapperRef.current ? wrapperRef.current.querySelectorAll('.fb-coverflow-carousel-slide').length : 0;
 		if (totalCards > 0) {
 			if (editorIndex >= totalCards - 1) {
@@ -127,8 +128,9 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		if (e) {
 			e.preventDefault();
 			e.stopPropagation();
+			// Only select block on manual user interaction, not autoplay
+			selectBlock(clientId);
 		}
-		selectBlock(clientId);
 		const totalCards = wrapperRef.current ? wrapperRef.current.querySelectorAll('.fb-coverflow-carousel-slide').length : 0;
 		if (totalCards > 0) {
 			if (editorIndex <= 0) {
@@ -333,14 +335,14 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 	});
 
 	// Conditional rendering
-    const isProActive = getProActive();
-    const coverflowCarouselAvailable = applyFilters('frontisblocks-coverflow-carousel-available', false);
+    // const isProActive = getProActive();
+    // const coverflowCarouselAvailable = applyFilters('frontisblocks-coverflow-carousel-available', false);
     
-    if(!coverflowCarouselAvailable || !isProActive) {
-        return (
-            <UpgradeToProPopup />
-        )
-    }
+    // if(!coverflowCarouselAvailable || !isProActive) {
+    //     return (
+    //         <UpgradeToProPopup />
+    //     )
+    // }
 
 	return (
 		<>

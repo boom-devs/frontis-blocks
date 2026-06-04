@@ -558,9 +558,9 @@ class BlockList
             'coverflow-carousel' => [
                 'slug' => 'coverflow-carousel',
                 'title' => 'Coverflow Carousel',
-                'package' => 'pro',
+                'package' => 'free',
                 'category' => 'content',
-                'badge' => 'pro',
+                'badge' => 'free',
                 'status' => 'true',
                 'icon' => FB_PLUGIN_URL . 'assets/icons/slider.svg',
                 'doc' => 'https://wpmessiah.com/',
@@ -571,9 +571,9 @@ class BlockList
             'coverflow-carousel-item' => [
                 'slug' => 'coverflow-carousel-item',
                 'title' => 'Coverflow Carousel Item',
-                'package' => 'pro',
+                'package' => 'free',
                 'category' => 'content',
-                'badge' => 'pro',
+                'badge' => 'free',
                 'status' => 'true',
                 'icon' => FB_PLUGIN_URL . 'assets/icons/slider.svg',
                 'doc' => 'https://wpmessiah.com/',
