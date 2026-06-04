@@ -16,9 +16,9 @@ import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
 import generatecoverflowCarouselNumberStyle from "./styling";
 import { useDeviceType } from "@Config/displayType";
 
-import { applyFilters } from '@wordpress/hooks';
-import UpgradeToProPopup from '@Utils/upgradeToProPopup';
-import getProActive from '@Utils/getProActive';
+// import { applyFilters } from '@wordpress/hooks';
+// import UpgradeToProPopup from '@Utils/upgradeToProPopup';
+// import getProActive from '@Utils/getProActive';
 
 export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
 	const {
@@ -335,14 +335,14 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 	});
 
 	// Conditional rendering
-    const isProActive = getProActive();
-    const coverflowCarouselAvailable = applyFilters('frontisblocks-coverflow-carousel-available', false);
+    // const isProActive = getProActive();
+    // const coverflowCarouselAvailable = applyFilters('frontisblocks-coverflow-carousel-available', false);
     
-    if(!coverflowCarouselAvailable || !isProActive) {
-        return (
-            <UpgradeToProPopup />
-        )
-    }
+    // if(!coverflowCarouselAvailable || !isProActive) {
+    //     return (
+    //         <UpgradeToProPopup />
+    //     )
+    // }
 
 	return (
 		<>
