@@ -113,7 +113,6 @@ export default function save({ attributes }) {
         <div className="fb-tabs-body-wrap" id={contentId}>
           <InnerBlocks.Content />
         </div>
-        <style>{blockStyle}</style>
       </div>
     </div>
   );
