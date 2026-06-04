@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { useEffect } from '@wordpress/element';
+import { useEffect, useRef } from '@wordpress/element';
 import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
 import { Button } from '@wordpress/components';
 import { select, dispatch } from "@wordpress/data";
@@ -18,6 +18,7 @@ import generateVerticalTimelineStyle from "./styling";
 const ALLOWED_BLOCKS = ["frontis-blocks/vertical-timeline-item"];
 
 export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
+    const innerRef = useRef(null);
     const {
         blockID,
         blockStyle,
@@ -55,7 +56,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         if (!blockID) return;
 
         const updateTimelineLine = () => {
-            const wrapper = document.querySelector(`.${blockID} .fb-vertical-timeline-inner`);
+            const wrapper = innerRef.current;
             if (!wrapper) return;
 
             const icons = wrapper.querySelectorAll('.fb-vertical-timeline-icon');
@@ -77,15 +78,13 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
         const timer = setTimeout(updateTimelineLine, 200);
 
-
-        const wrapper = document.querySelector(`.${blockID} .fb-vertical-timeline-inner`);
+        const wrapper = innerRef.current;
         let observer;
         if (wrapper) {
             observer = new ResizeObserver(() => {
                 updateTimelineLine();
             });
             observer.observe(wrapper);
-
 
             const icons = wrapper.querySelectorAll('.fb-vertical-timeline-icon');
             icons.forEach(icon => observer.observe(icon));
@@ -104,8 +103,10 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
     useEffect(() => {
         if (!blockID) return;
 
-        const wrapper = document.querySelector(`.${blockID} .fb-vertical-timeline-inner`);
+        const wrapper = innerRef.current;
         if (!wrapper) return;
+
+        const localWindow = wrapper.ownerDocument?.defaultView || window;
 
         const observerOptions = {
             root: null,
@@ -116,7 +117,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         const handleIntersect = (entries) => {
             entries.forEach(entry => {
                 const rect = entry.boundingClientRect;
-                const windowHeight = window.innerHeight;
+                const windowHeight = localWindow.innerHeight;
                 const totalHeight = rect.height;
                 const visibleTop = rect.top;
 
@@ -130,10 +131,31 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         const progressObserver = new IntersectionObserver(handleIntersect, observerOptions);
         progressObserver.observe(wrapper);
 
+        // Update progress manually on scroll and resize inside the editor iframe/window
+        const onScrollOrResize = () => {
+            const rect = wrapper.getBoundingClientRect();
+            const windowHeight = localWindow.innerHeight;
+            const totalHeight = rect.height;
+            const visibleTop = rect.top;
+
+            let progress = (windowHeight * 0.5 - visibleTop) / totalHeight;
+            progress = Math.max(0, Math.min(progress, 1));
+
+            wrapper.style.setProperty('--timeline-progress-scale', progress);
+        };
+
+        localWindow.addEventListener('scroll', onScrollOrResize, { passive: true });
+        localWindow.addEventListener('resize', onScrollOrResize, { passive: true });
+
+        // Run once initially
+        onScrollOrResize();
+
         return () => {
             if (progressObserver) {
                 progressObserver.disconnect();
             }
+            localWindow.removeEventListener('scroll', onScrollOrResize);
+            localWindow.removeEventListener('resize', onScrollOrResize);
         };
     }, [blockID, timelineChildCount]);
     /** End Timeline Scroll Progress */
@@ -185,7 +207,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
             <div {...blockProps}>
                 <div className={`fb-vertical-timeline-wrapper ${verticalTimelineWrapperClass}`} id={verticalTimelineWrapperID}>
-                    <div className="fb-vertical-timeline-inner">
+                    <div ref={innerRef} className="fb-vertical-timeline-inner">
                         <InnerBlocks
                             template={timelineItemTemplate(timelineChildCount)}
                             templateLock={false}
