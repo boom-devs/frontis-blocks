@@ -18,12 +18,11 @@ import generateVerticalTimelineStyle from "./styling";
 const ALLOWED_BLOCKS = ["frontis-blocks/vertical-timeline-item"];
 
 export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
-    const innerRef = useRef(null);
     const {
         blockID,
         blockStyle,
         timelineChildCount,
-
+        
         /** Start Class & ID Setting */
         verticalTimelineGlobalZIndex,
         verticalTimelineCustomCSS,
@@ -31,6 +30,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         verticalTimelineWrapperClass,
         /** End Class & ID Setting */
     } = attributes;
+    const innerRef = useRef(null);
 
     // Handle block ID generation (handles duplication and initial ID)
     useBlockIdGenerator({
