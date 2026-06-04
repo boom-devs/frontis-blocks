@@ -774,7 +774,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                         label={__("Label", "frontis-blocks")}
                         value={beforeImageLabel}
                         onChange={(value) => setAttributes({ beforeImageLabel: value })}
-                        className="fb-google-map-address-control"
+                        className="fb-conpare-image-label-control"
                         help={__('Enter the address or location for the map', 'frontis-blocks')}
                     />
                 )}
@@ -808,7 +808,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                         label={__("Label", "frontis-blocks")}
                         value={afterImageLabel}
                         onChange={(value) => setAttributes({ afterImageLabel: value })}
-                        className="fb-google-map-address-control"
+                        className="fb-conpare-image-label-control"
                         help={__('Enter the address or location for the map', 'frontis-blocks')}
                     />
                 )}

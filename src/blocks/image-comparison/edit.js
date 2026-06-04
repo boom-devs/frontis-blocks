@@ -244,12 +244,12 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                     >
                         {beforeImgShowLabelSwitcher && (
                             <div className="fb-image-comparison-label fb-image-comparison-before-label">
-                                {beforeImageLabel || "Before"}
+                                {__(beforeImageLabel || "Before")}
                             </div>
                         )}
                         {afterImgShowLabelSwitcher && (
                             <div className="fb-image-comparison-label fb-image-comparison-after-label">
-                                {afterImageLabel || "After"}
+                                {__(afterImageLabel || "After")}
                             </div>
                         )}
                         <div className="fb-image-comparison-before-image fb-img-comp-overlay" style={overlayStyle}>

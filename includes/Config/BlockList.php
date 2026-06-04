@@ -727,9 +727,9 @@ class BlockList
             'image-comparison' => [
                 'slug' => 'image-comparison',
                 'title' => 'Image Comparison',
-                'package' => 'free',
+                'package' => 'pro',
                 'category' => 'media',
-                'badge' => 'free',
+                'badge' => 'pro',
                 'status' => 'true',
                 'icon' => FB_PLUGIN_URL . 'assets/icons/image-compare.svg',
                 'doc' => 'https://wpmessiah.com/',
