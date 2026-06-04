@@ -14,7 +14,7 @@ const attributes = {
 	},
 	taxonomyType: {
 		type: "string",
-		default: "",
+		default: "category",
 	},
 	showAuthor: {
 		type: "boolean",
@@ -44,17 +44,17 @@ const attributes = {
 	mediaSizeUnits: {
 		type: 'object',
 		default: {
-			Desktop: '%',
-			Tablet: '%',
-			Mobile: '%',
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
 		}
 	},
 	mediaHeightUnits: {
 		type: 'object',
 		default: {
-			Desktop: '%',
-			Tablet: '%',
-			Mobile: '%',
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
 		}
 	},
 	autoFitSwitch: {

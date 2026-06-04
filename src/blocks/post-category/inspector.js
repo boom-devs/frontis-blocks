@@ -2757,7 +2757,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 				<PanelBody title={__("Category Image", "frontis-blocks")} initialOpen={true}>
 					<FB_Range
 						min={1}
-						max={mediaSizeUnits === '%' ? 100 : 1400}
+						max={1400}
 						label={__("Width", "frontis-blocks")}
 						rangeValue={mediaSize}
 						onChangeHandler={(value) => setAttributes({ mediaSize: value })}
@@ -2767,10 +2767,17 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 						setAttributes={setAttributes}
 						rangeStep={1}
 						resetFallbackValue={"100"}
+						units_types_arr={[
+							{ label: 'px', value: 'px' },
+							{ label: 'em', value: 'em' },
+							{ label: 'rem', value: 'rem' },
+							{ label: 'vh', value: 'vh' },
+							{ label: 'vw', value: 'vw' },
+						]}
 					/>
 					<FB_Range
 						min={1}
-						max={mediaHeightUnits === '%' ? 100 : 1400}
+						max={1400}
 						label={__("Height", "frontis-blocks")}
 						rangeValue={mediaHeight}
 						onChangeHandler={(value) => setAttributes({ mediaHeight: value })}
@@ -2780,6 +2787,13 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 						setAttributes={setAttributes}
 						rangeStep={1}
 						resetFallbackValue={"100"}
+						units_types_arr={[
+							{ label: 'px', value: 'px' },
+							{ label: 'em', value: 'em' },
+							{ label: 'rem', value: 'rem' },
+							{ label: 'vh', value: 'vh' },
+							{ label: 'vw', value: 'vw' },
+						]}
 					/>
 	
 					<ToggleControl
