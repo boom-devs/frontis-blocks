@@ -32,7 +32,8 @@ if (!function_exists('fb_trim_words')) {
 // Extract attributes
 $block_id = fb_norm_str(isset($attributes['blockID']) ? $attributes['blockID'] : '');
 $premade_style = fb_norm_str(isset($attributes['premadeStyle']) ? $attributes['premadeStyle'] : 'style-1');
-$taxonomy_type = fb_norm_str(isset($attributes['taxonomyType']) ? $attributes['taxonomyType'] : '');
+$taxonomy_type = fb_norm_str(isset($attributes['taxonomyType']) ? $attributes['taxonomyType'] : 'category');
+
 $show_count = isset($attributes['showCount']) ? (bool) $attributes['showCount'] : true;
 $show_description = isset($attributes['showDescription']) ? (bool) $attributes['showDescription'] : true;
 $show_empty = isset($attributes['showEmpty']) ? (bool) $attributes['showEmpty'] : false;
@@ -46,6 +47,7 @@ $per_page = isset($attributes['perPage']) ? (int) $attributes['perPage'] : 6;
 $show_post_type_label = !empty($attributes['showLabel']);
 // $show_post_type_label = isset($attributes['showLabel']) ? (bool) $attributes['showLabel'] : true;
 $show_author = isset($attributes['showAuthor']) ? (bool) $attributes['showAuthor'] : true;
+$show_category_image = isset($attributes['showCategoryImage']) ? (bool) $attributes['showCategoryImage'] : true;
 
 // Layout attributes
 $layout_type = fb_norm_str(isset($attributes['layoutType']) ? $attributes['layoutType'] : 'grid');
@@ -202,6 +204,7 @@ if (!function_exists('fb_format_count_with_label_html')) {
 
 // Get taxonomy terms
 $taxonomy_terms = [];
+
 if ($taxonomy_type) {
     $args = [
         'taxonomy' => $taxonomy_type,
@@ -409,9 +412,9 @@ if (empty($taxonomy_type)) {
 
         $should_render_image = false;
 
-        if ($premade_style === 'style-3') {
+        if ($premade_style === 'style-3' && $show_category_image) {
             $should_render_image = true;
-        } elseif ($premade_style === 'style-4') {
+        } elseif ($premade_style === 'style-4' && $show_category_image) {
             $should_render_image = true;
         }
 
