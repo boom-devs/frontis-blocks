@@ -23,6 +23,10 @@ const attributes = {
         type: 'string',
         default: 'horizontal',
     },
+    tabListAlignment: {
+		type: 'string',
+		default: 'center'
+	},
 
 	tabItems: {
         type: 'array',
@@ -163,9 +167,9 @@ const attributes = {
     tabListItemGap : {
         type: 'object',
         default: {
-            Desktop: '10',
-            Tablet: '10',
-            Mobile: '10',
+            Desktop: '',
+            Tablet: '',
+            Mobile: '',
         }
     },
     tabListItemGapUnits: {
