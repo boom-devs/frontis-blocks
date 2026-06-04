@@ -10,10 +10,7 @@
     "supports": {
         "html": false,
         "anchor": false,
-        "align": [
-            "wide",
-            "full"
-        ],
+        "align": [ "wide","full" ],
         "customClassName": false,
         "customCSS": false
     },

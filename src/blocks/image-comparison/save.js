@@ -1,3 +1,4 @@
+import { __ } from '@wordpress/i18n';
 import { useBlockProps } from '@wordpress/block-editor';
 
 export default function save({ attributes }) {
@@ -62,13 +63,13 @@ export default function save({ attributes }) {
 
                     {beforeImgShowLabelSwitcher && (
                         <div className="fb-image-comparison-label fb-image-comparison-before-label">
-                            {beforeImageLabel || "Before"}
+                            {__(beforeImageLabel || "Before")}
                         </div>
                     )}
 
                     {afterImgShowLabelSwitcher && (
                         <div className="fb-image-comparison-label fb-image-comparison-after-label">
-                            {afterImageLabel || "After"}
+                            {__(afterImageLabel || "After")}
                         </div>
                     )}
 

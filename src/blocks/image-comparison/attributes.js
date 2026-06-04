@@ -944,5 +944,4 @@ const attributes = {
     /** End Class & ID Setting */
 
 }
-
 export default attributes;
