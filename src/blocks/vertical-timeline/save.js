@@ -6,10 +6,13 @@ export default function save({ attributes }) {
         blockID,
         verticalTimelineWrapperID,
         verticalTimelineWrapperClass,
+        verticalTimelineDesktopSwitcher,
+        verticalTimelineTabletSwitcher,
+        verticalTimelineMobileSwitcher,
     } = attributes;
 
     const blockProps = useBlockProps.save({
-        className: `fb-vertical-timeline-main-wrapper ${blockID}`,
+        className: `fb-vertical-timeline-main-wrapper ${blockID} ${verticalTimelineDesktopSwitcher ? 'fb-desktop-responsive' : ''} ${verticalTimelineTabletSwitcher ? 'fb-tablet-responsive' : ''} ${verticalTimelineMobileSwitcher ? 'fb-mobile-responsive' : ''}`.trim(),
     });
 
     return (
