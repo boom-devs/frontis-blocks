@@ -25,6 +25,14 @@ const generatePostCategoryStyle = (attributes) => {
         premadeStyle,
         taxonomyType,
         showAuthor,
+        showCategoryImage,
+		mediaSize,
+		mediaHeight,
+		mediaSizeUnits,
+		mediaHeightUnits,
+        autoFitSwitch,
+		imageFit,
+        imagePosition,
         authorAvatarSize,
         authorAvatarSizeUnits,
         authorAvatarGaps,
@@ -1070,7 +1078,11 @@ const generatePostCategoryStyle = (attributes) => {
             .${blockID} .single-item .fb-taxonomy-item {
                 padding: 32px;
                 border-radius: 14px;
-                flex-direction: row !important;
+                ${imagePosition === "top" ? `flex-direction: column !important;` : ''}
+                ${imagePosition === "left" ? `flex-direction: row !important;` : ''}
+                ${imagePosition === "bottom" ? `flex-direction: column-reverse !important;` : ''}
+                ${imagePosition === "right" ? `flex-direction: row-reverse !important;` : ''}
+                justify-content: unset !important;
                 padding: 0 !important;
                 overflow: hidden;
                 box-shadow: 0 8px 24px rgba(0, 0, 0, 0.02), 0 0px 6px rgba(0, 0, 0, 0.02);
@@ -1086,6 +1098,8 @@ const generatePostCategoryStyle = (attributes) => {
                 position: relative;
                 overflow: hidden;
                 width: 100%;
+                ${mediaSize?.Desktop ? `width: ${mediaSize?.Desktop}${mediaSizeUnits?.Desktop};` : ''}
+                ${mediaHeight?.Desktop ? `height: ${mediaHeight?.Desktop}${mediaHeightUnits?.Desktop};` : `height: 100%;`}
             }
 
             .${blockID} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-card-content,
@@ -1094,24 +1108,19 @@ const generatePostCategoryStyle = (attributes) => {
                 padding: 32px 24px;
                 display: flex;
                 flex-direction: column;
-                justify-content: space-between;
             }
 
             .${blockID} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-image-container .fb-taxonomy-image,
             .${blockID} .single-item .fb-taxonomy-item .fb-taxonomy-image-container .fb-taxonomy-image {
-                position: absolute;
-                top: 0;
-                left: 0;
                 width: 100%;
                 height: 100%;
-                z-index: 0;
             }
 
             .${blockID} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-image img,
             .${blockID} .single-item .fb-taxonomy-item .fb-taxonomy-image img {
                 width: 100%;
                 height: 100%;
-                object-fit: cover;
+                ${imageFit ? `object-fit: ${imageFit};`:''}
                 vertical-align: middle;
                 transition: transform 0.4s cubic-bezier(0.33, 0.04, 0.63, 0.99), filter 0.4s ease;
             }
