@@ -9,10 +9,10 @@
 	"example": {},
     "supports": {
 		"html": false,
-        "anchor": false,
+		"anchor": false,
 		"align": ["wide", "full"],
-        "customClassName": false
-    },
+		"customClassName": false
+	},
 	"textdomain": "frontis-blocks",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css"

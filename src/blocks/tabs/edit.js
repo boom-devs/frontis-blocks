@@ -376,6 +376,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 											next[index] = { ...next[index], title: val };
 											setAttributes({ tabItems: next });
 										}}
+										placeholder={__('title...', 'frontis-blocks')}
 										className="fb-tab-title"
 										allowedFormats={['core/bold', 'core/italic']}
 									/>
@@ -389,6 +390,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 											next[index] = { ...next[index], description: val };
 											setAttributes({ tabItems: next });
 										}}
+										placeholder={__('description...', 'frontis-blocks')}
 										className="fb-tab-description"
 										allowedFormats={['core/bold', 'core/italic']}
 									/>

@@ -20,6 +20,8 @@ import {
 	LIST_STYLE_OPTIONS,
 	READ_MORE_ICON_ALIGN,
 	BORDER_STYLES,
+	IMAGE_AUTO_FIT,
+	ITEM_POSITION,
 } from "@Constants/fbConstants";
 import getCustomCss from "@Utils/getCustomCss";
 import { useDeviceType } from "@Config/displayType";
@@ -50,6 +52,14 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 		premadeStyle,
 		taxonomyType,
 		showAuthor,
+		showCategoryImage,
+		mediaSize,
+		mediaHeight,
+		mediaSizeUnits,
+		mediaHeightUnits,
+		autoFitSwitch,
+		imageFit,
+		imagePosition,
 		authorAvatarSize,
 		authorAvatarSizeUnits,
 		authorAvatarGaps,
@@ -2421,6 +2431,14 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 							onChange={(value) => setAttributes({ showAuthor: value })}
 						/>
 
+						{(premadeStyle === "style-3" || premadeStyle === "style-4") && (
+							<ToggleControl
+								label={__("Show Category Image", "frontis-blocks")}
+								checked={showCategoryImage}
+								onChange={(value) => setAttributes({ showCategoryImage: value })}
+							/>
+						)}
+
 						<ToggleControl
 							label={__("Show Count", "frontis-blocks")}
 							checked={showCount}
@@ -2735,6 +2753,75 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 
 	const styleControls = (
 		<>
+			{premadeStyle === "style-4" && (
+				<PanelBody title={__("Category Image", "frontis-blocks")} initialOpen={true}>
+					<FB_Range
+						min={1}
+						max={1400}
+						label={__("Width", "frontis-blocks")}
+						rangeValue={mediaSize}
+						onChangeHandler={(value) => setAttributes({ mediaSize: value })}
+						rangeUnitHandler={(value) => setAttributes({ mediaSizeUnits: value })}
+						deviceType={deviceType}
+						units={mediaSizeUnits}
+						setAttributes={setAttributes}
+						rangeStep={1}
+						resetFallbackValue={"100"}
+						units_types_arr={[
+							{ label: 'px', value: 'px' },
+							{ label: 'em', value: 'em' },
+							{ label: 'rem', value: 'rem' },
+							{ label: 'vh', value: 'vh' },
+							{ label: 'vw', value: 'vw' },
+						]}
+					/>
+					<FB_Range
+						min={1}
+						max={1400}
+						label={__("Height", "frontis-blocks")}
+						rangeValue={mediaHeight}
+						onChangeHandler={(value) => setAttributes({ mediaHeight: value })}
+						rangeUnitHandler={(value) => setAttributes({ mediaHeightUnits: value })}
+						deviceType={deviceType}
+						units={mediaHeightUnits}
+						setAttributes={setAttributes}
+						rangeStep={1}
+						resetFallbackValue={"100"}
+						units_types_arr={[
+							{ label: 'px', value: 'px' },
+							{ label: 'em', value: 'em' },
+							{ label: 'rem', value: 'rem' },
+							{ label: 'vh', value: 'vh' },
+							{ label: 'vw', value: 'vw' },
+						]}
+					/>
+	
+					<ToggleControl
+						label={__("Auto Fit Image?", "frontis-block")}
+						checked={autoFitSwitch}
+						onChange={(newValue) => {
+							setAttributes({ autoFitSwitch: newValue });
+						}}
+					/>
+
+					{autoFitSwitch && (
+						<SelectControl
+							label={__("Image Fit Options", "frontis-blocks")}
+							value={imageFit || "cover"}
+							options={IMAGE_AUTO_FIT}
+							onChange={(size) =>
+								setAttributes({ imageFit: size })
+							}
+						/>
+					)}
+					<SelectControl
+						label={__("Image Position", "frontis-blocks")}
+						value={imagePosition}
+						options={ITEM_POSITION}
+						onChange={(value) => setAttributes({ imagePosition: value })}
+					/>
+				</PanelBody>
+			)}
 			{layoutType === "grid" && (
 				<PanelBody title={__("Items", "frontis-blocks")} initialOpen={false}>
 					<FB_Range

@@ -933,7 +933,7 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 			'box-shadow': containerGlobalBoxShadowCssValue ? containerGlobalBoxShadowCssValue : undefined
 		};
 	} else {
-		widthSelectorsDesktop[`.wp-block-frontis-blocks-container.frontis-blocks-block-${clientId}`] = {
+		widthSelectorsDesktop[`.wp-block-frontis-blocks-container.frontis-blocks-block-${clientId}, .wp-block-frontis-blocks-container.child.frontis-blocks-block-${clientId}`] = {
 			'max-width': generateCSSUnit(widthDesktopFallback, customWidthUnits['Desktop']),
 			'width': '100%',
 			...desktopChildContainerPadding,
@@ -1023,7 +1023,7 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 			...containerBorderRadiusTabletWidthCSS,
 		};
 	} else {
-		widthSelectorsTablet[`.wp-block-frontis-blocks-container.frontis-blocks-block-${clientId} `] = {
+		widthSelectorsTablet[`.wp-block-frontis-blocks-container.frontis-blocks-block-${clientId} , .wp-block-frontis-blocks-container.child.frontis-blocks-block-${clientId} `] = {
 			'max-width': generateCSSUnit(widthTabletFallback, customWidthUnits['Tablet']),
 			'width': '100%',
 			...tabletChildContainerPadding,
@@ -1102,7 +1102,7 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 	
 		};
 	} else {
-		widthSelectorsMobile[`.wp-block-frontis-blocks-container.frontis-blocks-block-${clientId} `] = {
+		widthSelectorsMobile[`.wp-block-frontis-blocks-container.frontis-blocks-block-${clientId} , .wp-block-frontis-blocks-container.child.frontis-blocks-block-${clientId} `] = {
 			'max-width': generateCSSUnit(widthMobileFallback, customWidthUnits['Mobile']),
 			'width': '100%',
 			...mobileChildContainerPadding,
