@@ -316,6 +316,8 @@ const Inspector = ({ attributes, setAttributes }) => {
         carouselProgressbarBGActiveColor,
         carouselProgressbarHeight,
         carouselProgressbarHeightUnits,
+        carouselProgressbarWidth,
+        carouselProgressbarWidthUnits,
 
         //Global attributes
         coverflowCarouselGlobalZIndex,
@@ -334,31 +336,31 @@ const Inspector = ({ attributes, setAttributes }) => {
         coverflowCarouselGlobalMarginLink,
 
         coverflowCarouselGlobalBgColorSwitcher,
-		coverflowCarouselGlobalBackgroundType,
-		coverflowCarouselGlobalClassicColor,
-		coverflowCarouselGlobalGradientColor,
-		coverflowCarouselGlobalCustomGradientSwitcher,
-		coverflowCarouselGlobalCustomGradientInputValue,
-		coverflowCarouselGlobalBackgroundColorStyle,
-		coverflowCarouselGlobalBackgroundImageUrl,
-		coverflowCarouselGlobalBackgroundImageAlt,
-		coverflowCarouselGlobalBackgroundImageID,
-		coverflowCarouselGlobalBackgroundImagePosition,
-		coverflowCarouselGlobalBackgroundImageAttachment,
-		coverflowCarouselGlobalBackgroundImageSize,
-		coverflowCarouselGlobalBackgroundImageRepeat,
-		coverflowCarouselGlobalBghoverBackgroundType,
-		coverflowCarouselGlobalBgHoverClassicColor,
-		coverflowCarouselGlobalHoverGradientColor,
-		coverflowCarouselGlobalHoverCustomGradientSwitcher,
-		coverflowCarouselGlobalHoverCustomGradientInputValue,
-		coverflowCarouselGlobalHoverBackgroundImageUrl,
-		coverflowCarouselGlobalHoverBackgroundImageAlt,
-		coverflowCarouselGlobalHoverBackgroundImageID,
-		coverflowCarouselGlobalHoverBackgroundImagePosition,
-		coverflowCarouselGlobalHoverBackgroundImageAttachment,
-		coverflowCarouselGlobalHoverBackgroundImageSize,
-		coverflowCarouselGlobalHoverBackgroundImageRepeat,
+        coverflowCarouselGlobalBackgroundType,
+        coverflowCarouselGlobalClassicColor,
+        coverflowCarouselGlobalGradientColor,
+        coverflowCarouselGlobalCustomGradientSwitcher,
+        coverflowCarouselGlobalCustomGradientInputValue,
+        coverflowCarouselGlobalBackgroundColorStyle,
+        coverflowCarouselGlobalBackgroundImageUrl,
+        coverflowCarouselGlobalBackgroundImageAlt,
+        coverflowCarouselGlobalBackgroundImageID,
+        coverflowCarouselGlobalBackgroundImagePosition,
+        coverflowCarouselGlobalBackgroundImageAttachment,
+        coverflowCarouselGlobalBackgroundImageSize,
+        coverflowCarouselGlobalBackgroundImageRepeat,
+        coverflowCarouselGlobalBghoverBackgroundType,
+        coverflowCarouselGlobalBgHoverClassicColor,
+        coverflowCarouselGlobalHoverGradientColor,
+        coverflowCarouselGlobalHoverCustomGradientSwitcher,
+        coverflowCarouselGlobalHoverCustomGradientInputValue,
+        coverflowCarouselGlobalHoverBackgroundImageUrl,
+        coverflowCarouselGlobalHoverBackgroundImageAlt,
+        coverflowCarouselGlobalHoverBackgroundImageID,
+        coverflowCarouselGlobalHoverBackgroundImagePosition,
+        coverflowCarouselGlobalHoverBackgroundImageAttachment,
+        coverflowCarouselGlobalHoverBackgroundImageSize,
+        coverflowCarouselGlobalHoverBackgroundImageRepeat,
 
         coverflowCarouselGlobalBorder,
         coverflowCarouselGlobalBorderColorSwitcher,
@@ -1557,7 +1559,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                 <FB_Range
                     min={400}
                     max={3000}
-                    label={__("Perspective", "frontis-blocks")}
+                    label={__("Perspective", "frontis-blocks")} 
                     rangeValue={carouselPerspective}
                     onChangeHandler={(value) => setAttributes({ carouselPerspective: value })}
                     rangeUnitHandler={(value) => setAttributes({ carouselPerspectiveUnits: value })}
@@ -1929,29 +1931,29 @@ const Inspector = ({ attributes, setAttributes }) => {
                     setNormalBackgroundImageAttachment={(value) => setAttributes({ coverflowCarouselItemBgImageAttachment: value, })}
                     normalBackgroundImageRepeat={coverflowCarouselItemBgImageRepeat}
                     setNormalBackgroundImageRepeat={(value) => setAttributes({ coverflowCarouselItemBgImageRepeat: value, })}
-                    normalBackgroundImageSize={coverflowCarouselItemBgImageSize} 
+                    normalBackgroundImageSize={coverflowCarouselItemBgImageSize}
                     setNormalBackgroundImageSize={(value) => setAttributes({ coverflowCarouselItemBgImageSize: value })}
-                    hoverBackgroundType={coverflowCarouselItemHoverBgType}  
+                    hoverBackgroundType={coverflowCarouselItemHoverBgType}
                     setHoverBackgroundType={(value) => setAttributes({ coverflowCarouselItemHoverBgType: value })}
                     hoverClassicColor={coverflowCarouselItemBgHoverClassicColor}
                     setHoverClassicColor={(value) => setAttributes({ coverflowCarouselItemBgHoverClassicColor: value === undefined ? '' : value })}
-                    hoverGradientColor={coverflowCarouselItemBgHoverGradientColor} 
+                    hoverGradientColor={coverflowCarouselItemBgHoverGradientColor}
                     setHoverGradientColor={(value) => setAttributes({ coverflowCarouselItemBgHoverGradientColor: value === undefined ? null : value })}
-                    hoverCustomGradientSwitcher={coverflowCarouselItemBgHoverCustomGradientSwitcher} 
+                    hoverCustomGradientSwitcher={coverflowCarouselItemBgHoverCustomGradientSwitcher}
                     setHoverCustomGradientSwitcher={(value) => setAttributes({ coverflowCarouselItemBgHoverCustomGradientSwitcher: value, })}
                     hoverCustomGradientInputValue={coverflowCarouselItemBgHoverCustomGradientInputValue}
-                    setHoverCustomGradientInputValue={(value) => setAttributes({ coverflowCarouselItemBgHoverCustomGradientInputValue: value, })} 
+                    setHoverCustomGradientInputValue={(value) => setAttributes({ coverflowCarouselItemBgHoverCustomGradientInputValue: value, })}
                     hoverBackgroundImageUrl={coverflowCarouselItemHoverBgImageUrl}
                     setHoverBackgroundImageUrl={(value) => setAttributes({ coverflowCarouselItemHoverBgImageUrl: value })}
-                    hoverBackgroundImageAlt={coverflowCarouselItemHoverBgImageAlt} 
+                    hoverBackgroundImageAlt={coverflowCarouselItemHoverBgImageAlt}
                     setHoverBackgroundImageAlt={(value) => setAttributes({ coverflowCarouselItemHoverBgImageAlt: value })}
-                    hoverBackgroundImageID={coverflowCarouselItemHoverBgImageID} 
+                    hoverBackgroundImageID={coverflowCarouselItemHoverBgImageID}
                     setHoverBackgroundImageID={(value) => setAttributes({ coverflowCarouselItemHoverBgImageID: value })}
                     hoverBackgroundImagePosition={coverflowCarouselItemHoverBgImagePosition}
                     setHoverBackgroundImagePosition={(value) => setAttributes({ coverflowCarouselItemHoverBgImagePosition: value, })}
                     hoverBackgroundImageAttachment={coverflowCarouselItemHoverBgImageAttachment}
                     setHoverBackgroundImageAttachment={(value) => setAttributes({ coverflowCarouselItemHoverBgImageAttachment: value, })}
-                    hoverBackgroundImageRepeat={coverflowCarouselItemHoverBgImageRepeat} 
+                    hoverBackgroundImageRepeat={coverflowCarouselItemHoverBgImageRepeat}
                     setHoverBackgroundImageRepeat={(value) => setAttributes({ coverflowCarouselItemHoverBgImageRepeat: value, })}
                     hoverBackgroundImageSize={coverflowCarouselItemHoverBgImageSize}
                     setHoverBackgroundImageSize={(value) => setAttributes({ coverflowCarouselItemHoverBgImageSize: value })}
@@ -2536,6 +2538,19 @@ const Inspector = ({ attributes, setAttributes }) => {
                             <FB_Range
                                 min={0}
                                 max={100}
+                                label={__("Width", "frontis-blocks")}
+                                rangeValue={carouselProgressbarWidth}
+                                onChangeHandler={(value) => setAttributes({ carouselProgressbarWidth: value })}
+                                rangeUnitHandler={(value) => setAttributes({ carouselProgressbarWidthUnits: value })}
+                                deviceType={deviceType}
+                                units={carouselProgressbarWidthUnits}
+                                setAttributes={setAttributes}
+                                rangeStep={1}
+                                resetFallbackValue={"4"}
+                            />
+                            <FB_Range
+                                min={0}
+                                max={100}
                                 label={__("Height", "frontis-blocks")}
                                 rangeValue={carouselProgressbarHeight}
                                 onChangeHandler={(value) => setAttributes({ carouselProgressbarHeight: value })}
@@ -2702,15 +2717,15 @@ const Inspector = ({ attributes, setAttributes }) => {
                             setHoverClassicColor={(value) => setAttributes({ coverflowCarouselGlobalBgHoverClassicColor: value === undefined ? '' : value })}
                             hoverGradientColor={coverflowCarouselGlobalHoverGradientColor}
                             setHoverGradientColor={(value) => setAttributes({ coverflowCarouselGlobalHoverGradientColor: value === undefined ? null : value })}
-                            hoverCustomGradientSwitcher={coverflowCarouselGlobalHoverCustomGradientSwitcher} 
+                            hoverCustomGradientSwitcher={coverflowCarouselGlobalHoverCustomGradientSwitcher}
                             setHoverCustomGradientSwitcher={(value) => setAttributes({ coverflowCarouselGlobalHoverCustomGradientSwitcher: value, })}
                             hoverCustomGradientInputValue={coverflowCarouselGlobalHoverCustomGradientInputValue}
-                            setHoverCustomGradientInputValue={(value) => setAttributes({ coverflowCarouselGlobalHoverCustomGradientInputValue: value, })} 
+                            setHoverCustomGradientInputValue={(value) => setAttributes({ coverflowCarouselGlobalHoverCustomGradientInputValue: value, })}
                             hoverBackgroundImageUrl={coverflowCarouselGlobalHoverBackgroundImageUrl}
                             setHoverBackgroundImageUrl={(value) => setAttributes({ coverflowCarouselGlobalHoverBackgroundImageUrl: value })}
                             hoverBackgroundImageAlt={coverflowCarouselGlobalHoverBackgroundImageAlt}
                             setHoverBackgroundImageAlt={(value) => setAttributes({ coverflowCarouselGlobalHoverBackgroundImageAlt: value })}
-                            hoverBackgroundImageID={coverflowCarouselGlobalHoverBackgroundImageID} 
+                            hoverBackgroundImageID={coverflowCarouselGlobalHoverBackgroundImageID}
                             setHoverBackgroundImageID={(value) => setAttributes({ coverflowCarouselGlobalHoverBackgroundImageID: value })}
                             hoverBackgroundImagePosition={coverflowCarouselGlobalHoverBackgroundImagePosition}
                             setHoverBackgroundImagePosition={(value) => setAttributes({ coverflowCarouselGlobalHoverBackgroundImagePosition: value, })}

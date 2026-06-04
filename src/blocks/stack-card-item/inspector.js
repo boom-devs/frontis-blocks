@@ -1,4 +1,5 @@
 import { __ } from '@wordpress/i18n';
+import FB_InspectorControls from '@Components/InspectorControls';
 import { PanelBody, SelectControl } from '@wordpress/components';
 import { BORDER_STYLES } from '@Constants/fbConstants';
 import FB_BackgroundColorControl from '@Components/background-color-control';
@@ -15,11 +16,26 @@ export default function StackCardItemInspector({ attributes, setAttributes }) {
 		stackCardItemBgNormalGradientColor,
 		stackCardItemBgNormalCustomGradientSwitcher,
 		stackCardItemBgNormalCustomGradientInputValue,
+		stackCardItemBgNormalImageUrl,
+		stackCardItemBgNormalImageAlt,
+		stackCardItemBgNormalImageID,
+		stackCardItemBgNormalImagePosition,
+		stackCardItemBgNormalImageAttachment,
+		stackCardItemBgNormalImageRepeat,
+		stackCardItemBgNormalImageSize,
 		stackCardItemBgHoverBackgroundType,
 		stackCardItemBgHoverClassicColor,
 		stackCardItemBgHoverGradientColor,
 		stackCardItemBgHoverCustomGradientSwitcher,
 		stackCardItemBgHoverCustomGradientInputValue,
+		stackCardItemBgHoverImageUrl,
+		stackCardItemBgHoverImageAlt,
+		stackCardItemBgHoverImageID,
+		stackCardItemBgHoverImagePosition,
+		stackCardItemBgHoverImageAttachment,
+		stackCardItemBgHoverImageRepeat,
+		stackCardItemBgHoverImageSize,
+
 		stackCardItemPaddingUnits,
 		stackCardItemPaddingDesktop,
 		stackCardItemPaddingTablet,
@@ -250,105 +266,196 @@ export default function StackCardItemInspector({ attributes, setAttributes }) {
 		});
 	};
 
+	const styleControls = (
+		<>
+			<PanelBody title={__('Stack Card Item', 'frontis-blocks')} initialOpen={true}>
+				<FB_BackgroundColorControl
+					label={__('Background Color', 'frontis-blocks')}
+					bgColorSwitcher={stackCardItemBgColorSwitcher}
+					setBgColorSwitcher={(value) => setAttributes({ stackCardItemBgColorSwitcher: value })}
+					normalBackgroundType={stackCardItemBgNormalBackgroundType}
+					setNormalBackgroundType={(value) => setAttributes({ stackCardItemBgNormalBackgroundType: value })}
+					normalClassicColor={stackCardItemBgNormalClassicColor}
+					setNormalClassicColor={(value) => setAttributes({ stackCardItemBgNormalClassicColor: value === undefined ? '' : value })}
+					normalGradientColor={stackCardItemBgNormalGradientColor}
+					setNormalGradientColor={(value) => setAttributes({ stackCardItemBgNormalGradientColor: value === undefined ? '' : value })}
+					normalCustomGradientSwitcher={stackCardItemBgNormalCustomGradientSwitcher}
+					setNormalCustomGradientSwitcher={(value) => setAttributes({ stackCardItemBgNormalCustomGradientSwitcher: value })}
+					normalCustomGradientInputValue={stackCardItemBgNormalCustomGradientInputValue}
+					setNormalCustomGradientInputValue={(value) => setAttributes({ stackCardItemBgNormalCustomGradientInputValue: value })}
+					normalBackgroundImageUrl={stackCardItemBgNormalImageUrl}
+					setNormalBackgroundImageUrl={(value) =>
+						setAttributes({ stackCardItemBgNormalImageUrl: value })
+					}
+					normalBackgroundImageAlt={stackCardItemBgNormalImageAlt}
+					setNormalBackgroundImageAlt={(value) =>
+						setAttributes({ stackCardItemBgNormalImageAlt: value })
+					}
+					normalBackgroundImageID={stackCardItemBgNormalImageID}
+					setNormalBackgroundImageID={(value) =>
+						setAttributes({ stackCardItemBgNormalImageID: value })
+					}
+					normalBackgroundImagePosition={
+						stackCardItemBgNormalImagePosition
+					}
+					setNormalBackgroundImagePosition={(value) =>
+						setAttributes({
+							stackCardItemBgNormalImagePosition: value,
+						})
+					}
+					normalBackgroundImageAttachment={
+						stackCardItemBgNormalImageAttachment
+					}
+					setNormalBackgroundImageAttachment={(value) =>
+						setAttributes({
+							stackCardItemBgNormalImageAttachment: value,
+						})
+					}
+					normalBackgroundImageRepeat={
+						stackCardItemBgNormalImageRepeat
+					}
+					setNormalBackgroundImageRepeat={(value) =>
+						setAttributes({
+							stackCardItemBgNormalImageRepeat: value,
+						})
+					}
+					normalBackgroundImageSize={stackCardItemBgNormalImageSize}
+					setNormalBackgroundImageSize={(value) =>
+						setAttributes({ stackCardItemBgNormalImageSize: value })
+					}
+
+					hoverBackgroundType={stackCardItemBgHoverBackgroundType}
+					setHoverBackgroundType={(value) => setAttributes({ stackCardItemBgHoverBackgroundType: value })}
+					hoverClassicColor={stackCardItemBgHoverClassicColor}
+					setHoverClassicColor={(value) => setAttributes({ stackCardItemBgHoverClassicColor: value === undefined ? '' : value })}
+					hoverGradientColor={stackCardItemBgHoverGradientColor}
+					setHoverGradientColor={(value) => setAttributes({ stackCardItemBgHoverGradientColor: value === undefined ? '' : value })}
+					hoverCustomGradientSwitcher={stackCardItemBgHoverCustomGradientSwitcher}
+					setHoverCustomGradientSwitcher={(value) => setAttributes({ stackCardItemBgHoverCustomGradientSwitcher: value })}
+					hoverCustomGradientInputValue={stackCardItemBgHoverCustomGradientInputValue}
+					setHoverCustomGradientInputValue={(value) => setAttributes({ stackCardItemBgHoverCustomGradientInputValue: value })}
+					hoverBackgroundImageUrl={stackCardItemBgHoverImageUrl}
+					setBgHoverImageUrl={(value) =>
+						setAttributes({ stackCardItemBgHoverImageUrl: value })
+					}
+					hoverBackgroundImageAlt={stackCardItemBgHoverImageAlt}
+					setBgHoverImageAlt={(value) =>
+						setAttributes({ stackCardItemBgHoverImageAlt: value })
+					}
+					hoverBackgroundImageID={stackCardItemBgHoverImageID}
+					setBgHoverImageID={(value) =>
+						setAttributes({ stackCardItemBgHoverImageID: value })
+					}
+					hoverBackgroundImagePosition={
+						stackCardItemBgHoverImagePosition
+					}
+					setBgHoverImagePosition={(value) =>
+						setAttributes({
+							stackCardItemBgHoverImagePosition: value,
+						})
+					}
+					hoverBackgroundImageAttachment={
+						stackCardItemBgHoverImageAttachment
+					}
+					setBgHoverImageAttachment={(value) =>
+						setAttributes({
+							stackCardItemBgHoverImageAttachment: value,
+						})
+					}
+					hoverBackgroundImageRepeat={
+						stackCardItemBgHoverImageRepeat
+					}
+					setBgHoverImageRepeat={(value) =>
+						setAttributes({
+							stackCardItemBgHoverImageRepeat: value,
+						})
+					}
+					hoverBackgroundImageSize={stackCardItemBgHoverImageSize}
+					setBgHoverImageSize={(value) =>
+						setAttributes({ stackCardItemBgHoverImageSize: value })
+					}
+				/>
+
+				<FB_Spacing
+					label={__('Padding', 'frontis-blocks')}
+					deviceType={deviceType}
+					spacingUnitsHandler={handleStackCardItemPaddingUnitsHandler}
+					spacingUnits={stackCardItemPaddingUnits}
+					spacingDesktop={stackCardItemPaddingDesktop}
+					spacingTablet={stackCardItemPaddingTablet}
+					spacingMobile={stackCardItemPaddingMobile}
+					handleSpacingUnitHandler={handleStackCardItemPaddingUnitChange}
+					spacingCombineBtn={stackCardItemPaddingLink}
+					spacingCombineBtnHandler={handleStackCardItemPaddingCombineBtn}
+					setAttributes={setAttributes}
+				/>
+
+				<SelectControl
+					label={__('Border Style', 'frontis-blocks')}
+					value={stackCardItemBorder}
+					options={BORDER_STYLES}
+					onChange={(value) => setAttributes({ stackCardItemBorder: value })}
+				/>
+
+				<FB_SwitcherControl
+					label={__('Border Color', 'frontis-blocks')}
+					globalSwitcher={stackCardItemBorderColorSwitcher}
+					setGlobalSwitcher={(value) => setAttributes({ stackCardItemBorderColorSwitcher: value })}
+				/>
+
+				{stackCardItemBorderColorSwitcher === 'normal' && (
+					<FB_ColorControl
+						label={__('Normal Color', 'frontis-blocks')}
+						globalColor={stackCardItemBorderColor}
+						setGlobalColor={(value) => setAttributes({ stackCardItemBorderColor: value === undefined ? '' : value })}
+					/>
+				)}
+
+				{stackCardItemBorderColorSwitcher === 'hover' && (
+					<FB_ColorControl
+						label={__('Hover Color', 'frontis-blocks')}
+						globalColor={stackCardItemBorderHoverColor}
+						setGlobalColor={(value) => setAttributes({ stackCardItemBorderHoverColor: value === undefined ? '' : value })}
+					/>
+				)}
+
+				<FB_Spacing
+					label={__('Border', 'frontis-blocks')}
+					deviceType={deviceType}
+					spacingUnitsHandler={handleStackCardItemBorderUnitsHandler}
+					spacingUnits={stackCardItemBorderUnits}
+					spacingDesktop={stackCardItemBorderDesktop}
+					spacingTablet={stackCardItemBorderTablet}
+					spacingMobile={stackCardItemBorderMobile}
+					handleSpacingUnitHandler={handleStackCardItemBorderUnitChange}
+					spacingCombineBtn={stackCardItemBorderLink}
+					spacingCombineBtnHandler={handleStackCardItemBorderCombineBtn}
+					setAttributes={setAttributes}
+				/>
+
+				<FB_Spacing
+					label={__('Border Radius', 'frontis-blocks')}
+					deviceType={deviceType}
+					spacingUnitsHandler={handleStackCardItemBorderRadiusUnitsHandler}
+					spacingUnits={stackCardItemBorderRadiusUnits}
+					spacingDesktop={stackCardItemBorderRadiusDesktop}
+					spacingTablet={stackCardItemBorderRadiusTablet}
+					spacingMobile={stackCardItemBorderRadiusMobile}
+					handleSpacingUnitHandler={handleStackCardItemBorderRadiusUnitChange}
+					spacingCombineBtn={stackCardItemBorderRadiusLink}
+					spacingCombineBtnHandler={handleStackCardItemBorderRadiusCombineBtn}
+					setAttributes={setAttributes}
+				/>
+			</PanelBody>
+
+		</>
+	);
+
 	return (
-		<PanelBody title={__('Stack Card Item', 'frontis-blocks')} initialOpen={true}>
-			<FB_BackgroundColorControl
-				label={__('Background Color', 'frontis-blocks')}
-				bgColorSwitcher={stackCardItemBgColorSwitcher}
-				setBgColorSwitcher={(value) => setAttributes({ stackCardItemBgColorSwitcher: value })}
-				normalBackgroundType={stackCardItemBgNormalBackgroundType}
-				setNormalBackgroundType={(value) => setAttributes({ stackCardItemBgNormalBackgroundType: value })}
-				normalClassicColor={stackCardItemBgNormalClassicColor}
-				setNormalClassicColor={(value) => setAttributes({ stackCardItemBgNormalClassicColor: value === undefined ? '' : value })}
-				normalGradientColor={stackCardItemBgNormalGradientColor}
-				setNormalGradientColor={(value) => setAttributes({ stackCardItemBgNormalGradientColor: value === undefined ? '' : value })}
-				normalCustomGradientSwitcher={stackCardItemBgNormalCustomGradientSwitcher}
-				setNormalCustomGradientSwitcher={(value) => setAttributes({ stackCardItemBgNormalCustomGradientSwitcher: value })}
-				normalCustomGradientInputValue={stackCardItemBgNormalCustomGradientInputValue}
-				setNormalCustomGradientInputValue={(value) => setAttributes({ stackCardItemBgNormalCustomGradientInputValue: value })}
-				hoverBackgroundType={stackCardItemBgHoverBackgroundType}
-				setHoverBackgroundType={(value) => setAttributes({ stackCardItemBgHoverBackgroundType: value })}
-				hoverClassicColor={stackCardItemBgHoverClassicColor}
-				setHoverClassicColor={(value) => setAttributes({ stackCardItemBgHoverClassicColor: value === undefined ? '' : value })}
-				hoverGradientColor={stackCardItemBgHoverGradientColor}
-				setHoverGradientColor={(value) => setAttributes({ stackCardItemBgHoverGradientColor: value === undefined ? '' : value })}
-				hoverCustomGradientSwitcher={stackCardItemBgHoverCustomGradientSwitcher}
-				setHoverCustomGradientSwitcher={(value) => setAttributes({ stackCardItemBgHoverCustomGradientSwitcher: value })}
-				hoverCustomGradientInputValue={stackCardItemBgHoverCustomGradientInputValue}
-				setHoverCustomGradientInputValue={(value) => setAttributes({ stackCardItemBgHoverCustomGradientInputValue: value })}
-				isBackgroundImage={false}
+		<>
+			<FB_InspectorControls
+				styleControls={styleControls}
 			/>
-
-			<FB_Spacing
-				label={__('Padding', 'frontis-blocks')}
-				deviceType={deviceType}
-				spacingUnitsHandler={handleStackCardItemPaddingUnitsHandler}
-				spacingUnits={stackCardItemPaddingUnits}
-				spacingDesktop={stackCardItemPaddingDesktop}
-				spacingTablet={stackCardItemPaddingTablet}
-				spacingMobile={stackCardItemPaddingMobile}
-				handleSpacingUnitHandler={handleStackCardItemPaddingUnitChange}
-				spacingCombineBtn={stackCardItemPaddingLink}
-				spacingCombineBtnHandler={handleStackCardItemPaddingCombineBtn}
-				setAttributes={setAttributes}
-			/>
-
-			<SelectControl
-				label={__('Border Style', 'frontis-blocks')}
-				value={stackCardItemBorder}
-				options={BORDER_STYLES}
-				onChange={(value) => setAttributes({ stackCardItemBorder: value })}
-			/>
-
-			<FB_SwitcherControl
-				label={__('Border Color', 'frontis-blocks')}
-				globalSwitcher={stackCardItemBorderColorSwitcher}
-				setGlobalSwitcher={(value) => setAttributes({ stackCardItemBorderColorSwitcher: value })}
-			/>
-
-			{stackCardItemBorderColorSwitcher === 'normal' && (
-				<FB_ColorControl
-					label={__('Normal Color', 'frontis-blocks')}
-					globalColor={stackCardItemBorderColor}
-					setGlobalColor={(value) => setAttributes({ stackCardItemBorderColor: value === undefined ? '' : value })}
-				/>
-			)}
-
-			{stackCardItemBorderColorSwitcher === 'hover' && (
-				<FB_ColorControl
-					label={__('Hover Color', 'frontis-blocks')}
-					globalColor={stackCardItemBorderHoverColor}
-					setGlobalColor={(value) => setAttributes({ stackCardItemBorderHoverColor: value === undefined ? '' : value })}
-				/>
-			)}
-
-			<FB_Spacing
-				label={__('Border', 'frontis-blocks')}
-				deviceType={deviceType}
-				spacingUnitsHandler={handleStackCardItemBorderUnitsHandler}
-				spacingUnits={stackCardItemBorderUnits}
-				spacingDesktop={stackCardItemBorderDesktop}
-				spacingTablet={stackCardItemBorderTablet}
-				spacingMobile={stackCardItemBorderMobile}
-				handleSpacingUnitHandler={handleStackCardItemBorderUnitChange}
-				spacingCombineBtn={stackCardItemBorderLink}
-				spacingCombineBtnHandler={handleStackCardItemBorderCombineBtn}
-				setAttributes={setAttributes}
-			/>
-
-			<FB_Spacing
-				label={__('Border Radius', 'frontis-blocks')}
-				deviceType={deviceType}
-				spacingUnitsHandler={handleStackCardItemBorderRadiusUnitsHandler}
-				spacingUnits={stackCardItemBorderRadiusUnits}
-				spacingDesktop={stackCardItemBorderRadiusDesktop}
-				spacingTablet={stackCardItemBorderRadiusTablet}
-				spacingMobile={stackCardItemBorderRadiusMobile}
-				handleSpacingUnitHandler={handleStackCardItemBorderRadiusUnitChange}
-				spacingCombineBtn={stackCardItemBorderRadiusLink}
-				spacingCombineBtnHandler={handleStackCardItemBorderRadiusCombineBtn}
-				setAttributes={setAttributes}
-			/>
-		</PanelBody>
+		</>
 	);
 }

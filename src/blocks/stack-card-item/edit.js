@@ -15,56 +15,10 @@ const DEFAULT_CARD_ITEM_TEMPLATE = [
 	['frontis-blocks/testimonial'],
 ];
 
-const getItemBackgroundValue = (
-	backgroundType,
-	classicColor,
-	gradientColor,
-	customGradientSwitcher,
-	customGradientInputValue,
-	fallbackValue
-) => {
-	if (backgroundType === 'gradient') {
-		return customGradientSwitcher && customGradientInputValue
-			? customGradientInputValue
-			: (gradientColor || classicColor || fallbackValue);
-	}
-
-	return classicColor || fallbackValue;
-};
-
 export default function Edit({ attributes, isSelected, clientId, setAttributes }) {
 	const {
 		itemNumber = 1,
-		stackCardItemBgNormalBackgroundType,
-		stackCardItemBgNormalClassicColor,
-		stackCardItemBgNormalGradientColor,
-		stackCardItemBgNormalCustomGradientSwitcher,
-		stackCardItemBgNormalCustomGradientInputValue,
-		stackCardItemBgHoverBackgroundType,
-		stackCardItemBgHoverClassicColor,
-		stackCardItemBgHoverGradientColor,
-		stackCardItemBgHoverCustomGradientSwitcher,
-		stackCardItemBgHoverCustomGradientInputValue,
-		stackCardItemBorderColor,
-		stackCardItemBorderHoverColor,
 	} = attributes;
-
-	const normalBackground = getItemBackgroundValue(
-		stackCardItemBgNormalBackgroundType,
-		stackCardItemBgNormalClassicColor,
-		stackCardItemBgNormalGradientColor,
-		stackCardItemBgNormalCustomGradientSwitcher,
-		stackCardItemBgNormalCustomGradientInputValue
-	);
-
-	const hoverBackground = getItemBackgroundValue(
-		stackCardItemBgHoverBackgroundType,
-		stackCardItemBgHoverClassicColor,
-		stackCardItemBgHoverGradientColor,
-		stackCardItemBgHoverCustomGradientSwitcher,
-		stackCardItemBgHoverCustomGradientInputValue,
-		normalBackground
-	);
 
 	const { replaceInnerBlocks } = useDispatch(blockEditorStore);
 	const autoRestoreAttemptedRef = useRef(false);
@@ -74,30 +28,30 @@ export default function Edit({ attributes, isSelected, clientId, setAttributes }
 		[clientId]
 	);
 
-	useLayoutEffect(() => {
-		if (hasInnerBlocks) {
-			autoRestoreAttemptedRef.current = false;
-			return;
-		}
+	// useLayoutEffect(() => {
+	// 	if (hasInnerBlocks) {
+	// 		autoRestoreAttemptedRef.current = false;
+	// 		return;
+	// 	}
 
-		if (autoRestoreAttemptedRef.current) {
-			return;
-		}
+	// 	if (autoRestoreAttemptedRef.current) {
+	// 		return;
+	// 	}
 
-		autoRestoreAttemptedRef.current = true;
+	// 	autoRestoreAttemptedRef.current = true;
 
-		replaceInnerBlocks(
-			clientId,
-			[
-				createBlock('frontis-blocks/testimonial', {
-					icon: 'swatchbook',
-					btnIcon: 'arrow-up-right-from-square',
-					mediaSwitcher: 'icon'
-				})
-			],
-			false
-		);
-	}, [clientId, hasInnerBlocks, replaceInnerBlocks]);
+	// 	replaceInnerBlocks(
+	// 		clientId,
+	// 		[
+	// 			createBlock('frontis-blocks/testimonial', {
+	// 				icon: 'swatchbook',
+	// 				btnIcon: 'arrow-up-right-from-square',
+	// 				mediaSwitcher: 'icon'
+	// 			})
+	// 		],
+	// 		false
+	// 	);
+	// }, [clientId, hasInnerBlocks, replaceInnerBlocks]);
 
 	// Force a store update on mount to ensure defaults are saved and parent styles are triggered
 	useEffect(() => {
@@ -109,22 +63,37 @@ export default function Edit({ attributes, isSelected, clientId, setAttributes }
 
 	const blockProps = useBlockProps({
 		className: ['fb-stack-card-item', `fb-card-item${itemNumber}`].filter(Boolean).join(' '),
-		style: {
-			'--fb-stack-card-item-bg-normal': normalBackground,
-			'--fb-stack-card-item-bg-hover': hoverBackground,
-			'--fb-stack-card-item-border-color': stackCardItemBorderColor || undefined,
-			'--fb-stack-card-item-border-hover-color': stackCardItemBorderHoverColor || undefined,
-		},
 	});
+
+	// const innerBlocksProps = useInnerBlocksProps(
+	// 	{
+	// 		className: `fb-stack-card-item__content ${!hasInnerBlocks ? 'fb-stack-card-item__content--empty' : ''}`.trim(),
+	// 	},
+	// 	{
+	// 		template: DEFAULT_CARD_ITEM_TEMPLATE,
+	// 		templateLock: false,
+	// 		renderAppender: !hasInnerBlocks || isSelected ? InnerBlocks.ButtonBlockAppender : false,
+	// 	}
+	// );
+	
+	// const innerBlocksProps = useInnerBlocksProps(
+	// 	{
+	// 		className: `fb-stack-card-item__content ${!hasInnerBlocks ? 'fb-stack-card-item__content--empty' : ''}`.trim(),
+	// 	},
+	// 	{
+	// 		template: DEFAULT_CARD_ITEM_TEMPLATE,
+	// 		templateLock: false,
+	// 		renderAppender: isSelected ? InnerBlocks.ButtonBlockAppender : false,
+	// 	}
+	// );
 
 	const innerBlocksProps = useInnerBlocksProps(
 		{
 			className: `fb-stack-card-item__content ${!hasInnerBlocks ? 'fb-stack-card-item__content--empty' : ''}`.trim(),
 		},
 		{
-			template: DEFAULT_CARD_ITEM_TEMPLATE,
 			templateLock: false,
-			renderAppender: !hasInnerBlocks || isSelected ? InnerBlocks.ButtonBlockAppender : false,
+			renderAppender: isSelected ? InnerBlocks.ButtonBlockAppender : false,
 		}
 	);
 
