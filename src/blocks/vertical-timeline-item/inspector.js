@@ -64,7 +64,6 @@ import './editor.scss';;
 
 const Inspector = ({ attributes, setAttributes }) => {
 
-    const deviceType = useDeviceType();
     const {
 
         /** Start General Settings */
@@ -308,6 +307,7 @@ const Inspector = ({ attributes, setAttributes }) => {
         verticalTimelineItemWraperClass,
         /** End Class & ID Setting */
     } = attributes;
+    const deviceType = useDeviceType();
 
     /** Start Content Box Padding */
     const vertcalTimelineContentBoxPaddingUnitsChange = (event, position) => {
