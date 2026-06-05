@@ -1,0 +1,20 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "frontis-blocks/advanced-modal-popup",
+	"version": "1.0.0",
+	"title": "Advanced Modal Popup",
+	"category": "frontis-blocks",
+	"description": "Add an advanced modal popup with a toggleable trigger",
+	"example": {},
+    "supports": {
+        "anchor": false,
+		"align": ["wide", "full"],
+        "customClassName": false,
+        "customCSS": false
+    },
+	"textdomain": "frontis-blocks",
+	"editorScript": "file:./index.js",
+    "editorStyle": "file:./index.css",
+	"viewScript": "file:./view.js"
+}

@@ -684,7 +684,22 @@ export const ANIMATION = [
     { value: 'zoom', label: __('Zoom', 'frontis-blocks') },
     { value: 'flip', label: __('Flip', 'frontis-blocks') },
     { value: 'fade', label: __('Fade', 'frontis-blocks') },
+    { value: 'center', label: __('Center', 'frontis-blocks') },
 ];
+
+export const TOGGLE_TYPES = [
+	{ label: __('Button', 'frontis-blocks'), value: 'button' },
+	{ label: __('Image', 'frontis-blocks'), value: 'image' },
+];
+
+export const CONTENT_TYPES = [
+	{ label: __('Pattern', 'frontis-blocks'), value: 'pattern' },
+	{ label: __('Image', 'frontis-blocks'), value: 'image' },
+	{ label: __('Video', 'frontis-blocks'), value: 'video' },
+	{ label: __('Google Map', 'frontis-blocks'), value: 'map' },
+	{ label: __('Custom Content', 'frontis-blocks'), value: 'custom' },
+];
+
 
 export const MENU_TYPE = [
     { value: 'icon', label: __('Icon', 'frontis-blocks') },
