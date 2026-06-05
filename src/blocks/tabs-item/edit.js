@@ -48,12 +48,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 		const rootBlockAttrs = getBlockAttributes(rootBlockId) || {};
 
-		// Parent → Child: active tab sync (frontend state থেকে)
+		// Parent → Child: active tab sync (editor state থেকে)
 		if (
-			rootBlockAttrs.tabActiveFrontend &&
-			rootBlockAttrs.tabActiveFrontend !== attributes?.tabActive
+			rootBlockAttrs.tabActive !== undefined &&
+			rootBlockAttrs.tabActive !== attributes?.tabActive
 		) {
-			setAttributes({ tabActive: rootBlockAttrs.tabActiveFrontend });
+			setAttributes({ tabActive: rootBlockAttrs.tabActive });
 		}
 
 		// Parent-এর style/attributes apply (metadata বাদ)
@@ -73,7 +73,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	}, []);
 
 	const blockProps = useBlockProps({
-		className: `fb-tabs-item-wrapper ${blockId}`,
+		className: `fb-tabs-item-wrapper ${blockId} ${isActive ? 'fb-tabs-panel-active' : ''}`,
 		style: { display: isActive ? 'block' : 'none', opacity: isActive ? 1 : 0}
 	});
 
