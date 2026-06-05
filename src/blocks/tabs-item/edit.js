@@ -13,7 +13,6 @@ const Render = memo(({ attributes }) => {
 	return (
 		<div
 			className={`fb-tabs-body-container fb-inner-tab-${id}`}
-			style={{ display: isActive ? 'block' : 'none' }}
 			aria-labelledby={`fb-tabs-tab${id}`}
 		>
 			<InnerBlocks
@@ -34,7 +33,8 @@ const Render = memo(({ attributes }) => {
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 
-	const { blockId } = attributes;
+	const { blockId, id, tabActive } = attributes;
+	const isActive = id === tabActive;
 
 	useEffect(() => {
 		const editorSelect = select('core/block-editor');
@@ -74,6 +74,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	const blockProps = useBlockProps({
 		className: `fb-tabs-item-wrapper ${blockId}`,
+		style: { display: isActive ? 'block' : 'none', opacity: isActive ? 1 : 0}
 	});
 
 	return (
