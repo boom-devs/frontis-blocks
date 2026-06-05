@@ -935,9 +935,9 @@ class BlockList
             'circle-menu' => [
                 'slug' => 'circle-menu',
                 'title' => 'Circle Menu',
-                'package' => 'free',
+                'package' => 'pro',
                 'category' => 'navigation',
-                'badge' => 'free',
+                'badge' => 'pro',
                 'status' => 'true',
                 'icon' => FB_PLUGIN_URL . 'assets/icons/circle-menu.svg',
                 'doc' => 'https://wpmessiah.com/',
