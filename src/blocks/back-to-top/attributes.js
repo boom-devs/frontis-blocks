@@ -295,7 +295,7 @@ const attributes = {
     },
     backToTopNormalClassicColor: {
         type: "string",
-        default: "#92003b",
+        default: "#399CFF",
     },
     backToTopNormalGradientColor: {
         type: "string",
