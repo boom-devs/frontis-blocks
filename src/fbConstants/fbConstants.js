@@ -49,6 +49,11 @@ export const TABS_LAYOUT = [
 	{ label: __('Vertical', 'frontis-blocks'), value: 'vertical' },
 ];
 
+export const TAB_SWITCH_MODE = [
+	{ label: __('On Click', 'frontis-blocks'), value: 'click' },
+	{ label: __('Auto Switch', 'frontis-blocks'), value: 'auto' },
+];
+
 export const ICON_POSITION = [
 	{ label: __("Left", "frontis-block"), value: "left" },
 	{ label: __("Right", "frontis-block"), value: "right" },
