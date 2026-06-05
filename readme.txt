@@ -250,6 +250,7 @@ There is no prerequisites for installing **Frontis Blocks**. You can follow the 
 
 = 1.2.4 – 05 June 2026 =
 - **New**: Added Back To Top block to easily navigate to the top of pages.
+- **Improved**: Added responsive auto-switching support (with milliseconds control, hover pause, page visibility check, and fade/slide transition animations) to native Tabs block on both frontend and editor.
 - **Improved**: Updated and enhanced native Tabs block (Tabs & Tabs Item) with custom controls and layouts.
 - **Improved**: Added post category image control and custom height settings in Post Category block.
 - **Improved**: Added dynamic category and post terms link support in Advanced Heading block.
