@@ -5,22 +5,15 @@
   "version": "1.0.0",
   "title": "Circle Menu",
   "category": "frontis-blocks",
-  "description": "A customizable circle menu block with various styling options. ",
+  "description": "A customizable circle menu block with various styling options.",
   "example": {},
   "supports": {
     "anchor": false,
-    "align": [
-      "wide",
-      "full"
-    ],
+    "align": [ "wide", "full" ],
     "customClassName": false
   },
   "textdomain": "frontis-blocks",
-  "keywords": [
-    "menu",
-    "circle",
-    "navigation"
-  ],
+  "keywords": ["menu","circle","navigation"],
   "editorScript": "file:./index.js",
   "editorStyle": "file:./index.css",
   "style": "file:./style-index.css",

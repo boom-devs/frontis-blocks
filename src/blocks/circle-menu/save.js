@@ -34,11 +34,9 @@ export default function save({ attributes }) {
 
 	/** Block Props & Wrapper Classes */
 	const blockProps = useBlockProps.save({
-		id: circleMenuGlobalWraperID || undefined,
-		className: `fb-circle-menu-main-wrapper ${blockID} ${menuPosition} ${circleMenuGlobalWraperClass} ${
+		className: `fb-circle-menu-main-wrapper ${blockID} ${menuPosition} ${
 			attributes.circleMenuDesktopSwitcher ? "fb-desktop-responsive" : ""
-		} ${attributes.circleMenuTabletSwitcher ? "fb-tablet-responsive" : ""} ${
-			attributes.circleMenuMobileSwitcher ? "fb-mobile-responsive" : ""
+		} ${attributes.circleMenuTabletSwitcher ? "fb-tablet-responsive" : ""} ${attributes.circleMenuMobileSwitcher ? "fb-mobile-responsive" : ""
 		}`,
 	});
 
@@ -91,7 +89,7 @@ export default function save({ attributes }) {
 	/** Final Render Output (HTML for Frontend) */
 	return (
 		<div {...blockProps}>
-			<div className={`fb-parent-wrapper ${blockID}`}>
+			<div className={`fb-parent-wrapper ${blockID} ${circleMenuGlobalWraperClass}`} id={circleMenuGlobalWraperID}>
 				<div
 					className="fb-circle-menu"
 					data-radiusgap={submenuSpace?.Desktop || 0}

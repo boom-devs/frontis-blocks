@@ -743,12 +743,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 	const generalControls = (
 		<>
 			<PanelBody title={__("General", "frontis-blocks")} initialOpen={true}>
-				<BaseControl
-					help={__(
-						"This setting only affects the position on the frontend, not in the editor.",
-						"frontis-blocks",
-					)}
-				>
+				<BaseControl>
 					<SelectControl
 						label={__("Position", "frontis-blocks")}
 						value={menuPosition}
@@ -873,8 +868,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 						{mainMenuOpenType === "icon" ? (
 							<BaseControl>
 								<FBIconPicker
-									value={mainMenuIcon || "fas fa-ellipsis"}
-									setIconHandler={(icon) => setAttributes({ mainMenuIcon: icon })}
+									value={mainMenuIcon}
+									setIconHandler={(value) => setAttributes({ mainMenuIcon: value })}
 								/>
 							</BaseControl>
 						) : (
@@ -906,8 +901,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 						{mainMenuCloseType === "icon" ? (
 							<BaseControl>
 								<FBIconPicker
-									value={mainMenuCloseIcon || "fas fa-xmark"}
-									setIconHandler={(icon) => setAttributes({ mainMenuCloseIcon: icon })}
+									value={mainMenuCloseIcon}
+									setIconHandler={(value) => setAttributes({ mainMenuCloseIcon: value })}
 								/>
 							</BaseControl>
 						) : (
@@ -1080,12 +1075,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 				{offsetSwitcher === "before" ? (
 					<>
-						<BaseControl
-							help={__(
-								"Offsets only affect the frontend, so they are not visible in the editor.",
-								"frontis-blocks",
-							)}
-						>
+						<BaseControl>
 							<FB_Range
 								min={0}
 								max={300}
@@ -1115,11 +1105,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 					</>
 				) : (
 					<>
-						<BaseControl
-							help={__(
-								"Offsets only affect the frontend, so they are not visible in the editor.",
-							)}
-						>
+						<BaseControl>
 							<FB_Range
 								min={0}
 								max={300}

@@ -175,7 +175,7 @@ export default function SortableItem({
 					{!item.contentType || item.contentType === "icon" ? (
 						<BaseControl label={__("Icon", "frontis-blocks")}>
 							<FBIconPicker
-								value={item.icon || "fas fa-star"}
+								value={item.icon}
 								setIconHandler={iconHandler}
 							/>
 						</BaseControl>
