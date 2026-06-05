@@ -11,12 +11,7 @@ import "./editor.scss";
 import { useDeviceType } from "@Config/displayType";
 import generateCircleMenuStyle from "./styling";
 
-export default function Edit({
-	attributes,
-	setAttributes,
-	clientId,
-	isSelected,
-}) {
+export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
 	const {
 		blockID,
 		blockStyle,
@@ -79,11 +74,9 @@ export default function Edit({
 
 	/** Block Props & Global Wrappers Setup */
 	const blockProps = useBlockProps({
-		className: `fb-circle-menu-main-wrapper ${blockID} ${menuPosition} ${circleMenuGlobalWraperClass} ${
-			circleMenuDesktopSwitcher ? "fb-desktop-responsive" : ""
-		} ${circleMenuTabletSwitcher ? "fb-tablet-responsive" : ""} ${
-			circleMenuMobileSwitcher ? "fb-mobile-responsive" : ""
-		}`,
+		className: `fb-circle-menu-main-wrapper ${blockID} ${menuPosition} is-editor ${circleMenuDesktopSwitcher ? "fb-desktop-responsive" : ""
+			} ${circleMenuTabletSwitcher ? "fb-tablet-responsive" : ""} ${circleMenuMobileSwitcher ? "fb-mobile-responsive" : ""
+			}`,
 	});
 
 	const panelRef = useRef(null);
@@ -157,10 +150,17 @@ export default function Edit({
 	/** Final Render Output for Block Editor */
 	return (
 		<>
-			<div {...blockProps} id={circleMenuGlobalWraperID || undefined}>
+			{isSelected && (
+				<Inspector
+					attributes={attributes}
+					setAttributes={setAttributes}
+				/>
+			)}
+			<div {...blockProps}>
 				<div
-					className={`fb-parent-wrapper ${isOpen ? "is-active" : ""}`}
+					className={`fb-parent-wrapper ${isOpen ? "is-active" : ""} ${circleMenuGlobalWraperClass}`}
 					ref={panelRef}
+					id={circleMenuGlobalWraperID}
 				>
 					<div
 						ref={menuRef}
@@ -202,14 +202,14 @@ export default function Edit({
 													? renderSVG(item.icon)
 													: ""
 												: item.image && (
-														<img
-															src={item.image}
-															alt={item.imageAlt}
-															style={{
-																objectFit: item.imageSize || "cover",
-															}}
-														/>
-												  )}
+													<img
+														src={item.image}
+														alt={item.imageAlt}
+														style={{
+															objectFit: item.imageSize || "cover",
+														}}
+													/>
+												)}
 										</div>
 									</a>
 									{submenuShowTitleOnHover && (
@@ -221,7 +221,6 @@ export default function Edit({
 					</div>
 				</div>
 			</div>
-			<Inspector attributes={attributes} setAttributes={setAttributes} />
 			<style>{blockStyle}</style>
 		</>
 	);

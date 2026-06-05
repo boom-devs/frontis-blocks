@@ -414,16 +414,16 @@ const generateCircleMenuStyle = ( attributes ) => {
 	const circleMenuBlockStyle = `
         /* Desktop Styling */
         .${ blockID }.fb-circle-menu-main-wrapper {
-            --fb-cm-offset-h: ${ offsetH?.Desktop}px;
-            --fb-cm-offset-v: ${ offsetV?.Desktop}px;
+            --fb-cm-offset-h: ${ offsetH?.Desktop}px !important;
+            --fb-cm-offset-v: ${ offsetV?.Desktop}px !important;
             --fb-cm-wrapper-size: ${ getWrapperSize( 'Desktop' ) }px;
-            ${circleMenuGlobalZIndex?.Desktop ? `z-index: ${ circleMenuGlobalZIndex.Desktop };` : ''}
-            ${circleMenuPositionType !== 'default' ? `position: ${ circleMenuPositionType };` : ''}
-            ${circleMenuOverflow !== 'default' ? `overflow: ${ circleMenuOverflow };` : ''}
-            ${circleMenuHZOrientationType === 'left' && circleMenuHZLeftOffset?.Desktop !== undefined ? `left: ${ circleMenuHZLeftOffset.Desktop }${ circleMenuHZLeftOffsetUnits?.Desktop || 'px' };` : ''}
-            ${circleMenuHZOrientationType === 'right' && circleMenuHZRightOffset?.Desktop !== undefined ? `right: ${ circleMenuHZRightOffset.Desktop }${ circleMenuHZRightOffsetUnits?.Desktop || 'px' };` : ''}
-            ${circleMenuVROrientationType === 'top' && circleMenuVRTopOffset?.Desktop !== undefined ? `top: ${ circleMenuVRTopOffset.Desktop }${ circleMenuVRTopOffsetUnits?.Desktop || 'px' };` : ''}
-            ${circleMenuVROrientationType === 'bottom' && circleMenuVRBottomOffset?.Desktop !== undefined ? `bottom: ${ circleMenuVRBottomOffset.Desktop }${ circleMenuVRBottomOffsetUnits?.Desktop || 'px' };` : ''}
+            ${circleMenuGlobalZIndex?.Desktop ? `z-index: ${ circleMenuGlobalZIndex.Desktop } !important;` : ''}
+            ${circleMenuPositionType !== 'default' ? `position: ${ circleMenuPositionType } !important;` : ''}
+            ${circleMenuOverflow !== 'default' ? `overflow: ${ circleMenuOverflow } !important;` : ''}
+            ${circleMenuHZOrientationType === 'left' && circleMenuHZLeftOffset?.Desktop !== undefined ? `left: ${ circleMenuHZLeftOffset.Desktop }${ circleMenuHZLeftOffsetUnits?.Desktop || 'px' } !important;` : ''}
+            ${circleMenuHZOrientationType === 'right' && circleMenuHZRightOffset?.Desktop !== undefined ? `right: ${ circleMenuHZRightOffset.Desktop }${ circleMenuHZRightOffsetUnits?.Desktop || 'px' } !important;` : ''}
+            ${circleMenuVROrientationType === 'top' && circleMenuVRTopOffset?.Desktop !== undefined ? `top: ${ circleMenuVRTopOffset.Desktop }${ circleMenuVRTopOffsetUnits?.Desktop || 'px' } !important;` : ''}
+            ${circleMenuVROrientationType === 'bottom' && circleMenuVRBottomOffset?.Desktop !== undefined ? `bottom: ${ circleMenuVRBottomOffset.Desktop }${ circleMenuVRBottomOffsetUnits?.Desktop || 'px' } !important;` : ''}
             padding: ${ globalDesktopPadding };
             margin: ${ globalDesktopMargin };
             border-width: ${ globalDesktopBorderWidth };
@@ -481,8 +481,8 @@ const generateCircleMenuStyle = ( attributes ) => {
         }
 
         .${ blockID }.fb-circle-menu-main-wrapper.is-active {
-            --fb-cm-offset-h: ${ activeOffsetH?.Desktop || offsetH?.Desktop}px;
-            --fb-cm-offset-v: ${ activeOffsetV?.Desktop || offsetV?.Desktop}px;
+            --fb-cm-offset-h: ${ activeOffsetH?.Desktop || offsetH?.Desktop}px !important;
+            --fb-cm-offset-v: ${ activeOffsetV?.Desktop || offsetV?.Desktop}px !important;
         }
 
         .${ blockID } .fb-circle-menu {
@@ -755,13 +755,13 @@ const generateCircleMenuStyle = ( attributes ) => {
         /* Tablet Media Query */
         @media only screen and (max-width: 1024px) {
             .${ blockID }.fb-circle-menu-main-wrapper {
-                --fb-cm-offset-h: ${ offsetH?.Tablet}px;
-                --fb-cm-offset-v: ${ offsetV?.Tablet}px;
-                ${ circleMenuGlobalZIndex?.Tablet ? `z-index: ${ circleMenuGlobalZIndex.Tablet };` : ''}
-                ${ circleMenuHZOrientationType === 'left' && circleMenuHZLeftOffset?.Tablet !== undefined ? `left: ${ circleMenuHZLeftOffset.Tablet }${ circleMenuHZLeftOffsetUnits?.Tablet || 'px' };` : ''}
-                ${ circleMenuHZOrientationType === 'right' && circleMenuHZRightOffset?.Tablet !== undefined ? `right: ${ circleMenuHZRightOffset.Tablet }${ circleMenuHZRightOffsetUnits?.Tablet || 'px' };` : ''}
-                ${ circleMenuVROrientationType === 'top' && circleMenuVRTopOffset?.Tablet !== undefined ? `top: ${ circleMenuVRTopOffset.Tablet }${ circleMenuVRTopOffsetUnits?.Tablet || 'px' };` : ''}
-                ${ circleMenuVROrientationType === 'bottom' && circleMenuVRBottomOffset?.Tablet !== undefined ? `bottom: ${ circleMenuVRBottomOffset.Tablet }${ circleMenuVRBottomOffsetUnits?.Tablet || 'px' };` : ''}
+                --fb-cm-offset-h: ${ offsetH?.Tablet}px !important;
+                --fb-cm-offset-v: ${ offsetV?.Tablet}px !important;
+                ${ circleMenuGlobalZIndex?.Tablet ? `z-index: ${ circleMenuGlobalZIndex.Tablet } !important;` : ''}
+                ${ circleMenuHZOrientationType === 'left' && circleMenuHZLeftOffset?.Tablet !== undefined ? `left: ${ circleMenuHZLeftOffset.Tablet }${ circleMenuHZLeftOffsetUnits?.Tablet || 'px' } !important;` : ''}
+                ${ circleMenuHZOrientationType === 'right' && circleMenuHZRightOffset?.Tablet !== undefined ? `right: ${ circleMenuHZRightOffset.Tablet }${ circleMenuHZRightOffsetUnits?.Tablet || 'px' } !important;` : ''}
+                ${ circleMenuVROrientationType === 'top' && circleMenuVRTopOffset?.Tablet !== undefined ? `top: ${ circleMenuVRTopOffset.Tablet }${ circleMenuVRTopOffsetUnits?.Tablet || 'px' } !important;` : ''}
+                ${ circleMenuVROrientationType === 'bottom' && circleMenuVRBottomOffset?.Tablet !== undefined ? `bottom: ${ circleMenuVRBottomOffset.Tablet }${ circleMenuVRBottomOffsetUnits?.Tablet || 'px' } !important;` : ''}
                 padding: ${ globalTabletPadding };
                 margin: ${ globalTabletMargin };
                 border-width: ${ globalTabletBorderWidth };
@@ -770,8 +770,8 @@ const generateCircleMenuStyle = ( attributes ) => {
             }
 
             .${ blockID }.fb-circle-menu-main-wrapper.is-active {
-                --fb-cm-offset-h: ${ activeOffsetH?.Tablet || offsetH?.Tablet}px;
-                --fb-cm-offset-v: ${ activeOffsetV?.Tablet || offsetV?.Tablet}px;
+                --fb-cm-offset-h: ${ activeOffsetH?.Tablet || offsetH?.Tablet}px !important;
+                --fb-cm-offset-v: ${ activeOffsetV?.Tablet || offsetV?.Tablet}px !important;
             }
 
             .${ blockID } .fb-circle-menu {
@@ -829,13 +829,13 @@ const generateCircleMenuStyle = ( attributes ) => {
         /* Mobile Media Query */
         @media only screen and (max-width: 767px) {
             .${ blockID }.fb-circle-menu-main-wrapper {
-                --fb-cm-offset-h: ${ offsetH?.Mobile}px;
-                --fb-cm-offset-v: ${ offsetV?.Mobile}px;
-                ${circleMenuGlobalZIndex?.Mobile ? `z-index: ${ circleMenuGlobalZIndex.Mobile };` : ''}
-                ${circleMenuHZOrientationType === 'left' && circleMenuHZLeftOffset?.Mobile !== undefined ? `left: ${ circleMenuHZLeftOffset.Mobile }${ circleMenuHZLeftOffsetUnits?.Mobile || 'px' };` : ''}
-                ${circleMenuHZOrientationType === 'right' && circleMenuHZRightOffset?.Mobile !== undefined ? `right: ${ circleMenuHZRightOffset.Mobile }${ circleMenuHZRightOffsetUnits?.Mobile || 'px' };`	: ''}
-                ${circleMenuVROrientationType === 'top' && circleMenuVRTopOffset?.Mobile !== undefined ? `top: ${ circleMenuVRTopOffset.Mobile }${ circleMenuVRTopOffsetUnits?.Mobile || 'px' };` : ''}
-                ${circleMenuVROrientationType === 'bottom' && circleMenuVRBottomOffset?.Mobile !== undefined ? `bottom: ${ circleMenuVRBottomOffset.Mobile }${ circleMenuVRBottomOffsetUnits?.Mobile || 'px' };` : ''}
+                --fb-cm-offset-h: ${ offsetH?.Mobile}px !important;
+                --fb-cm-offset-v: ${ offsetV?.Mobile}px !important;
+                ${circleMenuGlobalZIndex?.Mobile ? `z-index: ${ circleMenuGlobalZIndex.Mobile } !important;` : ''}
+                ${circleMenuHZOrientationType === 'left' && circleMenuHZLeftOffset?.Mobile !== undefined ? `left: ${ circleMenuHZLeftOffset.Mobile }${ circleMenuHZLeftOffsetUnits?.Mobile || 'px' } !important;` : ''}
+                ${circleMenuHZOrientationType === 'right' && circleMenuHZRightOffset?.Mobile !== undefined ? `right: ${ circleMenuHZRightOffset.Mobile }${ circleMenuHZRightOffsetUnits?.Mobile || 'px' } !important;`	: ''}
+                ${circleMenuVROrientationType === 'top' && circleMenuVRTopOffset?.Mobile !== undefined ? `top: ${ circleMenuVRTopOffset.Mobile }${ circleMenuVRTopOffsetUnits?.Mobile || 'px' } !important;` : ''}
+                ${circleMenuVROrientationType === 'bottom' && circleMenuVRBottomOffset?.Mobile !== undefined ? `bottom: ${ circleMenuVRBottomOffset.Mobile }${ circleMenuVRBottomOffsetUnits?.Mobile || 'px' } !important;` : ''}
                 padding: ${ globalMobilePadding };
                 margin: ${ globalMobileMargin };
                 border-width: ${ globalMobileBorderWidth };
@@ -844,8 +844,8 @@ const generateCircleMenuStyle = ( attributes ) => {
             }
 
             .${ blockID }.fb-circle-menu-main-wrapper.is-active {
-                --fb-cm-offset-h: ${ activeOffsetH?.Mobile || offsetH?.Mobile}px;
-                --fb-cm-offset-v: ${activeOffsetV?.Mobile || offsetV?.Mobile}px;
+                --fb-cm-offset-h: ${ activeOffsetH?.Mobile || offsetH?.Mobile}px !important;
+                --fb-cm-offset-v: ${activeOffsetV?.Mobile || offsetV?.Mobile}px !important;
             }
 
             .${ blockID } .fb-circle-menu {
