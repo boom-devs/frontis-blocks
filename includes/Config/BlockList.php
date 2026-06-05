@@ -308,6 +308,7 @@ class BlockList
                 'complete' => 'true',
                 'child' => 'true',
             ],
+<<<<<<< HEAD
             'image-hotspot' => [
                 'slug' => 'image-hotspot',
                 'title' => 'Image Hotspot',
@@ -321,6 +322,34 @@ class BlockList
                 'complete' => 'true',
                 'child' => 'false',
             ],
+=======
+            'select-field' => [
+                'slug' => 'select-field',
+                'title' => 'Select Field',
+                'package' => 'free',
+                'category' => 'form',
+                'badge' => 'freemium',
+                'status' => 'true',
+                'icon' => FB_PLUGIN_URL . 'assets/icons/accordion.svg',
+                'doc' => 'https://wpmessiah.com/',
+                'demo' => 'https://wpmessiah.com/',
+                'complete' => 'true',
+                'child' => 'true',
+            ],
+            // 'image-hotspot' => [
+            //     'slug' => 'image-hotspot',
+            //     'title' => 'Image Hotspot',
+            //     'package' => 'free',
+            //     'category' => 'content',
+            //     'badge' => 'pro',
+            //     'status' => 'true',
+            //     'icon' => FB_PLUGIN_URL . 'assets/icons/image-hotspot.svg',
+            //     'doc' => 'https://wpmessiah.com/',
+            //     'demo' => 'https://wpmessiah.com/',
+            //     'complete' => 'true',
+            //     'child' => 'false',
+            // ],
+>>>>>>> 17bbdba69f890e5df10ea601ddde355196d26f70
             'features-list' => [
                 'slug' => 'features-list',
                 'title' => 'Features List',
