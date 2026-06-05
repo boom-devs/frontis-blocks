@@ -1,63 +1,63 @@
 const attributes = {
-    blockID: {
-        type: "string",
-        default: ""
-    },
-    blockStyle: {
-        type: 'string',
-        default: ''
-    },
-    deviceType: {
-        type: 'string',
-        default: 'Desktop'
-    },
-    googleMapLocation: {
-        type: "string",
-        default: "BoomDevs"
-    },
-    googleMapWidth: {
-        type: 'object',
-        default: {
-            Desktop: '100',
-            Tablet: '100',
-            Mobile: '100'
-        }
-    },
-    googleMapWidthUnits: {
-        type: 'object',
-        default: {
-            Desktop: '%',
-            Tablet: '%',
-            Mobile: '%',
-        }
-    },
-    googleMapHeight: {
-        type: 'object',
-        default: {
-            Desktop: '500',
-            Tablet: '400',
-            Mobile: '300'
-        }
-    },
-    googleMapHeightUnits: {
-        type: 'object',
-        default: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px',
-        }
-    },
-    googleMapZoomLevel: {
-        type: 'number',
-        default: 10,
-    },
-    googleMapMapType: {
-        type: 'string',
-        default: 'm',
-    },
+	blockID: {
+		type: "string",
+		default: ""
+	},
+	blockStyle: {
+		type: 'string',
+		default: ''
+	},
+	deviceType: {
+		type: 'string',
+		default: 'Desktop'
+	},
+	googleMapLocation: {
+		type: "string",
+		default: "BoomDevs"
+	},
+	googleMapWidth: {
+		type: 'object',
+		default: {
+			Desktop: '100',
+			Tablet: '100',
+			Mobile: '100'
+		}
+	},
+	googleMapWidthUnits: {
+		type: 'object',
+		default: {
+			Desktop: '%',
+			Tablet: '%',
+			Mobile: '%',
+		}
+	},
+	googleMapHeight: {
+		type: 'object',
+		default: {
+			Desktop: '500',
+			Tablet: '400',
+			Mobile: '300'
+		}
+	},
+	googleMapHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	googleMapZoomLevel: {
+		type: 'number',
+		default: 10,
+	},
+	googleMapMapType: {
+		type: 'string',
+		default: 'm',
+	},
 
 
-    /** Start Padding */
+	/** Start Padding */
 	googleMapPaddingUnits: {
 		type: 'object',
 		default: {
@@ -66,8 +66,8 @@ const attributes = {
 			Mobile: 'px'
 		}
 	},
-	googleMapPaddingDesktop: { 
-		type: "object", 
+	googleMapPaddingDesktop: {
+		type: "object",
 		default: {
 			top: '',
 			bottom: '',
@@ -76,7 +76,7 @@ const attributes = {
 		},
 	},
 	googleMapPaddingTablet: {
-		type: "object", 
+		type: "object",
 		default: {
 			top: '',
 			bottom: '',
@@ -85,7 +85,7 @@ const attributes = {
 		},
 	},
 	googleMapPaddingMobile: {
-		type: "object", 
+		type: "object",
 		default: {
 			top: '',
 			bottom: '',
@@ -93,8 +93,8 @@ const attributes = {
 			right: '',
 		},
 	},
-	googleMapPaddingLink : {
-		type : "boolean",
+	googleMapPaddingLink: {
+		type: "boolean",
 		default: true
 	},
 	/** End Padding */
@@ -109,7 +109,7 @@ const attributes = {
 		}
 	},
 	googleMapMarginDesktop: {
-		type: "object", 
+		type: "object",
 		default: {
 			top: '',
 			bottom: '',
@@ -118,7 +118,7 @@ const attributes = {
 		},
 	},
 	googleMapMarginTablet: {
-		type: "object", 
+		type: "object",
 		default: {
 			top: '',
 			bottom: '',
@@ -127,7 +127,7 @@ const attributes = {
 		},
 	},
 	googleMapMarginMobile: {
-		type: "object", 
+		type: "object",
 		default: {
 			top: '',
 			bottom: '',
@@ -135,19 +135,19 @@ const attributes = {
 			right: '',
 		},
 	},
-	googleMapMarginLink : {
-		type : "boolean",
+	googleMapMarginLink: {
+		type: "boolean",
 		default: true
 	},
 	/** End Margin */
 
 
-    	/** Start Background */
-	googleMapBgColorSwitcher : {
+	/** Start Background */
+	googleMapBgColorSwitcher: {
 		type: "string",
 		default: "normal"
 	},
-	googleMapNormalBackgroundType: { 
+	googleMapNormalBackgroundType: {
 		type: "string",
 		default: "classic",
 	},
@@ -190,12 +190,12 @@ const attributes = {
 	},
 	/** End Background */
 
-        /** Start Border */
+	/** Start Border */
 	googleMapBorder: {
 		type: 'string',
 		default: "none",
 	},
-	googleMapBorderColorSwitcher : {
+	googleMapBorderColorSwitcher: {
 		type: "string",
 		default: "normal"
 	},
@@ -215,7 +215,7 @@ const attributes = {
 		}
 	},
 	googleMapBorderDesktop: {
-		type: "object", 
+		type: "object",
 		default: {
 			top: '',
 			bottom: '',
@@ -224,7 +224,7 @@ const attributes = {
 		},
 	},
 	googleMapBorderTablet: {
-		type: "object", 
+		type: "object",
 		default: {
 			top: '',
 			bottom: '',
@@ -233,7 +233,7 @@ const attributes = {
 		},
 	},
 	googleMapBorderMobile: {
-		type: "object", 
+		type: "object",
 		default: {
 			top: '',
 			bottom: '',
@@ -241,8 +241,8 @@ const attributes = {
 			right: '',
 		},
 	},
-	googleMapBorderLink : {
-		type : "boolean",
+	googleMapBorderLink: {
+		type: "boolean",
 		default: true
 	},
 	/** End Border */
@@ -257,7 +257,7 @@ const attributes = {
 		}
 	},
 	googleMapBorderRadiusDesktop: {
-		type: "object", 
+		type: "object",
 		default: {
 			top: '',
 			bottom: '',
@@ -266,7 +266,7 @@ const attributes = {
 		},
 	},
 	googleMapBorderRadiusTablet: {
-		type: "object", 
+		type: "object",
 		default: {
 			top: '',
 			bottom: '',
@@ -275,7 +275,7 @@ const attributes = {
 		},
 	},
 	googleMapBorderRadiusMobile: {
-		type: "object", 
+		type: "object",
 		default: {
 			top: '',
 			bottom: '',
@@ -283,58 +283,58 @@ const attributes = {
 			right: '',
 		},
 	},
-	googleMapBorderRadiusLink : {
-		type : "boolean",
+	googleMapBorderRadiusLink: {
+		type: "boolean",
 		default: true
 	},
 	/** End Border Radius */
 
 	/** Start Box Shadow */
-    googleMapBoxShadowSwitcher: {
-        type: 'string',
-        default: 'normal',
-    },
+	googleMapBoxShadowSwitcher: {
+		type: 'string',
+		default: 'normal',
+	},
 	googleMapBoxShadowValues: {
-        type: 'array',
-        default: [],
-    },
-    googleMapBoxShadowCssValue: {
-        type: 'string',
-        default: '',
-    },
-    googleMapBoxShadowHoverValues: {
-        type: 'array',
-        default: [],
-    },
-    googleMapBoxShadowHoverCssValue: {
-        type: 'string',
-        default: '',
-    },
-    /** End Box Shadow */
+		type: 'array',
+		default: [],
+	},
+	googleMapBoxShadowCssValue: {
+		type: 'string',
+		default: '',
+	},
+	googleMapBoxShadowHoverValues: {
+		type: 'array',
+		default: [],
+	},
+	googleMapBoxShadowHoverCssValue: {
+		type: 'string',
+		default: '',
+	},
+	/** End Box Shadow */
 
 
 
-    /** Start Global Setting */
-	googleMapGlobalZIndex : {
-        type: "object",
-        default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-        }
-    },
+	/** Start Global Setting */
+	googleMapGlobalZIndex: {
+		type: "object",
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
 
-    /** Start Class & ID Setting */
-	googleMapCustomCSS : {
-        type: "string",
-        default: "",
-    },
-	googleMapWraperID : {
+	/** Start Class & ID Setting */
+	googleMapCustomCSS: {
+		type: "string",
+		default: "",
+	},
+	googleMapWraperID: {
 		type: "string",
 		default: ""
 	},
 
-	googleMapWraperClass : {
+	googleMapWraperClass: {
 		type: "string",
 		default: ""
 	},

@@ -1105,4 +1105,8 @@ export const CAROUSEL_ITEM_ROTATE = [
 	{ label: __("Vertical", "frontis-blocks"), value: "Y" },
 	{ label: __("Depth", "frontis-blocks"), value: "Z" },
 ];
+export const STACKED_CARD_SCALE = [
+	{ label: __("Horizontal", "frontis-blocks"), value: "horizontal" },
+	{ label: __("Vertical", "frontis-blocks"), value: "vertical" },
+];
 

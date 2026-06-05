@@ -1,0 +1,21 @@
+
+import { registerBlockType } from '@wordpress/blocks';
+import './style.scss';
+
+/**
+ * Internal dependencies
+ */
+import Edit from './edit';
+import save from './save';
+import metadata from './block.json';
+import attributes from './attributes.js';
+import './style.scss';
+import './editor.scss';
+import FB_Block_Icons from "@Config/fb-blocks-icons";
+
+registerBlockType(metadata.name, {
+    attributes,
+    icon: FB_Block_Icons.vertical_timeline,
+    edit: Edit,
+    save
+});
