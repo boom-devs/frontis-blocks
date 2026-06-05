@@ -18,6 +18,7 @@ const generateTabsStyle = (attributes) => {
         tabsItems,
         tabTitleTag,
         tabDescriptionTag,
+        tabListAlignment,
 
         showIcon,
         showTitle,
@@ -608,14 +609,19 @@ const generateTabsStyle = (attributes) => {
         }
 
         .${blockID} .fb-tabs-wrap ul.fb-tabs-panel li {
+            display: flex;
+            align-items: center;
+            ${tabListAlignment === 'left' ? `justify-content: flex-start;` : ''}
+            ${tabListAlignment === 'center' ? `justify-content: center;` : ''}
+            ${tabListAlignment === 'right' ? `justify-content: flex-end;` : ''}
             ${tabListPaddingDesktopWidth && tabListPaddingDesktop?.top ? `padding: ${tabListPaddingDesktopWidth} !important;` : ''}
             ${tabListMarginDesktopWidth && tabListMarginDesktop?.top ? `margin: ${tabListMarginDesktopWidth};` : ''}
             ${tabListMinWidth?.Desktop && tabListMinWidthUnits?.Desktop ? `min-width: ${tabListMinWidth?.Desktop}${tabListMinWidthUnits?.Desktop};` : ''}
             ${tabLayoutSwitcher === 'vertical' ? 'width: 100px;' : ''}
             ${tabListItemGap?.Desktop && tabListItemGapUnits?.Desktop ? `gap: ${tabListItemGap?.Desktop}${tabListItemGapUnits?.Desktop};` : ''}
-            ${tabListBorder ? `border: ${tabListBorder};` : ''}
-            ${tabListBorderColor ? `border-color: ${tabListBorderColor};` : ''}
-            ${tabListBorderDesktopWidth && tabListBorderDesktop?.top ? `border-width: ${tabListBorderDesktopWidth};` : ''}
+            ${tabListBorder ? `border: ${tabListBorder} !important;` : ''}
+            ${tabListBorderColor ? `border-color: ${tabListBorderColor} !important;` : ''}
+            ${tabListBorderDesktopWidth && tabListBorderDesktop?.top ? `border-width: ${tabListBorderDesktopWidth} !important;` : ''}
             ${tabListBorderRadiusDesktopWidth && tabListBorderRadiusDesktop?.top ? `border-radius: ${tabListBorderRadiusDesktopWidth};` : ''} 
 
             ${tabListBgColorType === "gradient"
@@ -647,7 +653,11 @@ const generateTabsStyle = (attributes) => {
 
         .${blockID} .fb-tabs-wrap ul.fb-tabs-panel li.top ,
         .${blockID} .fb-tabs-wrap ul.fb-tabs-panel li.bottom {
-            flex-direction: column;
+            ${showIcon ? 'flex-direction: column;' : ''}
+            ${tabListAlignment === 'left' ? `align-items: flex-start;` : ''}
+            ${tabListAlignment === 'center' ? `align-items: center;` : ''}
+            ${tabListAlignment === 'right' ? `align-items: flex-end;` : ''}
+            ${tabListAlignment ? `text-align: ${tabListAlignment};` : ''}
         }
 
         .${blockID} .fb-tabs-wrap ul.fb-tabs-panel li.fb-tabs-active {
@@ -660,7 +670,7 @@ const generateTabsStyle = (attributes) => {
                 : tabListActiveBgColor ? `background: ${tabListActiveBgColor};` : ''
             }
 
-            ${tabListActiveBorderColor ? `border-color: ${tabListActiveBorderColor};` : ''}
+            ${tabListActiveBorderColor ? `border-color: ${tabListActiveBorderColor} !important;` : ''}
         }
 
         .${blockID} .fb-tabs-wrap ul.fb-tabs-panel li.fb-tabs-active .fb-tab-icon svg{
@@ -863,7 +873,7 @@ const generateTabsStyle = (attributes) => {
                 ${tabListMarginTabletWidth && tabListMarginTablet?.top ? `margin: ${tabListMarginTabletWidth};` : ''}
                 ${tabListMinWidth?.Tablet && tabListMinWidthUnits?.Tablet ? `min-width: ${tabListMinWidth?.Tablet}${tabListMinWidthUnits?.Tablet};` : ''}
                 ${tabListItemGap?.Tablet && tabListItemGapUnits?.Tablet ? `gap: ${tabListItemGap?.Tablet}${tabListItemGapUnits?.Tablet};` : ''}
-                ${tabListBorderTabletWidth && tabListBorderTablet?.top ? `border-width: ${tabListBorderTabletWidth};` : ''}
+                ${tabListBorderTabletWidth && tabListBorderTablet?.top ? `border-width: ${tabListBorderTabletWidth} !important;` : ''}
                 ${tabListBorderRadiusTabletWidth && tabListBorderRadiusTablet?.top ? `border-radius: ${tabListBorderRadiusTabletWidth};` : ''} 
             }
 
@@ -944,7 +954,7 @@ const generateTabsStyle = (attributes) => {
                 ${tabListMarginMobileWidth && tabListMarginMobile?.top ? `margin: ${tabListMarginMobileWidth};` : ''}
                 ${tabListMinWidth?.Mobile && tabListMinWidthUnits?.Mobile ? `min-width: ${tabListMinWidth?.Mobile}${tabListMinWidthUnits?.Mobile};` : ''}
                 ${tabListItemGap?.Mobile && tabListItemGapUnits?.Mobile ? `gap: ${tabListItemGap?.Mobile}${tabListItemGapUnits?.Mobile};` : ''}
-                ${tabListBorderMobileWidth && tabListBorderMobile?.top ? `border-width: ${tabListBorderMobileWidth};` : ''}
+                ${tabListBorderMobileWidth && tabListBorderMobile?.top ? `border-width: ${tabListBorderMobileWidth} !important;` : ''}
                 ${tabListBorderRadiusMobileWidth && tabListBorderRadiusMobile?.top ? `border-radius: ${tabListBorderRadiusMobileWidth};` : ''} 
             }
 

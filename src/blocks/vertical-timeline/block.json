@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "frontis-blocks/vertical-timeline",
+	"version": "1.0.0",
+	"title": "Vertical Timeline",
+	"category": "frontis-blocks",
+	"textdomain": "frontis-blocks",
+	"description": "Create beautiful and responsive vertical timeline directly inside the block editor with customizable data, colors, labels, and animations — no API key required.",
+	"example": {},
+	"supports": {
+		"html": false,
+		"anchor": false,
+		"align": ["wide","full"],
+		"customClassName": false
+	},
+	"providesContext": {
+		"fb/timelineparentBlockID": "blockID",
+		"fb/showSectionLabelSwitcher": "showSectionLabelSwitcher"
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js"
+}

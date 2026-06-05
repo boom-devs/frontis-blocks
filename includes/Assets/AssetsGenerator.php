@@ -1113,41 +1113,7 @@ class AssetsGenerator
 
 	public function get_template_css()
 	{
-		global $wpdb;
-
-		$post_name = Helper::is_custom_post_type($this->post->ID) || get_post_type($this->post->ID) === 'post' ? 'single' : 'page';
-
-		$assigned_template = get_post_meta($this->post->ID, '_wp_page_template', true);
-
-		if ($assigned_template !== '') {
-			$post_name = $assigned_template;
-		}
-
-		$query = $wpdb->prepare(
-			"SELECT
-                ID,
-                post_type,
-                post_content
-            FROM
-                {$wpdb->posts}
-            WHERE
-                post_type = 'wp_template'
-                AND post_status = 'publish'
-                AND post_name = %s
-            ORDER BY
-                post_modified DESC",
-			$post_name
-		);
-
-		// Execute the query
-		$cache_key_tpl = 'fb_assets_wp_tpl_' . md5($post_name);
-		$template_contents = wp_cache_get($cache_key_tpl, 'frontis_blocks');
-
-		if (false === $template_contents) {
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
-			$template_contents = $wpdb->get_results($query);
-			wp_cache_set($cache_key_tpl, $template_contents, 'frontis_blocks', 300);
-		}
+		$template_contents = Helper::get_template_content($this->post->ID);
 
 		if ($template_contents) {
 			foreach ($template_contents as $template) {
