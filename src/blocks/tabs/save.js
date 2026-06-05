@@ -16,13 +16,22 @@ export default function save({ attributes }) {
     showDescription,
     tabLayoutSwitcher,
     tabGlobalWraperID,
-		tabGlobalWraperClass,
+    tabGlobalWraperClass,
+    tabSwitchMode,
+    tabAutoSwitchInterval,
+    tabAutoSwitchPauseOnHover,
   } = attributes;
 
   const blockProps = useBlockProps.save({
     className: `fb-tabs-wrapper ${blockID || ''}`,
     'data-tab-active': tabActiveFrontend,
+    'data-tab-switch-mode': tabSwitchMode,
+    'data-tab-auto-interval-desktop': tabAutoSwitchInterval?.Desktop || '3000',
+    'data-tab-auto-interval-tablet': tabAutoSwitchInterval?.Tablet || '',
+    'data-tab-auto-interval-mobile': tabAutoSwitchInterval?.Mobile || '',
+    'data-tab-auto-pause-hover': String(tabAutoSwitchPauseOnHover),
   });
+
 
   const contentId = `fb-tabs-body-${blockID || 'x'}`;
 

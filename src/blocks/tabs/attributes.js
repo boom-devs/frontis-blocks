@@ -23,6 +23,23 @@ const attributes = {
         type: 'string',
         default: 'horizontal',
     },
+	tabSwitchMode: {
+		type: 'string',
+		default: 'click',
+	},
+	tabAutoSwitchInterval: {
+		type: 'object',
+		default: {
+			Desktop: '3000',
+			Tablet: '',
+			Mobile: '',
+		},
+	},
+	tabAutoSwitchPauseOnHover: {
+		type: 'boolean',
+		default: true,
+	},
+
     tabListAlignment: {
 		type: 'string',
 		default: 'center'
