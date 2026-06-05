@@ -449,6 +449,18 @@ const generateAdvancedMegaMenuStyle = (attributes) => {
             : megaMenuTextBackgroundHoverColor ? `background: ${megaMenuTextBackgroundHoverColor};` : ''
         }
         }
+        .${blockID} .fb-advanced-mega-menu-item.current-menu-item .fb-advanced-mega-menu-link {
+            ${megaMenuHighlightColor ? `color: ${megaMenuHighlightColor} !important;` : ''}
+        }
+        .${blockID} .fb-advanced-mega-menu-item.current-menu-item .fb-advanced-mega-menu-link:hover {
+            ${megaMenuHighlightHoverColor ? `color: ${megaMenuHighlightHoverColor} !important;` : ''}
+        }
+        .${blockID} .fb-advanced-mega-menu-item.current-menu-item .fb-advanced-mega-menu-indicator svg {
+            ${megaMenuHighlightColor ? `fill: ${megaMenuHighlightColor};` : ''}
+        }
+        .${blockID} .fb-advanced-mega-menu-item.current-menu-item:hover .fb-advanced-mega-menu-indicator svg {
+            ${megaMenuHighlightHoverColor ? `fill: ${megaMenuHighlightHoverColor};` : ''}
+        }
         .${blockID} .fb-advanced-mega-menu-item .fb-advanced-mega-menu-panel{
             ${megaMenuWidthSwitcher === "content"
             ? `

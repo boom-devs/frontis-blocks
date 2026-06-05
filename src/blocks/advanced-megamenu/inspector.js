@@ -19,7 +19,8 @@ import {
     OVERFLOW_OP,
     BACKGROUND_TYPES,
     MEGA_MENU_TRIGGERS,
-    IMAGE_OBJECT_FIT
+    IMAGE_OBJECT_FIT,
+    NORMAL_HOVER,
 } from '@Constants/fbConstants';
 
 import FB_ImageControl from '@Components/image-control';
@@ -1273,6 +1274,29 @@ const Inspector = ({ attributes, setAttributes }) => {
 
                     isBackgroundImage={false}
                 />
+
+                <FB_SwitcherControl
+                    label={__("Active Menu Item", "frontis-blocks")}
+                    options={NORMAL_HOVER}
+                    globalSwitcher={megaMenuHighlightColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ megaMenuHighlightColorSwitcher: value })}
+                />
+
+                {megaMenuHighlightColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Active Color", "frontis-blocks")}
+                        globalColor={megaMenuHighlightColor}
+                        setGlobalColor={(value) => setAttributes({ megaMenuHighlightColor: value === undefined ? '' : value })}
+                    />
+                )}
+
+                {megaMenuHighlightColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={megaMenuHighlightHoverColor}
+                        setGlobalColor={(value) => setAttributes({ megaMenuHighlightHoverColor: value === undefined ? '' : value })}
+                    />
+                )}
 
                 <SelectControl
                     label={__("Border Style", "frontis-blocks")}
