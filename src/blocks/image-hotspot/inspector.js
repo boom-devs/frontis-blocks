@@ -38,8 +38,76 @@ export default function Inspector({ attributes, setAttributes }) {
   const {
     imageHotspotPresetStyle,
     imageHotspotShowPopoverImage,
+    imageHotspotCategoryFontFamily,
+    imageHotspotCategoryFontSize,
+    imageHotspotCategoryFontSizeUnits,
+    imageHotspotCategoryFontWeight,
+    imageHotspotCategoryFontStyle,
     imageHotspotCategoryColor,
+    imageHotspotCategoryHoverColor,
+    imageHotspotCategoryColorSwitcher,
+    imageHotspotCategoryTextTransform,
+    imageHotspotCategoryTextDecoration,
+    imageHotspotCategoryLetterSpacing,
+    imageHotspotCategoryLetterSpacingUnits,
+    imageHotspotCategoryLineHeight,
+    imageHotspotCategoryLineHeightUnits,
+    imageHotspotCategoryPaddingUnits,
+    imageHotspotCategoryPaddingDesktop,
+    imageHotspotCategoryPaddingTablet,
+    imageHotspotCategoryPaddingMobile,
+    imageHotspotCategoryPaddingLink,
+    imageHotspotCategoryMarginUnits,
+    imageHotspotCategoryMarginDesktop,
+    imageHotspotCategoryMarginTablet,
+    imageHotspotCategoryMarginMobile,
+    imageHotspotCategoryMarginLink,
+    imageHotspotCategoryBorderWidthDesktop,
+    imageHotspotCategoryBorderWidthTablet,
+    imageHotspotCategoryBorderWidthMobile,
+    imageHotspotCategoryBorderWidthUnits,
+    imageHotspotCategoryBorderWidthLink,
+    imageHotspotCategoryBorderColor,
+    imageHotspotCategoryBorderRadiusDesktop,
+    imageHotspotCategoryBorderRadiusTablet,
+    imageHotspotCategoryBorderRadiusMobile,
+    imageHotspotCategoryBorderRadiusUnits,
+    imageHotspotCategoryBorderRadiusLink,
+    imageHotspotPriceFontFamily,
+    imageHotspotPriceFontSize,
+    imageHotspotPriceFontSizeUnits,
+    imageHotspotPriceFontWeight,
+    imageHotspotPriceFontStyle,
     imageHotspotPriceColor,
+    imageHotspotPriceHoverColor,
+    imageHotspotPriceColorSwitcher,
+    imageHotspotPriceTextTransform,
+    imageHotspotPriceTextDecoration,
+    imageHotspotPriceLetterSpacing,
+    imageHotspotPriceLetterSpacingUnits,
+    imageHotspotPriceLineHeight,
+    imageHotspotPriceLineHeightUnits,
+    imageHotspotPricePaddingUnits,
+    imageHotspotPricePaddingDesktop,
+    imageHotspotPricePaddingTablet,
+    imageHotspotPricePaddingMobile,
+    imageHotspotPricePaddingLink,
+    imageHotspotPriceMarginUnits,
+    imageHotspotPriceMarginDesktop,
+    imageHotspotPriceMarginTablet,
+    imageHotspotPriceMarginMobile,
+    imageHotspotPriceMarginLink,
+    imageHotspotPriceBorderWidthDesktop,
+    imageHotspotPriceBorderWidthTablet,
+    imageHotspotPriceBorderWidthMobile,
+    imageHotspotPriceBorderWidthUnits,
+    imageHotspotPriceBorderWidthLink,
+    imageHotspotPriceBorderColor,
+    imageHotspotPriceBorderRadiusDesktop,
+    imageHotspotPriceBorderRadiusTablet,
+    imageHotspotPriceBorderRadiusMobile,
+    imageHotspotPriceBorderRadiusUnits,
+    imageHotspotPriceBorderRadiusLink,
     // Image
     imageHotspotImageUrl,
     imageHotspotImageId,
@@ -91,6 +159,27 @@ export default function Inspector({ attributes, setAttributes }) {
     imageHotspotTitleLetterSpacingUnits,
     imageHotspotTitleLineHeight,
     imageHotspotTitleLineHeightUnits,
+    imageHotspotTitlePaddingUnits,
+    imageHotspotTitlePaddingDesktop,
+    imageHotspotTitlePaddingTablet,
+    imageHotspotTitlePaddingMobile,
+    imageHotspotTitlePaddingLink,
+    imageHotspotTitleMarginUnits,
+    imageHotspotTitleMarginDesktop,
+    imageHotspotTitleMarginTablet,
+    imageHotspotTitleMarginMobile,
+    imageHotspotTitleMarginLink,
+    imageHotspotTitleBorderWidthDesktop,
+    imageHotspotTitleBorderWidthTablet,
+    imageHotspotTitleBorderWidthMobile,
+    imageHotspotTitleBorderWidthUnits,
+    imageHotspotTitleBorderWidthLink,
+    imageHotspotTitleBorderColor,
+    imageHotspotTitleBorderRadiusDesktop,
+    imageHotspotTitleBorderRadiusTablet,
+    imageHotspotTitleBorderRadiusMobile,
+    imageHotspotTitleBorderRadiusUnits,
+    imageHotspotTitleBorderRadiusLink,
 
     // Description typography
     imageHotspotDescFontFamily,
@@ -99,12 +188,35 @@ export default function Inspector({ attributes, setAttributes }) {
     imageHotspotDescFontWeight,
     imageHotspotDescFontStyle,
     imageHotspotDescColor,
+    imageHotspotDescHoverColor,
+    imageHotspotDescColorSwitcher,
     imageHotspotDescTextTransform,
     imageHotspotDescTextDecoration,
     imageHotspotDescLetterSpacing,
     imageHotspotDescLetterSpacingUnits,
     imageHotspotDescLineHeight,
     imageHotspotDescLineHeightUnits,
+    imageHotspotDescPaddingUnits,
+    imageHotspotDescPaddingDesktop,
+    imageHotspotDescPaddingTablet,
+    imageHotspotDescPaddingMobile,
+    imageHotspotDescPaddingLink,
+    imageHotspotDescMarginUnits,
+    imageHotspotDescMarginDesktop,
+    imageHotspotDescMarginTablet,
+    imageHotspotDescMarginMobile,
+    imageHotspotDescMarginLink,
+    imageHotspotDescBorderWidthDesktop,
+    imageHotspotDescBorderWidthTablet,
+    imageHotspotDescBorderWidthMobile,
+    imageHotspotDescBorderWidthUnits,
+    imageHotspotDescBorderWidthLink,
+    imageHotspotDescBorderColor,
+    imageHotspotDescBorderRadiusDesktop,
+    imageHotspotDescBorderRadiusTablet,
+    imageHotspotDescBorderRadiusMobile,
+    imageHotspotDescBorderRadiusUnits,
+    imageHotspotDescBorderRadiusLink,
 
     // Padding
     imageHotspotPaddingUnits,
@@ -117,6 +229,11 @@ export default function Inspector({ attributes, setAttributes }) {
     imageHotspotPopoverPaddingTablet,
     imageHotspotPopoverPaddingMobile,
     imageHotspotPopoverPaddingLink,
+    imageHotspotPopoverMarginUnits,
+    imageHotspotPopoverMarginDesktop,
+    imageHotspotPopoverMarginTablet,
+    imageHotspotPopoverMarginMobile,
+    imageHotspotPopoverMarginLink,
     imageHotspotPopoverBorderRadiusDesktop,
     imageHotspotPopoverBorderRadiusTablet,
     imageHotspotPopoverBorderRadiusMobile,
@@ -156,6 +273,8 @@ export default function Inspector({ attributes, setAttributes }) {
     imageHotspotCustomCSS,
 
     imageHotspotPopoverBgColor,
+    imageHotspotPopoverBgColorSwitcher,
+    imageHotspotPopoverBgHoverColor,
     imageHotspotContainerShadowValues,
     imageHotspotPopoverShadowValues,
     globalZIndex,
@@ -404,6 +523,201 @@ export default function Inspector({ attributes, setAttributes }) {
 
   const imageHotspotPopoverPaddingLinkBtn = () => {
     setAttributes({ imageHotspotPopoverPaddingLink: !imageHotspotPopoverPaddingLink });
+  };
+
+  const imageHotspotTitlePaddingUnitsChange = (event, position) => {
+    const value = event.target.value;
+    if (imageHotspotTitlePaddingLink) {
+      switch (deviceType) {
+        case 'Desktop':
+          setAttributes({
+            imageHotspotTitlePaddingDesktop: {
+              top: value,
+              right: value,
+              bottom: value,
+              left: value
+            }
+          });
+          break;
+        case 'Tablet':
+          setAttributes({
+            imageHotspotTitlePaddingTablet: {
+              top: value,
+              right: value,
+              bottom: value,
+              left: value
+            }
+          });
+          break;
+        case 'Mobile':
+          setAttributes({
+            imageHotspotTitlePaddingMobile: {
+              top: value,
+              right: value,
+              bottom: value,
+              left: value
+            }
+          });
+          break;
+      }
+    } else {
+      switch (deviceType) {
+        case 'Desktop':
+          setAttributes({
+            imageHotspotTitlePaddingDesktop: {
+              ...imageHotspotTitlePaddingDesktop,
+              [position]: value
+            }
+          });
+          break;
+        case 'Tablet':
+          setAttributes({
+            imageHotspotTitlePaddingTablet: {
+              ...imageHotspotTitlePaddingTablet,
+              [position]: value
+            }
+          });
+          break;
+        case 'Mobile':
+          setAttributes({
+            imageHotspotTitlePaddingMobile: {
+              ...imageHotspotTitlePaddingMobile,
+              [position]: value
+            }
+          });
+          break;
+      }
+    }
+  };
+
+  const imageHotspotTitleMarginUnitsChange = (event, position) => {
+    const value = event.target.value;
+    if (imageHotspotTitleMarginLink) {
+      switch (deviceType) {
+        case 'Desktop':
+          setAttributes({
+            imageHotspotTitleMarginDesktop: {
+              top: value,
+              right: value,
+              bottom: value,
+              left: value
+            }
+          });
+          break;
+        case 'Tablet':
+          setAttributes({
+            imageHotspotTitleMarginTablet: {
+              top: value,
+              right: value,
+              bottom: value,
+              left: value
+            }
+          });
+          break;
+        case 'Mobile':
+          setAttributes({
+            imageHotspotTitleMarginMobile: {
+              top: value,
+              right: value,
+              bottom: value,
+              left: value
+            }
+          });
+          break;
+      }
+    } else {
+      switch (deviceType) {
+        case 'Desktop':
+          setAttributes({
+            imageHotspotTitleMarginDesktop: {
+              ...imageHotspotTitleMarginDesktop,
+              [position]: value
+            }
+          });
+          break;
+        case 'Tablet':
+          setAttributes({
+            imageHotspotTitleMarginTablet: {
+              ...imageHotspotTitleMarginTablet,
+              [position]: value
+            }
+          });
+          break;
+        case 'Mobile':
+          setAttributes({
+            imageHotspotTitleMarginMobile: {
+              ...imageHotspotTitleMarginMobile,
+              [position]: value
+            }
+          });
+          break;
+      }
+    }
+  };
+
+  const imageHotspotPopoverMarginUnitsChange = (event, position) => {
+    const value = event.target.value;
+    if (imageHotspotPopoverMarginLink) {
+      switch (deviceType) {
+        case 'Desktop':
+          setAttributes({
+            imageHotspotPopoverMarginDesktop: {
+              top: value,
+              right: value,
+              bottom: value,
+              left: value
+            }
+          });
+          break;
+        case 'Tablet':
+          setAttributes({
+            imageHotspotPopoverMarginTablet: {
+              top: value,
+              right: value,
+              bottom: value,
+              left: value
+            }
+          });
+          break;
+        case 'Mobile':
+          setAttributes({
+            imageHotspotPopoverMarginMobile: {
+              top: value,
+              right: value,
+              bottom: value,
+              left: value
+            }
+          });
+          break;
+      }
+    } else {
+      switch (deviceType) {
+        case 'Desktop':
+          setAttributes({
+            imageHotspotPopoverMarginDesktop: {
+              ...imageHotspotPopoverMarginDesktop,
+              [position]: value
+            }
+          });
+          break;
+        case 'Tablet':
+          setAttributes({
+            imageHotspotPopoverMarginTablet: {
+              ...imageHotspotPopoverMarginTablet,
+              [position]: value
+            }
+          });
+          break;
+        case 'Mobile':
+          setAttributes({
+            imageHotspotPopoverMarginMobile: {
+              ...imageHotspotPopoverMarginMobile,
+              [position]: value
+            }
+          });
+          break;
+      }
+    }
   };
 
   // Margin handlers
@@ -919,6 +1233,484 @@ export default function Inspector({ attributes, setAttributes }) {
     });
   };
 
+  const imageHotspotTitleBorderWidthChange = (event, position) => {
+    const value = event.target.value;
+    const attr = `imageHotspotTitleBorderWidth${deviceType}`;
+    const current = attributes[attr];
+    setAttributes({
+      [attr]: imageHotspotTitleBorderWidthLink
+        ? { top: value, right: value, bottom: value, left: value }
+        : { ...current, [position]: value }
+    });
+  };
+
+  const imageHotspotTitleBorderRadiusChange = (event, position) => {
+    const value = event.target.value;
+    const attr = `imageHotspotTitleBorderRadius${deviceType}`;
+    const current = attributes[attr];
+    setAttributes({
+      [attr]: imageHotspotTitleBorderRadiusLink
+        ? { top: value, right: value, bottom: value, left: value }
+        : { ...current, [position]: value }
+    });
+  };
+
+  const imageHotspotCategoryPaddingUnitsChange = (event, position) => {
+    const value = event.target.value;
+    if (imageHotspotCategoryPaddingLink) {
+      switch (deviceType) {
+        case 'Desktop':
+          setAttributes({
+            imageHotspotCategoryPaddingDesktop: {
+              top: value,
+              right: value,
+              bottom: value,
+              left: value
+            }
+          });
+          break;
+        case 'Tablet':
+          setAttributes({
+            imageHotspotCategoryPaddingTablet: {
+              top: value,
+              right: value,
+              bottom: value,
+              left: value
+            }
+          });
+          break;
+        case 'Mobile':
+          setAttributes({
+            imageHotspotCategoryPaddingMobile: {
+              top: value,
+              right: value,
+              bottom: value,
+              left: value
+            }
+          });
+          break;
+      }
+    } else {
+      switch (deviceType) {
+        case 'Desktop':
+          setAttributes({
+            imageHotspotCategoryPaddingDesktop: {
+              ...imageHotspotCategoryPaddingDesktop,
+              [position]: value
+            }
+          });
+          break;
+        case 'Tablet':
+          setAttributes({
+            imageHotspotCategoryPaddingTablet: {
+              ...imageHotspotCategoryPaddingTablet,
+              [position]: value
+            }
+          });
+          break;
+        case 'Mobile':
+          setAttributes({
+            imageHotspotCategoryPaddingMobile: {
+              ...imageHotspotCategoryPaddingMobile,
+              [position]: value
+            }
+          });
+          break;
+      }
+    }
+  };
+
+  const imageHotspotCategoryMarginUnitsChange = (event, position) => {
+    const value = event.target.value;
+    if (imageHotspotCategoryMarginLink) {
+      switch (deviceType) {
+        case 'Desktop':
+          setAttributes({
+            imageHotspotCategoryMarginDesktop: {
+              top: value,
+              right: value,
+              bottom: value,
+              left: value
+            }
+          });
+          break;
+        case 'Tablet':
+          setAttributes({
+            imageHotspotCategoryMarginTablet: {
+              top: value,
+              right: value,
+              bottom: value,
+              left: value
+            }
+          });
+          break;
+        case 'Mobile':
+          setAttributes({
+            imageHotspotCategoryMarginMobile: {
+              top: value,
+              right: value,
+              bottom: value,
+              left: value
+            }
+          });
+          break;
+      }
+    } else {
+      switch (deviceType) {
+        case 'Desktop':
+          setAttributes({
+            imageHotspotCategoryMarginDesktop: {
+              ...imageHotspotCategoryMarginDesktop,
+              [position]: value
+            }
+          });
+          break;
+        case 'Tablet':
+          setAttributes({
+            imageHotspotCategoryMarginTablet: {
+              ...imageHotspotCategoryMarginTablet,
+              [position]: value
+            }
+          });
+          break;
+        case 'Mobile':
+          setAttributes({
+            imageHotspotCategoryMarginMobile: {
+              ...imageHotspotCategoryMarginMobile,
+              [position]: value
+            }
+          });
+          break;
+      }
+    }
+  };
+
+  const imageHotspotCategoryBorderWidthChange = (event, position) => {
+    const value = event.target.value;
+    const attr = `imageHotspotCategoryBorderWidth${deviceType}`;
+    const current = attributes[attr];
+    setAttributes({
+      [attr]: imageHotspotCategoryBorderWidthLink
+        ? { top: value, right: value, bottom: value, left: value }
+        : { ...current, [position]: value }
+    });
+  };
+
+  const imageHotspotCategoryBorderRadiusChange = (event, position) => {
+    const value = event.target.value;
+    const attr = `imageHotspotCategoryBorderRadius${deviceType}`;
+    const current = attributes[attr];
+    setAttributes({
+      [attr]: imageHotspotCategoryBorderRadiusLink
+        ? { top: value, right: value, bottom: value, left: value }
+        : { ...current, [position]: value }
+    });
+  };
+
+  const imageHotspotDescPaddingUnitsChange = (event, position) => {
+    const value = event.target.value;
+    if (imageHotspotDescPaddingLink) {
+      switch (deviceType) {
+        case 'Desktop':
+          setAttributes({
+            imageHotspotDescPaddingDesktop: {
+              top: value,
+              right: value,
+              bottom: value,
+              left: value
+            }
+          });
+          break;
+        case 'Tablet':
+          setAttributes({
+            imageHotspotDescPaddingTablet: {
+              top: value,
+              right: value,
+              bottom: value,
+              left: value
+            }
+          });
+          break;
+        case 'Mobile':
+          setAttributes({
+            imageHotspotDescPaddingMobile: {
+              top: value,
+              right: value,
+              bottom: value,
+              left: value
+            }
+          });
+          break;
+      }
+    } else {
+      switch (deviceType) {
+        case 'Desktop':
+          setAttributes({
+            imageHotspotDescPaddingDesktop: {
+              ...imageHotspotDescPaddingDesktop,
+              [position]: value
+            }
+          });
+          break;
+        case 'Tablet':
+          setAttributes({
+            imageHotspotDescPaddingTablet: {
+              ...imageHotspotDescPaddingTablet,
+              [position]: value
+            }
+          });
+          break;
+        case 'Mobile':
+          setAttributes({
+            imageHotspotDescPaddingMobile: {
+              ...imageHotspotDescPaddingMobile,
+              [position]: value
+            }
+          });
+          break;
+      }
+    }
+  };
+
+  const imageHotspotDescMarginUnitsChange = (event, position) => {
+    const value = event.target.value;
+    if (imageHotspotDescMarginLink) {
+      switch (deviceType) {
+        case 'Desktop':
+          setAttributes({
+            imageHotspotDescMarginDesktop: {
+              top: value,
+              right: value,
+              bottom: value,
+              left: value
+            }
+          });
+          break;
+        case 'Tablet':
+          setAttributes({
+            imageHotspotDescMarginTablet: {
+              top: value,
+              right: value,
+              bottom: value,
+              left: value
+            }
+          });
+          break;
+        case 'Mobile':
+          setAttributes({
+            imageHotspotDescMarginMobile: {
+              top: value,
+              right: value,
+              bottom: value,
+              left: value
+            }
+          });
+          break;
+      }
+    } else {
+      switch (deviceType) {
+        case 'Desktop':
+          setAttributes({
+            imageHotspotDescMarginDesktop: {
+              ...imageHotspotDescMarginDesktop,
+              [position]: value
+            }
+          });
+          break;
+        case 'Tablet':
+          setAttributes({
+            imageHotspotDescMarginTablet: {
+              ...imageHotspotDescMarginTablet,
+              [position]: value
+            }
+          });
+          break;
+        case 'Mobile':
+          setAttributes({
+            imageHotspotDescMarginMobile: {
+              ...imageHotspotDescMarginMobile,
+              [position]: value
+            }
+          });
+          break;
+      }
+    }
+  };
+
+  const imageHotspotDescBorderWidthChange = (event, position) => {
+    const value = event.target.value;
+    const attr = `imageHotspotDescBorderWidth${deviceType}`;
+    const current = attributes[attr];
+    setAttributes({
+      [attr]: imageHotspotDescBorderWidthLink
+        ? { top: value, right: value, bottom: value, left: value }
+        : { ...current, [position]: value }
+    });
+  };
+
+  const imageHotspotDescBorderRadiusChange = (event, position) => {
+    const value = event.target.value;
+    const attr = `imageHotspotDescBorderRadius${deviceType}`;
+    const current = attributes[attr];
+    setAttributes({
+      [attr]: imageHotspotDescBorderRadiusLink
+        ? { top: value, right: value, bottom: value, left: value }
+        : { ...current, [position]: value }
+    });
+  };
+
+  const imageHotspotPricePaddingUnitsChange = (event, position) => {
+    const value = event.target.value;
+    if (imageHotspotPricePaddingLink) {
+      switch (deviceType) {
+        case 'Desktop':
+          setAttributes({
+            imageHotspotPricePaddingDesktop: {
+              top: value,
+              right: value,
+              bottom: value,
+              left: value
+            }
+          });
+          break;
+        case 'Tablet':
+          setAttributes({
+            imageHotspotPricePaddingTablet: {
+              top: value,
+              right: value,
+              bottom: value,
+              left: value
+            }
+          });
+          break;
+        case 'Mobile':
+          setAttributes({
+            imageHotspotPricePaddingMobile: {
+              top: value,
+              right: value,
+              bottom: value,
+              left: value
+            }
+          });
+          break;
+      }
+    } else {
+      switch (deviceType) {
+        case 'Desktop':
+          setAttributes({
+            imageHotspotPricePaddingDesktop: {
+              ...imageHotspotPricePaddingDesktop,
+              [position]: value
+            }
+          });
+          break;
+        case 'Tablet':
+          setAttributes({
+            imageHotspotPricePaddingTablet: {
+              ...imageHotspotPricePaddingTablet,
+              [position]: value
+            }
+          });
+          break;
+        case 'Mobile':
+          setAttributes({
+            imageHotspotPricePaddingMobile: {
+              ...imageHotspotPricePaddingMobile,
+              [position]: value
+            }
+          });
+          break;
+      }
+    }
+  };
+
+  const imageHotspotPriceMarginUnitsChange = (event, position) => {
+    const value = event.target.value;
+    if (imageHotspotPriceMarginLink) {
+      switch (deviceType) {
+        case 'Desktop':
+          setAttributes({
+            imageHotspotPriceMarginDesktop: {
+              top: value,
+              right: value,
+              bottom: value,
+              left: value
+            }
+          });
+          break;
+        case 'Tablet':
+          setAttributes({
+            imageHotspotPriceMarginTablet: {
+              top: value,
+              right: value,
+              bottom: value,
+              left: value
+            }
+          });
+          break;
+        case 'Mobile':
+          setAttributes({
+            imageHotspotPriceMarginMobile: {
+              top: value,
+              right: value,
+              bottom: value,
+              left: value
+            }
+          });
+          break;
+      }
+    } else {
+      switch (deviceType) {
+        case 'Desktop':
+          setAttributes({
+            imageHotspotPriceMarginDesktop: {
+              ...imageHotspotPriceMarginDesktop,
+              [position]: value
+            }
+          });
+          break;
+        case 'Tablet':
+          setAttributes({
+            imageHotspotPriceMarginTablet: {
+              ...imageHotspotPriceMarginTablet,
+              [position]: value
+            }
+          });
+          break;
+        case 'Mobile':
+          setAttributes({
+            imageHotspotPriceMarginMobile: {
+              ...imageHotspotPriceMarginMobile,
+              [position]: value
+            }
+          });
+          break;
+      }
+    }
+  };
+
+  const imageHotspotPriceBorderWidthChange = (event, position) => {
+    const value = event.target.value;
+    const attr = `imageHotspotPriceBorderWidth${deviceType}`;
+    const current = attributes[attr];
+    setAttributes({
+      [attr]: imageHotspotPriceBorderWidthLink
+        ? { top: value, right: value, bottom: value, left: value }
+        : { ...current, [position]: value }
+    });
+  };
+
+  const imageHotspotPriceBorderRadiusChange = (event, position) => {
+    const value = event.target.value;
+    const attr = `imageHotspotPriceBorderRadius${deviceType}`;
+    const current = attributes[attr];
+    setAttributes({
+      [attr]: imageHotspotPriceBorderRadiusLink
+        ? { top: value, right: value, bottom: value, left: value }
+        : { ...current, [position]: value }
+    });
+  };
+
   const imageHotspotPopoverImageBorderWidthChange = (event, position) => {
     const value = event.target.value;
     const attr = `imageHotspotPopoverImageBorderWidth${deviceType}`;
@@ -1262,15 +2054,151 @@ export default function Inspector({ attributes, setAttributes }) {
 
   const styleControls = (
     <>
-      <PanelBody title={__("Colors", "frontis-blocks")} initialOpen={true}>
+      <PanelBody title={__("Popover", "frontis-blocks")} initialOpen={true}>
+        <FB_SwitcherControl
+          label={__("Background", "frontis-blocks")}
+          globalSwitcher={imageHotspotPopoverBgColorSwitcher}
+          setGlobalSwitcher={(value) => setAttributes({ imageHotspotPopoverBgColorSwitcher: value })}
+        />
+
+        {imageHotspotPopoverBgColorSwitcher === 'normal' && (
+          <FB_ColorControl
+            label={__("Background Color", "frontis-blocks")}
+            globalColor={imageHotspotPopoverBgColor}
+            setGlobalColor={(value) => setAttributes({ imageHotspotPopoverBgColor: value })}
+          />
+        )}
+
+        {imageHotspotPopoverBgColorSwitcher === 'hover' && (
+          <FB_ColorControl
+            label={__("Background Hover Color", "frontis-blocks")}
+            globalColor={imageHotspotPopoverBgHoverColor}
+            setGlobalColor={(value) => setAttributes({ imageHotspotPopoverBgHoverColor: value })}
+          />
+        )}
+
+        <FB_Spacing
+          label={__("Padding", "frontis-blocks")}
+          deviceType={deviceType}
+          spacingUnitsHandler={(unit) => setAttributes({
+            imageHotspotPopoverPaddingUnits: {
+              ...imageHotspotPopoverPaddingUnits,
+              [deviceType]: unit
+            }
+          })}
+          spacingUnits={imageHotspotPopoverPaddingUnits}
+          spacingDesktop={imageHotspotPopoverPaddingDesktop}
+          spacingTablet={imageHotspotPopoverPaddingTablet}
+          spacingMobile={imageHotspotPopoverPaddingMobile}
+          handleSpacingUnitHandler={imageHotspotPopoverPaddingUnitsChange}
+          spacingCombineBtn={imageHotspotPopoverPaddingLink}
+          spacingCombineBtnHandler={() => setAttributes({
+            imageHotspotPopoverPaddingLink: !imageHotspotPopoverPaddingLink
+          })}
+          setAttributes={setAttributes}
+        />
+
+        <FB_Spacing
+          label={__("Margin", "frontis-blocks")}
+          deviceType={deviceType}
+          spacingUnitsHandler={(unit) => setAttributes({
+            imageHotspotPopoverMarginUnits: {
+              ...imageHotspotPopoverMarginUnits,
+              [deviceType]: unit
+            }
+          })}
+          spacingUnits={imageHotspotPopoverMarginUnits}
+          spacingDesktop={imageHotspotPopoverMarginDesktop}
+          spacingTablet={imageHotspotPopoverMarginTablet}
+          spacingMobile={imageHotspotPopoverMarginMobile}
+          handleSpacingUnitHandler={imageHotspotPopoverMarginUnitsChange}
+          spacingCombineBtn={imageHotspotPopoverMarginLink}
+          spacingCombineBtnHandler={() => setAttributes({
+            imageHotspotPopoverMarginLink: !imageHotspotPopoverMarginLink
+          })}
+          setAttributes={setAttributes}
+        />
+
+        <FB_Spacing
+          label={__("Border Width", "frontis-blocks")}
+          deviceType={deviceType}
+          spacingUnits={imageHotspotPopoverBorderWidthUnits}
+          spacingDesktop={imageHotspotPopoverBorderWidthDesktop}
+          spacingTablet={imageHotspotPopoverBorderWidthTablet}
+          spacingMobile={imageHotspotPopoverBorderWidthMobile}
+          handleSpacingUnitHandler={imageHotspotPopoverBorderWidthChange}
+          spacingUnitsHandler={(unit) => setAttributes({
+            imageHotspotPopoverBorderWidthUnits: {
+              ...imageHotspotPopoverBorderWidthUnits,
+              [deviceType]: unit
+            }
+          })}
+          spacingCombineBtn={imageHotspotPopoverBorderWidthLink}
+          spacingCombineBtnHandler={() => setAttributes({
+            imageHotspotPopoverBorderWidthLink: !imageHotspotPopoverBorderWidthLink
+          })}
+          setAttributes={setAttributes}
+        />
+
         <FB_ColorControl
-          label={__("Popover Background", "frontis-blocks")}
-          globalColor={imageHotspotPopoverBgColor}
-          setGlobalColor={(value) => setAttributes({ imageHotspotPopoverBgColor: value })}
+          label={__("Border Color", "frontis-blocks")}
+          globalColor={imageHotspotPopoverBorderColor}
+          setGlobalColor={(value) => setAttributes({ imageHotspotPopoverBorderColor: value })}
+        />
+
+        <FB_Spacing
+          label={__("Border Radius", "frontis-blocks")}
+          deviceType={deviceType}
+          spacingUnits={imageHotspotPopoverBorderRadiusUnits}
+          spacingDesktop={imageHotspotPopoverBorderRadiusDesktop}
+          spacingTablet={imageHotspotPopoverBorderRadiusTablet}
+          spacingMobile={imageHotspotPopoverBorderRadiusMobile}
+          handleSpacingUnitHandler={imageHotspotPopoverBorderRadiusChange}
+          spacingUnitsHandler={(unit) => setAttributes({
+            imageHotspotPopoverBorderRadiusUnits: {
+              ...imageHotspotPopoverBorderRadiusUnits,
+              [deviceType]: unit
+            }
+          })}
+          spacingCombineBtn={imageHotspotPopoverBorderRadiusLink}
+          spacingCombineBtnHandler={() => setAttributes({
+            imageHotspotPopoverBorderRadiusLink: !imageHotspotPopoverBorderRadiusLink
+          })}
+          setAttributes={setAttributes}
+        />
+      </PanelBody>
+      
+      <PanelBody title={__("Title", "frontis-blocks")} initialOpen={true}>
+        <FB_TypographyControl
+          label={__("Typography", "frontis-blocks")}
+          deviceType={deviceType}
+          setAttributes={setAttributes}
+          fontFamily={imageHotspotTitleFontFamily}
+          onChangeFontFamily={(value) => setAttributes({ imageHotspotTitleFontFamily: value })}
+          fontSize={imageHotspotTitleFontSize}
+          onChangeFontSize={(value) => setAttributes({ imageHotspotTitleFontSize: value })}
+          fontSizeUnits={imageHotspotTitleFontSizeUnits}
+          onChangeFontSizeUnit={(value) => setAttributes({ imageHotspotTitleFontSizeUnits: value })}
+          fontWeight={imageHotspotTitleFontWeight}
+          onChangeFontWeight={(value) => setAttributes({ imageHotspotTitleFontWeight: value })}
+          fontStyle={imageHotspotTitleFontStyle}
+          onChangeFontStyle={(value) => setAttributes({ imageHotspotTitleFontStyle: value })}
+          textTransform={imageHotspotTitleTextTransform}
+          onChangeTextTransform={(value) => setAttributes({ imageHotspotTitleTextTransform: value })}
+          textDecoration={imageHotspotTitleTextDecoration}
+          onChangeTextDecoration={(value) => setAttributes({ imageHotspotTitleTextDecoration: value })}
+          letterSpacing={imageHotspotTitleLetterSpacing}
+          onChangeLetterSpacing={(value) => setAttributes({ imageHotspotTitleLetterSpacing: value })}
+          letterSpacingUnits={imageHotspotTitleLetterSpacingUnits}
+          onChangeLetterSpacingUnit={(value) => setAttributes({ imageHotspotTitleLetterSpacingUnits: value })}
+          lineHeight={imageHotspotTitleLineHeight}
+          onChangeLineHeight={(value) => setAttributes({ imageHotspotTitleLineHeight: value })}
+          lineHeightUnits={imageHotspotTitleLineHeightUnits}
+          onChangeLineHeightUnit={(value) => setAttributes({ imageHotspotTitleLineHeightUnits: value })}
         />
 
         <FB_SwitcherControl
-          label={__("Title Color", "frontis-blocks")}
+          label={__("Color", "frontis-blocks")}
           globalSwitcher={imageHotspotTitleColorSwitcher}
           setGlobalSwitcher={(value) => setAttributes({ imageHotspotTitleColorSwitcher: value })}
         />
@@ -1291,264 +2219,520 @@ export default function Inspector({ attributes, setAttributes }) {
           />
         )}
 
-        <FB_ColorControl
-          label={__("Description Color", "frontis-blocks")}
-          globalColor={imageHotspotDescColor}
-          setGlobalColor={(value) => setAttributes({ imageHotspotDescColor: value })}
+        <FB_Spacing
+          label={__("Padding", "frontis-blocks")}
+          deviceType={deviceType}
+          spacingUnitsHandler={(unit) => setAttributes({
+            imageHotspotTitlePaddingUnits: {
+              ...imageHotspotTitlePaddingUnits,
+              [deviceType]: unit
+            }
+          })}
+          spacingUnits={imageHotspotTitlePaddingUnits}
+          spacingDesktop={imageHotspotTitlePaddingDesktop}
+          spacingTablet={imageHotspotTitlePaddingTablet}
+          spacingMobile={imageHotspotTitlePaddingMobile}
+          handleSpacingUnitHandler={imageHotspotTitlePaddingUnitsChange}
+          spacingCombineBtn={imageHotspotTitlePaddingLink}
+          spacingCombineBtnHandler={() => setAttributes({
+            imageHotspotTitlePaddingLink: !imageHotspotTitlePaddingLink
+          })}
+          setAttributes={setAttributes}
         />
-        <FB_ColorControl
-          label={__("Category Color", "frontis-blocks")}
-          globalColor={imageHotspotCategoryColor}
-          setGlobalColor={(value) => setAttributes({ imageHotspotCategoryColor: value })}
+
+        <FB_Spacing
+          label={__("Margin", "frontis-blocks")}
+          deviceType={deviceType}
+          spacingUnitsHandler={(unit) => setAttributes({
+            imageHotspotTitleMarginUnits: {
+              ...imageHotspotTitleMarginUnits,
+              [deviceType]: unit
+            }
+          })}
+          spacingUnits={imageHotspotTitleMarginUnits}
+          spacingDesktop={imageHotspotTitleMarginDesktop}
+          spacingTablet={imageHotspotTitleMarginTablet}
+          spacingMobile={imageHotspotTitleMarginMobile}
+          handleSpacingUnitHandler={imageHotspotTitleMarginUnitsChange}
+          spacingCombineBtn={imageHotspotTitleMarginLink}
+          spacingCombineBtnHandler={() => setAttributes({
+            imageHotspotTitleMarginLink: !imageHotspotTitleMarginLink
+          })}
+          setAttributes={setAttributes}
+        />
+
+        <FB_Spacing
+          label={__("Border Width", "frontis-blocks")}
+          deviceType={deviceType}
+          spacingUnits={imageHotspotTitleBorderWidthUnits}
+          spacingDesktop={imageHotspotTitleBorderWidthDesktop}
+          spacingTablet={imageHotspotTitleBorderWidthTablet}
+          spacingMobile={imageHotspotTitleBorderWidthMobile}
+          handleSpacingUnitHandler={imageHotspotTitleBorderWidthChange}
+          spacingUnitsHandler={(unit) => setAttributes({
+            imageHotspotTitleBorderWidthUnits: {
+              ...imageHotspotTitleBorderWidthUnits,
+              [deviceType]: unit
+            }
+          })}
+          spacingCombineBtn={imageHotspotTitleBorderWidthLink}
+          spacingCombineBtnHandler={() => setAttributes({
+            imageHotspotTitleBorderWidthLink: !imageHotspotTitleBorderWidthLink
+          })}
+          setAttributes={setAttributes}
         />
 
         <FB_ColorControl
-          label={__("Price Color", "frontis-blocks")}
-          globalColor={imageHotspotPriceColor}
-          setGlobalColor={(value) => setAttributes({ imageHotspotPriceColor: value })}
+          label={__("Border Color", "frontis-blocks")}
+          globalColor={imageHotspotTitleBorderColor}
+          setGlobalColor={(value) => setAttributes({ imageHotspotTitleBorderColor: value })}
+        />
+
+        <FB_Spacing
+          label={__("Border Radius", "frontis-blocks")}
+          deviceType={deviceType}
+          spacingUnits={imageHotspotTitleBorderRadiusUnits}
+          spacingDesktop={imageHotspotTitleBorderRadiusDesktop}
+          spacingTablet={imageHotspotTitleBorderRadiusTablet}
+          spacingMobile={imageHotspotTitleBorderRadiusMobile}
+          handleSpacingUnitHandler={imageHotspotTitleBorderRadiusChange}
+          spacingUnitsHandler={(unit) => setAttributes({
+            imageHotspotTitleBorderRadiusUnits: {
+              ...imageHotspotTitleBorderRadiusUnits,
+              [deviceType]: unit
+            }
+          })}
+          spacingCombineBtn={imageHotspotTitleBorderRadiusLink}
+          spacingCombineBtnHandler={() => setAttributes({
+            imageHotspotTitleBorderRadiusLink: !imageHotspotTitleBorderRadiusLink
+          })}
+          setAttributes={setAttributes}
         />
       </PanelBody>
 
-      <PanelBody title={__("Typography", "frontis-blocks")} initialOpen={true}>
+      <PanelBody title={__("Category", "frontis-blocks")} initialOpen={true}>
         <FB_TypographyControl
-          label={__("Title Typography", "frontis-blocks")}
+          label={__("Typography", "frontis-blocks")}
           deviceType={deviceType}
           setAttributes={setAttributes}
-
-          fontFamily={imageHotspotTitleFontFamily}
-          onChangeFontFamily={(value) => setAttributes({ imageHotspotTitleFontFamily: value })}
-
-          fontSize={imageHotspotTitleFontSize}
-          onChangeFontSize={(value) => setAttributes({ imageHotspotTitleFontSize: value })}
-          fontSizeUnits={imageHotspotTitleFontSizeUnits}
-          onChangeFontSizeUnit={(value) => setAttributes({ imageHotspotTitleFontSizeUnits: value })}
-
-          fontWeight={imageHotspotTitleFontWeight}
-          onChangeFontWeight={(value) => setAttributes({ imageHotspotTitleFontWeight: value })}
-
-          fontStyle={imageHotspotTitleFontStyle}
-          onChangeFontStyle={(value) => setAttributes({ imageHotspotTitleFontStyle: value })}
-
-          textTransform={imageHotspotTitleTextTransform}
-          onChangeTextTransform={(value) => setAttributes({ imageHotspotTitleTextTransform: value })}
-
-          textDecoration={imageHotspotTitleTextDecoration}
-          onChangeTextDecoration={(value) => setAttributes({ imageHotspotTitleTextDecoration: value })}
-
-          letterSpacing={imageHotspotTitleLetterSpacing}
-          onChangeLetterSpacing={(value) => setAttributes({ imageHotspotTitleLetterSpacing: value })}
-          letterSpacingUnits={imageHotspotTitleLetterSpacingUnits}
-          onChangeLetterSpacingUnit={(value) => setAttributes({ imageHotspotTitleLetterSpacingUnits: value })}
-
-          lineHeight={imageHotspotTitleLineHeight}
-          onChangeLineHeight={(value) => setAttributes({ imageHotspotTitleLineHeight: value })}
-          lineHeightUnits={imageHotspotTitleLineHeightUnits}
-          onChangeLineHeightUnit={(value) => setAttributes({ imageHotspotTitleLineHeightUnits: value })}
+          fontFamily={imageHotspotCategoryFontFamily}
+          onChangeFontFamily={(value) => setAttributes({ imageHotspotCategoryFontFamily: value })}
+          fontSize={imageHotspotCategoryFontSize}
+          onChangeFontSize={(value) => setAttributes({ imageHotspotCategoryFontSize: value })}
+          fontSizeUnits={imageHotspotCategoryFontSizeUnits}
+          onChangeFontSizeUnit={(value) => setAttributes({ imageHotspotCategoryFontSizeUnits: value })}
+          fontWeight={imageHotspotCategoryFontWeight}
+          onChangeFontWeight={(value) => setAttributes({ imageHotspotCategoryFontWeight: value })}
+          fontStyle={imageHotspotCategoryFontStyle}
+          onChangeFontStyle={(value) => setAttributes({ imageHotspotCategoryFontStyle: value })}
+          textTransform={imageHotspotCategoryTextTransform}
+          onChangeTextTransform={(value) => setAttributes({ imageHotspotCategoryTextTransform: value })}
+          textDecoration={imageHotspotCategoryTextDecoration}
+          onChangeTextDecoration={(value) => setAttributes({ imageHotspotCategoryTextDecoration: value })}
+          letterSpacing={imageHotspotCategoryLetterSpacing}
+          onChangeLetterSpacing={(value) => setAttributes({ imageHotspotCategoryLetterSpacing: value })}
+          letterSpacingUnits={imageHotspotCategoryLetterSpacingUnits}
+          onChangeLetterSpacingUnit={(value) => setAttributes({ imageHotspotCategoryLetterSpacingUnits: value })}
+          lineHeight={imageHotspotCategoryLineHeight}
+          onChangeLineHeight={(value) => setAttributes({ imageHotspotCategoryLineHeight: value })}
+          lineHeightUnits={imageHotspotCategoryLineHeightUnits}
+          onChangeLineHeightUnit={(value) => setAttributes({ imageHotspotCategoryLineHeightUnits: value })}
         />
+
+        <FB_SwitcherControl
+          label={__("Color", "frontis-blocks")}
+          globalSwitcher={imageHotspotCategoryColorSwitcher}
+          setGlobalSwitcher={(value) => setAttributes({ imageHotspotCategoryColorSwitcher: value })}
+        />
+
+        {imageHotspotCategoryColorSwitcher === 'normal' && (
+          <FB_ColorControl
+            label={__("Color", "frontis-blocks")}
+            globalColor={imageHotspotCategoryColor}
+            setGlobalColor={(value) => setAttributes({ imageHotspotCategoryColor: value })}
+          />
+        )}
+
+        {imageHotspotCategoryColorSwitcher === 'hover' && (
+          <FB_ColorControl
+            label={__("Hover Color", "frontis-blocks")}
+            globalColor={imageHotspotCategoryHoverColor}
+            setGlobalColor={(value) => setAttributes({ imageHotspotCategoryHoverColor: value })}
+          />
+        )}
+
+        <FB_Spacing
+          label={__("Padding", "frontis-blocks")}
+          deviceType={deviceType}
+          spacingUnitsHandler={(unit) => setAttributes({
+            imageHotspotCategoryPaddingUnits: {
+              ...imageHotspotCategoryPaddingUnits,
+              [deviceType]: unit
+            }
+          })}
+          spacingUnits={imageHotspotCategoryPaddingUnits}
+          spacingDesktop={imageHotspotCategoryPaddingDesktop}
+          spacingTablet={imageHotspotCategoryPaddingTablet}
+          spacingMobile={imageHotspotCategoryPaddingMobile}
+          handleSpacingUnitHandler={imageHotspotCategoryPaddingUnitsChange}
+          spacingCombineBtn={imageHotspotCategoryPaddingLink}
+          spacingCombineBtnHandler={() => setAttributes({
+            imageHotspotCategoryPaddingLink: !imageHotspotCategoryPaddingLink
+          })}
+          setAttributes={setAttributes}
+        />
+
+        <FB_Spacing
+          label={__("Margin", "frontis-blocks")}
+          deviceType={deviceType}
+          spacingUnitsHandler={(unit) => setAttributes({
+            imageHotspotCategoryMarginUnits: {
+              ...imageHotspotCategoryMarginUnits,
+              [deviceType]: unit
+            }
+          })}
+          spacingUnits={imageHotspotCategoryMarginUnits}
+          spacingDesktop={imageHotspotCategoryMarginDesktop}
+          spacingTablet={imageHotspotCategoryMarginTablet}
+          spacingMobile={imageHotspotCategoryMarginMobile}
+          handleSpacingUnitHandler={imageHotspotCategoryMarginUnitsChange}
+          spacingCombineBtn={imageHotspotCategoryMarginLink}
+          spacingCombineBtnHandler={() => setAttributes({
+            imageHotspotCategoryMarginLink: !imageHotspotCategoryMarginLink
+          })}
+          setAttributes={setAttributes}
+        />
+
+        <FB_Spacing
+          label={__("Border Width", "frontis-blocks")}
+          deviceType={deviceType}
+          spacingUnits={imageHotspotCategoryBorderWidthUnits}
+          spacingDesktop={imageHotspotCategoryBorderWidthDesktop}
+          spacingTablet={imageHotspotCategoryBorderWidthTablet}
+          spacingMobile={imageHotspotCategoryBorderWidthMobile}
+          handleSpacingUnitHandler={imageHotspotCategoryBorderWidthChange}
+          spacingUnitsHandler={(unit) => setAttributes({
+            imageHotspotCategoryBorderWidthUnits: {
+              ...imageHotspotCategoryBorderWidthUnits,
+              [deviceType]: unit
+            }
+          })}
+          spacingCombineBtn={imageHotspotCategoryBorderWidthLink}
+          spacingCombineBtnHandler={() => setAttributes({
+            imageHotspotCategoryBorderWidthLink: !imageHotspotCategoryBorderWidthLink
+          })}
+          setAttributes={setAttributes}
+        />
+
+        <FB_ColorControl
+          label={__("Border Color", "frontis-blocks")}
+          globalColor={imageHotspotCategoryBorderColor}
+          setGlobalColor={(value) => setAttributes({ imageHotspotCategoryBorderColor: value })}
+        />
+
+        <FB_Spacing
+          label={__("Border Radius", "frontis-blocks")}
+          deviceType={deviceType}
+          spacingUnits={imageHotspotCategoryBorderRadiusUnits}
+          spacingDesktop={imageHotspotCategoryBorderRadiusDesktop}
+          spacingTablet={imageHotspotCategoryBorderRadiusTablet}
+          spacingMobile={imageHotspotCategoryBorderRadiusMobile}
+          handleSpacingUnitHandler={imageHotspotCategoryBorderRadiusChange}
+          spacingUnitsHandler={(unit) => setAttributes({
+            imageHotspotCategoryBorderRadiusUnits: {
+              ...imageHotspotCategoryBorderRadiusUnits,
+              [deviceType]: unit
+            }
+          })}
+          spacingCombineBtn={imageHotspotCategoryBorderRadiusLink}
+          spacingCombineBtnHandler={() => setAttributes({
+            imageHotspotCategoryBorderRadiusLink: !imageHotspotCategoryBorderRadiusLink
+          })}
+          setAttributes={setAttributes}
+        />
+      </PanelBody>
+
+      <PanelBody title={__("Description", "frontis-blocks")} initialOpen={true}>
         <FB_TypographyControl
-          label={__("Description Typography", "frontis-blocks")}
+          label={__("Typography", "frontis-blocks")}
           deviceType={deviceType}
           setAttributes={setAttributes}
-
           fontFamily={imageHotspotDescFontFamily}
           onChangeFontFamily={(value) => setAttributes({ imageHotspotDescFontFamily: value })}
-
           fontSize={imageHotspotDescFontSize}
           onChangeFontSize={(value) => setAttributes({ imageHotspotDescFontSize: value })}
           fontSizeUnits={imageHotspotDescFontSizeUnits}
           onChangeFontSizeUnit={(value) => setAttributes({ imageHotspotDescFontSizeUnits: value })}
-
           fontWeight={imageHotspotDescFontWeight}
           onChangeFontWeight={(value) => setAttributes({ imageHotspotDescFontWeight: value })}
-
           fontStyle={imageHotspotDescFontStyle}
           onChangeFontStyle={(value) => setAttributes({ imageHotspotDescFontStyle: value })}
-
           textTransform={imageHotspotDescTextTransform}
           onChangeTextTransform={(value) => setAttributes({ imageHotspotDescTextTransform: value })}
-
           textDecoration={imageHotspotDescTextDecoration}
           onChangeTextDecoration={(value) => setAttributes({ imageHotspotDescTextDecoration: value })}
-
           letterSpacing={imageHotspotDescLetterSpacing}
           onChangeLetterSpacing={(value) => setAttributes({ imageHotspotDescLetterSpacing: value })}
           letterSpacingUnits={imageHotspotDescLetterSpacingUnits}
           onChangeLetterSpacingUnit={(value) => setAttributes({ imageHotspotDescLetterSpacingUnits: value })}
-
           lineHeight={imageHotspotDescLineHeight}
           onChangeLineHeight={(value) => setAttributes({ imageHotspotDescLineHeight: value })}
           lineHeightUnits={imageHotspotDescLineHeightUnits}
           onChangeLineHeightUnit={(value) => setAttributes({ imageHotspotDescLineHeightUnits: value })}
         />
-      </PanelBody>
 
-      <PanelBody title={__("Padding & Margin", "frontis-blocks")} initialOpen={false}>
+        <FB_SwitcherControl
+          label={__("Color", "frontis-blocks")}
+          globalSwitcher={imageHotspotDescColorSwitcher}
+          setGlobalSwitcher={(value) => setAttributes({ imageHotspotDescColorSwitcher: value })}
+        />
+
+        {imageHotspotDescColorSwitcher === 'normal' && (
+          <FB_ColorControl
+            label={__("Color", "frontis-blocks")}
+            globalColor={imageHotspotDescColor}
+            setGlobalColor={(value) => setAttributes({ imageHotspotDescColor: value })}
+          />
+        )}
+
+        {imageHotspotDescColorSwitcher === 'hover' && (
+          <FB_ColorControl
+            label={__("Hover Color", "frontis-blocks")}
+            globalColor={imageHotspotDescHoverColor}
+            setGlobalColor={(value) => setAttributes({ imageHotspotDescHoverColor: value })}
+          />
+        )}
+
         <FB_Spacing
           label={__("Padding", "frontis-blocks")}
           deviceType={deviceType}
-          spacingUnitsHandler={imageHotspotPaddingUnitsHandler}
-          spacingUnits={imageHotspotPaddingUnits}
-          spacingDesktop={imageHotspotPaddingDesktop}
-          spacingTablet={imageHotspotPaddingTablet}
-          spacingMobile={imageHotspotPaddingMobile}
-          handleSpacingUnitHandler={imageHotspotPaddingUnitsChange}
-          spacingCombineBtn={imageHotspotPaddingLink}
-          spacingCombineBtnHandler={imageHotspotPaddingLinkBtn}
-          setAttributes={setAttributes}
-        />
-        <FB_Spacing
-          label={__("Popover Padding", "frontis-blocks")}
-          deviceType={deviceType}
           spacingUnitsHandler={(unit) => setAttributes({
-            imageHotspotPopoverPaddingUnits: {
-              ...imageHotspotPopoverPaddingUnits,
+            imageHotspotDescPaddingUnits: {
+              ...imageHotspotDescPaddingUnits,
               [deviceType]: unit
             }
           })}
-          spacingUnits={imageHotspotPopoverPaddingUnits}
-          spacingDesktop={imageHotspotPopoverPaddingDesktop}
-          spacingTablet={imageHotspotPopoverPaddingTablet}
-          spacingMobile={imageHotspotPopoverPaddingMobile}
-          handleSpacingUnitHandler={imageHotspotPopoverPaddingUnitsChange}
-          spacingCombineBtn={imageHotspotPopoverPaddingLink}
+          spacingUnits={imageHotspotDescPaddingUnits}
+          spacingDesktop={imageHotspotDescPaddingDesktop}
+          spacingTablet={imageHotspotDescPaddingTablet}
+          spacingMobile={imageHotspotDescPaddingMobile}
+          handleSpacingUnitHandler={imageHotspotDescPaddingUnitsChange}
+          spacingCombineBtn={imageHotspotDescPaddingLink}
           spacingCombineBtnHandler={() => setAttributes({
-            imageHotspotPopoverPaddingLink: !imageHotspotPopoverPaddingLink
+            imageHotspotDescPaddingLink: !imageHotspotDescPaddingLink
           })}
           setAttributes={setAttributes}
         />
+
         <FB_Spacing
           label={__("Margin", "frontis-blocks")}
           deviceType={deviceType}
-          spacingUnitsHandler={imageHotspotMarginUnitsHandler}
-          spacingUnits={imageHotspotMarginUnits}
-          spacingDesktop={imageHotspotMarginDesktop}
-          spacingTablet={imageHotspotMarginTablet}
-          spacingMobile={imageHotspotMarginMobile}
-          handleSpacingUnitHandler={imageHotspotMarginUnitsChange}
-          spacingCombineBtn={imageHotspotMarginLink}
-          spacingCombineBtnHandler={imageHotspotMarginLinkBtn}
+          spacingUnitsHandler={(unit) => setAttributes({
+            imageHotspotDescMarginUnits: {
+              ...imageHotspotDescMarginUnits,
+              [deviceType]: unit
+            }
+          })}
+          spacingUnits={imageHotspotDescMarginUnits}
+          spacingDesktop={imageHotspotDescMarginDesktop}
+          spacingTablet={imageHotspotDescMarginTablet}
+          spacingMobile={imageHotspotDescMarginMobile}
+          handleSpacingUnitHandler={imageHotspotDescMarginUnitsChange}
+          spacingCombineBtn={imageHotspotDescMarginLink}
+          spacingCombineBtnHandler={() => setAttributes({
+            imageHotspotDescMarginLink: !imageHotspotDescMarginLink
+          })}
+          setAttributes={setAttributes}
+        />
+
+        <FB_Spacing
+          label={__("Border Width", "frontis-blocks")}
+          deviceType={deviceType}
+          spacingUnits={imageHotspotDescBorderWidthUnits}
+          spacingDesktop={imageHotspotDescBorderWidthDesktop}
+          spacingTablet={imageHotspotDescBorderWidthTablet}
+          spacingMobile={imageHotspotDescBorderWidthMobile}
+          handleSpacingUnitHandler={imageHotspotDescBorderWidthChange}
+          spacingUnitsHandler={(unit) => setAttributes({
+            imageHotspotDescBorderWidthUnits: {
+              ...imageHotspotDescBorderWidthUnits,
+              [deviceType]: unit
+            }
+          })}
+          spacingCombineBtn={imageHotspotDescBorderWidthLink}
+          spacingCombineBtnHandler={() => setAttributes({
+            imageHotspotDescBorderWidthLink: !imageHotspotDescBorderWidthLink
+          })}
+          setAttributes={setAttributes}
+        />
+
+        <FB_ColorControl
+          label={__("Border Color", "frontis-blocks")}
+          globalColor={imageHotspotDescBorderColor}
+          setGlobalColor={(value) => setAttributes({ imageHotspotDescBorderColor: value })}
+        />
+
+        <FB_Spacing
+          label={__("Border Radius", "frontis-blocks")}
+          deviceType={deviceType}
+          spacingUnits={imageHotspotDescBorderRadiusUnits}
+          spacingDesktop={imageHotspotDescBorderRadiusDesktop}
+          spacingTablet={imageHotspotDescBorderRadiusTablet}
+          spacingMobile={imageHotspotDescBorderRadiusMobile}
+          handleSpacingUnitHandler={imageHotspotDescBorderRadiusChange}
+          spacingUnitsHandler={(unit) => setAttributes({
+            imageHotspotDescBorderRadiusUnits: {
+              ...imageHotspotDescBorderRadiusUnits,
+              [deviceType]: unit
+            }
+          })}
+          spacingCombineBtn={imageHotspotDescBorderRadiusLink}
+          spacingCombineBtnHandler={() => setAttributes({
+            imageHotspotDescBorderRadiusLink: !imageHotspotDescBorderRadiusLink
+          })}
           setAttributes={setAttributes}
         />
       </PanelBody>
 
-      <PanelBody title={__("Border & Box Shadow", "frontis-blocks")} initialOpen={false}>
-        <FB_Spacing
-          label={__("Image Border Width", "frontis-blocks")}
+      <PanelBody title={__("Price", "frontis-blocks")} initialOpen={true}>
+        <FB_TypographyControl
+          label={__("Typography", "frontis-blocks")}
           deviceType={deviceType}
-          spacingUnits={imageHotspotImageBorderWidthUnits}
-          spacingDesktop={imageHotspotImageBorderWidthDesktop}
-          spacingTablet={imageHotspotImageBorderWidthTablet}
-          spacingMobile={imageHotspotImageBorderWidthMobile}
-          handleSpacingUnitHandler={imageHotspotImageBorderWidthChange}
-          spacingUnitsHandler={(unit) => setAttributes({ imageHotspotImageBorderWidthUnits: { ...imageHotspotImageBorderWidthUnits, [deviceType]: unit } })}
-          spacingCombineBtn={imageHotspotImageBorderWidthLink}
-          spacingCombineBtnHandler={() => setAttributes({ imageHotspotImageBorderWidthLink: !imageHotspotImageBorderWidthLink })}
+          setAttributes={setAttributes}
+          fontFamily={imageHotspotPriceFontFamily}
+          onChangeFontFamily={(value) => setAttributes({ imageHotspotPriceFontFamily: value })}
+          fontSize={imageHotspotPriceFontSize}
+          onChangeFontSize={(value) => setAttributes({ imageHotspotPriceFontSize: value })}
+          fontSizeUnits={imageHotspotPriceFontSizeUnits}
+          onChangeFontSizeUnit={(value) => setAttributes({ imageHotspotPriceFontSizeUnits: value })}
+          fontWeight={imageHotspotPriceFontWeight}
+          onChangeFontWeight={(value) => setAttributes({ imageHotspotPriceFontWeight: value })}
+          fontStyle={imageHotspotPriceFontStyle}
+          onChangeFontStyle={(value) => setAttributes({ imageHotspotPriceFontStyle: value })}
+          textTransform={imageHotspotPriceTextTransform}
+          onChangeTextTransform={(value) => setAttributes({ imageHotspotPriceTextTransform: value })}
+          textDecoration={imageHotspotPriceTextDecoration}
+          onChangeTextDecoration={(value) => setAttributes({ imageHotspotPriceTextDecoration: value })}
+          letterSpacing={imageHotspotPriceLetterSpacing}
+          onChangeLetterSpacing={(value) => setAttributes({ imageHotspotPriceLetterSpacing: value })}
+          letterSpacingUnits={imageHotspotPriceLetterSpacingUnits}
+          onChangeLetterSpacingUnit={(value) => setAttributes({ imageHotspotPriceLetterSpacingUnits: value })}
+          lineHeight={imageHotspotPriceLineHeight}
+          onChangeLineHeight={(value) => setAttributes({ imageHotspotPriceLineHeight: value })}
+          lineHeightUnits={imageHotspotPriceLineHeightUnits}
+          onChangeLineHeightUnit={(value) => setAttributes({ imageHotspotPriceLineHeightUnits: value })}
+        />
+
+        <FB_SwitcherControl
+          label={__("Color", "frontis-blocks")}
+          globalSwitcher={imageHotspotPriceColorSwitcher}
+          setGlobalSwitcher={(value) => setAttributes({ imageHotspotPriceColorSwitcher: value })}
+        />
+
+        {imageHotspotPriceColorSwitcher === 'normal' && (
+          <FB_ColorControl
+            label={__("Color", "frontis-blocks")}
+            globalColor={imageHotspotPriceColor}
+            setGlobalColor={(value) => setAttributes({ imageHotspotPriceColor: value })}
+          />
+        )}
+
+        {imageHotspotPriceColorSwitcher === 'hover' && (
+          <FB_ColorControl
+            label={__("Hover Color", "frontis-blocks")}
+            globalColor={imageHotspotPriceHoverColor}
+            setGlobalColor={(value) => setAttributes({ imageHotspotPriceHoverColor: value })}
+          />
+        )}
+
+        <FB_Spacing
+          label={__("Padding", "frontis-blocks")}
+          deviceType={deviceType}
+          spacingUnitsHandler={(unit) => setAttributes({
+            imageHotspotPricePaddingUnits: {
+              ...imageHotspotPricePaddingUnits,
+              [deviceType]: unit
+            }
+          })}
+          spacingUnits={imageHotspotPricePaddingUnits}
+          spacingDesktop={imageHotspotPricePaddingDesktop}
+          spacingTablet={imageHotspotPricePaddingTablet}
+          spacingMobile={imageHotspotPricePaddingMobile}
+          handleSpacingUnitHandler={imageHotspotPricePaddingUnitsChange}
+          spacingCombineBtn={imageHotspotPricePaddingLink}
+          spacingCombineBtnHandler={() => setAttributes({
+            imageHotspotPricePaddingLink: !imageHotspotPricePaddingLink
+          })}
+          setAttributes={setAttributes}
+        />
+
+        <FB_Spacing
+          label={__("Margin", "frontis-blocks")}
+          deviceType={deviceType}
+          spacingUnitsHandler={(unit) => setAttributes({
+            imageHotspotPriceMarginUnits: {
+              ...imageHotspotPriceMarginUnits,
+              [deviceType]: unit
+            }
+          })}
+          spacingUnits={imageHotspotPriceMarginUnits}
+          spacingDesktop={imageHotspotPriceMarginDesktop}
+          spacingTablet={imageHotspotPriceMarginTablet}
+          spacingMobile={imageHotspotPriceMarginMobile}
+          handleSpacingUnitHandler={imageHotspotPriceMarginUnitsChange}
+          spacingCombineBtn={imageHotspotPriceMarginLink}
+          spacingCombineBtnHandler={() => setAttributes({
+            imageHotspotPriceMarginLink: !imageHotspotPriceMarginLink
+          })}
+          setAttributes={setAttributes}
+        />
+
+        <FB_Spacing
+          label={__("Border Width", "frontis-blocks")}
+          deviceType={deviceType}
+          spacingUnits={imageHotspotPriceBorderWidthUnits}
+          spacingDesktop={imageHotspotPriceBorderWidthDesktop}
+          spacingTablet={imageHotspotPriceBorderWidthTablet}
+          spacingMobile={imageHotspotPriceBorderWidthMobile}
+          handleSpacingUnitHandler={imageHotspotPriceBorderWidthChange}
+          spacingUnitsHandler={(unit) => setAttributes({
+            imageHotspotPriceBorderWidthUnits: {
+              ...imageHotspotPriceBorderWidthUnits,
+              [deviceType]: unit
+            }
+          })}
+          spacingCombineBtn={imageHotspotPriceBorderWidthLink}
+          spacingCombineBtnHandler={() => setAttributes({
+            imageHotspotPriceBorderWidthLink: !imageHotspotPriceBorderWidthLink
+          })}
           setAttributes={setAttributes}
         />
 
         <FB_ColorControl
-          label={__("Image Border Color", "frontis-blocks")}
-          globalColor={imageHotspotImageBorderColor}
-          setGlobalColor={(value) => setAttributes({ imageHotspotImageBorderColor: value })}
+          label={__("Border Color", "frontis-blocks")}
+          globalColor={imageHotspotPriceBorderColor}
+          setGlobalColor={(value) => setAttributes({ imageHotspotPriceBorderColor: value })}
         />
 
         <FB_Spacing
-          label={__("Image Border Radius", "frontis-blocks")}
+          label={__("Border Radius", "frontis-blocks")}
           deviceType={deviceType}
-          spacingUnits={imageHotspotImageBorderRadiusUnits}
-          spacingDesktop={imageHotspotImageBorderRadiusDesktop}
-          spacingTablet={imageHotspotImageBorderRadiusTablet}
-          spacingMobile={imageHotspotImageBorderRadiusMobile}
-          handleSpacingUnitHandler={imageHotspotImageBorderRadiusChange}
-          spacingUnitsHandler={(unit) => setAttributes({ imageHotspotImageBorderRadiusUnits: { ...imageHotspotImageBorderRadiusUnits, [deviceType]: unit } })}
-          spacingCombineBtn={imageHotspotImageBorderRadiusLink}
-          spacingCombineBtnHandler={() => setAttributes({ imageHotspotImageBorderRadiusLink: !imageHotspotImageBorderRadiusLink })}
+          spacingUnits={imageHotspotPriceBorderRadiusUnits}
+          spacingDesktop={imageHotspotPriceBorderRadiusDesktop}
+          spacingTablet={imageHotspotPriceBorderRadiusTablet}
+          spacingMobile={imageHotspotPriceBorderRadiusMobile}
+          handleSpacingUnitHandler={imageHotspotPriceBorderRadiusChange}
+          spacingUnitsHandler={(unit) => setAttributes({
+            imageHotspotPriceBorderRadiusUnits: {
+              ...imageHotspotPriceBorderRadiusUnits,
+              [deviceType]: unit
+            }
+          })}
+          spacingCombineBtn={imageHotspotPriceBorderRadiusLink}
+          spacingCombineBtnHandler={() => setAttributes({
+            imageHotspotPriceBorderRadiusLink: !imageHotspotPriceBorderRadiusLink
+          })}
           setAttributes={setAttributes}
-        />
-
-        <FB_Spacing
-          label={__("Popover Border Width", "frontis-blocks")}
-          deviceType={deviceType}
-          spacingUnits={imageHotspotPopoverBorderWidthUnits}
-          spacingDesktop={imageHotspotPopoverBorderWidthDesktop}
-          spacingTablet={imageHotspotPopoverBorderWidthTablet}
-          spacingMobile={imageHotspotPopoverBorderWidthMobile}
-          handleSpacingUnitHandler={imageHotspotPopoverBorderWidthChange}
-          spacingUnitsHandler={(unit) => setAttributes({ imageHotspotPopoverBorderWidthUnits: { ...imageHotspotPopoverBorderWidthUnits, [deviceType]: unit } })}
-          spacingCombineBtn={imageHotspotPopoverBorderWidthLink}
-          spacingCombineBtnHandler={() => setAttributes({ imageHotspotPopoverBorderWidthLink: !imageHotspotPopoverBorderWidthLink })}
-          setAttributes={setAttributes}
-        />
-
-        <FB_ColorControl
-          label={__("Popover Border Color", "frontis-blocks")}
-          globalColor={imageHotspotPopoverBorderColor}
-          setGlobalColor={(value) => setAttributes({ imageHotspotPopoverBorderColor: value })}
-        />
-
-        <FB_Spacing
-          label={__("Popover Border Radius", "frontis-blocks")}
-          deviceType={deviceType}
-          spacingUnits={imageHotspotPopoverBorderRadiusUnits}
-          spacingDesktop={imageHotspotPopoverBorderRadiusDesktop}
-          spacingTablet={imageHotspotPopoverBorderRadiusTablet}
-          spacingMobile={imageHotspotPopoverBorderRadiusMobile}
-          handleSpacingUnitHandler={imageHotspotPopoverBorderRadiusChange}
-          spacingUnitsHandler={(unit) => setAttributes({ imageHotspotPopoverBorderRadiusUnits: { ...imageHotspotPopoverBorderRadiusUnits, [deviceType]: unit } })}
-          spacingCombineBtn={imageHotspotPopoverBorderRadiusLink}
-          spacingCombineBtnHandler={() => setAttributes({ imageHotspotPopoverBorderRadiusLink: !imageHotspotPopoverBorderRadiusLink })}
-          setAttributes={setAttributes}
-        />
-
-        <FB_Spacing
-          label={__("Popover Image Border Width", "frontis-blocks")}
-          deviceType={deviceType}
-          spacingUnits={imageHotspotPopoverImageBorderWidthUnits}
-          spacingDesktop={imageHotspotPopoverImageBorderWidthDesktop}
-          spacingTablet={imageHotspotPopoverImageBorderWidthTablet}
-          spacingMobile={imageHotspotPopoverImageBorderWidthMobile}
-          handleSpacingUnitHandler={imageHotspotPopoverImageBorderWidthChange}
-          spacingUnitsHandler={(unit) => setAttributes({ imageHotspotPopoverImageBorderWidthUnits: { ...imageHotspotPopoverImageBorderWidthUnits, [deviceType]: unit } })}
-          spacingCombineBtn={imageHotspotPopoverImageBorderWidthLink}
-          spacingCombineBtnHandler={() => setAttributes({ imageHotspotPopoverImageBorderWidthLink: !imageHotspotPopoverImageBorderWidthLink })}
-          setAttributes={setAttributes}
-        />
-
-        <FB_ColorControl
-          label={__("Popover Image Border Color", "frontis-blocks")}
-          globalColor={imageHotspotPopoverImageBorderColor}
-          setGlobalColor={(value) => setAttributes({ imageHotspotPopoverImageBorderColor: value })}
-        />
-
-        <FB_Spacing
-          label={__("Popover Image Border Radius", "frontis-blocks")}
-          deviceType={deviceType}
-          spacingUnits={imageHotspotPopoverImageBorderRadiusUnits}
-          spacingDesktop={imageHotspotPopoverImageBorderRadiusDesktop}
-          spacingTablet={imageHotspotPopoverImageBorderRadiusTablet}
-          spacingMobile={imageHotspotPopoverImageBorderRadiusMobile}
-          handleSpacingUnitHandler={imageHotspotPopoverImageBorderRadiusChange}
-          spacingUnitsHandler={(unit) => setAttributes({ imageHotspotPopoverImageBorderRadiusUnits: { ...imageHotspotPopoverImageBorderRadiusUnits, [deviceType]: unit } })}
-          spacingCombineBtn={imageHotspotPopoverImageBorderRadiusLink}
-          spacingCombineBtnHandler={() => setAttributes({ imageHotspotPopoverImageBorderRadiusLink: !imageHotspotPopoverImageBorderRadiusLink })}
-          setAttributes={setAttributes}
-        />
-
-        <FB_BoxShadowControl
-          label={__("Box Shadow", "frontis-blocks")}
-          onBoxShadowChange={(value) => setAttributes({ imageHotspotContainerShadowValues: value })}
-          initialShadowValue={imageHotspotContainerShadowValues}
-          onBoxShadowStyleChange={(value) => setAttributes({ imageHotspotContainerShadowCssValue: value })}
-        />
-        <FB_BoxShadowControl
-          label={__("Popover Shadow", "frontis-blocks")}
-          onBoxShadowChange={(value) => setAttributes({ imageHotspotPopoverShadowValues: value })}
-          initialShadowValue={imageHotspotPopoverShadowValues}
-          onBoxShadowStyleChange={(value) =>
-            setAttributes({
-              imageHotspotPopoverShadowCssValue: value
-            })
-          }
         />
       </PanelBody>
     </>
