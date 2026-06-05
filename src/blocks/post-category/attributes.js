@@ -14,11 +14,60 @@ const attributes = {
 	},
 	taxonomyType: {
 		type: "string",
-		default: "",
+		default: "category",
 	},
 	showAuthor: {
 		type: "boolean",
 		default: true,
+	},
+	showCategoryImage: {
+		type: "boolean",
+		default: true,
+	},
+	/** Image Size */
+	mediaSize: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	mediaHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	mediaSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	mediaHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	autoFitSwitch: {
+		type: 'boolean',
+		default: false,
+	},
+	imageFit: {
+		type: 'string',
+		default: 'cover',
+	},
+	imagePosition: {
+		type: "string",
+		default: "left",
 	},
 	categoryCreators: {
         type: "object",
@@ -189,7 +238,7 @@ const attributes = {
 	},
 	listStyle: {
 		type: "string",
-		default: "bullet", // 'none', 'bullet', 'number'
+		default: "bullet",
 	},
 	listIndentation: {
 		type: "object",

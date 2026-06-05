@@ -19,6 +19,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         taxonomyType,
         showCount,
         showAuthor,
+        showCategoryImage,
         authorAvatarSize,
         authorAvatarSizeUnits,
         showLabel,
@@ -580,11 +581,13 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                         <div key={taxonomy.id} className="fb-taxonomy-item">
                             {premadeStyle === "style-4" ? (
                                 <>
-                                    <div className="fb-taxonomy-image-container">
-                                        <div className="fb-taxonomy-image">
-                                            <img src={taxonomy.fb_taxonomy_image || defaultImageUrl} alt={taxonomy.name} />
+                                    {showCategoryImage && (
+                                        <div className="fb-taxonomy-image-container">
+                                            <div className="fb-taxonomy-image">
+                                                <img src={taxonomy.fb_taxonomy_image || defaultImageUrl} alt={taxonomy.name} />
+                                            </div>
                                         </div>
-                                    </div>
+                                    )}
 
                                     <div className="fb-taxonomy-card-content">
                                         <div className="fb-taxonomy-meta">
@@ -668,7 +671,8 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                             ) : (
 
                                 <>
-                                    {premadeStyle === "style-3" && (
+                                    
+                                    {premadeStyle === "style-3" && showCategoryImage && (
                                         <div className="fb-taxonomy-image">
                                             <img src={taxonomy.fb_taxonomy_image || defaultImageUrl} alt={taxonomy.name} />
                                         </div>

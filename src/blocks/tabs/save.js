@@ -5,6 +5,7 @@ import renderSVG from "@Components/icon-picker/components/icon-picker/controls/r
 export default function save({ attributes }) {
   const {
     blockID,
+    blockStyle,
     tabItems,
     tabActiveFrontend,
     tabTitleTag,

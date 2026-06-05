@@ -148,12 +148,15 @@ function renderNavButtonContent(type, config) {
 export function StackCardPresetOverNavigation({ config = STACK_CARD_DEFAULT_CONFIG_OVER }) {
 	return (
 		<>
-			<button className={`fb-stack-card-prev-btn prev-btn fb-stack-card-nav-btn fb-stack-card-nav-btn--${config.previousButtonIconAlign || 'none'}`}>
-				{renderNavButtonContent('prev', config)}
-			</button>
-			<button className={`fb-stack-card-next-btn next-btn fb-stack-card-nav-btn fb-stack-card-nav-btn--${config.nextButtonIconAlign || 'none'}`}>
-				{renderNavButtonContent('next', config)}
-			</button>
+			<div className="fb-stack-card-navigation-wrapper">
+				<button className={`fb-stack-card-prev-btn prev-btn fb-stack-card-nav-btn fb-stack-card-nav-btn--${config.previousButtonIconAlign || 'none'}`}>
+					{renderNavButtonContent('prev', config)}
+				</button>
+				<button className={`fb-stack-card-next-btn next-btn fb-stack-card-nav-btn fb-stack-card-nav-btn--${config.nextButtonIconAlign || 'none'}`}>
+					{renderNavButtonContent('next', config)}
+				</button>
+			</div>
+			
 		</>
 	);
 }
