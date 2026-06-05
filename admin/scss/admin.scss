@@ -40,14 +40,17 @@ body {
   min-width: 0px !important;
   position: relative !important;
   padding: 0 !important;
+  height: unset;
 
   &:before {
     background: transparent !important;
   }
+
   &:focus {
     outline: none !important;
     box-shadow: none !important;
   }
+
   &:focus-within {
     outline: none !important;
     box-shadow: none !important;
@@ -60,11 +63,13 @@ body {
         border-left: 1px solid $neutral-color-100 !important;
       }
     }
+
     &:nth-child(4) {
       button {
         border-radius: 0 4px 0 0;
       }
     }
+
     &:nth-child(5) {
       button {
         border-radius: 0 0 0 4px;
@@ -72,11 +77,13 @@ body {
         border-left: 1px solid $neutral-color-100 !important;
       }
     }
+
     &:nth-child(6) {
       button {
         border-top: none !important;
       }
     }
+
     &:nth-child(7) {
       button {
         border-top: none !important;
@@ -109,12 +116,14 @@ body {
         background-color: #E1E3E8 !important;
         cursor: pointer !important;
       }
-      &[aria-checked="true"] {  
+
+      &[aria-checked="true"] {
         background-color: $neutral-color-900 !important;
         color: $white-color !important;
       }
     }
   }
+
   .fb-global-typography-empty-heading {
     border: 1px solid $neutral-color-100;
     border-left: none;
@@ -122,6 +131,7 @@ body {
     border-radius: 0 0 4px 0;
   }
 }
+
 .highlight-tabs .components-tab-panel__tabs-item.active-tab {
   border-bottom: 2px solid #399CFF;
 }
@@ -130,12 +140,14 @@ body {
   border-bottom: 1px solid #ddd;
   margin: 16px 0;
 }
-.fb-control-help{
+
+.fb-control-help {
   font-size: 12px;
-	color: #888;
-	line-height: 1.4;
+  color: #888;
+  line-height: 1.4;
 }
+
 .is-disabled {
   opacity: 0.5;
-  pointer-events: none; 
+  pointer-events: none;
 }
