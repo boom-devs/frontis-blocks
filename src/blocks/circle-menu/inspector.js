@@ -56,6 +56,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 		mainMenuCloseImageSize,
 		triggerType,
 		submenuShowTitleOnHover,
+
 		// Typography
 		mainMenuTextGlobalTypographyData,
 		mainMenuTextGlobalTypoSwitcher,
@@ -98,6 +99,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 		submenuTitleOffsetHUnits,
 		submenuTitleOffsetV,
 		submenuTitleOffsetVUnits,
+
 		// Background Type
 		mainMenuNormalBackgroundType,
 		mainMenuNormalGradientColor,
@@ -115,6 +117,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 		submenuHoverGradientColor,
 		submenuHoverCustomGradientSwitcher,
 		submenuHoverCustomGradientInputValue,
+
 		// Border Radius
 		mainMenuBorderRadiusUnits,
 		mainMenuBorderRadiusDesktop,
@@ -126,6 +129,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 		submenuBorderRadiusTablet,
 		submenuBorderRadiusMobile,
 		submenuBorderRadiusLink,
+
 		// Border
 		mainMenuBorder,
 		mainMenuBorderColor,
@@ -143,6 +147,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 		submenuBorderTablet,
 		submenuBorderMobile,
 		submenuBorderLink,
+
 		// Box Shadow
 		mainMenuBoxShadowSwitcher,
 		mainMenuBoxShadowValues,
@@ -154,13 +159,21 @@ const Inspector = ({ attributes, setAttributes }) => {
 		submenuBoxShadowCssValue,
 		submenuBoxShadowHoverValues,
 		submenuBoxShadowHoverCssValue,
+
 		// Offsets
+		offsetHUnits,
 		offsetH,
+		offsetVUnits,
 		offsetV,
+		activeOffsetHUnits,
 		activeOffsetH,
+		activeOffsetVUnits,
 		activeOffsetV,
+
 		// Main Menu Colors & Sizes
+		mainMenuSizeUnits,
 		mainMenuSize,
+		mainMenuIconSizeUnits,
 		mainMenuIconSize,
 		mainMenuBgColorSwitcher,
 		mainMenuBgColor,
@@ -169,8 +182,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 		mainMenuTextColor,
 		mainMenuTextHoverColor,
 		mainMenuBorderColorSwitcher,
+
 		// Sub Menu Colors & Sizes
+		submenuSizeUnits,
 		submenuSize,
+		submenuIconSizeUnits,
 		submenuIconSize,
 		submenuBgColorSwitcher,
 		submenuBgColor,
@@ -179,6 +195,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 		submenuIconColor,
 		submenuIconHoverColor,
 		submenuBorderColorSwitcher,
+
 		// Circle Menu Global Settings
 		circleMenuGlobalPaddingLink,
 		circleMenuGlobalPaddingDesktop,
@@ -253,6 +270,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 		circleMenuTabletSwitcher,
 		circleMenuMobileSwitcher,
 		circleMenuGlobalCustomCSS,
+
 	} = attributes;
 
 	/** Start Local State & Device Context */
@@ -356,8 +374,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 				deviceType === "Desktop"
 					? mainMenuBorderDesktop
 					: deviceType === "Tablet"
-					? mainMenuBorderTablet
-					: mainMenuBorderMobile || {};
+						? mainMenuBorderTablet
+						: mainMenuBorderMobile || {};
 			setAttributes({
 				[`mainMenuBorder${deviceType}`]: { ...current, [position]: value },
 			});
@@ -394,8 +412,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 				deviceType === "Desktop"
 					? mainMenuBorderRadiusDesktop
 					: deviceType === "Tablet"
-					? mainMenuBorderRadiusTablet
-					: mainMenuBorderRadiusMobile || {};
+						? mainMenuBorderRadiusTablet
+						: mainMenuBorderRadiusMobile || {};
 			setAttributes({
 				[`mainMenuBorderRadius${deviceType}`]: {
 					...current,
@@ -438,8 +456,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 				deviceType === "Desktop"
 					? submenuBorderDesktop
 					: deviceType === "Tablet"
-					? submenuBorderTablet
-					: submenuBorderMobile || {};
+						? submenuBorderTablet
+						: submenuBorderMobile || {};
 			setAttributes({
 				[`submenuBorder${deviceType}`]: { ...current, [position]: value },
 			});
@@ -476,8 +494,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 				deviceType === "Desktop"
 					? submenuBorderRadiusDesktop
 					: deviceType === "Tablet"
-					? submenuBorderRadiusTablet
-					: submenuBorderRadiusMobile || {};
+						? submenuBorderRadiusTablet
+						: submenuBorderRadiusMobile || {};
 			setAttributes({
 				[`submenuBorderRadius${deviceType}`]: {
 					...current,
@@ -657,8 +675,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 			deviceType === "Desktop"
 				? "circleMenuGlobalBorderDesktop"
 				: deviceType === "Tablet"
-				? "circleMenuGlobalBorderTablet"
-				: "circleMenuGlobalBorderMobile";
+					? "circleMenuGlobalBorderTablet"
+					: "circleMenuGlobalBorderMobile";
 		if (circleMenuGlobalBorderLink) {
 			setAttributes({
 				[deviceAttr]: {
@@ -673,8 +691,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 				deviceType === "Desktop"
 					? circleMenuGlobalBorderDesktop
 					: deviceType === "Tablet"
-					? circleMenuGlobalBorderTablet
-					: circleMenuGlobalBorderMobile;
+						? circleMenuGlobalBorderTablet
+						: circleMenuGlobalBorderMobile;
 			setAttributes({
 				[deviceAttr]: {
 					...current,
@@ -700,8 +718,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 			deviceType === "Desktop"
 				? "circleMenuGlobalBorderRadiusDesktop"
 				: deviceType === "Tablet"
-				? "circleMenuGlobalBorderRadiusTablet"
-				: "circleMenuGlobalBorderRadiusMobile";
+					? "circleMenuGlobalBorderRadiusTablet"
+					: "circleMenuGlobalBorderRadiusMobile";
 		if (circleMenuGlobalBorderRadiusLink) {
 			setAttributes({
 				[deviceAttr]: {
@@ -716,8 +734,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 				deviceType === "Desktop"
 					? circleMenuGlobalBorderRadiusDesktop
 					: deviceType === "Tablet"
-					? circleMenuGlobalBorderRadiusTablet
-					: circleMenuGlobalBorderRadiusMobile;
+						? circleMenuGlobalBorderRadiusTablet
+						: circleMenuGlobalBorderRadiusMobile;
 			setAttributes({
 				[deviceAttr]: {
 					...current,
@@ -785,6 +803,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 						setAttributes={setAttributes}
 						rangeStep={1}
 						resetFallbackValue={""}
+						isRangeUnit={true}
 					/>
 				)}
 
@@ -802,6 +821,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 							setAttributes={setAttributes}
 							rangeStep={1}
 							resetFallbackValue={""}
+							isRangeUnit={true}
 						/>
 						<SelectControl
 							label={__("Position Align", "frontis-blocks")}
@@ -815,29 +835,34 @@ const Inspector = ({ attributes, setAttributes }) => {
 					</>
 				)}
 
-				<SelectControl
-					label={__("Trigger Type", "frontis-blocks")}
-					value={triggerType}
+				<FB_SwitcherControl
+					label={__('Content Type', 'frontis-blocks')}
 					options={[
 						{ label: "Hover", value: "hover" },
 						{ label: "Click", value: "click" },
 					]}
-					onChange={(value) => setAttributes({ triggerType: value })}
+					globalSwitcher={triggerType}
+					setGlobalSwitcher={(value) =>
+						setAttributes({ triggerType: value })
+					}
 				/>
+
 			</PanelBody>
 
 			<PanelBody
 				title={__("Main Menu", "frontis-blocks")}
 				initialOpen={false}
 			>
-				<SelectControl
-					label={__("Content Type", "frontis-blocks")}
-					value={mainMenuContentType}
+				<FB_SwitcherControl
+					label={__('Content Type', 'frontis-blocks')}
 					options={[
 						{ label: "Icon", value: "icon" },
 						{ label: "Text", value: "text" },
 					]}
-					onChange={(value) => setAttributes({ mainMenuContentType: value })}
+					globalSwitcher={mainMenuContentType}
+					setGlobalSwitcher={(value) =>
+						setAttributes({ mainMenuContentType: value })
+					}
 				/>
 
 				{mainMenuContentType === "text" ? (
@@ -945,21 +970,9 @@ const Inspector = ({ attributes, setAttributes }) => {
 											key={item.id}
 											id={item.id}
 											item={item}
-											handleChangeItem={(id, key, value) =>
-												handleChangeItem(
-													id,
-													key,
-													value,
-													menuItemsRef,
-													setAttributes,
-												)
-											}
-											handleDeleteItem={(id) =>
-												handleDeleteItem(id, menuItemsRef, setAttributes)
-											}
-											handleDuplicateItem={(id) =>
-												handleDuplicateItem(id, menuItemsRef, setAttributes)
-											}
+											handleChangeItem={(id, key, value) => handleChangeItem(id, key, value, menuItemsRef, setAttributes,)}
+											handleDeleteItem={(id) => handleDeleteItem(id, menuItemsRef, setAttributes)}
+											handleDuplicateItem={(id) => handleDuplicateItem(id, menuItemsRef, setAttributes)}
 											index={index}
 										/>
 									))}
@@ -983,7 +996,9 @@ const Inspector = ({ attributes, setAttributes }) => {
 	const styleControls = (
 		<>
 			<PanelBody title={__("Main Menu", "frontis-blocks")} initialOpen={true}>
+
 				{mainMenuContentType === "text" && (
+					
 					<FB_TypographyControl
 						globalTypoControlActive={true}
 						globalTypoSwitcher={mainMenuTextGlobalTypoSwitcher}
@@ -993,46 +1008,34 @@ const Inspector = ({ attributes, setAttributes }) => {
 						onChangeGlobalTypoType={(value) => {
 							setAttributes({
 								mainMenuTextGlobalTypoType: value,
-								mainMenuTextGlobalTypoSwitcher: value === "default" ? { ...mainMenuTextGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false,lineHeight: false,} : { ...mainMenuTextGlobalTypoSwitcher,fontFamily: true,fontSize: true,fontWeight: true,fontStyle: true,textTransform: true,textDecoration: true,letterSpacing: true,lineHeight: true, }
+								mainMenuTextGlobalTypoSwitcher: value === "default" ? { ...mainMenuTextGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...mainMenuTextGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
 							});
 						}}
 
 						globalTypoOption={mainMenuTextGlobalTypoOption}
 						onChangeGlobalTypoOption={(value) => setAttributes({ mainMenuTextGlobalTypoOption: value })}
-						
 						fontFamily={mainMenuTextFontFamily}
-						onChangeFontFamily={(value) => setAttributes({ mainMenuTextFontFamily: value, mainMenuTextGlobalTypoSwitcher: { ...mainMenuTextGlobalTypoSwitcher,fontFamily: value && false,},})}
-						
+						onChangeFontFamily={(value) => setAttributes({ mainMenuTextFontFamily: value, mainMenuTextGlobalTypoSwitcher: { ...mainMenuTextGlobalTypoSwitcher, fontFamily: value && false, }, })}
 						fontSize={mainMenuTextFontSize}
-						onChangeFontSize={(value) => setAttributes({ mainMenuTextFontSize: value, mainMenuTextGlobalTypoSwitcher: { ...mainMenuTextGlobalTypoSwitcher,fontSize: value && false,},})}
-
+						onChangeFontSize={(value) => setAttributes({ mainMenuTextFontSize: value, mainMenuTextGlobalTypoSwitcher: { ...mainMenuTextGlobalTypoSwitcher, fontSize: value && false, }, })}
 						fontSizeUnits={mainMenuTextFontSizeUnits}
 						onChangeFontSizeUnit={(value) => setAttributes({ mainMenuTextFontSizeUnits: value })}
-						
 						fontWeight={mainMenuTextFontWeight}
-						onChangeFontWeight={(value) => setAttributes({ mainMenuTextFontWeight: value, mainMenuTextGlobalTypoSwitcher: { ...mainMenuTextGlobalTypoSwitcher,fontWeight: value && false,},})}
-						
+						onChangeFontWeight={(value) => setAttributes({ mainMenuTextFontWeight: value, mainMenuTextGlobalTypoSwitcher: { ...mainMenuTextGlobalTypoSwitcher, fontWeight: value && false, }, })}
 						fontStyle={mainMenuTextFontStyle}
-						onChangeFontStyle={(value) => setAttributes({ mainMenuTextFontStyle: value, mainMenuTextGlobalTypoSwitcher: { ...mainMenuTextGlobalTypoSwitcher,fontStyle: value && false,},})}
-						
+						onChangeFontStyle={(value) => setAttributes({ mainMenuTextFontStyle: value, mainMenuTextGlobalTypoSwitcher: { ...mainMenuTextGlobalTypoSwitcher, fontStyle: value && false, }, })}
 						textTransform={mainMenuTextTransform}
-						onChangeTextTransform={(value) => setAttributes({ mainMenuTextTransform: value, mainMenuTextGlobalTypoSwitcher: { ...mainMenuTextGlobalTypoSwitcher,textTransform: value && false,},})}
-						
+						onChangeTextTransform={(value) => setAttributes({ mainMenuTextTransform: value, mainMenuTextGlobalTypoSwitcher: { ...mainMenuTextGlobalTypoSwitcher, textTransform: value && false, }, })}
 						textDecoration={mainMenuTextDecoration}
-						onChangeTextDecoration={(value) => setAttributes({ mainMenuTextDecoration: value, mainMenuTextGlobalTypoSwitcher: { ...mainMenuTextGlobalTypoSwitcher,textDecoration: value && false,},})}
-						
+						onChangeTextDecoration={(value) => setAttributes({ mainMenuTextDecoration: value, mainMenuTextGlobalTypoSwitcher: { ...mainMenuTextGlobalTypoSwitcher, textDecoration: value && false, }, })}
 						letterSpacing={mainMenuTextLetterSpacing}
-						onChangeLetterSpacing={(value) => setAttributes({ mainMenuTextLetterSpacing: value, mainMenuTextGlobalTypoSwitcher: { ...mainMenuTextGlobalTypoSwitcher,letterSpacing: value && false,},})}
-						
+						onChangeLetterSpacing={(value) => setAttributes({ mainMenuTextLetterSpacing: value, mainMenuTextGlobalTypoSwitcher: { ...mainMenuTextGlobalTypoSwitcher, letterSpacing: value && false, }, })}
 						letterSpacingUnits={mainMenuTextLetterSpacingUnits}
 						onChangeLetterSpacingUnit={(value) => setAttributes({ mainMenuTextLetterSpacingUnits: value })}
-						
 						lineHeight={mainMenuTextLineHeight}
-						onChangeLineHeight={(value) => setAttributes({mainMenuTextLineHeight: value,mainMenuTextGlobalTypoSwitcher: { ...mainMenuTextGlobalTypoSwitcher,lineHeight: value && false,},})}
-						
+						onChangeLineHeight={(value) => setAttributes({ mainMenuTextLineHeight: value, mainMenuTextGlobalTypoSwitcher: { ...mainMenuTextGlobalTypoSwitcher, lineHeight: value && false, }, })}
 						lineHeightUnits={mainMenuTextLineHeightUnits}
 						onChangeLineHeightUnit={(value) => setAttributes({ mainMenuTextLineHeightUnits: value })}
-						
 						deviceType={deviceType}
 						setAttributes={setAttributes}
 					/>
@@ -1043,12 +1046,15 @@ const Inspector = ({ attributes, setAttributes }) => {
 					label={__("Container Size", "frontis-blocks")}
 					rangeValue={mainMenuSize}
 					onChangeHandler={(value) => setAttributes({ mainMenuSize: value })}
+					rangeUnitHandler={(value) => setAttributes({ mainMenuSizeUnits: value })}
 					deviceType={deviceType}
+					units={mainMenuSizeUnits}
 					setAttributes={setAttributes}
 					rangeStep={1}
-					resetFallbackValue={72}
-					isRangeUnit={false}
+					resetFallbackValue={""}
+					isRangeUnit={true}
 				/>
+
 				{mainMenuContentType !== "text" && (
 					<FB_Range
 						min={10}
@@ -1056,13 +1062,16 @@ const Inspector = ({ attributes, setAttributes }) => {
 						label={__("Icon Size", "frontis-blocks")}
 						rangeValue={mainMenuIconSize}
 						onChangeHandler={(value) => setAttributes({ mainMenuIconSize: value })}
+						rangeUnitHandler={(value) => setAttributes({ mainMenuIconSizeUnits: value })}
 						deviceType={deviceType}
+						units={mainMenuIconSizeUnits}
 						setAttributes={setAttributes}
 						rangeStep={1}
-						resetFallbackValue={32}
-						isRangeUnit={false}
+						resetFallbackValue={""}
+						isRangeUnit={true}
 					/>
 				)}
+
 				<FB_SwitcherControl
 					label={__("Offset", "frontis-blocks")}
 					options={[
@@ -1076,17 +1085,20 @@ const Inspector = ({ attributes, setAttributes }) => {
 				{offsetSwitcher === "before" ? (
 					<>
 						<BaseControl>
+
 							<FB_Range
 								min={0}
 								max={300}
 								label={__("Offset Horizontal", "frontis-blocks")}
 								rangeValue={offsetH}
 								onChangeHandler={(value) => setAttributes({ offsetH: value })}
+								rangeUnitHandler={(value) => setAttributes({ offsetHUnits: value })}
 								deviceType={deviceType}
+								units={offsetHUnits}
 								setAttributes={setAttributes}
 								rangeStep={1}
-								resetFallbackValue={40}
-								isRangeUnit={false}
+								resetFallbackValue={""}
+								isRangeUnit={true}
 							/>
 
 							<FB_Range
@@ -1095,28 +1107,34 @@ const Inspector = ({ attributes, setAttributes }) => {
 								label={__("Offset Vertical", "frontis-blocks")}
 								rangeValue={offsetV}
 								onChangeHandler={(value) => setAttributes({ offsetV: value })}
+								rangeUnitHandler={(value) => setAttributes({ offsetVUnits: value })}
 								deviceType={deviceType}
+								units={offsetVUnits}
 								setAttributes={setAttributes}
 								rangeStep={1}
-								resetFallbackValue={40}
-								isRangeUnit={false}
+								resetFallbackValue={""}
+								isRangeUnit={true}
 							/>
+
 						</BaseControl>
 					</>
 				) : (
 					<>
 						<BaseControl>
+					
 							<FB_Range
 								min={0}
 								max={300}
 								label={__("Offset Horizontal", "frontis-blocks")}
 								rangeValue={activeOffsetH}
 								onChangeHandler={(value) => setAttributes({ activeOffsetH: value })}
+								rangeUnitHandler={(value) => setAttributes({ activeOffsetHUnits: value })}
 								deviceType={deviceType}
+								units={activeOffsetHUnits}
 								setAttributes={setAttributes}
 								rangeStep={1}
-								resetFallbackValue={40}
-								isRangeUnit={false}
+								resetFallbackValue={""}
+								isRangeUnit={true}
 							/>
 
 							<FB_Range
@@ -1125,12 +1143,15 @@ const Inspector = ({ attributes, setAttributes }) => {
 								label={__("Offset Vertical", "frontis-blocks")}
 								rangeValue={activeOffsetV}
 								onChangeHandler={(value) => setAttributes({ activeOffsetV: value })}
+								rangeUnitHandler={(value) => setAttributes({ activeOffsetVUnits: value })}
 								deviceType={deviceType}
+								units={activeOffsetVUnits}
 								setAttributes={setAttributes}
 								rangeStep={1}
-								resetFallbackValue={40}
-								isRangeUnit={false}
+								resetFallbackValue={""}
+								isRangeUnit={true}
 							/>
+
 						</BaseControl>
 					</>
 				)}
@@ -1169,6 +1190,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 					globalSwitcher={mainMenuTextColorSwitcher}
 					setGlobalSwitcher={(value) => setAttributes({ mainMenuTextColorSwitcher: value })}
 				/>
+
 				{mainMenuTextColorSwitcher === "normal" ? (
 					<FB_ColorControl
 						label={__("Normal Color", "frontis-blocks")}
@@ -1223,6 +1245,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 					spacingCombineBtnHandler={handleMainMenuBorderCombineBtn}
 					setAttributes={setAttributes}
 				/>
+
 				<FB_Spacing
 					label={__("Radius Border", "frontis-blocks")}
 					deviceType={deviceType}
@@ -1258,35 +1281,43 @@ const Inspector = ({ attributes, setAttributes }) => {
 						onBoxShadowStyleChange={(value) => setAttributes({ mainMenuBoxShadowCssValue: value })}
 					/>
 				)}
+
 			</PanelBody>
 			{/* End Main Menu Style Panel */}
 
 			{/* Start Sub Menu Style Panel */}
 			<PanelBody title={__("Sub Menu", "frontis-blocks")} initialOpen={false}>
+
 				<FB_Range
 					min={30}
 					max={200}
 					label={__("Container Size", "frontis-blocks")}
 					rangeValue={submenuSize}
 					onChangeHandler={(value) => setAttributes({ submenuSize: value })}
+					rangeUnitHandler={(value) => setAttributes({ submenuSizeUnits: value })}
 					deviceType={deviceType}
+					units={submenuSizeUnits}
 					setAttributes={setAttributes}
 					rangeStep={1}
-					resetFallbackValue={62}
-					isRangeUnit={false}
+					resetFallbackValue={""}
+					isRangeUnit={true}
 				/>
+
 				<FB_Range
 					min={10}
 					max={100}
 					label={__("Icon Size", "frontis-blocks")}
 					rangeValue={submenuIconSize}
 					onChangeHandler={(value) => setAttributes({ submenuIconSize: value })}
+					rangeUnitHandler={(value) => setAttributes({ submenuIconSizeUnits: value })}
 					deviceType={deviceType}
+					units={submenuIconSizeUnits}
 					setAttributes={setAttributes}
 					rangeStep={1}
-					resetFallbackValue={24}
-					isRangeUnit={false}
+					resetFallbackValue={""}
+					isRangeUnit={true}
 				/>
+
 				<FB_BackgroundColorControl
 					label={__("Background", "frontis-blocks")}
 					bgColorSwitcher={submenuBgColorSwitcher || "normal"}
@@ -1322,6 +1353,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 					globalSwitcher={submenuIconColorSwitcher}
 					setGlobalSwitcher={(value) => setAttributes({ submenuIconColorSwitcher: value })}
 				/>
+
 				{submenuIconColorSwitcher === "normal" ? (
 					<FB_ColorControl
 						label={__("Normal Color", "frontis-blocks")}
@@ -1376,6 +1408,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 					spacingCombineBtnHandler={handleSubmenuBorderCombineBtn}
 					setAttributes={setAttributes}
 				/>
+
 				<FB_Spacing
 					label={__("Radius Border", "frontis-blocks")}
 					deviceType={deviceType}
@@ -1422,50 +1455,35 @@ const Inspector = ({ attributes, setAttributes }) => {
 				>
 					<FB_TypographyControl
 						globalTypographyData={submenuTextGlobalTypographyData}
-						setGlobalTypographyData={(value) =>	setAttributes({ submenuTextGlobalTypographyData: value })}
-
-						globalTypoSwitcher={submenuTextGlobalTypoSwitcher}						
-						setGlobalTypoSwitcher={(value) =>setAttributes({ submenuTextGlobalTypoSwitcher: value })}
-
+						setGlobalTypographyData={(value) => setAttributes({ submenuTextGlobalTypographyData: value })}
+						globalTypoSwitcher={submenuTextGlobalTypoSwitcher}
+						setGlobalTypoSwitcher={(value) => setAttributes({ submenuTextGlobalTypoSwitcher: value })}
 						globalTypoType={submenuTextGlobalTypoType}
 						setGlobalTypoType={(value) => setAttributes({ submenuTextGlobalTypoType: value })}
-
 						globalTypoOption={submenuTextGlobalTypoOption}
 						onChangeGlobalTypoOption={(value) => setAttributes({ submenuTextGlobalTypoOption: value })}
-
 						fontFamily={submenuTextFontFamily}
 						onChangeFontFamily={(value) => setAttributes({ submenuTextFontFamily: value, submenuTextGlobalTypoSwitcher: { ...submenuTextGlobalTypoSwitcher, fontFamily: value && false, }, })}
-						
 						fontSize={submenuTextFontSize}
 						onChangeFontSize={(value) => setAttributes({ submenuTextFontSize: value, submenuTextGlobalTypoSwitcher: { ...submenuTextGlobalTypoSwitcher, fontSize: value && false, }, })}
-
 						fontSizeUnits={submenuTextFontSizeUnits}
 						onChangeFontSizeUnit={(value) => setAttributes({ submenuTextFontSizeUnits: value })}
-
 						fontWeight={submenuTextFontWeight}
 						onChangeFontWeight={(value) => setAttributes({ submenuTextFontWeight: value, submenuTextGlobalTypoSwitcher: { ...submenuTextGlobalTypoSwitcher, fontWeight: value && false, }, })}
-						
 						fontStyle={submenuTextFontStyle}
-						onChangeFontStyle={(value) => setAttributes({ submenuTextFontStyle: value, submenuTextGlobalTypoSwitcher: {	...submenuTextGlobalTypoSwitcher, fontStyle: value && false,}})}
-
+						onChangeFontStyle={(value) => setAttributes({ submenuTextFontStyle: value, submenuTextGlobalTypoSwitcher: { ...submenuTextGlobalTypoSwitcher, fontStyle: value && false, } })}
 						textTransform={submenuTextTransform}
-						onChangeTextTransform={(value) => setAttributes({ submenuTextTransform: value, submenuTextGlobalTypoSwitcher: {	...submenuTextGlobalTypoSwitcher, textTransform: value && false,}})}
-						
+						onChangeTextTransform={(value) => setAttributes({ submenuTextTransform: value, submenuTextGlobalTypoSwitcher: { ...submenuTextGlobalTypoSwitcher, textTransform: value && false, } })}
 						textDecoration={submenuTextDecoration}
-						onChangeTextDecoration={(value) =>setAttributes({submenuTextDecoration: value,submenuTextGlobalTypoSwitcher: {	...submenuTextGlobalTypoSwitcher,	textDecoration: value && false,},})}
-						
+						onChangeTextDecoration={(value) => setAttributes({ submenuTextDecoration: value, submenuTextGlobalTypoSwitcher: { ...submenuTextGlobalTypoSwitcher, textDecoration: value && false, }, })}
 						letterSpacing={submenuTextLetterSpacing}
-						onChangeLetterSpacing={(value) => setAttributes({ submenuTextLetterSpacing: value, submenuTextGlobalTypoSwitcher: { ...submenuTextGlobalTypoSwitcher, letterSpacing: value && false, },})}
-						
+						onChangeLetterSpacing={(value) => setAttributes({ submenuTextLetterSpacing: value, submenuTextGlobalTypoSwitcher: { ...submenuTextGlobalTypoSwitcher, letterSpacing: value && false, }, })}
 						letterSpacingUnits={submenuTextLetterSpacingUnits}
 						onChangeLetterSpacingUnit={(value) => setAttributes({ submenuTextLetterSpacingUnits: value })}
-						
 						lineHeight={submenuTextLineHeight}
 						onChangeLineHeight={(value) => setAttributes({ submenuTextLineHeight: value, submenuTextGlobalTypoSwitcher: { ...submenuTextGlobalTypoSwitcher, lineHeight: value && false, }, })}
-						
 						lineHeightUnits={submenuTextLineHeightUnits}
 						onChangeLineHeightUnit={(value) => setAttributes({ submenuTextLineHeightUnits: value })}
-
 						deviceType={deviceType}
 						setAttributes={setAttributes}
 					/>
@@ -1481,29 +1499,33 @@ const Inspector = ({ attributes, setAttributes }) => {
 						onChange={(value) => setAttributes({ submenuTitlePosition: value })}
 					/>
 					<FB_Range
-							min={0}
-							max={50}
-							label={__("Offset Horizontal", "frontis-blocks")}
-							rangeValue={submenuTitleOffsetH}
-							onChangeHandler={(value) => setAttributes({ submenuTitleOffsetH: value === 0 ? undefined : value })}
-							deviceType={deviceType}
-							setAttributes={setAttributes}
-							rangeStep={1}
-							resetFallbackValue={""}
-							isRangeUnit={false}
-						/>
-						<FB_Range
-							min={0}
-							max={50}
-							label={__("Offset Vertical", "frontis-blocks")}
-							rangeValue={submenuTitleOffsetV}
-							onChangeHandler={(value) => setAttributes({ submenuTitleOffsetV: value === 0 ? undefined : value })}
-							deviceType={deviceType}
-							setAttributes={setAttributes}
-							rangeStep={1}
-							resetFallbackValue={""}
-							isRangeUnit={false}
-						/>
+						min={0}
+						max={50}
+						label={__("Offset Horizontal", "frontis-blocks")}
+						rangeValue={submenuTitleOffsetH}
+						onChangeHandler={(value) => setAttributes({ submenuTitleOffsetH: value === 0 ? undefined : value })}
+						rangeUnitHandler={(value) => setAttributes({ submenuTitleOffsetHUnits: value })}
+						deviceType={deviceType}
+						units={submenuTitleOffsetHUnits}
+						setAttributes={setAttributes}
+						rangeStep={1}
+						resetFallbackValue={""}
+						isRangeUnit={true}
+					/>
+					<FB_Range
+						min={0}
+						max={50}
+						label={__("Offset Vertical", "frontis-blocks")}
+						rangeValue={submenuTitleOffsetV}
+						onChangeHandler={(value) => setAttributes({ submenuTitleOffsetV: value === 0 ? undefined : value })}
+						rangeUnitHandler={(value) => setAttributes({ submenuTitleOffsetVUnits: value })}
+						deviceType={deviceType}
+						units={submenuTitleOffsetVUnits}
+						setAttributes={setAttributes}
+						rangeStep={1}
+						resetFallbackValue={""}
+						isRangeUnit={true}
+					/>
 					<FB_ColorControl
 						label={__("Text Color", "frontis-blocks")}
 						globalColor={submenuTitleColor}
@@ -1795,10 +1817,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 						<FB_VisibilityControl
 							desktopValue={circleMenuDesktopSwitcher}
 							setDesktopValue={(value) => setAttributes({ circleMenuDesktopSwitcher: value })}
-
 							tabletValue={circleMenuTabletSwitcher}
 							setTabletValue={(value) => setAttributes({ circleMenuTabletSwitcher: value })}
-
 							mobileValue={circleMenuMobileSwitcher}
 							setMobileValue={(value) => setAttributes({ circleMenuMobileSwitcher: value })}
 						/>

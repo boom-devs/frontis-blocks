@@ -55,7 +55,7 @@
 					}
 				});
 			} else {
-				center.addEventListener("click", (e) => {
+				center.addEventListener("click", (e) => {  
 					e.stopPropagation();
 					if (!isOpen) {
 						openMenu();

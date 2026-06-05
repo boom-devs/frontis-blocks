@@ -116,32 +116,14 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		return (
 			<>
 				<div className="fb-circle-menu-open-icon">
-					{mainMenuContentType === "text" ? (
-						<span className="fb-circle-menu-text">{mainMenuOpenText}</span>
-					) : mainMenuOpenType === "icon" ? (
-						mainMenuIcon ? (
-							renderSVG(mainMenuIcon)
-						) : (
-							""
-						)
-					) : (
-						mainMenuImage && <img src={mainMenuImage} alt={mainMenuImageAlt} />
-					)}
+					{mainMenuContentType === "text" ? ( <span className="fb-circle-menu-text">{mainMenuOpenText}</span>
+					) : mainMenuOpenType === "icon" ? (mainMenuIcon ? ( renderSVG(mainMenuIcon)) : ( "")
+					) : ( mainMenuImage && <img src={mainMenuImage} alt={mainMenuImageAlt} /> )}
 				</div>
 				<div className="fb-circle-menu-close-icon">
-					{mainMenuContentType === "text" ? (
-						<span className="fb-circle-menu-text">{mainMenuCloseText}</span>
-					) : mainMenuCloseType === "icon" ? (
-						mainMenuCloseIcon ? (
-							renderSVG(mainMenuCloseIcon)
-						) : (
-							""
-						)
-					) : (
-						mainMenuCloseImage && (
-							<img src={mainMenuCloseImage} alt={mainMenuCloseImageAlt} />
-						)
-					)}
+					{mainMenuContentType === "text" ? (<span className="fb-circle-menu-text">{mainMenuCloseText}</span>
+					) : mainMenuCloseType === "icon" ? ( mainMenuCloseIcon ? ( renderSVG(mainMenuCloseIcon)) : ( "" )
+					) : ( mainMenuCloseImage && ( <img src={mainMenuCloseImage} alt={mainMenuCloseImageAlt} /> ))}
 				</div>
 			</>
 		);
@@ -162,59 +144,28 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 					ref={panelRef}
 					id={circleMenuGlobalWraperID}
 				>
-					<div
-						ref={menuRef}
-						className="fb-circle-menu"
-						onMouseEnter={handleMouseEnter}
-						onMouseLeave={handleMouseLeave}
-						data-radiusgap={
-							attributes.submenuSpace?.[deviceType] ||
-							attributes.submenuSpace?.Desktop ||
-							0
-						}
+					<div ref={menuRef} className="fb-circle-menu" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}
+						data-radiusgap={attributes.submenuSpace?.[deviceType] || attributes.submenuSpace?.Desktop || 0}
 						data-preset={attributes.menuPreset}
 						data-trigger={attributes.triggerType}
-						data-horizontalspace={
-							attributes.submenuHorizontalSpace?.[deviceType] ||
-							attributes.submenuHorizontalSpace?.Desktop ||
-							0
-						}
+						data-horizontalspace={attributes.submenuHorizontalSpace?.[deviceType] || attributes.submenuHorizontalSpace?.Desktop || 0}
 						data-horizontposition={attributes.submenuHorizontalAlign}
 					>
-						<div
-							className={`fb-circle-menu-center ${isOpen ? "is-active" : ""}`}
-							onClick={() => triggerType === "click" && setIsOpen(!isOpen)}
-						>
+						<div className={`fb-circle-menu-center ${isOpen ? "is-active" : ""}`} onClick={() => triggerType === "click" && setIsOpen(!isOpen)}>
 							<div className="fb-circle-menu-toggle">{renderMainContent()}</div>
 						</div>
 
 						<ul className="fb-circle-menu-items">
 							{menuItems.map((item, index) => (
 								<li key={item.id} className="fb-circle-menu-item">
-									<a
-										href={item.link ? item.link : "#"}
-										className="fb-circle-menu-link"
-										onClick={(e) => e.preventDefault()}
-									>
+									<a href={item.link ? item.link : "#"} className="fb-circle-menu-link" onClick={(e) => e.preventDefault()} >
 										<div className="fb-circle-menu-icon" aria-hidden="true">
-											{!item.contentType || item.contentType === "icon"
-												? item.icon
-													? renderSVG(item.icon)
-													: ""
-												: item.image && (
-													<img
-														src={item.image}
-														alt={item.imageAlt}
-														style={{
-															objectFit: item.imageSize || "cover",
-														}}
-													/>
-												)}
+											{!item.contentType || item.contentType === "icon" ? item.icon ? renderSVG(item.icon) : "" : item.image && (
+											<img src={item.image} alt={item.imageAlt} style={{objectFit: item.imageSize || "cover",}}/>
+											)}
 										</div>
 									</a>
-									{submenuShowTitleOnHover && (
-										<div className="fb-circle-menu-tooltip">{item.title}</div>
-									)}
+									{submenuShowTitleOnHover && (<div className="fb-circle-menu-tooltip">{item.title}</div>)}
 								</li>
 							))}
 						</ul>

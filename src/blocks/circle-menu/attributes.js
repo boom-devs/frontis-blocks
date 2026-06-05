@@ -160,13 +160,28 @@ const attributes = {
 		type: "string",
 		default: "hover",
 	},
-
+	offsetHUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
 	offsetH: {
 		type: "object",
 		default: {
 			Desktop: "40",
 			Tablet: "40",
 			Mobile: "40",
+		},
+	},
+	offsetVUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
 		},
 	},
 	offsetV: {
@@ -177,12 +192,28 @@ const attributes = {
 			Mobile: "40",
 		},
 	},
+	activeOffsetHUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
 	activeOffsetH: {
 		type: "object",
 		default: {
 			Desktop: "40",
 			Tablet: "40",
 			Mobile: "40",
+		},
+	},
+	activeOffsetVUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
 		},
 	},
 	activeOffsetV: {
@@ -195,6 +226,14 @@ const attributes = {
 	},
 
 	/** Main Menu Styling (Size, Color, Background) */
+	mainMenuSizeUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
 	mainMenuSize: {
 		type: "object",
 		default: {
@@ -210,6 +249,14 @@ const attributes = {
 	mainMenuTextColor: {
 		type: "string",
 		default: "#FFFFFF",
+	},
+	mainMenuIconSizeUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
 	},
 	mainMenuIconSize: {
 		type: "object",
@@ -339,6 +386,14 @@ const attributes = {
 		type: "boolean",
 		default: false,
 	},
+	submenuSizeUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
 	submenuSize: {
 		type: "object",
 		default: {
@@ -350,6 +405,14 @@ const attributes = {
 	submenuBgColor: {
 		type: "string",
 		default: "#D7EBFF",
+	},
+	submenuIconSizeUnits:{
+		type: "object",
+		default:{
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		}
 	},
 	submenuIconSize: {
 		type: "object",
