@@ -62,19 +62,19 @@ const attributes = {
 			{
 				id: "ds1",
 				series_name: "Series 1",
-				values: "28,20,22,30,21",
+				values: "28,20,22,30,21,25,10",
 				color: "#3b82f6",
 			},
 			{
 				id: "ds2",
 				series_name: "Series 2",
-				values: "15,30,21,34,16",
+				values: "15,30,21,34,16,28,12",
 				color: "#f59e0b",
 			},
 			{
 				id: "ds3",
 				series_name: "Series 3",
-				values: "-15,40,23,10,21",
+				values: "-15,40,23,10,21,25,10",
 				color: "#10b981",
 			},
 		],
@@ -94,7 +94,7 @@ const attributes = {
 	},
 	canvasHeight: {
 		type: "object",
-		default: { Desktop: "700", Tablet: "", Mobile: "" },
+		default: { Desktop: "280", Tablet: "", Mobile: "" },
 	},
 	canvasHeightUnits: {
 		type: "object",
@@ -350,6 +350,23 @@ const attributes = {
 		type: "object",
 		default: { top: "0", bottom: "24", left: "0", right: "0" },
 	},
+	showChartHeader: {
+		type: "boolean",
+		default: true,
+	},
+	showChartFilters: {
+		type: "boolean",
+		default: false,
+	},
+	showChartLegend: {
+		type: "boolean",
+		default: true,
+	},
+	showChartFooter: {
+		type: "boolean",
+		default: true,
+	},
+
 	chartHeaderPaddingTablet: {
 		type: "object",
 		default: { top: "", bottom: "", left: "", right: "" },

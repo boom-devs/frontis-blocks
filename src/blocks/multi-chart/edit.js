@@ -167,7 +167,7 @@ export default function Edit({
 
 	// Dynamic Title Logic from PHP
 	const typeMap = {
-		line: __("Smooth Chart", "frontis-blocks"),
+		line: __("Line Chart", "frontis-blocks"),
 		bar: __("Bar Chart", "frontis-blocks"),
 		pie: __("Pie Chart", "frontis-blocks"),
 		doughnut: __("Donut Chart", "frontis-blocks"),

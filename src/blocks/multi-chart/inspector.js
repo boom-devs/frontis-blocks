@@ -412,12 +412,12 @@ const Inspector = ({ attributes, setAttributes }) => {
 						{ label: __("Doughnut", "frontis-blocks"), value: "doughnut" },
 						{ label: __("Radar", "frontis-blocks"), value: "radar" },
 						{ label: __("Polar Area", "frontis-blocks"), value: "polarArea" },
-						{
-							label: __("Waterfall (Bar)", "frontis-blocks"),
-							value: "waterfall",
-						},
-						{ label: __("Bubble", "frontis-blocks"), value: "bubble" },
-						{ label: __("Scatter", "frontis-blocks"), value: "scatter" },
+						// {
+						// 	label: __("Waterfall (Bar)", "frontis-blocks"),
+						// 	value: "waterfall",
+						// },
+						// { label: __("Bubble", "frontis-blocks"), value: "bubble" },
+						// { label: __("Scatter", "frontis-blocks"), value: "scatter" },
 					]}
 					onChange={(value) => {
 						setAttributes({ chartType: value });
