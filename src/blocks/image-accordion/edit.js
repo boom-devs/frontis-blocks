@@ -20,6 +20,7 @@ export default function Edit({
 		imageAccordionPreset,
 		imageAccordionTrigger,
 		imageAccordionItems,
+		imageAccordionShowIcon,
 		imageAccordionShowTitle,
 		imageAccordionShowSubtitle,
 		imageAccordionShowDots,
