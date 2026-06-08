@@ -15,17 +15,10 @@ import QueryContent from './query-content';
 import QueryPlaceholder from './query-placeholder';
 
 const QueryEdit = ( props ) => {
-
+	const { clientId, attributes } = props;
 	const isProActive = getProActive();
 	const loopBuilderAvailable = applyFilters('frontisblocks-loop-builder-available', false);
 
-	if(!loopBuilderAvailable || !isProActive) {
-		return (
-			<UpgradeToProPopup />
-		)
-	}
-	
-	const { clientId, attributes } = props;
 	const [ isPatternSelectionModalOpen, setIsPatternSelectionModalOpen ] =
 		useState( false );
 	const hasInnerBlocks = useSelect(
@@ -33,6 +26,12 @@ const QueryEdit = ( props ) => {
 			!! select( blockEditorStore ).getBlocks( clientId ).length,
 		[ clientId ]
 	);
+
+	if(!loopBuilderAvailable || !isProActive) {
+		return (
+			<UpgradeToProPopup />
+		)
+	}
 
 	const Component = hasInnerBlocks ? QueryContent : QueryPlaceholder;
 	return (
