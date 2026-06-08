@@ -47,6 +47,10 @@ const attributes = {
 		type: 'string',
 		default: 'arrow-right',
 	},
+    modalCloseIcon: {
+		type: 'string',
+		default: 'xmark',
+	},
 	toggleButtonIconPosition :{
 		type: 'string',
 		default: 'right'
@@ -88,6 +92,128 @@ const attributes = {
 			Mobile: ''
 		}
 	},
+	/**Toggle Button*/
+    toggleButtonWidth: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    toggleButtonWidthUnits: {
+        type: 'object',
+        default: {
+            Desktop: '%',
+            Tablet: '%',
+            Mobile: '%',
+        }
+    },
+	toggleButtonGlobalTypographyData: {
+        type: "object",
+        default: {}
+    },
+    toggleButtonGlobalTypoSwitcher: {
+        type: "object",
+        default: {
+            fontFamily: false,
+            fontSize: false,
+            fontWeight: false,
+            fontStyle: false,
+            textTransform: false,
+            textDecoration: false,
+            letterSpacing: false,
+            lineHeight: false,
+        },
+    },
+    toggleButtonGlobalTypoType: {
+        type: "string",
+        default: 'default',
+    },
+    toggleButtonGlobalTypoOption: {
+        type: "object",
+        default: { label: 'Default', value: 'default' },
+    },
+    toggleButtonFontFamily: {
+        type: "string",
+        default: "Default",
+    },
+    toggleButtonFontSize: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    toggleButtonFontSizeUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    toggleButtonFontWeight: {
+        type: "string",
+        default: ""
+    },
+    toggleButtonFontStyle: {
+        type: "string",
+        default: ""
+    },
+    toggleButtonTextTransform: {
+        type: "string",
+        default: ""
+    },
+    toggleButtonTextDecoration: {
+        type: "string",
+        default: ""
+    },
+    toggleButtonLetterSpacing: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    toggleButtonLetterSpacingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    toggleButtonLineHeight: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    toggleButtonLineHeightUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+	toggleButtonColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    toggleButtonColor: {
+        type: "string",
+        default: "#000000"
+    },
+    toggleButtonHoverColor: {
+        type: 'string',
+    },
+    
 	contentType: {
 		type: 'string',
 		default: 'pattern'
@@ -154,6 +280,39 @@ const attributes = {
         }
     },
     modalPopupPanelHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	/**Close Icon */
+	modalCloseIconWidth: {
+        type: 'object',
+        default: {
+            Desktop: '16',
+            Tablet: '16',
+            Mobile: '16'
+        }
+    },
+    modalCloseIconWidthUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	modalCloseIconHeight: {
+        type: 'object',
+        default: {
+            Desktop: '16',
+            Tablet: '16',
+            Mobile: '16'
+        }
+    },
+    modalCloseIconHeightUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -483,6 +642,10 @@ const attributes = {
 	},  
 	
     //Overlay
+    modalPopupOverlaySwitcher: {
+        type: 'boolean',
+        default: true
+    },
     modalPopupOverlayBackgroundColorSwitcher: {
         type: 'string',
         default: 'normal'

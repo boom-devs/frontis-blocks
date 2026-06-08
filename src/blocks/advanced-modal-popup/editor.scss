@@ -26,11 +26,33 @@
             visibility: visible;
         }
     }
+
+    // Modal popup styling
+    .fb-advanced-modal-popup {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+
+        &.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+    }
 }
 
 // Editor-specific styling
 .block-editor-block-list__block .fb-advanced-modal-popup-block {
     .fb-modal-overlay {
+        position: absolute;
+    }
+    .fb-advanced-modal-popup {
         position: absolute;
     }
 }

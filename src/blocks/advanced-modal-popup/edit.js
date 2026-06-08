@@ -1,12 +1,18 @@
 import { __ } from '@wordpress/i18n';
 import {
+    RichText,
+    MediaPlaceholder,
+    MediaUpload,
+    MediaUploadCheck,
+    BlockControls,
     useBlockProps,
     useInnerBlocksProps,
     store as blockEditorStore,
 } from '@wordpress/block-editor';
+import { ToolbarButton, ToolbarGroup } from '@wordpress/components';
 import { useState, useEffect, useRef } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
-import { parse } from '@wordpress/blocks';
+import { useSelect, useDispatch, select } from '@wordpress/data';
+import { parse, createBlock } from '@wordpress/blocks';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import './editor.scss';
@@ -27,6 +33,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         toggleButtonIcon,
         toggleButtonIconAlign,
         toggleButtonText,
+        modalCloseIcon,
 
         position,
         toggleType,
@@ -43,7 +50,8 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         modalPopupGlobalWraperID,
         modalPopupDesktopSwitcher,
         modalPopupTabletSwitcher,
-        modalPopupMobileSwitcher
+        modalPopupMobileSwitcher,
+        modalPopupOverlaySwitcher
     } = attributes;
 
     // Handle block ID generation (handles duplication and initial ID)
@@ -66,6 +74,24 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
     /** End Generate Block Style */
 
     const [isModalOpen, setIsModalOpen] = useState(false);
+
+    // Toggle image handler
+    const onSelectToggleImage = (media) => {
+        setAttributes({
+            toggleImageUrl: media.url,
+            toggleImageAlt: media.alt || '',
+            toggleImageId: media.id,
+        });
+    };
+
+    // Content image handler
+    const onSelectContentImage = (media) => {
+        setAttributes({
+            contentImageUrl: media.url,
+            contentImageAlt: media.alt || '',
+            contentImageId: media.id,
+        });
+    };
 
     const patternData = useSelect(select => {
         if (!selectedTemplate || contentType !== 'pattern') return null;
@@ -94,6 +120,8 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         return null;
     }, [selectedTemplate, contentType]);
 
+    const { replaceInnerBlocks } = useDispatch(blockEditorStore);
+
     // Update innerBlocks when pattern changes
     useEffect(() => {
         if (contentType !== 'pattern') return;
@@ -102,7 +130,6 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
             const parsedBlocks = parse(patternData.content);
 
             if (parsedBlocks && parsedBlocks.length > 0) {
-                const { replaceInnerBlocks } = wp.data.dispatch(blockEditorStore);
                 replaceInnerBlocks(clientId, parsedBlocks, false);
             } else {
                 console.warn("No blocks parsed from pattern content");
@@ -110,7 +137,24 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         } else {
             console.warn("No content found in pattern data");
         }
-    }, [patternData, clientId, contentType]);
+    }, [patternData, clientId, contentType, replaceInnerBlocks]);
+
+    // Insert appropriate block when contentType is video, image, or map
+    useEffect(() => {
+        if (contentType === 'video' || contentType === 'image' || contentType === 'map') {
+            let blockName = '';
+            if (contentType === 'video') blockName = 'frontis-blocks/advanced-video';
+            if (contentType === 'image') blockName = 'frontis-blocks/advanced-image';
+            if (contentType === 'map') blockName = 'frontis-blocks/google-map';
+
+            const currentBlocks = select('core/block-editor').getBlocks(clientId);
+            const hasBlock = currentBlocks.length === 1 && currentBlocks[0].name === blockName;
+            if (!hasBlock) {
+                const newBlock = createBlock(blockName);
+                replaceInnerBlocks(clientId, [newBlock], false);
+            }
+        }
+    }, [contentType, clientId, replaceInnerBlocks]);
 
     /**
     * Manages tab button settings and switches to block settings on click
@@ -163,10 +207,19 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                         </div>
                     )}
                 </a>;
-            case 'image':
-                return (
+            case 'image': 
+                return ( 
                     <div className="fb-modal-toggle-image">
-                        <img src={attributes.toggleImageUrl} />
+                        {toggleImageUrl ? (
+                            <img src={toggleImageUrl} alt={attributes.toggleImageAlt} />
+                        ) : (
+                            <MediaPlaceholder
+                                onSelect={onSelectToggleImage}
+                                allowedTypes={['image']}
+                                multiple={false}
+                                labels={{ title: __('Add Image', 'frontis-blocks') }}
+                            />
+                        )}
                     </div>
                 );
             default:
@@ -187,18 +240,24 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
             case 'custom':
                 return <div {...innerBlocksProps} />;
             case 'image':
-                const imgUrl = contentImage?.Desktop || contentImage?.Tablet || contentImage?.Mobile;
-                return imgUrl ? <img src={imgUrl} alt="Modal Content" className="fb-modal-content-img" /> : <div className="fb-placeholder-image">{__('Select an image for content', 'frontis-blocks')}</div>;
+                return (
+                    <div className="fb-modal-content-image">
+                        <div {...innerBlocksProps} />
+                    </div>
+                );
             case 'video':
-                return contentVideoUrl ? <video src={contentVideoUrl} controls className="fb-modal-content-video"></video> : <div className="fb-placeholder-video">{__('Enter MP4 Video URL', 'frontis-blocks')}</div>;
-            case 'youtube':
-                return contentYoutubeUrl ? <iframe src={contentYoutubeUrl} allowFullScreen className="fb-modal-content-iframe"></iframe> : <div className="fb-placeholder-iframe">{__('Enter YouTube URL', 'frontis-blocks')}</div>;
-            case 'vimeo':
-                return contentVimeoUrl ? <iframe src={contentVimeoUrl} allowFullScreen className="fb-modal-content-iframe"></iframe> : <div className="fb-placeholder-iframe">{__('Enter Vimeo URL', 'frontis-blocks')}</div>;
+                return (
+                    <div className="fb-modal-content-video">
+                        <div {...innerBlocksProps} />
+                    </div>
+                );
+                    
             case 'map':
-                return contentMapUrl ? (
-                    <div className="fb-modal-content-map" dangerouslySetInnerHTML={{ __html: contentMapUrl }}></div>
-                ) : <div className="fb-placeholder-iframe">{__('Enter Google Map Embed URL', 'frontis-blocks')}</div>;
+                return (
+                    <div className="fb-modal-content-map">
+                        <div {...innerBlocksProps} />
+                    </div>
+                );
             default:
                 return null;
         }
@@ -213,6 +272,35 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                 />
             )}
 
+            {/* BlockControls Toolbar — shown when image exists */}
+            <BlockControls>
+                <ToolbarGroup>
+                    {toggleType === 'image' && toggleImageUrl && (
+                        <>
+                            <ToolbarButton
+                                icon="trash"
+                                title={__('Remove Toggle Image', 'frontis-blocks')}
+                                onClick={() => setAttributes({ toggleImageUrl: '', toggleImageAlt: '', toggleImageId: '' })}
+                            />
+                            <MediaUploadCheck>
+                                <MediaUpload
+                                    onSelect={onSelectToggleImage}
+                                    allowedTypes={['image']}
+                                    value={attributes.toggleImageId}
+                                    render={({ open }) => (
+                                        <ToolbarButton
+                                            onClick={open}
+                                            icon="edit"
+                                            title={__('Replace Toggle Image', 'frontis-blocks')}
+                                        />
+                                    )}
+                                />
+                            </MediaUploadCheck>
+                        </>
+                    )}
+                </ToolbarGroup>
+            </BlockControls>
+
             <div className={`fb-advanced-modal-popup-container ${modalPopupGlobalWraperClass}`} id={modalPopupGlobalWraperID} ref={panelRef}>
                 
                 {/* Modal Trigger */}
@@ -221,9 +309,9 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                 </div>
 
                 {/* Modal Container */}
-                <div className={`fb-advanced-modal-popup ${modalPositionClass} ${isModalOpen ? 'open' : ''}`}>
+                <div className={`fb-advanced-modal-popup ${modalPositionClass} ${isModalOpen ? 'active' : ''}`}>
                     <div className="fb-modal-close-btn" onClick={() => setIsModalOpen(false)}>
-                        &times;
+                        {renderSVG(modalCloseIcon)}
                     </div>
                     <div className="fb-modal-content-wrapper">
                         {renderContent()}
@@ -231,7 +319,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                 </div>
  
                 {/* Overlay */}
-                {isModalOpen && (
+                {isModalOpen && modalPopupOverlaySwitcher && (
                     <div
                         className={`fb-modal-overlay active`}
                         onClick={() => setIsModalOpen(false)}
