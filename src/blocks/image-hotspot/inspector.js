@@ -1,4 +1,5 @@
 import { __ } from '@wordpress/i18n';
+import { useEffect } from '@wordpress/element';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove } from '@dnd-kit/sortable';
 import {
@@ -1094,6 +1095,36 @@ export default function Inspector({ attributes, setAttributes }) {
     });
   };
 
+  useEffect(() => {
+    let needsUpdate = false;
+    const sanitizedHotspots = (imageHotspotHotspots || []).map((hotspot, idx) => {
+      let hotspotUpdated = false;
+      const sanitizedSocialLinks = (hotspot.socialLinks || []).map((link, sIdx) => {
+        if (!link.id) {
+          hotspotUpdated = true;
+          needsUpdate = true;
+          return {
+            ...link,
+            id: `social-init-${idx}-${sIdx}-${Date.now()}-${Math.random().toString(36).substr(2, 5)}`
+          };
+        }
+        return link;
+      });
+
+      if (hotspotUpdated) {
+        return {
+          ...hotspot,
+          socialLinks: sanitizedSocialLinks
+        };
+      }
+      return hotspot;
+    });
+
+    if (needsUpdate) {
+      setAttributes({ imageHotspotHotspots: sanitizedHotspots });
+    }
+  }, [imageHotspotHotspots]);
+
   let latestHotspots = imageHotspotHotspots || [];
 
   const addHotspot = () => {
@@ -1188,6 +1219,63 @@ export default function Inspector({ attributes, setAttributes }) {
     }
 
     setAttributes({ imageHotspotHotspots: arrayMove(latestHotspots, oldIndex, newIndex) });
+  };
+
+  const handleSocialLinkDragEnd = (hotspotId, { active, over }) => {
+    if (!over || active.id === over.id) {
+      return;
+    }
+
+    const hotspot = (imageHotspotHotspots || []).find((h) => h.id === hotspotId);
+    if (!hotspot) {
+      return;
+    }
+
+    const socialLinks = hotspot.socialLinks || [];
+    const oldIndex = socialLinks.findIndex((link) => link.id === active.id);
+    const newIndex = socialLinks.findIndex((link) => link.id === over.id);
+
+    if (oldIndex === -1 || newIndex === -1) {
+      return;
+    }
+
+    const updatedLinks = arrayMove(socialLinks, oldIndex, newIndex);
+    updateHotspot(hotspotId, 'socialLinks', updatedLinks);
+  };
+
+  const deleteSocialLink = (hotspotId, socialLinkId) => {
+    const hotspot = (imageHotspotHotspots || []).find((h) => h.id === hotspotId);
+    if (!hotspot) {
+      return;
+    }
+    const socialLinks = hotspot.socialLinks || [];
+    const updatedLinks = socialLinks.filter((link) => link.id !== socialLinkId);
+    updateHotspot(hotspotId, 'socialLinks', updatedLinks);
+  };
+
+  const duplicateSocialLink = (hotspotId, socialLinkId) => {
+    const hotspot = (imageHotspotHotspots || []).find((h) => h.id === hotspotId);
+    if (!hotspot) {
+      return;
+    }
+    const socialLinks = hotspot.socialLinks || [];
+    const linkIndex = socialLinks.findIndex((link) => link.id === socialLinkId);
+    if (linkIndex === -1) {
+      return;
+    }
+
+    const sourceLink = socialLinks[linkIndex];
+    const duplicatedLink = {
+      ...sourceLink,
+      id: `social-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+    };
+
+    const updatedLinks = [
+      ...socialLinks.slice(0, linkIndex + 1),
+      duplicatedLink,
+      ...socialLinks.slice(linkIndex + 1),
+    ];
+    updateHotspot(hotspotId, 'socialLinks', updatedLinks);
   };
 
   const imageHotspotImageBorderWidthChange = (event, position) => {
@@ -1843,22 +1931,124 @@ export default function Inspector({ attributes, setAttributes }) {
                             placeholder={__("Enter price", "frontis-blocks")}
                           />
 
-                          <FB_ImageControl
-                            label={__("Popover Image", "frontis-blocks")}
-                            globalImageUrl={hotspot.popoverImageUrl || ''}
-                            setglobalImageUrl={(url) => updateHotspot(hotspot.id, 'popoverImageUrl', url)}
-                            globalImageAlt={hotspot.popoverImageAlt || ''}
-                            setglobalImageAlt={(alt) => updateHotspot(hotspot.id, 'popoverImageAlt', alt)}
-                            globalImageID={hotspot.popoverImageId || 0}
-                            setglobalImageID={(id) => updateHotspot(hotspot.id, 'popoverImageId', id)}
-                            isImageSize={false}
-                          />
-
                           <ToggleControl
                             label={__("Show Popover Image", "frontis-blocks")}
                             checked={hotspot.showImage !== false}
                             onChange={(value) => updateHotspot(hotspot.id, 'showImage', value)}
                           />
+
+                          {hotspot.showImage && (
+                            <FB_ImageControl
+                              label={__("Popover Image", "frontis-blocks")}
+                              globalImageUrl={hotspot.popoverImageUrl || ''}
+                              setglobalImageUrl={(url) => updateHotspot(hotspot.id, 'popoverImageUrl', url)}
+                              globalImageAlt={hotspot.popoverImageAlt || ''}
+                              setglobalImageAlt={(alt) => updateHotspot(hotspot.id, 'popoverImageAlt', alt)}
+                              globalImageID={hotspot.popoverImageId || 0}
+                              setglobalImageID={(id) => updateHotspot(hotspot.id, 'popoverImageId', id)}
+                              isImageSize={false}
+                            />
+                          )}
+
+                          <ToggleControl
+                            label={__('Show Social Links', 'frontis-blocks')}
+                            checked={hotspot.showSocialLinks || false}
+                            onChange={(value) => updateHotspot(hotspot.id, 'showSocialLinks', value)}
+                          />
+
+                          {hotspot.showSocialLinks && (
+                            <div className="fb-hotspot-social-links-repeater">
+                              <p className="fb-hotspot-control-label">{__('Social Links', 'frontis-blocks')}</p>
+
+                              {(hotspot.socialLinks || []).length > 0 && (
+                                <div className="fb-hotspot-repeater-wrapper">
+                                  <DndContext
+                                    collisionDetection={closestCenter}
+                                    onDragEnd={(event) => handleSocialLinkDragEnd(hotspot.id, event)}
+                                  >
+                                    <SortableContext items={(hotspot.socialLinks || []).map((link) => link.id)}>
+                                      <ul className="dnd-items-wrapper">
+                                        {(hotspot.socialLinks || []).map((socialLink, socialIndex) => {
+                                          const iconName = socialLink.icon
+                                            ? socialLink.icon.charAt(0).toUpperCase() + socialLink.icon.slice(1)
+                                            : 'Facebook';
+                                          const itemTitle = `${iconName} (${socialIndex + 1})`;
+
+                                          return (
+                                            <SortableItem
+                                              key={socialLink.id}
+                                              id={socialLink.id}
+                                              item={socialLink}
+                                              index={socialIndex}
+                                              title={itemTitle}
+                                              duplicateLabel={__('Duplicate Social Link', 'frontis-blocks')}
+                                              deleteLabel={__('Delete Social Link', 'frontis-blocks')}
+                                              handleDeleteItem={(id) => deleteSocialLink(hotspot.id, id)}
+                                              handleDuplicateItem={(id) => duplicateSocialLink(hotspot.id, id)}
+                                            >
+                                              <div className="fb-hotspot-social-link-fields">
+                                                <p className="fb-hotspot-control-label">{__('Icon', 'frontis-blocks')}</p>
+                                                <FBIconPicker
+                                                  value={socialLink.icon || 'facebook'}
+                                                  setIconHandler={(icon) => {
+                                                    const updatedLinks = [...(hotspot.socialLinks || [])];
+                                                    const idx = updatedLinks.findIndex((l) => l.id === socialLink.id);
+                                                    if (idx !== -1) {
+                                                      updatedLinks[idx] = { ...updatedLinks[idx], icon };
+                                                      updateHotspot(hotspot.id, 'socialLinks', updatedLinks);
+                                                    }
+                                                  }}
+                                                />
+
+                                                <FB_UrlControl
+                                                  label={__('URL', 'frontis-blocks')}
+                                                  url={socialLink.url || ''}
+                                                  onChangeUrl={(value) => {
+                                                    const updatedLinks = [...(hotspot.socialLinks || [])];
+                                                    const idx = updatedLinks.findIndex((l) => l.id === socialLink.id);
+                                                    if (idx !== -1) {
+                                                      updatedLinks[idx] = { ...updatedLinks[idx], url: value };
+                                                      updateHotspot(hotspot.id, 'socialLinks', updatedLinks);
+                                                    }
+                                                  }}
+                                                  openInNewTab={!!socialLink.openInNewTab}
+                                                  onChangeOpenInNewTab={(value) => {
+                                                    const updatedLinks = [...(hotspot.socialLinks || [])];
+                                                    const idx = updatedLinks.findIndex((l) => l.id === socialLink.id);
+                                                    if (idx !== -1) {
+                                                      updatedLinks[idx] = { ...updatedLinks[idx], openInNewTab: value };
+                                                      updateHotspot(hotspot.id, 'socialLinks', updatedLinks);
+                                                    }
+                                                  }}
+                                                />
+                                              </div>
+                                            </SortableItem>
+                                          );
+                                        })}
+                                      </ul>
+                                    </SortableContext>
+                                  </DndContext>
+                                </div>
+                              )}
+
+                              <Button
+                                variant="secondary"
+                                onClick={() => {
+                                  const currentLinks = hotspot.socialLinks || [];
+                                  const newLink = {
+                                    id: `social-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+                                    icon: 'facebook',
+                                    url: '',
+                                    openInNewTab: false,
+                                  };
+                                  updateHotspot(hotspot.id, 'socialLinks', [...currentLinks, newLink]);
+                                }}
+                                className="fb-hotspot-full-btn"
+                              >
+                                {__('+ Add Social Link', 'frontis-blocks')}
+                              </Button>
+                            </div>
+                          )}
 
                           <SelectControl
                             label={__("Popover Position", "frontis-blocks")}
@@ -2168,7 +2358,7 @@ export default function Inspector({ attributes, setAttributes }) {
           setAttributes={setAttributes}
         />
       </PanelBody>
-      
+
       <PanelBody title={__("Title", "frontis-blocks")} initialOpen={true}>
         <FB_TypographyControl
           label={__("Typography", "frontis-blocks")}
