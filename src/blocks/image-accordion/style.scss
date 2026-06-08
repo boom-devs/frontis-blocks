@@ -1,6 +1,6 @@
-/* ---------------------------------------------------------------
+/* -------------
    BASE CONTAINER
---------------------------------------------------------------- */
+---------------- */
 .fb-image-accordion-container {
 	display: flex;
 	gap: 12px;
@@ -9,9 +9,9 @@
 	align-items: stretch;
 }
 
-/* ---------------------------------------------------------------
-   BASE ITEM — collapsed "pill" state
---------------------------------------------------------------- */
+/* --------------
+   BASE ITEM 
+------------- */
 .fb-image-accordion-item {
 	position: relative;
 	flex: 0 0 80px;
@@ -26,9 +26,9 @@
 	overflow: hidden;
 }
 
-/* ---------------------------------------------------------------
+/* -----------
    OVERLAY
---------------------------------------------------------------- */
+----------- */
 .fb-image-accordion-overlay {
 	position: absolute;
 	inset: 0;
@@ -38,9 +38,9 @@
 	z-index: 1;
 }
 
-/* ---------------------------------------------------------------
-   CONTENT WRAPPER — shared
---------------------------------------------------------------- */
+/* -------------
+   CONTENT WRAPPER 
+-------------- */
 .fb-image-accordion-content-wrapper {
 	position: absolute;
 	left: 18px;
@@ -63,9 +63,9 @@
 	height: 90px;
 }
 
-/* ---------------------------------------------------------------
-   ICON CIRCLE (Preset 1)
---------------------------------------------------------------- */
+/* -------------
+   ICON CIRCLE 
+---------------- */
 .fb-image-accordion-icon-circle {
 	width: 44px;
 	height: 44px;
@@ -94,9 +94,9 @@
 	}
 }
 
-/* ---------------------------------------------------------------
+/* ---------------
    TEXT GROUP (Preset 1)
---------------------------------------------------------------- */
+------------------- */
 .preset-1 .fb-image-accordion-content-wrapper {
 	flex-direction: row;
 	align-items: center;
@@ -134,9 +134,9 @@
 	transform: translateX(0);
 }
 
-/* ---------------------------------------------------------------
+/* ----------------
    ACTIVE / OPEN ITEM
---------------------------------------------------------------- */
+----------------- */
 .fb-image-accordion-item.is-active {
 	flex: 1 !important;
 	border-radius: 25px;
@@ -148,9 +148,9 @@
 	flex: 0 0 80px;
 }
 
-/* ---------------------------------------------------------------
-   TRIGGER: HOVER - Only expand on hover if trigger is set to hover
---------------------------------------------------------------- */
+/* ---------------
+    HOVER 
+------------------- */
 .fb-trigger-hover {
 	.fb-image-accordion-item:hover {
 		flex: 1 !important;
@@ -164,9 +164,9 @@
 	}
 }
 
-/* ---------------------------------------------------------------
-   TRIGGER: CLICK
---------------------------------------------------------------- */
+/* -----------
+  CLICK
+----------------- */
 .fb-trigger-click .fb-image-accordion-item.is-active {
 	flex: 1 !important;
 	border-radius: 25px;
@@ -180,9 +180,9 @@
 	transform: translateX(0);
 }
 
-/* ---------------------------------------------------------------
-   RESPONSIVE — mobile
---------------------------------------------------------------- */
+/* ------------
+   RESPONSIVE
+----------------- */
 @media screen and (max-width: 767px) {
 	.fb-image-accordion-container {
 		flex-direction: column;
@@ -205,9 +205,9 @@
 	}
 }
 
-/* =============================================================
-   PRESET 2 — Seamless Pillars
-   ============================================================= */
+/* ===============
+   PRESET 2 
+   =============== */
 .preset-2 {
 	.fb-image-accordion-container {
 		gap: 0;
@@ -309,9 +309,9 @@
 	border-radius: 0 !important;
 }
 
-/* =============================================================
-   PRESET 3 — Vertical Stack
-   ============================================================= */
+/* =============
+   PRESET 3 
+   ============ */
 .preset-3 {
 	.fb-image-accordion-container {
 		flex-direction: column;
@@ -417,9 +417,9 @@
 	}
 }
 
-/* =============================================================
-   PRESET 4 — Skewed Panels
-   ============================================================= */
+/* ==============
+   PRESET 4 
+   ===========*/
 .preset-4 {
 	.fb-image-accordion-container {
 		gap: 0;
@@ -537,7 +537,7 @@
 	}
 
 	.fb-image-accordion-item.is-active {
-		flex: 1.4 !important; // Increased priority for expansion
+		flex: 1.4 !important;
 	}
 
 	@media screen and (max-width: 767px) {
@@ -574,9 +574,9 @@
 	}
 }
 
-/* =============================================================
+/* =============
    RESPONSIVE VISIBILITY
-   ============================================================= */
+   =============== */
 @media screen and (min-width: 1025px) {
 	.fb-desktop-responsive {
 		display: none !important;

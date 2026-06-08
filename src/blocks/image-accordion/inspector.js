@@ -497,7 +497,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 							}`}
 							onClick={() => applyPreset(preset.value)}
 							title={preset.label}
-							style={{ marginBottom: "20px" }}
+							// style={{ marginBottom: "20px" }}
 						>
 							<div
 								className="fb-preset-icon"
@@ -514,7 +514,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 					onChange={(value) =>
 						setAttributes({ imageAccordionShowTitle: value })
 					}
-					style={{ marginTop: "20px" }}
 				/>
 				<ToggleControl
 					label={__("Show Subtitle", "frontis-blocks")}

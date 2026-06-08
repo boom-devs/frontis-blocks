@@ -1,7 +1,3 @@
-/**
- * Frontis Blocks — Image Accordion Frontend Script
- * Handles hover / click trigger for all 4 presets
- */
 (function () {
 	"use strict";
 
