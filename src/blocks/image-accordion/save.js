@@ -9,6 +9,8 @@ export default function save({ attributes }) {
 		imageAccordionPreset,
 		imageAccordionTrigger,
 		imageAccordionItems,
+		imageAccordionShowTitle,
+		imageAccordionShowSubtitle,
 		imageAccordionShowDots,
 		imageAccordionShowNumber,
 		imageAccordionWraperID,
@@ -88,8 +90,10 @@ export default function save({ attributes }) {
 								)}
 							</div>
 							<div className="fb-image-accordion-text-group">
-								<h3 className="fb-image-accordion-title">{item.title}</h3>
-								{item.subTitle && (
+								{imageAccordionShowTitle && (
+									<h3 className="fb-image-accordion-title">{item.title}</h3>
+								)}
+								{imageAccordionShowSubtitle && item.subTitle && (
 									<p className="fb-image-accordion-desc">{item.subTitle}</p>
 								)}
 							</div>
