@@ -50,6 +50,13 @@ $attributes = isset($block_arr['attrs']) ? $block_arr['attrs'] : (isset($attribu
 			 * Offset from attributes
 			 */
 			$postOffset = isset($attributes['postOffset']) ? intval($attributes['postOffset']) : 0;
+			$excerptWordLimitAttr = isset($attributes['excerptWordLimit']) ? $attributes['excerptWordLimit'] : [];
+			if ( is_array( $excerptWordLimitAttr ) ) {
+				$excerptWordLimit = isset($excerptWordLimitAttr['Desktop']) ? intval($excerptWordLimitAttr['Desktop']) : 20;
+			} else {
+				$excerptWordLimit = intval( $excerptWordLimitAttr ) ?: 20;
+			}
+			$excerptMoreText = isset($attributes['excerptMoreText']) ? $attributes['excerptMoreText'] : '...';
 
 			/**
 			 * Default query args
@@ -208,6 +215,20 @@ $attributes = isset($block_arr['attrs']) ? $block_arr['attrs'] : (isset($attribu
 						while ($query->have_posts()):
 							$query->the_post();
 							$post_id = get_the_ID();
+
+							$temp_post = get_post( $post_id );
+							$original_excerpt = $temp_post ? $temp_post->post_excerpt : '';
+							$excerpt_overridden = false;
+							if ( $temp_post && empty( $original_excerpt ) ) {
+								$temp_post->post_excerpt = wp_trim_words( get_the_excerpt( $temp_post ), $excerptWordLimit, $excerptMoreText );
+								wp_cache_set( $post_id, $temp_post, 'posts' );
+								global $post;
+								if ( $post ) {
+									$post->post_excerpt = $temp_post->post_excerpt;
+								}
+								$excerpt_overridden = true;
+							}
+
 							$post_classes = implode(' ', get_post_class('wp-block-post', $post_id));
 							$item_classes = trim("{$post_classes} fb-loop-builder-item-block-context-container {$loop_builder_item_class} fb-loop-builder-item-inner-container");
 							?>
@@ -222,6 +243,9 @@ $attributes = isset($block_arr['attrs']) ? $block_arr['attrs'] : (isset($attribu
 								?>
 							</div>
 							<?php
+							if ( $excerpt_overridden ) {
+								clean_post_cache( $post_id );
+							}
 						endwhile;
 						wp_reset_postdata();
 					else:
