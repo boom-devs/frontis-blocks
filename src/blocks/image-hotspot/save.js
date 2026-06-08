@@ -94,6 +94,31 @@ export default function Save({ attributes }) {
                     )}
                     {hotspot.description && <p className="fb-hotspot-popover-description">{hotspot.description}</p>}
                     {hotspot.price && <div className="fb-hotspot-popover-price">{hotspot.price}</div>}
+
+                    {/* {hotspot.showSocialLinks && (
+                      <div className="fb-hotspot-social-links">
+                        Social Links
+                      </div>
+                    )} */}
+
+                    {hotspot.showSocialLinks && (hotspot.socialLinks || []).length > 0 && (
+                      <div className="fb-hotspot-social-links">
+                        {(hotspot.socialLinks || []).map((socialLink, i) => (
+                          <a
+                            key={i}
+                            href={socialLink.url || '#'}
+                            target={socialLink.openInNewTab ? '_blank' : undefined}
+                            rel={socialLink.openInNewTab ? 'noopener noreferrer' : undefined}
+                            className="fb-hotspot-social-link"
+                          >
+                            <span className="fb-hotspot-social-icon">
+                              {renderSVG(socialLink.icon || 'facebook')}
+                            </span>
+                          </a>
+                        ))}
+                      </div>
+                    )}
+
                   </div>
                 </div>
               );

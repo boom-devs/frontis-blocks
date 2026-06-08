@@ -3,7 +3,7 @@ import { __ } from '@wordpress/i18n';
 import { Button } from '@wordpress/components';
 import { useSortable } from '@dnd-kit/sortable';
 
-export default function SortableItem({ id, item, index, handleDeleteItem, handleDuplicateItem, children }) {
+export default function SortableItem({ id, item, index, handleDeleteItem, handleDuplicateItem, children, title, duplicateLabel, deleteLabel }) {
     const { attributes, listeners, setNodeRef } = useSortable({ id });
     const [isOpen, setIsOpen] = useState(false);
 
@@ -31,7 +31,7 @@ export default function SortableItem({ id, item, index, handleDeleteItem, handle
         <li className="sortable-item" ref={setNodeRef} {...attributes}>
             <div className="sortable-header">
                 <span className="sortable-title" onClick={toggleOpen}>
-                    {item.title || `${__('Hotspot', 'frontis-blocks')} ${index + 1}`}
+                    {title || item.title || `${__('Hotspot', 'frontis-blocks')} ${index + 1}`}
                 </span>
 
                 <span className="sortable-sort" {...listeners}>
@@ -41,8 +41,8 @@ export default function SortableItem({ id, item, index, handleDeleteItem, handle
                 <span className="sortable-duplicate">
                     <Button
                         icon={DuplicateIcon}
-                        label={__('Duplicate', 'frontis-blocks')}
-                        aria-label={__('Duplicate hotspot', 'frontis-blocks')}
+                        label={duplicateLabel || __('Duplicate', 'frontis-blocks')}
+                        aria-label={duplicateLabel || __('Duplicate hotspot', 'frontis-blocks')}
                         onClick={() => handleDuplicateItem(item.id)}
                     />
                 </span>
@@ -50,8 +50,8 @@ export default function SortableItem({ id, item, index, handleDeleteItem, handle
                 <span className="sortable-delete">
                     <Button
                         icon={TrashIcon}
-                        label={__('Delete', 'frontis-blocks')}
-                        aria-label={__('Delete hotspot', 'frontis-blocks')}
+                        label={deleteLabel || __('Delete', 'frontis-blocks')}
+                        aria-label={deleteLabel || __('Delete hotspot', 'frontis-blocks')}
                         onClick={() => handleDeleteItem(item.id)}
                     />
                 </span>

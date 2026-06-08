@@ -192,6 +192,20 @@
       margin-top: 8px;
       font-weight: 600;
     }
+
+    .fb-hotspot-social-links {
+      display: flex;
+      gap: 5px;
+      justify-content: flex-start;
+      align-items: center;
+      .fb-hotspot-social-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+      }
+    }
   }
 
   &:hover .fb-hotspot-popover,
