@@ -34,6 +34,7 @@ import FB_Presets from '@Components/presets';
 import { imageHotspotPresets } from './preset';
 import { useDeviceType } from '@Config/displayType';
 import SortableItem from './sortableItem';
+import FB_BackgroundColorControl from '@Components/background-color-control';
 
 export default function Inspector({ attributes, setAttributes }) {
   const {
@@ -353,6 +354,68 @@ export default function Inspector({ attributes, setAttributes }) {
 
     imageHotspotSocialLinksIconSize,
     imageHotspotSocialLinksIconSizeUnits,
+
+    /** Start Hotspot Popover Padding */
+    imageHotspotsPopoverPaddingUnits,
+    imageHotspotsPopoverPaddingDesktop,
+    imageHotspotsPopoverPaddingTablet,
+    imageHotspotsPopoverPaddingMobile,
+    imageHotspotsPopoverPaddingLink,
+    /** End Hotspot Popover Padding */
+
+    /** Start Image Hotspots Popover Margin */
+    imageHotspotsPopoverMarginUnits,
+    imageHotspotsPopoverMarginDesktop,
+    imageHotspotsPopoverMarginTablet,
+    imageHotspotsPopoverMarginMobile,
+    imageHotspotsPopoverMarginLink,
+    /** End Image Hotspots Popover Margin */
+
+    /** Start Hotspot Popover Background */
+    imageHotspotsPopoverBgColorSwitcher,
+    imageHotspotsPopoverNormalBackgroundType,
+    imageHotspotsPopoverNormalClassicColor,
+    imageHotspotsPopoverNormalGradientColor,
+    imageHotspotsPopoverNormalCustomGradientSwitcher,
+    imageHotspotsPopoverNormalCustomGradientInputValue,
+    imageHotspotsPopoverHoverBackgroundType,
+    imageHotspotsPopoverHoverClassicColor,
+    imageHotspotsPopoverHoverGradientColor,
+    imageHotspotsPopoverHoverCustomGradientSwitcher,
+    imageHotspotsPopoverHoverCustomGradientInputValue,
+    /** End Hotspot Popover Background */
+
+    /** Start Hotspot Popover Border */
+    imageHotspotsPopoverBorder,
+    imageHotspotsPopoverBorderColorSwitcher,
+    imageHotspotsPopoverBorderColor,
+    imageHotspotsPopoverBorderHoverColor,
+    /** End Hotspot Popover Border */
+
+    /** Start Hotspot Popover Border Units */
+    imageHotspotsPopoverBorderUnits,
+    imageHotspotsPopoverBorderDesktop,
+    imageHotspotsPopoverBorderTablet,
+    imageHotspotsPopoverBorderMobile,
+    imageHotspotsPopoverBorderLink,
+    /** End Hotspot Popover Border Units */
+
+    /** Start Hotspot Popover Border Radius */
+    imageHotspotsPopoverBorderRadiusUnits,
+    imageHotspotsPopoverBorderRadiusDesktop,
+    imageHotspotsPopoverBorderRadiusTablet,
+    imageHotspotsPopoverBorderRadiusMobile,
+    imageHotspotsPopoverBorderRadiusLink,
+    /** End Hotspot Popover Border Radius */
+
+    /** Start Hotspot Popover Box Shadow */
+    imageHotspotsPopoverBoxShadowSwitcher,
+    imageHotspotsPopoverBoxShadowValues,
+    imageHotspotsPopoverBoxShadowHoverValues,
+    imageHotspotsPopoverGlobalZIndex,
+    /** End Hotspot Popover Box Shadow */
+
+
   } = attributes;
 
   const deviceType = useDeviceType();
@@ -1832,11 +1895,220 @@ export default function Inspector({ attributes, setAttributes }) {
     });
   };
 
+  /** Start Back To Top Padding */
+  const imageHotspotsPopoverPaddingUnitsChange = (event, position) => {
+    const value = event.target.value;
+    if (imageHotspotsPopoverPaddingLink) {
+      switch (deviceType) {
+        case 'Desktop':
+          setAttributes({ imageHotspotsPopoverPaddingDesktop: { top: value, right: value, bottom: value, left: value } });
+          break;
+        case 'Tablet':
+          setAttributes({ imageHotspotsPopoverPaddingTablet: { top: value, right: value, bottom: value, left: value } });
+          break;
+        case 'Mobile':
+          setAttributes({ imageHotspotsPopoverPaddingMobile: { top: value, right: value, bottom: value, left: value } });
+          break;
+        default:
+          break;
+      }
+    } else {
+      switch (deviceType) {
+        case 'Desktop':
+          setAttributes({ imageHotspotsPopoverPaddingDesktop: { ...imageHotspotsPopoverPaddingDesktop, [position]: value } });
+          break;
+        case 'Tablet':
+          setAttributes({ imageHotspotsPopoverPaddingTablet: { ...imageHotspotsPopoverPaddingTablet, [position]: value } });
+          break;
+        case 'Mobile':
+          setAttributes({ imageHotspotsPopoverPaddingMobile: { ...imageHotspotsPopoverPaddingMobile, [position]: value } });
+          break;
+        default:
+          break;
+      }
+    }
+  };
+
+  const imageHotspotsPopoverPaddingLinkBtn = () => {
+    setAttributes({
+      imageHotspotsPopoverPaddingLink: !imageHotspotsPopoverPaddingLink
+    });
+  };
+
+  const imageHotspotsPopoverPaddingUnitsHandler = (unit) => {
+    setAttributes({
+      imageHotspotsPopoverPaddingUnits: {
+        ...imageHotspotsPopoverPaddingUnits,
+        [deviceType]: unit
+      }
+    });
+  };
+  /** End Back To Top Padding */
+
+  /** Start Image Hotspots Popover Margin */
+  const imageHotspotsPopoverMarginUnitsChange = (event, position) => {
+    const value = event.target.value;
+    if (imageHotspotsPopoverMarginLink) {
+      switch (deviceType) {
+        case 'Desktop':
+          setAttributes({
+            imageHotspotsPopoverMarginDesktop: {
+              top: value,
+              right: value,
+              bottom: value,
+              left: value
+            }
+          });
+          break;
+        case 'Tablet':
+          setAttributes({
+            imageHotspotsPopoverMarginTablet: {
+              top: value,
+              right: value,
+              bottom: value,
+              left: value
+            }
+          });
+          break;
+        case 'Mobile':
+          setAttributes({
+            imageHotspotsPopoverMarginMobile: {
+              top: value,
+              right: value,
+              bottom: value,
+              left: value
+            }
+          });
+          break;
+        default:
+          break;
+      }
+    } else {
+      switch (deviceType) {
+        case 'Desktop':
+          setAttributes({ imageHotspotsPopoverMarginDesktop: { ...imageHotspotsPopoverMarginDesktop, [position]: value } });
+          break;
+        case 'Tablet':
+          setAttributes({ imageHotspotsPopoverMarginTablet: { ...imageHotspotsPopoverMarginTablet, [position]: value } });
+          break;
+        case 'Mobile':
+          setAttributes({ imageHotspotsPopoverMarginMobile: { ...imageHotspotsPopoverMarginMobile, [position]: value } });
+          break;
+        default:
+          break;
+      }
+    }
+  };
+
+  const imageHotspotsPopoverMarginLinkBtn = () => {
+    setAttributes({
+      imageHotspotsPopoverMarginLink: !imageHotspotsPopoverMarginLink
+    });
+  };
+
+  const imageHotspotsPopoverMarginUnitsHandler = (unit) => {
+    setAttributes({
+      imageHotspotsPopoverMarginUnits: {
+        ...imageHotspotsPopoverMarginUnits,
+        [deviceType]: unit
+      }
+    });
+  };
+  /** End Image Hotspots Popover Margin */
+
+  /** Start Border Controls */
+  const imageHotspotsPopoverBorderUnitsChange = (event, position) => {
+    const value = event.target.value;
+    if (imageHotspotsPopoverBorderLink) {
+      switch (deviceType) {
+        case 'Desktop':
+          setAttributes({ imageHotspotsPopoverBorderDesktop: { top: value, right: value, bottom: value, left: value } });
+          break;
+        case 'Tablet':
+          setAttributes({ imageHotspotsPopoverBorderTablet: { top: value, right: value, bottom: value, left: value } });
+          break;
+        case 'Mobile':
+          setAttributes({ imageHotspotsPopoverBorderMobile: { top: value, right: value, bottom: value, left: value } });
+          break;
+      }
+    } else {
+      switch (deviceType) {
+        case 'Desktop':
+          setAttributes({ imageHotspotsPopoverBorderDesktop: { ...imageHotspotsPopoverBorderDesktop, [position]: value } });
+          break;
+        case 'Tablet':
+          setAttributes({ imageHotspotsPopoverBorderTablet: { ...imageHotspotsPopoverBorderTablet, [position]: value } });
+          break;
+        case 'Mobile':
+          setAttributes({ imageHotspotsPopoverBorderMobile: { ...imageHotspotsPopoverBorderMobile, [position]: value } });
+          break;
+      }
+    }
+  };
+
+  const imageHotspotsPopoverBorderLinkBtn = () => {
+    setAttributes({ imageHotspotsPopoverBorderLink: !imageHotspotsPopoverBorderLink });
+  };
+
+  const imageHotspotsPopoverBorderUnitsHandler = (unit) => {
+    setAttributes({
+      imageHotspotsPopoverBorderUnits: {
+        ...imageHotspotsPopoverBorderUnits,
+        [deviceType]: unit
+      }
+    });
+  };
+  /** End Border Controls */
+
+  /** Start Border Radius Controls */
+  const imageHotspotsPopoverBorderRadiusUnitsChange = (event, position) => {
+    const value = event.target.value;
+    if (imageHotspotsPopoverBorderRadiusLink) {
+      switch (deviceType) {
+        case 'Desktop':
+          setAttributes({ imageHotspotsPopoverBorderRadiusDesktop: { top: value, right: value, bottom: value, left: value } });
+          break;
+        case 'Tablet':
+          setAttributes({ imageHotspotsPopoverBorderRadiusTablet: { top: value, right: value, bottom: value, left: value } });
+          break;
+        case 'Mobile':
+          setAttributes({ imageHotspotsPopoverBorderRadiusMobile: { top: value, right: value, bottom: value, left: value } });
+          break;
+      }
+    } else {
+      switch (deviceType) {
+        case 'Desktop':
+          setAttributes({ imageHotspotsPopoverBorderRadiusDesktop: { ...imageHotspotsPopoverBorderRadiusDesktop, [position]: value } });
+          break;
+        case 'Tablet':
+          setAttributes({ imageHotspotsPopoverBorderRadiusTablet: { ...imageHotspotsPopoverBorderRadiusTablet, [position]: value } });
+          break;
+        case 'Mobile':
+          setAttributes({ imageHotspotsPopoverBorderRadiusMobile: { ...imageHotspotsPopoverBorderRadiusMobile, [position]: value } });
+          break;
+      }
+    }
+  };
+
+  const imageHotspotsPopoverBorderRadiusLinkBtn = () => {
+    setAttributes({ imageHotspotsPopoverBorderRadiusLink: !imageHotspotsPopoverBorderRadiusLink });
+  };
+
+  const imageHotspotsPopoverBorderRadiusUnitsHandler = (unit) => {
+    setAttributes({
+      imageHotspotsPopoverBorderRadiusUnits: {
+        ...imageHotspotsPopoverBorderRadiusUnits,
+        [deviceType]: unit
+      }
+    });
+  };
+  /** End Border Radius Controls */
+
   const generalControls = (
     <>
       <PanelBody title={__("General", "frontis-blocks")}
-       initialOpen={true}
-       >
+        initialOpen={true}
+      >
         <FB_Presets
           presets={imageHotspotPresets}
           value={imageHotspotPresetStyle}
@@ -2295,10 +2567,10 @@ export default function Inspector({ attributes, setAttributes }) {
   const styleControls = (
     <>
       <PanelBody title={__("Popover", "frontis-blocks")}
-       initialOpen={true}
-       >
+        initialOpen={true}
+      >
 
-        <FB_SwitcherControl
+        {/* <FB_SwitcherControl
           label={__("Background", "frontis-blocks")}
           globalSwitcher={imageHotspotPopoverBgColorSwitcher}
           setGlobalSwitcher={(value) => setAttributes({ imageHotspotPopoverBgColorSwitcher: value })}
@@ -2408,10 +2680,156 @@ export default function Inspector({ attributes, setAttributes }) {
             imageHotspotPopoverBorderRadiusLink: !imageHotspotPopoverBorderRadiusLink
           })}
           setAttributes={setAttributes}
+        /> */}
+
+        <FB_Spacing
+          label={__("Padding", "frontis-blocks")}
+          deviceType={deviceType}
+          spacingUnitsHandler={imageHotspotsPopoverPaddingUnitsHandler}
+          spacingUnits={imageHotspotsPopoverPaddingUnits}
+          spacingDesktop={imageHotspotsPopoverPaddingDesktop}
+          spacingTablet={imageHotspotsPopoverPaddingTablet}
+          spacingMobile={imageHotspotsPopoverPaddingMobile}
+          handleSpacingUnitHandler={imageHotspotsPopoverPaddingUnitsChange}
+          spacingCombineBtn={imageHotspotsPopoverPaddingLink}
+          spacingCombineBtnHandler={imageHotspotsPopoverPaddingLinkBtn}
+          setAttributes={setAttributes}
         />
+
+        <FB_Spacing
+          label={__("Margin", "frontis-blocks")}
+          deviceType={deviceType}
+          spacingUnitsHandler={imageHotspotsPopoverMarginUnitsHandler}
+          spacingUnits={imageHotspotsPopoverMarginUnits}
+          spacingDesktop={imageHotspotsPopoverMarginDesktop}
+          spacingTablet={imageHotspotsPopoverMarginTablet}
+          spacingMobile={imageHotspotsPopoverMarginMobile}
+          handleSpacingUnitHandler={imageHotspotsPopoverMarginUnitsChange}
+          spacingCombineBtn={imageHotspotsPopoverMarginLink}
+          spacingCombineBtnHandler={imageHotspotsPopoverMarginLinkBtn}
+          setAttributes={setAttributes}
+        />
+
+        <FB_BackgroundColorControl
+          label={__("Background Color", "frontis-blocks")}
+          bgColorSwitcher={imageHotspotsPopoverBgColorSwitcher}
+          setBgColorSwitcher={(value) => setAttributes({ imageHotspotsPopoverBgColorSwitcher: value })}
+
+          normalBackgroundType={imageHotspotsPopoverNormalBackgroundType}
+          setNormalBackgroundType={(value) => setAttributes({ imageHotspotsPopoverNormalBackgroundType: value })}
+          normalClassicColor={imageHotspotsPopoverNormalClassicColor}
+          setNormalClassicColor={(value) => setAttributes({ imageHotspotsPopoverNormalClassicColor: value === undefined ? '' : value })}
+          normalGradientColor={imageHotspotsPopoverNormalGradientColor}
+          setNormalGradientColor={(value) => setAttributes({ imageHotspotsPopoverNormalGradientColor: value === undefined ? null : value })}
+          normalCustomGradientSwitcher={imageHotspotsPopoverNormalCustomGradientSwitcher}
+          setNormalCustomGradientSwitcher={(value) => setAttributes({ imageHotspotsPopoverNormalCustomGradientSwitcher: value })}
+          normalCustomGradientInputValue={imageHotspotsPopoverNormalCustomGradientInputValue}
+          setNormalCustomGradientInputValue={(value) => setAttributes({ imageHotspotsPopoverNormalCustomGradientInputValue: value })}
+
+          hoverBackgroundType={imageHotspotsPopoverHoverBackgroundType}
+          setHoverBackgroundType={(value) => setAttributes({ imageHotspotsPopoverHoverBackgroundType: value })}
+          hoverClassicColor={imageHotspotsPopoverHoverClassicColor}
+          setHoverClassicColor={(value) => setAttributes({ imageHotspotsPopoverHoverClassicColor: value === undefined ? '' : value })}
+          hoverGradientColor={imageHotspotsPopoverHoverGradientColor}
+          setHoverGradientColor={(value) => setAttributes({ imageHotspotsPopoverHoverGradientColor: value === undefined ? null : value })}
+          hoverCustomGradientSwitcher={imageHotspotsPopoverHoverCustomGradientSwitcher}
+          setHoverCustomGradientSwitcher={(value) => setAttributes({ imageHotspotsPopoverHoverCustomGradientSwitcher: value })}
+          hoverCustomGradientInputValue={imageHotspotsPopoverHoverCustomGradientInputValue}
+          setHoverCustomGradientInputValue={(value) => setAttributes({ imageHotspotsPopoverHoverCustomGradientInputValue: value })}
+
+          isBackgroundImage={false}
+        />
+
+        <SelectControl
+          label={__("Border Style", "frontis-blocks")}
+          value={imageHotspotsPopoverBorder}
+          options={BORDER_STYLES}
+          onChange={(value) => setAttributes({ imageHotspotsPopoverBorder: value })}
+        />
+
+        <FB_SwitcherControl
+          label={__("Border Color", "frontis-blocks")}
+          options={[
+            { label: __('Normal', 'frontis-blocks'), value: 'normal' },
+            { label: __('Hover', 'frontis-blocks'), value: 'hover' },
+          ]}
+          globalSwitcher={imageHotspotsPopoverBorderColorSwitcher}
+          setGlobalSwitcher={(value) => setAttributes({ imageHotspotsPopoverBorderColorSwitcher: value })}
+        />
+
+        {imageHotspotsPopoverBorderColorSwitcher === 'normal' && (
+          <FB_ColorControl
+            label={__("Normal Color", "frontis-blocks")}
+            globalColor={imageHotspotsPopoverBorderColor}
+            setGlobalColor={(value) => setAttributes({ imageHotspotsPopoverBorderColor: value === undefined ? '' : value })}
+          />
+        )}
+
+        {imageHotspotsPopoverBorderColorSwitcher === 'hover' && (
+          <FB_ColorControl
+            label={__("Hover Color", "frontis-blocks")}
+            globalColor={imageHotspotsPopoverBorderHoverColor}
+            setGlobalColor={(value) => setAttributes({ imageHotspotsPopoverBorderHoverColor: value === undefined ? '' : value })}
+          />
+        )}
+
+        <FB_Spacing
+          label={__("Border", "frontis-blocks")}
+          deviceType={deviceType}
+          spacingUnitsHandler={imageHotspotsPopoverBorderUnitsHandler}
+          spacingUnits={imageHotspotsPopoverBorderUnits}
+          spacingDesktop={imageHotspotsPopoverBorderDesktop}
+          spacingTablet={imageHotspotsPopoverBorderTablet}
+          spacingMobile={imageHotspotsPopoverBorderMobile}
+          handleSpacingUnitHandler={imageHotspotsPopoverBorderUnitsChange}
+          spacingCombineBtn={imageHotspotsPopoverBorderLink}
+          spacingCombineBtnHandler={imageHotspotsPopoverBorderLinkBtn}
+          setAttributes={setAttributes}
+        />
+
+        <FB_Spacing
+          label={__("Border Radius", "frontis-blocks")}
+          deviceType={deviceType}
+          spacingUnitsHandler={imageHotspotsPopoverBorderRadiusUnitsHandler}
+          spacingUnits={imageHotspotsPopoverBorderRadiusUnits}
+          spacingDesktop={imageHotspotsPopoverBorderRadiusDesktop}
+          spacingTablet={imageHotspotsPopoverBorderRadiusTablet}
+          spacingMobile={imageHotspotsPopoverBorderRadiusMobile}
+          handleSpacingUnitHandler={imageHotspotsPopoverBorderRadiusUnitsChange}
+          spacingCombineBtn={imageHotspotsPopoverBorderRadiusLink}
+          spacingCombineBtnHandler={imageHotspotsPopoverBorderRadiusLinkBtn}
+          setAttributes={setAttributes}
+        />
+
+        <FB_SwitcherControl
+          label={__("Box Shadow", "frontis-blocks")}
+          globalSwitcher={imageHotspotsPopoverBoxShadowSwitcher}
+          setGlobalSwitcher={(value) => setAttributes({ imageHotspotsPopoverBoxShadowSwitcher: value })}
+        />
+
+        {imageHotspotsPopoverBoxShadowSwitcher === 'normal' && (
+          <FB_BoxShadowControl
+            label={__("Normal Shadow", "frontis-blocks")}
+            onBoxShadowChange={(value) => setAttributes({ imageHotspotsPopoverBoxShadowValues: value })}
+            initialShadowValue={imageHotspotsPopoverBoxShadowValues}
+            onBoxShadowStyleChange={(value) => setAttributes({ imageHotspotsPopoverBoxShadowCssValue: value })}
+          />
+        )}
+
+        {imageHotspotsPopoverBoxShadowSwitcher === 'hover' && (
+          <FB_BoxShadowControl
+            label={__("Hover Shadow", "frontis-blocks")}
+            onBoxShadowChange={(value) => setAttributes({ imageHotspotsPopoverBoxShadowHoverValues: value })}
+            initialShadowValue={imageHotspotsPopoverBoxShadowHoverValues}
+            onBoxShadowStyleChange={(value) => setAttributes({ imageHotspotsPopoverBoxShadowHoverCssValue: value })}
+          />
+        )}
+
+
       </PanelBody>
 
       <PanelBody title={__("Title", "frontis-blocks")} initialOpen={false}>
+        
         <FB_TypographyControl
           label={__("Typography", "frontis-blocks")}
           deviceType={deviceType}
@@ -3022,278 +3440,274 @@ export default function Inspector({ attributes, setAttributes }) {
 
   const advancedControls = (
     <>
-      <div className="fb-setting-advanced-tab-wrapper">
-        <div className="fb-setting-inner-wrapper">
-          <PanelBody
-            title={__("Layout", "frontis-blocks")}
-            initialOpen={true}
-            className="fb-setting-layout-header"
-          >
-            <FB_Range
-              min={0}
-              max={10000000}
-              label={__("Z Index", "frontis-blocks")}
-              rangeValue={globalZIndex}
-              onChangeHandler={(value) => setAttributes({ globalZIndex: value === 0 ? undefined : value })}
-              deviceType={deviceType}
-              setAttributes={setAttributes}
-              rangeStep={1}
-              resetFallbackValue={''}
-              isRangeUnit={false}
-            />
+      <PanelBody
+        title={__("Layout", "frontis-blocks")}
+        initialOpen={true}
+        className="fb-setting-layout-header"
+      >
+        <FB_Range
+          min={0}
+          max={10000000}
+          label={__("Z Index", "frontis-blocks")}
+          rangeValue={globalZIndex}
+          onChangeHandler={(value) => setAttributes({ globalZIndex: value === 0 ? undefined : value })}
+          deviceType={deviceType}
+          setAttributes={setAttributes}
+          rangeStep={1}
+          resetFallbackValue={''}
+          isRangeUnit={false}
+        />
 
-            <SelectControl
-              label={__("Overflow", "frontis-blocks")}
-              value={imageHotspotOverflow}
-              options={OVERFLOW_OP}
-              onChange={(value) => setAttributes({ imageHotspotOverflow: value })}
-            />
+        <SelectControl
+          label={__("Overflow", "frontis-blocks")}
+          value={imageHotspotOverflow}
+          options={OVERFLOW_OP}
+          onChange={(value) => setAttributes({ imageHotspotOverflow: value })}
+        />
 
-            <FB_PositionControl
-              deviceType={deviceType}
-              positionType={imageHotspotPositionType}
-              setPositionType={(value) => setAttributes({ imageHotspotPositionType: value })}
+        <FB_PositionControl
+          deviceType={deviceType}
+          positionType={imageHotspotPositionType}
+          setPositionType={(value) => setAttributes({ imageHotspotPositionType: value })}
 
-              HZOrientationType={imageHotspotHZOrientationType}
-              setHZOrientationType={(value) =>
-                setAttributes({ imageHotspotHZOrientationType: value })
-              }
-              VROrientationType={imageHotspotVROrientationType}
-              setVROrientationType={(value) =>
-                setAttributes({ imageHotspotVROrientationType: value })
-              }
+          HZOrientationType={imageHotspotHZOrientationType}
+          setHZOrientationType={(value) =>
+            setAttributes({ imageHotspotHZOrientationType: value })
+          }
+          VROrientationType={imageHotspotVROrientationType}
+          setVROrientationType={(value) =>
+            setAttributes({ imageHotspotVROrientationType: value })
+          }
 
-              HZLeftOffset={imageHotspotHZLeftOffset}
-              setHZLeftOffset={(value) => setAttributes({ imageHotspotHZLeftOffset: value })}
-              HZLeftOffsetUnits={imageHotspotHZLeftOffsetUnits}
-              setHZLeftOffsetUnits={(value) => setAttributes({ imageHotspotHZLeftOffsetUnits: value })}
-              HZRightOffset={imageHotspotHZRightOffset}
-              setHZRightOffset={(value) => setAttributes({ imageHotspotHZRightOffset: value })}
-              HZRightOffsetUnits={imageHotspotHZRightOffsetUnits}
-              setHZRightOffsetUnits={(value) => setAttributes({ imageHotspotHZRightOffsetUnits: value })}
+          HZLeftOffset={imageHotspotHZLeftOffset}
+          setHZLeftOffset={(value) => setAttributes({ imageHotspotHZLeftOffset: value })}
+          HZLeftOffsetUnits={imageHotspotHZLeftOffsetUnits}
+          setHZLeftOffsetUnits={(value) => setAttributes({ imageHotspotHZLeftOffsetUnits: value })}
+          HZRightOffset={imageHotspotHZRightOffset}
+          setHZRightOffset={(value) => setAttributes({ imageHotspotHZRightOffset: value })}
+          HZRightOffsetUnits={imageHotspotHZRightOffsetUnits}
+          setHZRightOffsetUnits={(value) => setAttributes({ imageHotspotHZRightOffsetUnits: value })}
 
-              VRTopOffset={imageHotspotVRTopOffset}
-              setVRTopOffset={(value) => setAttributes({ imageHotspotVRTopOffset: value })}
-              VRTopOffsetUnits={imageHotspotVRTopOffsetUnits}
-              setVRTopOffsetUnits={(value) => setAttributes({ imageHotspotVRTopOffsetUnits: value })}
-              VRBottomOffset={imageHotspotVRBottomOffset}
-              setVRBottomOffset={(value) => setAttributes({ imageHotspotVRBottomOffset: value })}
-              VRBottomOffsetUnits={imageHotspotVRBottomOffsetUnits}
-              setVRBottomOffsetUnits={(value) => setAttributes({ imageHotspotVRBottomOffsetUnits: value })}
+          VRTopOffset={imageHotspotVRTopOffset}
+          setVRTopOffset={(value) => setAttributes({ imageHotspotVRTopOffset: value })}
+          VRTopOffsetUnits={imageHotspotVRTopOffsetUnits}
+          setVRTopOffsetUnits={(value) => setAttributes({ imageHotspotVRTopOffsetUnits: value })}
+          VRBottomOffset={imageHotspotVRBottomOffset}
+          setVRBottomOffset={(value) => setAttributes({ imageHotspotVRBottomOffset: value })}
+          VRBottomOffsetUnits={imageHotspotVRBottomOffsetUnits}
+          setVRBottomOffsetUnits={(value) => setAttributes({ imageHotspotVRBottomOffsetUnits: value })}
 
-              setAttributes={setAttributes}
-            />
+          setAttributes={setAttributes}
+        />
 
-            <FB_InputControl
-              label={__("CSS ID", "frontis-blocks")}
-              value={imageHotspotGlobalWraperID}
-              onChangeValue={(value) => setAttributes({ imageHotspotGlobalWraperID: value })}
-              helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
-            />
+        <FB_InputControl
+          label={__("CSS ID", "frontis-blocks")}
+          value={imageHotspotGlobalWraperID}
+          onChangeValue={(value) => setAttributes({ imageHotspotGlobalWraperID: value })}
+          helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
+        />
 
-            <FB_InputControl
-              label={__("CSS Class", "frontis-blocks")}
-              value={imageHotspotGlobalWraperClass}
-              onChangeValue={(value) => setAttributes({ imageHotspotGlobalWraperClass: value })}
-              helpText={__("Separate with spaces key.", "frontis-blocks")}
-            />
+        <FB_InputControl
+          label={__("CSS Class", "frontis-blocks")}
+          value={imageHotspotGlobalWraperClass}
+          onChangeValue={(value) => setAttributes({ imageHotspotGlobalWraperClass: value })}
+          helpText={__("Separate with spaces key.", "frontis-blocks")}
+        />
 
-          </PanelBody>
+      </PanelBody>
 
-          <PanelBody
-            title={__("Padding and Margin", "frontis-blocks")}
-            initialOpen={false}
-          >
-            <FB_Spacing
-              label={__("Padding", "frontis-blocks")}
-              deviceType={deviceType}
-              spacingUnitsHandler={
-                handleGlobalPaddingUnitsHandler
-              }
-              spacingUnits={globalPaddingUnits}
-              spacingDesktop={globalPaddingDesktop}
-              spacingTablet={globalPaddingTablet}
-              spacingMobile={globalPaddingMobile}
-              handleSpacingUnitHandler={
-                handleGlobalPaddingUnitChange
-              }
-              spacingCombineBtn={globalPaddingLink}
-              spacingCombineBtnHandler={
-                handleGlobalPaddingCombineBtn
-              }
-              setAttributes={setAttributes}
-            />
-            <FB_Spacing
-              label={__("Margin", "frontis-blocks")}
-              deviceType={deviceType}
-              spacingUnitsHandler={handleGlobalMarginUnitsHandler}
-              spacingUnits={globalMarginUnits}
-              spacingDesktop={globalMarginDesktop}
-              spacingTablet={globalMarginTablet}
-              spacingMobile={globalMarginMobile}
-              handleSpacingUnitHandler={
-                handleGlobalMarginUnitChange
-              }
-              spacingCombineBtn={globalMarginLink}
-              spacingCombineBtnHandler={
-                handleGlobalMarginCombineBtn
-              }
-              setAttributes={setAttributes}
-            />
-          </PanelBody>
+      <PanelBody
+        title={__("Padding and Margin", "frontis-blocks")}
+        initialOpen={false}
+      >
+        <FB_Spacing
+          label={__("Padding", "frontis-blocks")}
+          deviceType={deviceType}
+          spacingUnitsHandler={
+            handleGlobalPaddingUnitsHandler
+          }
+          spacingUnits={globalPaddingUnits}
+          spacingDesktop={globalPaddingDesktop}
+          spacingTablet={globalPaddingTablet}
+          spacingMobile={globalPaddingMobile}
+          handleSpacingUnitHandler={
+            handleGlobalPaddingUnitChange
+          }
+          spacingCombineBtn={globalPaddingLink}
+          spacingCombineBtnHandler={
+            handleGlobalPaddingCombineBtn
+          }
+          setAttributes={setAttributes}
+        />
+        <FB_Spacing
+          label={__("Margin", "frontis-blocks")}
+          deviceType={deviceType}
+          spacingUnitsHandler={handleGlobalMarginUnitsHandler}
+          spacingUnits={globalMarginUnits}
+          spacingDesktop={globalMarginDesktop}
+          spacingTablet={globalMarginTablet}
+          spacingMobile={globalMarginMobile}
+          handleSpacingUnitHandler={
+            handleGlobalMarginUnitChange
+          }
+          spacingCombineBtn={globalMarginLink}
+          spacingCombineBtnHandler={
+            handleGlobalMarginCombineBtn
+          }
+          setAttributes={setAttributes}
+        />
+      </PanelBody>
 
-          <PanelBody title="Background Color" initialOpen={false}>
-            <FB_SwitcherControl
-              label={__("Background Color", "frontis-blocks")}
-              globalSwitcher={globalBgColorSwitcher}
-              setGlobalSwitcher={(value) => setAttributes({ globalBgColorSwitcher: value })}
-            />
+      <PanelBody title="Background Color" initialOpen={false}>
+        <FB_SwitcherControl
+          label={__("Background Color", "frontis-blocks")}
+          globalSwitcher={globalBgColorSwitcher}
+          setGlobalSwitcher={(value) => setAttributes({ globalBgColorSwitcher: value })}
+        />
 
-            {globalBgColorSwitcher === 'normal' && (
-              <FB_ColorControl
-                label={__("Normal Color", "frontis-blocks")}
-                globalColor={globalBgColor}
-                setGlobalColor={(value) => setAttributes({ globalBgColor: value === undefined ? '' : value })}
-              />
-            )}
+        {globalBgColorSwitcher === 'normal' && (
+          <FB_ColorControl
+            label={__("Normal Color", "frontis-blocks")}
+            globalColor={globalBgColor}
+            setGlobalColor={(value) => setAttributes({ globalBgColor: value === undefined ? '' : value })}
+          />
+        )}
 
-            {globalBgColorSwitcher === 'hover' && (
-              <FB_ColorControl
-                label={__("Hover Color", "frontis-blocks")}
-                globalColor={globalBgHoverColor}
-                setGlobalColor={(value) => setAttributes({ globalBgHoverColor: value === undefined ? '' : value })}
-              />
-            )}
-          </PanelBody>
-          <PanelBody
-            title={__("Border and Shadow", "frontis-blocks")}
-            initialOpen={false}
-          >
-            <SelectControl
-              label={__("Border Style", "frontis-blocks")}
-              value={globalBorder}
-              options={BORDER_STYLES}
-              onChange={(value) =>
-                setAttributes({ globalBorder: value })
-              }
-            />
+        {globalBgColorSwitcher === 'hover' && (
+          <FB_ColorControl
+            label={__("Hover Color", "frontis-blocks")}
+            globalColor={globalBgHoverColor}
+            setGlobalColor={(value) => setAttributes({ globalBgHoverColor: value === undefined ? '' : value })}
+          />
+        )}
+      </PanelBody>
+      <PanelBody
+        title={__("Border and Shadow", "frontis-blocks")}
+        initialOpen={false}
+      >
+        <SelectControl
+          label={__("Border Style", "frontis-blocks")}
+          value={globalBorder}
+          options={BORDER_STYLES}
+          onChange={(value) =>
+            setAttributes({ globalBorder: value })
+          }
+        />
 
-            <FB_SwitcherControl
-              label={__("Border Color", "frontis-blocks")}
-              globalSwitcher={globalBorderColorSwitcher}
-              setGlobalSwitcher={(value) => setAttributes({ globalBorderColorSwitcher: value })}
-            />
+        <FB_SwitcherControl
+          label={__("Border Color", "frontis-blocks")}
+          globalSwitcher={globalBorderColorSwitcher}
+          setGlobalSwitcher={(value) => setAttributes({ globalBorderColorSwitcher: value })}
+        />
 
-            {globalBorderColorSwitcher === 'normal' && (
-              <FB_ColorControl
-                label={__("Normal Color", "frontis-blocks")}
-                globalColor={globalBorderColor}
-                setGlobalColor={(value) => setAttributes({ globalBorderColor: value === undefined ? '' : value })}
-              />
-            )}
+        {globalBorderColorSwitcher === 'normal' && (
+          <FB_ColorControl
+            label={__("Normal Color", "frontis-blocks")}
+            globalColor={globalBorderColor}
+            setGlobalColor={(value) => setAttributes({ globalBorderColor: value === undefined ? '' : value })}
+          />
+        )}
 
-            {globalBorderColorSwitcher === 'hover' && (
-              <FB_ColorControl
-                label={__("Hover Color", "frontis-blocks")}
-                globalColor={globalBorderHoverColor}
-                setGlobalColor={(value) => setAttributes({ globalBorderHoverColor: value === undefined ? '' : value })}
-              />
-            )}
+        {globalBorderColorSwitcher === 'hover' && (
+          <FB_ColorControl
+            label={__("Hover Color", "frontis-blocks")}
+            globalColor={globalBorderHoverColor}
+            setGlobalColor={(value) => setAttributes({ globalBorderHoverColor: value === undefined ? '' : value })}
+          />
+        )}
 
-            <FB_Spacing
-              label={__("Border", "frontis-blocks")}
-              deviceType={deviceType}
-              spacingUnitsHandler={handleGlobalBorderUnitsHandler}
-              spacingUnits={globalBorderUnits}
-              spacingDesktop={globalBorderDesktop}
-              spacingTablet={globalBorderTablet}
-              spacingMobile={globalBorderMobile}
-              handleSpacingUnitHandler={
-                handleGlobalBorderUnitChange
-              }
-              spacingCombineBtn={globalBorderLink}
-              spacingCombineBtnHandler={
-                handleGlobalBorderCombineBtn
-              }
-              setAttributes={setAttributes}
-            />
+        <FB_Spacing
+          label={__("Border", "frontis-blocks")}
+          deviceType={deviceType}
+          spacingUnitsHandler={handleGlobalBorderUnitsHandler}
+          spacingUnits={globalBorderUnits}
+          spacingDesktop={globalBorderDesktop}
+          spacingTablet={globalBorderTablet}
+          spacingMobile={globalBorderMobile}
+          handleSpacingUnitHandler={
+            handleGlobalBorderUnitChange
+          }
+          spacingCombineBtn={globalBorderLink}
+          spacingCombineBtnHandler={
+            handleGlobalBorderCombineBtn
+          }
+          setAttributes={setAttributes}
+        />
 
-            <FB_Spacing
-              label={__("Border Radius", "frontis-blocks")}
-              deviceType={deviceType}
-              spacingUnitsHandler={
-                handleGlobalBorderRadiusUnitsHandler
-              }
-              spacingUnits={globalBorderRadiusUnits}
-              spacingDesktop={globalBorderRadiusDesktop}
-              spacingTablet={globalBorderRadiusTablet}
-              spacingMobile={globalBorderRadiusMobile}
-              handleSpacingUnitHandler={
-                handleGlobalBorderRadiusUnitChange
-              }
-              spacingCombineBtn={globalBorderRadiusLink}
-              spacingCombineBtnHandler={
-                handleGlobalBorderRadiusCombineBtn
-              }
-              setAttributes={setAttributes}
-            />
+        <FB_Spacing
+          label={__("Border Radius", "frontis-blocks")}
+          deviceType={deviceType}
+          spacingUnitsHandler={
+            handleGlobalBorderRadiusUnitsHandler
+          }
+          spacingUnits={globalBorderRadiusUnits}
+          spacingDesktop={globalBorderRadiusDesktop}
+          spacingTablet={globalBorderRadiusTablet}
+          spacingMobile={globalBorderRadiusMobile}
+          handleSpacingUnitHandler={
+            handleGlobalBorderRadiusUnitChange
+          }
+          spacingCombineBtn={globalBorderRadiusLink}
+          spacingCombineBtnHandler={
+            handleGlobalBorderRadiusCombineBtn
+          }
+          setAttributes={setAttributes}
+        />
 
-            <FB_SwitcherControl
-              label={__("Box Shadow", "frontis-blocks")}
-              globalSwitcher={imageHotspotBoxShadowSwitcher}
-              setGlobalSwitcher={(value) => setAttributes({ imageHotspotBoxShadowSwitcher: value })}
-            />
+        <FB_SwitcherControl
+          label={__("Box Shadow", "frontis-blocks")}
+          globalSwitcher={imageHotspotBoxShadowSwitcher}
+          setGlobalSwitcher={(value) => setAttributes({ imageHotspotBoxShadowSwitcher: value })}
+        />
 
-            {imageHotspotBoxShadowSwitcher === 'normal' && (
-              <FB_BoxShadowControl
-                label={__("Normal Shadow", "frontis-blocks")}
-                onBoxShadowChange={(value) =>
-                  setAttributes({ imageHotspotBoxShadowValues: value })
-                }
-                initialShadowValue={imageHotspotBoxShadowValues}
-                onBoxShadowStyleChange={(value) =>
-                  setAttributes({
-                    imageHotspotBoxShadowCssValue: value,
-                  })
-                }
-              />
-            )}
+        {imageHotspotBoxShadowSwitcher === 'normal' && (
+          <FB_BoxShadowControl
+            label={__("Normal Shadow", "frontis-blocks")}
+            onBoxShadowChange={(value) =>
+              setAttributes({ imageHotspotBoxShadowValues: value })
+            }
+            initialShadowValue={imageHotspotBoxShadowValues}
+            onBoxShadowStyleChange={(value) =>
+              setAttributes({
+                imageHotspotBoxShadowCssValue: value,
+              })
+            }
+          />
+        )}
 
-            {imageHotspotBoxShadowSwitcher === 'hover' && (
-              <FB_BoxShadowControl
-                label={__("Hover Shadow", "frontis-blocks")}
-                onBoxShadowChange={(value) =>
-                  setAttributes({ imageHotspotHoverBoxShadowValues: value })
-                }
-                initialShadowValue={imageHotspotHoverBoxShadowValues}
-                onBoxShadowStyleChange={(value) =>
-                  setAttributes({
-                    imageHotspotHoverBoxShadowCssValue: value,
-                  })
-                }
-              />
-            )}
-          </PanelBody>
+        {imageHotspotBoxShadowSwitcher === 'hover' && (
+          <FB_BoxShadowControl
+            label={__("Hover Shadow", "frontis-blocks")}
+            onBoxShadowChange={(value) =>
+              setAttributes({ imageHotspotHoverBoxShadowValues: value })
+            }
+            initialShadowValue={imageHotspotHoverBoxShadowValues}
+            onBoxShadowStyleChange={(value) =>
+              setAttributes({
+                imageHotspotHoverBoxShadowCssValue: value,
+              })
+            }
+          />
+        )}
+      </PanelBody>
 
-          <PanelBody title={__("Responsive Control", "frontis-blocks")} initialOpen={false}>
-            <FB_VisibilityControl
-              desktopValue={imageHotspotDesktopSwitcher}
-              setDesktopValue={(value) => setAttributes({ imageHotspotDesktopSwitcher: value })}
-              tabletValue={imageHotspotTabletSwitcher}
-              setTabletValue={(value) => setAttributes({ imageHotspotTabletSwitcher: value })}
-              mobileValue={imageHotspotMobileSwitcher}
-              setMobileValue={(value) => setAttributes({ imageHotspotMobileSwitcher: value })}
-            />
-          </PanelBody>
+      <PanelBody title={__("Responsive Control", "frontis-blocks")} initialOpen={false}>
+        <FB_VisibilityControl
+          desktopValue={imageHotspotDesktopSwitcher}
+          setDesktopValue={(value) => setAttributes({ imageHotspotDesktopSwitcher: value })}
+          tabletValue={imageHotspotTabletSwitcher}
+          setTabletValue={(value) => setAttributes({ imageHotspotTabletSwitcher: value })}
+          mobileValue={imageHotspotMobileSwitcher}
+          setMobileValue={(value) => setAttributes({ imageHotspotMobileSwitcher: value })}
+        />
+      </PanelBody>
 
-          <PanelBody title={__("Custom CSS", "frontis-blocks")} initialOpen={false}>
-            <FB_CustomCSSEditor
-              value={imageHotspotCustomCSS}
-              onChangeValue={(value) => setAttributes({ imageHotspotCustomCSS: value })}
-            />
-          </PanelBody>
-        </div>
-      </div>
+      <PanelBody title={__("Custom CSS", "frontis-blocks")} initialOpen={false}>
+        <FB_CustomCSSEditor
+          value={imageHotspotCustomCSS}
+          onChangeValue={(value) => setAttributes({ imageHotspotCustomCSS: value })}
+        />
+      </PanelBody>
     </>
   );
 

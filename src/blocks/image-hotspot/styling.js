@@ -234,6 +234,68 @@ const generateImageHotspotStyle = (attributes) => {
 
         // Custom CSS
         imageHotspotCustomCSS,
+
+        /** Start Hotspot Popover Padding */
+        imageHotspotsPopoverPaddingUnits,
+        imageHotspotsPopoverPaddingDesktop,
+        imageHotspotsPopoverPaddingTablet,
+        imageHotspotsPopoverPaddingMobile,
+        imageHotspotsPopoverPaddingLink,
+        /** End Hotspot Popover Padding */
+
+        /** Start Image Hotspots Popover Margin */
+        imageHotspotsPopoverMarginUnits,
+        imageHotspotsPopoverMarginDesktop,
+        imageHotspotsPopoverMarginTablet,
+        imageHotspotsPopoverMarginMobile,
+        imageHotspotsPopoverMarginLink,
+        /** End Image Hotspots Popover Margin */
+
+        /** Start Hotspot Popover Background */
+        imageHotspotsPopoverBgColorSwitcher,
+        imageHotspotsPopoverNormalBackgroundType,
+        imageHotspotsPopoverNormalClassicColor,
+        imageHotspotsPopoverNormalGradientColor,
+        imageHotspotsPopoverNormalCustomGradientSwitcher,
+        imageHotspotsPopoverNormalCustomGradientInputValue,
+        imageHotspotsPopoverHoverBackgroundType,
+        imageHotspotsPopoverHoverClassicColor,
+        imageHotspotsPopoverHoverGradientColor,
+        imageHotspotsPopoverHoverCustomGradientSwitcher,
+        imageHotspotsPopoverHoverCustomGradientInputValue,
+        /** End Hotspot Popover Background */
+
+        /** Start Hotspot Popover Border */
+        imageHotspotsPopoverBorder,
+        imageHotspotsPopoverBorderColorSwitcher,
+        imageHotspotsPopoverBorderColor,
+        imageHotspotsPopoverBorderHoverColor,
+        /** End Hotspot Popover Border */
+
+        /** Start Hotspot Popover Border Units */
+        imageHotspotsPopoverBorderUnits,
+        imageHotspotsPopoverBorderDesktop,
+        imageHotspotsPopoverBorderTablet,
+        imageHotspotsPopoverBorderMobile,
+        imageHotspotsPopoverBorderLink,
+        /** End Hotspot Popover Border Units */
+
+        /** Start Hotspot Popover Border Radius */
+        imageHotspotsPopoverBorderRadiusUnits,
+        imageHotspotsPopoverBorderRadiusDesktop,
+        imageHotspotsPopoverBorderRadiusTablet,
+        imageHotspotsPopoverBorderRadiusMobile,
+        imageHotspotsPopoverBorderRadiusLink,
+        /** End Hotspot Popover Border Radius */
+
+        /** Start Hotspot Popover Box Shadow */
+        imageHotspotsPopoverBoxShadowSwitcher,
+        imageHotspotsPopoverBoxShadowValues,
+        imageHotspotsPopoverBoxShadowHoverValues,
+        imageHotspotsPopoverGlobalZIndex,
+        /** End Hotspot Popover Box Shadow */
+
+
     } = attributes;
 
     // ─── Helpers
@@ -421,6 +483,21 @@ const generateImageHotspotStyle = (attributes) => {
     const blockBorderRadiusDesktop = buildFourSided(imageHotspotBorderRadiusDesktop, imageHotspotBorderRadiusUnits?.Desktop);
     const blockBorderRadiusTablet = buildFourSided(imageHotspotBorderRadiusTablet, imageHotspotBorderRadiusUnits?.Tablet);
     const blockBorderRadiusMobile = buildFourSided(imageHotspotBorderRadiusMobile, imageHotspotBorderRadiusUnits?.Mobile);
+
+    /** Default padding for Image Hotspots Popovers */
+    const imageHotspotsPopoverPaddingDesktopWidth = `${imageHotspotsPopoverPaddingDesktop?.top}${imageHotspotsPopoverPaddingUnits?.Desktop} ${imageHotspotsPopoverPaddingDesktop?.right}${imageHotspotsPopoverPaddingUnits?.Desktop} ${imageHotspotsPopoverPaddingDesktop?.bottom}${imageHotspotsPopoverPaddingUnits?.Desktop} ${imageHotspotsPopoverPaddingDesktop?.left}${imageHotspotsPopoverPaddingUnits?.Desktop}`;
+    const imageHotspotsPopoverPaddingTabletWidth = `${imageHotspotsPopoverPaddingTablet?.top}${imageHotspotsPopoverPaddingUnits?.Tablet} ${imageHotspotsPopoverPaddingTablet?.right}${imageHotspotsPopoverPaddingUnits?.Tablet} ${imageHotspotsPopoverPaddingTablet?.bottom}${imageHotspotsPopoverPaddingUnits?.Tablet} ${imageHotspotsPopoverPaddingTablet?.left}${imageHotspotsPopoverPaddingUnits?.Tablet}`;
+    const imageHotspotsPopoverPaddingMobileWidth = `${imageHotspotsPopoverPaddingMobile?.top}${imageHotspotsPopoverPaddingUnits?.Mobile} ${imageHotspotsPopoverPaddingMobile?.right}${imageHotspotsPopoverPaddingUnits?.Mobile} ${imageHotspotsPopoverPaddingMobile?.bottom}${imageHotspotsPopoverPaddingUnits?.Mobile} ${imageHotspotsPopoverPaddingMobile?.left}${imageHotspotsPopoverPaddingUnits?.Mobile}`;
+
+    /** Default border for Image Hotspots Popovers */
+    const imageHotspotsPopoverBorderDesktopWidth = `${imageHotspotsPopoverBorderDesktop?.top}${imageHotspotsPopoverBorderUnits?.Desktop} ${imageHotspotsPopoverBorderDesktop?.right}${imageHotspotsPopoverBorderUnits?.Desktop} ${imageHotspotsPopoverBorderDesktop?.bottom}${imageHotspotsPopoverBorderUnits?.Desktop} ${imageHotspotsPopoverBorderDesktop?.left}${imageHotspotsPopoverBorderUnits?.Desktop}`;
+    const imageHotspotsPopoverBorderTabletWidth = `${imageHotspotsPopoverBorderTablet?.top}${imageHotspotsPopoverBorderUnits?.Tablet} ${imageHotspotsPopoverBorderTablet?.right}${imageHotspotsPopoverBorderUnits?.Tablet} ${imageHotspotsPopoverBorderTablet?.bottom}${imageHotspotsPopoverBorderUnits?.Tablet} ${imageHotspotsPopoverBorderTablet?.left}${imageHotspotsPopoverBorderUnits?.Tablet}`;
+    const imageHotspotsPopoverBorderMobileWidth = `${imageHotspotsPopoverBorderMobile?.top}${imageHotspotsPopoverBorderUnits?.Mobile} ${imageHotspotsPopoverBorderMobile?.right}${imageHotspotsPopoverBorderUnits?.Mobile} ${imageHotspotsPopoverBorderMobile?.bottom}${imageHotspotsPopoverBorderUnits?.Mobile} ${imageHotspotsPopoverBorderMobile?.left}${imageHotspotsPopoverBorderUnits?.Mobile}`;
+
+    /** Default border radius for Image Hotspots Popovers */
+    const imageHotspotsPopoverBorderRadiusDesktopWidth = `${imageHotspotsPopoverBorderRadiusDesktop?.top}${imageHotspotsPopoverBorderRadiusUnits?.Desktop} ${imageHotspotsPopoverBorderRadiusDesktop?.right}${imageHotspotsPopoverBorderRadiusUnits?.Desktop} ${imageHotspotsPopoverBorderRadiusDesktop?.bottom}${imageHotspotsPopoverBorderRadiusUnits?.Desktop} ${imageHotspotsPopoverBorderRadiusDesktop?.left}${imageHotspotsPopoverBorderRadiusUnits?.Desktop}`;
+    const imageHotspotsPopoverBorderRadiusTabletWidth = `${imageHotspotsPopoverBorderRadiusTablet?.top}${imageHotspotsPopoverBorderRadiusUnits?.Tablet} ${imageHotspotsPopoverBorderRadiusTablet?.right}${imageHotspotsPopoverBorderRadiusUnits?.Tablet} ${imageHotspotsPopoverBorderRadiusTablet?.bottom}${imageHotspotsPopoverBorderRadiusUnits?.Tablet} ${imageHotspotsPopoverBorderRadiusTablet?.left}${imageHotspotsPopoverBorderRadiusUnits?.Tablet}`;
+    const imageHotspotsPopoverBorderRadiusMobileWidth = `${imageHotspotsPopoverBorderRadiusMobile?.top}${imageHotspotsPopoverBorderRadiusUnits?.Mobile} ${imageHotspotsPopoverBorderRadiusMobile?.right}${imageHotspotsPopoverBorderRadiusUnits?.Mobile} ${imageHotspotsPopoverBorderRadiusMobile?.bottom}${imageHotspotsPopoverBorderRadiusUnits?.Mobile} ${imageHotspotsPopoverBorderRadiusMobile?.left}${imageHotspotsPopoverBorderRadiusUnits?.Mobile}`;
 
 
     const hotspotBaseStyles = (imageHotspotHotspots || []).map((hotspot) => `
@@ -633,6 +710,17 @@ const generateImageHotspotStyle = (attributes) => {
 
 
     const popoverBg = imageHotspotPopoverBgColor || '#ffffff';
+
+    const resolvedPopoverBg = (() => {
+        if (imageHotspotsPopoverNormalBackgroundType === 'gradient') {
+            if (imageHotspotsPopoverNormalCustomGradientSwitcher && imageHotspotsPopoverNormalCustomGradientInputValue) {
+                return imageHotspotsPopoverNormalCustomGradientInputValue;
+            }
+            return imageHotspotsPopoverNormalGradientColor || popoverBg;
+        }
+        return imageHotspotsPopoverNormalClassicColor || popoverBg;
+    })();
+
     const popoverBgHover = imageHotspotPopoverBgHoverColor || popoverBg;
     const gap = '25px';
 
@@ -692,22 +780,24 @@ const generateImageHotspotStyle = (attributes) => {
 
         return `
             .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"] .fb-hotspot-popover {
+               ${imageHotspotsPopoverPaddingMobileWidth && imageHotspotsPopoverPaddingMobile?.top ? `padding: ${imageHotspotsPopoverPaddingMobileWidth};` : ''}
+               ${imageHotspotsPopoverBorderMobileWidth && imageHotspotsPopoverBorderMobile?.top ? `border-width: ${imageHotspotsPopoverBorderMobileWidth};` : ''}
+               ${imageHotspotsPopoverBorderRadiusMobileWidth && imageHotspotsPopoverBorderRadiusMobile?.top ? `border-radius: ${imageHotspotsPopoverBorderRadiusMobileWidth};` : ''}
+               ${imageHotspotsPopoverBoxShadowHoverValues ? `box-shadow: ${imageHotspotsPopoverBoxShadowHoverValues};` : ''}
+               ${imageHotspotsPopoverNormalBackgroundType === 'gradient' ? `  
+                 ${imageHotspotsPopoverNormalCustomGradientSwitcher && imageHotspotsPopoverNormalCustomGradientInputValue ? `--fb-popover-bg: ${imageHotspotsPopoverNormalCustomGradientInputValue};` : `--fb-popover-bg: ${imageHotspotsPopoverNormalGradientColor};`}
+                  `: `
+                 ${imageHotspotsPopoverNormalClassicColor ? `--fb-popover-bg: ${imageHotspotsPopoverNormalClassicColor};` : ''}
+               `}  
                 position: absolute;
                 inset: auto;
-                ${popoverMarginDesktop ? `margin: ${popoverMarginDesktop};` : 'margin: 0;'}
                 ${placement.position}
                 transform: ${placement.hiddenTransform};
                 transform-origin: center;
-                --fb-popover-bg: ${popoverBg};
+                --fb-popover-bg: ${resolvedPopoverBg};
                 background-color: var(--fb-popover-bg);
                 width: ${popoverWidthDesktop};
-                ${popoverPaddingDesktop ? `padding: ${popoverPaddingDesktop};` : 'padding: 12px;'}
-                border-radius: ${popoverBorderRadiusDesktop};
-                ${popoverBorderWidthDesktop ? `border-width: ${popoverBorderWidthDesktop};` : ''}
-                ${popoverBorderWidthDesktop ? 'border-style: solid;' : ''}
-                ${imageHotspotPopoverBorderColor ? `border-color: ${imageHotspotPopoverBorderColor};` : ''}
-                ${imageHotspotPopoverShadowCssValue ? `box-shadow: ${imageHotspotPopoverShadowCssValue};` : ''}
-                z-index: 20;
+                z-index: 200;
                 min-width: ${popoverWidthDesktop};
                 word-wrap: break-word;
                 white-space: normal;
@@ -1186,11 +1276,11 @@ const generateImageHotspotStyle = (attributes) => {
             }
 
             .${blockID} .fb-hotspot-social-links {
-                gap: ${imageHotspotSocialLinksGap?.Mobile !== undefined && imageHotspotSocialLinksGap.Mobile !== ''? `${imageHotspotSocialLinksGap.Mobile}${imageHotspotSocialLinksGapUnits?.Mobile || 'px'}` : ''};
+                gap: ${imageHotspotSocialLinksGap?.Mobile !== undefined && imageHotspotSocialLinksGap.Mobile !== '' ? `${imageHotspotSocialLinksGap.Mobile}${imageHotspotSocialLinksGapUnits?.Mobile || 'px'}` : ''};
             }
 
             .${blockID} .fb-hotspot-social-icon {
-                ${imageHotspotSocialLinksIconSize?.Mobile !== undefined && imageHotspotSocialLinksIconSize.Mobile !== ''? `width: ${imageHotspotSocialLinksIconSize.Mobile}${imageHotspotSocialLinksIconSizeUnits?.Mobile || 'px'};
+                ${imageHotspotSocialLinksIconSize?.Mobile !== undefined && imageHotspotSocialLinksIconSize.Mobile !== '' ? `width: ${imageHotspotSocialLinksIconSize.Mobile}${imageHotspotSocialLinksIconSizeUnits?.Mobile || 'px'};
                 height: ${imageHotspotSocialLinksIconSize.Mobile}${imageHotspotSocialLinksIconSizeUnits?.Mobile || 'px'};`
             : ''}
             }
