@@ -32,7 +32,7 @@ export default function getProActive() {
     // Use cached result if available for instant render, otherwise fall back to PHP-cached localization
     cachedResult !== null 
       ? cachedResult 
-      : (window?.FrontisBlocksData?.is_license_active !== false)
+      : (window?.FrontisBlocksData?.is_license_active === 'true' || window?.FrontisBlocksData?.is_license_active === undefined)
   );
 
   useEffect(() => {

@@ -1128,7 +1128,7 @@ class Admin
         $license_key = is_array($license_options) && !empty($license_options['sc_license_key']) ? (string) $license_options['sc_license_key'] : '';
 
         if (empty($license_id) || empty($license_key)) {
-            return new \WP_REST_Response(['status' => false, 'message' => 'License is not activated'], 400);
+            return new \WP_REST_Response(['status' => false, 'message' => 'License is not activated'], 200);
         }
 
         // Cache setup (using transients for 12 hours)

@@ -98,7 +98,7 @@ class Blocks
 				'tablet_breakpoint' => $tablet_breakpoint,
 				'mobile_breakpoint' => $mobile_breakpoint,
 				'global_typography' => get_option('fb_globaltypo'),
-				'is_license_active' => $is_license_active,
+				'is_license_active' => $is_license_active ? 'true' : 'false',
 			];
 		}
 
