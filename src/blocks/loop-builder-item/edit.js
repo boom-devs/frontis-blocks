@@ -26,6 +26,7 @@ import { store as coreStore } from '@wordpress/core-data';
 import Inspector from "./inspector";
 import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
 import generateLoopBuilderItemStyle from './styling';
+import getProActive from '@Utils/getProActive';
 
 
 function PostTemplateInnerBlocks( { classList } ) {
@@ -75,6 +76,7 @@ function PostTemplateBlockPreview( {
 const MemoizedPostTemplateBlockPreview = memo( PostTemplateBlockPreview );
 
 export default function Edit({ attributes, setAttributes, clientId, context, isSelected }) {
+	const isProActive = getProActive();
 
 	const {
 		blockID,
@@ -240,11 +242,11 @@ export default function Edit({ attributes, setAttributes, clientId, context, isS
 				query.sticky = sticky === 'only';
 			}
 
-			// Empty string represents the default behavior of including sticky posts.
+			// If empty string or 'ignore', we should ignore sticky posts (not float them to the top).
 			if ( [ '', 'ignore' ].includes( sticky ) ) {
 				// Remove any leftover sticky query parameter.
 				delete query.sticky;
-				query.ignore_sticky = sticky === 'ignore';
+				query.ignore_sticky = true;
 			}
 
 			// If `inherit` is truthy, adjust conditionally the query to create a better preview.
@@ -308,9 +310,38 @@ export default function Edit({ attributes, setAttributes, clientId, context, isS
 			previewPostType,
 		]
 	);
+	const sortedPosts = useMemo(() => {
+		if (!posts) return posts;
+		let result = [...posts];
+
+		if (sticky === 'exclude') {
+			result = result.filter(post => !post.sticky);
+		} else if (sticky === 'only') {
+			result = result.filter(post => post.sticky);
+		}
+
+		const isIgnoreSticky = !sticky || sticky === 'ignore';
+		if (isIgnoreSticky) {
+			result.sort((a, b) => {
+				if (orderBy === 'date') {
+					const dateA = new Date(a.date);
+					const dateB = new Date(b.date);
+					return order?.toLowerCase() === 'asc' ? dateA - dateB : dateB - dateA;
+				}
+				if (orderBy === 'title') {
+					const titleA = (a.title?.rendered || '').toLowerCase();
+					const titleB = (b.title?.rendered || '').toLowerCase();
+					return order?.toLowerCase() === 'asc' ? titleA.localeCompare(titleB) : titleB.localeCompare(titleA);
+				}
+				return 0;
+			});
+		}
+		return result;
+	}, [posts, sticky, orderBy, order]);
+
 	const blockContexts = useMemo(
 		() =>
-			posts?.map( ( post ) => ( {
+			sortedPosts?.map( ( post ) => ( {
 				postType: post.type,
 				postId: post.id,
 				classList: clsx(
@@ -318,15 +349,20 @@ export default function Edit({ attributes, setAttributes, clientId, context, isS
 					'fb-loop-builder-item-block-context-container',
 					loopBuilderItemClass
 				),
+				isLoopBuilder: true,
 			} ) ),
-		[ posts, loopBuilderItemClass ]
+		[ sortedPosts, loopBuilderItemClass ]
 	);
 
 	const blockProps = useBlockProps( {
 		className: `${blockID || ''} fb-loop-builder-item-main-container ${postSwitcher === 'list' ? 'list-layout' : 'grid-layout'}`,
 	} );
 
-	if ( ! posts ) {
+	if (!isProActive) {
+		return null;
+	}
+
+	if ( ! sortedPosts ) {
 		return (
 			<p { ...blockProps }>
 				<Spinner />
@@ -334,7 +370,7 @@ export default function Edit({ attributes, setAttributes, clientId, context, isS
 		);
 	}
 
-	if ( ! posts.length ) {
+	if ( ! sortedPosts.length ) {
 		return <p { ...blockProps }> { __( 'No results found.' ) }</p>;
 	}
 

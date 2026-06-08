@@ -25,6 +25,7 @@ class RestApi
     public function __construct()
     {
         add_action('init', [$this, 'fb_init_rest_api_blocks']);
+        add_filter('rest_post_query', [$this, 'fb_filter_rest_post_query'], 10, 2);
     }
 
     /**
@@ -35,5 +36,17 @@ class RestApi
         PostGrid::get_instance();
         PostCategory::get_instance();
         Search::get_instance();
+    }
+
+    /**
+     * Filter REST API post query arguments to support ignore_sticky.
+     */
+    public function fb_filter_rest_post_query($args, $request)
+    {
+        $ignore_sticky = $request->get_param('ignore_sticky');
+        if (isset($ignore_sticky)) {
+            $args['ignore_sticky_posts'] = filter_var($ignore_sticky, FILTER_VALIDATE_BOOLEAN);
+        }
+        return $args;
     }
 }
