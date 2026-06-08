@@ -1,7 +1,3 @@
-/**
- * Frontis Blocks — Multi Chart Frontend Script
- * Handles Chart.js initialization and interactivity
- */
 (function ($) {
 	"use strict";
 

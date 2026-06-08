@@ -34,7 +34,6 @@ export default function save({ attributes }) {
 		yAxisTypography,
 	} = attributes;
 
-	// Prepare chart config for view.js logic
 	const chartConfig = {
 		type: chartType,
 		height: chartHeight,

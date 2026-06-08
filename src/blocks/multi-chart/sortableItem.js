@@ -155,8 +155,12 @@ export default function SortableItem({
 							/>
 
 							<FB_InputControl
-								label={__("Values (Comma separated)", "frontis-blocks")}
+								label={__("Values", "frontis-blocks")}
 								value={item.values}
+								description={__(
+									"Comma separated values for the series",
+									"frontis-blocks",
+								)}
 								onChangeValue={(val) => updateItem(id, "values", val)}
 							/>
 
