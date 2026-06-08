@@ -1,8 +1,3 @@
-/**
- * Multi Chart Block - Style Generation
- * Returns Dynamic Generated CSS
- */
-
 import getCustomCss from "@Utils/getCustomCss";
 
 const generateMultiChartStyle = (attributes) => {
@@ -80,6 +75,56 @@ const generateMultiChartStyle = (attributes) => {
 		footerMarginUnits,
 		footerTextAlignment,
 
+		multiChartBgColorSwitcher,
+		multiChartBackgroundType,
+		multiChartClassicColor,
+		multiChartGradientColor,
+		multiChartCustomGradientSwitcher,
+		multiChartCustomGradientInputValue,
+		multiChartBackgroundImageUrl,
+		multiChartBackgroundImageAlt,
+		multiChartBackgroundImageID,
+		multiChartBackgroundImagePosition,
+		multiChartBackgroundImageAttachment,
+		multiChartBackgroundImageRepeat,
+		multiChartBackgroundImageSize,
+		multiChartHoverBackgroundType,
+		multiChartHoverClassicColor,
+		multiChartHoverGradientColor,
+		multiChartHoverCustomGradientSwitcher,
+		multiChartHoverCustomGradientInputValue,
+		multiChartHoverBackgroundImageUrl,
+		multiChartHoverBackgroundImageAlt,
+		multiChartHoverBackgroundImageID,
+		multiChartHoverBackgroundImagePosition,
+		multiChartHoverBackgroundImageAttachment,
+		multiChartHoverBackgroundImageRepeat,
+		multiChartHoverBackgroundImageSize,
+
+		multiChartWrapperBorder,
+		multiChartWrapperBorderColorSwitcher,
+		multiChartWrapperBorderColor,
+		multiChartWrapperBorderHoverColor,
+		multiChartWrapperBorderTypeUnits,
+		multiChartWrapperBorderTypeDesktop,
+		multiChartWrapperBorderTypeTablet,
+		multiChartWrapperBorderTypeMobile,
+		multiChartWrapperBorderTypeLink,
+		multiChartWrapperBorderRadiusUnits,
+		multiChartWrapperBorderRadiusDesktop,
+		multiChartWrapperBorderRadiusTablet,
+		multiChartWrapperBorderRadiusMobile,
+		multiChartWrapperBorderRadiusLink,
+
+		multiChartPaddingUnits,
+		multiChartPaddingDesktop,
+		multiChartPaddingTablet,
+		multiChartPaddingMobile,
+		multiChartMarginUnits,
+		multiChartMarginDesktop,
+		multiChartMarginTablet,
+		multiChartMarginMobile,
+
 		multiChartGlobalZIndex,
 		multiChartCustomCSS,
 	} = attributes;
@@ -109,6 +154,58 @@ const generateMultiChartStyle = (attributes) => {
 	const headerPad = spacing4(chartHeaderPaddingDesktop, "px");
 	const footerPad = spacing4(footerPaddingDesktop, footerPaddingUnits?.Desktop);
 	const footerMar = spacing4(footerMarginDesktop, footerMarginUnits?.Desktop);
+
+	const wrapperPadDesktop = spacing4(
+		multiChartPaddingDesktop,
+		multiChartPaddingUnits?.Desktop ?? "px",
+	);
+	const wrapperPadTablet = spacing4(
+		multiChartPaddingTablet,
+		multiChartPaddingUnits?.Tablet ?? "px",
+	);
+	const wrapperPadMobile = spacing4(
+		multiChartPaddingMobile,
+		multiChartPaddingUnits?.Mobile ?? "px",
+	);
+
+	const wrapperMarDesktop = spacing4(
+		multiChartMarginDesktop,
+		multiChartMarginUnits?.Desktop ?? "px",
+	);
+	const wrapperMarTablet = spacing4(
+		multiChartMarginTablet,
+		multiChartMarginUnits?.Tablet ?? "px",
+	);
+	const wrapperMarMobile = spacing4(
+		multiChartMarginMobile,
+		multiChartMarginUnits?.Mobile ?? "px",
+	);
+
+	const wrapperBrDesktop = spacing4(
+		multiChartWrapperBorderRadiusDesktop,
+		multiChartWrapperBorderRadiusUnits?.Desktop ?? "px",
+	);
+	const wrapperBrTablet = spacing4(
+		multiChartWrapperBorderRadiusTablet,
+		multiChartWrapperBorderRadiusUnits?.Tablet ?? "px",
+	);
+	const wrapperBrMobile = spacing4(
+		multiChartWrapperBorderRadiusMobile,
+		multiChartWrapperBorderRadiusUnits?.Mobile ?? "px",
+	);
+
+	const wrapperBorderDesktop = spacing4(
+		multiChartWrapperBorderTypeDesktop,
+		multiChartWrapperBorderTypeUnits?.Desktop ?? "px",
+	);
+	const wrapperBorderTablet = spacing4(
+		multiChartWrapperBorderTypeTablet,
+		multiChartWrapperBorderTypeUnits?.Tablet ?? "px",
+	);
+	const wrapperBorderMobile = spacing4(
+		multiChartWrapperBorderTypeMobile,
+		multiChartWrapperBorderTypeUnits?.Mobile ?? "px",
+	);
 
 	const btnPad = spacing4(toggleBtnPaddingDesktop, "px");
 	const btnBR = spacing4(toggleBtnBorderRadiusDesktop, "px");
@@ -162,12 +259,71 @@ const generateMultiChartStyle = (attributes) => {
 
 	const blockStyle = `
 		.${blockID}.fb-elegant-chart-block {
+			${multiChartWrapperBorder ? `border-style: ${multiChartWrapperBorder};` : ""}
+			${
+				multiChartWrapperBorderColor
+					? `border-color: ${multiChartWrapperBorderColor};`
+					: ""
+			}
+			${wrapperBorderDesktop ? `border-width: ${wrapperBorderDesktop};` : ""}
+			${wrapperBrDesktop ? `border-radius: ${wrapperBrDesktop};` : ""}
+			${wrapperPadDesktop ? `padding: ${wrapperPadDesktop};` : ""}
+			${wrapperMarDesktop ? `margin: ${wrapperMarDesktop};` : ""}
+
+			${
+				multiChartBackgroundType === "gradient"
+					? multiChartCustomGradientSwitcher &&
+					  multiChartCustomGradientInputValue
+						? `background: ${multiChartCustomGradientInputValue};`
+						: multiChartGradientColor
+						? `background: ${multiChartGradientColor};`
+						: `background: ${multiChartClassicColor};`
+					: multiChartBackgroundImageUrl
+					? `
+						background-image: url(${multiChartBackgroundImageUrl});
+						background-position: ${multiChartBackgroundImagePosition};
+						background-attachment: ${multiChartBackgroundImageAttachment};
+						background-repeat: ${multiChartBackgroundImageRepeat};
+						background-size: ${multiChartBackgroundImageSize};
+					`
+					: multiChartClassicColor
+					? `background-color: ${multiChartClassicColor};`
+					: ""
+			}
 			${
 				multiChartGlobalZIndex?.Desktop
 					? `z-index: ${multiChartGlobalZIndex.Desktop};`
 					: ""
 			}
+			transition: all .3s ease-in-out;
 		}
+
+		.${blockID}.fb-elegant-chart-block:hover {
+			${
+				multiChartWrapperBorderHoverColor
+					? `border-color: ${multiChartWrapperBorderHoverColor};`
+					: ""
+			}
+			${
+				multiChartHoverBackgroundType === "gradient"
+					? multiChartHoverCustomGradientSwitcher &&
+					  multiChartHoverCustomGradientInputValue
+						? `background: ${multiChartHoverCustomGradientInputValue};`
+						: multiChartHoverGradientColor
+						? `background: ${multiChartHoverGradientColor};`
+						: `background: ${multiChartHoverClassicColor};`
+					: multiChartHoverBackgroundImageUrl
+					? `background-image: url(${multiChartHoverBackgroundImageUrl});
+					   background-position: ${multiChartHoverBackgroundImagePosition};
+					   background-attachment: ${multiChartHoverBackgroundImageAttachment};
+					   background-repeat: ${multiChartHoverBackgroundImageRepeat};
+					   background-size: ${multiChartHoverBackgroundImageSize};`
+					: multiChartHoverClassicColor
+					? `background-color: ${multiChartHoverClassicColor};`
+					: ""
+			}
+		}
+
 		.${blockID} .fb-chart-card {
 			${
 				canvasWidth?.Desktop
@@ -234,7 +390,6 @@ const generateMultiChartStyle = (attributes) => {
 		.${blockID} .fb-chart-card-body:hover {
 			${bodyBgHover}
 		}
-		/* Legend Styles */
 		.${blockID} .fb-chart-legend {
 			display: flex;
 			flex-wrap: wrap;
@@ -282,6 +437,12 @@ const generateMultiChartStyle = (attributes) => {
 		}
 		/* Responsive Media Queries */
 		@media only screen and (max-width: 1024px) {
+			.${blockID}.fb-elegant-chart-block {
+				${wrapperBorderTablet ? `border-width: ${wrapperBorderTablet};` : ""}
+				${wrapperBrTablet ? `border-radius: ${wrapperBrTablet};` : ""}
+				${wrapperPadTablet ? `padding: ${wrapperPadTablet};` : ""}
+				${wrapperMarTablet ? `margin: ${wrapperMarTablet};` : ""}
+			}
 			.${blockID} .fb-chart-card {
 				${
 					canvasWidth?.Tablet
@@ -335,6 +496,12 @@ const generateMultiChartStyle = (attributes) => {
 		}
 
 		@media only screen and (max-width: 767px) {
+			.${blockID}.fb-elegant-chart-block {
+				${wrapperBorderMobile ? `border-width: ${wrapperBorderMobile};` : ""}
+				${wrapperBrMobile ? `border-radius: ${wrapperBrMobile};` : ""}
+				${wrapperPadMobile ? `padding: ${wrapperPadMobile};` : ""}
+				${wrapperMarMobile ? `margin: ${wrapperMarMobile};` : ""}
+			}
 			.${blockID} .fb-chart-card {
 				${
 					canvasWidth?.Mobile

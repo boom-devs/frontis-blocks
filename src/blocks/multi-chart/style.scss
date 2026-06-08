@@ -1,6 +1,6 @@
-/* =============================================================
-   Frontis Blocks — Multi Chart Block Styles
-   ============================================================= */
+/* ==========
+   Multi Chart Block Styles
+   ======== */
 
 .fb-elegant-chart-block {
 	width: 100%;
@@ -34,7 +34,7 @@
 		padding: 8px 18px;
 		background: #fff;
 		border: 1px solid #e2e8f0;
-		border-radius: 999px; // Pill shape
+		border-radius: 999px;
 		cursor: pointer;
 		z-index: 20;
 
@@ -47,7 +47,7 @@
 			border-radius: 12px;
 			box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
 			list-style: none;
-			padding: 8px 0; // Padding for list items
+			padding: 8px 0;
 			margin: 0;
 			min-width: 150px;
 		}
@@ -60,7 +60,7 @@
 			padding: 10px 16px;
 			font-size: 14px;
 			color: #64748b;
-			transition: all 0.2s; // Smooth hover transition
+			transition: all 0.2s;
 
 			&:hover {
 				background: #f8fafc;
@@ -76,7 +76,7 @@
 
 	.fb-canvas-wrapper {
 		position: relative;
-		width: 100%; // Full width
+		width: 100%;
 	}
 
 	/* Legend Styles */
@@ -110,7 +110,7 @@
 	.fb-chart-footer {
 		margin-top: 20px;
 		.fb-footer-title {
-			margin: 0 0 5px; // Spacing below title
+			margin: 0 0 5px;
 		}
 		.fb-chart-description {
 			color: #64748b;

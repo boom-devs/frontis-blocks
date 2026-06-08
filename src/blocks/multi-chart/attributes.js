@@ -6,7 +6,6 @@ const pluginURL =
 		: "";
 
 const attributes = {
-	// Standard Frontis Attributes
 	blockID: {
 		type: "string",
 		default: "",
@@ -20,9 +19,6 @@ const attributes = {
 		default: "Desktop",
 	},
 
-	/* =============================================
-       CONTENT: Chart Type & Settings
-    ============================================= */
 	chartType: {
 		type: "string",
 		default: "line",
@@ -45,9 +41,6 @@ const attributes = {
 		default: 280,
 	},
 
-	/* =============================================
-       CONTENT: Filter Dropdown & Series Data
-    ============================================= */
 	filterList: {
 		type: "array",
 		default: [
@@ -91,9 +84,6 @@ const attributes = {
 		default: "Jan,Feb,Mar,Apr,May,Jun,Jul",
 	},
 
-	/* =============================================
-       STYLE: Chart Container (Canvas)
-    ============================================= */
 	canvasWidth: {
 		type: "object",
 		default: { Desktop: "100", Tablet: "100", Mobile: "100" },
@@ -110,10 +100,7 @@ const attributes = {
 		type: "object",
 		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
 	},
-
-	// Container Background / Border / Spacing
 	canvasNormalColor: {
-		// Normal Classic Color
 		type: "string",
 		default: "#EBF5FF",
 	},
@@ -250,9 +237,6 @@ const attributes = {
 		default: true,
 	},
 
-	/* =============================================
-       STYLE: Chart Body
-    ============================================= */
 	chartBodyWidth: {
 		type: "object",
 		default: { Desktop: "100", Tablet: "100", Mobile: "100" },
@@ -354,9 +338,6 @@ const attributes = {
 		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
 	},
 
-	/* =============================================
-       STYLE: Chart Title & Header
-    ============================================= */
 	chartTitleColor: {
 		type: "string",
 		default: "#0f172a",
@@ -382,9 +363,6 @@ const attributes = {
 		default: false,
 	},
 
-	/* =============================================
-       STYLE: Toggle Button & Icon
-    ============================================= */
 	toggleBtnColor: {
 		type: "string",
 		default: "#0f172a",
@@ -434,9 +412,6 @@ const attributes = {
 		default: "",
 	},
 
-	/* =============================================
-       STYLE: Legend & Footer Missing Attributes
-    ============================================= */
 	legendItemPaddingUnits: {
 		type: "object",
 		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
@@ -506,9 +481,6 @@ const attributes = {
 		default: { top: "", bottom: "", left: "", right: "" },
 	},
 
-	/* =============================================
-       STYLE: X/Y Axis Granular
-    ============================================= */
 	xAxisTypography: {
 		type: "object",
 		default: {
@@ -531,9 +503,6 @@ const attributes = {
 		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
 	},
 
-	/* =============================================
-       STYLE: Axis, Grid & Tooltip
-    ============================================= */
 	showGrid: {
 		type: "boolean",
 		default: true,
@@ -547,7 +516,6 @@ const attributes = {
 		default: { Desktop: "1", Tablet: "", Mobile: "" },
 	},
 
-	// X-Axis Normal
 	xAxisNormalColor: {
 		type: "string",
 		default: "#94a3b8",
@@ -565,7 +533,6 @@ const attributes = {
 		default: "",
 	},
 
-	// Y-Axis Normal
 	yAxisNormalColor: {
 		type: "string",
 		default: "#94a3b8",
@@ -583,7 +550,6 @@ const attributes = {
 		default: "",
 	},
 
-	// Tooltip
 	tooltipBg: {
 		type: "string",
 		default: "#1e293b",
@@ -593,9 +559,6 @@ const attributes = {
 		default: "#ffffff",
 	},
 
-	/* =============================================
-       STYLE: Legend
-    ============================================= */
 	legendTextAlignment: {
 		type: "object",
 		default: { Desktop: "center", Tablet: "", Mobile: "" },
@@ -617,9 +580,6 @@ const attributes = {
 		default: "",
 	},
 
-	/* =============================================
-       STYLE: Chart Footer Text
-    ============================================= */
 	footerTextAlignment: {
 		type: "object",
 		default: {
@@ -653,9 +613,6 @@ const attributes = {
 		default: false,
 	},
 
-	/* =============================================
-       ADVANCED: Layout & Responsive
-    ============================================= */
 	multiChartGlobalZIndex: {
 		type: "object",
 		default: { Desktop: "", Tablet: "", Mobile: "" },
@@ -683,6 +640,200 @@ const attributes = {
 	multiChartMobileSwitcher: {
 		type: "boolean",
 		default: false,
+	},
+
+	multiChartBgColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	multiChartBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	multiChartClassicColor: {
+		type: "string",
+		default: "",
+	},
+	multiChartGradientColor: {
+		type: "string",
+	},
+	multiChartCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	multiChartCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+	multiChartBackgroundImageUrl: {
+		type: "string",
+		default: "",
+	},
+	multiChartBackgroundImageAlt: {
+		type: "string",
+		default: "",
+	},
+	multiChartBackgroundImageID: {
+		type: "string",
+		default: "",
+	},
+	multiChartBackgroundImagePosition: {
+		type: "string",
+		default: "",
+	},
+	multiChartBackgroundImageAttachment: {
+		type: "string",
+		default: "",
+	},
+	multiChartBackgroundImageSize: {
+		type: "string",
+		default: "",
+	},
+	multiChartBackgroundImageRepeat: {
+		type: "string",
+		default: "",
+	},
+	multiChartHoverBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	multiChartHoverClassicColor: {
+		type: "string",
+	},
+	multiChartHoverGradientColor: {
+		type: "string",
+	},
+	multiChartHoverCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	multiChartHoverCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+	multiChartHoverBackgroundImageUrl: {
+		type: "string",
+		default: "",
+	},
+	multiChartHoverBackgroundImageAlt: {
+		type: "string",
+		default: "",
+	},
+	multiChartHoverBackgroundImageID: {
+		type: "string",
+		default: "",
+	},
+	multiChartHoverBackgroundImagePosition: {
+		type: "string",
+		default: "",
+	},
+	multiChartHoverBackgroundImageAttachment: {
+		type: "string",
+		default: "",
+	},
+	multiChartHoverBackgroundImageSize: {
+		type: "string",
+		default: "",
+	},
+	multiChartHoverBackgroundImageRepeat: {
+		type: "string",
+		default: "",
+	},
+	multiChartWrapperBorder: {
+		type: "string",
+		default: "none",
+	},
+	multiChartWrapperBorderColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	multiChartWrapperBorderColor: {
+		type: "string",
+		default: "",
+	},
+	multiChartWrapperBorderHoverColor: {
+		type: "string",
+	},
+	multiChartWrapperBorderTypeUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+	multiChartWrapperBorderTypeDesktop: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	multiChartWrapperBorderTypeTablet: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	multiChartWrapperBorderTypeMobile: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	multiChartWrapperBorderTypeLink: {
+		type: "boolean",
+		default: true,
+	},
+	multiChartWrapperBorderRadiusUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+	multiChartWrapperBorderRadiusDesktop: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	multiChartWrapperBorderRadiusTablet: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	multiChartWrapperBorderRadiusMobile: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	multiChartWrapperBorderRadiusLink: {
+		type: "boolean",
+		default: true,
+	},
+
+	multiChartPaddingUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+	multiChartPaddingDesktop: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	multiChartPaddingTablet: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	multiChartPaddingMobile: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	multiChartPaddingLink: {
+		type: "boolean",
+		default: true,
+	},
+	multiChartMarginUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+	multiChartMarginDesktop: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	multiChartMarginTablet: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	multiChartMarginMobile: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	multiChartMarginLink: {
+		type: "boolean",
+		default: true,
 	},
 };
 

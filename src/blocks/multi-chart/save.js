@@ -19,6 +19,10 @@ export default function save({ attributes }) {
 		gridColor,
 		xAxisNormalColor,
 		yAxisNormalColor,
+		showChartHeader,
+		showChartFilters,
+		showChartLegend,
+		showChartFooter,
 		tooltipBg,
 		tooltipColor,
 		multiChartDesktopSwitcher,
@@ -83,35 +87,38 @@ export default function save({ attributes }) {
 			<div {...blockProps}>
 				<div className={`fb-chart-card ${multiChartWrapperClass}`}>
 					<div className="fb-chart-body-wrapper">
-						<div className="fb-chart-header">
-							<div className="fb-chart-title-group">
-								<p className="fb-chart-label">{dynamicTitle}</p>
+						{showChartHeader && (
+							<div className="fb-chart-header">
+								<div className="fb-chart-title-group">
+									<p className="fb-chart-label">{dynamicTitle}</p>
+								</div>
+								{showChartFilters && (
+									<div className="fb-chart-period fb-chart-filter">
+										<span className="fb-current-filter">
+											{filterList[0]?.filter_label ||
+												__("This Week", "frontis-blocks")}
+										</span>
+										<span className="fb-filter-icon">
+											{renderSVG(filterIcon?.value || "fas fa-chevron-down")}
+										</span>
+										<ul className="fb-dropdown-list">
+											{filterList &&
+												filterList.map((item, index) => (
+													<li
+														key={index}
+														className={`fb-dropdown-item ${
+															0 === index ? "fb-item-active" : ""
+														}`}
+														data-index={index}
+													>
+														{item.filter_label || __("Item", "frontis-blocks")}
+													</li>
+												))}
+										</ul>
+									</div>
+								)}
 							</div>
-
-							<div className="fb-chart-period fb-chart-filter">
-								<span className="fb-current-filter">
-									{filterList[0]?.filter_label ||
-										__("This Week", "frontis-blocks")}
-								</span>
-								<span className="fb-filter-icon">
-									{renderSVG(filterIcon?.value || "fas fa-chevron-down")}
-								</span>
-								<ul className="fb-dropdown-list">
-									{filterList &&
-										filterList.map((item, index) => (
-											<li
-												key={index}
-												className={`fb-dropdown-item ${
-													0 === index ? "fb-item-active" : ""
-												}`}
-												data-index={index}
-											>
-												{item.filter_label || __("Item", "frontis-blocks")}
-											</li>
-										))}
-								</ul>
-							</div>
-						</div>
+						)}
 
 						<div className="fb-chart-card-body">
 							<div
@@ -120,16 +127,18 @@ export default function save({ attributes }) {
 							>
 								<canvas></canvas>
 							</div>
-							<div className="fb-chart-legend"></div>
+							{showChartLegend && <div className="fb-chart-legend"></div>}
 						</div>
 					</div>
 
-					<div className="fb-chart-footer">
-						<h2 className="fb-footer-title">{dynamicTitle}</h2>
-						{chartDescription && (
-							<p className="fb-chart-description">{chartDescription}</p>
-						)}
-					</div>
+					{showChartFooter && (
+						<div className="fb-chart-footer">
+							<h2 className="fb-footer-title">{dynamicTitle}</h2>
+							{chartDescription && (
+								<p className="fb-chart-description">{chartDescription}</p>
+							)}
+						</div>
+					)}
 				</div>
 			</div>
 			{blockStyle && <style>{blockStyle}</style>}

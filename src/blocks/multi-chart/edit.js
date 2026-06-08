@@ -27,6 +27,15 @@ export default function Edit({
 		filterIcon,
 		chartDatasets,
 		chartLabels,
+		showGrid,
+		gridColor,
+		xAxisNormalColor,
+		yAxisNormalColor,
+		tooltipBg,
+		showChartHeader,
+		showChartFilters,
+		showChartLegend,
+		showChartFooter,
 		multiChartDesktopSwitcher,
 		multiChartTabletSwitcher,
 		multiChartMobileSwitcher,
@@ -34,13 +43,10 @@ export default function Edit({
 		multiChartWrapperClass,
 	} = attributes;
 
-	// State to toggle filter dropdown in editor
 	const [isFilterOpen, setIsFilterOpen] = useState(false);
-
 	const canvasRef = useRef(null);
 	const chartInstance = useRef(null);
 
-	// Handle block ID generation
 	useBlockIdGenerator({
 		clientId,
 		blockID,
@@ -50,7 +56,6 @@ export default function Edit({
 		setAttributes,
 	});
 
-	// Generate block style
 	useEffect(() => {
 		if (blockID) {
 			const css = generateMultiChartStyle(attributes);
@@ -58,13 +63,10 @@ export default function Edit({
 		}
 	}, [attributes, blockID]);
 
-	// Render Chart in Editor using Chart.js
 	useEffect(() => {
 		if (!canvasRef.current) return;
-
 		const ctx = canvasRef.current.getContext("2d");
 
-		// Destroy previous instance to avoid overlapping
 		if (chartInstance.current) {
 			chartInstance.current.destroy();
 		}
@@ -76,7 +78,6 @@ export default function Edit({
 			const isArea = chartType === "areaChart";
 			const baseColor = ds.color || "#3b82f6";
 
-			// Helper for transparent colors in area/radar charts
 			const hexToRgba = (hex, opacity) => {
 				const r = parseInt(hex.slice(1, 3), 16);
 				const g = parseInt(hex.slice(3, 5), 16);
@@ -195,39 +196,42 @@ export default function Edit({
 			<div {...blockProps}>
 				<div className={`fb-chart-card ${multiChartWrapperClass}`}>
 					<div className="fb-chart-body-wrapper">
-						<div className="fb-chart-header">
-							<div className="fb-chart-title-group">
-								<p className="fb-chart-label">{dynamicTitle}</p>
+						{showChartHeader && (
+							<div className="fb-chart-header">
+								<div className="fb-chart-title-group">
+									<p className="fb-chart-label">{dynamicTitle}</p>
+								</div>
+								{showChartFilters && (
+									<div
+										className={`fb-chart-period fb-chart-filter ${
+											isFilterOpen ? "fb-active" : ""
+										}`}
+										onClick={() => setIsFilterOpen(!isFilterOpen)}
+									>
+										<span className="fb-current-filter">
+											{filterList[0]?.filter_label ||
+												__("This Week", "frontis-blocks")}
+										</span>
+										<span className="fb-filter-icon">
+											{renderSVG(filterIcon?.value || "fas fa-chevron-down")}
+										</span>
+										<ul className="fb-dropdown-list">
+											{filterList &&
+												filterList.map((item, index) => (
+													<li
+														key={index}
+														className={`fb-dropdown-item ${
+															0 === index ? "fb-item-active" : ""
+														}`}
+													>
+														{item.filter_label || __("Item", "frontis-blocks")}
+													</li>
+												))}
+										</ul>
+									</div>
+								)}
 							</div>
-
-							<div
-								className={`fb-chart-period fb-chart-filter ${
-									isFilterOpen ? "fb-active" : ""
-								}`}
-								onClick={() => setIsFilterOpen(!isFilterOpen)}
-							>
-								<span className="fb-current-filter">
-									{filterList[0]?.filter_label ||
-										__("This Week", "frontis-blocks")}
-								</span>
-								<span className="fb-filter-icon">
-									{renderSVG(filterIcon?.value || "fas fa-chevron-down")}
-								</span>
-								<ul className="fb-dropdown-list">
-									{filterList &&
-										filterList.map((item, index) => (
-											<li
-												key={index}
-												className={`fb-dropdown-item ${
-													0 === index ? "fb-item-active" : ""
-												}`}
-											>
-												{item.filter_label || __("Item", "frontis-blocks")}
-											</li>
-										))}
-								</ul>
-							</div>
-						</div>
+						)}
 
 						<div className="fb-chart-card-body">
 							<div
@@ -241,16 +245,18 @@ export default function Edit({
 								)}
 								<canvas ref={canvasRef}></canvas>
 							</div>
-							<div className="fb-chart-legend"></div>
+							{showChartLegend && <div className="fb-chart-legend"></div>}
 						</div>
 					</div>
 
-					<div className="fb-chart-footer">
-						<h2 className="fb-footer-title">{dynamicTitle}</h2>
-						{chartDescription && (
-							<p className="fb-chart-description">{chartDescription}</p>
-						)}
-					</div>
+					{showChartFooter && (
+						<div className="fb-chart-footer">
+							<h2 className="fb-footer-title">{dynamicTitle}</h2>
+							{chartDescription && (
+								<p className="fb-chart-description">{chartDescription}</p>
+							)}
+						</div>
+					)}
 				</div>
 			</div>
 

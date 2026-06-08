@@ -5,6 +5,7 @@ import {
 	ToggleControl,
 	Button,
 } from "@wordpress/components";
+import { Fragment } from "@wordpress/element";
 import { DndContext, closestCenter } from "@dnd-kit/core";
 import { SortableContext, arrayMove } from "@dnd-kit/sortable";
 import { memo, useState } from "@wordpress/element";
@@ -23,6 +24,7 @@ import FB_ResponsiveAlignmentControl from "@Components/responsive-alignment-cont
 import FB_TypographyControl from "@Components/typography-control";
 import FB_SwitcherControl from "@Components/switcher-control";
 import SortableItem from "./sortableItem";
+import { BORDER_STYLES } from "@Constants/fbConstants";
 
 const Inspector = ({ attributes, setAttributes }) => {
 	const {
@@ -100,6 +102,10 @@ const Inspector = ({ attributes, setAttributes }) => {
 		filterIconColor,
 		filterIconHoverColor,
 
+		showChartHeader,
+		showChartFilters,
+		showChartLegend,
+		showChartFooter,
 		showGrid,
 		gridColor,
 		gridLineWidth,
@@ -127,6 +133,58 @@ const Inspector = ({ attributes, setAttributes }) => {
 		footerDescHoverColor,
 		footerPaddingDesktop,
 		footerPaddingLink,
+
+		multiChartBgColorSwitcher,
+		multiChartBackgroundType,
+		multiChartClassicColor,
+		multiChartGradientColor,
+		multiChartCustomGradientSwitcher,
+		multiChartCustomGradientInputValue,
+		multiChartBackgroundImageUrl,
+		multiChartBackgroundImageAlt,
+		multiChartBackgroundImageID,
+		multiChartBackgroundImagePosition,
+		multiChartBackgroundImageAttachment,
+		multiChartBackgroundImageRepeat,
+		multiChartBackgroundImageSize,
+		multiChartHoverBackgroundType,
+		multiChartHoverClassicColor,
+		multiChartHoverGradientColor,
+		multiChartHoverCustomGradientSwitcher,
+		multiChartHoverCustomGradientInputValue,
+		multiChartHoverBackgroundImageUrl,
+		multiChartHoverBackgroundImageAlt,
+		multiChartHoverBackgroundImageID,
+		multiChartHoverBackgroundImagePosition,
+		multiChartHoverBackgroundImageAttachment,
+		multiChartHoverBackgroundImageRepeat,
+		multiChartHoverBackgroundImageSize,
+
+		multiChartWrapperBorder,
+		multiChartWrapperBorderColorSwitcher,
+		multiChartWrapperBorderColor,
+		multiChartWrapperBorderHoverColor,
+		multiChartWrapperBorderTypeUnits,
+		multiChartWrapperBorderTypeDesktop,
+		multiChartWrapperBorderTypeTablet,
+		multiChartWrapperBorderTypeMobile,
+		multiChartWrapperBorderTypeLink,
+		multiChartWrapperBorderRadiusUnits,
+		multiChartWrapperBorderRadiusDesktop,
+		multiChartWrapperBorderRadiusTablet,
+		multiChartWrapperBorderRadiusMobile,
+		multiChartWrapperBorderRadiusLink,
+
+		multiChartPaddingUnits,
+		multiChartPaddingDesktop,
+		multiChartPaddingTablet,
+		multiChartPaddingMobile,
+		multiChartPaddingLink,
+		multiChartMarginUnits,
+		multiChartMarginDesktop,
+		multiChartMarginTablet,
+		multiChartMarginMobile,
+		multiChartMarginLink,
 
 		multiChartGlobalZIndex,
 		multiChartCustomCSS,
@@ -162,6 +220,74 @@ const Inspector = ({ attributes, setAttributes }) => {
 	const deviceType = useDeviceType();
 	const [footerTab, setFooterTab] = useState("normal");
 	const [axisTab, setAxisTab] = useState("normal");
+
+	const wrapperBorderTypeChange = (event, position) => {
+		const value = event.target.value;
+		if (multiChartWrapperBorderTypeLink) {
+			const val = { top: value, right: value, bottom: value, left: value };
+			if (deviceType === "Desktop")
+				setAttributes({ multiChartWrapperBorderTypeDesktop: val });
+			else if (deviceType === "Tablet")
+				setAttributes({ multiChartWrapperBorderTypeTablet: val });
+			else setAttributes({ multiChartWrapperBorderTypeMobile: val });
+		} else {
+			if (deviceType === "Desktop")
+				setAttributes({
+					multiChartWrapperBorderTypeDesktop: {
+						...multiChartWrapperBorderTypeDesktop,
+						[position]: value,
+					},
+				});
+			else if (deviceType === "Tablet")
+				setAttributes({
+					multiChartWrapperBorderTypeTablet: {
+						...multiChartWrapperBorderTypeTablet,
+						[position]: value,
+					},
+				});
+			else
+				setAttributes({
+					multiChartWrapperBorderTypeMobile: {
+						...multiChartWrapperBorderTypeMobile,
+						[position]: value,
+					},
+				});
+		}
+	};
+
+	const wrapperBorderRadiusChange = (event, position) => {
+		const value = event.target.value;
+		if (multiChartWrapperBorderRadiusLink) {
+			const val = { top: value, right: value, bottom: value, left: value };
+			if (deviceType === "Desktop")
+				setAttributes({ multiChartWrapperBorderRadiusDesktop: val });
+			else if (deviceType === "Tablet")
+				setAttributes({ multiChartWrapperBorderRadiusTablet: val });
+			else setAttributes({ multiChartWrapperBorderRadiusMobile: val });
+		} else {
+			if (deviceType === "Desktop")
+				setAttributes({
+					multiChartWrapperBorderRadiusDesktop: {
+						...multiChartWrapperBorderRadiusDesktop,
+						[position]: value,
+					},
+				});
+			else if (deviceType === "Tablet")
+				setAttributes({
+					multiChartWrapperBorderRadiusTablet: {
+						...multiChartWrapperBorderRadiusTablet,
+						[position]: value,
+					},
+				});
+			else
+				setAttributes({
+					multiChartWrapperBorderRadiusMobile: {
+						...multiChartWrapperBorderRadiusMobile,
+						[position]: value,
+					},
+				});
+		}
+	};
 
 	/* =============================================
        REPEATER HANDLERS
@@ -329,6 +455,28 @@ const Inspector = ({ attributes, setAttributes }) => {
 					setAttributes={setAttributes}
 					isRangeUnit={false}
 					resetFallbackValue={280}
+				/>
+				<ToggleControl
+					label={__("Show Header", "frontis-blocks")}
+					checked={showChartHeader}
+					onChange={(v) => setAttributes({ showChartHeader: v })}
+				/>
+				{showChartHeader && (
+					<ToggleControl
+						label={__("Show Filters", "frontis-blocks")}
+						checked={showChartFilters}
+						onChange={(v) => setAttributes({ showChartFilters: v })}
+					/>
+				)}
+				<ToggleControl
+					label={__("Show Legend", "frontis-blocks")}
+					checked={showChartLegend}
+					onChange={(v) => setAttributes({ showChartLegend: v })}
+				/>
+				<ToggleControl
+					label={__("Show Footer", "frontis-blocks")}
+					checked={showChartFooter}
+					onChange={(v) => setAttributes({ showChartFooter: v })}
 				/>
 			</PanelBody>
 
