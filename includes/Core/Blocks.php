@@ -70,6 +70,16 @@ class Blocks
 		$sc_license_id = is_array($license_options) && !empty($license_options['sc_license_id']) ? (string) $license_options['sc_license_id'] : '';
 		$sc_license_key = is_array($license_options) && !empty($license_options['sc_license_key']) ? (string) $license_options['sc_license_key'] : '';
 
+		// Check cached license status (from transients)
+		$cache_key = 'fb_sc_license_' . md5($sc_license_id . $sc_license_key);
+		$cached_status = get_transient($cache_key);
+		if ($cached_status !== false) {
+			$is_license_active = ($cached_status === 'active');
+		} else {
+			// Fallback: if keys are present and the Pro plugin exists, assume active until checked
+			$is_license_active = (class_exists('FrontisBlocks\\Pro\\Plugin') && !empty($sc_license_key) && !empty($sc_license_id));
+		}
+
 		// Pre-load admin data once (these are now cached via transients)
 		$admin_localize_array = [];
 		if (is_admin()) {
@@ -88,8 +98,7 @@ class Blocks
 				'tablet_breakpoint' => $tablet_breakpoint,
 				'mobile_breakpoint' => $mobile_breakpoint,
 				'global_typography' => get_option('fb_globaltypo'),
-				'sc_license_id' => $sc_license_id,
-				'sc_license_key' => $sc_license_key,
+				'is_license_active' => $is_license_active,
 			];
 		}
 
