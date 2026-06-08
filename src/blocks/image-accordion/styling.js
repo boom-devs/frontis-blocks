@@ -53,6 +53,12 @@ const generateImageAccordionStyle = (attributes) => {
 		imageAccordionTitleFontSize,
 		imageAccordionTitleFontSizeUnits,
 		imageAccordionTitleFontWeight,
+		imageAccordionTitleFontFamily,
+		imageAccordionTitleFontStyle,
+		imageAccordionTitleTransform,
+		imageAccordionTitleDecoration,
+		imageAccordionTitleLetterSpacing,
+		imageAccordionTitleLetterSpacingUnits,
 		imageAccordionTitleLineHeight,
 		imageAccordionTitleLineHeightUnits,
 
@@ -61,6 +67,12 @@ const generateImageAccordionStyle = (attributes) => {
 		imageAccordionSubtitleFontSize,
 		imageAccordionSubtitleFontSizeUnits,
 		imageAccordionSubtitleFontWeight,
+		imageAccordionSubtitleFontFamily,
+		imageAccordionSubtitleFontStyle,
+		imageAccordionSubtitleTransform,
+		imageAccordionSubtitleDecoration,
+		imageAccordionSubtitleLetterSpacing,
+		imageAccordionSubtitleLetterSpacingUnits,
 
 		imageAccordionBtnTextColor,
 		imageAccordionBtnHoverTextColor,
@@ -75,6 +87,12 @@ const generateImageAccordionStyle = (attributes) => {
 		imageAccordionBtnFontSize,
 		imageAccordionBtnFontSizeUnits,
 		imageAccordionBtnFontWeight,
+		imageAccordionBtnFontFamily,
+		imageAccordionBtnFontStyle,
+		imageAccordionBtnTransform,
+		imageAccordionBtnDecoration,
+		imageAccordionBtnLetterSpacing,
+		imageAccordionBtnLetterSpacingUnits,
 
 		imageAccordionPaddingUnits,
 		imageAccordionPaddingDesktop,
@@ -85,6 +103,47 @@ const generateImageAccordionStyle = (attributes) => {
 		imageAccordionMarginDesktop,
 		imageAccordionMarginTablet,
 		imageAccordionMarginMobile,
+
+		imageAccordionBgColorSwitcher,
+		imageAccordionBackgroundType,
+		imageAccordionClassicColor,
+		imageAccordionGradientColor,
+		imageAccordionCustomGradientSwitcher,
+		imageAccordionCustomGradientInputValue,
+		imageAccordionBackgroundImageUrl,
+		imageAccordionBackgroundImageAlt,
+		imageAccordionBackgroundImageID,
+		imageAccordionBackgroundImagePosition,
+		imageAccordionBackgroundImageAttachment,
+		imageAccordionBackgroundImageRepeat,
+		imageAccordionBackgroundImageSize,
+		imageAccordionHoverBackgroundType,
+		imageAccordionHoverClassicColor,
+		imageAccordionHoverGradientColor,
+		imageAccordionHoverCustomGradientSwitcher,
+		imageAccordionHoverCustomGradientInputValue,
+		imageAccordionHoverBackgroundImageUrl,
+		imageAccordionHoverBackgroundImageAlt,
+		imageAccordionHoverBackgroundImageID,
+		imageAccordionHoverBackgroundImagePosition,
+		imageAccordionHoverBackgroundImageAttachment,
+		imageAccordionHoverBackgroundImageRepeat,
+		imageAccordionHoverBackgroundImageSize,
+
+		imageAccordionWrapperBorder,
+		imageAccordionWrapperBorderColorSwitcher,
+		imageAccordionWrapperBorderColor,
+		imageAccordionWrapperBorderHoverColor,
+		imageAccordionWrapperBorderTypeUnits,
+		imageAccordionWrapperBorderTypeDesktop,
+		imageAccordionWrapperBorderTypeTablet,
+		imageAccordionWrapperBorderTypeMobile,
+		imageAccordionWrapperBorderTypeLink,
+		imageAccordionWrapperBorderRadiusUnits,
+		imageAccordionWrapperBorderRadiusDesktop,
+		imageAccordionWrapperBorderRadiusTablet,
+		imageAccordionWrapperBorderRadiusMobile,
+		imageAccordionWrapperBorderRadiusLink,
 
 		imageAccordionGlobalZIndex,
 		imageAccordionCustomCSS,
@@ -150,6 +209,32 @@ const generateImageAccordionStyle = (attributes) => {
 		imageAccordionMarginUnits?.Mobile ?? "px",
 	);
 
+	const wrapperBrDesktop = spacing4(
+		imageAccordionWrapperBorderRadiusDesktop,
+		imageAccordionWrapperBorderRadiusUnits?.Desktop ?? "px",
+	);
+	const wrapperBrTablet = spacing4(
+		imageAccordionWrapperBorderRadiusTablet,
+		imageAccordionWrapperBorderRadiusUnits?.Tablet ?? "px",
+	);
+	const wrapperBrMobile = spacing4(
+		imageAccordionWrapperBorderRadiusMobile,
+		imageAccordionWrapperBorderRadiusUnits?.Mobile ?? "px",
+	);
+
+	const wrapperBorderDesktop = spacing4(
+		imageAccordionWrapperBorderTypeDesktop,
+		imageAccordionWrapperBorderTypeUnits?.Desktop ?? "px",
+	);
+	const wrapperBorderTablet = spacing4(
+		imageAccordionWrapperBorderTypeTablet,
+		imageAccordionWrapperBorderTypeUnits?.Tablet ?? "px",
+	);
+	const wrapperBorderMobile = spacing4(
+		imageAccordionWrapperBorderTypeMobile,
+		imageAccordionWrapperBorderTypeUnits?.Mobile ?? "px",
+	);
+
 	const btnBrDesktop = spacing4(
 		imageAccordionBtnBorderRadiusDesktop,
 		imageAccordionBtnBorderRadiusUnits?.Desktop ?? "px",
@@ -160,6 +245,70 @@ const generateImageAccordionStyle = (attributes) => {
 	);
 
 	const blockStyle = `
+
+        /* ---- Wrapper ---- */
+        .${blockID}.fb-image-accordion-main-wrapper {
+            ${
+							imageAccordionWrapperBorder
+								? `border-style: ${imageAccordionWrapperBorder};`
+								: ""
+						}
+            ${
+							imageAccordionWrapperBorderColor
+								? `border-color: ${imageAccordionWrapperBorderColor};`
+								: ""
+						}
+            ${
+							wrapperBorderDesktop
+								? `border-width: ${wrapperBorderDesktop};`
+								: ""
+						}
+            ${wrapperBrDesktop ? `border-radius: ${wrapperBrDesktop};` : ""}
+            
+            ${
+							imageAccordionBackgroundType === "gradient"
+								? imageAccordionCustomGradientSwitcher &&
+								  imageAccordionCustomGradientInputValue
+									? `background: ${imageAccordionCustomGradientInputValue};`
+									: imageAccordionGradientColor
+									? `background: ${imageAccordionGradientColor};`
+									: `background: ${imageAccordionClassicColor};`
+								: imageAccordionBackgroundImageUrl
+								? `
+                        background-image: url(${imageAccordionBackgroundImageUrl});
+                        background-position: ${imageAccordionBackgroundImagePosition};
+                        background-attachment: ${imageAccordionBackgroundImageAttachment};
+                        background-repeat: ${imageAccordionBackgroundImageRepeat};
+                        background-size: ${imageAccordionBackgroundImageSize};
+                    `
+								: imageAccordionClassicColor
+								? `background-color: ${imageAccordionClassicColor};`
+								: ""
+						}
+            transition: all .3s ease-in-out;
+        }
+
+        .${blockID}.fb-image-accordion-main-wrapper:hover {
+            ${
+							imageAccordionWrapperBorderHoverColor
+								? `border-color: ${imageAccordionWrapperBorderHoverColor};`
+								: ""
+						}
+            ${
+							imageAccordionHoverBackgroundType === "gradient"
+								? imageAccordionHoverCustomGradientSwitcher &&
+								  imageAccordionHoverCustomGradientInputValue
+									? `background: ${imageAccordionHoverCustomGradientInputValue};`
+									: imageAccordionHoverGradientColor
+									? `background: ${imageAccordionHoverGradientColor};`
+									: `background: ${imageAccordionHoverClassicColor};`
+								: imageAccordionHoverBackgroundImageUrl
+								? `background-image: url(${imageAccordionHoverBackgroundImageUrl});`
+								: imageAccordionHoverClassicColor
+								? `background-color: ${imageAccordionHoverClassicColor};`
+								: ""
+						}
+        }
 
         /* ---- Container ---- */
         .${blockID} .fb-image-accordion-container {
@@ -249,6 +398,35 @@ const generateImageAccordionStyle = (attributes) => {
 								  };`
 								: ""
 						}
+            ${
+							imageAccordionTitleFontFamily &&
+							imageAccordionTitleFontFamily !== "Default" &&
+							imageAccordionTitleFontFamily !== "inherit"
+								? `font-family: ${imageAccordionTitleFontFamily};`
+								: ""
+						}
+            ${
+							imageAccordionTitleFontStyle
+								? `font-style: ${imageAccordionTitleFontStyle};`
+								: ""
+						}
+            ${
+							imageAccordionTitleTransform
+								? `text-transform: ${imageAccordionTitleTransform};`
+								: ""
+						}
+            ${
+							imageAccordionTitleDecoration
+								? `text-decoration: ${imageAccordionTitleDecoration};`
+								: ""
+						}
+            ${
+							imageAccordionTitleLetterSpacing?.Desktop !== ""
+								? `letter-spacing: ${imageAccordionTitleLetterSpacing.Desktop}${
+										imageAccordionTitleLetterSpacingUnits?.Desktop || "px"
+								  };`
+								: ""
+						}
         }
         .${blockID} .fb-image-accordion-item:hover .fb-image-accordion-title,
         .${blockID} .fb-image-accordion-item.is-active .fb-image-accordion-title {
@@ -277,6 +455,37 @@ const generateImageAccordionStyle = (attributes) => {
             ${
 							imageAccordionSubtitleFontWeight
 								? `font-weight: ${imageAccordionSubtitleFontWeight};`
+								: ""
+						}
+            ${
+							imageAccordionSubtitleFontFamily &&
+							imageAccordionSubtitleFontFamily !== "Default" &&
+							imageAccordionSubtitleFontFamily !== "inherit"
+								? `font-family: ${imageAccordionSubtitleFontFamily};`
+								: ""
+						}
+            ${
+							imageAccordionSubtitleFontStyle
+								? `font-style: ${imageAccordionSubtitleFontStyle};`
+								: ""
+						}
+            ${
+							imageAccordionSubtitleTransform
+								? `text-transform: ${imageAccordionSubtitleTransform};`
+								: ""
+						}
+            ${
+							imageAccordionSubtitleDecoration
+								? `text-decoration: ${imageAccordionSubtitleDecoration};`
+								: ""
+						}
+            ${
+							imageAccordionSubtitleLetterSpacing?.Desktop !== ""
+								? `letter-spacing: ${
+										imageAccordionSubtitleLetterSpacing.Desktop
+								  }${
+										imageAccordionSubtitleLetterSpacingUnits?.Desktop || "px"
+								  };`
 								: ""
 						}
         }
@@ -429,6 +638,35 @@ const generateImageAccordionStyle = (attributes) => {
 								? `font-weight: ${imageAccordionBtnFontWeight};`
 								: ""
 						}
+            ${
+							imageAccordionBtnFontFamily &&
+							imageAccordionBtnFontFamily !== "Default" &&
+							imageAccordionBtnFontFamily !== "inherit"
+								? `font-family: ${imageAccordionBtnFontFamily};`
+								: ""
+						}
+            ${
+							imageAccordionBtnFontStyle
+								? `font-style: ${imageAccordionBtnFontStyle};`
+								: ""
+						}
+            ${
+							imageAccordionBtnTransform
+								? `text-transform: ${imageAccordionBtnTransform};`
+								: ""
+						}
+            ${
+							imageAccordionBtnDecoration
+								? `text-decoration: ${imageAccordionBtnDecoration};`
+								: ""
+						}
+            ${
+							imageAccordionBtnLetterSpacing?.Desktop !== ""
+								? `letter-spacing: ${imageAccordionBtnLetterSpacing.Desktop}${
+										imageAccordionBtnLetterSpacingUnits?.Desktop || "px"
+								  };`
+								: ""
+						}
         }
         .${blockID} .fb-image-accordion-btn:hover {
             ${
@@ -445,6 +683,14 @@ const generateImageAccordionStyle = (attributes) => {
 
         /* ---- Tablet ---- */
         @media only screen and (max-width: 1024px) {
+            .${blockID}.fb-image-accordion-main-wrapper {
+                ${
+									wrapperBorderTablet
+										? `border-width: ${wrapperBorderTablet};`
+										: ""
+								}
+                ${wrapperBrTablet ? `border-radius: ${wrapperBrTablet};` : ""}
+            }
             .${blockID} .fb-image-accordion-container {
                 ${
 									imageAccordionWidth?.Tablet
@@ -497,6 +743,15 @@ const generateImageAccordionStyle = (attributes) => {
 										  };`
 										: ""
 								}
+                ${
+									imageAccordionTitleLetterSpacing?.Tablet
+										? `letter-spacing: ${
+												imageAccordionTitleLetterSpacing.Tablet
+										  }${
+												imageAccordionTitleLetterSpacingUnits?.Tablet || "px"
+										  };`
+										: ""
+								}
             }
             .${blockID} .fb-image-accordion-desc,
             .${blockID} .fb-sub-title {
@@ -504,6 +759,15 @@ const generateImageAccordionStyle = (attributes) => {
 									imageAccordionSubtitleFontSize?.Tablet
 										? `font-size: ${imageAccordionSubtitleFontSize.Tablet}${
 												imageAccordionSubtitleFontSizeUnits?.Tablet ?? "px"
+										  };`
+										: ""
+								}
+                ${
+									imageAccordionSubtitleLetterSpacing?.Tablet
+										? `letter-spacing: ${
+												imageAccordionSubtitleLetterSpacing.Tablet
+										  }${
+												imageAccordionSubtitleLetterSpacingUnits?.Tablet || "px"
 										  };`
 										: ""
 								}
@@ -523,6 +787,14 @@ const generateImageAccordionStyle = (attributes) => {
 
         /* ---- Mobile ---- */
         @media only screen and (max-width: 767px) {
+            .${blockID}.fb-image-accordion-main-wrapper {
+                ${
+									wrapperBorderMobile
+										? `border-width: ${wrapperBorderMobile};`
+										: ""
+								}
+                ${wrapperBrMobile ? `border-radius: ${wrapperBrMobile};` : ""}
+            }
             .${blockID} .fb-image-accordion-container {
                 ${
 									imageAccordionWidth?.Mobile
@@ -575,6 +847,15 @@ const generateImageAccordionStyle = (attributes) => {
 										  };`
 										: ""
 								}
+                ${
+									imageAccordionTitleLetterSpacing?.Mobile
+										? `letter-spacing: ${
+												imageAccordionTitleLetterSpacing.Mobile
+										  }${
+												imageAccordionTitleLetterSpacingUnits?.Mobile || "px"
+										  };`
+										: ""
+								}
             }
             .${blockID} .fb-image-accordion-desc,
             .${blockID} .fb-sub-title {
@@ -582,6 +863,15 @@ const generateImageAccordionStyle = (attributes) => {
 									imageAccordionSubtitleFontSize?.Mobile
 										? `font-size: ${imageAccordionSubtitleFontSize.Mobile}${
 												imageAccordionSubtitleFontSizeUnits?.Mobile ?? "px"
+										  };`
+										: ""
+								}
+                ${
+									imageAccordionSubtitleLetterSpacing?.Mobile
+										? `letter-spacing: ${
+												imageAccordionSubtitleLetterSpacing.Mobile
+										  }${
+												imageAccordionSubtitleLetterSpacingUnits?.Mobile || "px"
 										  };`
 										: ""
 								}
