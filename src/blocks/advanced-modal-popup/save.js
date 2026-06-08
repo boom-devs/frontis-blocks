@@ -1,37 +1,37 @@
 import { __ } from '@wordpress/i18n';
-import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
+import { useBlockProps, useInnerBlocksProps, RichText } from '@wordpress/block-editor';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 
 export default function save({ attributes }) {
 
     const {
         blockID,
-        selectedTemplate,
+        toggleImageUrl,
+        toggleButtonIconPosition,
+        toggleButtonUrl,
+        toggleButtonTargetUrl,
+        toggleButtonIcon,
+        toggleButtonIconAlign,
+        toggleButtonText,
+        modalCloseIcon,
+
         position,
         toggleType,
-        toggleText,
-        toggleIcon,
-        toggleImage,
         contentType,
-        contentImage,
         contentVideoUrl,
-        contentYoutubeUrl,
-        contentVimeoUrl,
         contentMapUrl,
         modalPopupGlobalWraperClass,
         modalPopupGlobalWraperID,
         modalPopupDesktopSwitcher,
         modalPopupTabletSwitcher,
-        modalPopupMobileSwitcher
+        modalPopupMobileSwitcher,
+        modalPopupOverlaySwitcher
     } = attributes;
 
     const modalPositionClass = `fb-advanced-modal-popup-${position}`;
 
     const blockProps = useBlockProps.save({
-        className: `fb-advanced-modal-popup-block ${blockID} 
-            ${modalPopupDesktopSwitcher ? 'fb-desktop-responsive' : ''} 
-            ${modalPopupTabletSwitcher ? 'fb-tablet-responsive' : ''} 
-            ${modalPopupMobileSwitcher ? 'fb-mobile-responsive' : ''}`
+        className: `fb-advanced-modal-popup-block ${blockID} ${modalPopupDesktopSwitcher ? 'fb-desktop-responsive' : ''} ${modalPopupTabletSwitcher ? 'fb-tablet-responsive' : ''} ${modalPopupMobileSwitcher ? 'fb-mobile-responsive' : ''}`.trim()
     });
 
     const innerBlocksProps = useInnerBlocksProps.save({
@@ -41,25 +41,33 @@ export default function save({ attributes }) {
     const renderToggle = () => {
         switch (toggleType) {
             case 'button':
-                return <button className="fb-modal-toggle-btn">{toggleText}</button>;
-            case 'icon':
                 return (
-                    <div className="fb-modal-toggle-icon">
-                        {renderSVG(toggleIcon)}
-                    </div>
+                    <a className={`fb-modal-toggle-btn fb-button-icon-${toggleButtonIconPosition}`}
+                        href={toggleButtonUrl || '#'}
+                        target={toggleButtonTargetUrl ? "_blank" : undefined}
+                        rel={toggleButtonTargetUrl ? "noopener noreferrer" : undefined}
+                    >
+                        {toggleButtonIconPosition === 'left' && toggleButtonIconAlign === 'icon' && (
+                            <div className="fb-button-icon">
+                                {renderSVG(toggleButtonIcon)}
+                            </div>
+                        )}
+                        <RichText.Content 
+                            tagName="span" 
+                            value={toggleButtonText}
+                            className="fb-button-text"
+                        />
+                        {toggleButtonIconPosition === 'right' && toggleButtonIconAlign === 'icon' && (
+                            <div className="fb-button-icon">
+                                {renderSVG(toggleButtonIcon)} 
+                            </div>
+                        )}
+                    </a>
                 );
-            case 'button-icon':
-                return (
-                    <button className="fb-modal-toggle-btn-icon">
-                        {renderSVG(toggleIcon)}
-                        <span>{toggleText}</span>
-                    </button>
-                );
-            case 'image':
-                const imageUrl = toggleImage?.Desktop || toggleImage?.Tablet || toggleImage?.Mobile;
+            case 'image': 
                 return (
                     <div className="fb-modal-toggle-image">
-                        {imageUrl && <img src={imageUrl} alt="Modal Trigger" />}
+                        <img src={toggleImageUrl} alt={attributes.toggleImageAlt} />
                     </div>
                 );
             default:
@@ -73,18 +81,23 @@ export default function save({ attributes }) {
             case 'custom':
                 return <div {...innerBlocksProps} />;
             case 'image':
-                const imgUrl = contentImage?.Desktop || contentImage?.Tablet || contentImage?.Mobile;
-                return imgUrl ? <img src={imgUrl} alt="Modal Content" className="fb-modal-content-img" /> : null;
+                return (
+                    <div className="fb-modal-content-image">
+                        <div {...innerBlocksProps} />
+                    </div>
+                );
             case 'video':
-                return contentVideoUrl ? <video src={contentVideoUrl} controls className="fb-modal-content-video"></video> : null;
-            case 'youtube':
-                return contentYoutubeUrl ? <iframe src={contentYoutubeUrl} allowFullScreen className="fb-modal-content-iframe"></iframe> : null;
-            case 'vimeo':
-                return contentVimeoUrl ? <iframe src={contentVimeoUrl} allowFullScreen className="fb-modal-content-iframe"></iframe> : null;
+                return (
+                    <div className="fb-modal-content-video">
+                        <div {...innerBlocksProps} />
+                    </div>
+                );
             case 'map':
-                return contentMapUrl ? (
-                    <div className="fb-modal-content-map" dangerouslySetInnerHTML={{ __html: contentMapUrl }}></div>
-                ) : null;
+                return (
+                    <div className="fb-modal-content-map">
+                        <div {...innerBlocksProps} />
+                    </div>
+                );
             default:
                 return null;
         }
@@ -92,20 +105,17 @@ export default function save({ attributes }) {
 
     return (
         <div {...blockProps}>
-            {/* Main Wrapper */}
-            <div
-                className={`fb-advanced-modal-popup-container ${modalPopupGlobalWraperClass}`}
-                id={modalPopupGlobalWraperID}
-            >
+            <div className={`fb-advanced-modal-popup-container ${modalPopupGlobalWraperClass || ''}`.trim()} id={modalPopupGlobalWraperID}>
+                
                 {/* Modal Trigger */}
-                <div className="fb-advanced-modal-popup-trigger js-fb-modal-trigger">
+                <div className="fb-advanced-modal-popup-trigger">
                     {renderToggle()}
                 </div>
 
-                {/* Off-Canvas Menu */}
-                <div className={`fb-advanced-modal-popup js-fb-modal-popup ${modalPositionClass}`}>
-                    <div className="fb-modal-close-btn js-fb-modal-close-btn">
-                        &times;
+                {/* Modal Container */}
+                <div className={`fb-advanced-modal-popup ${modalPositionClass}`}>
+                    <div className="fb-modal-close-btn">
+                        {renderSVG(modalCloseIcon)}
                     </div>
                     <div className="fb-modal-content-wrapper">
                         {renderContent()}
@@ -113,10 +123,10 @@ export default function save({ attributes }) {
                 </div>
 
                 {/* Overlay */}
-                <div className="fb-modal-overlay js-fb-modal-overlay"></div>
-
+                {modalPopupOverlaySwitcher && (
+                    <div className="fb-modal-overlay"></div>
+                )}
             </div>
-
         </div>
     );
 }
