@@ -1090,6 +1090,10 @@ const attributes = {
 		type: "string",
 		default: "normal"
 	},
+	imageHotspotSocialLinkIconColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
 
 	// Padding
 	imageHotspotPaddingUnits: {
@@ -2057,6 +2061,41 @@ const attributes = {
 			Mobile: 'px',
 		}
 	},
+
+	imageHotspotSocialLinksGap: {
+		type: "object",
+		default: {
+			Desktop: "5",
+			Tablet: "5",
+			Mobile: "5",
+		},
+	},
+	imageHotspotSocialLinksGapUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+
+	imageHotspotSocialLinksIconSize: {
+		type: "object",
+		default: {
+			Desktop: "24",
+			Tablet: "24",
+			Mobile: "24",
+		},
+	},
+	imageHotspotSocialLinksIconSizeUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+
 	imageHotspotBoxShadowSwitcher: {
 		type: 'string',
 		default: 'normal',

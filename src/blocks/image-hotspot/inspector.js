@@ -145,6 +145,10 @@ export default function Inspector({ attributes, setAttributes }) {
     // Icon styles
     imageHotspotIconColorSwitcher,
 
+    // Social link styles
+    imageHotspotSocialLinkIconColorSwitcher,
+    // imageHotspotSocialLinkIconHoverColorSwitcher,
+
     // Title typography
     imageHotspotTitleFontFamily,
     imageHotspotTitleFontSize,
@@ -343,6 +347,12 @@ export default function Inspector({ attributes, setAttributes }) {
 
     imageHotspotHoverBoxShadowValues,
     imageHotspotHoverBoxShadowCssValue,
+
+    imageHotspotSocialLinksGap,
+    imageHotspotSocialLinksGapUnits,
+
+    imageHotspotSocialLinksIconSize,
+    imageHotspotSocialLinksIconSizeUnits,
   } = attributes;
 
   const deviceType = useDeviceType();
@@ -1824,7 +1834,9 @@ export default function Inspector({ attributes, setAttributes }) {
 
   const generalControls = (
     <>
-      <PanelBody title={__("General", "frontis-blocks")} initialOpen={true}>
+      <PanelBody title={__("General", "frontis-blocks")}
+       initialOpen={true}
+       >
         <FB_Presets
           presets={imageHotspotPresets}
           value={imageHotspotPresetStyle}
@@ -1863,7 +1875,7 @@ export default function Inspector({ attributes, setAttributes }) {
         />
       </PanelBody>
 
-      <PanelBody title={__("Hotspots", "frontis-blocks")} initialOpen={true}>
+      <PanelBody title={__("Hotspots", "frontis-blocks")} initialOpen={false}>
         {imageHotspotHotspots?.length > 0 && (
           <PanelRow>
             <small>
@@ -2021,6 +2033,43 @@ export default function Inspector({ attributes, setAttributes }) {
                                                     }
                                                   }}
                                                 />
+
+                                                <FB_SwitcherControl
+                                                  label={__("Icon Color", "frontis-blocks")}
+                                                  globalSwitcher={imageHotspotSocialLinkIconColorSwitcher}
+                                                  setGlobalSwitcher={(value) => setAttributes({ imageHotspotSocialLinkIconColorSwitcher: value })}
+                                                />
+
+                                                {imageHotspotSocialLinkIconColorSwitcher === 'normal' && (
+                                                  <FB_ColorControl
+                                                    label={__("Icon Color", "frontis-blocks")}
+                                                    globalColor={socialLink.socialLinkIconColor}
+                                                    setGlobalColor={(color) => {
+                                                      const updatedLinks = [...(hotspot.socialLinks || [])];
+                                                      const idx = updatedLinks.findIndex((l) => l.id === socialLink.id);
+                                                      if (idx !== -1) {
+                                                        updatedLinks[idx] = { ...updatedLinks[idx], socialLinkIconColor: color };
+                                                        updateHotspot(hotspot.id, 'socialLinks', updatedLinks);
+                                                      }
+                                                    }}
+                                                  />
+                                                )}
+
+                                                {imageHotspotSocialLinkIconColorSwitcher === 'hover' && (
+                                                  <FB_ColorControl
+                                                    label={__("Icon Hover Color", "frontis-blocks")}
+                                                    globalColor={socialLink.socialLinkIconHoverColor}
+                                                    setGlobalColor={(color) => {
+                                                      const updatedLinks = [...(hotspot.socialLinks || [])];
+                                                      const idx = updatedLinks.findIndex((l) => l.id === socialLink.id);
+                                                      if (idx !== -1) {
+                                                        updatedLinks[idx] = { ...updatedLinks[idx], socialLinkIconHoverColor: color };
+                                                        updateHotspot(hotspot.id, 'socialLinks', updatedLinks);
+                                                      }
+                                                    }}
+                                                  />
+                                                )}
+
                                               </div>
                                             </SortableItem>
                                           );
@@ -2245,7 +2294,10 @@ export default function Inspector({ attributes, setAttributes }) {
 
   const styleControls = (
     <>
-      <PanelBody title={__("Popover", "frontis-blocks")} initialOpen={true}>
+      <PanelBody title={__("Popover", "frontis-blocks")}
+       initialOpen={true}
+       >
+
         <FB_SwitcherControl
           label={__("Background", "frontis-blocks")}
           globalSwitcher={imageHotspotPopoverBgColorSwitcher}
@@ -2359,7 +2411,7 @@ export default function Inspector({ attributes, setAttributes }) {
         />
       </PanelBody>
 
-      <PanelBody title={__("Title", "frontis-blocks")} initialOpen={true}>
+      <PanelBody title={__("Title", "frontis-blocks")} initialOpen={false}>
         <FB_TypographyControl
           label={__("Typography", "frontis-blocks")}
           deviceType={deviceType}
@@ -2501,7 +2553,7 @@ export default function Inspector({ attributes, setAttributes }) {
         />
       </PanelBody>
 
-      <PanelBody title={__("Category", "frontis-blocks")} initialOpen={true}>
+      <PanelBody title={__("Category", "frontis-blocks")} initialOpen={false}>
         <FB_TypographyControl
           label={__("Typography", "frontis-blocks")}
           deviceType={deviceType}
@@ -2643,7 +2695,7 @@ export default function Inspector({ attributes, setAttributes }) {
         />
       </PanelBody>
 
-      <PanelBody title={__("Description", "frontis-blocks")} initialOpen={true}>
+      <PanelBody title={__("Description", "frontis-blocks")} initialOpen={false}>
         <FB_TypographyControl
           label={__("Typography", "frontis-blocks")}
           deviceType={deviceType}
@@ -2785,7 +2837,7 @@ export default function Inspector({ attributes, setAttributes }) {
         />
       </PanelBody>
 
-      <PanelBody title={__("Price", "frontis-blocks")} initialOpen={true}>
+      <PanelBody title={__("Price", "frontis-blocks")} initialOpen={false}>
         <FB_TypographyControl
           label={__("Typography", "frontis-blocks")}
           deviceType={deviceType}
@@ -2926,6 +2978,45 @@ export default function Inspector({ attributes, setAttributes }) {
           setAttributes={setAttributes}
         />
       </PanelBody>
+
+      <PanelBody
+        title={__("Social Links", "frontis-blocks")}
+        initialOpen={false}
+        className="fb-setting-social-links-header"
+      >
+
+        <FB_Range
+          min={0}
+          max={50}
+          label={__("Gap", "frontis-blocks")}
+          rangeValue={imageHotspotSocialLinksGap}
+          onChangeHandler={(value) => setAttributes({ imageHotspotSocialLinksGap: value })}
+          rangeUnitHandler={(value) => setAttributes({ imageHotspotSocialLinksGapUnits: value })}
+          deviceType={deviceType}
+          units={imageHotspotSocialLinksGapUnits}
+          setAttributes={setAttributes}
+          rangeStep={1}
+          resetFallbackValue={""}
+          isRangeUnit={true}
+        />
+
+        <FB_Range
+          min={0}
+          max={50}
+          label={__("Icon Size", "frontis-blocks")}
+          rangeValue={imageHotspotSocialLinksIconSize}
+          onChangeHandler={(value) => setAttributes({ imageHotspotSocialLinksIconSize: value })}
+          rangeUnitHandler={(value) => setAttributes({ imageHotspotSocialLinksIconSizeUnits: value })}
+          deviceType={deviceType}
+          units={imageHotspotSocialLinksIconSizeUnits}
+          setAttributes={setAttributes}
+          rangeStep={1}
+          resetFallbackValue={""}
+          isRangeUnit={true}
+        />
+
+      </PanelBody>
+
     </>
   );
 
