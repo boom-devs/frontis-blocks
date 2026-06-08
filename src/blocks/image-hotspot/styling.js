@@ -418,11 +418,6 @@ const generateImageHotspotStyle = (attributes) => {
 
 
     const hotspotBaseStyles = (imageHotspotHotspots || []).map((hotspot) => `
-        .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"] {
-            ${hotspot.x !== undefined && hotspot.x !== '' ? `left: ${hotspot.x}%;` : ''}
-            ${hotspot.y !== undefined && hotspot.y !== '' ? `top: ${hotspot.y}%;` : ''}
-        }
-
         .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"] .fb-hotspot-trigger {
             ${(hotspot.markerColor || imageHotspotMarkerColor)
                 ? imageHotspotMarkerSvg

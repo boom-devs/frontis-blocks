@@ -7,7 +7,6 @@ const attributes = {
 		type: "string",
 		default: "",
 	},
-
 	imageHotspotImageUrl: {
 		type: "string",
 		default: "",

@@ -6,10 +6,10 @@ import renderSVG from "../../components/icon-picker/components/icon-picker/contr
 import { markerSvgs } from './preset';
 
 export default function Save({ attributes }) {
-  const { 
-    imageHotspotImageUrl, 
-    imageHotspotImageAlt, 
-    imageHotspotImageSize, 
+  const {
+    imageHotspotImageUrl,
+    imageHotspotImageAlt,
+    imageHotspotImageSize,
     imageHotspotHotspots,
     blockID,
     imageHotspotDesktopSwitcher,
@@ -25,52 +25,56 @@ export default function Save({ attributes }) {
   }
 
   const responsiveClasses = [
-        imageHotspotDesktopSwitcher && 'fb-desktop-responsive',
-        imageHotspotTabletSwitcher && 'fb-tablet-responsive',
-        imageHotspotMobileSwitcher && 'fb-mobile-responsive'
-    ].filter(Boolean).join(' ');
+    imageHotspotDesktopSwitcher && 'fb-desktop-responsive',
+    imageHotspotTabletSwitcher && 'fb-tablet-responsive',
+    imageHotspotMobileSwitcher && 'fb-mobile-responsive'
+  ].filter(Boolean).join(' ');
 
-    const blockProps = useBlockProps.save({
-        className: `fb-hotspot-main-wrapper ${blockID}`,
-    });
+  const blockProps = useBlockProps.save({
+    className: `fb-hotspot-main-wrapper ${blockID}`,
+  });
 
   return (
     <>
       <div {...blockProps}>
         <div className={`fb-hotspot-responsive-wrapper ${responsiveClasses}`}>
-        <div className="fb-hotspot-container">
-            <img 
-              src={imageHotspotImageUrl} 
+          <div className="fb-hotspot-container">
+            <img
+              src={imageHotspotImageUrl}
               alt={imageHotspotImageAlt || __('Hotspot Image', 'frontis-blocks')}
               className="fb-hotspot-base-image"
             />
-            
+
             {imageHotspotHotspots?.map((hotspot) => {
               return (
-                <div 
+                <div
                   key={hotspot.id}
                   className={`fb-hotspot-marker animation-${hotspot.autoplay === false ? 'none' : hotspot.animation || 'none'}`}
+                  style={{
+                    left: `${hotspot.x ?? hotspot.left ?? 25}%`,
+                    top: `${hotspot.y ?? hotspot.top ?? 25}%`,
+                  }}
                   data-hotspot-id={hotspot.id}
                   data-popover-position={hotspot.popoverPosition || 'top'}
                 >
                   <div className="fb-hotspot-trigger">
-                      {imageHotspotMarkerSvg && markerSvgs[imageHotspotMarkerSvg] && (
-                          <span className="fb-hotspot-marker-svg">
-                              {markerSvgs[imageHotspotMarkerSvg](hotspot.markerColor || imageHotspotMarkerColor)}
-                          </span>
-                      )}
-                      <span className="fb-hotspot-icon">
-                          {renderSVG(hotspot.icon || 'plus')}
+                    {imageHotspotMarkerSvg && markerSvgs[imageHotspotMarkerSvg] && (
+                      <span className="fb-hotspot-marker-svg">
+                        {markerSvgs[imageHotspotMarkerSvg](hotspot.markerColor || imageHotspotMarkerColor)}
                       </span>
+                    )}
+                    <span className="fb-hotspot-icon">
+                      {renderSVG(hotspot.icon || 'plus')}
+                    </span>
                   </div>
-                  
+
                   <div className="fb-hotspot-popover">
                     {imageHotspotShowPopoverImage && hotspot.popoverImageUrl && (
-                        <img 
-                            src={hotspot.popoverImageUrl}
-                            alt={hotspot.popoverImageAlt || ''}
-                            className="fb-hotspot-popover-image"
-                        />
+                      <img
+                        src={hotspot.popoverImageUrl}
+                        alt={hotspot.popoverImageAlt || ''}
+                        className="fb-hotspot-popover-image"
+                      />
                     )}
                     {hotspot.category && <div className="fb-hotspot-popover-category">{hotspot.category}</div>}
                     {hotspot.title && (
@@ -94,7 +98,7 @@ export default function Save({ attributes }) {
                 </div>
               );
             })}
-        </div>
+          </div>
         </div>
       </div>
     </>

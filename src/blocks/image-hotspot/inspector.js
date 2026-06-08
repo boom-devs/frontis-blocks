@@ -1098,10 +1098,11 @@ export default function Inspector({ attributes, setAttributes }) {
 
   const addHotspot = () => {
     const hotspotNumber = (imageHotspotHotspots?.length || 0) + 1;
+    const offset = ((imageHotspotHotspots?.length || 0) * 8) % 40;
     const newHotspot = {
       id: Date.now().toString(),
-      x: 50,
-      y: 50,
+      x: Math.min(30 + offset, 95),
+      y: Math.min(30 + offset, 95),
       category: '',
       title: `${__('Hotspot', 'frontis-blocks')} ${hotspotNumber}`,
       titleLink: '',

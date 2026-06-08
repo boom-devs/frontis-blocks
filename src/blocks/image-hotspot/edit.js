@@ -103,6 +103,10 @@ function Edit({ attributes, setAttributes, clientId, isSelected }) {
               <div
                 key={hotspot.id}
                 className={`fb-hotspot-marker ${imageHotspotSelectedHotspotId === hotspot.id ? 'selected' : ''} animation-${hotspot.autoplay === false ? 'none' : hotspot.animation || 'none'}`}
+                style={{
+                  left: `${hotspot.x ?? hotspot.left ?? 25}%`,
+                  top: `${hotspot.y ?? hotspot.top ?? 25}%`,
+                }}
                 data-hotspot-id={hotspot.id}
                 data-popover-position={hotspot.popoverPosition || 'top'}
                 onClick={(e) => {
