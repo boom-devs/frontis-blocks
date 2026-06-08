@@ -236,6 +236,14 @@ const attributes = {
 		type: "string",
 		default: "rgba(0,0,0,0.55)",
 	},
+	imageAccordionShowTitle: {
+		type: "boolean",
+		default: true,
+	},
+	imageAccordionShowSubtitle: {
+		type: "boolean",
+		default: true,
+	},
 	imageAccordionOverlayHoverColor: {
 		type: "string",
 		default: "",
