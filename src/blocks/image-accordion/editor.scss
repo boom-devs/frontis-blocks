@@ -318,9 +318,9 @@
 	border-radius: 0 !important;
 }
 
-/* =============================================================
-   PRESET 3 — Vertical Stack
-   ============================================================= */
+/* =============
+   PRESET 3 Vertical Stack
+   ============ */
 .preset-3 {
 	.fb-image-accordion-container {
 		flex-direction: column;
@@ -426,9 +426,9 @@
 	}
 }
 
-/* =============================================================
-   PRESET 4 — Skewed Panels
-   ============================================================= */
+/* ===============
+   PRESET 4 Skewed Panels
+   ============== */
 .preset-4 {
 	.fb-image-accordion-container {
 		gap: 0;
@@ -546,7 +546,7 @@
 	}
 
 	.fb-image-accordion-item.is-active {
-		flex: 1.4 !important; // Increased priority for expansion
+		flex: 1.4 !important;
 	}
 
 	@media screen and (max-width: 767px) {
@@ -583,9 +583,9 @@
 	}
 }
 
-/* =============================================================
+/* ===========
    RESPONSIVE VISIBILITY
-   ============================================================= */
+   =========== */
 @media screen and (min-width: 1025px) {
 	.fb-desktop-responsive {
 		display: none !important;

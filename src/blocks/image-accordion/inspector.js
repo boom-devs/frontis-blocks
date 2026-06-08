@@ -28,6 +28,7 @@ import FB_ColorControl from "@Components/color-control";
 import FB_SwitcherControl from "@Components/switcher-control";
 import FB_InputControl from "@Components/input-control";
 import FB_IconPicker from "@Components/icon-picker";
+import FB_BackgroundColorControl from "@Components/background-color-control";
 import FB_CustomCSSEditor from "@Components/custom-css-editor";
 import FB_InspectorControls from "@Components/InspectorControls";
 import FB_TypographyControl from "@Components/typography-control";
@@ -95,11 +96,33 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 		imageAccordionTitleLineHeight,
 		imageAccordionTitleLineHeightUnits,
 
+		imageAccordionTitleFontFamily,
+		imageAccordionTitleFontStyle,
+		imageAccordionTitleTransform,
+		imageAccordionTitleDecoration,
+		imageAccordionTitleLetterSpacing,
+		imageAccordionTitleLetterSpacingUnits,
+		imageAccordionTitleGlobalTypographyData,
+		imageAccordionTitleTypoType,
+		imageAccordionTitleTypoOption,
+
 		imageAccordionSubtitleColor,
 		imageAccordionSubtitleHoverColor,
 		imageAccordionSubtitleFontSize,
 		imageAccordionSubtitleFontSizeUnits,
 		imageAccordionSubtitleFontWeight,
+		imageAccordionSubtitleLineHeight,
+		imageAccordionSubtitleLineHeightUnits,
+
+		imageAccordionSubtitleFontFamily,
+		imageAccordionSubtitleFontStyle,
+		imageAccordionSubtitleTransform,
+		imageAccordionSubtitleDecoration,
+		imageAccordionSubtitleLetterSpacing,
+		imageAccordionSubtitleLetterSpacingUnits,
+		imageAccordionSubtitleGlobalTypographyData,
+		imageAccordionSubtitleTypoType,
+		imageAccordionSubtitleTypoOption,
 
 		imageAccordionBtnTextColor,
 		imageAccordionBtnHoverTextColor,
@@ -114,6 +137,18 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 		imageAccordionBtnFontSize,
 		imageAccordionBtnFontSizeUnits,
 		imageAccordionBtnFontWeight,
+		imageAccordionBtnLineHeight,
+		imageAccordionBtnLineHeightUnits,
+
+		imageAccordionBtnFontFamily,
+		imageAccordionBtnFontStyle,
+		imageAccordionBtnTransform,
+		imageAccordionBtnDecoration,
+		imageAccordionBtnLetterSpacing,
+		imageAccordionBtnLetterSpacingUnits,
+		imageAccordionBtnGlobalTypographyData,
+		imageAccordionBtnTypoType,
+		imageAccordionBtnTypoOption,
 
 		imageAccordionPaddingUnits,
 		imageAccordionPaddingDesktop,
@@ -126,6 +161,47 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 		imageAccordionMarginTablet,
 		imageAccordionMarginMobile,
 		imageAccordionMarginLink,
+
+		imageAccordionBgColorSwitcher,
+		imageAccordionBackgroundType,
+		imageAccordionClassicColor,
+		imageAccordionGradientColor,
+		imageAccordionCustomGradientSwitcher,
+		imageAccordionCustomGradientInputValue,
+		imageAccordionBackgroundImageUrl,
+		imageAccordionBackgroundImageAlt,
+		imageAccordionBackgroundImageID,
+		imageAccordionBackgroundImagePosition,
+		imageAccordionBackgroundImageAttachment,
+		imageAccordionBackgroundImageRepeat,
+		imageAccordionBackgroundImageSize,
+		imageAccordionHoverBackgroundType,
+		imageAccordionHoverClassicColor,
+		imageAccordionHoverGradientColor,
+		imageAccordionHoverCustomGradientSwitcher,
+		imageAccordionHoverCustomGradientInputValue,
+		imageAccordionHoverBackgroundImageUrl,
+		imageAccordionHoverBackgroundImageAlt,
+		imageAccordionHoverBackgroundImageID,
+		imageAccordionHoverBackgroundImagePosition,
+		imageAccordionHoverBackgroundImageAttachment,
+		imageAccordionHoverBackgroundImageRepeat,
+		imageAccordionHoverBackgroundImageSize,
+
+		imageAccordionWrapperBorder,
+		imageAccordionWrapperBorderColorSwitcher,
+		imageAccordionWrapperBorderColor,
+		imageAccordionWrapperBorderHoverColor,
+		imageAccordionWrapperBorderTypeUnits,
+		imageAccordionWrapperBorderTypeDesktop,
+		imageAccordionWrapperBorderTypeTablet,
+		imageAccordionWrapperBorderTypeMobile,
+		imageAccordionWrapperBorderTypeLink,
+		imageAccordionWrapperBorderRadiusUnits,
+		imageAccordionWrapperBorderRadiusDesktop,
+		imageAccordionWrapperBorderRadiusTablet,
+		imageAccordionWrapperBorderRadiusMobile,
+		imageAccordionWrapperBorderRadiusLink,
 
 		imageAccordionGlobalZIndex,
 		imageAccordionCustomCSS,
@@ -145,6 +221,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 	const [titleColorTab, setTitleColorTab] = useState("normal");
 	const [overlayColorTab, setOverlayColorTab] = useState("normal");
 	const [numberColorTab, setNumberColorTab] = useState("normal");
+	const [subtitleColorTab, setSubtitleColorTab] = useState("normal");
 
 	/** Apply preset */
 	const applyPreset = (preset) => {
@@ -159,7 +236,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 
 	/** Item handlers */
 	const updateItem = (id, keyOrUpdates, value) => {
-		// সরাসরি স্টোর থেকে লেটেস্ট অ্যাট্রিবিউট সংগ্রহ করা হচ্ছে যেন Race Condition না হয়
 		const latestAttributes = wp.data
 			.select("core/block-editor")
 			.getBlockAttributes(clientId);
@@ -335,6 +411,74 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 		}
 	};
 
+	const wrapperBorderTypeChange = (event, position) => {
+		const value = event.target.value;
+		if (imageAccordionWrapperBorderTypeLink) {
+			const val = { top: value, right: value, bottom: value, left: value };
+			if (deviceType === "Desktop")
+				setAttributes({ imageAccordionWrapperBorderTypeDesktop: val });
+			else if (deviceType === "Tablet")
+				setAttributes({ imageAccordionWrapperBorderTypeTablet: val });
+			else setAttributes({ imageAccordionWrapperBorderTypeMobile: val });
+		} else {
+			if (deviceType === "Desktop")
+				setAttributes({
+					imageAccordionWrapperBorderTypeDesktop: {
+						...imageAccordionWrapperBorderTypeDesktop,
+						[position]: value,
+					},
+				});
+			else if (deviceType === "Tablet")
+				setAttributes({
+					imageAccordionWrapperBorderTypeTablet: {
+						...imageAccordionWrapperBorderTypeTablet,
+						[position]: value,
+					},
+				});
+			else
+				setAttributes({
+					imageAccordionWrapperBorderTypeMobile: {
+						...imageAccordionWrapperBorderTypeMobile,
+						[position]: value,
+					},
+				});
+		}
+	};
+
+	const wrapperBorderRadiusChange = (event, position) => {
+		const value = event.target.value;
+		if (imageAccordionWrapperBorderRadiusLink) {
+			const val = { top: value, right: value, bottom: value, left: value };
+			if (deviceType === "Desktop")
+				setAttributes({ imageAccordionWrapperBorderRadiusDesktop: val });
+			else if (deviceType === "Tablet")
+				setAttributes({ imageAccordionWrapperBorderRadiusTablet: val });
+			else setAttributes({ imageAccordionWrapperBorderRadiusMobile: val });
+		} else {
+			if (deviceType === "Desktop")
+				setAttributes({
+					imageAccordionWrapperBorderRadiusDesktop: {
+						...imageAccordionWrapperBorderRadiusDesktop,
+						[position]: value,
+					},
+				});
+			else if (deviceType === "Tablet")
+				setAttributes({
+					imageAccordionWrapperBorderRadiusTablet: {
+						...imageAccordionWrapperBorderRadiusTablet,
+						[position]: value,
+					},
+				});
+			else
+				setAttributes({
+					imageAccordionWrapperBorderRadiusMobile: {
+						...imageAccordionWrapperBorderRadiusMobile,
+						[position]: value,
+					},
+				});
+		}
+	};
+
 	const generalControls = (
 		<>
 			<PanelBody
@@ -454,7 +598,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 					rangeStep={1}
 					resetFallbackValue={""}
 				/>
-				{/* Gap — hide for preset-2 (seamless) */}
+				{/* Gap hide for preset-2 (seamless) */}
 				{imageAccordionPreset !== "preset-2" &&
 					imageAccordionPreset !== "preset-4" && (
 						<FB_Range
@@ -475,33 +619,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 							resetFallbackValue={""}
 						/>
 					)}
-
-				{/* Item Border Radius */}
-				<FB_Spacing
-					label={__("Item Border Radius", "frontis-blocks")}
-					deviceType={deviceType}
-					spacingUnitsHandler={(unit) =>
-						setAttributes({
-							imageAccordionItemBorderRadiusUnits: {
-								...imageAccordionItemBorderRadiusUnits,
-								[deviceType]: unit,
-							},
-						})
-					}
-					spacingUnits={imageAccordionItemBorderRadiusUnits}
-					spacingDesktop={imageAccordionItemBorderRadiusDesktop}
-					spacingTablet={imageAccordionItemBorderRadiusTablet}
-					spacingMobile={imageAccordionItemBorderRadiusMobile}
-					handleSpacingUnitHandler={borderRadiusChange}
-					spacingCombineBtn={imageAccordionItemBorderRadiusLink}
-					spacingCombineBtnHandler={() =>
-						setAttributes({
-							imageAccordionItemBorderRadiusLink:
-								!imageAccordionItemBorderRadiusLink,
-						})
-					}
-					setAttributes={setAttributes}
-				/>
 
 				<FB_Spacing
 					label={__("Padding", "frontis-blocks")}
@@ -553,6 +670,35 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 				/>
 			</PanelBody>
 
+			{/* Item Style */}
+			<PanelBody title={__("Item", "frontis-blocks")} initialOpen={false}>
+				<FB_Spacing
+					label={__("Border Radius", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={(unit) =>
+						setAttributes({
+							imageAccordionItemBorderRadiusUnits: {
+								...imageAccordionItemBorderRadiusUnits,
+								[deviceType]: unit,
+							},
+						})
+					}
+					spacingUnits={imageAccordionItemBorderRadiusUnits}
+					spacingDesktop={imageAccordionItemBorderRadiusDesktop}
+					spacingTablet={imageAccordionItemBorderRadiusTablet}
+					spacingMobile={imageAccordionItemBorderRadiusMobile}
+					handleSpacingUnitHandler={borderRadiusChange}
+					spacingCombineBtn={imageAccordionItemBorderRadiusLink}
+					spacingCombineBtnHandler={() =>
+						setAttributes({
+							imageAccordionItemBorderRadiusLink:
+								!imageAccordionItemBorderRadiusLink,
+						})
+					}
+					setAttributes={setAttributes}
+				/>
+			</PanelBody>
+
 			{/* Overlay */}
 			<PanelBody title={__("Overlay", "frontis-blocks")} initialOpen={false}>
 				<FB_SwitcherControl
@@ -580,52 +726,77 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 				)}
 			</PanelBody>
 
-			{/* Typography */}
-			<PanelBody title={__("Typography", "frontis-blocks")} initialOpen={false}>
-				{/* Title */}
-				<p className="fb-section-label">
-					<strong>{__("Title", "frontis-blocks")}</strong>
-				</p>
-				<FB_Range
-					label={__("Font Size", "frontis-blocks")}
-					min={0}
-					max={100}
-					rangeValue={imageAccordionTitleFontSize}
-					onChangeHandler={(value) =>
+			{/* Title */}
+			<PanelBody title={__("Title", "frontis-blocks")} initialOpen={false}>
+				<FB_TypographyControl
+					label={__("Typography", "frontis-blocks")}
+					fontFamily={imageAccordionTitleFontFamily}
+					onChangeFontFamily={(value) =>
+						setAttributes({ imageAccordionTitleFontFamily: value })
+					}
+					fontSize={imageAccordionTitleFontSize}
+					onChangeFontSize={(value) =>
 						setAttributes({ imageAccordionTitleFontSize: value })
 					}
-					rangeUnitHandler={(value) =>
+					fontSizeUnits={imageAccordionTitleFontSizeUnits}
+					onChangeFontSizeUnit={(value) =>
 						setAttributes({ imageAccordionTitleFontSizeUnits: value })
 					}
-					deviceType={deviceType}
-					units={imageAccordionTitleFontSizeUnits}
-					setAttributes={setAttributes}
-					rangeStep={1}
-					resetFallbackValue={""}
-				/>
-				<SelectControl
-					label={__("Font Weight", "frontis-blocks")}
-					value={imageAccordionTitleFontWeight}
-					options={[
-						{ label: "Default", value: "" },
-						{ label: "400", value: "400" },
-						{ label: "500", value: "500" },
-						{ label: "600", value: "600" },
-						{ label: "700", value: "700" },
-						{ label: "800", value: "800" },
-					]}
-					onChange={(value) =>
+					fontWeight={imageAccordionTitleFontWeight}
+					onChangeFontWeight={(value) =>
 						setAttributes({ imageAccordionTitleFontWeight: value })
+					}
+					fontStyle={imageAccordionTitleFontStyle}
+					onChangeFontStyle={(value) =>
+						setAttributes({ imageAccordionTitleFontStyle: value })
+					}
+					textTransform={imageAccordionTitleTransform}
+					onChangeTextTransform={(value) =>
+						setAttributes({ imageAccordionTitleTransform: value })
+					}
+					textDecoration={imageAccordionTitleDecoration}
+					onChangeTextDecoration={(value) =>
+						setAttributes({ imageAccordionTitleDecoration: value })
+					}
+					letterSpacing={imageAccordionTitleLetterSpacing}
+					onChangeLetterSpacing={(value) =>
+						setAttributes({ imageAccordionTitleLetterSpacing: value })
+					}
+					letterSpacingUnits={imageAccordionTitleLetterSpacingUnits}
+					onChangeLetterSpacingUnit={(value) =>
+						setAttributes({ imageAccordionTitleLetterSpacingUnits: value })
+					}
+					lineHeight={imageAccordionTitleLineHeight}
+					onChangeLineHeight={(value) =>
+						setAttributes({ imageAccordionTitleLineHeight: value })
+					}
+					lineHeightUnits={imageAccordionTitleLineHeightUnits}
+					onChangeLineHeightUnit={(value) =>
+						setAttributes({ imageAccordionTitleLineHeightUnits: value })
+					}
+					globalTypoType={imageAccordionTitleTypoType}
+					onChangeGlobalTypoType={(value) =>
+						setAttributes({ imageAccordionTitleTypoType: value })
+					}
+					globalTypoOption={imageAccordionTitleTypoOption}
+					onChangeGlobalTypoOption={(value) =>
+						setAttributes({ imageAccordionTitleTypoOption: value })
+					}
+					deviceType={deviceType}
+					setAttributes={setAttributes}
+					globalTypoControlActive={true}
+					storeGlobalTypographyData={(value) =>
+						setAttributes({ imageAccordionTitleGlobalTypographyData: value })
 					}
 				/>
 				<FB_SwitcherControl
-					label={__("Title Color", "frontis-blocks")}
+					label={__("Color", "frontis-blocks")}
 					globalSwitcher={titleColorTab}
 					setGlobalSwitcher={setTitleColorTab}
 				/>
 				{titleColorTab === "normal" && (
 					<FB_ColorControl
-						label={__("Color", "frontis-blocks")}
+						label={__("Normal Color", "frontis-blocks")}
 						globalColor={imageAccordionTitleColor}
 						setGlobalColor={(value) =>
 							setAttributes({ imageAccordionTitleColor: value ?? "" })
@@ -641,39 +812,69 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 						}
 					/>
 				)}
+			</PanelBody>
 
-				{/* Subtitle */}
-				<p className="fb-section-label" style={{ marginTop: "16px" }}>
-					<strong>{__("Subtitle", "frontis-blocks")}</strong>
-				</p>
-				<FB_Range
-					label={__("Font Size", "frontis-blocks")}
-					min={0}
-					max={100}
-					rangeValue={imageAccordionSubtitleFontSize}
-					onChangeHandler={(value) =>
+			{/* Subtitle */}
+			<PanelBody title={__("Subtitle", "frontis-blocks")} initialOpen={false}>
+				<FB_TypographyControl
+					label={__("Typography", "frontis-blocks")}
+					fontFamily={imageAccordionSubtitleFontFamily}
+					onChangeFontFamily={(value) =>
+						setAttributes({ imageAccordionSubtitleFontFamily: value })
+					}
+					fontSize={imageAccordionSubtitleFontSize}
+					onChangeFontSize={(value) =>
 						setAttributes({ imageAccordionSubtitleFontSize: value })
 					}
-					rangeUnitHandler={(value) =>
+					fontSizeUnits={imageAccordionSubtitleFontSizeUnits}
+					onChangeFontSizeUnit={(value) =>
 						setAttributes({ imageAccordionSubtitleFontSizeUnits: value })
 					}
-					deviceType={deviceType}
-					units={imageAccordionSubtitleFontSizeUnits}
-					setAttributes={setAttributes}
-					rangeStep={1}
-					resetFallbackValue={""}
-				/>
-				<SelectControl
-					label={__("Font Weight", "frontis-blocks")}
-					value={imageAccordionSubtitleFontWeight}
-					options={[
-						{ label: "Default", value: "" },
-						{ label: "400", value: "400" },
-						{ label: "500", value: "500" },
-						{ label: "600", value: "600" },
-					]}
-					onChange={(value) =>
+					fontWeight={imageAccordionSubtitleFontWeight}
+					onChangeFontWeight={(value) =>
 						setAttributes({ imageAccordionSubtitleFontWeight: value })
+					}
+					fontStyle={imageAccordionSubtitleFontStyle}
+					onChangeFontStyle={(value) =>
+						setAttributes({ imageAccordionSubtitleFontStyle: value })
+					}
+					textTransform={imageAccordionSubtitleTransform}
+					onChangeTextTransform={(value) =>
+						setAttributes({ imageAccordionSubtitleTransform: value })
+					}
+					textDecoration={imageAccordionSubtitleDecoration}
+					onChangeTextDecoration={(value) =>
+						setAttributes({ imageAccordionSubtitleDecoration: value })
+					}
+					letterSpacing={imageAccordionSubtitleLetterSpacing}
+					onChangeLetterSpacing={(value) =>
+						setAttributes({ imageAccordionSubtitleLetterSpacing: value })
+					}
+					letterSpacingUnits={imageAccordionSubtitleLetterSpacingUnits}
+					onChangeLetterSpacingUnit={(value) =>
+						setAttributes({ imageAccordionSubtitleLetterSpacingUnits: value })
+					}
+					lineHeight={imageAccordionSubtitleLineHeight}
+					onChangeLineHeight={(value) =>
+						setAttributes({ imageAccordionSubtitleLineHeight: value })
+					}
+					lineHeightUnits={imageAccordionSubtitleLineHeightUnits}
+					onChangeLineHeightUnit={(value) =>
+						setAttributes({ imageAccordionSubtitleLineHeightUnits: value })
+					}
+					globalTypoType={imageAccordionSubtitleTypoType}
+					onChangeGlobalTypoType={(value) =>
+						setAttributes({ imageAccordionSubtitleTypoType: value })
+					}
+					globalTypoOption={imageAccordionSubtitleTypoOption}
+					onChangeGlobalTypoOption={(value) =>
+						setAttributes({ imageAccordionSubtitleTypoOption: value })
+					}
+					deviceType={deviceType}
+					setAttributes={setAttributes}
+					globalTypoControlActive={true}
+					storeGlobalTypographyData={(value) =>
+						setAttributes({ imageAccordionSubtitleGlobalTypographyData: value })
 					}
 				/>
 				<FB_ColorControl
@@ -879,34 +1080,61 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 			{/* Button — Preset 3 only */}
 			{imageAccordionPreset === "preset-3" && (
 				<PanelBody title={__("Button", "frontis-blocks")} initialOpen={false}>
-					<FB_Range
-						label={__("Font Size", "frontis-blocks")}
-						min={8}
-						max={48}
-						rangeValue={imageAccordionBtnFontSize}
-						onChangeHandler={(value) =>
+					<FB_TypographyControl
+						label={__("Button Typography", "frontis-blocks")}
+						fontFamily={imageAccordionBtnFontFamily}
+						onChangeFontFamily={(value) =>
+							setAttributes({ imageAccordionBtnFontFamily: value })
+						}
+						fontSize={imageAccordionBtnFontSize}
+						onChangeFontSize={(value) =>
 							setAttributes({ imageAccordionBtnFontSize: value })
 						}
-						rangeUnitHandler={(value) =>
+						fontSizeUnits={imageAccordionBtnFontSizeUnits}
+						onChangeFontSizeUnit={(value) =>
 							setAttributes({ imageAccordionBtnFontSizeUnits: value })
 						}
-						deviceType={deviceType}
-						units={imageAccordionBtnFontSizeUnits}
-						setAttributes={setAttributes}
-						rangeStep={1}
-						resetFallbackValue={""}
-					/>
-					<SelectControl
-						label={__("Font Weight", "frontis-blocks")}
-						value={imageAccordionBtnFontWeight}
-						options={[
-							{ label: "Default", value: "" },
-							{ label: "400", value: "400" },
-							{ label: "500", value: "500" },
-							{ label: "600", value: "600" },
-						]}
-						onChange={(value) =>
+						fontWeight={imageAccordionBtnFontWeight}
+						onChangeFontWeight={(value) =>
 							setAttributes({ imageAccordionBtnFontWeight: value })
+						}
+						fontStyle={imageAccordionBtnFontStyle}
+						onChangeFontStyle={(value) =>
+							setAttributes({ imageAccordionBtnFontStyle: value })
+						}
+						textTransform={imageAccordionBtnTransform}
+						onChangeTextTransform={(value) =>
+							setAttributes({ imageAccordionBtnTransform: value })
+						}
+						textDecoration={imageAccordionBtnDecoration}
+						onChangeTextDecoration={(value) =>
+							setAttributes({ imageAccordionBtnDecoration: value })
+						}
+						letterSpacing={imageAccordionBtnLetterSpacing}
+						onChangeLetterSpacing={(value) =>
+							setAttributes({ imageAccordionBtnLetterSpacing: value })
+						}
+						letterSpacingUnits={imageAccordionBtnLetterSpacingUnits}
+						onChangeLetterSpacingUnit={(value) =>
+							setAttributes({ imageAccordionBtnLetterSpacingUnits: value })
+						}
+						lineHeight={imageAccordionBtnLineHeight}
+						onChangeLineHeight={(value) =>
+							setAttributes({ imageAccordionBtnLineHeight: value })
+						}
+						globalTypoType={imageAccordionBtnTypoType}
+						onChangeGlobalTypoType={(value) =>
+							setAttributes({ imageAccordionBtnTypoType: value })
+						}
+						globalTypoOption={imageAccordionBtnTypoOption}
+						onChangeGlobalTypoOption={(value) =>
+							setAttributes({ imageAccordionBtnTypoOption: value })
+						}
+						deviceType={deviceType}
+						setAttributes={setAttributes}
+						globalTypoControlActive={true}
+						storeGlobalTypographyData={(value) =>
+							setAttributes({ imageAccordionBtnGlobalTypographyData: value })
 						}
 					/>
 					<FB_SwitcherControl
@@ -1035,76 +1263,390 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 	// ========================
 	const advancedControls = (
 		<>
-			<PanelBody title={__("Layout", "frontis-blocks")} initialOpen={true}>
-				<FB_Range
-					min={0}
-					max={10000000}
-					label={__("Z Index", "frontis-blocks")}
-					rangeValue={imageAccordionGlobalZIndex}
-					onChangeHandler={(value) =>
-						setAttributes({
-							imageAccordionGlobalZIndex: value === 0 ? undefined : value,
-						})
-					}
-					deviceType={deviceType}
-					setAttributes={setAttributes}
-					rangeStep={1}
-					resetFallbackValue={""}
-					isRangeUnit={false}
-				/>
-				<FB_InputControl
-					label={__("CSS ID", "frontis-blocks")}
-					value={imageAccordionWraperID}
-					onChangeValue={(value) =>
-						setAttributes({ imageAccordionWraperID: value })
-					}
-					helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
-				/>
-				<FB_InputControl
-					label={__("CSS Class", "frontis-blocks")}
-					value={imageAccordionWraperClass}
-					onChangeValue={(value) =>
-						setAttributes({ imageAccordionWraperClass: value })
-					}
-					helpText={__("Separate with spaces.", "frontis-blocks")}
-				/>
-			</PanelBody>
+			<div className="fb-setting-advanced-tab-wrapper">
+				<div className="fb-setting-inner-wrapper">
+					<PanelBody
+						title={__("Layout", "frontis-blocks")}
+						initialOpen={true}
+						className="fb-setting-layout-header"
+					>
+						<FB_Range
+							min={0}
+							max={10000000}
+							label={__("Z Index", "frontis-blocks")}
+							rangeValue={imageAccordionGlobalZIndex}
+							onChangeHandler={(value) =>
+								setAttributes({
+									imageAccordionGlobalZIndex: value === 0 ? undefined : value,
+								})
+							}
+							deviceType={deviceType}
+							setAttributes={setAttributes}
+							rangeStep={1}
+							resetFallbackValue={""}
+							isRangeUnit={false}
+						/>
 
-			<PanelBody
-				title={__("Responsive Visibility", "frontis-blocks")}
-				initialOpen={false}
-			>
-				<ToggleControl
-					label={__("Hide on Desktop", "frontis-blocks")}
-					checked={imageAccordionDesktopSwitcher}
-					onChange={(value) =>
-						setAttributes({ imageAccordionDesktopSwitcher: value })
-					}
-				/>
-				<ToggleControl
-					label={__("Hide on Tablet", "frontis-blocks")}
-					checked={imageAccordionTabletSwitcher}
-					onChange={(value) =>
-						setAttributes({ imageAccordionTabletSwitcher: value })
-					}
-				/>
-				<ToggleControl
-					label={__("Hide on Mobile", "frontis-blocks")}
-					checked={imageAccordionMobileSwitcher}
-					onChange={(value) =>
-						setAttributes({ imageAccordionMobileSwitcher: value })
-					}
-				/>
-			</PanelBody>
+						<FB_InputControl
+							label={__("CSS ID", "frontis-blocks")}
+							value={imageAccordionWraperID}
+							onChangeValue={(value) =>
+								setAttributes({ imageAccordionWraperID: value })
+							}
+							helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
+						/>
 
-			<PanelBody title={__("Custom CSS", "frontis-blocks")} initialOpen={false}>
-				<FB_CustomCSSEditor
-					value={imageAccordionCustomCSS}
-					onChangeValue={(value) =>
-						setAttributes({ imageAccordionCustomCSS: value })
-					}
-				/>
-			</PanelBody>
+						<FB_InputControl
+							label={__("CSS Class", "frontis-blocks")}
+							value={imageAccordionWraperClass}
+							onChangeValue={(value) =>
+								setAttributes({ imageAccordionWraperClass: value })
+							}
+							helpText={__("Separate with spaces key.", "frontis-blocks")}
+						/>
+					</PanelBody>
+
+					<PanelBody
+						title={__("Responsive Control", "frontis-blocks")}
+						initialOpen={false}
+						className="fb-setting-responsive-control-wrapper"
+					>
+						<ToggleControl
+							label={__("Hide on Desktop", "frontis-blocks")}
+							className="fb-setting-responsive-control"
+							checked={imageAccordionDesktopSwitcher}
+							onChange={(value) =>
+								setAttributes({ imageAccordionDesktopSwitcher: value })
+							}
+						/>
+						<ToggleControl
+							label={__("Hide on Tablet", "frontis-blocks")}
+							className="fb-setting-responsive-control"
+							checked={imageAccordionTabletSwitcher}
+							onChange={(value) =>
+								setAttributes({ imageAccordionTabletSwitcher: value })
+							}
+						/>
+						<ToggleControl
+							label={__("Hide on Mobile", "frontis-blocks")}
+							className="fb-setting-responsive-control"
+							checked={imageAccordionMobileSwitcher}
+							onChange={(value) =>
+								setAttributes({ imageAccordionMobileSwitcher: value })
+							}
+						/>
+					</PanelBody>
+
+					<PanelBody
+						title={__("Background", "frontis-blocks")}
+						initialOpen={false}
+					>
+						<FB_BackgroundColorControl
+							bgColorSwitcher={imageAccordionBgColorSwitcher}
+							setBgColorSwitcher={(value) =>
+								setAttributes({ imageAccordionBgColorSwitcher: value })
+							}
+							normalBackgroundType={imageAccordionBackgroundType}
+							setNormalBackgroundType={(value) =>
+								setAttributes({ imageAccordionBackgroundType: value })
+							}
+							normalClassicColor={imageAccordionClassicColor}
+							setNormalClassicColor={(value) =>
+								setAttributes({
+									imageAccordionClassicColor: value === undefined ? "" : value,
+								})
+							}
+							normalGradientColor={imageAccordionGradientColor}
+							setNormalGradientColor={(value) =>
+								setAttributes({
+									imageAccordionGradientColor:
+										value === undefined ? null : value,
+								})
+							}
+							normalCustomGradientSwitcher={
+								imageAccordionCustomGradientSwitcher
+							}
+							setNormalCustomGradientSwitcher={(value) =>
+								setAttributes({ imageAccordionCustomGradientSwitcher: value })
+							}
+							normalCustomGradientInputValue={
+								imageAccordionCustomGradientInputValue
+							}
+							setNormalCustomGradientInputValue={(value) =>
+								setAttributes({ imageAccordionCustomGradientInputValue: value })
+							}
+							normalBackgroundImageUrl={imageAccordionBackgroundImageUrl}
+							setNormalBackgroundImageUrl={(value) =>
+								setAttributes({ imageAccordionBackgroundImageUrl: value })
+							}
+							normalBackgroundImageAlt={imageAccordionBackgroundImageAlt}
+							setNormalBackgroundImageAlt={(value) =>
+								setAttributes({ imageAccordionBackgroundImageAlt: value })
+							}
+							normalBackgroundImageID={imageAccordionBackgroundImageID}
+							setNormalBackgroundImageID={(value) =>
+								setAttributes({ imageAccordionBackgroundImageID: value })
+							}
+							normalBackgroundImagePosition={
+								imageAccordionBackgroundImagePosition
+							}
+							setNormalBackgroundImagePosition={(value) =>
+								setAttributes({ imageAccordionBackgroundImagePosition: value })
+							}
+							normalBackgroundImageAttachment={
+								imageAccordionBackgroundImageAttachment
+							}
+							setNormalBackgroundImageAttachment={(value) =>
+								setAttributes({
+									imageAccordionBackgroundImageAttachment: value,
+								})
+							}
+							normalBackgroundImageRepeat={imageAccordionBackgroundImageRepeat}
+							setNormalBackgroundImageRepeat={(value) =>
+								setAttributes({ imageAccordionBackgroundImageRepeat: value })
+							}
+							normalBackgroundImageSize={imageAccordionBackgroundImageSize}
+							setNormalBackgroundImageSize={(value) =>
+								setAttributes({ imageAccordionBackgroundImageSize: value })
+							}
+							hoverBackgroundType={imageAccordionHoverBackgroundType}
+							setHoverBackgroundType={(value) =>
+								setAttributes({ imageAccordionHoverBackgroundType: value })
+							}
+							hoverClassicColor={imageAccordionHoverClassicColor}
+							setHoverClassicColor={(value) =>
+								setAttributes({
+									imageAccordionHoverClassicColor:
+										value === undefined ? "" : value,
+								})
+							}
+							hoverGradientColor={imageAccordionHoverGradientColor}
+							setHoverGradientColor={(value) =>
+								setAttributes({
+									imageAccordionHoverGradientColor:
+										value === undefined ? null : value,
+								})
+							}
+							hoverCustomGradientSwitcher={
+								imageAccordionHoverCustomGradientSwitcher
+							}
+							setHoverCustomGradientSwitcher={(value) =>
+								setAttributes({
+									imageAccordionHoverCustomGradientSwitcher: value,
+								})
+							}
+							hoverCustomGradientInputValue={
+								imageAccordionHoverCustomGradientInputValue
+							}
+							setHoverCustomGradientInputValue={(value) =>
+								setAttributes({
+									imageAccordionHoverCustomGradientInputValue: value,
+								})
+							}
+							hoverBackgroundImageUrl={imageAccordionHoverBackgroundImageUrl}
+							setHoverBackgroundImageUrl={(value) =>
+								setAttributes({ imageAccordionHoverBackgroundImageUrl: value })
+							}
+							hoverBackgroundImageAlt={imageAccordionHoverBackgroundImageAlt}
+							setHoverBackgroundImageAlt={(value) =>
+								setAttributes({ imageAccordionHoverBackgroundImageAlt: value })
+							}
+							hoverBackgroundImageID={imageAccordionHoverBackgroundImageID}
+							setHoverBackgroundImageID={(value) =>
+								setAttributes({ imageAccordionHoverBackgroundImageID: value })
+							}
+							hoverBackgroundImagePosition={
+								imageAccordionHoverBackgroundImagePosition
+							}
+							setHoverBackgroundImagePosition={(value) =>
+								setAttributes({
+									imageAccordionHoverBackgroundImagePosition: value,
+								})
+							}
+							hoverBackgroundImageAttachment={
+								imageAccordionHoverBackgroundImageAttachment
+							}
+							setHoverBackgroundImageAttachment={(value) =>
+								setAttributes({
+									imageAccordionHoverBackgroundImageAttachment: value,
+								})
+							}
+							hoverBackgroundImageRepeat={
+								imageAccordionHoverBackgroundImageRepeat
+							}
+							setHoverBackgroundImageRepeat={(value) =>
+								setAttributes({
+									imageAccordionHoverBackgroundImageRepeat: value,
+								})
+							}
+							hoverBackgroundImageSize={imageAccordionHoverBackgroundImageSize}
+							setHoverBackgroundImageSize={(value) =>
+								setAttributes({ imageAccordionHoverBackgroundImageSize: value })
+							}
+						/>
+					</PanelBody>
+					<PanelBody title={__("Border", "frontis-blocks")} initialOpen={false}>
+						<SelectControl
+							label={__("Border Style", "frontis-blocks")}
+							value={imageAccordionWrapperBorder}
+							options={BORDER_STYLES}
+							onChange={(value) =>
+								setAttributes({ imageAccordionWrapperBorder: value })
+							}
+						/>
+						<FB_SwitcherControl
+							label={__("Border Color", "frontis-blocks")}
+							globalSwitcher={imageAccordionWrapperBorderColorSwitcher}
+							setGlobalSwitcher={(value) =>
+								setAttributes({
+									imageAccordionWrapperBorderColorSwitcher: value,
+								})
+							}
+						/>
+
+						{imageAccordionWrapperBorderColorSwitcher === "normal" && (
+							<FB_ColorControl
+								label={__("Normal Color", "frontis-blocks")}
+								globalColor={imageAccordionWrapperBorderColor}
+								setGlobalColor={(value) =>
+									setAttributes({
+										imageAccordionWrapperBorderColor:
+											value === undefined ? "" : value,
+									})
+								}
+							/>
+						)}
+
+						{imageAccordionWrapperBorderColorSwitcher === "hover" && (
+							<FB_ColorControl
+								label={__("Hover Color", "frontis-blocks")}
+								globalColor={imageAccordionWrapperBorderHoverColor}
+								setGlobalColor={(value) =>
+									setAttributes({
+										imageAccordionWrapperBorderHoverColor:
+											value === undefined ? "" : value,
+									})
+								}
+							/>
+						)}
+						<FB_Spacing
+							label={"Border Width"}
+							deviceType={deviceType}
+							spacingUnitsHandler={(unit) =>
+								setAttributes({
+									imageAccordionWrapperBorderTypeUnits: {
+										...imageAccordionWrapperBorderTypeUnits,
+										[deviceType]: unit,
+									},
+								})
+							}
+							spacingUnits={imageAccordionWrapperBorderTypeUnits}
+							spacingDesktop={imageAccordionWrapperBorderTypeDesktop}
+							spacingTablet={imageAccordionWrapperBorderTypeTablet}
+							spacingMobile={imageAccordionWrapperBorderTypeMobile}
+							handleSpacingUnitHandler={wrapperBorderTypeChange}
+							spacingCombineBtn={imageAccordionWrapperBorderTypeLink}
+							spacingCombineBtnHandler={() =>
+								setAttributes({
+									imageAccordionWrapperBorderTypeLink:
+										!imageAccordionWrapperBorderTypeLink,
+								})
+							}
+							setAttributes={setAttributes}
+						/>
+						<FB_Spacing
+							label={"Border Radius"}
+							deviceType={deviceType}
+							spacingUnitsHandler={(unit) =>
+								setAttributes({
+									imageAccordionWrapperBorderRadiusUnits: {
+										...imageAccordionWrapperBorderRadiusUnits,
+										[deviceType]: unit,
+									},
+								})
+							}
+							spacingUnits={imageAccordionWrapperBorderRadiusUnits}
+							spacingDesktop={imageAccordionWrapperBorderRadiusDesktop}
+							spacingTablet={imageAccordionWrapperBorderRadiusTablet}
+							spacingMobile={imageAccordionWrapperBorderRadiusMobile}
+							handleSpacingUnitHandler={wrapperBorderRadiusChange}
+							spacingCombineBtn={imageAccordionWrapperBorderRadiusLink}
+							spacingCombineBtnHandler={() =>
+								setAttributes({
+									imageAccordionWrapperBorderRadiusLink:
+										!imageAccordionWrapperBorderRadiusLink,
+								})
+							}
+							setAttributes={setAttributes}
+						/>
+					</PanelBody>
+					<PanelBody
+						title={__("Padding/Margin", "frontis-blocks")}
+						initialOpen={false}
+					>
+						<FB_Spacing
+							label={"Padding"}
+							deviceType={deviceType}
+							spacingUnitsHandler={(unit) =>
+								setAttributes({
+									imageAccordionPaddingUnits: {
+										...imageAccordionPaddingUnits,
+										[deviceType]: unit,
+									},
+								})
+							}
+							spacingUnits={imageAccordionPaddingUnits}
+							spacingDesktop={imageAccordionPaddingDesktop}
+							spacingTablet={imageAccordionPaddingTablet}
+							spacingMobile={imageAccordionPaddingMobile}
+							handleSpacingUnitHandler={paddingUnitsChange}
+							spacingCombineBtn={imageAccordionPaddingLink}
+							spacingCombineBtnHandler={() =>
+								setAttributes({
+									imageAccordionPaddingLink: !imageAccordionPaddingLink,
+								})
+							}
+							setAttributes={setAttributes}
+						/>
+						<FB_Spacing
+							label={"Margin"}
+							deviceType={deviceType}
+							spacingUnitsHandler={(unit) =>
+								setAttributes({
+									imageAccordionMarginUnits: {
+										...imageAccordionMarginUnits,
+										[deviceType]: unit,
+									},
+								})
+							}
+							spacingUnits={imageAccordionMarginUnits}
+							spacingDesktop={imageAccordionMarginDesktop}
+							spacingTablet={imageAccordionMarginTablet}
+							spacingMobile={imageAccordionMarginMobile}
+							handleSpacingUnitHandler={marginUnitsChange}
+							spacingCombineBtn={imageAccordionMarginLink}
+							spacingCombineBtnHandler={() =>
+								setAttributes({
+									imageAccordionMarginLink: !imageAccordionMarginLink,
+								})
+							}
+							setAttributes={setAttributes}
+						/>
+					</PanelBody>
+
+					<PanelBody
+						title={__("Custom CSS", "frontis-blocks")}
+						initialOpen={false}
+					>
+						<FB_CustomCSSEditor
+							value={imageAccordionCustomCSS}
+							onChangeValue={(value) =>
+								setAttributes({ imageAccordionCustomCSS: value })
+							}
+						/>
+					</PanelBody>
+				</div>
+			</div>
 		</>
 	);
 

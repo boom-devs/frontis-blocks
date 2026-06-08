@@ -340,6 +340,42 @@ const attributes = {
 		type: "object",
 		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
 	},
+	imageAccordionTitleFontFamily: {
+		type: "string",
+		default: "Default",
+	},
+	imageAccordionTitleFontStyle: {
+		type: "string",
+		default: "",
+	},
+	imageAccordionTitleTransform: {
+		type: "string",
+		default: "",
+	},
+	imageAccordionTitleDecoration: {
+		type: "string",
+		default: "",
+	},
+	imageAccordionTitleLetterSpacing: {
+		type: "object",
+		default: { Desktop: "", Tablet: "", Mobile: "" },
+	},
+	imageAccordionTitleLetterSpacingUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+	imageAccordionTitleGlobalTypographyData: {
+		type: "object",
+		default: {},
+	},
+	imageAccordionTitleTypoType: {
+		type: "string",
+		default: "default",
+	},
+	imageAccordionTitleTypoOption: {
+		type: "object",
+		default: { label: "Default", value: "default" },
+	},
 
 	imageAccordionSubtitleColor: {
 		type: "string",
@@ -360,6 +396,50 @@ const attributes = {
 	imageAccordionSubtitleFontWeight: {
 		type: "string",
 		default: "",
+	},
+	imageAccordionSubtitleLineHeight: {
+		type: "object",
+		default: { Desktop: "", Tablet: "", Mobile: "" },
+	},
+	imageAccordionSubtitleLineHeightUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+	imageAccordionSubtitleFontFamily: {
+		type: "string",
+		default: "Default",
+	},
+	imageAccordionSubtitleFontStyle: {
+		type: "string",
+		default: "",
+	},
+	imageAccordionSubtitleTransform: {
+		type: "string",
+		default: "",
+	},
+	imageAccordionSubtitleDecoration: {
+		type: "string",
+		default: "",
+	},
+	imageAccordionSubtitleLetterSpacing: {
+		type: "object",
+		default: { Desktop: "", Tablet: "", Mobile: "" },
+	},
+	imageAccordionSubtitleLetterSpacingUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+	imageAccordionSubtitleGlobalTypographyData: {
+		type: "object",
+		default: {},
+	},
+	imageAccordionSubtitleTypoType: {
+		type: "string",
+		default: "default",
+	},
+	imageAccordionSubtitleTypoOption: {
+		type: "object",
+		default: { label: "Default", value: "default" },
 	},
 
 	imageAccordionBtnTextColor: {
@@ -417,6 +497,50 @@ const attributes = {
 	imageAccordionBtnFontWeight: {
 		type: "string",
 		default: "",
+	},
+	imageAccordionBtnLineHeight: {
+		type: "object",
+		default: { Desktop: "", Tablet: "", Mobile: "" },
+	},
+	imageAccordionBtnLineHeightUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+	imageAccordionBtnFontFamily: {
+		type: "string",
+		default: "Default",
+	},
+	imageAccordionBtnFontStyle: {
+		type: "string",
+		default: "",
+	},
+	imageAccordionBtnTransform: {
+		type: "string",
+		default: "",
+	},
+	imageAccordionBtnDecoration: {
+		type: "string",
+		default: "",
+	},
+	imageAccordionBtnLetterSpacing: {
+		type: "object",
+		default: { Desktop: "", Tablet: "", Mobile: "" },
+	},
+	imageAccordionBtnLetterSpacingUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+	imageAccordionBtnGlobalTypographyData: {
+		type: "object",
+		default: {},
+	},
+	imageAccordionBtnTypoType: {
+		type: "string",
+		default: "default",
+	},
+	imageAccordionBtnTypoOption: {
+		type: "object",
+		default: { label: "Default", value: "default" },
 	},
 
 	imageAccordionPaddingUnits: {
@@ -489,6 +613,197 @@ const attributes = {
 	imageAccordionMobileSwitcher: {
 		type: "boolean",
 		default: false,
+	},
+
+	imageAccordionBgColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	imageAccordionBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	imageAccordionClassicColor: {
+		type: "string",
+		default: "",
+	},
+	imageAccordionGradientColor: {
+		type: "string",
+	},
+	imageAccordionCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	imageAccordionCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+	imageAccordionBackgroundImageUrl: {
+		type: "string",
+		default: "",
+	},
+	imageAccordionBackgroundImageAlt: {
+		type: "string",
+		default: "",
+	},
+	imageAccordionBackgroundImageID: {
+		type: "string",
+		default: "",
+	},
+	imageAccordionBackgroundImagePosition: {
+		type: "string",
+		default: "",
+	},
+	imageAccordionBackgroundImageAttachment: {
+		type: "string",
+		default: "",
+	},
+	imageAccordionBackgroundImageSize: {
+		type: "string",
+		default: "",
+	},
+	imageAccordionBackgroundImageRepeat: {
+		type: "string",
+		default: "",
+	},
+	imageAccordionHoverBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	imageAccordionHoverClassicColor: {
+		type: "string",
+	},
+	imageAccordionHoverGradientColor: {
+		type: "string",
+	},
+	imageAccordionHoverCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	imageAccordionHoverCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+	imageAccordionHoverBackgroundImageUrl: {
+		type: "string",
+		default: "",
+	},
+	imageAccordionHoverBackgroundImageAlt: {
+		type: "string",
+		default: "",
+	},
+	imageAccordionHoverBackgroundImageID: {
+		type: "string",
+		default: "",
+	},
+	imageAccordionHoverBackgroundImagePosition: {
+		type: "string",
+		default: "",
+	},
+	imageAccordionHoverBackgroundImageAttachment: {
+		type: "string",
+		default: "",
+	},
+	imageAccordionHoverBackgroundImageSize: {
+		type: "string",
+		default: "",
+	},
+	imageAccordionHoverBackgroundImageRepeat: {
+		type: "string",
+		default: "",
+	},
+	imageAccordionWrapperBorder: {
+		type: "string",
+		default: "none",
+	},
+	imageAccordionWrapperBorderColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	imageAccordionWrapperBorderColor: {
+		type: "string",
+		default: "",
+	},
+	imageAccordionWrapperBorderHoverColor: {
+		type: "string",
+	},
+	imageAccordionWrapperBorderTypeUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	imageAccordionWrapperBorderTypeDesktop: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	imageAccordionWrapperBorderTypeTablet: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	imageAccordionWrapperBorderTypeMobile: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	imageAccordionWrapperBorderTypeLink: {
+		type: "boolean",
+		default: true,
+	},
+	imageAccordionWrapperBorderRadiusUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	imageAccordionWrapperBorderRadiusDesktop: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	imageAccordionWrapperBorderRadiusTablet: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	imageAccordionWrapperBorderRadiusMobile: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	imageAccordionWrapperBorderRadiusLink: {
+		type: "boolean",
+		default: true,
 	},
 };
 
