@@ -1,0 +1,120 @@
+/* =============================================================
+   Frontis Blocks — Multi Chart Block Styles
+   ============================================================= */
+
+.fb-elegant-chart-block {
+	width: 100%;
+	position: relative;
+
+	.fb-chart-card {
+		display: flex;
+		flex-direction: column;
+		transition: all 0.3s ease;
+	}
+
+	.fb-chart-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding-bottom: 20px;
+	}
+
+	.fb-chart-label {
+		font-size: 1.1rem;
+		font-weight: 600;
+		margin: 0;
+	}
+
+	/* Filter Dropdown */
+	.fb-chart-filter {
+		position: relative;
+		display: inline-flex;
+		align-items: center;
+		gap: 10px;
+		padding: 8px 18px;
+		background: #fff;
+		border: 1px solid #e2e8f0;
+		border-radius: 999px; // Pill shape
+		cursor: pointer;
+		z-index: 20;
+
+		.fb-dropdown-list {
+			display: none;
+			position: absolute;
+			top: 110%;
+			right: 0;
+			background: #fff;
+			border-radius: 12px;
+			box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+			list-style: none;
+			padding: 8px 0; // Padding for list items
+			margin: 0;
+			min-width: 150px;
+		}
+
+		&.fb-active .fb-dropdown-list {
+			display: block;
+		}
+
+		.fb-dropdown-item {
+			padding: 10px 16px;
+			font-size: 14px;
+			color: #64748b;
+			transition: all 0.2s; // Smooth hover transition
+
+			&:hover {
+				background: #f8fafc;
+				color: #3b82f6;
+			}
+			&.fb-item-active {
+				background: #ebf5ff;
+				color: #3b82f6;
+				font-weight: 600;
+			}
+		}
+	}
+
+	.fb-canvas-wrapper {
+		position: relative;
+		width: 100%; // Full width
+	}
+
+	/* Legend Styles */
+	.fb-chart-legend {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 15px;
+		margin-top: 20px;
+		justify-content: center;
+	}
+
+	.fb-legend-item {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		font-size: 13px;
+		cursor: pointer;
+
+		&.fb-legend-hidden {
+			opacity: 0.4;
+			text-decoration: line-through;
+		}
+	}
+
+	.fb-legend-dot {
+		width: 10px;
+		height: 10px;
+		border-radius: 50%;
+	}
+
+	.fb-chart-footer {
+		margin-top: 20px;
+		.fb-footer-title {
+			margin: 0 0 5px; // Spacing below title
+		}
+		.fb-chart-description {
+			color: #64748b;
+			margin: 0;
+		}
+	}
+}

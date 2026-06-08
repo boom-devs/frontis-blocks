@@ -1,0 +1,689 @@
+const pluginURL =
+	typeof frontis_blocks_params !== "undefined"
+		? frontis_blocks_params.plugin_url
+		: typeof FrontisBlocksData !== "undefined"
+		? FrontisBlocksData.pluginUrl
+		: "";
+
+const attributes = {
+	// Standard Frontis Attributes
+	blockID: {
+		type: "string",
+		default: "",
+	},
+	blockStyle: {
+		type: "string",
+		default: "",
+	},
+	deviceType: {
+		type: "string",
+		default: "Desktop",
+	},
+
+	/* =============================================
+       CONTENT: Chart Type & Settings
+    ============================================= */
+	chartType: {
+		type: "string",
+		default: "line",
+	},
+	barVariant: {
+		type: "string",
+		default: "default",
+	},
+	chartTitle: {
+		type: "string",
+		default: "",
+	},
+	chartDescription: {
+		type: "string",
+		default:
+			"Exhibit trends and variations over time by enabling a clear depiction of data fluctuations.",
+	},
+	chartHeight: {
+		type: "number",
+		default: 280,
+	},
+
+	/* =============================================
+       CONTENT: Filter Dropdown & Series Data
+    ============================================= */
+	filterList: {
+		type: "array",
+		default: [
+			{
+				id: "f1",
+				filter_label: "This Week",
+				filter_icon: "fas fa-calendar-week",
+			},
+			{
+				id: "f2",
+				filter_label: "Last Month",
+				filter_icon: "fas fa-calendar-alt",
+			},
+		],
+	},
+	chartDatasets: {
+		type: "array",
+		default: [
+			{
+				id: "ds1",
+				series_name: "Series 1",
+				values: "28,20,22,30,21",
+				color: "#3b82f6",
+			},
+			{
+				id: "ds2",
+				series_name: "Series 2",
+				values: "15,30,21,34,16",
+				color: "#f59e0b",
+			},
+			{
+				id: "ds3",
+				series_name: "Series 3",
+				values: "-15,40,23,10,21",
+				color: "#10b981",
+			},
+		],
+	},
+	chartLabels: {
+		type: "string",
+		default: "Jan,Feb,Mar,Apr,May,Jun,Jul",
+	},
+
+	/* =============================================
+       STYLE: Chart Container (Canvas)
+    ============================================= */
+	canvasWidth: {
+		type: "object",
+		default: { Desktop: "100", Tablet: "100", Mobile: "100" },
+	},
+	canvasWidthUnits: {
+		type: "object",
+		default: { Desktop: "%", Tablet: "%", Mobile: "%" },
+	},
+	canvasHeight: {
+		type: "object",
+		default: { Desktop: "700", Tablet: "", Mobile: "" },
+	},
+	canvasHeightUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+
+	// Container Background / Border / Spacing
+	canvasNormalColor: {
+		// Normal Classic Color
+		type: "string",
+		default: "#EBF5FF",
+	},
+	canvasBgColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	canvasNormalBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	canvasNormalGradientColor: {
+		type: "string",
+		default: null,
+	},
+	canvasNormalCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	canvasNormalCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+	canvasHoverBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	canvasHoverClassicColor: {
+		type: "string",
+		default: "",
+	},
+	canvasHoverGradientColor: {
+		type: "string",
+		default: null,
+	},
+	canvasHoverCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	canvasHoverColor: {
+		type: "string",
+		default: "",
+	},
+	canvasBgColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	canvasNormalBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	canvasNormalGradientColor: {
+		type: "string",
+		default: null,
+	},
+	canvasHoverBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	canvasHoverClassicColor: {
+		type: "string",
+		default: "",
+	},
+	canvasHoverGradientColor: {
+		type: "string",
+		default: null,
+	},
+	canvasNormalCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	canvasBorderHoverColor: {
+		type: "string",
+		default: "",
+	},
+	canvasBorderRadiusUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+	canvasBorderRadiusDesktop: {
+		type: "object",
+		default: { top: "24", bottom: "24", left: "24", right: "24" },
+	},
+	canvasBorderRadiusTablet: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	canvasBorderRadiusMobile: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	canvasBorderRadiusLink: {
+		type: "boolean",
+		default: true,
+	},
+	canvasPaddingUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+	canvasPaddingDesktop: {
+		type: "object",
+		default: { top: "24", bottom: "24", left: "24", right: "24" },
+	},
+	canvasPaddingTablet: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	canvasPaddingMobile: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	canvasPaddingLink: {
+		type: "boolean",
+		default: true,
+	},
+	canvasMarginUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+	canvasMarginDesktop: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	canvasMarginTablet: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	canvasMarginMobile: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	canvasMarginLink: {
+		type: "boolean",
+		default: true,
+	},
+
+	/* =============================================
+       STYLE: Chart Body
+    ============================================= */
+	chartBodyWidth: {
+		type: "object",
+		default: { Desktop: "100", Tablet: "100", Mobile: "100" },
+	},
+	chartBodyWidthUnits: {
+		type: "object",
+		default: { Desktop: "%", Tablet: "%", Mobile: "%" },
+	},
+	chartBodyHeight: {
+		type: "object",
+		default: { Desktop: "430", Tablet: "", Mobile: "" },
+	},
+	chartBodyHeightUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+	chartBodyNormalColor: {
+		type: "string",
+		default: "#ffffff",
+	},
+	chartBodyBgColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	chartBodyNormalBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	chartBodyNormalGradientColor: {
+		type: "string",
+		default: null,
+	},
+	chartBodyNormalCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	chartBodyNormalCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+	chartBodyHoverBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	chartBodyHoverGradientColor: {
+		type: "string",
+		default: null,
+	},
+	chartBodyHoverCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	chartBodyHoverCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+	chartBodyHoverColor: {
+		type: "string",
+		default: "",
+	},
+	chartBodyBorderRadiusUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+	chartBodyBorderRadiusDesktop: {
+		type: "object",
+		default: { top: "24", bottom: "24", left: "24", right: "24" },
+	},
+	chartBodyBorderRadiusTablet: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	chartBodyBorderRadiusMobile: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	chartBodyBorderRadiusLink: {
+		type: "boolean",
+		default: true,
+	},
+	chartBodyPaddingDesktop: {
+		type: "object",
+		default: { top: "24", bottom: "24", left: "24", right: "24" },
+	},
+	chartBodyPaddingTablet: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	chartBodyPaddingMobile: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	chartBodyPaddingLink: {
+		type: "boolean",
+		default: true,
+	},
+	filterIconSizeUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+
+	/* =============================================
+       STYLE: Chart Title & Header
+    ============================================= */
+	chartTitleColor: {
+		type: "string",
+		default: "#0f172a",
+	},
+	chartTitleHoverColor: {
+		type: "string",
+		default: "",
+	},
+	chartHeaderPaddingDesktop: {
+		type: "object",
+		default: { top: "0", bottom: "24", left: "0", right: "0" },
+	},
+	chartHeaderPaddingTablet: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	chartHeaderPaddingMobile: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	chartHeaderPaddingLink: {
+		type: "boolean",
+		default: false,
+	},
+
+	/* =============================================
+       STYLE: Toggle Button & Icon
+    ============================================= */
+	toggleBtnColor: {
+		type: "string",
+		default: "#0f172a",
+	},
+	toggleBtnBgColor: {
+		type: "string",
+		default: "#ffffff",
+	},
+	toggleBtnHoverColor: {
+		type: "string",
+		default: "",
+	},
+	toggleBtnHoverBgColor: {
+		type: "string",
+		default: "",
+	},
+	toggleBtnPaddingDesktop: {
+		type: "object",
+		default: { top: "9", bottom: "9", left: "18", right: "18" },
+	},
+	toggleBtnBorderRadiusDesktop: {
+		type: "object",
+		default: { top: "999", bottom: "999", left: "999", right: "999" },
+	},
+	filterIcon: {
+		type: "object",
+		default: { value: "fas fa-chevron-down", library: "solid" },
+	},
+	filterIconSize: {
+		type: "object",
+		default: { Desktop: "13", Tablet: "", Mobile: "" },
+	},
+	filterIconSizeUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	filterIconColor: {
+		type: "string",
+		default: "",
+	},
+	filterIconHoverColor: {
+		type: "string",
+		default: "",
+	},
+
+	/* =============================================
+       STYLE: Legend & Footer Missing Attributes
+    ============================================= */
+	legendItemPaddingUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+	legendItemPaddingDesktop: {
+		type: "object",
+		default: { top: "5", bottom: "5", left: "10", right: "10" },
+	},
+	legendItemMarginUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+	legendItemMarginDesktop: {
+		type: "object",
+		default: { top: "0", bottom: "0", left: "0", right: "0" },
+	},
+	footerTitleTypography: {
+		type: "object",
+		default: {
+			fontFamily: "",
+			fontSize: { Desktop: "24", Tablet: "", Mobile: "" },
+			fontWeight: "600",
+			textTransform: "",
+			lineHeight: { Desktop: "", Tablet: "", Mobile: "" },
+		},
+	},
+	footerDescTypography: {
+		type: "object",
+		default: {
+			fontFamily: "",
+			fontSize: { Desktop: "16", Tablet: "", Mobile: "" },
+			fontWeight: "400",
+			textTransform: "",
+			lineHeight: { Desktop: "", Tablet: "", Mobile: "" },
+		},
+	},
+	footerPaddingUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+	footerPaddingDesktop: {
+		type: "object",
+		default: { top: "24", bottom: "0", left: "0", right: "0" },
+	},
+	footerPaddingTablet: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	footerPaddingMobile: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	footerMarginUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+	footerMarginDesktop: {
+		type: "object",
+		default: { top: "0", bottom: "0", left: "0", right: "0" },
+	},
+	footerMarginTablet: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	footerMarginMobile: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+
+	/* =============================================
+       STYLE: X/Y Axis Granular
+    ============================================= */
+	xAxisTypography: {
+		type: "object",
+		default: {
+			fontSize: { Desktop: "12", Tablet: "", Mobile: "" },
+			fontWeight: "normal",
+			fontFamily: "",
+		},
+	},
+	yAxisTypography: {
+		type: "object",
+		default: {
+			fontSize: { Desktop: "12", Tablet: "", Mobile: "" },
+			fontWeight: "normal",
+			fontFamily: "",
+		},
+	},
+
+	legendDotSizeUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+
+	/* =============================================
+       STYLE: Axis, Grid & Tooltip
+    ============================================= */
+	showGrid: {
+		type: "boolean",
+		default: true,
+	},
+	gridColor: {
+		type: "string",
+		default: "rgba(148,163,184,0.15)",
+	},
+	gridLineWidth: {
+		type: "object",
+		default: { Desktop: "1", Tablet: "", Mobile: "" },
+	},
+
+	// X-Axis Normal
+	xAxisNormalColor: {
+		type: "string",
+		default: "#94a3b8",
+	},
+	xAxisNormalFontSize: {
+		type: "object",
+		default: { Desktop: "12", Tablet: "", Mobile: "" },
+	},
+	xAxisNormalFontWeight: {
+		type: "string",
+		default: "normal",
+	},
+	xAxisNormalFontFamily: {
+		type: "string",
+		default: "",
+	},
+
+	// Y-Axis Normal
+	yAxisNormalColor: {
+		type: "string",
+		default: "#94a3b8",
+	},
+	yAxisNormalFontSize: {
+		type: "object",
+		default: { Desktop: "12", Tablet: "", Mobile: "" },
+	},
+	yAxisNormalFontWeight: {
+		type: "string",
+		default: "normal",
+	},
+	yAxisNormalFontFamily: {
+		type: "string",
+		default: "",
+	},
+
+	// Tooltip
+	tooltipBg: {
+		type: "string",
+		default: "#1e293b",
+	},
+	tooltipColor: {
+		type: "string",
+		default: "#ffffff",
+	},
+
+	/* =============================================
+       STYLE: Legend
+    ============================================= */
+	legendTextAlignment: {
+		type: "object",
+		default: { Desktop: "center", Tablet: "", Mobile: "" },
+	},
+	legendGap: {
+		type: "object",
+		default: { Desktop: "10", Tablet: "", Mobile: "" },
+	},
+	legendDotSize: {
+		type: "object",
+		default: { Desktop: "10", Tablet: "", Mobile: "" },
+	},
+	legendDotRadius: {
+		type: "object",
+		default: { Desktop: "50", Tablet: "", Mobile: "" },
+	},
+	legendTextColor: {
+		type: "string",
+		default: "",
+	},
+
+	/* =============================================
+       STYLE: Chart Footer Text
+    ============================================= */
+	footerTextAlignment: {
+		type: "object",
+		default: {
+			Desktop: "left",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	footerTitleNormalColor: {
+		type: "string",
+		default: "#0f172a",
+	},
+	footerTitleHoverColor: {
+		type: "string",
+		default: "#0f172a",
+	},
+	footerDescNormalColor: {
+		type: "string",
+		default: "#64748b",
+	},
+	footerDescHoverColor: {
+		type: "string",
+		default: "#64748b",
+	},
+	footerPaddingDesktop: {
+		type: "object",
+		default: { top: "24", bottom: "0", left: "0", right: "0" },
+	},
+	footerPaddingLink: {
+		type: "boolean",
+		default: false,
+	},
+
+	/* =============================================
+       ADVANCED: Layout & Responsive
+    ============================================= */
+	multiChartGlobalZIndex: {
+		type: "object",
+		default: { Desktop: "", Tablet: "", Mobile: "" },
+	},
+	multiChartCustomCSS: {
+		type: "string",
+		default: "",
+	},
+	multiChartWrapperID: {
+		type: "string",
+		default: "",
+	},
+	multiChartWrapperClass: {
+		type: "string",
+		default: "",
+	},
+	multiChartDesktopSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	multiChartTabletSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	multiChartMobileSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+};
+
+export default attributes;

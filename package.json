@@ -70,6 +70,7 @@
     "@wordpress/private-apis": "^1.26.0",
     "awesome-icon-picker": "^1.0.25",
     "change-case": "^5.4.4",
+    "chart.js": "^4.5.1",
     "classnames": "^2.5.1",
     "clean-webpack-plugin": "^4.0.0",
     "countries-and-timezones": "^3.8.0",

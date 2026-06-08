@@ -1,0 +1,300 @@
+/* =============================================================
+   Frontis Blocks — Multi Chart Block (editor.scss)
+   ============================================================= */
+
+@import "./style.scss";
+
+.fb-elegant-chart-block {
+	display: block;
+	width: 100%;
+
+	/* Card Layout like Widget */
+	.fb-chart-card {
+		background: #fff; // White background
+		border-radius: 12px; // Consistent with image-accordion preset-3
+		box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05); // Soft shadow
+		padding: 25px; // Generous padding
+		transition: all 0.3s ease;
+		border: 1px solid #f1f5f9; // Subtle border
+	}
+
+	.fb-chart-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 25px;
+		gap: 15px; // Gap between title and filter
+	}
+
+	.fb-chart-label {
+		margin: 0;
+		font-size: 18px; // Larger title
+		font-weight: 700; // Bold title
+		color: #1e293b; // Darker text color
+		text-transform: capitalize;
+	}
+
+	/* Filter Dropdown Styling */
+	.fb-chart-filter {
+		position: relative; // For dropdown positioning
+		cursor: pointer;
+		padding: 8px 14px;
+		background: #f8fafc;
+		border: 1px solid #e2e8f0;
+		border-radius: 8px;
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		user-select: none; // Prevent text selection
+		min-width: 130px;
+		justify-content: space-between;
+		transition: background 0.2s ease;
+
+		&:hover {
+			background: #f1f5f9; // Slight hover effect
+		}
+
+		.fb-current-filter {
+			font-size: 13px;
+			font-weight: 600; // Semi-bold text
+			color: #475569;
+		}
+
+		.fb-filter-icon svg {
+			width: 10px;
+			height: 10px;
+			fill: #64748b;
+			transition: transform 0.3s ease; // Smooth rotation
+		}
+
+		&.fb-active {
+			.fb-filter-icon svg {
+				transform: rotate(180deg);
+			}
+			.fb-dropdown-list {
+				opacity: 1;
+				visibility: visible;
+				transform: translateY(0);
+			}
+		}
+
+		.fb-dropdown-list {
+			position: absolute;
+			top: calc(100% + 8px);
+			right: 0;
+			background: #fff;
+			box-shadow:
+				0 10px 15px -3px rgba(0, 0, 0, 0.1),
+				// Soft shadow
+				0 4px 6px -2px rgba(0, 0, 0, 0.05); // Soft shadow
+			border-radius: 10px; // Rounded corners
+			padding: 8px 0;
+			list-style: none !important;
+			margin: 0 !important;
+			min-width: 160px;
+			z-index: 9999;
+			border: 1px solid #f1f5f9; // Subtle border
+			opacity: 0; // Hidden by default
+			visibility: hidden; // Hidden by default
+			transform: translateY(10px); // Initial state for animation
+			transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); // Smooth animation
+
+			.fb-dropdown-item {
+				padding: 10px 16px;
+				font-size: 13px;
+				color: #334155;
+				&:hover {
+					background: #f8fafc;
+					color: #3b82f6; // Hover text color
+				}
+				&.fb-item-active {
+					background: #eff6ff; // Active background
+					color: #3b82f6; // Active text color
+					font-weight: 600;
+				}
+			}
+		}
+	}
+
+	.fb-canvas-wrapper {
+		position: relative;
+		width: 100%; // Full width
+		margin-bottom: 15px; // Spacing below canvas
+
+		canvas {
+			width: 100% !important; // Ensure canvas fills container
+			height: 100% !important; // Ensure canvas fills container
+		}
+	}
+
+	.fb-chart-footer {
+		margin-top: 25px; // Spacing above footer
+		padding-top: 20px; // Padding inside footer
+		border-top: 1px solid #f1f5f9; // Separator line
+
+		.fb-footer-title {
+			margin: 0 0 8px 0;
+			font-size: 16px;
+			font-weight: 600;
+			color: #1e293b;
+		}
+
+		.fb-chart-description {
+			margin: 0; // Remove default margin
+			color: #64748b;
+			font-size: 14px;
+			line-height: 1.6;
+		}
+	}
+
+	/* Editor specific placeholder style */
+	.fb-chart-preview-placeholder {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 100%; // Fill available height
+		background: #f8fafc; // Light background
+		border: 2px dashed #cbd5e1; // Dashed border
+		border-radius: 12px; // Rounded corners
+		color: #64748b; // Muted text color
+		font-weight: 500; // Medium font weight
+		font-size: 14px; // Readable font size
+		text-align: center;
+		padding: 20px;
+	}
+
+	/* Prevent dropdown from being clipped in editor card */
+	.fb-chart-card {
+		overflow: visible !important;
+	}
+}
+
+/* =============================================================
+   RESPONSIVE VISIBILITY
+   ============================================================= */
+@media screen and (min-width: 1025px) {
+	.fb-desktop-responsive {
+		display: none !important;
+	}
+}
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+	.fb-tablet-responsive {
+		display: none !important;
+	}
+}
+@media screen and (max-width: 767px) {
+	.fb-mobile-responsive {
+		display: none !important;
+	}
+}
+
+/* Repeater Sidebar UI */
+.fb-repeater-item-wrap {
+	background: #fff;
+	padding: 0 !important;
+}
+
+.fb-repeater-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 8px 12px;
+	background: #f0f0f0;
+	cursor: pointer;
+	border-bottom: 1px solid #e0e0e0;
+
+	&:hover {
+		background: #e8e8e8;
+	}
+}
+
+.fb-repeater-title-wrap {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	flex: 1;
+}
+
+.fb-repeater-index {
+	font-size: 10px;
+	background: #404655;
+	color: #fff;
+	width: 18px;
+	height: 18px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+}
+
+.fb-repeater-title {
+	font-weight: 500;
+	font-size: 13px;
+}
+
+.fb-repeater-body {
+	padding: 15px;
+	background: #fff;
+}
+.fb-accordion-item-control {
+	margin-bottom: 8px;
+	display: block;
+
+	.fb-accordion-item-header {
+		border: 1px solid #e0e0e0 !important;
+		padding: 10px 12px;
+		cursor: pointer;
+		background: #fff;
+		border-radius: 2px;
+		display: flex;
+		align-items: center;
+		transition: background-color 0.1s ease-in-out;
+
+		&:hover {
+			background-color: #f0f0f0;
+		}
+
+		&.is-open {
+			border-bottom: 1px solid #f0f0f0 !important;
+			border-radius: 2px 2px 0 0;
+			margin-bottom: 0;
+		}
+
+		.fb-accordion-item-title {
+			font-size: 13px;
+			font-weight: 600;
+			color: #1e1e1e;
+		}
+
+		.fb-accordion-item-remove {
+			background: transparent !important;
+			border: none !important;
+			box-shadow: none !important;
+			color: #cc1818 !important;
+			padding: 0 !important;
+			min-width: unset !important;
+			height: auto !important;
+			margin-left: 8px; // Gap with Chevron
+			text-decoration: none !important;
+
+			&:hover,
+			&:focus,
+			&:active {
+				color: #f00 !important;
+				text-decoration: none !important;
+			}
+		}
+
+		.fb-accordion-item-toggle {
+			color: #1e1e1e;
+		}
+	}
+
+	.fb-accordion-item-body {
+		border: 1px solid #e0e0e0;
+		border-top: none;
+		padding: 15px;
+		background: #fff;
+		border-radius: 0 0 2px 2px;
+	}
+}
