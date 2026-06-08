@@ -1230,6 +1230,25 @@ class Helper
                 }
                 return 'single-product';
             }
+
+            if (function_exists('wc_get_page_id')) {
+                $cart_page_id = (int) wc_get_page_id('cart');
+                $checkout_page_id = (int) wc_get_page_id('checkout');
+                $shop_page_id = (int) wc_get_page_id('shop');
+
+                if ($cart_page_id > 0 && (int) $post_id === $cart_page_id) {
+                    return 'page-cart';
+                }
+                if ($checkout_page_id > 0 && (int) $post_id === $checkout_page_id) {
+                    if (function_exists('is_order_received_page') && is_order_received_page()) {
+                        return 'order-confirmation';
+                    }
+                    return 'page-checkout';
+                }
+                if ($shop_page_id > 0 && (int) $post_id === $shop_page_id) {
+                    return 'archive-product';
+                }
+            }
         }
 
         // 3. Check for custom post types
