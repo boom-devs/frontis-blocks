@@ -4,26 +4,31 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-if (!function_exists('render_loop_builder')):
-	function render_loop_builder($block_content, $block)
-	{
+/**
+ * Pro Security Check
+ */
+if (!defined('FB_IS_PRO_ACTIVE') || !FB_IS_PRO_ACTIVE) {
+	return;
+}
 
-		/**
-		 * Only for our block
-		 */
-		if (isset($block['blockName']) && $block['blockName'] === 'frontis-blocks/loop-builder') {
+if (!apply_filters('frontisblocks_loop_builder_available', false)) {
+	return;
+}
 
-			/**
-			 * Do not override in editor
-			 */
-			if (is_admin()) {
-				return $block_content;
-			}
+/**
+ * Do not override in editor
+ */
+if (is_admin()) {
+	return;
+}
 
-			/**
-			 * Attributes
-			 */
-			$attributes = isset($block['attrs']) ? $block['attrs'] : [];
+// Map the WP_Block object to a parsed block array for compatibility
+$block_arr = isset($block) && is_object($block) ? $block->parsed_block : [];
+
+/**
+ * Attributes
+ */
+$attributes = isset($block_arr['attrs']) ? $block_arr['attrs'] : (isset($attributes) ? $attributes : []);
 			$blockId = isset($attributes['blockID']) ? $attributes['blockID'] : (isset($attributes['blockId']) ? $attributes['blockId'] : '');
 			$align_class = isset($attributes['align']) ? 'align' . $attributes['align'] : 'alignwide';
 
@@ -111,7 +116,7 @@ if (!function_exists('render_loop_builder')):
 			/**
 			 * Inner blocks (layout + pagination)
 			 */
-			$inner_blocks = isset($block['innerBlocks']) ? $block['innerBlocks'] : [];
+			$inner_blocks = isset($block_arr['innerBlocks']) ? $block_arr['innerBlocks'] : [];
 
 			$item_block = null;
 			foreach ($inner_blocks as $ib) {
@@ -323,15 +328,4 @@ if (!function_exists('render_loop_builder')):
 			</div>
 			<?php
 
-			$output = ob_get_clean();
-			return $output;
-		}
-
-		/**
-		 * Other blocks: keep default
-		 */
-		return $block_content;
-	}
-
-	add_filter('render_block', 'render_loop_builder', 10, 2);
-endif;
+			echo ob_get_clean();
