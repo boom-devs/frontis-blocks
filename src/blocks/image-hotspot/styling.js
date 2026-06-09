@@ -4,6 +4,7 @@
  */
 
 import getCustomCss from '@Utils/getCustomCss';
+// import { CleanWebpackPlugin } from "clean-webpack-plugin";
 
 /**
  * Generate block styles from attributes
@@ -360,14 +361,6 @@ const generateImageHotspotStyle = (attributes) => {
 
     } = attributes;
 
-    // ─── Helpers
-
-    const buildFourSided = (obj, unit) => {
-        if (!obj || (!obj.top && !obj.right && !obj.bottom && !obj.left)) return '';
-        const u = unit || 'px';
-        return `${obj.top || 0}${u} ${obj.right || 0}${u} ${obj.bottom || 0}${u} ${obj.left || 0}${u}`;
-    };
-
     const buildResponsiveBoxValue = (obj, units, device, fallback = '') => {
         const value = obj?.[device];
 
@@ -399,136 +392,114 @@ const generateImageHotspotStyle = (attributes) => {
     // ─── Global shorthand values
 
     // Marker size
-    const markerSizeDesktop = imageHotspotMarkerSize?.Desktop ? `${imageHotspotMarkerSize.Desktop}${imageHotspotMarkerSizeUnits?.Desktop || 'px'}` : '35px';
-    const markerSizeTablet = imageHotspotMarkerSize?.Tablet ? `${imageHotspotMarkerSize.Tablet}${imageHotspotMarkerSizeUnits?.Tablet || 'px'}` : markerSizeDesktop;
-    const markerSizeMobile = imageHotspotMarkerSize?.Mobile ? `${imageHotspotMarkerSize.Mobile}${imageHotspotMarkerSizeUnits?.Mobile || 'px'}` : markerSizeDesktop;
+    const markerSizeDesktop = `${imageHotspotMarkerSize?.top}${imageHotspotMarkerSizeUnits?.Desktop} ${imageHotspotMarkerSize?.right}${imageHotspotMarkerSizeUnits?.Desktop} ${imageHotspotMarkerSize?.bottom}${imageHotspotMarkerSizeUnits?.Desktop} ${imageHotspotMarkerSize?.left}${imageHotspotMarkerSizeUnits?.Desktop}`;
+    const markerSizeTablet = `${imageHotspotMarkerSize?.top}${imageHotspotMarkerSizeUnits?.Tablet} ${imageHotspotMarkerSize?.right}${imageHotspotMarkerSizeUnits?.Tablet} ${imageHotspotMarkerSize?.bottom}${imageHotspotMarkerSizeUnits?.Tablet} ${imageHotspotMarkerSize?.left}${imageHotspotMarkerSizeUnits?.Tablet}`;
+    const markerSizeMobile = `${imageHotspotMarkerSize?.top}${imageHotspotMarkerSizeUnits?.Mobile} ${imageHotspotMarkerSize?.right}${imageHotspotMarkerSizeUnits?.Mobile} ${imageHotspotMarkerSize?.bottom}${imageHotspotMarkerSizeUnits?.Mobile} ${imageHotspotMarkerSize?.left}${imageHotspotMarkerSizeUnits?.Mobile}`;
 
     // Marker hover size
-    const markerHoverSizeDesktop = imageHotspotMarkerHoverSize?.Desktop ? `${imageHotspotMarkerHoverSize.Desktop}${imageHotspotMarkerHoverSizeUnits?.Desktop || 'px'}` : '40px';
-    const markerHoverSizeTablet = imageHotspotMarkerHoverSize?.Tablet ? `${imageHotspotMarkerHoverSize.Tablet}${imageHotspotMarkerHoverSizeUnits?.Tablet || 'px'}` : '37px';
-    const markerHoverSizeMobile = imageHotspotMarkerHoverSize?.Mobile ? `${imageHotspotMarkerHoverSize.Mobile}${imageHotspotMarkerHoverSizeUnits?.Mobile || 'px'}` : '35px';
+    const markerHoverSizeDesktop = `${imageHotspotMarkerHoverSize?.top}${imageHotspotMarkerHoverSizeUnits?.Desktop} ${imageHotspotMarkerHoverSize?.right}${imageHotspotMarkerHoverSizeUnits?.Desktop} ${imageHotspotMarkerHoverSize?.bottom}${imageHotspotMarkerHoverSizeUnits?.Desktop} ${imageHotspotMarkerHoverSize?.left}${imageHotspotMarkerHoverSizeUnits?.Desktop}`;
+    const markerHoverSizeTablet = `${imageHotspotMarkerHoverSize?.top}${imageHotspotMarkerHoverSizeUnits?.Tablet} ${imageHotspotMarkerHoverSize?.right}${imageHotspotMarkerHoverSizeUnits?.Tablet} ${imageHotspotMarkerHoverSize?.bottom}${imageHotspotMarkerHoverSizeUnits?.Tablet} ${imageHotspotMarkerHoverSize?.left}${imageHotspotMarkerHoverSizeUnits?.Tablet}`;
+    const markerHoverSizeMobile = `${imageHotspotMarkerHoverSize?.top}${imageHotspotMarkerHoverSizeUnits?.Mobile} ${imageHotspotMarkerHoverSize?.right}${imageHotspotMarkerHoverSizeUnits?.Mobile} ${imageHotspotMarkerHoverSize?.bottom}${imageHotspotMarkerHoverSizeUnits?.Mobile} ${imageHotspotMarkerHoverSize?.left}${imageHotspotMarkerHoverSizeUnits?.Mobile}`;
 
     // Marker border width
-    const markerBorderWidthDesktop = imageHotspotMarkerBorderWidth?.Desktop ? `${imageHotspotMarkerBorderWidth.Desktop}${imageHotspotMarkerBorderWidthUnits?.Desktop || 'px'}` : '';
-    const markerBorderWidthTablet = imageHotspotMarkerBorderWidth?.Tablet ? `${imageHotspotMarkerBorderWidth.Tablet}${imageHotspotMarkerBorderWidthUnits?.Tablet || 'px'}` : '';
-    const markerBorderWidthMobile = imageHotspotMarkerBorderWidth?.Mobile ? `${imageHotspotMarkerBorderWidth.Mobile}${imageHotspotMarkerBorderWidthUnits?.Mobile || 'px'}` : '';
+    const markerBorderWidthDesktop = `${imageHotspotMarkerBorderWidth?.top}${imageHotspotMarkerBorderWidthUnits?.Desktop} ${imageHotspotMarkerBorderWidth?.right}${imageHotspotMarkerBorderWidthUnits?.Desktop} ${imageHotspotMarkerBorderWidth?.bottom}${imageHotspotMarkerBorderWidthUnits?.Desktop} ${imageHotspotMarkerBorderWidth?.left}${imageHotspotMarkerBorderWidthUnits?.Desktop}`;
+    const markerBorderWidthTablet = `${imageHotspotMarkerBorderWidth?.top}${imageHotspotMarkerBorderWidthUnits?.Tablet} ${imageHotspotMarkerBorderWidth?.right}${imageHotspotMarkerBorderWidthUnits?.Tablet} ${imageHotspotMarkerBorderWidth?.bottom}${imageHotspotMarkerBorderWidthUnits?.Tablet} ${imageHotspotMarkerBorderWidth?.left}${imageHotspotMarkerBorderWidthUnits?.Tablet}`;
+    const markerBorderWidthMobile = `${imageHotspotMarkerBorderWidth?.top}${imageHotspotMarkerBorderWidthUnits?.Mobile} ${imageHotspotMarkerBorderWidth?.right}${imageHotspotMarkerBorderWidthUnits?.Mobile} ${imageHotspotMarkerBorderWidth?.bottom}${imageHotspotMarkerBorderWidthUnits?.Mobile} ${imageHotspotMarkerBorderWidth?.left}${imageHotspotMarkerBorderWidthUnits?.Mobile}`;
 
     // Marker border radius
-    const markerBorderRadiusDesktop = imageHotspotMarkerBorderRadius?.Desktop ? `${imageHotspotMarkerBorderRadius.Desktop}${imageHotspotMarkerBorderRadiusUnits?.Desktop || '%'}` : '50%';
-    const markerBorderRadiusTablet = imageHotspotMarkerBorderRadius?.Tablet ? `${imageHotspotMarkerBorderRadius.Tablet}${imageHotspotMarkerBorderRadiusUnits?.Tablet || '%'}` : markerBorderRadiusDesktop;
-    const markerBorderRadiusMobile = imageHotspotMarkerBorderRadius?.Mobile ? `${imageHotspotMarkerBorderRadius.Mobile}${imageHotspotMarkerBorderRadiusUnits?.Mobile || '%'}` : markerBorderRadiusDesktop;
+    const markerBorderRadiusDesktop = `${imageHotspotMarkerBorderRadius?.top}${imageHotspotMarkerBorderRadiusUnits?.Desktop} ${imageHotspotMarkerBorderRadius?.right}${imageHotspotMarkerBorderRadiusUnits?.Desktop} ${imageHotspotMarkerBorderRadius?.bottom}${imageHotspotMarkerBorderRadiusUnits?.Desktop} ${imageHotspotMarkerBorderRadius?.left}${imageHotspotMarkerBorderRadiusUnits?.Desktop}`;
+    const markerBorderRadiusTablet = `${imageHotspotMarkerBorderRadius?.top}${imageHotspotMarkerBorderRadiusUnits?.Tablet} ${imageHotspotMarkerBorderRadius?.right}${imageHotspotMarkerBorderRadiusUnits?.Tablet} ${imageHotspotMarkerBorderRadius?.bottom}${imageHotspotMarkerBorderRadiusUnits?.Tablet} ${imageHotspotMarkerBorderRadius?.left}${imageHotspotMarkerBorderRadiusUnits?.Tablet}`;
+    const markerBorderRadiusMobile = `${imageHotspotMarkerBorderRadius?.top}${imageHotspotMarkerBorderRadiusUnits?.Mobile} ${imageHotspotMarkerBorderRadius?.right}${imageHotspotMarkerBorderRadiusUnits?.Mobile} ${imageHotspotMarkerBorderRadius?.bottom}${imageHotspotMarkerBorderRadiusUnits?.Mobile} ${imageHotspotMarkerBorderRadius?.left}${imageHotspotMarkerBorderRadiusUnits?.Mobile}`;
 
     // Title spacing
-    const titlePaddingDesktop = buildFourSided(imageHotspotTitlePaddingDesktop, imageHotspotTitlePaddingUnits?.Desktop);
-    const titlePaddingTablet = buildFourSided(imageHotspotTitlePaddingTablet, imageHotspotTitlePaddingUnits?.Tablet);
-    const titlePaddingMobile = buildFourSided(imageHotspotTitlePaddingMobile, imageHotspotTitlePaddingUnits?.Mobile);
+    const titlePaddingDesktop = `${imageHotspotTitlePaddingDesktop?.top}${imageHotspotTitlePaddingUnits?.Desktop} ${imageHotspotTitlePaddingDesktop?.right}${imageHotspotTitlePaddingUnits?.Desktop} ${imageHotspotTitlePaddingDesktop?.bottom}${imageHotspotTitlePaddingUnits?.Desktop} ${imageHotspotTitlePaddingDesktop?.left}${imageHotspotTitlePaddingUnits?.Desktop}`;
+    const titlePaddingTablet = `${imageHotspotTitlePaddingTablet?.top}${imageHotspotTitlePaddingUnits?.Tablet} ${imageHotspotTitlePaddingTablet?.right}${imageHotspotTitlePaddingUnits?.Tablet} ${imageHotspotTitlePaddingTablet?.bottom}${imageHotspotTitlePaddingUnits?.Tablet} ${imageHotspotTitlePaddingTablet?.left}${imageHotspotTitlePaddingUnits?.Tablet}`;
+    const titlePaddingMobile = `${imageHotspotTitlePaddingMobile?.top}${imageHotspotTitlePaddingUnits?.Mobile} ${imageHotspotTitlePaddingMobile?.right}${imageHotspotTitlePaddingUnits?.Mobile} ${imageHotspotTitlePaddingMobile?.bottom}${imageHotspotTitlePaddingUnits?.Mobile} ${imageHotspotTitlePaddingMobile?.left}${imageHotspotTitlePaddingUnits?.Mobile}`;
 
-    const titleMarginDesktop = buildFourSided(imageHotspotTitleMarginDesktop, imageHotspotTitleMarginUnits?.Desktop)
-        || (imageHotspotTitleMargin?.Desktop ? `${imageHotspotTitleMargin.Desktop}${imageHotspotTitleMarginUnits?.Desktop || 'px'}` : '');
-    const titleMarginTablet = buildFourSided(imageHotspotTitleMarginTablet, imageHotspotTitleMarginUnits?.Tablet)
-        || (imageHotspotTitleMargin?.Tablet ? `${imageHotspotTitleMargin.Tablet}${imageHotspotTitleMarginUnits?.Tablet || 'px'}` : '');
-    const titleMarginMobile = buildFourSided(imageHotspotTitleMarginMobile, imageHotspotTitleMarginUnits?.Mobile)
-        || (imageHotspotTitleMargin?.Mobile ? `${imageHotspotTitleMargin.Mobile}${imageHotspotTitleMarginUnits?.Mobile || 'px'}` : '');
+    const titleMarginDesktop = `${imageHotspotTitleMarginDesktop?.top}${imageHotspotTitleMarginUnits?.Desktop} ${imageHotspotTitleMarginDesktop?.right}${imageHotspotTitleMarginUnits?.Desktop} ${imageHotspotTitleMarginDesktop?.bottom}${imageHotspotTitleMarginUnits?.Desktop} ${imageHotspotTitleMarginDesktop?.left}${imageHotspotTitleMarginUnits?.Desktop}`;
+    const titleMarginTablet = `${imageHotspotTitleMarginTablet?.top}${imageHotspotTitleMarginUnits?.Tablet} ${imageHotspotTitleMarginTablet?.right}${imageHotspotTitleMarginUnits?.Tablet} ${imageHotspotTitleMarginTablet?.bottom}${imageHotspotTitleMarginUnits?.Tablet} ${imageHotspotTitleMarginTablet?.left}${imageHotspotTitleMarginUnits?.Tablet}`;
+    const titleMarginMobile = `${imageHotspotTitleMarginMobile?.top}${imageHotspotTitleMarginUnits?.Mobile} ${imageHotspotTitleMarginMobile?.right}${imageHotspotTitleMarginUnits?.Mobile} ${imageHotspotTitleMarginMobile?.bottom}${imageHotspotTitleMarginUnits?.Mobile} ${imageHotspotTitleMarginMobile?.left}${imageHotspotTitleMarginUnits?.Mobile}`;
 
-    const categoryPaddingDesktop = buildFourSided(imageHotspotCategoryPaddingDesktop, imageHotspotCategoryPaddingUnits?.Desktop);
-    const categoryPaddingTablet = buildFourSided(imageHotspotCategoryPaddingTablet, imageHotspotCategoryPaddingUnits?.Tablet);
-    const categoryPaddingMobile = buildFourSided(imageHotspotCategoryPaddingMobile, imageHotspotCategoryPaddingUnits?.Mobile);
+    const categoryPaddingDesktop = `${imageHotspotCategoryPaddingDesktop?.top}${imageHotspotCategoryPaddingUnits?.Desktop} ${imageHotspotCategoryPaddingDesktop?.right}${imageHotspotCategoryPaddingUnits?.Desktop} ${imageHotspotCategoryPaddingDesktop?.bottom}${imageHotspotCategoryPaddingUnits?.Desktop} ${imageHotspotCategoryPaddingDesktop?.left}${imageHotspotCategoryPaddingUnits?.Desktop}`;
+    const categoryPaddingTablet = `${imageHotspotCategoryPaddingTablet?.top}${imageHotspotCategoryPaddingUnits?.Tablet} ${imageHotspotCategoryPaddingTablet?.right}${imageHotspotCategoryPaddingUnits?.Tablet} ${imageHotspotCategoryPaddingTablet?.bottom}${imageHotspotCategoryPaddingUnits?.Tablet} ${imageHotspotCategoryPaddingTablet?.left}${imageHotspotCategoryPaddingUnits?.Tablet}`;
+    const categoryPaddingMobile = `${imageHotspotCategoryPaddingMobile?.top}${imageHotspotCategoryPaddingUnits?.Mobile} ${imageHotspotCategoryPaddingMobile?.right}${imageHotspotCategoryPaddingUnits?.Mobile} ${imageHotspotCategoryPaddingMobile?.bottom}${imageHotspotCategoryPaddingUnits?.Mobile} ${imageHotspotCategoryPaddingMobile?.left}${imageHotspotCategoryPaddingUnits?.Mobile}`;
 
-    const categoryMarginDesktop = buildFourSided(imageHotspotCategoryMarginDesktop, imageHotspotCategoryMarginUnits?.Desktop);
-    const categoryMarginTablet = buildFourSided(imageHotspotCategoryMarginTablet, imageHotspotCategoryMarginUnits?.Tablet);
-    const categoryMarginMobile = buildFourSided(imageHotspotCategoryMarginMobile, imageHotspotCategoryMarginUnits?.Mobile);
+    const categoryMarginDesktop = `${imageHotspotCategoryMarginDesktop?.top}${imageHotspotCategoryMarginUnits?.Desktop} ${imageHotspotCategoryMarginDesktop?.right}${imageHotspotCategoryMarginUnits?.Desktop} ${imageHotspotCategoryMarginDesktop?.bottom}${imageHotspotCategoryMarginUnits?.Desktop} ${imageHotspotCategoryMarginDesktop?.left}${imageHotspotCategoryMarginUnits?.Desktop}`;
+    const categoryMarginTablet = `${imageHotspotCategoryMarginTablet?.top}${imageHotspotCategoryMarginUnits?.Tablet} ${imageHotspotCategoryMarginTablet?.right}${imageHotspotCategoryMarginUnits?.Tablet} ${imageHotspotCategoryMarginTablet?.bottom}${imageHotspotCategoryMarginUnits?.Tablet} ${imageHotspotCategoryMarginTablet?.left}${imageHotspotCategoryMarginUnits?.Tablet}`;
+    const categoryMarginMobile = `${imageHotspotCategoryMarginMobile?.top}${imageHotspotCategoryMarginUnits?.Mobile} ${imageHotspotCategoryMarginMobile?.right}${imageHotspotCategoryMarginUnits?.Mobile} ${imageHotspotCategoryMarginMobile?.bottom}${imageHotspotCategoryMarginUnits?.Mobile} ${imageHotspotCategoryMarginMobile?.left}${imageHotspotCategoryMarginUnits?.Mobile}`;
 
     // Description spacing
-    const descPaddingDesktop = buildFourSided(imageHotspotDescPaddingDesktop, imageHotspotDescPaddingUnits?.Desktop);
-    const descPaddingTablet = buildFourSided(imageHotspotDescPaddingTablet, imageHotspotDescPaddingUnits?.Tablet);
-    const descPaddingMobile = buildFourSided(imageHotspotDescPaddingMobile, imageHotspotDescPaddingUnits?.Mobile);
+    const descPaddingDesktop = `${imageHotspotDescPaddingDesktop?.top}${imageHotspotDescPaddingUnits?.Desktop} ${imageHotspotDescPaddingDesktop?.right}${imageHotspotDescPaddingUnits?.Desktop} ${imageHotspotDescPaddingDesktop?.bottom}${imageHotspotDescPaddingUnits?.Desktop} ${imageHotspotDescPaddingDesktop?.left}${imageHotspotDescPaddingUnits?.Desktop}`;
+    const descPaddingTablet = `${imageHotspotDescPaddingTablet?.top}${imageHotspotDescPaddingUnits?.Tablet} ${imageHotspotDescPaddingTablet?.right}${imageHotspotDescPaddingUnits?.Tablet} ${imageHotspotDescPaddingTablet?.bottom}${imageHotspotDescPaddingUnits?.Tablet} ${imageHotspotDescPaddingTablet?.left}${imageHotspotDescPaddingUnits?.Tablet}`;
+    const descPaddingMobile = `${imageHotspotDescPaddingMobile?.top}${imageHotspotDescPaddingUnits?.Mobile} ${imageHotspotDescPaddingMobile?.right}${imageHotspotDescPaddingUnits?.Mobile} ${imageHotspotDescPaddingMobile?.bottom}${imageHotspotDescPaddingUnits?.Mobile} ${imageHotspotDescPaddingMobile?.left}${imageHotspotDescPaddingUnits?.Mobile}`;
 
-    const descMarginDesktop = buildFourSided(imageHotspotDescMarginDesktop, imageHotspotDescMarginUnits?.Desktop)
-        || (imageHotspotDescMargin?.Desktop ? `${imageHotspotDescMargin.Desktop}${imageHotspotDescMarginUnits?.Desktop || 'px'}` : '');
-    const descMarginTablet = buildFourSided(imageHotspotDescMarginTablet, imageHotspotDescMarginUnits?.Tablet)
-        || (imageHotspotDescMargin?.Tablet ? `${imageHotspotDescMargin.Tablet}${imageHotspotDescMarginUnits?.Tablet || 'px'}` : '');
-    const descMarginMobile = buildFourSided(imageHotspotDescMarginMobile, imageHotspotDescMarginUnits?.Mobile)
-        || (imageHotspotDescMargin?.Mobile ? `${imageHotspotDescMargin.Mobile}${imageHotspotDescMarginUnits?.Mobile || 'px'}` : '');
+    const descMarginDesktop = `${imageHotspotDescMarginDesktop?.top}${imageHotspotDescMarginUnits?.Desktop} ${imageHotspotDescMarginDesktop?.right}${imageHotspotDescMarginUnits?.Desktop} ${imageHotspotDescMarginDesktop?.bottom}${imageHotspotDescMarginUnits?.Desktop} ${imageHotspotDescMarginDesktop?.left}${imageHotspotDescMarginUnits?.Desktop}`;
+    const descMarginTablet = `${imageHotspotDescMarginTablet?.top}${imageHotspotDescMarginUnits?.Tablet} ${imageHotspotDescMarginTablet?.right}${imageHotspotDescMarginUnits?.Tablet} ${imageHotspotDescMarginTablet?.bottom}${imageHotspotDescMarginUnits?.Tablet} ${imageHotspotDescMarginTablet?.left}${imageHotspotDescMarginUnits?.Tablet}`;
+    const descMarginMobile = `${imageHotspotDescMarginMobile?.top}${imageHotspotDescMarginUnits?.Mobile} ${imageHotspotDescMarginMobile?.right}${imageHotspotDescMarginUnits?.Mobile} ${imageHotspotDescMarginMobile?.bottom}${imageHotspotDescMarginUnits?.Mobile} ${imageHotspotDescMarginMobile?.left}${imageHotspotDescMarginUnits?.Mobile}`;
 
-    const pricePaddingDesktop = buildFourSided(imageHotspotPricePaddingDesktop, imageHotspotPricePaddingUnits?.Desktop);
-    const pricePaddingTablet = buildFourSided(imageHotspotPricePaddingTablet, imageHotspotPricePaddingUnits?.Tablet);
-    const pricePaddingMobile = buildFourSided(imageHotspotPricePaddingMobile, imageHotspotPricePaddingUnits?.Mobile);
+    const pricePaddingDesktop = `${imageHotspotPricePaddingDesktop?.top}${imageHotspotPricePaddingUnits?.Desktop} ${imageHotspotPricePaddingDesktop?.right}${imageHotspotPricePaddingUnits?.Desktop} ${imageHotspotPricePaddingDesktop?.bottom}${imageHotspotPricePaddingUnits?.Desktop} ${imageHotspotPricePaddingDesktop?.left}${imageHotspotPricePaddingUnits?.Desktop}`;
+    const pricePaddingTablet = `${imageHotspotPricePaddingTablet?.top}${imageHotspotPricePaddingUnits?.Tablet} ${imageHotspotPricePaddingTablet?.right}${imageHotspotPricePaddingUnits?.Tablet} ${imageHotspotPricePaddingTablet?.bottom}${imageHotspotPricePaddingUnits?.Tablet} ${imageHotspotPricePaddingTablet?.left}${imageHotspotPricePaddingUnits?.Tablet}`;
+    const pricePaddingMobile = `${imageHotspotPricePaddingMobile?.top}${imageHotspotPricePaddingUnits?.Mobile} ${imageHotspotPricePaddingMobile?.right}${imageHotspotPricePaddingUnits?.Mobile} ${imageHotspotPricePaddingMobile?.bottom}${imageHotspotPricePaddingUnits?.Mobile} ${imageHotspotPricePaddingMobile?.left}${imageHotspotPricePaddingUnits?.Mobile}`;
 
-    const priceMarginDesktop = buildFourSided(imageHotspotPriceMarginDesktop, imageHotspotPriceMarginUnits?.Desktop);
-    const priceMarginTablet = buildFourSided(imageHotspotPriceMarginTablet, imageHotspotPriceMarginUnits?.Tablet);
-    const priceMarginMobile = buildFourSided(imageHotspotPriceMarginMobile, imageHotspotPriceMarginUnits?.Mobile);
+    const priceMarginDesktop = `${imageHotspotPriceMarginDesktop?.top}${imageHotspotPriceMarginUnits?.Desktop} ${imageHotspotPriceMarginDesktop?.right}${imageHotspotPriceMarginUnits?.Desktop} ${imageHotspotPriceMarginDesktop?.bottom}${imageHotspotPriceMarginUnits?.Desktop} ${imageHotspotPriceMarginDesktop?.left}${imageHotspotPriceMarginUnits?.Desktop}`;
+    const priceMarginTablet = `${imageHotspotPriceMarginTablet?.top}${imageHotspotPriceMarginUnits?.Tablet} ${imageHotspotPriceMarginTablet?.right}${imageHotspotPriceMarginUnits?.Tablet} ${imageHotspotPriceMarginTablet?.bottom}${imageHotspotPriceMarginUnits?.Tablet} ${imageHotspotPriceMarginTablet?.left}${imageHotspotPriceMarginUnits?.Tablet}`;
+    const priceMarginMobile = `${imageHotspotPriceMarginMobile?.top}${imageHotspotPriceMarginUnits?.Mobile} ${imageHotspotPriceMarginMobile?.right}${imageHotspotPriceMarginUnits?.Mobile} ${imageHotspotPriceMarginMobile?.bottom}${imageHotspotPriceMarginUnits?.Mobile} ${imageHotspotPriceMarginMobile?.left}${imageHotspotPriceMarginUnits?.Mobile}`;
 
     // Popover spacing (four-sided objects)
-    // const popoverPaddingDesktop = buildFourSided(imageHotspotPopoverPaddingDesktop, imageHotspotPopoverPaddingUnits?.Desktop);
-    // const popoverPaddingTablet = buildFourSided(imageHotspotPopoverPaddingTablet, imageHotspotPopoverPaddingUnits?.Tablet);
-    // const popoverPaddingMobile = buildFourSided(imageHotspotPopoverPaddingMobile, imageHotspotPopoverPaddingUnits?.Mobile);
+    const popoverPaddingDesktop = `${imageHotspotsPopoverPaddingDesktop?.top}${imageHotspotsPopoverPaddingUnits?.Desktop} ${imageHotspotsPopoverPaddingDesktop?.right}${imageHotspotsPopoverPaddingUnits?.Desktop} ${imageHotspotsPopoverPaddingDesktop?.bottom}${imageHotspotsPopoverPaddingUnits?.Desktop} ${imageHotspotsPopoverPaddingDesktop?.left}${imageHotspotsPopoverPaddingUnits?.Desktop}`;
+    const popoverPaddingTablet = `${imageHotspotsPopoverPaddingTablet?.top}${imageHotspotsPopoverPaddingUnits?.Tablet} ${imageHotspotsPopoverPaddingTablet?.right}${imageHotspotsPopoverPaddingUnits?.Tablet} ${imageHotspotsPopoverPaddingTablet?.bottom}${imageHotspotsPopoverPaddingUnits?.Tablet} ${imageHotspotsPopoverPaddingTablet?.left}${imageHotspotsPopoverPaddingUnits?.Tablet}`;
+    const popoverPaddingMobile = `${imageHotspotsPopoverPaddingMobile?.top}${imageHotspotsPopoverPaddingUnits?.Mobile} ${imageHotspotsPopoverPaddingMobile?.right}${imageHotspotsPopoverPaddingUnits?.Mobile} ${imageHotspotsPopoverPaddingMobile?.bottom}${imageHotspotsPopoverPaddingUnits?.Mobile} ${imageHotspotsPopoverPaddingMobile?.left}${imageHotspotsPopoverPaddingUnits?.Mobile}`;
 
-    // const popoverMarginDesktop = buildFourSided(imageHotspotPopoverMarginDesktop, imageHotspotPopoverMarginUnits?.Desktop);
-    // const popoverMarginTablet = buildFourSided(imageHotspotPopoverMarginTablet, imageHotspotPopoverMarginUnits?.Tablet);
-    // const popoverMarginMobile = buildFourSided(imageHotspotPopoverMarginMobile, imageHotspotPopoverMarginUnits?.Mobile);
+    const popoverMarginDesktop = `${imageHotspotsPopoverMarginDesktop?.top}${imageHotspotsPopoverMarginUnits?.Desktop} ${imageHotspotsPopoverMarginDesktop?.right}${imageHotspotsPopoverMarginUnits?.Desktop} ${imageHotspotsPopoverMarginDesktop?.bottom}${imageHotspotsPopoverMarginUnits?.Desktop} ${imageHotspotsPopoverMarginDesktop?.left}${imageHotspotsPopoverMarginUnits?.Desktop}`;
+    const popoverMarginTablet = `${imageHotspotsPopoverMarginTablet?.top}${imageHotspotsPopoverMarginUnits?.Tablet} ${imageHotspotsPopoverMarginTablet?.right}${imageHotspotsPopoverMarginUnits?.Tablet} ${imageHotspotsPopoverMarginTablet?.bottom}${imageHotspotsPopoverMarginUnits?.Tablet} ${imageHotspotsPopoverMarginTablet?.left}${imageHotspotsPopoverMarginUnits?.Tablet}`;
+    const popoverMarginMobile = `${imageHotspotsPopoverMarginMobile?.top}${imageHotspotsPopoverMarginUnits?.Mobile} ${imageHotspotsPopoverMarginMobile?.right}${imageHotspotsPopoverMarginUnits?.Mobile} ${imageHotspotsPopoverMarginMobile?.bottom}${imageHotspotsPopoverMarginUnits?.Mobile} ${imageHotspotsPopoverMarginMobile?.left}${imageHotspotsPopoverMarginUnits?.Mobile}`;
 
-    const popoverPaddingDesktop = buildFourSided(imageHotspotsPopoverPaddingDesktop, imageHotspotsPopoverPaddingUnits?.Desktop);
-    const popoverPaddingTablet = buildFourSided(imageHotspotsPopoverPaddingTablet, imageHotspotsPopoverPaddingUnits?.Tablet);
-    const popoverPaddingMobile = buildFourSided(imageHotspotsPopoverPaddingMobile, imageHotspotsPopoverPaddingUnits?.Mobile);
+    const imageBorderWidthDesktop = `${imageHotspotImageBorderWidth?.top}${imageHotspotImageBorderWidthUnits?.Desktop} ${imageHotspotImageBorderWidth?.right}${imageHotspotImageBorderWidthUnits?.Desktop} ${imageHotspotImageBorderWidth?.bottom}${imageHotspotImageBorderWidthUnits?.Desktop} ${imageHotspotImageBorderWidth?.left}${imageHotspotImageBorderWidthUnits?.Desktop}`;
+    const imageBorderWidthTablet = `${imageHotspotImageBorderWidth?.top}${imageHotspotImageBorderWidthUnits?.Tablet} ${imageHotspotImageBorderWidth?.right}${imageHotspotImageBorderWidthUnits?.Tablet} ${imageHotspotImageBorderWidth?.bottom}${imageHotspotImageBorderWidthUnits?.Tablet} ${imageHotspotImageBorderWidth?.left}${imageHotspotImageBorderWidthUnits?.Tablet}`;
+    const imageBorderWidthMobile = `${imageHotspotImageBorderWidth?.top}${imageHotspotImageBorderWidthUnits?.Mobile} ${imageHotspotImageBorderWidth?.right}${imageHotspotImageBorderWidthUnits?.Mobile} ${imageHotspotImageBorderWidth?.bottom}${imageHotspotImageBorderWidthUnits?.Mobile} ${imageHotspotImageBorderWidth?.left}${imageHotspotImageBorderWidthUnits?.Mobile}`;
 
-    const popoverMarginDesktop = buildFourSided(imageHotspotsPopoverMarginDesktop, imageHotspotsPopoverMarginUnits?.Desktop);
-    const popoverMarginTablet = buildFourSided(imageHotspotsPopoverMarginTablet, imageHotspotsPopoverMarginUnits?.Tablet);
-    const popoverMarginMobile = buildFourSided(imageHotspotsPopoverMarginMobile, imageHotspotsPopoverMarginUnits?.Mobile);
-
-    const imageBorderWidthDesktop = buildResponsiveBoxValue(imageHotspotImageBorderWidth, imageHotspotImageBorderWidthUnits, 'Desktop');
-    const imageBorderWidthTablet = buildResponsiveBoxValue(imageHotspotImageBorderWidth, imageHotspotImageBorderWidthUnits, 'Tablet');
-    const imageBorderWidthMobile = buildResponsiveBoxValue(imageHotspotImageBorderWidth, imageHotspotImageBorderWidthUnits, 'Mobile');
-
-    const imageBorderRadiusDesktop = buildResponsiveBoxValue(imageHotspotImageBorderRadius, imageHotspotImageBorderRadiusUnits, 'Desktop');
-    const imageBorderRadiusTablet = buildResponsiveBoxValue(imageHotspotImageBorderRadius, imageHotspotImageBorderRadiusUnits, 'Tablet');
-    const imageBorderRadiusMobile = buildResponsiveBoxValue(imageHotspotImageBorderRadius, imageHotspotImageBorderRadiusUnits, 'Mobile');
+    const imageBorderRadiusDesktop = `${imageHotspotImageBorderRadius?.top}${imageHotspotImageBorderRadiusUnits?.Desktop} ${imageHotspotImageBorderRadius?.right}${imageHotspotImageBorderRadiusUnits?.Desktop} ${imageHotspotImageBorderRadius?.bottom}${imageHotspotImageBorderRadiusUnits?.Desktop} ${imageHotspotImageBorderRadius?.left}${imageHotspotImageBorderRadiusUnits?.Desktop}`;
+    const imageBorderRadiusTablet = `${imageHotspotImageBorderRadius?.top}${imageHotspotImageBorderRadiusUnits?.Tablet} ${imageHotspotImageBorderRadius?.right}${imageHotspotImageBorderRadiusUnits?.Tablet} ${imageHotspotImageBorderRadius?.bottom}${imageHotspotImageBorderRadiusUnits?.Tablet} ${imageHotspotImageBorderRadius?.left}${imageHotspotImageBorderRadiusUnits?.Tablet}`;
+    const imageBorderRadiusMobile = `${imageHotspotImageBorderRadius?.top}${imageHotspotImageBorderRadiusUnits?.Mobile} ${imageHotspotImageBorderRadius?.right}${imageHotspotImageBorderRadiusUnits?.Mobile} ${imageHotspotImageBorderRadius?.bottom}${imageHotspotImageBorderRadiusUnits?.Mobile} ${imageHotspotImageBorderRadius?.left}${imageHotspotImageBorderRadiusUnits?.Mobile}`;
 
     // Popover width
-    const popoverWidthDesktop = imageHotspotPopoverWidth?.Desktop ? `${imageHotspotPopoverWidth.Desktop}${imageHotspotPopoverWidthUnits?.Desktop || 'px'}` : '250';
-    const popoverWidthTablet = imageHotspotPopoverWidth?.Tablet ? `${imageHotspotPopoverWidth.Tablet}${imageHotspotPopoverWidthUnits?.Tablet || 'px'}` : popoverWidthDesktop;
-    const popoverWidthMobile = imageHotspotPopoverWidth?.Mobile ? `${imageHotspotPopoverWidth.Mobile}${imageHotspotPopoverWidthUnits?.Mobile || 'px'}` : popoverWidthDesktop;
+    const popoverWidthDesktop = `${imageHotspotPopoverWidth?.top}${imageHotspotPopoverWidthUnits?.Desktop} ${imageHotspotPopoverWidth?.right}${imageHotspotPopoverWidthUnits?.Desktop} ${imageHotspotPopoverWidth?.bottom}${imageHotspotPopoverWidthUnits?.Desktop} ${imageHotspotPopoverWidth?.left}${imageHotspotPopoverWidthUnits?.Desktop}`;
+    const popoverWidthTablet = `${imageHotspotPopoverWidth?.top}${imageHotspotPopoverWidthUnits?.Tablet} ${imageHotspotPopoverWidth?.right}${imageHotspotPopoverWidthUnits?.Tablet} ${imageHotspotPopoverWidth?.bottom}${imageHotspotPopoverWidthUnits?.Tablet} ${imageHotspotPopoverWidth?.left}${imageHotspotPopoverWidthUnits?.Tablet}`;
+    const popoverWidthMobile = `${imageHotspotPopoverWidth?.top}${imageHotspotPopoverWidthUnits?.Mobile} ${imageHotspotPopoverWidth?.right}${imageHotspotPopoverWidthUnits?.Mobile} ${imageHotspotPopoverWidth?.bottom}${imageHotspotPopoverWidthUnits?.Mobile} ${imageHotspotPopoverWidth?.left}${imageHotspotPopoverWidthUnits?.Mobile}`;
 
-    // Popover border
-    // const popoverBorderRadiusDesktop = buildFourSided(imageHotspotsPopoverBorderRadiusDesktop, imageHotspotPopoverBorderRadiusUnits?.Desktop) || '8px';
-    // const popoverBorderRadiusTablet = buildFourSided(imageHotspotPopoverBorderRadiusTablet, imageHotspotPopoverBorderRadiusUnits?.Tablet) || popoverBorderRadiusDesktop;
-    // const popoverBorderRadiusMobile = buildFourSided(imageHotspotPopoverBorderRadiusMobile, imageHotspotPopoverBorderRadiusUnits?.Mobile) || popoverBorderRadiusDesktop;
+    // Popover border Radius
+    const popoverBorderRadiusDesktop = `${imageHotspotsPopoverBorderRadiusDesktop?.top}${imageHotspotsPopoverBorderRadiusUnits?.Desktop} ${imageHotspotsPopoverBorderRadiusDesktop?.right}${imageHotspotsPopoverBorderRadiusUnits?.Desktop} ${imageHotspotsPopoverBorderRadiusDesktop?.bottom}${imageHotspotsPopoverBorderRadiusUnits?.Desktop} ${imageHotspotsPopoverBorderRadiusDesktop?.left}${imageHotspotsPopoverBorderRadiusUnits?.Desktop}`;
+    const popoverBorderRadiusTablet = `${imageHotspotsPopoverBorderRadiusTablet?.top}${imageHotspotsPopoverBorderRadiusUnits?.Tablet} ${imageHotspotsPopoverBorderRadiusTablet?.right}${imageHotspotsPopoverBorderRadiusTablet?.Tablet} ${imageHotspotsPopoverBorderRadiusTablet?.bottom}${imageHotspotsPopoverBorderRadiusTablet?.Tablet} ${imageHotspotsPopoverBorderRadiusTablet?.left}${imageHotspotsPopoverBorderRadiusUnits?.Tablet}`;
+    const popoverBorderRadiusMobile = `${imageHotspotsPopoverBorderRadiusMobile?.top}${imageHotspotsPopoverBorderRadiusUnits?.Mobile} ${imageHotspotsPopoverBorderRadiusMobile?.right}${imageHotspotsPopoverBorderRadiusMobile?.right} ${imageHotspotsPopoverBorderRadiusMobile?.bottom}${imageHotspotsPopoverBorderRadiusMobile?.bottom} ${imageHotspotsPopoverBorderRadiusMobile?.left}${imageHotspotsPopoverBorderRadiusMobile?.left}`;
 
-    const popoverBorderRadiusDesktop = buildFourSided(imageHotspotsPopoverBorderRadiusDesktop, imageHotspotsPopoverBorderRadiusUnits?.Desktop) || '8px';
-    const popoverBorderRadiusTablet = buildFourSided(imageHotspotsPopoverBorderRadiusTablet, imageHotspotsPopoverBorderRadiusUnits?.Tablet) || popoverBorderRadiusDesktop;
-    const popoverBorderRadiusMobile = buildFourSided(imageHotspotsPopoverBorderRadiusMobile, imageHotspotsPopoverBorderRadiusUnits?.Mobile) || popoverBorderRadiusDesktop;
+    const popoverBorderWidthDesktop = `${imageHotspotsPopoverBorderDesktop?.top}${imageHotspotsPopoverBorderUnits?.Desktop} ${imageHotspotsPopoverBorderDesktop?.right}${imageHotspotsPopoverBorderUnits?.Desktop} ${imageHotspotsPopoverBorderDesktop?.bottom}${imageHotspotsPopoverBorderUnits?.Desktop} ${imageHotspotsPopoverBorderDesktop?.left}${imageHotspotsPopoverBorderUnits?.Desktop}`;
+    const popoverBorderWidthTablet = `${imageHotspotsPopoverBorderTablet?.top}${imageHotspotsPopoverBorderUnits?.Tablet} ${imageHotspotsPopoverBorderTablet?.right}${imageHotspotsPopoverBorderUnits?.Tablet} ${imageHotspotsPopoverBorderTablet?.bottom}${imageHotspotsPopoverBorderUnits?.Tablet} ${imageHotspotsPopoverBorderTablet?.left}${imageHotspotsPopoverBorderUnits?.Tablet}`;
+    const popoverBorderWidthMobile = `${imageHotspotsPopoverBorderMobile?.top}${imageHotspotsPopoverBorderUnits?.Mobile} ${imageHotspotsPopoverBorderMobile?.right}${imageHotspotsPopoverBorderUnits?.Mobile} ${imageHotspotsPopoverBorderMobile?.bottom}${imageHotspotsPopoverBorderUnits?.Mobile} ${imageHotspotsPopoverBorderMobile?.left}${imageHotspotsPopoverBorderUnits?.Mobile}`;
 
-    // const popoverBorderWidthDesktop = buildFourSided(imageHotspotsPopoverBorderDesktop, imageHotspotPopoverBorderWidthUnits?.Desktop);
-    // const popoverBorderWidthTablet = buildFourSided(imageHotspotPopoverBorderWidthTablet, imageHotspotPopoverBorderWidthUnits?.Tablet);
-    // const popoverBorderWidthMobile = buildFourSided(imageHotspotPopoverBorderWidthMobile, imageHotspotPopoverBorderWidthUnits?.Mobile);
+    const popoverImageBorderWidthDesktop = `${imageHotspotPopoverImageBorderWidthDesktop?.top}${imageHotspotPopoverImageBorderWidthUnits?.Desktop} ${imageHotspotPopoverImageBorderWidthDesktop?.right}${imageHotspotPopoverImageBorderWidthUnits?.Desktop} ${imageHotspotPopoverImageBorderWidthDesktop?.bottom}${imageHotspotPopoverImageBorderWidthUnits?.Desktop} ${imageHotspotPopoverImageBorderWidthDesktop?.left}${imageHotspotPopoverImageBorderWidthUnits?.Desktop}`;
+    const popoverImageBorderWidthTablet = `${imageHotspotPopoverImageBorderWidthTablet?.top}${imageHotspotPopoverImageBorderWidthUnits?.Tablet} ${imageHotspotPopoverImageBorderWidthTablet?.right}${imageHotspotPopoverImageBorderWidthUnits?.Tablet} ${imageHotspotPopoverImageBorderWidthTablet?.bottom}${imageHotspotPopoverImageBorderWidthUnits?.Tablet} ${imageHotspotPopoverImageBorderWidthTablet?.left}${imageHotspotPopoverImageBorderWidthUnits?.Tablet}`;
+    const popoverImageBorderWidthMobile = `${imageHotspotPopoverImageBorderWidthMobile?.top}${imageHotspotPopoverImageBorderWidthUnits?.Mobile} ${imageHotspotPopoverImageBorderWidthMobile?.right}${imageHotspotPopoverImageBorderWidthUnits?.Mobile} ${imageHotspotPopoverImageBorderWidthMobile?.bottom}${imageHotspotPopoverImageBorderWidthUnits?.Mobile} ${imageHotspotPopoverImageBorderWidthMobile?.left}${imageHotspotPopoverImageBorderWidthUnits?.Mobile}`;
 
-    const popoverBorderWidthDesktop = buildFourSided(imageHotspotsPopoverBorderDesktop, imageHotspotsPopoverBorderUnits?.Desktop);
-    const popoverBorderWidthTablet = buildFourSided(imageHotspotsPopoverBorderTablet, imageHotspotsPopoverBorderUnits?.Tablet);
-    const popoverBorderWidthMobile = buildFourSided(imageHotspotsPopoverBorderMobile, imageHotspotsPopoverBorderUnits?.Mobile);
-
-    const popoverImageBorderWidthDesktop = buildFourSided(imageHotspotPopoverImageBorderWidthDesktop, imageHotspotPopoverImageBorderWidthUnits?.Desktop);
-    const popoverImageBorderWidthTablet = buildFourSided(imageHotspotPopoverImageBorderWidthTablet, imageHotspotPopoverImageBorderWidthUnits?.Tablet);
-    const popoverImageBorderWidthMobile = buildFourSided(imageHotspotPopoverImageBorderWidthMobile, imageHotspotPopoverImageBorderWidthUnits?.Mobile);
-
-    const popoverImageBorderRadiusDesktop = buildFourSided(imageHotspotPopoverImageBorderRadiusDesktop, imageHotspotPopoverImageBorderRadiusUnits?.Desktop);
-    const popoverImageBorderRadiusTablet = buildFourSided(imageHotspotPopoverImageBorderRadiusTablet, imageHotspotPopoverImageBorderRadiusUnits?.Tablet);
-    const popoverImageBorderRadiusMobile = buildFourSided(imageHotspotPopoverImageBorderRadiusMobile, imageHotspotPopoverImageBorderRadiusUnits?.Mobile);
+    const popoverImageBorderRadiusDesktop = `${imageHotspotPopoverImageBorderRadiusDesktop?.top}${imageHotspotPopoverImageBorderRadiusUnits?.Desktop} ${imageHotspotPopoverImageBorderRadiusDesktop?.right}${imageHotspotPopoverImageBorderRadiusUnits?.Desktop} ${imageHotspotPopoverImageBorderRadiusDesktop?.bottom}${imageHotspotPopoverImageBorderRadiusUnits?.Desktop} ${imageHotspotPopoverImageBorderRadiusDesktop?.left}${imageHotspotPopoverImageBorderRadiusUnits?.Desktop}`;
+    const popoverImageBorderRadiusTablet = `${imageHotspotPopoverImageBorderRadiusTablet?.top}${imageHotspotPopoverImageBorderRadiusUnits?.Tablet} ${imageHotspotPopoverImageBorderRadiusTablet?.right}${imageHotspotPopoverImageBorderRadiusUnits?.Tablet} ${imageHotspotPopoverImageBorderRadiusTablet?.bottom}${imageHotspotPopoverImageBorderRadiusUnits?.Tablet} ${imageHotspotPopoverImageBorderRadiusTablet?.left}${imageHotspotPopoverImageBorderRadiusUnits?.Tablet}`;
+    const popoverImageBorderRadiusMobile = `${imageHotspotPopoverImageBorderRadiusMobile?.top}${imageHotspotPopoverImageBorderRadiusUnits?.Mobile} ${imageHotspotPopoverImageBorderRadiusMobile?.right}${imageHotspotPopoverImageBorderRadiusUnits?.Mobile} ${imageHotspotPopoverImageBorderRadiusMobile?.bottom}${imageHotspotPopoverImageBorderRadiusUnits?.Mobile} ${imageHotspotPopoverImageBorderRadiusMobile?.left}${imageHotspotPopoverImageBorderRadiusUnits?.Mobile}`;
 
     // Block spacing
-    const blockPaddingDesktop = buildFourSided(imageHotspotPaddingDesktop, imageHotspotPaddingUnits?.Desktop);
-    const blockPaddingTablet = buildFourSided(imageHotspotPaddingTablet, imageHotspotPaddingUnits?.Tablet);
-    const blockPaddingMobile = buildFourSided(imageHotspotPaddingMobile, imageHotspotPaddingUnits?.Mobile);
+    const blockPaddingDesktop = `${imageHotspotPaddingDesktop?.top}${imageHotspotPaddingUnits?.Desktop} ${imageHotspotPaddingDesktop?.right}${imageHotspotPaddingUnits?.Desktop} ${imageHotspotPaddingDesktop?.bottom}${imageHotspotPaddingUnits?.Desktop} ${imageHotspotPaddingDesktop?.left}${imageHotspotPaddingUnits?.Desktop}`;
+    const blockPaddingTablet = `${imageHotspotPaddingTablet?.top}${imageHotspotPaddingUnits?.Tablet} ${imageHotspotPaddingTablet?.right}${imageHotspotPaddingUnits?.Tablet} ${imageHotspotPaddingTablet?.bottom}${imageHotspotPaddingUnits?.Tablet} ${imageHotspotPaddingTablet?.left}${imageHotspotPaddingUnits?.Tablet}`;
+    const blockPaddingMobile = `${imageHotspotPaddingMobile?.top}${imageHotspotPaddingUnits?.Mobile} ${imageHotspotPaddingMobile?.right}${imageHotspotPaddingUnits?.Mobile} ${imageHotspotPaddingMobile?.bottom}${imageHotspotPaddingUnits?.Mobile} ${imageHotspotPaddingMobile?.left}${imageHotspotPaddingUnits?.Mobile}`;
 
-    const blockMarginDesktop = buildFourSided(imageHotspotMarginDesktop, imageHotspotMarginUnits?.Desktop);
-    const blockMarginTablet = buildFourSided(imageHotspotMarginTablet, imageHotspotMarginUnits?.Tablet);
-    const blockMarginMobile = buildFourSided(imageHotspotMarginMobile, imageHotspotMarginUnits?.Mobile);
+    const blockMarginDesktop = `${imageHotspotMarginDesktop?.top}${imageHotspotMarginUnits?.Desktop} ${imageHotspotMarginDesktop?.right}${imageHotspotMarginUnits?.Desktop} ${imageHotspotMarginDesktop?.bottom}${imageHotspotMarginUnits?.Desktop} ${imageHotspotMarginDesktop?.left}${imageHotspotMarginUnits?.Desktop}`;
+    const blockMarginTablet = `${imageHotspotMarginTablet?.top}${imageHotspotMarginUnits?.Tablet} ${imageHotspotMarginTablet?.right}${imageHotspotMarginUnits?.Tablet} ${imageHotspotMarginTablet?.bottom}${imageHotspotMarginUnits?.Tablet} ${imageHotspotMarginTablet?.left}${imageHotspotMarginUnits?.Tablet}`;
+    const blockMarginMobile = `${imageHotspotMarginMobile?.top}${imageHotspotMarginUnits?.Mobile} ${imageHotspotMarginMobile?.right}${imageHotspotMarginUnits?.Mobile} ${imageHotspotMarginMobile?.bottom}${imageHotspotMarginUnits?.Mobile} ${imageHotspotMarginMobile?.left}${imageHotspotMarginUnits?.Mobile}`;
 
-    const blockBorderDesktop = buildFourSided(imageHotspotBorderDesktop, imageHotspotBorderUnits?.Desktop);
-    const blockBorderTablet = buildFourSided(imageHotspotBorderTablet, imageHotspotBorderUnits?.Tablet);
-    const blockBorderMobile = buildFourSided(imageHotspotBorderMobile, imageHotspotBorderUnits?.Mobile);
+    const blockBorderDesktop = `${imageHotspotBorderDesktop?.top}${imageHotspotBorderUnits?.Desktop} ${imageHotspotBorderDesktop?.right}${imageHotspotBorderUnits?.Desktop} ${imageHotspotBorderDesktop?.bottom}${imageHotspotBorderUnits?.Desktop} ${imageHotspotBorderDesktop?.left}${imageHotspotBorderUnits?.Desktop}`;
+    const blockBorderTablet = `${imageHotspotBorderTablet?.top}${imageHotspotBorderUnits?.Tablet} ${imageHotspotBorderTablet?.right}${imageHotspotBorderUnits?.Tablet} ${imageHotspotBorderTablet?.bottom}${imageHotspotBorderUnits?.Tablet} ${imageHotspotBorderTablet?.left}${imageHotspotBorderUnits?.Tablet}`;
+    const blockBorderMobile = `${imageHotspotBorderMobile?.top}${imageHotspotBorderUnits?.Mobile} ${imageHotspotBorderMobile?.right}${imageHotspotBorderUnits?.Mobile} ${imageHotspotBorderMobile?.bottom}${imageHotspotBorderUnits?.Mobile} ${imageHotspotBorderMobile?.left}${imageHotspotBorderUnits?.Mobile}`;
 
-    const blockBorderRadiusDesktop = buildFourSided(imageHotspotBorderRadiusDesktop, imageHotspotBorderRadiusUnits?.Desktop);
-    const blockBorderRadiusTablet = buildFourSided(imageHotspotBorderRadiusTablet, imageHotspotBorderRadiusUnits?.Tablet);
-    const blockBorderRadiusMobile = buildFourSided(imageHotspotBorderRadiusMobile, imageHotspotBorderRadiusUnits?.Mobile);
+    const blockBorderRadiusDesktop = `${imageHotspotBorderRadiusDesktop?.top}${imageHotspotBorderRadiusUnits?.Desktop} ${imageHotspotBorderRadiusDesktop?.right}${imageHotspotBorderRadiusUnits?.Desktop} ${imageHotspotBorderRadiusDesktop?.bottom}${imageHotspotBorderRadiusUnits?.Desktop} ${imageHotspotBorderRadiusDesktop?.left}${imageHotspotBorderRadiusUnits?.Desktop}`;
+    const blockBorderRadiusTablet = `${imageHotspotBorderRadiusTablet?.top}${imageHotspotBorderRadiusUnits?.Tablet} ${imageHotspotBorderRadiusTablet?.right}${imageHotspotBorderRadiusUnits?.Tablet} ${imageHotspotBorderRadiusTablet?.bottom}${imageHotspotBorderRadiusUnits?.Tablet} ${imageHotspotBorderRadiusTablet?.left}${imageHotspotBorderRadiusUnits?.Tablet}`;
+    const blockBorderRadiusMobile = `${imageHotspotBorderRadiusMobile?.top}${imageHotspotBorderRadiusUnits?.Mobile} ${imageHotspotBorderRadiusMobile?.right}${imageHotspotBorderRadiusUnits?.Mobile} ${imageHotspotBorderRadiusMobile?.bottom}${imageHotspotBorderRadiusUnits?.Mobile} ${imageHotspotBorderRadiusMobile?.left}${imageHotspotBorderRadiusUnits?.Mobile}`;
 
     /** Default padding for Image Hotspots Popovers */
     const imageHotspotsPopoverPaddingDesktopWidth = `${imageHotspotsPopoverPaddingDesktop?.top}${imageHotspotsPopoverPaddingUnits?.Desktop} ${imageHotspotsPopoverPaddingDesktop?.right}${imageHotspotsPopoverPaddingUnits?.Desktop} ${imageHotspotsPopoverPaddingDesktop?.bottom}${imageHotspotsPopoverPaddingUnits?.Desktop} ${imageHotspotsPopoverPaddingDesktop?.left}${imageHotspotsPopoverPaddingUnits?.Desktop}`;
@@ -879,7 +850,7 @@ const generateImageHotspotStyle = (attributes) => {
                 ${imageHotspotsPopoverHoverClassicColor || imageHotspotsPopoverHoverGradientColor || imageHotspotsPopoverHoverCustomGradientInputValue
                 ? `--fb-popover-bg: ${resolvedPopoverHoverBg}; background: var(--fb-popover-bg) !important;`
                 : ''
-                }
+            }
                 ${imageHotspotsPopoverBorderHoverColor ? `border-color: ${imageHotspotsPopoverBorderHoverColor} !important;` : ''}
             }
 
