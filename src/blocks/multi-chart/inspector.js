@@ -559,7 +559,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 			</PanelBody>
 
 			<PanelBody
-				title={__("Content Text", "frontis-blocks")}
+				title={__("Footer Text", "frontis-blocks")}
 				initialOpen={false}
 			>
 				<FB_InputControl
