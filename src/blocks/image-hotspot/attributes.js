@@ -39,48 +39,9 @@ const attributes = {
 			Mobile: 'px'
 		}
 	},
-	imageHotspotImageBorderWidthDesktop: {
-		type: "object",
-		default: {
-			top: '',
-			right: '',
-			bottom: '',
-			left: ''
-		}
-	},
-	imageHotspotImageBorderWidthTablet: {
-		type: "object",
-		default: {
-			top: '',
-			right: '',
-			bottom: '',
-			left: ''
-		}
-	},
-	imageHotspotImageBorderWidthMobile: {
-		type: "object",
-		default: {
-			top: '',
-			right: '',
-			bottom: '',
-			left: ''
-		}
-	},
-	imageHotspotImageBorderWidthUnits: {
-		type: "object",
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
-	},
 	imageHotspotImageBorderColor: {
 		type: "string",
 		default: ""
-	},
-	imageHotspotImageBorderWidthLink: {
-		type: "boolean",
-		default: true
 	},
 	imageHotspotImageBorderRadiusDesktop: {
 		type: "object",
@@ -1286,10 +1247,6 @@ const attributes = {
 		type: "string",
 		default: ""
 	},
-	imageHotspotShowPopoverImage: {
-		type: "boolean",
-		default: true
-	},
 	imageHotspotCategoryFontFamily: {
 		type: "string",
 		default: ""
@@ -1448,87 +1405,9 @@ const attributes = {
 		type: "boolean",
 		default: true
 	},
-	imageHotspotCategoryBorderWidthDesktop: {
-		type: "object",
-		default: {
-			top: '',
-			right: '',
-			bottom: '',
-			left: ''
-		}
-	},
-	imageHotspotCategoryBorderWidthTablet: {
-		type: "object",
-		default: {
-			top: '',
-			right: '',
-			bottom: '',
-			left: ''
-		}
-	},
-	imageHotspotCategoryBorderWidthMobile: {
-		type: "object",
-		default: {
-			top: '',
-			right: '',
-			bottom: '',
-			left: ''
-		}
-	},
-	imageHotspotCategoryBorderWidthUnits: {
-		type: "object",
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
-	},
-	imageHotspotCategoryBorderWidthLink: {
-		type: "boolean",
-		default: true
-	},
 	imageHotspotCategoryBorderColor: {
 		type: "string",
 		default: ""
-	},
-	imageHotspotCategoryBorderRadiusDesktop: {
-		type: "object",
-		default: {
-			top: '',
-			right: '',
-			bottom: '',
-			left: ''
-		}
-	},
-	imageHotspotCategoryBorderRadiusTablet: {
-		type: "object",
-		default: {
-			top: '',
-			right: '',
-			bottom: '',
-			left: ''
-		}
-	},
-	imageHotspotCategoryBorderRadiusMobile: {
-		type: "object",
-		default: {
-			top: '',
-			right: '',
-			bottom: '',
-			left: ''
-		}
-	},
-	imageHotspotCategoryBorderRadiusUnits: {
-		type: "object",
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
-	},
-	imageHotspotCategoryBorderRadiusLink: {
-		type: "boolean",
-		default: true
 	},
 	imageHotspotPriceFontFamily: {
 		type: "string",
@@ -1685,88 +1564,6 @@ const attributes = {
 		}
 	},
 	imageHotspotPriceMarginLink: {
-		type: "boolean",
-		default: true
-	},
-	imageHotspotPriceBorderWidthDesktop: {
-		type: "object",
-		default: {
-			top: '',
-			right: '',
-			bottom: '',
-			left: ''
-		}
-	},
-	imageHotspotPriceBorderWidthTablet: {
-		type: "object",
-		default: {
-			top: '',
-			right: '',
-			bottom: '',
-			left: ''
-		}
-	},
-	imageHotspotPriceBorderWidthMobile: {
-		type: "object",
-		default: {
-			top: '',
-			right: '',
-			bottom: '',
-			left: ''
-		}
-	},
-	imageHotspotPriceBorderWidthUnits: {
-		type: "object",
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
-	},
-	imageHotspotPriceBorderWidthLink: {
-		type: "boolean",
-		default: true
-	},
-	imageHotspotPriceBorderColor: {
-		type: "string",
-		default: ""
-	},
-	imageHotspotPriceBorderRadiusDesktop: {
-		type: "object",
-		default: {
-			top: '',
-			right: '',
-			bottom: '',
-			left: ''
-		}
-	},
-	imageHotspotPriceBorderRadiusTablet: {
-		type: "object",
-		default: {
-			top: '',
-			right: '',
-			bottom: '',
-			left: ''
-		}
-	},
-	imageHotspotPriceBorderRadiusMobile: {
-		type: "object",
-		default: {
-			top: '',
-			right: '',
-			bottom: '',
-			left: ''
-		}
-	},
-	imageHotspotPriceBorderRadiusUnits: {
-		type: "object",
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
-	},
-	imageHotspotPriceBorderRadiusLink: {
 		type: "boolean",
 		default: true
 	},
@@ -2117,6 +1914,15 @@ const attributes = {
 		default: '',
 	},
 
+	imageHotspotsPopoverBoxShadowCssValue: {
+		type: "string",
+		default: "",
+	},
+	imageHotspotsPopoverBoxShadowHoverCssValue: {
+		type: "string",
+		default: "",
+	},
+
 	/** Start Background */
 	imageHotspotsPopoverBgColorSwitcher: {
 		type: "string",
@@ -2132,7 +1938,7 @@ const attributes = {
 	},
 	imageHotspotsPopoverNormalGradientColor: {
 		type: "string",
-		default: null,
+		default: "",
 	},
 	imageHotspotsPopoverNormalCustomGradientSwitcher: {
 		type: "boolean",
@@ -2153,7 +1959,7 @@ const attributes = {
 	},
 	imageHotspotsPopoverHoverGradientColor: {
 		type: "string",
-		default: null,
+		default: "",
 	},
 	imageHotspotsPopoverHoverCustomGradientSwitcher: {
 		type: "boolean",
@@ -2371,6 +2177,259 @@ const attributes = {
 		default: "",
 	},
 	/** End Box Shadow */
+
+
+
+	/** Start Hotspot Popover Padding (new) */
+	imageHotspotsPopoverPaddingUnits: {
+		type: "object",
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		},
+	},
+	imageHotspotsPopoverPaddingDesktop: {
+		type: "object",
+		default: {
+			top: '',
+			right: '',
+			bottom: '',
+			left: ''
+		},
+	},
+	imageHotspotsPopoverPaddingTablet: {
+		type: "object",
+		default: {
+			top: '',
+			right: '',
+			bottom: '',
+			left: ''
+		},
+	},
+	imageHotspotsPopoverPaddingMobile: {
+		type: "object",
+		default: {
+			top: '',
+			right: '',
+			bottom: '',
+			left: ''
+		},
+	},
+	imageHotspotsPopoverPaddingLink: {
+		type: "boolean",
+		default: true,
+	},
+	/** End Hotspot Popover Padding (new) */
+
+	/** Start Hotspot Popover Margin (new) */
+	imageHotspotsPopoverMarginUnits: {
+		type: "object",
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		},
+	},
+	imageHotspotsPopoverMarginDesktop: {
+		type: "object",
+		default: {
+			top: '',
+			right: '',
+			bottom: '',
+			left: ''
+		},
+	},
+	imageHotspotsPopoverMarginTablet: {
+		type: "object",
+		default: {
+			top: '',
+			right: '',
+			bottom: '',
+			left: ''
+		},
+	},
+	imageHotspotsPopoverMarginMobile: {
+		type: "object",
+		default: {
+			top: '',
+			right: '',
+			bottom: '',
+			left: ''
+		},
+	},
+	imageHotspotsPopoverMarginLink: {
+		type: "boolean",
+		default: true,
+	},
+	/** End Hotspot Popover Margin (new) */
+
+	/** Start Hotspot Popover Background (new) */
+	imageHotspotsPopoverBgColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	imageHotspotsPopoverNormalBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	imageHotspotsPopoverNormalClassicColor: {
+		type: "string",
+		default: "#ffffff",
+	},
+	imageHotspotsPopoverNormalGradientColor: {
+		type: "string",
+		default: "",
+	},
+	imageHotspotsPopoverNormalCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	imageHotspotsPopoverNormalCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+	imageHotspotsPopoverHoverBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	imageHotspotsPopoverHoverClassicColor: {
+		type: "string",
+		default: "",
+	},
+	imageHotspotsPopoverHoverGradientColor: {
+		type: "string",
+		default: "",
+	},
+	imageHotspotsPopoverHoverCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	imageHotspotsPopoverHoverCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+	/** End Hotspot Popover Background (new) */
+
+	/** Start Hotspot Popover Border (new) */
+	imageHotspotsPopoverBorder: {
+		type: "string",
+		default: "none",
+	},
+	imageHotspotsPopoverBorderColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	imageHotspotsPopoverBorderColor: {
+		type: "string",
+		default: "",
+	},
+	imageHotspotsPopoverBorderHoverColor: {
+		type: "string",
+		default: "",
+	},
+	imageHotspotsPopoverBorderUnits: {
+		type: "object",
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		},
+	},
+	imageHotspotsPopoverBorderDesktop: {
+		type: "object",
+		default: {
+			top: '',
+			right: '',
+			bottom: '',
+			left: ''
+		},
+	},
+	imageHotspotsPopoverBorderTablet: {
+		type: "object",
+		default: {
+			top: '',
+			right: '',
+			bottom: '',
+			left: ''
+		},
+	},
+	imageHotspotsPopoverBorderMobile: {
+		type: "object",
+		default: {
+			top: '',
+			right: '',
+			bottom: '',
+			left: ''
+		},
+	},
+	imageHotspotsPopoverBorderLink: {
+		type: "boolean",
+		default: true,
+	},
+	/** End Hotspot Popover Border (new) */
+
+	/** Start Hotspot Popover Border Radius (new) */
+	imageHotspotsPopoverBorderRadiusUnits: {
+		type: "object",
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		},
+	},
+	imageHotspotsPopoverBorderRadiusDesktop: {
+		type: "object",
+		default: {
+			top: '',
+			right: '',
+			bottom: '',
+			left: ''
+		},
+	},
+	imageHotspotsPopoverBorderRadiusTablet: {
+		type: "object",
+		default: {
+			top: '',
+			right: '',
+			bottom: '',
+			left: ''
+		},
+	},
+	imageHotspotsPopoverBorderRadiusMobile: {
+		type: "object",
+		default: {
+			top: '',
+			right: '',
+			bottom: '',
+			left: ''
+		},
+	},
+	imageHotspotsPopoverBorderRadiusLink: {
+		type: "boolean",
+		default: true,
+	},
+	/** End Hotspot Popover Border Radius (new) */
+
+	/** Start Hotspot Popover Box Shadow (new) */
+	imageHotspotsPopoverBoxShadowSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	imageHotspotsPopoverBoxShadowValues: {
+		type: "array",
+		default: [0, 4, 12, 0, '', 'rgba(0,0,0,0.15)'],
+	},
+	imageHotspotsPopoverBoxShadowHoverValues: {
+		type: "string",
+		default: "",
+	},
+	// imageHotspotsPopoverGlobalZIndex: {
+	// 	type: "number",
+	// 	default: 200,
+	// },
+	/** End Hotspot Popover Box Shadow (new) */
+
 
 }
 

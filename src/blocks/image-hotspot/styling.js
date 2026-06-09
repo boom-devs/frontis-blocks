@@ -98,7 +98,7 @@ const generateImageHotspotStyle = (attributes) => {
         imageHotspotCategoryBorderWidthTablet,
         imageHotspotCategoryBorderWidthMobile,
         imageHotspotCategoryBorderWidthUnits,
-        imageHotspotCategoryBorderColor,
+        // imageHotspotCategoryBorderColor,
         imageHotspotCategoryBorderRadiusDesktop,
         imageHotspotCategoryBorderRadiusTablet,
         imageHotspotCategoryBorderRadiusMobile,
@@ -145,10 +145,10 @@ const generateImageHotspotStyle = (attributes) => {
 
         imageHotspotTitleMargin,
         imageHotspotTitleMarginUnits,
-        imageHotspotTitlePaddingDesktop,
-        imageHotspotTitlePaddingTablet,
-        imageHotspotTitlePaddingMobile,
-        imageHotspotTitlePaddingUnits,
+        // imageHotspotTitlePaddingDesktop,
+        // imageHotspotTitlePaddingTablet,
+        // imageHotspotTitlePaddingMobile,
+        // imageHotspotTitlePaddingUnits,
         imageHotspotTitleMarginDesktop,
         imageHotspotTitleMarginTablet,
         imageHotspotTitleMarginMobile,
@@ -156,7 +156,7 @@ const generateImageHotspotStyle = (attributes) => {
         imageHotspotTitleBorderWidthTablet,
         imageHotspotTitleBorderWidthMobile,
         imageHotspotTitleBorderWidthUnits,
-        imageHotspotTitleBorderColor,
+        // imageHotspotTitleBorderColor,
         imageHotspotTitleBorderRadiusDesktop,
         imageHotspotTitleBorderRadiusTablet,
         imageHotspotTitleBorderRadiusMobile,
@@ -235,6 +235,22 @@ const generateImageHotspotStyle = (attributes) => {
         // Custom CSS
         imageHotspotCustomCSS,
 
+
+        /** Start Hotspot Title Padding */
+        imageHotspotTitlePaddingUnits,
+        imageHotspotTitlePaddingDesktop,
+        imageHotspotTitlePaddingTablet,
+        imageHotspotTitlePaddingMobile,
+        imageHotspotTitlePaddingLink,
+        /** End Hotspot Title Padding */
+
+        /** Start Hotspot Title Border */
+        imageHotspotTitleBorder,
+        imageHotspotTitleBorderColorSwitcher,
+        imageHotspotTitleBorderColor,
+        imageHotspotTitleBorderHoverColor,
+        /** End Hotspot Title Border */
+
         /** Start Hotspot Popover Padding */
         imageHotspotsPopoverPaddingUnits,
         imageHotspotsPopoverPaddingDesktop,
@@ -291,9 +307,55 @@ const generateImageHotspotStyle = (attributes) => {
         /** Start Hotspot Popover Box Shadow */
         imageHotspotsPopoverBoxShadowSwitcher,
         imageHotspotsPopoverBoxShadowValues,
-        imageHotspotsPopoverBoxShadowHoverValues,
+        imageHotspotsPopoverBoxShadowCssValue,
         imageHotspotsPopoverGlobalZIndex,
         /** End Hotspot Popover Box Shadow */
+
+
+        /** Start Hotspot Category Border Color */
+        imageHotspotCategoryBorder,
+        imageHotspotCategoryBorderColorSwitcher,
+        imageHotspotCategoryBorderColor,
+        imageHotspotCategoryBorderHoverColor,
+        /** End Hotspot Category Border Color */
+
+        /** Start Hotspot Category Border */
+        imageHotspotCategoryBorderUnits,
+        imageHotspotCategoryBorderDesktop,
+        imageHotspotCategoryBorderTablet,
+        imageHotspotCategoryBorderMobile,
+        imageHotspotCategoryBorderLink,
+        /** End Hotspot Category Border */
+
+        /** Start Hotspot Description Border Color */
+        imageHotspotsDescriptionBorder,
+        imageHotspotsDescriptionBorderColorSwitcher,
+        imageHotspotsDescriptionBorderColor,
+        imageHotspotsDescriptionBorderHoverColor,
+        /** End Hotspot Description Border Color */
+
+        /** Start Hotspot Description Border */
+        imageHotspotsDescriptionBorderUnits,
+        imageHotspotsDescriptionBorderDesktop,
+        imageHotspotsDescriptionBorderTablet,
+        imageHotspotsDescriptionBorderMobile,
+        imageHotspotsDescriptionBorderLink,
+        /** End Hotspot Description Border */
+
+        /** Start Hotspot Price Border Color */
+        imageHotspotsPriceBorder,
+        imageHotspotsPriceBorderColorSwitcher,
+        imageHotspotsPriceBorderColor,
+        imageHotspotsPriceBorderHoverColor,
+        /** End Hotspot Price Border Color */
+
+        /** Start Hotspot Price Border */
+        imageHotspotsPriceBorderUnits,
+        imageHotspotsPriceBorderDesktop,
+        imageHotspotsPriceBorderTablet,
+        imageHotspotsPriceBorderMobile,
+        imageHotspotsPriceBorderLink,
+        /** End Hotspot Price Border */
 
 
     } = attributes;
@@ -368,14 +430,6 @@ const generateImageHotspotStyle = (attributes) => {
     const titleMarginMobile = buildFourSided(imageHotspotTitleMarginMobile, imageHotspotTitleMarginUnits?.Mobile)
         || (imageHotspotTitleMargin?.Mobile ? `${imageHotspotTitleMargin.Mobile}${imageHotspotTitleMarginUnits?.Mobile || 'px'}` : '');
 
-    const titleBorderWidthDesktop = buildFourSided(imageHotspotTitleBorderWidthDesktop, imageHotspotTitleBorderWidthUnits?.Desktop);
-    const titleBorderWidthTablet = buildFourSided(imageHotspotTitleBorderWidthTablet, imageHotspotTitleBorderWidthUnits?.Tablet);
-    const titleBorderWidthMobile = buildFourSided(imageHotspotTitleBorderWidthMobile, imageHotspotTitleBorderWidthUnits?.Mobile);
-
-    const titleBorderRadiusDesktop = buildFourSided(imageHotspotTitleBorderRadiusDesktop, imageHotspotTitleBorderRadiusUnits?.Desktop);
-    const titleBorderRadiusTablet = buildFourSided(imageHotspotTitleBorderRadiusTablet, imageHotspotTitleBorderRadiusUnits?.Tablet);
-    const titleBorderRadiusMobile = buildFourSided(imageHotspotTitleBorderRadiusMobile, imageHotspotTitleBorderRadiusUnits?.Mobile);
-
     const categoryPaddingDesktop = buildFourSided(imageHotspotCategoryPaddingDesktop, imageHotspotCategoryPaddingUnits?.Desktop);
     const categoryPaddingTablet = buildFourSided(imageHotspotCategoryPaddingTablet, imageHotspotCategoryPaddingUnits?.Tablet);
     const categoryPaddingMobile = buildFourSided(imageHotspotCategoryPaddingMobile, imageHotspotCategoryPaddingUnits?.Mobile);
@@ -383,14 +437,6 @@ const generateImageHotspotStyle = (attributes) => {
     const categoryMarginDesktop = buildFourSided(imageHotspotCategoryMarginDesktop, imageHotspotCategoryMarginUnits?.Desktop);
     const categoryMarginTablet = buildFourSided(imageHotspotCategoryMarginTablet, imageHotspotCategoryMarginUnits?.Tablet);
     const categoryMarginMobile = buildFourSided(imageHotspotCategoryMarginMobile, imageHotspotCategoryMarginUnits?.Mobile);
-
-    const categoryBorderWidthDesktop = buildFourSided(imageHotspotCategoryBorderWidthDesktop, imageHotspotCategoryBorderWidthUnits?.Desktop);
-    const categoryBorderWidthTablet = buildFourSided(imageHotspotCategoryBorderWidthTablet, imageHotspotCategoryBorderWidthUnits?.Tablet);
-    const categoryBorderWidthMobile = buildFourSided(imageHotspotCategoryBorderWidthMobile, imageHotspotCategoryBorderWidthUnits?.Mobile);
-
-    const categoryBorderRadiusDesktop = buildFourSided(imageHotspotCategoryBorderRadiusDesktop, imageHotspotCategoryBorderRadiusUnits?.Desktop);
-    const categoryBorderRadiusTablet = buildFourSided(imageHotspotCategoryBorderRadiusTablet, imageHotspotCategoryBorderRadiusUnits?.Tablet);
-    const categoryBorderRadiusMobile = buildFourSided(imageHotspotCategoryBorderRadiusMobile, imageHotspotCategoryBorderRadiusUnits?.Mobile);
 
     // Description spacing
     const descPaddingDesktop = buildFourSided(imageHotspotDescPaddingDesktop, imageHotspotDescPaddingUnits?.Desktop);
@@ -404,14 +450,6 @@ const generateImageHotspotStyle = (attributes) => {
     const descMarginMobile = buildFourSided(imageHotspotDescMarginMobile, imageHotspotDescMarginUnits?.Mobile)
         || (imageHotspotDescMargin?.Mobile ? `${imageHotspotDescMargin.Mobile}${imageHotspotDescMarginUnits?.Mobile || 'px'}` : '');
 
-    const descBorderWidthDesktop = buildFourSided(imageHotspotDescBorderWidthDesktop, imageHotspotDescBorderWidthUnits?.Desktop);
-    const descBorderWidthTablet = buildFourSided(imageHotspotDescBorderWidthTablet, imageHotspotDescBorderWidthUnits?.Tablet);
-    const descBorderWidthMobile = buildFourSided(imageHotspotDescBorderWidthMobile, imageHotspotDescBorderWidthUnits?.Mobile);
-
-    const descBorderRadiusDesktop = buildFourSided(imageHotspotDescBorderRadiusDesktop, imageHotspotDescBorderRadiusUnits?.Desktop);
-    const descBorderRadiusTablet = buildFourSided(imageHotspotDescBorderRadiusTablet, imageHotspotDescBorderRadiusUnits?.Tablet);
-    const descBorderRadiusMobile = buildFourSided(imageHotspotDescBorderRadiusMobile, imageHotspotDescBorderRadiusUnits?.Mobile);
-
     const pricePaddingDesktop = buildFourSided(imageHotspotPricePaddingDesktop, imageHotspotPricePaddingUnits?.Desktop);
     const pricePaddingTablet = buildFourSided(imageHotspotPricePaddingTablet, imageHotspotPricePaddingUnits?.Tablet);
     const pricePaddingMobile = buildFourSided(imageHotspotPricePaddingMobile, imageHotspotPricePaddingUnits?.Mobile);
@@ -420,22 +458,22 @@ const generateImageHotspotStyle = (attributes) => {
     const priceMarginTablet = buildFourSided(imageHotspotPriceMarginTablet, imageHotspotPriceMarginUnits?.Tablet);
     const priceMarginMobile = buildFourSided(imageHotspotPriceMarginMobile, imageHotspotPriceMarginUnits?.Mobile);
 
-    const priceBorderWidthDesktop = buildFourSided(imageHotspotPriceBorderWidthDesktop, imageHotspotPriceBorderWidthUnits?.Desktop);
-    const priceBorderWidthTablet = buildFourSided(imageHotspotPriceBorderWidthTablet, imageHotspotPriceBorderWidthUnits?.Tablet);
-    const priceBorderWidthMobile = buildFourSided(imageHotspotPriceBorderWidthMobile, imageHotspotPriceBorderWidthUnits?.Mobile);
-
-    const priceBorderRadiusDesktop = buildFourSided(imageHotspotPriceBorderRadiusDesktop, imageHotspotPriceBorderRadiusUnits?.Desktop);
-    const priceBorderRadiusTablet = buildFourSided(imageHotspotPriceBorderRadiusTablet, imageHotspotPriceBorderRadiusUnits?.Tablet);
-    const priceBorderRadiusMobile = buildFourSided(imageHotspotPriceBorderRadiusMobile, imageHotspotPriceBorderRadiusUnits?.Mobile);
-
     // Popover spacing (four-sided objects)
-    const popoverPaddingDesktop = buildFourSided(imageHotspotPopoverPaddingDesktop, imageHotspotPopoverPaddingUnits?.Desktop);
-    const popoverPaddingTablet = buildFourSided(imageHotspotPopoverPaddingTablet, imageHotspotPopoverPaddingUnits?.Tablet);
-    const popoverPaddingMobile = buildFourSided(imageHotspotPopoverPaddingMobile, imageHotspotPopoverPaddingUnits?.Mobile);
+    // const popoverPaddingDesktop = buildFourSided(imageHotspotPopoverPaddingDesktop, imageHotspotPopoverPaddingUnits?.Desktop);
+    // const popoverPaddingTablet = buildFourSided(imageHotspotPopoverPaddingTablet, imageHotspotPopoverPaddingUnits?.Tablet);
+    // const popoverPaddingMobile = buildFourSided(imageHotspotPopoverPaddingMobile, imageHotspotPopoverPaddingUnits?.Mobile);
 
-    const popoverMarginDesktop = buildFourSided(imageHotspotPopoverMarginDesktop, imageHotspotPopoverMarginUnits?.Desktop);
-    const popoverMarginTablet = buildFourSided(imageHotspotPopoverMarginTablet, imageHotspotPopoverMarginUnits?.Tablet);
-    const popoverMarginMobile = buildFourSided(imageHotspotPopoverMarginMobile, imageHotspotPopoverMarginUnits?.Mobile);
+    // const popoverMarginDesktop = buildFourSided(imageHotspotPopoverMarginDesktop, imageHotspotPopoverMarginUnits?.Desktop);
+    // const popoverMarginTablet = buildFourSided(imageHotspotPopoverMarginTablet, imageHotspotPopoverMarginUnits?.Tablet);
+    // const popoverMarginMobile = buildFourSided(imageHotspotPopoverMarginMobile, imageHotspotPopoverMarginUnits?.Mobile);
+
+    const popoverPaddingDesktop = buildFourSided(imageHotspotsPopoverPaddingDesktop, imageHotspotsPopoverPaddingUnits?.Desktop);
+    const popoverPaddingTablet = buildFourSided(imageHotspotsPopoverPaddingTablet, imageHotspotsPopoverPaddingUnits?.Tablet);
+    const popoverPaddingMobile = buildFourSided(imageHotspotsPopoverPaddingMobile, imageHotspotsPopoverPaddingUnits?.Mobile);
+
+    const popoverMarginDesktop = buildFourSided(imageHotspotsPopoverMarginDesktop, imageHotspotsPopoverMarginUnits?.Desktop);
+    const popoverMarginTablet = buildFourSided(imageHotspotsPopoverMarginTablet, imageHotspotsPopoverMarginUnits?.Tablet);
+    const popoverMarginMobile = buildFourSided(imageHotspotsPopoverMarginMobile, imageHotspotsPopoverMarginUnits?.Mobile);
 
     const imageBorderWidthDesktop = buildResponsiveBoxValue(imageHotspotImageBorderWidth, imageHotspotImageBorderWidthUnits, 'Desktop');
     const imageBorderWidthTablet = buildResponsiveBoxValue(imageHotspotImageBorderWidth, imageHotspotImageBorderWidthUnits, 'Tablet');
@@ -451,13 +489,21 @@ const generateImageHotspotStyle = (attributes) => {
     const popoverWidthMobile = imageHotspotPopoverWidth?.Mobile ? `${imageHotspotPopoverWidth.Mobile}${imageHotspotPopoverWidthUnits?.Mobile || 'px'}` : popoverWidthDesktop;
 
     // Popover border
-    const popoverBorderRadiusDesktop = buildFourSided(imageHotspotPopoverBorderRadiusDesktop, imageHotspotPopoverBorderRadiusUnits?.Desktop) || '8px';
-    const popoverBorderRadiusTablet = buildFourSided(imageHotspotPopoverBorderRadiusTablet, imageHotspotPopoverBorderRadiusUnits?.Tablet) || popoverBorderRadiusDesktop;
-    const popoverBorderRadiusMobile = buildFourSided(imageHotspotPopoverBorderRadiusMobile, imageHotspotPopoverBorderRadiusUnits?.Mobile) || popoverBorderRadiusDesktop;
+    // const popoverBorderRadiusDesktop = buildFourSided(imageHotspotsPopoverBorderRadiusDesktop, imageHotspotPopoverBorderRadiusUnits?.Desktop) || '8px';
+    // const popoverBorderRadiusTablet = buildFourSided(imageHotspotPopoverBorderRadiusTablet, imageHotspotPopoverBorderRadiusUnits?.Tablet) || popoverBorderRadiusDesktop;
+    // const popoverBorderRadiusMobile = buildFourSided(imageHotspotPopoverBorderRadiusMobile, imageHotspotPopoverBorderRadiusUnits?.Mobile) || popoverBorderRadiusDesktop;
 
-    const popoverBorderWidthDesktop = buildFourSided(imageHotspotPopoverBorderWidthDesktop, imageHotspotPopoverBorderWidthUnits?.Desktop);
-    const popoverBorderWidthTablet = buildFourSided(imageHotspotPopoverBorderWidthTablet, imageHotspotPopoverBorderWidthUnits?.Tablet);
-    const popoverBorderWidthMobile = buildFourSided(imageHotspotPopoverBorderWidthMobile, imageHotspotPopoverBorderWidthUnits?.Mobile);
+    const popoverBorderRadiusDesktop = buildFourSided(imageHotspotsPopoverBorderRadiusDesktop, imageHotspotsPopoverBorderRadiusUnits?.Desktop) || '8px';
+    const popoverBorderRadiusTablet = buildFourSided(imageHotspotsPopoverBorderRadiusTablet, imageHotspotsPopoverBorderRadiusUnits?.Tablet) || popoverBorderRadiusDesktop;
+    const popoverBorderRadiusMobile = buildFourSided(imageHotspotsPopoverBorderRadiusMobile, imageHotspotsPopoverBorderRadiusUnits?.Mobile) || popoverBorderRadiusDesktop;
+
+    // const popoverBorderWidthDesktop = buildFourSided(imageHotspotsPopoverBorderDesktop, imageHotspotPopoverBorderWidthUnits?.Desktop);
+    // const popoverBorderWidthTablet = buildFourSided(imageHotspotPopoverBorderWidthTablet, imageHotspotPopoverBorderWidthUnits?.Tablet);
+    // const popoverBorderWidthMobile = buildFourSided(imageHotspotPopoverBorderWidthMobile, imageHotspotPopoverBorderWidthUnits?.Mobile);
+
+    const popoverBorderWidthDesktop = buildFourSided(imageHotspotsPopoverBorderDesktop, imageHotspotsPopoverBorderUnits?.Desktop);
+    const popoverBorderWidthTablet = buildFourSided(imageHotspotsPopoverBorderTablet, imageHotspotsPopoverBorderUnits?.Tablet);
+    const popoverBorderWidthMobile = buildFourSided(imageHotspotsPopoverBorderMobile, imageHotspotsPopoverBorderUnits?.Mobile);
 
     const popoverImageBorderWidthDesktop = buildFourSided(imageHotspotPopoverImageBorderWidthDesktop, imageHotspotPopoverImageBorderWidthUnits?.Desktop);
     const popoverImageBorderWidthTablet = buildFourSided(imageHotspotPopoverImageBorderWidthTablet, imageHotspotPopoverImageBorderWidthUnits?.Tablet);
@@ -498,7 +544,6 @@ const generateImageHotspotStyle = (attributes) => {
     const imageHotspotsPopoverBorderRadiusDesktopWidth = `${imageHotspotsPopoverBorderRadiusDesktop?.top}${imageHotspotsPopoverBorderRadiusUnits?.Desktop} ${imageHotspotsPopoverBorderRadiusDesktop?.right}${imageHotspotsPopoverBorderRadiusUnits?.Desktop} ${imageHotspotsPopoverBorderRadiusDesktop?.bottom}${imageHotspotsPopoverBorderRadiusUnits?.Desktop} ${imageHotspotsPopoverBorderRadiusDesktop?.left}${imageHotspotsPopoverBorderRadiusUnits?.Desktop}`;
     const imageHotspotsPopoverBorderRadiusTabletWidth = `${imageHotspotsPopoverBorderRadiusTablet?.top}${imageHotspotsPopoverBorderRadiusUnits?.Tablet} ${imageHotspotsPopoverBorderRadiusTablet?.right}${imageHotspotsPopoverBorderRadiusUnits?.Tablet} ${imageHotspotsPopoverBorderRadiusTablet?.bottom}${imageHotspotsPopoverBorderRadiusUnits?.Tablet} ${imageHotspotsPopoverBorderRadiusTablet?.left}${imageHotspotsPopoverBorderRadiusUnits?.Tablet}`;
     const imageHotspotsPopoverBorderRadiusMobileWidth = `${imageHotspotsPopoverBorderRadiusMobile?.top}${imageHotspotsPopoverBorderRadiusUnits?.Mobile} ${imageHotspotsPopoverBorderRadiusMobile?.right}${imageHotspotsPopoverBorderRadiusUnits?.Mobile} ${imageHotspotsPopoverBorderRadiusMobile?.bottom}${imageHotspotsPopoverBorderRadiusUnits?.Mobile} ${imageHotspotsPopoverBorderRadiusMobile?.left}${imageHotspotsPopoverBorderRadiusUnits?.Mobile}`;
-
 
     const hotspotBaseStyles = (imageHotspotHotspots || []).map((hotspot) => `
         .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"] .fb-hotspot-trigger {
@@ -721,7 +766,17 @@ const generateImageHotspotStyle = (attributes) => {
         return imageHotspotsPopoverNormalClassicColor || popoverBg;
     })();
 
-    const popoverBgHover = imageHotspotPopoverBgHoverColor || popoverBg;
+    // const popoverBgHover = imageHotspotPopoverBgHoverColor || popoverBg;
+
+    const resolvedPopoverHoverBg = (() => {
+        if (imageHotspotsPopoverHoverBackgroundType === 'gradient') {
+            if (imageHotspotsPopoverHoverCustomGradientSwitcher && imageHotspotsPopoverHoverCustomGradientInputValue) {
+                return imageHotspotsPopoverHoverCustomGradientInputValue;
+            }
+            return imageHotspotsPopoverHoverGradientColor || resolvedPopoverBg;
+        }
+        return imageHotspotsPopoverHoverClassicColor || resolvedPopoverBg;
+    })();
     const gap = '25px';
 
     const popoverPositions = {
@@ -780,21 +835,26 @@ const generateImageHotspotStyle = (attributes) => {
 
         return `
             .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"] .fb-hotspot-popover {
-               ${imageHotspotsPopoverPaddingMobileWidth && imageHotspotsPopoverPaddingMobile?.top ? `padding: ${imageHotspotsPopoverPaddingMobileWidth};` : ''}
-               ${imageHotspotsPopoverBorderMobileWidth && imageHotspotsPopoverBorderMobile?.top ? `border-width: ${imageHotspotsPopoverBorderMobileWidth};` : ''}
-               ${imageHotspotsPopoverBorderRadiusMobileWidth && imageHotspotsPopoverBorderRadiusMobile?.top ? `border-radius: ${imageHotspotsPopoverBorderRadiusMobileWidth};` : ''}
-               ${imageHotspotsPopoverBoxShadowHoverValues ? `box-shadow: ${imageHotspotsPopoverBoxShadowHoverValues};` : ''}
-               ${imageHotspotsPopoverNormalBackgroundType === 'gradient' ? `  
-                 ${imageHotspotsPopoverNormalCustomGradientSwitcher && imageHotspotsPopoverNormalCustomGradientInputValue ? `--fb-popover-bg: ${imageHotspotsPopoverNormalCustomGradientInputValue};` : `--fb-popover-bg: ${imageHotspotsPopoverNormalGradientColor};`}
-                  `: `
-                 ${imageHotspotsPopoverNormalClassicColor ? `--fb-popover-bg: ${imageHotspotsPopoverNormalClassicColor};` : ''}
-               `}  
+                ${imageHotspotsPopoverPaddingDesktopWidth && imageHotspotsPopoverPaddingDesktop?.top ? `padding: ${imageHotspotsPopoverPaddingDesktopWidth};` : ''}
+                ${imageHotspotsPopoverBorderDesktopWidth && imageHotspotsPopoverBorderDesktop?.top ? `border-width: ${imageHotspotsPopoverBorderDesktopWidth};` : ''}
+                ${imageHotspotsPopoverBorderRadiusDesktopWidth && imageHotspotsPopoverBorderRadiusDesktop?.top ? `border-radius: ${imageHotspotsPopoverBorderRadiusDesktopWidth};` : ''}
+                // ${imageHotspotsPopoverBoxShadowCssValue ? `box-shadow: ${imageHotspotsPopoverBoxShadowCssValue};` : ''}
+                ${imageHotspotsPopoverNormalBackgroundType === 'gradient' ? `  
+                    ${imageHotspotsPopoverNormalCustomGradientSwitcher && imageHotspotsPopoverNormalCustomGradientInputValue
+                    ? `--fb-popover-bg: ${imageHotspotsPopoverNormalCustomGradientInputValue};`
+                    : `--fb-popover-bg: ${imageHotspotsPopoverNormalGradientColor};`}
+                    ` : `
+                    ${imageHotspotsPopoverNormalClassicColor ? `--fb-popover-bg: ${imageHotspotsPopoverNormalClassicColor};` : ''}
+                    `}
+                ${imageHotspotsPopoverBorder && imageHotspotsPopoverBorder !== 'none' ? `border-style: ${imageHotspotsPopoverBorder};` : ''}
+                // ${imageHotspotsPopoverBorderColor ? `border-color: ${imageHotspotsPopoverBorderColor};` : ''}
+                ${imageHotspotsPopoverBoxShadowCssValue ? `box-shadow: ${imageHotspotsPopoverBoxShadowCssValue};` : ''} 
                 position: absolute;
                 inset: auto;
                 ${placement.position}
                 transform: ${placement.hiddenTransform};
                 transform-origin: center;
-                --fb-popover-bg: ${resolvedPopoverBg};
+                /* --fb-popover-bg: ${resolvedPopoverBg}; */
                 background-color: var(--fb-popover-bg);
                 width: ${popoverWidthDesktop};
                 z-index: 200;
@@ -809,14 +869,18 @@ const generateImageHotspotStyle = (attributes) => {
                 transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease, background-color 0.2s ease;
             }
 
+           
             .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"]:hover .fb-hotspot-popover,
             .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"].locked .fb-hotspot-popover {
                 opacity: 1;
                 visibility: visible;
                 pointer-events: auto;
                 transform: ${placement.visibleTransform};
-                --fb-popover-bg: ${popoverBgHover};
-                background-color: var(--fb-popover-bg);
+                ${imageHotspotsPopoverHoverClassicColor || imageHotspotsPopoverHoverGradientColor || imageHotspotsPopoverHoverCustomGradientInputValue
+                ? `--fb-popover-bg: ${resolvedPopoverHoverBg}; background: var(--fb-popover-bg) !important;`
+                : ''
+                }
+                ${imageHotspotsPopoverBorderHoverColor ? `border-color: ${imageHotspotsPopoverBorderHoverColor} !important;` : ''}
             }
 
             .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"] .fb-hotspot-popover::after {
@@ -854,8 +918,8 @@ const generateImageHotspotStyle = (attributes) => {
             ? `height: ${imageHotspotImageHeight.Desktop}${imageHotspotImageHeightUnits.Desktop};`
             : ''}
             ${imageHotspotImageSize ? `object-fit: ${imageHotspotImageSize};` : ''}
-            ${imageBorderWidthDesktop ? `border-width: ${imageBorderWidthDesktop};` : ''}
-            ${imageBorderWidthDesktop ? 'border-style: solid;' : ''}
+            // ${imageBorderWidthDesktop ? `border-width: ${imageBorderWidthDesktop};` : ''}
+            // ${imageBorderWidthDesktop ? 'border-style: solid;' : ''}
             ${imageHotspotImageBorderColor ? `border-color: ${imageHotspotImageBorderColor};` : ''}
             ${imageBorderRadiusDesktop ? `border-radius: ${imageBorderRadiusDesktop};` : ''}
         }
@@ -962,10 +1026,6 @@ const generateImageHotspotStyle = (attributes) => {
             ? `line-height: ${imageHotspotTitleLineHeight.Desktop}${imageHotspotTitleLineHeightUnits.Desktop};` : ''}
             ${titlePaddingDesktop ? `padding: ${titlePaddingDesktop};` : ''}
             ${titleMarginDesktop ? `margin: ${titleMarginDesktop};` : ''}
-            ${titleBorderWidthDesktop ? `border-width: ${titleBorderWidthDesktop};` : ''}
-            ${titleBorderWidthDesktop ? 'border-style: solid;' : ''}
-            ${imageHotspotTitleBorderColor ? `border-color: ${imageHotspotTitleBorderColor};` : ''}
-            ${titleBorderRadiusDesktop ? `border-radius: ${titleBorderRadiusDesktop};` : ''}
         }
 
         .${blockID} .fb-hotspot-popover-title a {
@@ -996,10 +1056,6 @@ const generateImageHotspotStyle = (attributes) => {
             : 'line-height: 1.5;'}
             ${descPaddingDesktop ? `padding: ${descPaddingDesktop};` : ''}
             ${descMarginDesktop ? `margin: ${descMarginDesktop};` : ''}
-            ${descBorderWidthDesktop ? `border-width: ${descBorderWidthDesktop};` : ''}
-            ${descBorderWidthDesktop ? 'border-style: solid;' : ''}
-            ${imageHotspotDescBorderColor ? `border-color: ${imageHotspotDescBorderColor};` : ''}
-            ${descBorderRadiusDesktop ? `border-radius: ${descBorderRadiusDesktop};` : ''}
         }
 
         .${blockID} .fb-hotspot-marker:hover .fb-hotspot-popover-description,
@@ -1024,10 +1080,6 @@ const generateImageHotspotStyle = (attributes) => {
             ? `line-height: ${imageHotspotCategoryLineHeight.Desktop}${imageHotspotCategoryLineHeightUnits?.Desktop || ''};` : ''}
             ${categoryPaddingDesktop ? `padding: ${categoryPaddingDesktop};` : ''}
             ${categoryMarginDesktop ? `margin: ${categoryMarginDesktop};` : ''}
-            ${categoryBorderWidthDesktop ? `border-width: ${categoryBorderWidthDesktop};` : ''}
-            ${categoryBorderWidthDesktop ? 'border-style: solid;' : ''}
-            ${imageHotspotCategoryBorderColor ? `border-color: ${imageHotspotCategoryBorderColor};` : ''}
-            ${categoryBorderRadiusDesktop ? `border-radius: ${categoryBorderRadiusDesktop};` : ''}
         }
 
         .${blockID} .fb-hotspot-marker:hover .fb-hotspot-popover-category,
@@ -1052,10 +1104,6 @@ const generateImageHotspotStyle = (attributes) => {
             : 'line-height: 1.4;'}
             ${pricePaddingDesktop ? `padding: ${pricePaddingDesktop};` : ''}
             ${priceMarginDesktop ? `margin: ${priceMarginDesktop};` : 'margin-top: 8px;'}
-            ${priceBorderWidthDesktop ? `border-width: ${priceBorderWidthDesktop};` : ''}
-            ${priceBorderWidthDesktop ? 'border-style: solid;' : ''}
-            ${imageHotspotPriceBorderColor ? `border-color: ${imageHotspotPriceBorderColor};` : ''}
-            ${priceBorderRadiusDesktop ? `border-radius: ${priceBorderRadiusDesktop};` : ''}
         }
 
         .${blockID} .fb-hotspot-marker:hover .fb-hotspot-popover-price,
@@ -1125,8 +1173,6 @@ const generateImageHotspotStyle = (attributes) => {
             ? `line-height: ${imageHotspotTitleLineHeight.Tablet}${imageHotspotTitleLineHeightUnits.Tablet};` : ''}
                 ${titlePaddingTablet ? `padding: ${titlePaddingTablet};` : ''}
                 ${titleMarginTablet ? `margin: ${titleMarginTablet};` : ''}
-                ${titleBorderWidthTablet ? `border-width: ${titleBorderWidthTablet};` : ''}
-                ${titleBorderRadiusTablet ? `border-radius: ${titleBorderRadiusTablet};` : ''}
             }
 
             .${blockID} .fb-hotspot-popover-description {
@@ -1138,8 +1184,6 @@ const generateImageHotspotStyle = (attributes) => {
             ? `line-height: ${imageHotspotDescLineHeight.Tablet}${imageHotspotDescLineHeightUnits?.Tablet || ''};` : ''}
                 ${descPaddingTablet ? `padding: ${descPaddingTablet};` : ''}
                 ${descMarginTablet ? `margin: ${descMarginTablet};` : ''}
-                ${descBorderWidthTablet ? `border-width: ${descBorderWidthTablet};` : ''}
-                ${descBorderRadiusTablet ? `border-radius: ${descBorderRadiusTablet};` : ''}
             }
 
             .${blockID} .fb-hotspot-popover-category {
@@ -1151,8 +1195,6 @@ const generateImageHotspotStyle = (attributes) => {
             ? `line-height: ${imageHotspotCategoryLineHeight.Tablet}${imageHotspotCategoryLineHeightUnits?.Tablet || ''};` : ''}
                 ${categoryPaddingTablet ? `padding: ${categoryPaddingTablet};` : ''}
                 ${categoryMarginTablet ? `margin: ${categoryMarginTablet};` : ''}
-                ${categoryBorderWidthTablet ? `border-width: ${categoryBorderWidthTablet};` : ''}
-                ${categoryBorderRadiusTablet ? `border-radius: ${categoryBorderRadiusTablet};` : ''}
             }
 
             .${blockID} .fb-hotspot-popover-price {
@@ -1164,8 +1206,6 @@ const generateImageHotspotStyle = (attributes) => {
             ? `line-height: ${imageHotspotPriceLineHeight.Tablet}${imageHotspotPriceLineHeightUnits?.Tablet || ''};` : ''}
                 ${pricePaddingTablet ? `padding: ${pricePaddingTablet};` : ''}
                 ${priceMarginTablet ? `margin: ${priceMarginTablet};` : ''}
-                ${priceBorderWidthTablet ? `border-width: ${priceBorderWidthTablet};` : ''}
-                ${priceBorderRadiusTablet ? `border-radius: ${priceBorderRadiusTablet};` : ''}
             }
         }
 
@@ -1176,9 +1216,6 @@ const generateImageHotspotStyle = (attributes) => {
             .${blockID} .fb-hotspot-social-icon {
                 ${imageHotspotSocialLinksIconSize?.Tablet !== undefined && imageHotspotSocialLinksIconSize.Tablet !== '' ? `width: ${imageHotspotSocialLinksIconSize.Tablet}${imageHotspotSocialLinksIconSizeUnits?.Tablet || 'px'}; height: ${imageHotspotSocialLinksIconSize.Tablet}${imageHotspotSocialLinksIconSizeUnits?.Tablet || 'px'};` : ''}
             }
-
-        }
-        }
 
         @media only screen and (max-width: 767px) {
 
@@ -1232,8 +1269,6 @@ const generateImageHotspotStyle = (attributes) => {
             ? `line-height: ${imageHotspotTitleLineHeight.Mobile}${imageHotspotTitleLineHeightUnits.Mobile};` : ''}
                 ${titlePaddingMobile ? `padding: ${titlePaddingMobile};` : ''}
                 ${titleMarginMobile ? `margin: ${titleMarginMobile};` : ''}
-                ${titleBorderWidthMobile ? `border-width: ${titleBorderWidthMobile};` : ''}
-                ${titleBorderRadiusMobile ? `border-radius: ${titleBorderRadiusMobile};` : ''}
             }
 
             .${blockID} .fb-hotspot-popover-description {
@@ -1245,8 +1280,6 @@ const generateImageHotspotStyle = (attributes) => {
             ? `line-height: ${imageHotspotDescLineHeight.Mobile}${imageHotspotDescLineHeightUnits?.Mobile || ''};` : ''}
                 ${descPaddingMobile ? `padding: ${descPaddingMobile};` : ''}
                 ${descMarginMobile ? `margin: ${descMarginMobile};` : ''}
-                ${descBorderWidthMobile ? `border-width: ${descBorderWidthMobile};` : ''}
-                ${descBorderRadiusMobile ? `border-radius: ${descBorderRadiusMobile};` : ''}
             }
 
             .${blockID} .fb-hotspot-popover-category {
@@ -1258,8 +1291,6 @@ const generateImageHotspotStyle = (attributes) => {
             ? `line-height: ${imageHotspotCategoryLineHeight.Mobile}${imageHotspotCategoryLineHeightUnits?.Mobile || ''};` : ''}
                 ${categoryPaddingMobile ? `padding: ${categoryPaddingMobile};` : ''}
                 ${categoryMarginMobile ? `margin: ${categoryMarginMobile};` : ''}
-                ${categoryBorderWidthMobile ? `border-width: ${categoryBorderWidthMobile};` : ''}
-                ${categoryBorderRadiusMobile ? `border-radius: ${categoryBorderRadiusMobile};` : ''}
             }
 
             .${blockID} .fb-hotspot-popover-price {
@@ -1271,8 +1302,6 @@ const generateImageHotspotStyle = (attributes) => {
             ? `line-height: ${imageHotspotPriceLineHeight.Mobile}${imageHotspotPriceLineHeightUnits?.Mobile || ''};` : ''}
                 ${pricePaddingMobile ? `padding: ${pricePaddingMobile};` : ''}
                 ${priceMarginMobile ? `margin: ${priceMarginMobile};` : ''}
-                ${priceBorderWidthMobile ? `border-width: ${priceBorderWidthMobile};` : ''}
-                ${priceBorderRadiusMobile ? `border-radius: ${priceBorderRadiusMobile};` : ''}
             }
 
             .${blockID} .fb-hotspot-social-links {
