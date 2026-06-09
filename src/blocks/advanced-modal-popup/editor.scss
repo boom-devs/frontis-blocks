@@ -55,4 +55,24 @@
     .fb-advanced-modal-popup {
         position: absolute;
     }
+
+    // Add visual indicator for innerblocks area to easily detect them
+    .fb-advanced-modal-popup-inner-blocks {
+        min-height: 60px;
+        border: 2px dashed transparent;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+        
+        &.is-empty {
+            border-color: #cbd5e1;
+            background-color: #f8fafc;
+            padding: 20px;
+        }
+        
+        &:not(.is-empty) {
+            &:hover {
+                border-color: #e2e8f0;
+            }
+        }
+    }
 }

@@ -29,7 +29,7 @@ import {
     CONTENT_TYPES,
     TOGGLE_TYPES,
     ICON_POSITION,
-    POST_GRID_ICON_ALIGN,
+    TOGGLE_BUTTON_ICON_ALIGN,
 } from "@Constants/fbConstants";
 import FBIconPicker from "../../components/icon-picker";
 import "./editor.scss";
@@ -66,8 +66,12 @@ const Inspector = ({ attributes, setAttributes }) => {
         toggleButtonIconAlign,
         toggleButtonIcon,
         toggleButtonIconPosition,
-        toggleButtonIconSpacing,
-        toggleButtonIconSpacingUnits,
+        toggleButtonTextSwitcher,
+
+        toggleImageSize,
+        toggleImageHeight,
+        toggleImageSizeUnits,
+        toggleImageHeightUnits,
 
         toggleButtonGlobalTypographyData,
         toggleButtonGlobalTypoSwitcher,
@@ -88,28 +92,69 @@ const Inspector = ({ attributes, setAttributes }) => {
         toggleButtonColorSwitcher,
         toggleButtonColor,
         toggleButtonHoverColor,
-        toggleButtonTextColorType,
-        toggleButtonTextCustomGradientColorSwitcher,
-        toggleButtonTextCustomGradientColor,
-        toggleButtonTextGradientColor,
-        toggleButtonTextHoverColorType,
-        toggleButtonTextHoverGradientColor,
-        toggleButtonTextHoverCustomGradientColorSwitcher,
-        toggleButtonTextHoverCustomGradientColor,
+
+        toggleButtonIconSize,
+        toggleButtonIconSizeUnits,
+
+        toggleButtonIconColorSwitcher,
+        toggleButtonIconColor,
+        toggleButtonIconHoverColor,
+        
+        modalCloseIconColorSwitcher,
+        modalCloseIconColor,
+        modalCloseIconHoverColor,
+
+        toggleButtonIconGapSize,
+        toggleButtonIconGapUnits,
+
+        toggleButtonIconRotateSwitcher,
+        toggleButtonIconRotate,
+        toggleButtonIconRotateHover,
+        toggleButtonImageRotateSwitcher,
+        toggleButtonImageRotate,
+        toggleButtonImageRotateHover,
+
+        toggleButtonBgColorSwitcher,
+        toggleButtonNormalBackgroundType,
+        toggleButtonBgColor,
+        toggleButtonNormalGradientColor,
+        toggleButtonNormalCustomGradientSwitcher,
+        toggleButtonNormalCustomGradientInputValue,
+        toggleButtonHoverBackgroundType,
+        toggleButtonBgHoverColor,
+        toggleButtonHoverGradientColor,
+        toggleButtonHoverCustomGradientSwitcher,
+        toggleButtonHoverCustomGradientInputValue,
+
+        toggleButtonDesktopPadding,
+        toggleButtonPaddingUnits,
+        toggleButtonTabPadding,
+        toggleButtonMobilePadding,
+        toggleButtonPaddingLink,
+
+        toggleButtonDesktopMargin,
+        toggleButtonMarginUnits,
+        toggleButtonTabMargin,
+        toggleButtonMobileMargin,
+        toggleButtonMarginLink,
+
+        toggleButtonBorder,
+        toggleButtonBorderColorSwitcher,
+        toggleButtonBorderColor,
+        toggleButtonBorderHoverColor,
+        toggleButtonBorderUnits,
+        toggleButtonDesktopBorderWidth,
+        toggleButtonTabBorderWidth,
+        toggleButtonMobileBorderWidth,
+        toggleButtonBorderLink,
+        toggleButtonBorderRadiusUnits,
+        toggleButtonDesktopBorderRadiusWidth,
+        toggleButtonTabBorderRadiusWidth,
+        toggleButtonMobileBorderRadiusWidth,
+        toggleButtonBorderRadiusLink,
 
         toggleType,
-        toggleText,
-        toggleIcon,
-        toggleImage,
         contentType,
-        contentImage,
-        contentImageUrl,
-        contentImageAlt,
-        contentImageId,
-        contentVideoUrl,
-        contentYoutubeUrl,
-        contentVimeoUrl,
-        contentMapUrl,
         modalPopupPanelWidth,
         modalPopupPanelWidthUnits,
         modalPopupPanelHeight,
@@ -437,7 +482,6 @@ const Inspector = ({ attributes, setAttributes }) => {
         })
     }
     /** end padding */
-    /** End Padding */
 
     /** Start Margin */
     const handleModalPopupPanelMarginUnitChange = (event, position) => {
@@ -675,6 +719,312 @@ const Inspector = ({ attributes, setAttributes }) => {
         });
     };
     /** End border radius */
+
+    /** Start Toggle Button Padding */
+	const handleToggleBtnPaddingUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (toggleButtonPaddingLink) {
+			switch (deviceType) {
+				case 'Desktop':
+					setAttributes({
+						toggleButtonDesktopPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				case 'Tablet':
+					setAttributes({
+						toggleButtonTabPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				case 'Mobile':
+					setAttributes({
+						toggleButtonMobilePadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case 'Desktop':
+					setAttributes({ toggleButtonDesktopPadding: { ...toggleButtonDesktopPadding, [position]: value } });
+					break;
+				case 'Tablet':
+					setAttributes({ toggleButtonTabPadding: { ...toggleButtonTabPadding, [position]: value } });
+					break;
+				case 'Mobile':
+					setAttributes({ toggleButtonMobilePadding: { ...toggleButtonMobilePadding, [position]: value } });
+					break;
+				default:
+					break;
+			}
+		}
+	}
+
+	const handleToggleBtnPaddingCombineBtn = () => {
+		setAttributes({ toggleButtonPaddingLink: !toggleButtonPaddingLink });
+	}
+
+	const handleToggleBtnPaddingUnitsHandler = (unit) => {
+		setAttributes({
+			toggleButtonPaddingUnits: {
+				...toggleButtonPaddingUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	/** end Toggle Button padding */
+
+    /** Start Toggle Button Margin */
+	const handleToggleBtnMarginUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (toggleButtonMarginLink) {
+			switch (deviceType) {
+				case 'Desktop':
+					setAttributes({
+						toggleButtonDesktopMargin: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				case 'Tablet':
+					setAttributes({
+						toggleButtonTabMargin: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				case 'Mobile':
+					setAttributes({
+						toggleButtonMobileMargin: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case 'Desktop':
+					setAttributes({ toggleButtonDesktopMargin: { ...toggleButtonDesktopMargin, [position]: value } });
+					break;
+				case 'Tablet':
+					setAttributes({ toggleButtonTabMargin: { ...toggleButtonTabMargin, [position]: value } });
+					break;
+				case 'Mobile':
+					setAttributes({ toggleButtonMobileMargin: { ...toggleButtonMobileMargin, [position]: value } });
+					break;
+				default:
+					break;
+			}
+		}
+	}
+
+	const handleToggleBtnMarginCombineBtn = () => {
+		setAttributes({ toggleButtonMarginLink: !toggleButtonMarginLink });
+	}
+
+	const handleToggleBtnMarginUnitsHandler = (unit) => {
+		setAttributes({
+			toggleButtonMarginUnits: {
+				...toggleButtonMarginUnits,
+				[deviceType]: unit
+			}
+		});
+	}
+    /** End Toggle Button Margin */
+
+    /** Start Toggle Button border width */
+	const handleToggleBtnBorderWidthChange = (event, position) => {
+		const value = event.target.value;
+		if (toggleButtonBorderLink) {
+			switch (deviceType) {
+				case 'Desktop':
+					setAttributes({
+						toggleButtonDesktopBorderWidth: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				case 'Tablet':
+					setAttributes({
+						toggleButtonTabBorderWidth: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				case 'Mobile':
+					setAttributes({
+						toggleButtonMobileBorderWidth: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case 'Desktop':
+					setAttributes({
+						toggleButtonDesktopBorderWidth: {
+							...toggleButtonDesktopBorderWidth,
+							[position]: value
+						}
+					});
+					break;
+				case 'Tablet':
+					setAttributes({
+						toggleButtonTabBorderWidth: {
+							...toggleButtonTabBorderWidth,
+							[position]: value
+						}
+					});
+					break;
+				case 'Mobile':
+					setAttributes({
+						toggleButtonMobileBorderWidth: {
+							...toggleButtonMobileBorderWidth,
+							[position]: value
+						}
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const handleToggleBtnBorderLinkToggle = () => {
+		setAttributes({ toggleButtonBorderLink: !toggleButtonBorderLink });
+	};
+
+	const handleToggleBtnBorderUnitsChange = (unit) => {
+		setAttributes({ 
+			toggleButtonBorderUnits: {
+				...toggleButtonBorderUnits,
+				[deviceType]: unit
+			}
+		});
+	};
+	/** End Toggle Button border width */
+
+	/** Start Toggle Button border radius */
+	const handleToggleBtnBorderRadiusChange = (event, position) => {
+		const value = event.target.value;
+		if (toggleButtonBorderRadiusLink) {
+			switch (deviceType) {
+				case 'Desktop':
+					setAttributes({
+						toggleButtonDesktopBorderRadiusWidth: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				case 'Tablet':
+					setAttributes({
+						toggleButtonTabBorderRadiusWidth: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				case 'Mobile':
+					setAttributes({
+						toggleButtonMobileBorderRadiusWidth: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case 'Desktop':
+					setAttributes({
+						toggleButtonDesktopBorderRadiusWidth: {
+							...toggleButtonDesktopBorderRadiusWidth,
+							[position]: value
+						}
+					});
+					break;
+				case 'Tablet':
+					setAttributes({
+						toggleButtonTabBorderRadiusWidth: {
+							...toggleButtonTabBorderRadiusWidth,
+							[position]: value
+						}
+					});
+					break;
+				case 'Mobile':
+					setAttributes({
+						toggleButtonMobileBorderRadiusWidth: {
+							...toggleButtonMobileBorderRadiusWidth,
+							[position]: value
+						}
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const handleToggleBtnBorderRadiusLinkToggle = () => {
+		setAttributes({ toggleButtonBorderRadiusLink: !toggleButtonBorderRadiusLink });
+	};
+
+	const handleToggleBtnBorderRadiusUnitsChange = (unit) => {
+		setAttributes({
+			toggleButtonBorderRadiusUnits: {
+				...toggleButtonBorderRadiusUnits,
+				[deviceType]: unit
+			}
+		});
+	};
+	/** End border radius */
 
     /** Start Global padding */
     const handleGlobalPaddingUnitChange = (event, position) => {
@@ -958,7 +1308,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 
     const generalControls = (
         <>
-            <PanelBody title={__("Modal Opener", "frontis-blocks")} initialOpen={true}>
+            <PanelBody title={__("Modal Opener", "frontis-blocks")} initialOpen={false}>
                 <SelectControl
                     label={__("Toggle Type", "frontis-blocks")}
                     value={toggleType}
@@ -978,19 +1328,16 @@ const Inspector = ({ attributes, setAttributes }) => {
                     />
                 )}  
                  
-                {toggleType == 'button' && (
+                {toggleType == 'button' && ( 
                     <>
-                         <TextControl
-                            label={__("Button Text", "frontis-blocks")}
-                            value={toggleButtonText}
-                            onChange={(value) => setAttributes({ toggleButtonText: value })}
-                        />
-                        <FB_UrlControl
-                            url={toggleButtonUrl}
-                            onChangeUrl={(value) => setAttributes({ toggleButtonUrl: value })}
-                            openInNewTab={toggleButtonTargetUrl}
-                            onChangeOpenInNewTab={(value) => setAttributes({ toggleButtonTargetUrl: value })}
-                        />
+                        {toggleButtonTextSwitcher && (
+                            <TextControl 
+                                label={__("Button Text", "frontis-blocks")}
+                                value={toggleButtonText}
+                                onChange={(value) => setAttributes({ toggleButtonText: value })}
+                            /> 
+                        )}
+                        
                         <BaseControl
                             label={__("Icon", "frontis-blocks")}
                             id="fb-setting-text-alignment"
@@ -999,7 +1346,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                             <ButtonGroup 
                                 className="fb-setting-text-alignment-group-btn"
                             >
-                                {POST_GRID_ICON_ALIGN.map((item, key) => (
+                                {TOGGLE_BUTTON_ICON_ALIGN.map((item, key) => (
                                         <Button
                                             key={key}
                                             onClick={() => setAttributes({ toggleButtonIconAlign: item.value })}
@@ -1080,12 +1427,13 @@ const Inspector = ({ attributes, setAttributes }) => {
                     />
                 </BaseControl>
             </PanelBody>
+            
         </>
     );
  
     const styleControls = (
         <>
-            <PanelBody title={__("Modal", "frontis-blocks")} initialOpen={true}>
+            <PanelBody title={__("Modal", "frontis-blocks")} initialOpen={false}>
                 <FB_Range
                     min={1}
                     max={modalPopupPanelWidthUnits === '%' ? 100 : 2000}
@@ -1420,6 +1768,28 @@ const Inspector = ({ attributes, setAttributes }) => {
                     rangeStep={1}
                     resetFallbackValue={""}
                 />
+                 <FB_SwitcherControl
+                    label={__("Icon Color", "frontis-blocks")}
+                    globalSwitcher={modalCloseIconColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ modalCloseIconColorSwitcher: value })}
+                />
+
+                {modalCloseIconColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={modalCloseIconColor}
+                        setGlobalColor={(value) => setAttributes({ modalCloseIconColor: value === undefined ? '' : value })}
+                    />
+                )}
+
+                {modalCloseIconColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={modalCloseIconHoverColor}
+                        setGlobalColor={(value) => setAttributes({ modalCloseIconHoverColor: value === undefined ? '' : value })}
+                    />
+                )}
+
             </PanelBody>
 
             <PanelBody title={__("Overlay", "frontis-blocks")} initialOpen={false}>
@@ -1482,7 +1852,7 @@ const Inspector = ({ attributes, setAttributes }) => {
             {toggleType === 'button' && (
                  <PanelBody
                     title={__("Toggle Button", "frontis-blocks")}
-                    initialOpen={true}
+                    initialOpen={false}
                 >
                     <FB_Range
                         min={1}
@@ -1573,15 +1943,15 @@ const Inspector = ({ attributes, setAttributes }) => {
                         />
                     )}
 
-                    {/* <FB_Range
+                    <FB_Range
                         min={1}
                         max={100}
                         label={__("Icon Size", "frontis-blocks")}
-                        rangeValue={buttonIconSize}
-                        onChangeHandler={(value) => setAttributes({ buttonIconSize: value })}
-                        rangeUnitHandler={(value) => setAttributes({ buttonIconSizeUnits: value })}
+                        rangeValue={toggleButtonIconSize}
+                        onChangeHandler={(value) => setAttributes({ toggleButtonIconSize: value })}
+                        rangeUnitHandler={(value) => setAttributes({ toggleButtonIconSizeUnits: value })}
                         deviceType={deviceType}
-                        units={buttonIconSizeUnits}
+                        units={toggleButtonIconSizeUnits}
                         setAttributes={setAttributes}
                         rangeStep={1}
                         resetFallbackValue={25}
@@ -1589,23 +1959,23 @@ const Inspector = ({ attributes, setAttributes }) => {
 
                     <FB_SwitcherControl
                         label={__("Icon Color", "frontis-blocks")}
-                        globalSwitcher={buttonIconColorSwitcher}
-                        setGlobalSwitcher={(value) => setAttributes({ buttonIconColorSwitcher: value })}
+                        globalSwitcher={toggleButtonIconColorSwitcher}
+                        setGlobalSwitcher={(value) => setAttributes({ toggleButtonIconColorSwitcher: value })}
                     />
 
-                    {buttonIconColorSwitcher === 'normal' && (
+                    {toggleButtonIconColorSwitcher === 'normal' && (
                         <FB_ColorControl
                             label={__("Normal Color", "frontis-blocks")}
-                            globalColor={buttonIconColor}
-                            setGlobalColor={(value) => setAttributes({ buttonIconColor: value === undefined ? '' : value })}
+                            globalColor={toggleButtonIconColor}
+                            setGlobalColor={(value) => setAttributes({ toggleButtonIconColor: value === undefined ? '' : value })}
                         />
                     )}
 
-                    {buttonIconColorSwitcher === 'hover' && (
+                    {toggleButtonIconColorSwitcher === 'hover' && (
                         <FB_ColorControl
                             label={__("Hover Color", "frontis-blocks")}
-                            globalColor={buttonIconHoverColor}
-                            setGlobalColor={(value) => setAttributes({ buttonIconHoverColor: value === undefined ? '' : value })}
+                            globalColor={toggleButtonIconHoverColor}
+                            setGlobalColor={(value) => setAttributes({ toggleButtonIconHoverColor: value === undefined ? '' : value })}
                         />
                     )}
 
@@ -1613,11 +1983,11 @@ const Inspector = ({ attributes, setAttributes }) => {
                         min={0}
                         max={100}
                         label={__("Icon Gap", "frontis-blocks")}
-                        rangeValue={buttonIconGapSize}
-                        onChangeHandler={(value) => setAttributes({ buttonIconGapSize: value })}
-                        rangeUnitHandler={(value) => setAttributes({ buttonIconGapUnits: value })}
+                        rangeValue={toggleButtonIconGapSize}
+                        onChangeHandler={(value) => setAttributes({ toggleButtonIconGapSize: value })}
+                        rangeUnitHandler={(value) => setAttributes({ toggleButtonIconGapUnits: value })}
                         deviceType={deviceType}
-                        units={buttonIconGapUnits}
+                        units={toggleButtonIconGapUnits}
                         setAttributes={setAttributes}
                         rangeStep={1}
                         resetFallbackValue={''}
@@ -1625,17 +1995,17 @@ const Inspector = ({ attributes, setAttributes }) => {
 
                     <FB_SwitcherControl
                         label={__("Icon Rotation", "frontis-blocks")}
-                        globalSwitcher={buttonIconRotateSwitcher}
-                        setGlobalSwitcher={(value) => setAttributes({ buttonIconRotateSwitcher: value })}
+                        globalSwitcher={toggleButtonIconRotateSwitcher}
+                        setGlobalSwitcher={(value) => setAttributes({ toggleButtonIconRotateSwitcher: value })}
                     />
 
-                    {buttonIconRotateSwitcher === 'normal' && (
+                    {toggleButtonIconRotateSwitcher === 'normal' && (
                         <FB_Range
                             min={-360}
                             max={360}
                             label={__("Icon Rotation", "frontis-blocks")}
-                            rangeValue={buttonIconRotate}
-                            onChangeHandler={(value) => setAttributes({ buttonIconRotate: value === 0 ? undefined : value })}
+                            rangeValue={toggleButtonIconRotate}
+                            onChangeHandler={(value) => setAttributes({ toggleButtonIconRotate: value === 0 ? undefined : value })}
                             deviceType={deviceType}
                             setAttributes={setAttributes}
                             rangeStep={1}
@@ -1645,13 +2015,13 @@ const Inspector = ({ attributes, setAttributes }) => {
                         />
                     )}
 
-                    {buttonIconRotateSwitcher === 'hover' && (
+                    {toggleButtonIconRotateSwitcher === 'hover' && (
                         <FB_Range
                             min={-360}
                             max={360}
                             label={__("Icon Rotation", "frontis-blocks")}
-                            rangeValue={buttonIconRotateHover}
-                            onChangeHandler={(value) => setAttributes({ buttonIconRotateHover: value === 0 ? undefined : value })}
+                            rangeValue={toggleButtonIconRotateHover}
+                            onChangeHandler={(value) => setAttributes({ toggleButtonIconRotateHover: value === 0 ? undefined : value })}
                             deviceType={deviceType}
                             setAttributes={setAttributes}
                             rangeStep={1}
@@ -1662,30 +2032,30 @@ const Inspector = ({ attributes, setAttributes }) => {
 
                     <FB_BackgroundColorControl
                         label={__("Background Color", "frontis-blocks")}
-                        bgColorSwitcher={buttonBgColorSwitcher}
-                        setBgColorSwitcher={(value) => setAttributes({ buttonBgColorSwitcher: value })}
+                        bgColorSwitcher={toggleButtonBgColorSwitcher}
+                        setBgColorSwitcher={(value) => setAttributes({ toggleButtonBgColorSwitcher: value })}
 
-                        normalBackgroundType={buttonNormalBackgroundType}
-                        setNormalBackgroundType={(value) => setAttributes({ buttonNormalBackgroundType: value })}
-                        normalClassicColor={buttonBgColor}
-                        setNormalClassicColor={(value) => setAttributes({ buttonBgColor: value === undefined ? '' : value })}
-                        normalGradientColor={buttonNormalGradientColor}
-                        setNormalGradientColor={(value) => setAttributes({ buttonNormalGradientColor: value === undefined ? null : value })}
-                        normalCustomGradientSwitcher={buttonNormalCustomGradientSwitcher}
-                        setNormalCustomGradientSwitcher={(value) => setAttributes({ buttonNormalCustomGradientSwitcher: value })}
-                        normalCustomGradientInputValue={buttonNormalCustomGradientInputValue}
-                        setNormalCustomGradientInputValue={(value) => setAttributes({ buttonNormalCustomGradientInputValue: value })}
+                        normalBackgroundType={toggleButtonNormalBackgroundType}
+                        setNormalBackgroundType={(value) => setAttributes({ toggleButtonNormalBackgroundType: value })}
+                        normalClassicColor={toggleButtonBgColor}
+                        setNormalClassicColor={(value) => setAttributes({ toggleButtonBgColor: value === undefined ? '' : value })}
+                        normalGradientColor={toggleButtonNormalGradientColor}
+                        setNormalGradientColor={(value) => setAttributes({ toggleButtonNormalGradientColor: value === undefined ? null : value })}
+                        normalCustomGradientSwitcher={toggleButtonNormalCustomGradientSwitcher}
+                        setNormalCustomGradientSwitcher={(value) => setAttributes({ toggleButtonNormalCustomGradientSwitcher: value })}
+                        normalCustomGradientInputValue={toggleButtonNormalCustomGradientInputValue}
+                        setNormalCustomGradientInputValue={(value) => setAttributes({ toggleButtonNormalCustomGradientInputValue: value })}
 
-                        hoverBackgroundType={buttonHoverBackgroundType}
-                        setHoverBackgroundType={(value) => setAttributes({ buttonHoverBackgroundType: value })}
-                        hoverClassicColor={buttonBgHoverColor}
-                        setHoverClassicColor={(value) => setAttributes({ buttonBgHoverColor: value === undefined ? '' : value })}
-                        hoverGradientColor={buttonHoverGradientColor}
-                        setHoverGradientColor={(value) => setAttributes({ buttonHoverGradientColor: value === undefined ? null : value })}
-                        hoverCustomGradientSwitcher={buttonHoverCustomGradientSwitcher}
-                        setHoverCustomGradientSwitcher={(value) => setAttributes({ buttonHoverCustomGradientSwitcher: value })}
-                        hoverCustomGradientInputValue={buttonHoverCustomGradientInputValue}
-                        setHoverCustomGradientInputValue={(value) => setAttributes({ buttonHoverCustomGradientInputValue: value })}
+                        hoverBackgroundType={toggleButtonHoverBackgroundType}
+                        setHoverBackgroundType={(value) => setAttributes({ toggleButtonHoverBackgroundType: value })}
+                        hoverClassicColor={toggleButtonBgHoverColor}
+                        setHoverClassicColor={(value) => setAttributes({ toggleButtonBgHoverColor: value === undefined ? '' : value })}
+                        hoverGradientColor={toggleButtonHoverGradientColor}
+                        setHoverGradientColor={(value) => setAttributes({ toggleButtonHoverGradientColor: value === undefined ? null : value })}
+                        hoverCustomGradientSwitcher={toggleButtonHoverCustomGradientSwitcher}
+                        setHoverCustomGradientSwitcher={(value) => setAttributes({ toggleButtonHoverCustomGradientSwitcher: value })}
+                        hoverCustomGradientInputValue={toggleButtonHoverCustomGradientInputValue}
+                        setHoverCustomGradientInputValue={(value) => setAttributes({ toggleButtonHoverCustomGradientInputValue: value })}
 
                         isBackgroundImage={false}
 
@@ -1694,110 +2064,121 @@ const Inspector = ({ attributes, setAttributes }) => {
                     <FB_Spacing
                         label={__("Padding", "frontis-blocks")}
                         deviceType={deviceType}
-                        spacingUnitsHandler={handlePaddingUnitsHandler}
-                        spacingUnits={buttonPaddingUnits}
-                        spacingDesktop={buttonDesktopPadding}
-                        spacingTablet={buttonTabPadding}
-                        spacingMobile={buttonMobilePadding}
-                        handleSpacingUnitHandler={handlePaddingUnitChange}
-                        spacingCombineBtn={buttonPaddingLink}
-                        spacingCombineBtnHandler={handlePaddingCombineBtn}
+                        spacingUnitsHandler={handleToggleBtnPaddingUnitsHandler}
+                        spacingUnits={toggleButtonPaddingUnits}
+                        spacingDesktop={toggleButtonDesktopPadding}
+                        spacingTablet={toggleButtonTabPadding}
+                        spacingMobile={toggleButtonMobilePadding}
+                        handleSpacingUnitHandler={handleToggleBtnPaddingUnitChange}
+                        spacingCombineBtn={toggleButtonPaddingLink}
+                        spacingCombineBtnHandler={handleToggleBtnPaddingCombineBtn}
                         setAttributes={setAttributes}
                     />
+
                     <FB_Spacing
                         label={__("Margin", "frontis-blocks")}
                         deviceType={deviceType}
-                        spacingUnitsHandler={handleMarginUnitsHandler}
-                        spacingUnits={buttonMarginUnits}
-                        spacingDesktop={buttonDesktopMargin}
-                        spacingTablet={buttonTabMargin}
-                        spacingMobile={buttonMobileMargin}
-                        handleSpacingUnitHandler={handleMarginUnitChange}
-                        spacingCombineBtn={buttonMarginLink}
-                        spacingCombineBtnHandler={handleMarginCombineBtn}
+                        spacingUnitsHandler={handleToggleBtnMarginUnitsHandler}
+                        spacingUnits={toggleButtonMarginUnits}
+                        spacingDesktop={toggleButtonDesktopMargin}
+                        spacingTablet={toggleButtonTabMargin}
+                        spacingMobile={toggleButtonMobileMargin}
+                        handleSpacingUnitHandler={handleToggleBtnMarginUnitChange}
+                        spacingCombineBtn={toggleButtonMarginLink}
+                        spacingCombineBtnHandler={handleToggleBtnMarginCombineBtn}
                         setAttributes={setAttributes}
                     />
 
                     <SelectControl
                         label={__("Border Style", "frontis-blocks")}
-                        value={buttonBorder}
+                        value={toggleButtonBorder}
                         options={BORDER_STYLES}
-                        onChange={(value) => setAttributes({ buttonBorder: value })}
+                        onChange={(value) => setAttributes({ toggleButtonBorder: value })}
                     />
-
 
                     <FB_SwitcherControl
                         label={__("Border Color", "frontis-blocks")}
-                        globalSwitcher={buttonBorderColorSwitcher}
-                        setGlobalSwitcher={(value) => setAttributes({ buttonBorderColorSwitcher: value })}
+                        globalSwitcher={toggleButtonBorderColorSwitcher}
+                        setGlobalSwitcher={(value) => setAttributes({ toggleButtonBorderColorSwitcher: value })}
                     />
 
-                    {buttonBorderColorSwitcher === 'normal' && (
+                    {toggleButtonBorderColorSwitcher === 'normal' && (
                         <FB_ColorControl
                             label={__("Normal Color", "frontis-blocks")}
-                            globalColor={buttonBorderColor}
-                            setGlobalColor={(value) => setAttributes({ buttonBorderColor: value === undefined ? '' : value })}
+                            globalColor={toggleButtonBorderColor}
+                            setGlobalColor={(value) => setAttributes({ toggleButtonBorderColor: value === undefined ? '' : value })}
                         />
                     )}
 
-                    {buttonBorderColorSwitcher === 'hover' && (
+                    {toggleButtonBorderColorSwitcher === 'hover' && (
                         <FB_ColorControl
                             label={__("Hover Color", "frontis-blocks")}
-                            globalColor={buttonBorderHoverColor}
-                            setGlobalColor={(value) => setAttributes({ buttonBorderHoverColor: value === undefined ? '' : value })}
+                            globalColor={toggleButtonBorderHoverColor}
+                            setGlobalColor={(value) => setAttributes({ toggleButtonBorderHoverColor: value === undefined ? '' : value })}
                         />
                     )}
 
                     <FB_Spacing
                         label={__("Border", "frontis-blocks")}
                         deviceType={deviceType}
-                        spacingUnitsHandler={handleBorderUnitsChange}
-                        spacingUnits={buttonBorderUnits}
-                        spacingDesktop={buttonDesktopBorderWidth}
-                        spacingTablet={buttonTabBorderWidth}
-                        spacingMobile={buttonMobileBorderWidth}
-                        handleSpacingUnitHandler={handleBorderWidthChange}
-                        spacingCombineBtn={buttonBorderLink}
-                        spacingCombineBtnHandler={handleBorderLinkToggle}
+                        spacingUnitsHandler={handleToggleBtnBorderUnitsChange}
+                        spacingUnits={toggleButtonBorderUnits}
+                        spacingDesktop={toggleButtonDesktopBorderWidth}
+                        spacingTablet={toggleButtonTabBorderWidth}
+                        spacingMobile={toggleButtonMobileBorderWidth}
+                        handleSpacingUnitHandler={handleToggleBtnBorderWidthChange}
+                        spacingCombineBtn={toggleButtonBorderLink}
+                        spacingCombineBtnHandler={handleToggleBtnBorderLinkToggle}
                         setAttributes={setAttributes}
                     />
                     <FB_Spacing
                         label={__("Border Radius", "frontis-blocks")}
                         deviceType={deviceType}
-                        spacingUnitsHandler={handleBorderRadiusUnitsChange}
-                        spacingUnits={buttonBorderRadiusUnits}
-                        spacingDesktop={buttonDesktopBorderRadiusWidth}
-                        spacingTablet={buttonTabBorderRadiusWidth}
-                        spacingMobile={buttonMobileBorderRadiusWidth}
-                        handleSpacingUnitHandler={handleBorderRadiusChange}
-                        spacingCombineBtn={buttonBorderRadiusLink}
-                        spacingCombineBtnHandler={handleBorderRadiusLinkToggle}
+                        spacingUnitsHandler={handleToggleBtnBorderRadiusUnitsChange}
+                        spacingUnits={toggleButtonBorderRadiusUnits}
+                        spacingDesktop={toggleButtonDesktopBorderRadiusWidth}
+                        spacingTablet={toggleButtonTabBorderRadiusWidth}
+                        spacingMobile={toggleButtonMobileBorderRadiusWidth}
+                        handleSpacingUnitHandler={handleToggleBtnBorderRadiusChange}
+                        spacingCombineBtn={toggleButtonBorderRadiusLink}
+                        spacingCombineBtnHandler={handleToggleBtnBorderRadiusLinkToggle}
                         setAttributes={setAttributes}
                     />
+                </PanelBody>
+            )}
 
-                    <FB_SwitcherControl
-                        label={__("Box Shadow", "frontis-blocks")}
-                        globalSwitcher={buttonBoxShadowSwitcher}
-                        setGlobalSwitcher={(value) => setAttributes({ buttonBoxShadowSwitcher: value })}
+            {toggleType === 'image' && (
+                <PanelBody
+                    title={__("Toggle Image", "frontis-blocks")}
+                    initialOpen={false}
+                >
+                    <FB_Range
+                        min={1}
+                        max={toggleImageSizeUnits === '%' ? 100 : 1400}
+                        label={__("Width", "frontis-blocks")}
+                        rangeValue={toggleImageSize}
+                        onChangeHandler={(value) => setAttributes({ toggleImageSize: value })}
+                        rangeUnitHandler={(value) => setAttributes({ toggleImageSizeUnits: value })}
+                        deviceType={deviceType}
+                        units={toggleImageSizeUnits}
+                        setAttributes={setAttributes}
+                        rangeStep={1}
+                        resetFallbackValue={"100"}
+                    />
+                    <FB_Range
+                        min={1}
+                        max={toggleImageHeightUnits === '%' ? 100 : 1400}
+                        label={__("Height", "frontis-blocks")}
+                        rangeValue={toggleImageHeight}
+                        onChangeHandler={(value) => setAttributes({ toggleImageHeight: value })}
+                        rangeUnitHandler={(value) => setAttributes({ toggleImageHeightUnits: value })}
+                        deviceType={deviceType}
+                        units={toggleImageHeightUnits}
+                        setAttributes={setAttributes}
+                        rangeStep={1}
+                        resetFallbackValue={"100"}
                     />
 
-                    {buttonBoxShadowSwitcher === 'normal' && (
-                        <FB_BoxShadowControl
-                            label={__("Normal Shadow", "frontis-blocks")}
-                            onBoxShadowChange={(value) => setAttributes({ buttonBoxShadowValues: value })}
-                            initialShadowValue={buttonBoxShadowValues}
-                            onBoxShadowStyleChange={(value) => setAttributes({ buttonBoxShadowCssValue: value })}
-                        />
-                    )}
-
-                    {buttonBoxShadowSwitcher === 'hover' && (
-                        <FB_BoxShadowControl
-                            label={__("Hover Shadow", "frontis-blocks")}
-                            onBoxShadowChange={(value) => setAttributes({ buttonBoxShadowHoverValues: value })}
-                            initialShadowValue={buttonBoxShadowHoverValues}
-                            onBoxShadowStyleChange={(value) => setAttributes({ buttonBoxShadowHoverCssValue: value })}
-                        />
-                    )} */}
                 </PanelBody>
             )}
            
