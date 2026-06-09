@@ -39,7 +39,6 @@ import FB_BackgroundColorControl from '@Components/background-color-control';
 export default function Inspector({ attributes, setAttributes }) {
   const {
     imageHotspotPresetStyle,
-    imageHotspotShowPopoverImage,
     imageHotspotCategoryFontFamily,
     imageHotspotCategoryFontSize,
     imageHotspotCategoryFontSizeUnits,
@@ -64,17 +63,6 @@ export default function Inspector({ attributes, setAttributes }) {
     imageHotspotCategoryMarginTablet,
     imageHotspotCategoryMarginMobile,
     imageHotspotCategoryMarginLink,
-    imageHotspotCategoryBorderWidthDesktop,
-    imageHotspotCategoryBorderWidthTablet,
-    imageHotspotCategoryBorderWidthMobile,
-    imageHotspotCategoryBorderWidthUnits,
-    imageHotspotCategoryBorderWidthLink,
-    imageHotspotCategoryBorderColor,
-    imageHotspotCategoryBorderRadiusDesktop,
-    imageHotspotCategoryBorderRadiusTablet,
-    imageHotspotCategoryBorderRadiusMobile,
-    imageHotspotCategoryBorderRadiusUnits,
-    imageHotspotCategoryBorderRadiusLink,
     imageHotspotPriceFontFamily,
     imageHotspotPriceFontSize,
     imageHotspotPriceFontSizeUnits,
@@ -99,17 +87,6 @@ export default function Inspector({ attributes, setAttributes }) {
     imageHotspotPriceMarginTablet,
     imageHotspotPriceMarginMobile,
     imageHotspotPriceMarginLink,
-    imageHotspotPriceBorderWidthDesktop,
-    imageHotspotPriceBorderWidthTablet,
-    imageHotspotPriceBorderWidthMobile,
-    imageHotspotPriceBorderWidthUnits,
-    imageHotspotPriceBorderWidthLink,
-    imageHotspotPriceBorderColor,
-    imageHotspotPriceBorderRadiusDesktop,
-    imageHotspotPriceBorderRadiusTablet,
-    imageHotspotPriceBorderRadiusMobile,
-    imageHotspotPriceBorderRadiusUnits,
-    imageHotspotPriceBorderRadiusLink,
     // Image
     imageHotspotImageUrl,
     imageHotspotImageId,
@@ -165,11 +142,6 @@ export default function Inspector({ attributes, setAttributes }) {
     imageHotspotTitleLetterSpacingUnits,
     imageHotspotTitleLineHeight,
     imageHotspotTitleLineHeightUnits,
-    imageHotspotTitlePaddingUnits,
-    imageHotspotTitlePaddingDesktop,
-    imageHotspotTitlePaddingTablet,
-    imageHotspotTitlePaddingMobile,
-    imageHotspotTitlePaddingLink,
     imageHotspotTitleMarginUnits,
     imageHotspotTitleMarginDesktop,
     imageHotspotTitleMarginTablet,
@@ -180,7 +152,6 @@ export default function Inspector({ attributes, setAttributes }) {
     imageHotspotTitleBorderWidthMobile,
     imageHotspotTitleBorderWidthUnits,
     imageHotspotTitleBorderWidthLink,
-    imageHotspotTitleBorderColor,
     imageHotspotTitleBorderRadiusDesktop,
     imageHotspotTitleBorderRadiusTablet,
     imageHotspotTitleBorderRadiusMobile,
@@ -230,12 +201,12 @@ export default function Inspector({ attributes, setAttributes }) {
     imageHotspotPaddingTablet,
     imageHotspotPaddingMobile,
     imageHotspotPaddingLink,
-    imageHotspotPopoverPaddingUnits,
+    // imageHotspotPopoverPaddingUnits,
     imageHotspotPopoverPaddingDesktop,
     imageHotspotPopoverPaddingTablet,
     imageHotspotPopoverPaddingMobile,
     imageHotspotPopoverPaddingLink,
-    imageHotspotPopoverMarginUnits,
+    // imageHotspotPopoverMarginUnits,
     imageHotspotPopoverMarginDesktop,
     imageHotspotPopoverMarginTablet,
     imageHotspotPopoverMarginMobile,
@@ -355,6 +326,21 @@ export default function Inspector({ attributes, setAttributes }) {
     imageHotspotSocialLinksIconSize,
     imageHotspotSocialLinksIconSizeUnits,
 
+    /** Start Hotspot Title Padding */
+    imageHotspotTitlePaddingUnits,
+    imageHotspotTitlePaddingDesktop,
+    imageHotspotTitlePaddingTablet,
+    imageHotspotTitlePaddingMobile,
+    imageHotspotTitlePaddingLink,
+    /** End Hotspot Title Padding */
+
+    /** Start Hotspot Title Border */
+    imageHotspotTitleBorder,
+    imageHotspotTitleBorderColorSwitcher,
+    imageHotspotTitleBorderColor,
+    imageHotspotTitleBorderHoverColor,
+    /** End Hotspot Title Border */
+
     /** Start Hotspot Popover Padding */
     imageHotspotsPopoverPaddingUnits,
     imageHotspotsPopoverPaddingDesktop,
@@ -419,185 +405,6 @@ export default function Inspector({ attributes, setAttributes }) {
   } = attributes;
 
   const deviceType = useDeviceType();
-
-  const normalizeFourSided = (value) => {
-    if (value && typeof value === 'object') {
-      return {
-        top: value.top || '',
-        right: value.right || '',
-        bottom: value.bottom || '',
-        left: value.left || ''
-      };
-    }
-
-    return {
-      top: value || '',
-      right: value || '',
-      bottom: value || '',
-      left: value || ''
-    };
-  };
-
-  const getDeviceFourSided = (values, device) => normalizeFourSided(values?.[device]);
-
-  const updateFourSidedAttribute = (attributeName, values, isLinked, event, position) => {
-    const value = event.target.value;
-    const currentDeviceValue = isLinked
-      ? { top: value, right: value, bottom: value, left: value }
-      : {
-        ...getDeviceFourSided(values, deviceType),
-        [position]: value
-      };
-
-    setAttributes({
-      [attributeName]: {
-        ...(values || {}),
-        [deviceType]: currentDeviceValue
-      }
-    });
-  };
-
-  const updateFourSidedUnit = (attributeName, units, unit) => {
-    setAttributes({
-      [attributeName]: {
-        ...(units || {}),
-        [deviceType]: unit
-      }
-    });
-  };
-
-  // Padding handlers
-  const imageHotspotPaddingUnitsChange = (event, position) => {
-    const value = event.target.value;
-    if (imageHotspotPaddingLink) {
-      switch (deviceType) {
-        case 'Desktop':
-          setAttributes({
-            imageHotspotPaddingDesktop: {
-              top: value,
-              right: value,
-              bottom: value,
-              left: value
-            }
-          });
-          break;
-        case 'Tablet':
-          setAttributes({
-            imageHotspotPaddingTablet: {
-              top: value,
-              right: value,
-              bottom: value,
-              left: value
-            }
-          });
-          break;
-        case 'Mobile':
-          setAttributes({
-            imageHotspotPaddingMobile: {
-              top: value,
-              right: value,
-              bottom: value,
-              left: value
-            }
-          });
-          break;
-      }
-    } else {
-      switch (deviceType) {
-        case 'Desktop':
-          setAttributes({ imageHotspotPaddingDesktop: { ...imageHotspotPaddingDesktop, [position]: value } });
-          break;
-        case 'Tablet':
-          setAttributes({ imageHotspotPaddingTablet: { ...imageHotspotPaddingTablet, [position]: value } });
-          break;
-        case 'Mobile':
-          setAttributes({ imageHotspotPaddingMobile: { ...imageHotspotPaddingMobile, [position]: value } });
-          break;
-      }
-    }
-  };
-
-  const imageHotspotPaddingLinkBtn = () => {
-    setAttributes({ imageHotspotPaddingLink: !imageHotspotPaddingLink });
-  };
-
-  const imageHotspotPaddingUnitsHandler = (unit) => {
-    setAttributes({
-      imageHotspotPaddingUnits: {
-        ...imageHotspotPaddingUnits,
-        [deviceType]: unit
-      }
-    });
-  };
-
-  const imageHotspotPopoverPaddingUnitsChange = (event, position) => {
-    const value = event.target.value;
-    if (imageHotspotPopoverPaddingLink) {
-      switch (deviceType) {
-        case 'Desktop':
-          setAttributes({
-            imageHotspotPopoverPaddingDesktop: {
-              top: value,
-              right: value,
-              bottom: value,
-              left: value
-            }
-          });
-          break;
-        case 'Tablet':
-          setAttributes({
-            imageHotspotPopoverPaddingTablet: {
-              top: value,
-              right: value,
-              bottom: value,
-              left: value
-            }
-          });
-          break;
-        case 'Mobile':
-          setAttributes({
-            imageHotspotPopoverPaddingMobile: {
-              top: value,
-              right: value,
-              bottom: value,
-              left: value
-            }
-          });
-          break;
-      }
-    } else {
-      switch (deviceType) {
-        case 'Desktop':
-          setAttributes({
-            imageHotspotPopoverPaddingDesktop: {
-              ...imageHotspotPopoverPaddingDesktop,
-              [position]: value
-            }
-          });
-          break;
-        case 'Tablet':
-          setAttributes({
-            imageHotspotPopoverPaddingTablet: {
-              ...imageHotspotPopoverPaddingTablet,
-              [position]: value
-            }
-          });
-          break;
-        case 'Mobile':
-          setAttributes({
-            imageHotspotPopoverPaddingMobile: {
-              ...imageHotspotPopoverPaddingMobile,
-              [position]: value
-            }
-          });
-          break;
-      }
-    }
-  };
-
-  const imageHotspotPopoverPaddingLinkBtn = () => {
-    setAttributes({ imageHotspotPopoverPaddingLink: !imageHotspotPopoverPaddingLink });
-  };
 
   const imageHotspotTitlePaddingUnitsChange = (event, position) => {
     const value = event.target.value;
@@ -727,135 +534,6 @@ export default function Inspector({ attributes, setAttributes }) {
           break;
       }
     }
-  };
-
-  const imageHotspotPopoverMarginUnitsChange = (event, position) => {
-    const value = event.target.value;
-    if (imageHotspotPopoverMarginLink) {
-      switch (deviceType) {
-        case 'Desktop':
-          setAttributes({
-            imageHotspotPopoverMarginDesktop: {
-              top: value,
-              right: value,
-              bottom: value,
-              left: value
-            }
-          });
-          break;
-        case 'Tablet':
-          setAttributes({
-            imageHotspotPopoverMarginTablet: {
-              top: value,
-              right: value,
-              bottom: value,
-              left: value
-            }
-          });
-          break;
-        case 'Mobile':
-          setAttributes({
-            imageHotspotPopoverMarginMobile: {
-              top: value,
-              right: value,
-              bottom: value,
-              left: value
-            }
-          });
-          break;
-      }
-    } else {
-      switch (deviceType) {
-        case 'Desktop':
-          setAttributes({
-            imageHotspotPopoverMarginDesktop: {
-              ...imageHotspotPopoverMarginDesktop,
-              [position]: value
-            }
-          });
-          break;
-        case 'Tablet':
-          setAttributes({
-            imageHotspotPopoverMarginTablet: {
-              ...imageHotspotPopoverMarginTablet,
-              [position]: value
-            }
-          });
-          break;
-        case 'Mobile':
-          setAttributes({
-            imageHotspotPopoverMarginMobile: {
-              ...imageHotspotPopoverMarginMobile,
-              [position]: value
-            }
-          });
-          break;
-      }
-    }
-  };
-
-  // Margin handlers
-  const imageHotspotMarginUnitsChange = (event, position) => {
-    const value = event.target.value;
-    if (imageHotspotMarginLink) {
-      switch (deviceType) {
-        case 'Desktop':
-          setAttributes({
-            imageHotspotMarginDesktop: {
-              top: value,
-              right: value,
-              bottom: value,
-              left: value
-            }
-          });
-          break;
-        case 'Tablet':
-          setAttributes({
-            imageHotspotMarginTablet: {
-              top: value,
-              right: value,
-              bottom: value,
-              left: value
-            }
-          });
-          break;
-        case 'Mobile':
-          setAttributes({
-            imageHotspotMarginMobile: {
-              top: value,
-              right: value,
-              bottom: value,
-              left: value
-            }
-          });
-          break;
-      }
-    } else {
-      switch (deviceType) {
-        case 'Desktop':
-          setAttributes({ imageHotspotMarginDesktop: { ...imageHotspotMarginDesktop, [position]: value } });
-          break;
-        case 'Tablet':
-          setAttributes({ imageHotspotMarginTablet: { ...imageHotspotMarginTablet, [position]: value } });
-          break;
-        case 'Mobile':
-          setAttributes({ imageHotspotMarginMobile: { ...imageHotspotMarginMobile, [position]: value } });
-          break;
-      }
-    }
-  };
-
-  const imageHotspotMarginLinkBtn = () => {
-    setAttributes({ imageHotspotMarginLink: !imageHotspotMarginLink });
-  };
-
-  const imageHotspotMarginUnitsHandler = (unit) => {
-    setAttributes({
-      imageHotspotMarginUnits: {
-        ...imageHotspotMarginUnits,
-        [deviceType]: unit
-      }
-    });
   };
 
   /** Start Global padding */
@@ -1351,72 +1029,6 @@ export default function Inspector({ attributes, setAttributes }) {
     updateHotspot(hotspotId, 'socialLinks', updatedLinks);
   };
 
-  const imageHotspotImageBorderWidthChange = (event, position) => {
-    const value = event.target.value;
-    const attr = `imageHotspotImageBorderWidth${deviceType}`;
-    const current = attributes[attr];
-    setAttributes({
-      [attr]: imageHotspotImageBorderWidthLink
-        ? { top: value, right: value, bottom: value, left: value }
-        : { ...current, [position]: value }
-    });
-  };
-
-  const imageHotspotImageBorderRadiusChange = (event, position) => {
-    const value = event.target.value;
-    const attr = `imageHotspotImageBorderRadius${deviceType}`;
-    const current = attributes[attr];
-    setAttributes({
-      [attr]: imageHotspotImageBorderRadiusLink
-        ? { top: value, right: value, bottom: value, left: value }
-        : { ...current, [position]: value }
-    });
-  };
-
-  const imageHotspotPopoverBorderWidthChange = (event, position) => {
-    const value = event.target.value;
-    const attr = `imageHotspotPopoverBorderWidth${deviceType}`;
-    const current = attributes[attr];
-    setAttributes({
-      [attr]: imageHotspotPopoverBorderWidthLink
-        ? { top: value, right: value, bottom: value, left: value }
-        : { ...current, [position]: value }
-    });
-  };
-
-  const imageHotspotPopoverBorderRadiusChange = (event, position) => {
-    const value = event.target.value;
-    const attr = `imageHotspotPopoverBorderRadius${deviceType}`;
-    const current = attributes[attr];
-    setAttributes({
-      [attr]: imageHotspotPopoverBorderRadiusLink
-        ? { top: value, right: value, bottom: value, left: value }
-        : { ...current, [position]: value }
-    });
-  };
-
-  const imageHotspotTitleBorderWidthChange = (event, position) => {
-    const value = event.target.value;
-    const attr = `imageHotspotTitleBorderWidth${deviceType}`;
-    const current = attributes[attr];
-    setAttributes({
-      [attr]: imageHotspotTitleBorderWidthLink
-        ? { top: value, right: value, bottom: value, left: value }
-        : { ...current, [position]: value }
-    });
-  };
-
-  const imageHotspotTitleBorderRadiusChange = (event, position) => {
-    const value = event.target.value;
-    const attr = `imageHotspotTitleBorderRadius${deviceType}`;
-    const current = attributes[attr];
-    setAttributes({
-      [attr]: imageHotspotTitleBorderRadiusLink
-        ? { top: value, right: value, bottom: value, left: value }
-        : { ...current, [position]: value }
-    });
-  };
-
   const imageHotspotCategoryPaddingUnitsChange = (event, position) => {
     const value = event.target.value;
     if (imageHotspotCategoryPaddingLink) {
@@ -1545,28 +1157,6 @@ export default function Inspector({ attributes, setAttributes }) {
           break;
       }
     }
-  };
-
-  const imageHotspotCategoryBorderWidthChange = (event, position) => {
-    const value = event.target.value;
-    const attr = `imageHotspotCategoryBorderWidth${deviceType}`;
-    const current = attributes[attr];
-    setAttributes({
-      [attr]: imageHotspotCategoryBorderWidthLink
-        ? { top: value, right: value, bottom: value, left: value }
-        : { ...current, [position]: value }
-    });
-  };
-
-  const imageHotspotCategoryBorderRadiusChange = (event, position) => {
-    const value = event.target.value;
-    const attr = `imageHotspotCategoryBorderRadius${deviceType}`;
-    const current = attributes[attr];
-    setAttributes({
-      [attr]: imageHotspotCategoryBorderRadiusLink
-        ? { top: value, right: value, bottom: value, left: value }
-        : { ...current, [position]: value }
-    });
   };
 
   const imageHotspotDescPaddingUnitsChange = (event, position) => {
@@ -1699,28 +1289,6 @@ export default function Inspector({ attributes, setAttributes }) {
     }
   };
 
-  const imageHotspotDescBorderWidthChange = (event, position) => {
-    const value = event.target.value;
-    const attr = `imageHotspotDescBorderWidth${deviceType}`;
-    const current = attributes[attr];
-    setAttributes({
-      [attr]: imageHotspotDescBorderWidthLink
-        ? { top: value, right: value, bottom: value, left: value }
-        : { ...current, [position]: value }
-    });
-  };
-
-  const imageHotspotDescBorderRadiusChange = (event, position) => {
-    const value = event.target.value;
-    const attr = `imageHotspotDescBorderRadius${deviceType}`;
-    const current = attributes[attr];
-    setAttributes({
-      [attr]: imageHotspotDescBorderRadiusLink
-        ? { top: value, right: value, bottom: value, left: value }
-        : { ...current, [position]: value }
-    });
-  };
-
   const imageHotspotPricePaddingUnitsChange = (event, position) => {
     const value = event.target.value;
     if (imageHotspotPricePaddingLink) {
@@ -1849,50 +1417,6 @@ export default function Inspector({ attributes, setAttributes }) {
           break;
       }
     }
-  };
-
-  const imageHotspotPriceBorderWidthChange = (event, position) => {
-    const value = event.target.value;
-    const attr = `imageHotspotPriceBorderWidth${deviceType}`;
-    const current = attributes[attr];
-    setAttributes({
-      [attr]: imageHotspotPriceBorderWidthLink
-        ? { top: value, right: value, bottom: value, left: value }
-        : { ...current, [position]: value }
-    });
-  };
-
-  const imageHotspotPriceBorderRadiusChange = (event, position) => {
-    const value = event.target.value;
-    const attr = `imageHotspotPriceBorderRadius${deviceType}`;
-    const current = attributes[attr];
-    setAttributes({
-      [attr]: imageHotspotPriceBorderRadiusLink
-        ? { top: value, right: value, bottom: value, left: value }
-        : { ...current, [position]: value }
-    });
-  };
-
-  const imageHotspotPopoverImageBorderWidthChange = (event, position) => {
-    const value = event.target.value;
-    const attr = `imageHotspotPopoverImageBorderWidth${deviceType}`;
-    const current = attributes[attr];
-    setAttributes({
-      [attr]: imageHotspotPopoverImageBorderWidthLink
-        ? { top: value, right: value, bottom: value, left: value }
-        : { ...current, [position]: value }
-    });
-  };
-
-  const imageHotspotPopoverImageBorderRadiusChange = (event, position) => {
-    const value = event.target.value;
-    const attr = `imageHotspotPopoverImageBorderRadius${deviceType}`;
-    const current = attributes[attr];
-    setAttributes({
-      [attr]: imageHotspotPopoverImageBorderRadiusLink
-        ? { top: value, right: value, bottom: value, left: value }
-        : { ...current, [position]: value }
-    });
   };
 
   /** Start Back To Top Padding */
@@ -2102,7 +1626,6 @@ export default function Inspector({ attributes, setAttributes }) {
       }
     });
   };
-  /** End Border Radius Controls */
 
   const generalControls = (
     <>
@@ -2570,118 +2093,6 @@ export default function Inspector({ attributes, setAttributes }) {
         initialOpen={true}
       >
 
-        {/* <FB_SwitcherControl
-          label={__("Background", "frontis-blocks")}
-          globalSwitcher={imageHotspotPopoverBgColorSwitcher}
-          setGlobalSwitcher={(value) => setAttributes({ imageHotspotPopoverBgColorSwitcher: value })}
-        />
-
-        {imageHotspotPopoverBgColorSwitcher === 'normal' && (
-          <FB_ColorControl
-            label={__("Background Color", "frontis-blocks")}
-            globalColor={imageHotspotPopoverBgColor}
-            setGlobalColor={(value) => setAttributes({ imageHotspotPopoverBgColor: value })}
-          />
-        )}
-
-        {imageHotspotPopoverBgColorSwitcher === 'hover' && (
-          <FB_ColorControl
-            label={__("Background Hover Color", "frontis-blocks")}
-            globalColor={imageHotspotPopoverBgHoverColor}
-            setGlobalColor={(value) => setAttributes({ imageHotspotPopoverBgHoverColor: value })}
-          />
-        )}
-
-        <FB_Spacing
-          label={__("Padding", "frontis-blocks")}
-          deviceType={deviceType}
-          spacingUnitsHandler={(unit) => setAttributes({
-            imageHotspotPopoverPaddingUnits: {
-              ...imageHotspotPopoverPaddingUnits,
-              [deviceType]: unit
-            }
-          })}
-          spacingUnits={imageHotspotPopoverPaddingUnits}
-          spacingDesktop={imageHotspotPopoverPaddingDesktop}
-          spacingTablet={imageHotspotPopoverPaddingTablet}
-          spacingMobile={imageHotspotPopoverPaddingMobile}
-          handleSpacingUnitHandler={imageHotspotPopoverPaddingUnitsChange}
-          spacingCombineBtn={imageHotspotPopoverPaddingLink}
-          spacingCombineBtnHandler={() => setAttributes({
-            imageHotspotPopoverPaddingLink: !imageHotspotPopoverPaddingLink
-          })}
-          setAttributes={setAttributes}
-        />
-
-        <FB_Spacing
-          label={__("Margin", "frontis-blocks")}
-          deviceType={deviceType}
-          spacingUnitsHandler={(unit) => setAttributes({
-            imageHotspotPopoverMarginUnits: {
-              ...imageHotspotPopoverMarginUnits,
-              [deviceType]: unit
-            }
-          })}
-          spacingUnits={imageHotspotPopoverMarginUnits}
-          spacingDesktop={imageHotspotPopoverMarginDesktop}
-          spacingTablet={imageHotspotPopoverMarginTablet}
-          spacingMobile={imageHotspotPopoverMarginMobile}
-          handleSpacingUnitHandler={imageHotspotPopoverMarginUnitsChange}
-          spacingCombineBtn={imageHotspotPopoverMarginLink}
-          spacingCombineBtnHandler={() => setAttributes({
-            imageHotspotPopoverMarginLink: !imageHotspotPopoverMarginLink
-          })}
-          setAttributes={setAttributes}
-        />
-
-        <FB_Spacing
-          label={__("Border Width", "frontis-blocks")}
-          deviceType={deviceType}
-          spacingUnits={imageHotspotPopoverBorderWidthUnits}
-          spacingDesktop={imageHotspotPopoverBorderWidthDesktop}
-          spacingTablet={imageHotspotPopoverBorderWidthTablet}
-          spacingMobile={imageHotspotPopoverBorderWidthMobile}
-          handleSpacingUnitHandler={imageHotspotPopoverBorderWidthChange}
-          spacingUnitsHandler={(unit) => setAttributes({
-            imageHotspotPopoverBorderWidthUnits: {
-              ...imageHotspotPopoverBorderWidthUnits,
-              [deviceType]: unit
-            }
-          })}
-          spacingCombineBtn={imageHotspotPopoverBorderWidthLink}
-          spacingCombineBtnHandler={() => setAttributes({
-            imageHotspotPopoverBorderWidthLink: !imageHotspotPopoverBorderWidthLink
-          })}
-          setAttributes={setAttributes}
-        />
-
-        <FB_ColorControl
-          label={__("Border Color", "frontis-blocks")}
-          globalColor={imageHotspotPopoverBorderColor}
-          setGlobalColor={(value) => setAttributes({ imageHotspotPopoverBorderColor: value })}
-        />
-
-        <FB_Spacing
-          label={__("Border Radius", "frontis-blocks")}
-          deviceType={deviceType}
-          spacingUnits={imageHotspotPopoverBorderRadiusUnits}
-          spacingDesktop={imageHotspotPopoverBorderRadiusDesktop}
-          spacingTablet={imageHotspotPopoverBorderRadiusTablet}
-          spacingMobile={imageHotspotPopoverBorderRadiusMobile}
-          handleSpacingUnitHandler={imageHotspotPopoverBorderRadiusChange}
-          spacingUnitsHandler={(unit) => setAttributes({
-            imageHotspotPopoverBorderRadiusUnits: {
-              ...imageHotspotPopoverBorderRadiusUnits,
-              [deviceType]: unit
-            }
-          })}
-          spacingCombineBtn={imageHotspotPopoverBorderRadiusLink}
-          spacingCombineBtnHandler={() => setAttributes({
-            imageHotspotPopoverBorderRadiusLink: !imageHotspotPopoverBorderRadiusLink
-          })}
-          setAttributes={setAttributes}
-        /> */}
-
         <FB_Spacing
           label={__("Padding", "frontis-blocks")}
           deviceType={deviceType}
@@ -2720,7 +2131,7 @@ export default function Inspector({ attributes, setAttributes }) {
           normalClassicColor={imageHotspotsPopoverNormalClassicColor}
           setNormalClassicColor={(value) => setAttributes({ imageHotspotsPopoverNormalClassicColor: value === undefined ? '' : value })}
           normalGradientColor={imageHotspotsPopoverNormalGradientColor}
-          setNormalGradientColor={(value) => setAttributes({ imageHotspotsPopoverNormalGradientColor: value === undefined ? null : value })}
+          setNormalGradientColor={(value) => setAttributes({ imageHotspotsPopoverNormalGradientColor: value ?? '' })}
           normalCustomGradientSwitcher={imageHotspotsPopoverNormalCustomGradientSwitcher}
           setNormalCustomGradientSwitcher={(value) => setAttributes({ imageHotspotsPopoverNormalCustomGradientSwitcher: value })}
           normalCustomGradientInputValue={imageHotspotsPopoverNormalCustomGradientInputValue}
@@ -2731,7 +2142,7 @@ export default function Inspector({ attributes, setAttributes }) {
           hoverClassicColor={imageHotspotsPopoverHoverClassicColor}
           setHoverClassicColor={(value) => setAttributes({ imageHotspotsPopoverHoverClassicColor: value === undefined ? '' : value })}
           hoverGradientColor={imageHotspotsPopoverHoverGradientColor}
-          setHoverGradientColor={(value) => setAttributes({ imageHotspotsPopoverHoverGradientColor: value === undefined ? null : value })}
+          setHoverGradientColor={(value) => setAttributes({ imageHotspotsPopoverHoverGradientColor: value ?? '' })}
           hoverCustomGradientSwitcher={imageHotspotsPopoverHoverCustomGradientSwitcher}
           setHoverCustomGradientSwitcher={(value) => setAttributes({ imageHotspotsPopoverHoverCustomGradientSwitcher: value })}
           hoverCustomGradientInputValue={imageHotspotsPopoverHoverCustomGradientInputValue}
@@ -2829,7 +2240,49 @@ export default function Inspector({ attributes, setAttributes }) {
       </PanelBody>
 
       <PanelBody title={__("Title", "frontis-blocks")} initialOpen={false}>
-        
+
+        <FB_Spacing
+          label={__("Padding", "frontis-blocks")}
+          deviceType={deviceType}
+          spacingUnitsHandler={(unit) => setAttributes({
+            imageHotspotTitlePaddingUnits: {
+              ...imageHotspotTitlePaddingUnits,
+              [deviceType]: unit
+            }
+          })}
+          spacingUnits={imageHotspotTitlePaddingUnits}
+          spacingDesktop={imageHotspotTitlePaddingDesktop}
+          spacingTablet={imageHotspotTitlePaddingTablet}
+          spacingMobile={imageHotspotTitlePaddingMobile}
+          handleSpacingUnitHandler={imageHotspotTitlePaddingUnitsChange}
+          spacingCombineBtn={imageHotspotTitlePaddingLink}
+          spacingCombineBtnHandler={() => setAttributes({
+            imageHotspotTitlePaddingLink: !imageHotspotTitlePaddingLink
+          })}
+          setAttributes={setAttributes}
+        />
+
+        <FB_Spacing
+          label={__("Margin", "frontis-blocks")}
+          deviceType={deviceType}
+          spacingUnitsHandler={(unit) => setAttributes({
+            imageHotspotTitleMarginUnits: {
+              ...imageHotspotTitleMarginUnits,
+              [deviceType]: unit
+            }
+          })}
+          spacingUnits={imageHotspotTitleMarginUnits}
+          spacingDesktop={imageHotspotTitleMarginDesktop}
+          spacingTablet={imageHotspotTitleMarginTablet}
+          spacingMobile={imageHotspotTitleMarginMobile}
+          handleSpacingUnitHandler={imageHotspotTitleMarginUnitsChange}
+          spacingCombineBtn={imageHotspotTitleMarginLink}
+          spacingCombineBtnHandler={() => setAttributes({
+            imageHotspotTitleMarginLink: !imageHotspotTitleMarginLink
+          })}
+          setAttributes={setAttributes}
+        />
+
         <FB_TypographyControl
           label={__("Typography", "frontis-blocks")}
           deviceType={deviceType}
@@ -2880,98 +2333,40 @@ export default function Inspector({ attributes, setAttributes }) {
           />
         )}
 
+      </PanelBody>
+
+      <PanelBody title={__("Category", "frontis-blocks")}
+        initialOpen={false}
+      >
+
         <FB_Spacing
           label={__("Padding", "frontis-blocks")}
           deviceType={deviceType}
-          spacingUnitsHandler={(unit) => setAttributes({
-            imageHotspotTitlePaddingUnits: {
-              ...imageHotspotTitlePaddingUnits,
-              [deviceType]: unit
-            }
-          })}
-          spacingUnits={imageHotspotTitlePaddingUnits}
-          spacingDesktop={imageHotspotTitlePaddingDesktop}
-          spacingTablet={imageHotspotTitlePaddingTablet}
-          spacingMobile={imageHotspotTitlePaddingMobile}
-          handleSpacingUnitHandler={imageHotspotTitlePaddingUnitsChange}
-          spacingCombineBtn={imageHotspotTitlePaddingLink}
-          spacingCombineBtnHandler={() => setAttributes({
-            imageHotspotTitlePaddingLink: !imageHotspotTitlePaddingLink
-          })}
+          spacingUnitsHandler={(unit) => setAttributes({ imageHotspotCategoryPaddingUnits: { ...imageHotspotCategoryPaddingUnits, [deviceType]: unit } })}
+          spacingUnits={imageHotspotCategoryPaddingUnits}
+          spacingDesktop={imageHotspotCategoryPaddingDesktop}
+          spacingTablet={imageHotspotCategoryPaddingTablet}
+          spacingMobile={imageHotspotCategoryPaddingMobile}
+          handleSpacingUnitHandler={imageHotspotCategoryPaddingUnitsChange}
+          spacingCombineBtn={imageHotspotCategoryPaddingLink}
+          spacingCombineBtnHandler={() => setAttributes({ imageHotspotCategoryPaddingLink: !imageHotspotCategoryPaddingLink })}
           setAttributes={setAttributes}
         />
 
         <FB_Spacing
           label={__("Margin", "frontis-blocks")}
           deviceType={deviceType}
-          spacingUnitsHandler={(unit) => setAttributes({
-            imageHotspotTitleMarginUnits: {
-              ...imageHotspotTitleMarginUnits,
-              [deviceType]: unit
-            }
-          })}
-          spacingUnits={imageHotspotTitleMarginUnits}
-          spacingDesktop={imageHotspotTitleMarginDesktop}
-          spacingTablet={imageHotspotTitleMarginTablet}
-          spacingMobile={imageHotspotTitleMarginMobile}
-          handleSpacingUnitHandler={imageHotspotTitleMarginUnitsChange}
-          spacingCombineBtn={imageHotspotTitleMarginLink}
-          spacingCombineBtnHandler={() => setAttributes({
-            imageHotspotTitleMarginLink: !imageHotspotTitleMarginLink
-          })}
+          spacingUnitsHandler={(unit) => setAttributes({ imageHotspotCategoryMarginUnits: { ...imageHotspotCategoryMarginUnits, [deviceType]: unit } })}
+          spacingUnits={imageHotspotCategoryMarginUnits}
+          spacingDesktop={imageHotspotCategoryMarginDesktop}
+          spacingTablet={imageHotspotCategoryMarginTablet}
+          spacingMobile={imageHotspotCategoryMarginMobile}
+          handleSpacingUnitHandler={imageHotspotCategoryMarginUnitsChange}
+          spacingCombineBtn={imageHotspotCategoryMarginLink}
+          spacingCombineBtnHandler={() => setAttributes({ imageHotspotCategoryMarginLink: !imageHotspotCategoryMarginLink })}
           setAttributes={setAttributes}
         />
 
-        <FB_Spacing
-          label={__("Border Width", "frontis-blocks")}
-          deviceType={deviceType}
-          spacingUnits={imageHotspotTitleBorderWidthUnits}
-          spacingDesktop={imageHotspotTitleBorderWidthDesktop}
-          spacingTablet={imageHotspotTitleBorderWidthTablet}
-          spacingMobile={imageHotspotTitleBorderWidthMobile}
-          handleSpacingUnitHandler={imageHotspotTitleBorderWidthChange}
-          spacingUnitsHandler={(unit) => setAttributes({
-            imageHotspotTitleBorderWidthUnits: {
-              ...imageHotspotTitleBorderWidthUnits,
-              [deviceType]: unit
-            }
-          })}
-          spacingCombineBtn={imageHotspotTitleBorderWidthLink}
-          spacingCombineBtnHandler={() => setAttributes({
-            imageHotspotTitleBorderWidthLink: !imageHotspotTitleBorderWidthLink
-          })}
-          setAttributes={setAttributes}
-        />
-
-        <FB_ColorControl
-          label={__("Border Color", "frontis-blocks")}
-          globalColor={imageHotspotTitleBorderColor}
-          setGlobalColor={(value) => setAttributes({ imageHotspotTitleBorderColor: value })}
-        />
-
-        <FB_Spacing
-          label={__("Border Radius", "frontis-blocks")}
-          deviceType={deviceType}
-          spacingUnits={imageHotspotTitleBorderRadiusUnits}
-          spacingDesktop={imageHotspotTitleBorderRadiusDesktop}
-          spacingTablet={imageHotspotTitleBorderRadiusTablet}
-          spacingMobile={imageHotspotTitleBorderRadiusMobile}
-          handleSpacingUnitHandler={imageHotspotTitleBorderRadiusChange}
-          spacingUnitsHandler={(unit) => setAttributes({
-            imageHotspotTitleBorderRadiusUnits: {
-              ...imageHotspotTitleBorderRadiusUnits,
-              [deviceType]: unit
-            }
-          })}
-          spacingCombineBtn={imageHotspotTitleBorderRadiusLink}
-          spacingCombineBtnHandler={() => setAttributes({
-            imageHotspotTitleBorderRadiusLink: !imageHotspotTitleBorderRadiusLink
-          })}
-          setAttributes={setAttributes}
-        />
-      </PanelBody>
-
-      <PanelBody title={__("Category", "frontis-blocks")} initialOpen={false}>
         <FB_TypographyControl
           label={__("Typography", "frontis-blocks")}
           deviceType={deviceType}
@@ -3022,23 +2417,29 @@ export default function Inspector({ attributes, setAttributes }) {
           />
         )}
 
+      </PanelBody>
+
+      <PanelBody title={__("Description", "frontis-blocks")}
+        initialOpen={false}
+      >
+
         <FB_Spacing
           label={__("Padding", "frontis-blocks")}
           deviceType={deviceType}
           spacingUnitsHandler={(unit) => setAttributes({
-            imageHotspotCategoryPaddingUnits: {
-              ...imageHotspotCategoryPaddingUnits,
+            imageHotspotDescPaddingUnits: {
+              ...imageHotspotDescPaddingUnits,
               [deviceType]: unit
             }
           })}
-          spacingUnits={imageHotspotCategoryPaddingUnits}
-          spacingDesktop={imageHotspotCategoryPaddingDesktop}
-          spacingTablet={imageHotspotCategoryPaddingTablet}
-          spacingMobile={imageHotspotCategoryPaddingMobile}
-          handleSpacingUnitHandler={imageHotspotCategoryPaddingUnitsChange}
-          spacingCombineBtn={imageHotspotCategoryPaddingLink}
+          spacingUnits={imageHotspotDescPaddingUnits}
+          spacingDesktop={imageHotspotDescPaddingDesktop}
+          spacingTablet={imageHotspotDescPaddingTablet}
+          spacingMobile={imageHotspotDescPaddingMobile}
+          handleSpacingUnitHandler={imageHotspotDescPaddingUnitsChange}
+          spacingCombineBtn={imageHotspotDescPaddingLink}
           spacingCombineBtnHandler={() => setAttributes({
-            imageHotspotCategoryPaddingLink: !imageHotspotCategoryPaddingLink
+            imageHotspotDescPaddingLink: !imageHotspotDescPaddingLink
           })}
           setAttributes={setAttributes}
         />
@@ -3047,73 +2448,23 @@ export default function Inspector({ attributes, setAttributes }) {
           label={__("Margin", "frontis-blocks")}
           deviceType={deviceType}
           spacingUnitsHandler={(unit) => setAttributes({
-            imageHotspotCategoryMarginUnits: {
-              ...imageHotspotCategoryMarginUnits,
+            imageHotspotDescMarginUnits: {
+              ...imageHotspotDescMarginUnits,
               [deviceType]: unit
             }
           })}
-          spacingUnits={imageHotspotCategoryMarginUnits}
-          spacingDesktop={imageHotspotCategoryMarginDesktop}
-          spacingTablet={imageHotspotCategoryMarginTablet}
-          spacingMobile={imageHotspotCategoryMarginMobile}
-          handleSpacingUnitHandler={imageHotspotCategoryMarginUnitsChange}
-          spacingCombineBtn={imageHotspotCategoryMarginLink}
+          spacingUnits={imageHotspotDescMarginUnits}
+          spacingDesktop={imageHotspotDescMarginDesktop}
+          spacingTablet={imageHotspotDescMarginTablet}
+          spacingMobile={imageHotspotDescMarginMobile}
+          handleSpacingUnitHandler={imageHotspotDescMarginUnitsChange}
+          spacingCombineBtn={imageHotspotDescMarginLink}
           spacingCombineBtnHandler={() => setAttributes({
-            imageHotspotCategoryMarginLink: !imageHotspotCategoryMarginLink
+            imageHotspotDescMarginLink: !imageHotspotDescMarginLink
           })}
           setAttributes={setAttributes}
         />
 
-        <FB_Spacing
-          label={__("Border Width", "frontis-blocks")}
-          deviceType={deviceType}
-          spacingUnits={imageHotspotCategoryBorderWidthUnits}
-          spacingDesktop={imageHotspotCategoryBorderWidthDesktop}
-          spacingTablet={imageHotspotCategoryBorderWidthTablet}
-          spacingMobile={imageHotspotCategoryBorderWidthMobile}
-          handleSpacingUnitHandler={imageHotspotCategoryBorderWidthChange}
-          spacingUnitsHandler={(unit) => setAttributes({
-            imageHotspotCategoryBorderWidthUnits: {
-              ...imageHotspotCategoryBorderWidthUnits,
-              [deviceType]: unit
-            }
-          })}
-          spacingCombineBtn={imageHotspotCategoryBorderWidthLink}
-          spacingCombineBtnHandler={() => setAttributes({
-            imageHotspotCategoryBorderWidthLink: !imageHotspotCategoryBorderWidthLink
-          })}
-          setAttributes={setAttributes}
-        />
-
-        <FB_ColorControl
-          label={__("Border Color", "frontis-blocks")}
-          globalColor={imageHotspotCategoryBorderColor}
-          setGlobalColor={(value) => setAttributes({ imageHotspotCategoryBorderColor: value })}
-        />
-
-        <FB_Spacing
-          label={__("Border Radius", "frontis-blocks")}
-          deviceType={deviceType}
-          spacingUnits={imageHotspotCategoryBorderRadiusUnits}
-          spacingDesktop={imageHotspotCategoryBorderRadiusDesktop}
-          spacingTablet={imageHotspotCategoryBorderRadiusTablet}
-          spacingMobile={imageHotspotCategoryBorderRadiusMobile}
-          handleSpacingUnitHandler={imageHotspotCategoryBorderRadiusChange}
-          spacingUnitsHandler={(unit) => setAttributes({
-            imageHotspotCategoryBorderRadiusUnits: {
-              ...imageHotspotCategoryBorderRadiusUnits,
-              [deviceType]: unit
-            }
-          })}
-          spacingCombineBtn={imageHotspotCategoryBorderRadiusLink}
-          spacingCombineBtnHandler={() => setAttributes({
-            imageHotspotCategoryBorderRadiusLink: !imageHotspotCategoryBorderRadiusLink
-          })}
-          setAttributes={setAttributes}
-        />
-      </PanelBody>
-
-      <PanelBody title={__("Description", "frontis-blocks")} initialOpen={false}>
         <FB_TypographyControl
           label={__("Typography", "frontis-blocks")}
           deviceType={deviceType}
@@ -3164,23 +2515,28 @@ export default function Inspector({ attributes, setAttributes }) {
           />
         )}
 
+      </PanelBody>
+
+      <PanelBody title={__("Price", "frontis-blocks")}
+        initialOpen={false}
+      >
         <FB_Spacing
           label={__("Padding", "frontis-blocks")}
           deviceType={deviceType}
           spacingUnitsHandler={(unit) => setAttributes({
-            imageHotspotDescPaddingUnits: {
-              ...imageHotspotDescPaddingUnits,
+            imageHotspotPricePaddingUnits: {
+              ...imageHotspotPricePaddingUnits,
               [deviceType]: unit
             }
           })}
-          spacingUnits={imageHotspotDescPaddingUnits}
-          spacingDesktop={imageHotspotDescPaddingDesktop}
-          spacingTablet={imageHotspotDescPaddingTablet}
-          spacingMobile={imageHotspotDescPaddingMobile}
-          handleSpacingUnitHandler={imageHotspotDescPaddingUnitsChange}
-          spacingCombineBtn={imageHotspotDescPaddingLink}
+          spacingUnits={imageHotspotPricePaddingUnits}
+          spacingDesktop={imageHotspotPricePaddingDesktop}
+          spacingTablet={imageHotspotPricePaddingTablet}
+          spacingMobile={imageHotspotPricePaddingMobile}
+          handleSpacingUnitHandler={imageHotspotPricePaddingUnitsChange}
+          spacingCombineBtn={imageHotspotPricePaddingLink}
           spacingCombineBtnHandler={() => setAttributes({
-            imageHotspotDescPaddingLink: !imageHotspotDescPaddingLink
+            imageHotspotPricePaddingLink: !imageHotspotPricePaddingLink
           })}
           setAttributes={setAttributes}
         />
@@ -3189,73 +2545,23 @@ export default function Inspector({ attributes, setAttributes }) {
           label={__("Margin", "frontis-blocks")}
           deviceType={deviceType}
           spacingUnitsHandler={(unit) => setAttributes({
-            imageHotspotDescMarginUnits: {
-              ...imageHotspotDescMarginUnits,
+            imageHotspotPriceMarginUnits: {
+              ...imageHotspotPriceMarginUnits,
               [deviceType]: unit
             }
           })}
-          spacingUnits={imageHotspotDescMarginUnits}
-          spacingDesktop={imageHotspotDescMarginDesktop}
-          spacingTablet={imageHotspotDescMarginTablet}
-          spacingMobile={imageHotspotDescMarginMobile}
-          handleSpacingUnitHandler={imageHotspotDescMarginUnitsChange}
-          spacingCombineBtn={imageHotspotDescMarginLink}
+          spacingUnits={imageHotspotPriceMarginUnits}
+          spacingDesktop={imageHotspotPriceMarginDesktop}
+          spacingTablet={imageHotspotPriceMarginTablet}
+          spacingMobile={imageHotspotPriceMarginMobile}
+          handleSpacingUnitHandler={imageHotspotPriceMarginUnitsChange}
+          spacingCombineBtn={imageHotspotPriceMarginLink}
           spacingCombineBtnHandler={() => setAttributes({
-            imageHotspotDescMarginLink: !imageHotspotDescMarginLink
+            imageHotspotPriceMarginLink: !imageHotspotPriceMarginLink
           })}
           setAttributes={setAttributes}
         />
 
-        <FB_Spacing
-          label={__("Border Width", "frontis-blocks")}
-          deviceType={deviceType}
-          spacingUnits={imageHotspotDescBorderWidthUnits}
-          spacingDesktop={imageHotspotDescBorderWidthDesktop}
-          spacingTablet={imageHotspotDescBorderWidthTablet}
-          spacingMobile={imageHotspotDescBorderWidthMobile}
-          handleSpacingUnitHandler={imageHotspotDescBorderWidthChange}
-          spacingUnitsHandler={(unit) => setAttributes({
-            imageHotspotDescBorderWidthUnits: {
-              ...imageHotspotDescBorderWidthUnits,
-              [deviceType]: unit
-            }
-          })}
-          spacingCombineBtn={imageHotspotDescBorderWidthLink}
-          spacingCombineBtnHandler={() => setAttributes({
-            imageHotspotDescBorderWidthLink: !imageHotspotDescBorderWidthLink
-          })}
-          setAttributes={setAttributes}
-        />
-
-        <FB_ColorControl
-          label={__("Border Color", "frontis-blocks")}
-          globalColor={imageHotspotDescBorderColor}
-          setGlobalColor={(value) => setAttributes({ imageHotspotDescBorderColor: value })}
-        />
-
-        <FB_Spacing
-          label={__("Border Radius", "frontis-blocks")}
-          deviceType={deviceType}
-          spacingUnits={imageHotspotDescBorderRadiusUnits}
-          spacingDesktop={imageHotspotDescBorderRadiusDesktop}
-          spacingTablet={imageHotspotDescBorderRadiusTablet}
-          spacingMobile={imageHotspotDescBorderRadiusMobile}
-          handleSpacingUnitHandler={imageHotspotDescBorderRadiusChange}
-          spacingUnitsHandler={(unit) => setAttributes({
-            imageHotspotDescBorderRadiusUnits: {
-              ...imageHotspotDescBorderRadiusUnits,
-              [deviceType]: unit
-            }
-          })}
-          spacingCombineBtn={imageHotspotDescBorderRadiusLink}
-          spacingCombineBtnHandler={() => setAttributes({
-            imageHotspotDescBorderRadiusLink: !imageHotspotDescBorderRadiusLink
-          })}
-          setAttributes={setAttributes}
-        />
-      </PanelBody>
-
-      <PanelBody title={__("Price", "frontis-blocks")} initialOpen={false}>
         <FB_TypographyControl
           label={__("Typography", "frontis-blocks")}
           deviceType={deviceType}
@@ -3306,95 +2612,6 @@ export default function Inspector({ attributes, setAttributes }) {
           />
         )}
 
-        <FB_Spacing
-          label={__("Padding", "frontis-blocks")}
-          deviceType={deviceType}
-          spacingUnitsHandler={(unit) => setAttributes({
-            imageHotspotPricePaddingUnits: {
-              ...imageHotspotPricePaddingUnits,
-              [deviceType]: unit
-            }
-          })}
-          spacingUnits={imageHotspotPricePaddingUnits}
-          spacingDesktop={imageHotspotPricePaddingDesktop}
-          spacingTablet={imageHotspotPricePaddingTablet}
-          spacingMobile={imageHotspotPricePaddingMobile}
-          handleSpacingUnitHandler={imageHotspotPricePaddingUnitsChange}
-          spacingCombineBtn={imageHotspotPricePaddingLink}
-          spacingCombineBtnHandler={() => setAttributes({
-            imageHotspotPricePaddingLink: !imageHotspotPricePaddingLink
-          })}
-          setAttributes={setAttributes}
-        />
-
-        <FB_Spacing
-          label={__("Margin", "frontis-blocks")}
-          deviceType={deviceType}
-          spacingUnitsHandler={(unit) => setAttributes({
-            imageHotspotPriceMarginUnits: {
-              ...imageHotspotPriceMarginUnits,
-              [deviceType]: unit
-            }
-          })}
-          spacingUnits={imageHotspotPriceMarginUnits}
-          spacingDesktop={imageHotspotPriceMarginDesktop}
-          spacingTablet={imageHotspotPriceMarginTablet}
-          spacingMobile={imageHotspotPriceMarginMobile}
-          handleSpacingUnitHandler={imageHotspotPriceMarginUnitsChange}
-          spacingCombineBtn={imageHotspotPriceMarginLink}
-          spacingCombineBtnHandler={() => setAttributes({
-            imageHotspotPriceMarginLink: !imageHotspotPriceMarginLink
-          })}
-          setAttributes={setAttributes}
-        />
-
-        <FB_Spacing
-          label={__("Border Width", "frontis-blocks")}
-          deviceType={deviceType}
-          spacingUnits={imageHotspotPriceBorderWidthUnits}
-          spacingDesktop={imageHotspotPriceBorderWidthDesktop}
-          spacingTablet={imageHotspotPriceBorderWidthTablet}
-          spacingMobile={imageHotspotPriceBorderWidthMobile}
-          handleSpacingUnitHandler={imageHotspotPriceBorderWidthChange}
-          spacingUnitsHandler={(unit) => setAttributes({
-            imageHotspotPriceBorderWidthUnits: {
-              ...imageHotspotPriceBorderWidthUnits,
-              [deviceType]: unit
-            }
-          })}
-          spacingCombineBtn={imageHotspotPriceBorderWidthLink}
-          spacingCombineBtnHandler={() => setAttributes({
-            imageHotspotPriceBorderWidthLink: !imageHotspotPriceBorderWidthLink
-          })}
-          setAttributes={setAttributes}
-        />
-
-        <FB_ColorControl
-          label={__("Border Color", "frontis-blocks")}
-          globalColor={imageHotspotPriceBorderColor}
-          setGlobalColor={(value) => setAttributes({ imageHotspotPriceBorderColor: value })}
-        />
-
-        <FB_Spacing
-          label={__("Border Radius", "frontis-blocks")}
-          deviceType={deviceType}
-          spacingUnits={imageHotspotPriceBorderRadiusUnits}
-          spacingDesktop={imageHotspotPriceBorderRadiusDesktop}
-          spacingTablet={imageHotspotPriceBorderRadiusTablet}
-          spacingMobile={imageHotspotPriceBorderRadiusMobile}
-          handleSpacingUnitHandler={imageHotspotPriceBorderRadiusChange}
-          spacingUnitsHandler={(unit) => setAttributes({
-            imageHotspotPriceBorderRadiusUnits: {
-              ...imageHotspotPriceBorderRadiusUnits,
-              [deviceType]: unit
-            }
-          })}
-          spacingCombineBtn={imageHotspotPriceBorderRadiusLink}
-          spacingCombineBtnHandler={() => setAttributes({
-            imageHotspotPriceBorderRadiusLink: !imageHotspotPriceBorderRadiusLink
-          })}
-          setAttributes={setAttributes}
-        />
       </PanelBody>
 
       <PanelBody
@@ -3580,7 +2797,9 @@ export default function Inspector({ attributes, setAttributes }) {
             setGlobalColor={(value) => setAttributes({ globalBgHoverColor: value === undefined ? '' : value })}
           />
         )}
+
       </PanelBody>
+
       <PanelBody
         title={__("Border and Shadow", "frontis-blocks")}
         initialOpen={false}
