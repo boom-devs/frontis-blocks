@@ -28,6 +28,10 @@ const attributes = {
 		default: ''
 	}, 
     /** Start Button */
+    toggleButtonTextSwitcher: {
+        type: "boolean",
+        default: true,
+    },
     toggleButtonText: {
         type: 'string',
         default: 'Click Me',
@@ -168,7 +172,7 @@ const attributes = {
     },
     toggleButtonTextDecoration: {
         type: "string",
-        default: ""
+        default: "none"
     },
     toggleButtonLetterSpacing: {
         type: 'object',
@@ -213,6 +217,344 @@ const attributes = {
     toggleButtonHoverColor: {
         type: 'string',
     },
+
+    /** Icon Styles */
+    toggleButtonIconSize: {
+        type: 'object',
+        default: {
+            Desktop: '16',
+            Tablet: '16',
+            Mobile: '16'
+        }
+    },
+    toggleButtonIconSizeUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    toggleButtonIconColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    toggleButtonIconColor: {
+        type: "string",
+        default: "#000000"
+    },
+    toggleButtonIconHoverColor: {
+        type: 'string',
+        default: ""
+    },
+
+    /** Close Icon Styles */
+    modalCloseIconColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    modalCloseIconColor: {
+        type: "string",
+        default: "#000000"
+    },
+    modalCloseIconHoverColor: {
+        type: 'string',
+        default: ""
+    },
+
+    toggleButtonIconGapSize: {
+        type: 'object',
+        default: {
+            Desktop: '10',
+            Tablet: '10',
+            Mobile: '10'
+        }
+    },
+    toggleButtonIconGapUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+
+    toggleButtonIconRotateSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
+    toggleButtonIconRotate: {
+        type: 'object',
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        }
+    },
+    toggleButtonIconRotateHover: {
+        type: 'object',
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        }
+    },
+
+    /** Start Background */
+    toggleButtonBgColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    toggleButtonNormalBackgroundType: {
+        type: "string",
+        default: "classic",
+    },
+    toggleButtonBgColor: {
+        type: "string",
+        default: "#399CFF",
+    },
+    toggleButtonNormalGradientColor: {
+        type: "string",
+        default: null,
+    },
+    toggleButtonNormalCustomGradientSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    toggleButtonNormalCustomGradientInputValue: {
+        type: "string",
+        default: "",
+    },
+
+    toggleButtonHoverBackgroundType: {
+        type: "string",
+        default: "classic",
+    },
+    toggleButtonBgHoverColor: {
+        type: "string",
+        default: "",
+    },
+    toggleButtonHoverGradientColor: {
+        type: "string",
+        default: null,
+    },
+    toggleButtonHoverCustomGradientSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    toggleButtonHoverCustomGradientInputValue: {
+        type: "string",
+        default: "",
+    },
+    /** End Background */
+
+    /** Toggle Button Padding */
+    toggleButtonPaddingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    toggleButtonDesktopPadding: {
+        type: "object",
+        default: {
+            top: '12',
+            bottom: '12',
+            left: '24',
+            right: '24',
+        },
+    },
+    toggleButtonTabPadding: {
+        type: "object",
+        default: {
+            top: '12',
+            bottom: '12',
+            left: '24',
+            right: '24',
+        },
+    },
+    toggleButtonMobilePadding: {
+        type: "object",
+        default: {
+            top: '12',
+            bottom: '12',
+            left: '24',
+            right: '24',
+        },
+    },
+    toggleButtonPaddingLink: {
+        type: "boolean",
+        default: true
+    },
+
+    toggleButtonMarginUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    toggleButtonDesktopMargin: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    toggleButtonTabMargin: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    toggleButtonMobileMargin: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    toggleButtonMarginLink: {
+        type: "boolean",
+        default: true
+    },
+
+    toggleButtonBorder: {
+        type: 'string',
+        default: "none",
+    },
+    toggleButtonBorderColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    toggleButtonBorderColor: {
+        type: 'string',
+    },
+    toggleButtonBorderHoverColor: {
+        type: 'string',
+    },
+    toggleButtonBorderUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    toggleButtonDesktopBorderWidth: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    toggleButtonTabBorderWidth: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    toggleButtonMobileBorderWidth: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    toggleButtonBorderLink: {
+        type: "boolean",
+        default: true
+    },
+    toggleButtonBorderRadiusUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    toggleButtonDesktopBorderRadiusWidth: {
+        type: "object",
+        default: {
+            top: "4",
+            bottom: "4",
+            left: "4",
+            right: "4",
+        },
+    },
+    toggleButtonTabBorderRadiusWidth: {
+        type: "object",
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    toggleButtonMobileBorderRadiusWidth: {
+        type: "object",
+        default: {
+            top: "4",
+            bottom: "4",
+            left: "4",
+            right: "4",
+        },
+    },
+    toggleButtonBorderRadiusLink: {
+        type: "boolean",
+        default: true
+    },
+
+    /** Image Size */
+	toggleImageSize: {
+		type: 'object',
+		default: {
+			Desktop: '100',
+			Tablet: '100',
+			Mobile: '100'
+		}
+	},
+	toggleImageHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	toggleImageSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: '%',
+			Tablet: '%',
+			Mobile: '%',
+		}
+	},
+	toggleImageHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: '%',
+			Tablet: '%',
+			Mobile: '%',
+		}
+	},
     
 	contentType: {
 		type: 'string',
@@ -521,7 +863,7 @@ const attributes = {
 	},
 	modalPopupPanelBgNormalClassicColor: {
 		type: 'string',
-		default: '',
+		default: '#ffffff',
 	},
 	modalPopupPanelBgNormalGradientColor: {
 		type: 'string',

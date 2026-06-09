@@ -699,9 +699,6 @@ export const TOGGLE_TYPES = [
 
 export const CONTENT_TYPES = [
 	{ label: __('Pattern', 'frontis-blocks'), value: 'pattern' },
-	{ label: __('Image', 'frontis-blocks'), value: 'image' },
-	{ label: __('Video', 'frontis-blocks'), value: 'video' },
-	{ label: __('Google Map', 'frontis-blocks'), value: 'map' },
 	{ label: __('Custom Content', 'frontis-blocks'), value: 'custom' },
 ];
 
@@ -1129,4 +1126,7 @@ export const STACKED_CARD_SCALE = [
 	{ label: __("Horizontal", "frontis-blocks"), value: "horizontal" },
 	{ label: __("Vertical", "frontis-blocks"), value: "vertical" },
 ];
-
+export const TOGGLE_BUTTON_ICON_ALIGN = [
+	{ label: __(<Dashicon icon={"remove"} />), value: "none" },
+	{ label: __(<Dashicon icon={"admin-generic"} />), value: "icon" },
+];

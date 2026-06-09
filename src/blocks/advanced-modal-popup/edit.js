@@ -34,6 +34,8 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         toggleButtonIconAlign,
         toggleButtonText,
         modalCloseIcon,
+        toggleButtonTextSwitcher,
+        toggleButtonIconImageUrl,
 
         position,
         toggleType,
@@ -93,7 +95,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         });
     };
 
-    const patternData = useSelect(select => {
+    const patternContent = useSelect(select => {
         if (!selectedTemplate || contentType !== 'pattern') return null;
 
         if (selectedTemplate.startsWith('user-')) {
@@ -105,15 +107,14 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                 const userPattern = userPatterns.find(p => p.id === id);
 
                 if (userPattern && userPattern.content && userPattern.content.raw) {
-                    return {
-                        content: userPattern.content.raw
-                    };
+                    return userPattern.content.raw;
                 }
             }
         } else {
             if (select('core')) {
                 const patterns = select('core').getBlockPatterns() || [];
-                return patterns.find(pattern => pattern.name === selectedTemplate);
+                const found = patterns.find(pattern => pattern.name === selectedTemplate);
+                return found ? found.content : null;
             }
         }
 
@@ -126,8 +127,8 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
     useEffect(() => {
         if (contentType !== 'pattern') return;
 
-        if (patternData && patternData.content) {
-            const parsedBlocks = parse(patternData.content);
+        if (patternContent) {
+            const parsedBlocks = parse(patternContent);
 
             if (parsedBlocks && parsedBlocks.length > 0) {
                 replaceInnerBlocks(clientId, parsedBlocks, false);
@@ -137,24 +138,9 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         } else {
             console.warn("No content found in pattern data");
         }
-    }, [patternData, clientId, contentType, replaceInnerBlocks]);
+    }, [patternContent, clientId, contentType, replaceInnerBlocks]);
 
-    // Insert appropriate block when contentType is video, image, or map
-    useEffect(() => {
-        if (contentType === 'video' || contentType === 'image' || contentType === 'map') {
-            let blockName = '';
-            if (contentType === 'video') blockName = 'frontis-blocks/advanced-video';
-            if (contentType === 'image') blockName = 'frontis-blocks/advanced-image';
-            if (contentType === 'map') blockName = 'frontis-blocks/google-map';
 
-            const currentBlocks = select('core/block-editor').getBlocks(clientId);
-            const hasBlock = currentBlocks.length === 1 && currentBlocks[0].name === blockName;
-            if (!hasBlock) {
-                const newBlock = createBlock(blockName);
-                replaceInnerBlocks(clientId, [newBlock], false);
-            }
-        }
-    }, [contentType, clientId, replaceInnerBlocks]);
 
     /**
     * Manages tab button settings and switches to block settings on click
@@ -193,14 +179,18 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                         <div className="fb-button-icon">
                             {renderSVG(toggleButtonIcon)}
                         </div>
+                    )} 
+                    
+                    {toggleButtonTextSwitcher && (
+                        <RichText 
+                            tagName="span" 
+                            value={toggleButtonText}
+                            onChange={(value) => setAttributes({ toggleButtonText: value })}
+                            placeholder={__('Enter button text...', 'frontis-blocks')}
+                            className="fb-button-text"
+                        />
                     )}
-                    <RichText 
-                        tagName="span" 
-                        value={toggleButtonText}
-                        onChange={(value) => setAttributes({ toggleButtonText: value })}
-                        placeholder={__('Enter button text...', 'frontis-blocks')}
-                        className="fb-button-text"
-                    />
+                    
                     {toggleButtonIconPosition === 'right' && toggleButtonIconAlign === 'icon' && (
                         <div className="fb-button-icon">
                             {renderSVG(toggleButtonIcon)} 
@@ -237,27 +227,9 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                         <p>{__('Select a pattern from the sidebar to display here', 'frontis-blocks')}</p>
                     </div>
                 );
+
             case 'custom':
                 return <div {...innerBlocksProps} />;
-            case 'image':
-                return (
-                    <div className="fb-modal-content-image">
-                        <div {...innerBlocksProps} />
-                    </div>
-                );
-            case 'video':
-                return (
-                    <div className="fb-modal-content-video">
-                        <div {...innerBlocksProps} />
-                    </div>
-                );
-                    
-            case 'map':
-                return (
-                    <div className="fb-modal-content-map">
-                        <div {...innerBlocksProps} />
-                    </div>
-                );
             default:
                 return null;
         }
