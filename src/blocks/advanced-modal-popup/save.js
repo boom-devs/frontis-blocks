@@ -18,8 +18,9 @@ export default function save({ attributes }) {
         position,
         toggleType,
         contentType,
-        contentVideoUrl,
-        contentMapUrl,
+        pageLoadDelay,
+        pageLoadCookieEnable,
+        pageLoadCookieExpiry,
         modalPopupGlobalWraperClass,
         modalPopupGlobalWraperID,
         modalPopupDesktopSwitcher,
@@ -35,7 +36,7 @@ export default function save({ attributes }) {
     });
 
     const innerBlocksProps = useInnerBlocksProps.save({
-        className: 'fb-advanced-modal-popup-inner-blocks',
+        className: 'fb-advanced-modal-popup-inner',
     });
 
     const renderToggle = () => {
@@ -105,7 +106,14 @@ export default function save({ attributes }) {
 
     return (
         <div {...blockProps}>
-            <div className={`fb-advanced-modal-popup-container ${modalPopupGlobalWraperClass || ''}`.trim()} id={modalPopupGlobalWraperID}>
+            <div
+                className={`fb-advanced-modal-popup-container ${modalPopupGlobalWraperClass || ''}`.trim()}
+                id={modalPopupGlobalWraperID}
+                data-trigger-type={toggleType}
+                data-page-load-delay={toggleType === 'page-load' ? pageLoadDelay : undefined}
+                data-cookie-enable={toggleType === 'page-load' && pageLoadCookieEnable ? 'true' : undefined}
+                data-cookie-expiry={toggleType === 'page-load' && pageLoadCookieEnable ? pageLoadCookieExpiry : undefined}
+            >
                 
                 {/* Modal Trigger */}
                 <div className="fb-advanced-modal-popup-trigger">

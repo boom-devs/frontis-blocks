@@ -687,19 +687,19 @@ export const ANIMATION = [
     { value: 'top', label: __('Slide Top', 'frontis-blocks') },
     { value: 'bottom', label: __('Slide Bottom', 'frontis-blocks') },
     { value: 'zoom', label: __('Zoom', 'frontis-blocks') },
-    { value: 'flip', label: __('Flip', 'frontis-blocks') },
     { value: 'fade', label: __('Fade', 'frontis-blocks') },
-    { value: 'center', label: __('Center', 'frontis-blocks') },
 ];
 
 export const TOGGLE_TYPES = [
 	{ label: __('Button', 'frontis-blocks'), value: 'button' },
 	{ label: __('Image', 'frontis-blocks'), value: 'image' },
+	{ label: __('Scroll', 'frontis-blocks'), value: 'scroll' },
+	{ label: __('Page Load', 'frontis-blocks'), value: 'page-load' },
 ];
 
 export const CONTENT_TYPES = [
 	{ label: __('Pattern', 'frontis-blocks'), value: 'pattern' },
-	{ label: __('Custom Content', 'frontis-blocks'), value: 'custom' },
+	{ label: __('Manually', 'frontis-blocks'), value: 'custom' },
 ];
 
 

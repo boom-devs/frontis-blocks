@@ -37,14 +37,48 @@
         opacity: 0;
         visibility: hidden;
         pointer-events: none;
-        transition: opacity 0.3s ease, visibility 0.3s ease;
+        // Use transition on transform, opacity, and visibility for smooth 2-way animations
+        // transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.4s ease, visibility 0.4s ease-in-out;
 
+        // Animation variations (initial states before active)
+        &.fb-advanced-modal-popup-fade {
+            // Fade only, no transform change needed
+            transform: translate(-50%, -50%);
+        }
+
+        &.fb-advanced-modal-popup-top {
+            transform: translate(-50%, -150%);
+        }
+
+        &.fb-advanced-modal-popup-bottom {
+            transform: translate(-50%, 50%);
+        }
+
+        &.fb-advanced-modal-popup-left {
+            transform: translate(-150%, -50%);
+        }
+
+        &.fb-advanced-modal-popup-right {
+            transform: translate(50%, -50%);
+        }
+
+        &.fb-advanced-modal-popup-zoom {
+            transform: translate(-50%, -50%) scale(0.7);
+        }
+
+        // Active state must be defined after variations to override their transforms
         &.active {
             opacity: 1;
             visibility: visible;
             pointer-events: auto;
+            // The !important ensures it correctly overrides any base transform regardless of load order, but positioning it last usually suffices. We'll use high specificity.
+            transform: translate(-50%, -50%);
         }
     }
+}
+
+.fb-modal-content-wrapper .fb-advanced-modal-popup-inner {
+    overflow: auto;
 }
 
 // Editor-specific styling
@@ -53,3 +87,40 @@
         position: absolute;
     }
 }
+
+// .fb-advanced-modal-popup.fb-advanced-modal-popup-left {
+//     animation: 3s slide-left;
+// }
+// .fb-advanced-modal-popup.fb-advanced-modal-popup-right {
+//     animation: 3s slide-right;
+// }
+// .fb-advanced-modal-popup.fb-advanced-modal-popup-fade {
+//     animation: fadeIn ease 3s;
+// }
+
+// @keyframes slide-left {
+//   from {
+//     margin-left: 100%;
+//   }
+//   to {
+//     margin-left: 0%;
+//   }
+// }
+
+// @keyframes slide-right {
+//   from {
+//     margin-left: -100%;
+//   }
+//   to {
+//     margin-left: 0%;
+//   }
+// }
+
+// @keyframes fadeIn{
+//   0% {
+//     opacity:0;
+//   }
+//   100% {
+//     opacity:1;
+//   }
+// }

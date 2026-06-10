@@ -30,6 +30,7 @@ import {
     TOGGLE_TYPES,
     ICON_POSITION,
     TOGGLE_BUTTON_ICON_ALIGN,
+    TEXT_ALIGN_JUSTIFY,
 } from "@Constants/fbConstants";
 import FBIconPicker from "../../components/icon-picker";
 import "./editor.scss";
@@ -58,6 +59,7 @@ const Inspector = ({ attributes, setAttributes }) => {
         toggleImageUrl,
         toggleImageAlt,
         toggleImageId,
+        toggleButtonAlignment,
         toggleButtonWidth,
         toggleButtonWidthUnits,
         toggleButtonText,
@@ -312,6 +314,13 @@ const Inspector = ({ attributes, setAttributes }) => {
         modalCloseIconWidthUnits,
         modalCloseIconHeight,
         modalCloseIconHeightUnits,
+        modalCloseIconPositionTop,
+        modalCloseIconPositionTopUnits,
+        modalCloseIconPositionRight,
+        modalCloseIconPositionRightUnits,
+        pageLoadDelay,
+        pageLoadCookieEnable,
+        pageLoadCookieExpiry,
     } = attributes;
 
     const deviceType = useDeviceType();
@@ -1316,7 +1325,57 @@ const Inspector = ({ attributes, setAttributes }) => {
                     onChange={(value) => setAttributes({ toggleType: value })}
                 />
                 
-                {toggleType == 'image' && (
+                {toggleType === 'page-load' && (
+                    <>
+                        <FB_Range
+                            min={0}
+                            max={60}
+                            label={__('Delay (seconds)', 'frontis-blocks')}
+                            rangeValue={{ Desktop: pageLoadDelay, Tablet: pageLoadDelay, Mobile: pageLoadDelay }}
+                            onChangeHandler={(val) => setAttributes({ pageLoadDelay: Number(val?.Desktop ?? val) })}
+                            deviceType={deviceType}
+                            units={{ Desktop: 's', Tablet: 's', Mobile: 's' }}
+                            setAttributes={setAttributes}
+                            rangeStep={0.5}
+                            resetFallbackValue={3}
+                            hideUnits={true}
+                        />
+                        <ToggleControl
+                            label={__('Enable Cookie (hide after shown)', 'frontis-blocks')}
+                            help={pageLoadCookieEnable
+                                ? __('Popup will not show again until cookie expires.', 'frontis-blocks')
+                                : __('Popup will show on every page load.', 'frontis-blocks')
+                            }
+                            checked={pageLoadCookieEnable}
+                            onChange={(val) => setAttributes({ pageLoadCookieEnable: val })}
+                        />
+                        {pageLoadCookieEnable && (
+                            <FB_Range
+                                min={1}
+                                max={365}
+                                label={__('Cookie Expiry (days)', 'frontis-blocks')}
+                                rangeValue={{ Desktop: pageLoadCookieExpiry, Tablet: pageLoadCookieExpiry, Mobile: pageLoadCookieExpiry }}
+                                onChangeHandler={(val) => setAttributes({ pageLoadCookieExpiry: Number(val?.Desktop ?? val) })}
+                                deviceType={deviceType}
+                                units={{ Desktop: 'd', Tablet: 'd', Mobile: 'd' }}
+                                setAttributes={setAttributes}
+                                rangeStep={1}
+                                resetFallbackValue={1}
+                                hideUnits={true}
+                            />
+                        )}
+                    </>
+                )}
+
+                {toggleType === 'scroll' && (
+                    <BaseControl>
+                        <p style={{ margin: 0, color: '#757575', fontSize: '12px' }}>
+                            {__('The popup will appear automatically when the user starts scrolling the page. No trigger button is needed.', 'frontis-blocks')}
+                        </p>
+                    </BaseControl>
+                )}
+
+                {toggleType === 'image' && (
                     <FB_ImageControl
                         globalImageUrl={toggleImageUrl}
                         setglobalImageUrl={(value) => setAttributes({ toggleImageUrl: value })}
@@ -1368,6 +1427,25 @@ const Inspector = ({ attributes, setAttributes }) => {
                                     </> 
                                 )}
                         </BaseControl>
+                        <BaseControl
+                            label={__("Alignment", "frontis-blocks")}
+                            id="fb-setting-text-alignment"
+                            className="fb-setting-text-alignment"
+                        >
+                            <ButtonGroup
+                                className="fb-setting-text-alignment-group-btn"
+                            >
+                                {TEXT_ALIGN_JUSTIFY.map((item, key) => (
+                                    <Button
+                                        key={key}
+                                        onClick={() => setAttributes({ toggleButtonAlignment: item.value })}
+                                        className={`fb-setting-text-alignment-single-btn ${toggleButtonAlignment === item.value ? 'active' : ''}`}
+                                    >
+                                        {item.label}
+                                    </Button>
+                                ))}
+                            </ButtonGroup>
+					    </BaseControl>
                     </>
 
                 )}
@@ -1768,7 +1846,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                     rangeStep={1}
                     resetFallbackValue={""}
                 />
-                 <FB_SwitcherControl
+                <FB_SwitcherControl
                     label={__("Icon Color", "frontis-blocks")}
                     globalSwitcher={modalCloseIconColorSwitcher}
                     setGlobalSwitcher={(value) => setAttributes({ modalCloseIconColorSwitcher: value })}
@@ -1789,7 +1867,32 @@ const Inspector = ({ attributes, setAttributes }) => {
                         setGlobalColor={(value) => setAttributes({ modalCloseIconHoverColor: value === undefined ? '' : value })}
                     />
                 )}
-
+                <FB_Range
+                    min={-100}
+                    max={100}
+                    label={__("Position Top", "frontis-blocks")}
+                    rangeValue={modalCloseIconPositionTop}
+                    onChangeHandler={(value) => setAttributes({ modalCloseIconPositionTop: value })}
+                    rangeUnitHandler={(value) => setAttributes({ modalCloseIconPositionTopUnits: value })}
+                    deviceType={deviceType}
+                    units={modalCloseIconPositionTopUnits}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={""}
+                />
+                <FB_Range
+                    min={-100}
+                    max={100}
+                    label={__("Position Right", "frontis-blocks")}
+                    rangeValue={modalCloseIconPositionRight}
+                    onChangeHandler={(value) => setAttributes({ modalCloseIconPositionRight: value })}
+                    rangeUnitHandler={(value) => setAttributes({ modalCloseIconPositionRightUnits: value })}
+                    deviceType={deviceType}
+                    units={modalCloseIconPositionRightUnits}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={""}
+                />
             </PanelBody>
 
             <PanelBody title={__("Overlay", "frontis-blocks")} initialOpen={false}>
