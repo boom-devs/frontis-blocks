@@ -37,42 +37,52 @@
         opacity: 0;
         visibility: hidden;
         pointer-events: none;
-        transition: opacity 0.3s ease, visibility 0.3s ease;
+        // Use transition on transform, opacity, and visibility for smooth 2-way animations
+        // transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.4s ease, visibility 0.4s ease;
 
+        // Animation variations (initial states before active)
+        &.fb-advanced-modal-popup-fade {
+            // Fade only, no transform change needed
+            transform: translate(-50%, -50%);
+        }
+
+        &.fb-advanced-modal-popup-top {
+            transform: translate(-50%, -150%);
+        }
+
+        &.fb-advanced-modal-popup-bottom {
+            transform: translate(-50%, 50%);
+        }
+
+        &.fb-advanced-modal-popup-left {
+            transform: translate(-150%, -50%);
+        }
+
+        &.fb-advanced-modal-popup-right {
+            transform: translate(50%, -50%);
+        }
+
+        &.fb-advanced-modal-popup-zoom {
+            transform: translate(-50%, -50%) scale(0.7);
+        }
+
+        // Active state must be defined after variations to override their transforms
         &.active {
             opacity: 1;
             visibility: visible;
             pointer-events: auto;
+            transform: translate(-50%, -50%);
         }
     }
 }
 
 // Editor-specific styling
-.block-editor-block-list__block .fb-advanced-modal-popup-block {
-    .fb-modal-overlay {
-        position: absolute;
-    }
-    .fb-advanced-modal-popup {
-        position: absolute;
-    }
-
-    // Add visual indicator for innerblocks area to easily detect them
-    .fb-advanced-modal-popup-inner-blocks {
-        min-height: 60px;
-        border: 2px dashed transparent;
-        border-radius: 6px;
-        transition: all 0.3s ease;
-        
-        &.is-empty {
-            border-color: #cbd5e1;
-            background-color: #f8fafc;
-            padding: 20px;
-        }
-        
-        &:not(.is-empty) {
-            &:hover {
-                border-color: #e2e8f0;
-            }
-        }
+.fb-advanced-modal-popup-inner.block-editor-block-list__layout {
+    min-height: 60px;
+    display: flex;
+    
+    .block-list-appender.wp-block {
+        width: 100%;
+        padding: 0 12px;
     }
 }

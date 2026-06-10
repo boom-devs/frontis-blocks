@@ -27,7 +27,11 @@ const attributes = {
 		type: 'string',
 		default: ''
 	}, 
-    /** Start Button */
+    /** Start toggle Button */
+    toggleButtonAlignment: {
+        type: "string",
+        default: "left",
+    },
     toggleButtonTextSwitcher: {
         type: "boolean",
         default: true,
@@ -80,21 +84,18 @@ const attributes = {
 		type: 'string',
 		default: 'button'
 	},
-	toggleText: {
-		type: 'string',
-		default: 'Click Me'
+	/** Page Load Trigger */
+	pageLoadDelay: {
+		type: 'number',
+		default: 3,
 	},
-	toggleIcon: {
-		type: 'string',
-		default: 'dashicons dashicons-menu'
+	pageLoadCookieEnable: {
+		type: 'boolean',
+		default: false,
 	},
-	toggleImage: {
-		type: 'object',
-		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
-		}
+	pageLoadCookieExpiry: {
+		type: 'number',
+		default: 1,
 	},
 	/**Toggle Button*/
     toggleButtonWidth: {
@@ -560,47 +561,11 @@ const attributes = {
 		type: 'string',
 		default: 'pattern'
 	},
-	contentImage: {
-		type: 'object',
-		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
-		}
-	},
-    contentImageUrl : {
-		type: 'string',
-		default: '',
-	},
-	contentImageId: {
-		type: 'string',
-		default: '',
-	},
-	contentImageAlt: {
-		type: 'string',
-		default: ''
-	}, 
-	contentVideoUrl: {
-		type: 'string',
-		default: ''
-	},
-	contentYoutubeUrl: {
-		type: 'string',
-		default: ''
-	},
-	contentVimeoUrl: {
-		type: 'string',
-		default: ''
-	},
-	contentMapUrl: {
-		type: 'string',
-		default: ''
-	},
 
 	modalPopupPanelWidth: {
         type: 'object',
         default: {
-            Desktop: '',
+            Desktop: '600',
             Tablet: '',
             Mobile: ''
         }
@@ -655,6 +620,38 @@ const attributes = {
         }
     },
     modalCloseIconHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	modalCloseIconPositionTop: {
+        type: 'object',
+        default: {
+            Desktop: '-54',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    modalCloseIconPositionTopUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	modalCloseIconPositionRight: {
+        type: 'object',
+        default: {
+            Desktop: '-54',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    modalCloseIconPositionRightUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',

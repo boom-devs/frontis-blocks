@@ -35,19 +35,10 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         toggleButtonText,
         modalCloseIcon,
         toggleButtonTextSwitcher,
-        toggleButtonIconImageUrl,
 
         position,
         toggleType,
-        toggleText,
-        toggleIcon,
-        toggleImage,
         contentType,
-        contentImage,
-        contentVideoUrl,
-        contentYoutubeUrl,
-        contentVimeoUrl,
-        contentMapUrl,
         modalPopupGlobalWraperClass,
         modalPopupGlobalWraperID,
         modalPopupDesktopSwitcher,
@@ -86,14 +77,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         });
     };
 
-    // Content image handler
-    const onSelectContentImage = (media) => {
-        setAttributes({
-            contentImageUrl: media.url,
-            contentImageAlt: media.alt || '',
-            contentImageId: media.id,
-        });
-    };
+
 
     const patternContent = useSelect(select => {
         if (!selectedTemplate || contentType !== 'pattern') return null;
@@ -159,7 +143,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
     const isCustomContent = contentType === 'custom';
     const innerBlocksProps = useInnerBlocksProps(
         {
-            className: 'fb-advanced-modal-popup-inner-blocks',
+            className: 'fb-advanced-modal-popup-inner',
         },
         {
             templateLock: isCustomContent ? false : 'all',
