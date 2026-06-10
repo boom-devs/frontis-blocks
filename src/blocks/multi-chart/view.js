@@ -1,3 +1,5 @@
+import Chart from "chart.js/auto";
+
 (function ($) {
 	"use strict";
 
@@ -29,15 +31,8 @@
 		}
 
 		// Read config from data attribute
-		let config = $wrapper.attr("data-chart-config");
-		if (typeof config === "string") {
-			try {
-				config = JSON.parse(config);
-			} catch (e) {
-				return;
-			}
-		}
-		if (!config) return;
+		const config = $wrapper.data("chart-config");
+		if (!config || typeof config !== "object") return;
 
 		// Helpers
 		const hexToRgba = (hex, opacity) => {
@@ -53,12 +48,14 @@
 		// Chart Type Flags
 		let chartType = config.type;
 		const isArea = chartType === "areaChart";
+		const isHorizontal = chartType === "horizontalBar";
 		const isCircular = ["pie", "doughnut", "polarArea"].includes(chartType);
 		const isRadar = chartType === "radar";
-		const isBar = chartType === "bar";
+		const isBar = ["bar", "horizontalBar", "waterfall"].includes(chartType);
 		const isLine = chartType === "line";
 
 		if (isArea) chartType = "line";
+		if (isHorizontal) chartType = "bar";
 
 		// Typography settings
 		const xFont = {
@@ -74,74 +71,32 @@
 
 		// Build Datasets
 		const datasets = [];
-		if (isCircular) {
-			datasets.push({
-				data: config.datasets.map((d) => d.values[0] || 0),
-				backgroundColor: config.datasets.map((d) => d.color || "#3b82f6"),
-				borderColor: "#ffffff",
-				borderWidth: 3,
-				hoverOffset: 8,
-			});
-		} else {
-			config.datasets.forEach((series) => {
-				const baseColor = series.color || "#3b82f6";
-				const ds = {
-					label: series.name || "Content",
-					data: series.values || [],
-					backgroundColor: baseColor,
-					borderColor: baseColor,
-					borderWidth: 2,
-				};
+		(config.datasets || []).forEach((series) => {
+			const baseColor = series.color || "#3b82f6";
+			const ds = {
+				label: series.name || "Series",
+				data: series.values || [],
+				backgroundColor:
+					isArea || isRadar ? hexToRgba(baseColor, 0.2) : baseColor,
+				borderColor: baseColor,
+				fill: isArea,
+				borderWidth: 2,
+				tension: isLine || isArea || isRadar ? 0.4 : 0,
+				pointRadius: isBar ? 0 : 3,
+			};
 
-				if (isArea) {
-					const canvasH = ctxEl.clientHeight || config.height || 300;
-					const grad = ctx.createLinearGradient(0, 0, 0, canvasH);
-					grad.addColorStop(0, hexToRgba(baseColor, 0.35));
-					grad.addColorStop(1, hexToRgba(baseColor, 0.0));
-					ds.backgroundColor = grad;
-					ds.fill = true;
-					ds.tension = 0.4;
-					ds.pointRadius = 0;
-					ds.pointHoverRadius = 4;
-					ds.borderWidth = 2.5;
-				} else if (isLine) {
-					ds.tension = 0.4;
-					ds.pointRadius = 4;
-					ds.pointBackgroundColor = baseColor;
-					ds.pointBorderColor = "#fff";
-					ds.pointBorderWidth = 2;
-					ds.pointHoverRadius = 6;
-					ds.fill = false;
-				} else if (isRadar) {
-					ds.backgroundColor = hexToRgba(baseColor, 0.18);
-					ds.borderColor = baseColor;
-					ds.borderWidth = 2;
-					ds.pointRadius = 4;
-					ds.pointBackgroundColor = baseColor;
-					ds.pointBorderColor = "#fff";
-					ds.pointBorderWidth = 2;
-				} else if (isBar) {
-					ds.borderSkipped = false;
-					ds.maxBarThickness = 28;
-					ds.barThickness = "flex";
-					if (config.bar_variant === "rounded_pill") {
-						ds.borderRadius = 999;
-						ds.borderWidth = 0;
-					} else {
-						ds.borderRadius = 8;
-					}
-				}
-				datasets.push(ds);
-			});
-		}
+			datasets.push(ds);
+		});
 
 		// Options
 		const showGrid = config.show_grid !== "no";
+		const isStacked = isBar && config.bar_variant === "stacked";
 		const gridColor = config.grid_color || "rgba(148,163,184,0.15)";
 
 		const options = {
 			responsive: true,
 			maintainAspectRatio: false,
+			indexAxis: config.index_axis || "x",
 			animation: { duration: 600, easing: "easeInOutQuart" },
 			plugins: {
 				legend: { display: false },
@@ -187,7 +142,8 @@
 		} else if (!isCircular) {
 			options.scales = {
 				y: {
-					stacked: isBar && config.bar_variant === "stacked",
+					beginAtZero: true,
+					stacked: isStacked,
 					grid: {
 						display: isArea ? false : showGrid,
 						color: gridColor,
@@ -201,7 +157,7 @@
 					},
 				},
 				x: {
-					stacked: isBar && config.bar_variant === "stacked",
+					stacked: isStacked,
 					grid: {
 						display: isArea ? false : showGrid,
 						color: gridColor,
@@ -228,9 +184,7 @@
 		window.fbCharts[chartId] = new Chart(ctx, {
 			type: chartType,
 			data: {
-				labels: isCircular
-					? config.datasets.map((d) => d.name)
-					: config.labels || [],
+				labels: config.labels || [],
 				datasets: datasets,
 			},
 			options: options,

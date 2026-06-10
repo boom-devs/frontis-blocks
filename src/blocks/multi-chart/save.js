@@ -36,13 +36,14 @@ export default function save({ attributes }) {
 
 	const chartConfig = {
 		type: chartType,
+		index_axis: chartType === "horizontalBar" ? "y" : "x",
 		height: chartHeight,
 		bar_variant: barVariant,
 		labels: chartLabels ? chartLabels.split(",").map((l) => l.trim()) : [],
-		datasets: chartDatasets.map((ds) => ({
-			name: ds.series_name,
+		datasets: (chartDatasets || []).map((ds) => ({
+			name: ds.series_name || __("Series", "frontis-blocks"),
 			values: ds.values ? ds.values.split(",").map((v) => parseFloat(v)) : [],
-			color: ds.color,
+			color: ds.color || "#3b82f6",
 		})),
 		show_grid: showGrid ? "yes" : "no",
 		grid_color: gridColor,
