@@ -902,8 +902,10 @@ export default function Inspector({ attributes, setAttributes }) {
       animationInterval: 0,
       iconColor: '',
       hoverBackgroundColor: '',
-      markerSize: imageHotspotMarkerSize,
-      markerSizeUnits: imageHotspotMarkerSizeUnits,
+      // markerSize: imageHotspotMarkerSize,
+      // markerSizeUnits: imageHotspotMarkerSizeUnits,
+      markerSize: imageHotspotMarkerSize || 30,
+      markerSizeUnits: imageHotspotMarkerSizeUnits || 'px',
       markerHoverSize: imageHotspotMarkerHoverSize,
       markerHoverSizeUnits: imageHotspotMarkerHoverSizeUnits,
       popoverPosition: 'top',
@@ -1987,47 +1989,6 @@ export default function Inspector({ attributes, setAttributes }) {
                           <h3 className="fb-hotspot-section-heading">
                             {__('Styling', 'frontis-blocks')}
                           </h3>
-                          <FB_SwitcherControl
-                            label={__("Marker Size", "frontis-blocks")}
-                            globalSwitcher={imageHotspotMarkerSizeSwitcher}
-                            setGlobalSwitcher={(value) => setAttributes({ imageHotspotMarkerSizeSwitcher: value })}
-                          />
-
-                          {imageHotspotMarkerSizeSwitcher === 'normal' && (
-                            <FB_Range
-                              label={__("Size", "frontis-blocks")}
-                              rangeValue={hotspot.markerSize || imageHotspotMarkerSize}
-                              onChangeHandler={(value) => updateHotspot(hotspot.id, 'markerSize', value)}
-                              rangeUnitHandler={(unit) => updateHotspot(hotspot.id, 'markerSizeUnits', {
-                                ...(hotspot.markerSizeUnits || imageHotspotMarkerSizeUnits),
-                                [deviceType]: unit
-                              })}
-                              deviceType={deviceType}
-                              units={hotspot.markerSizeUnits || imageHotspotMarkerSizeUnits}
-                              min={10}
-                              max={100}
-                              rangeStep={1}
-                              resetFallbackValue={35}
-                            />
-                          )}
-
-                          {imageHotspotMarkerSizeSwitcher === 'hover' && (
-                            <FB_Range
-                              label={__("Hover Size", "frontis-blocks")}
-                              rangeValue={hotspot.markerHoverSize || imageHotspotMarkerHoverSize}
-                              onChangeHandler={(value) => updateHotspot(hotspot.id, 'markerHoverSize', value)}
-                              rangeUnitHandler={(unit) => updateHotspot(hotspot.id, 'markerHoverSizeUnits', {
-                                ...(hotspot.markerHoverSizeUnits || imageHotspotMarkerHoverSizeUnits),
-                                [deviceType]: unit
-                              })}
-                              deviceType={deviceType}
-                              units={hotspot.markerHoverSizeUnits || imageHotspotMarkerHoverSizeUnits}
-                              min={10}
-                              max={100}
-                              rangeStep={1}
-                              resetFallbackValue={40}
-                            />
-                          )}
 
                           <FB_SwitcherControl
                             label={__("Marker Color", "frontis-blocks")}
@@ -2237,6 +2198,50 @@ export default function Inspector({ attributes, setAttributes }) {
         )}
 
 
+      </PanelBody>
+
+      <PanelBody title={__("Marker Style", "frontis-blocks")}
+        initialOpen={false}
+      >
+
+        <FB_SwitcherControl
+          label={__("Marker Size", "frontis-blocks")}
+          globalSwitcher={imageHotspotMarkerSizeSwitcher}
+          setGlobalSwitcher={(value) => setAttributes({ imageHotspotMarkerSizeSwitcher: value })}
+        />
+
+        {imageHotspotMarkerSizeSwitcher === 'normal' && (
+          <FB_Range
+            min={0}
+            max={imageHotspotMarkerSizeUnits[deviceType] === '%' ? 100 : 1000}
+            label={__("Size", "frontis-blocks")}
+            rangeValue={imageHotspotMarkerSize}
+            onChangeHandler={(value) => setAttributes({ imageHotspotMarkerSize: value })}
+            rangeUnitHandler={(value) => setAttributes({ imageHotspotMarkerSizeUnits: value })}
+            deviceType={deviceType}
+            units={imageHotspotMarkerSizeUnits}
+            setAttributes={setAttributes}
+            rangeStep={1}
+            resetFallbackValue={""}
+          />
+        )}
+
+        {imageHotspotMarkerSizeSwitcher === 'hover' && (
+          <FB_Range
+            min={0}
+            max={imageHotspotMarkerHoverSizeUnits[deviceType] === '%' ? 100 : 1000}
+            label={__("Size", "frontis-blocks")}
+            rangeValue={imageHotspotMarkerHoverSize}
+            onChangeHandler={(value) => setAttributes({ imageHotspotMarkerHoverSize: value })}
+            rangeUnitHandler={(value) => setAttributes({ imageHotspotMarkerHoverSizeUnits: value })}
+            deviceType={deviceType}
+            units={imageHotspotMarkerHoverSizeUnits}
+            setAttributes={setAttributes}
+            rangeStep={1}
+            resetFallbackValue={""}
+          />
+        )}
+        
       </PanelBody>
 
       <PanelBody title={__("Title", "frontis-blocks")} initialOpen={false}>
