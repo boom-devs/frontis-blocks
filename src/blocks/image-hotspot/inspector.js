@@ -326,6 +326,9 @@ export default function Inspector({ attributes, setAttributes }) {
     imageHotspotSocialLinksIconSize,
     imageHotspotSocialLinksIconSizeUnits,
 
+    imageHotspotPopoverWidth,
+    imageHotspotPopoverWidthUnits,
+
     /** Start Hotspot Title Padding */
     imageHotspotTitlePaddingUnits,
     imageHotspotTitlePaddingDesktop,
@@ -400,6 +403,10 @@ export default function Inspector({ attributes, setAttributes }) {
     imageHotspotsPopoverBoxShadowHoverValues,
     imageHotspotsPopoverGlobalZIndex,
     /** End Hotspot Popover Box Shadow */
+
+    imageHotspotsPopoverColorSwitcher,
+    imageHotspotsPopoverColor,
+    imageHotspotsPopoverHoverColor,
 
 
   } = attributes;
@@ -2082,35 +2089,52 @@ export default function Inspector({ attributes, setAttributes }) {
           setAttributes={setAttributes}
         />
 
-        <FB_BackgroundColorControl
-          label={__("Background Color", "frontis-blocks")}
-          bgColorSwitcher={imageHotspotsPopoverBgColorSwitcher}
-          setBgColorSwitcher={(value) => setAttributes({ imageHotspotsPopoverBgColorSwitcher: value })}
-
-          normalBackgroundType={imageHotspotsPopoverNormalBackgroundType}
-          setNormalBackgroundType={(value) => setAttributes({ imageHotspotsPopoverNormalBackgroundType: value })}
-          normalClassicColor={imageHotspotsPopoverNormalClassicColor}
-          setNormalClassicColor={(value) => setAttributes({ imageHotspotsPopoverNormalClassicColor: value === undefined ? '' : value })}
-          normalGradientColor={imageHotspotsPopoverNormalGradientColor}
-          setNormalGradientColor={(value) => setAttributes({ imageHotspotsPopoverNormalGradientColor: value ?? '' })}
-          normalCustomGradientSwitcher={imageHotspotsPopoverNormalCustomGradientSwitcher}
-          setNormalCustomGradientSwitcher={(value) => setAttributes({ imageHotspotsPopoverNormalCustomGradientSwitcher: value })}
-          normalCustomGradientInputValue={imageHotspotsPopoverNormalCustomGradientInputValue}
-          setNormalCustomGradientInputValue={(value) => setAttributes({ imageHotspotsPopoverNormalCustomGradientInputValue: value })}
-
-          hoverBackgroundType={imageHotspotsPopoverHoverBackgroundType}
-          setHoverBackgroundType={(value) => setAttributes({ imageHotspotsPopoverHoverBackgroundType: value })}
-          hoverClassicColor={imageHotspotsPopoverHoverClassicColor}
-          setHoverClassicColor={(value) => setAttributes({ imageHotspotsPopoverHoverClassicColor: value === undefined ? '' : value })}
-          hoverGradientColor={imageHotspotsPopoverHoverGradientColor}
-          setHoverGradientColor={(value) => setAttributes({ imageHotspotsPopoverHoverGradientColor: value ?? '' })}
-          hoverCustomGradientSwitcher={imageHotspotsPopoverHoverCustomGradientSwitcher}
-          setHoverCustomGradientSwitcher={(value) => setAttributes({ imageHotspotsPopoverHoverCustomGradientSwitcher: value })}
-          hoverCustomGradientInputValue={imageHotspotsPopoverHoverCustomGradientInputValue}
-          setHoverCustomGradientInputValue={(value) => setAttributes({ imageHotspotsPopoverHoverCustomGradientInputValue: value })}
-
-          isBackgroundImage={false}
+        <FB_Range
+          min={0}
+          max={imageHotspotPopoverWidthUnits[deviceType] === '%' ? 100 : 1000}
+          label={__("Width", "frontis-blocks")}
+          rangeValue={imageHotspotPopoverWidth}
+          onChangeHandler={(value) => setAttributes({ imageHotspotPopoverWidth: value })}
+          rangeUnitHandler={(value) => setAttributes({ imageHotspotPopoverWidthUnits: value })}
+          deviceType={deviceType}
+          units={imageHotspotPopoverWidthUnits}
+          setAttributes={setAttributes}
+          rangeStep={1}
+          resetFallbackValue={""}
         />
+
+        <FB_SwitcherControl
+          label={__("Background Color", "frontis-blocks")}
+          globalSwitcher={imageHotspotsPopoverColorSwitcher}
+          setGlobalSwitcher={(value) =>
+            setAttributes({
+              imageHotspotsPopoverColorSwitcher: value,
+            })
+          }
+        />
+
+        {imageHotspotsPopoverColorSwitcher === "normal" && (
+          <FB_ColorControl
+            label={__("Normal Color", "frontis-blocks")}
+            globalColor={imageHotspotsPopoverColor}
+            setGlobalColor={(value) =>
+              setAttributes({ imageHotspotsPopoverColor: value })
+            }
+          />
+        )}
+
+        {imageHotspotsPopoverColorSwitcher === "hover" && (
+          <FB_ColorControl
+            label={__("Hover Color", "frontis-blocks")}
+            globalColor={imageHotspotsPopoverHoverColor}
+            setGlobalColor={(value) =>
+              setAttributes({
+                imageHotspotsPopoverHoverColor: value,
+              })
+            }
+          />
+        )}
+
 
         <SelectControl
           label={__("Border Style", "frontis-blocks")}
@@ -2241,7 +2265,7 @@ export default function Inspector({ attributes, setAttributes }) {
             resetFallbackValue={""}
           />
         )}
-        
+
       </PanelBody>
 
       <PanelBody title={__("Title", "frontis-blocks")} initialOpen={false}>
@@ -2691,16 +2715,10 @@ export default function Inspector({ attributes, setAttributes }) {
           deviceType={deviceType}
           positionType={imageHotspotPositionType}
           setPositionType={(value) => setAttributes({ imageHotspotPositionType: value })}
-
           HZOrientationType={imageHotspotHZOrientationType}
-          setHZOrientationType={(value) =>
-            setAttributes({ imageHotspotHZOrientationType: value })
-          }
+          setHZOrientationType={(value) => setAttributes({ imageHotspotHZOrientationType: value })}
           VROrientationType={imageHotspotVROrientationType}
-          setVROrientationType={(value) =>
-            setAttributes({ imageHotspotVROrientationType: value })
-          }
-
+          setVROrientationType={(value) => setAttributes({ imageHotspotVROrientationType: value })}
           HZLeftOffset={imageHotspotHZLeftOffset}
           setHZLeftOffset={(value) => setAttributes({ imageHotspotHZLeftOffset: value })}
           HZLeftOffsetUnits={imageHotspotHZLeftOffsetUnits}

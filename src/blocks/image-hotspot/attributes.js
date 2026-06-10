@@ -1925,96 +1925,6 @@ const attributes = {
 		default: "",
 	},
 
-	/** Start Background */
-	imageHotspotsPopoverBgColorSwitcher: {
-		type: "string",
-		default: "normal"
-	},
-	imageHotspotsPopoverNormalBackgroundType: {
-		type: "string",
-		default: "classic",
-	},
-	imageHotspotsPopoverNormalClassicColor: {
-		type: "string",
-		default: "#399CFF",
-	},
-	imageHotspotsPopoverNormalGradientColor: {
-		type: "string",
-		default: "",
-	},
-	imageHotspotsPopoverNormalCustomGradientSwitcher: {
-		type: "boolean",
-		default: false,
-	},
-	imageHotspotsPopoverNormalCustomGradientInputValue: {
-		type: "string",
-		default: "",
-	},
-
-	imageHotspotsPopoverHoverBackgroundType: {
-		type: "string",
-		default: "classic",
-	},
-	imageHotspotsPopoverHoverClassicColor: {
-		type: "string",
-		default: "",
-	},
-	imageHotspotsPopoverHoverGradientColor: {
-		type: "string",
-		default: "",
-	},
-	imageHotspotsPopoverHoverCustomGradientSwitcher: {
-		type: "boolean",
-		default: false,
-	},
-	imageHotspotsPopoverHoverCustomGradientInputValue: {
-		type: "string",
-		default: "",
-	},
-	/** End Background */
-
-	/** Start Padding */
-	imageHotspotsPopoverPaddingUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
-	},
-	imageHotspotsPopoverPaddingDesktop: {
-		type: "object",
-		default: {
-			top: '10',
-			bottom: '10',
-			left: '10',
-			right: '10',
-		},
-	},
-	imageHotspotsPopoverPaddingTablet: {
-		type: "object",
-		default: {
-			top: '10',
-			bottom: '10',
-			left: '10',
-			right: '10',
-		},
-	},
-	imageHotspotsPopoverPaddingMobile: {
-		type: "object",
-		default: {
-			top: '10',
-			bottom: '10',
-			left: '10',
-			right: '10',
-		},
-	},
-	imageHotspotsPopoverPaddingLink: {
-		type: "boolean",
-		default: true
-	},
-	/** End Padding */
-
 	/** Start Margin */
 	imageHotspotsPopoverMarginUnits: {
 		type: 'object',
@@ -2180,8 +2090,6 @@ const attributes = {
 	},
 	/** End Box Shadow */
 
-
-
 	/** Start Hotspot Popover Padding (new) */
 	imageHotspotsPopoverPaddingUnits: {
 		type: "object",
@@ -2194,28 +2102,28 @@ const attributes = {
 	imageHotspotsPopoverPaddingDesktop: {
 		type: "object",
 		default: {
-			top: '',
-			right: '',
-			bottom: '',
-			left: ''
+			top: '12',
+			right: '12',
+			bottom: '12',
+			left: '12'
 		},
 	},
 	imageHotspotsPopoverPaddingTablet: {
 		type: "object",
 		default: {
-			top: '',
-			right: '',
-			bottom: '',
-			left: ''
+			top: '12',
+			right: '12',
+			bottom: '12',
+			left: '12'
 		},
 	},
 	imageHotspotsPopoverPaddingMobile: {
 		type: "object",
 		default: {
-			top: '',
-			right: '',
-			bottom: '',
-			left: ''
+			top: '12',
+			right: '12',
+			bottom: '12',
+			left: '12'
 		},
 	},
 	imageHotspotsPopoverPaddingLink: {
@@ -2265,53 +2173,6 @@ const attributes = {
 		default: true,
 	},
 	/** End Hotspot Popover Margin (new) */
-
-	/** Start Hotspot Popover Background (new) */
-	imageHotspotsPopoverBgColorSwitcher: {
-		type: "string",
-		default: "normal",
-	},
-	imageHotspotsPopoverNormalBackgroundType: {
-		type: "string",
-		default: "classic",
-	},
-	imageHotspotsPopoverNormalClassicColor: {
-		type: "string",
-		default: "#ffffff",
-	},
-	imageHotspotsPopoverNormalGradientColor: {
-		type: "string",
-		default: "",
-	},
-	imageHotspotsPopoverNormalCustomGradientSwitcher: {
-		type: "boolean",
-		default: false,
-	},
-	imageHotspotsPopoverNormalCustomGradientInputValue: {
-		type: "string",
-		default: "",
-	},
-	imageHotspotsPopoverHoverBackgroundType: {
-		type: "string",
-		default: "classic",
-	},
-	imageHotspotsPopoverHoverClassicColor: {
-		type: "string",
-		default: "",
-	},
-	imageHotspotsPopoverHoverGradientColor: {
-		type: "string",
-		default: "",
-	},
-	imageHotspotsPopoverHoverCustomGradientSwitcher: {
-		type: "boolean",
-		default: false,
-	},
-	imageHotspotsPopoverHoverCustomGradientInputValue: {
-		type: "string",
-		default: "",
-	},
-	/** End Hotspot Popover Background (new) */
 
 	/** Start Hotspot Popover Border (new) */
 	imageHotspotsPopoverBorder: {
@@ -2371,6 +2232,19 @@ const attributes = {
 	},
 	/** End Hotspot Popover Border (new) */
 
+	imageHotspotsPopoverColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	imageHotspotsPopoverColor: {
+		type: "string",
+		default: "#FFFFFF",
+	},
+	imageHotspotsPopoverHoverColor: {
+		type: "string",
+		default: "",
+	},
+
 	/** Start Hotspot Popover Border Radius (new) */
 	imageHotspotsPopoverBorderRadiusUnits: {
 		type: "object",
@@ -2383,28 +2257,28 @@ const attributes = {
 	imageHotspotsPopoverBorderRadiusDesktop: {
 		type: "object",
 		default: {
-			top: '',
-			right: '',
-			bottom: '',
-			left: ''
+			top: '10',
+			right: '10',
+			bottom: '10',
+			left: '10'
 		},
 	},
 	imageHotspotsPopoverBorderRadiusTablet: {
 		type: "object",
 		default: {
-			top: '',
-			right: '',
-			bottom: '',
-			left: ''
+			top: '10',
+			right: '10',
+			bottom: '10',
+			left: '10'
 		},
 	},
 	imageHotspotsPopoverBorderRadiusMobile: {
 		type: "object",
 		default: {
-			top: '',
-			right: '',
-			bottom: '',
-			left: ''
+			top: '10',
+			right: '10',
+			bottom: '10',
+			left: '10'
 		},
 	},
 	imageHotspotsPopoverBorderRadiusLink: {
@@ -2426,10 +2300,6 @@ const attributes = {
 		type: "string",
 		default: "",
 	},
-	// imageHotspotsPopoverGlobalZIndex: {
-	// 	type: "number",
-	// 	default: 200,
-	// },
 	/** End Hotspot Popover Box Shadow (new) */
 
 

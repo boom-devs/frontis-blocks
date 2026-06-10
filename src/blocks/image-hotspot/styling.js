@@ -312,6 +312,10 @@ const generateImageHotspotStyle = (attributes) => {
         imageHotspotsPopoverGlobalZIndex,
         /** End Hotspot Popover Box Shadow */
 
+        imageHotspotsPopoverColorSwitcher,
+        imageHotspotsPopoverColor,
+        imageHotspotsPopoverHoverColor,
+
     } = attributes;
 
     // // Marker border width
@@ -363,10 +367,6 @@ const generateImageHotspotStyle = (attributes) => {
     const popoverPaddingTablet = `${imageHotspotsPopoverPaddingTablet?.top}${imageHotspotsPopoverPaddingUnits?.Tablet} ${imageHotspotsPopoverPaddingTablet?.right}${imageHotspotsPopoverPaddingUnits?.Tablet} ${imageHotspotsPopoverPaddingTablet?.bottom}${imageHotspotsPopoverPaddingUnits?.Tablet} ${imageHotspotsPopoverPaddingTablet?.left}${imageHotspotsPopoverPaddingUnits?.Tablet}`;
     const popoverPaddingMobile = `${imageHotspotsPopoverPaddingMobile?.top}${imageHotspotsPopoverPaddingUnits?.Mobile} ${imageHotspotsPopoverPaddingMobile?.right}${imageHotspotsPopoverPaddingUnits?.Mobile} ${imageHotspotsPopoverPaddingMobile?.bottom}${imageHotspotsPopoverPaddingUnits?.Mobile} ${imageHotspotsPopoverPaddingMobile?.left}${imageHotspotsPopoverPaddingUnits?.Mobile}`;
 
-    const popoverMarginDesktop = `${imageHotspotsPopoverMarginDesktop?.top}${imageHotspotsPopoverMarginUnits?.Desktop} ${imageHotspotsPopoverMarginDesktop?.right}${imageHotspotsPopoverMarginUnits?.Desktop} ${imageHotspotsPopoverMarginDesktop?.bottom}${imageHotspotsPopoverMarginUnits?.Desktop} ${imageHotspotsPopoverMarginDesktop?.left}${imageHotspotsPopoverMarginUnits?.Desktop}`;
-    const popoverMarginTablet = `${imageHotspotsPopoverMarginTablet?.top}${imageHotspotsPopoverMarginUnits?.Tablet} ${imageHotspotsPopoverMarginTablet?.right}${imageHotspotsPopoverMarginUnits?.Tablet} ${imageHotspotsPopoverMarginTablet?.bottom}${imageHotspotsPopoverMarginUnits?.Tablet} ${imageHotspotsPopoverMarginTablet?.left}${imageHotspotsPopoverMarginUnits?.Tablet}`;
-    const popoverMarginMobile = `${imageHotspotsPopoverMarginMobile?.top}${imageHotspotsPopoverMarginUnits?.Mobile} ${imageHotspotsPopoverMarginMobile?.right}${imageHotspotsPopoverMarginUnits?.Mobile} ${imageHotspotsPopoverMarginMobile?.bottom}${imageHotspotsPopoverMarginUnits?.Mobile} ${imageHotspotsPopoverMarginMobile?.left}${imageHotspotsPopoverMarginUnits?.Mobile}`;
-
     const imageBorderWidthDesktop = `${imageHotspotImageBorderWidth?.top}${imageHotspotImageBorderWidthUnits?.Desktop} ${imageHotspotImageBorderWidth?.right}${imageHotspotImageBorderWidthUnits?.Desktop} ${imageHotspotImageBorderWidth?.bottom}${imageHotspotImageBorderWidthUnits?.Desktop} ${imageHotspotImageBorderWidth?.left}${imageHotspotImageBorderWidthUnits?.Desktop}`;
     const imageBorderWidthTablet = `${imageHotspotImageBorderWidth?.top}${imageHotspotImageBorderWidthUnits?.Tablet} ${imageHotspotImageBorderWidth?.right}${imageHotspotImageBorderWidthUnits?.Tablet} ${imageHotspotImageBorderWidth?.bottom}${imageHotspotImageBorderWidthUnits?.Tablet} ${imageHotspotImageBorderWidth?.left}${imageHotspotImageBorderWidthUnits?.Tablet}`;
     const imageBorderWidthMobile = `${imageHotspotImageBorderWidth?.top}${imageHotspotImageBorderWidthUnits?.Mobile} ${imageHotspotImageBorderWidth?.right}${imageHotspotImageBorderWidthUnits?.Mobile} ${imageHotspotImageBorderWidth?.bottom}${imageHotspotImageBorderWidthUnits?.Mobile} ${imageHotspotImageBorderWidth?.left}${imageHotspotImageBorderWidthUnits?.Mobile}`;
@@ -375,19 +375,14 @@ const generateImageHotspotStyle = (attributes) => {
     const imageBorderRadiusTablet = `${imageHotspotImageBorderRadius?.top}${imageHotspotImageBorderRadiusUnits?.Tablet} ${imageHotspotImageBorderRadius?.right}${imageHotspotImageBorderRadiusUnits?.Tablet} ${imageHotspotImageBorderRadius?.bottom}${imageHotspotImageBorderRadiusUnits?.Tablet} ${imageHotspotImageBorderRadius?.left}${imageHotspotImageBorderRadiusUnits?.Tablet}`;
     const imageBorderRadiusMobile = `${imageHotspotImageBorderRadius?.top}${imageHotspotImageBorderRadiusUnits?.Mobile} ${imageHotspotImageBorderRadius?.right}${imageHotspotImageBorderRadiusUnits?.Mobile} ${imageHotspotImageBorderRadius?.bottom}${imageHotspotImageBorderRadiusUnits?.Mobile} ${imageHotspotImageBorderRadius?.left}${imageHotspotImageBorderRadiusUnits?.Mobile}`;
 
-    // Popover width
-    const popoverWidthDesktop = `${imageHotspotPopoverWidth?.top}${imageHotspotPopoverWidthUnits?.Desktop} ${imageHotspotPopoverWidth?.right}${imageHotspotPopoverWidthUnits?.Desktop} ${imageHotspotPopoverWidth?.bottom}${imageHotspotPopoverWidthUnits?.Desktop} ${imageHotspotPopoverWidth?.left}${imageHotspotPopoverWidthUnits?.Desktop}`;
-    const popoverWidthTablet = `${imageHotspotPopoverWidth?.top}${imageHotspotPopoverWidthUnits?.Tablet} ${imageHotspotPopoverWidth?.right}${imageHotspotPopoverWidthUnits?.Tablet} ${imageHotspotPopoverWidth?.bottom}${imageHotspotPopoverWidthUnits?.Tablet} ${imageHotspotPopoverWidth?.left}${imageHotspotPopoverWidthUnits?.Tablet}`;
-    const popoverWidthMobile = `${imageHotspotPopoverWidth?.top}${imageHotspotPopoverWidthUnits?.Mobile} ${imageHotspotPopoverWidth?.right}${imageHotspotPopoverWidthUnits?.Mobile} ${imageHotspotPopoverWidth?.bottom}${imageHotspotPopoverWidthUnits?.Mobile} ${imageHotspotPopoverWidth?.left}${imageHotspotPopoverWidthUnits?.Mobile}`;
-
     // Popover border Radius
-    const popoverBorderRadiusDesktop = `${imageHotspotsPopoverBorderRadiusDesktop?.top}${imageHotspotsPopoverBorderRadiusUnits?.Desktop} ${imageHotspotsPopoverBorderRadiusDesktop?.right}${imageHotspotsPopoverBorderRadiusUnits?.Desktop} ${imageHotspotsPopoverBorderRadiusDesktop?.bottom}${imageHotspotsPopoverBorderRadiusUnits?.Desktop} ${imageHotspotsPopoverBorderRadiusDesktop?.left}${imageHotspotsPopoverBorderRadiusUnits?.Desktop}`;
-    const popoverBorderRadiusTablet = `${imageHotspotsPopoverBorderRadiusTablet?.top}${imageHotspotsPopoverBorderRadiusUnits?.Tablet} ${imageHotspotsPopoverBorderRadiusTablet?.right}${imageHotspotsPopoverBorderRadiusTablet?.Tablet} ${imageHotspotsPopoverBorderRadiusTablet?.bottom}${imageHotspotsPopoverBorderRadiusTablet?.Tablet} ${imageHotspotsPopoverBorderRadiusTablet?.left}${imageHotspotsPopoverBorderRadiusUnits?.Tablet}`;
-    const popoverBorderRadiusMobile = `${imageHotspotsPopoverBorderRadiusMobile?.top}${imageHotspotsPopoverBorderRadiusUnits?.Mobile} ${imageHotspotsPopoverBorderRadiusMobile?.right}${imageHotspotsPopoverBorderRadiusMobile?.right} ${imageHotspotsPopoverBorderRadiusMobile?.bottom}${imageHotspotsPopoverBorderRadiusMobile?.bottom} ${imageHotspotsPopoverBorderRadiusMobile?.left}${imageHotspotsPopoverBorderRadiusMobile?.left}`;
+    // const popoverBorderRadiusDesktop = `${imageHotspotsPopoverBorderRadiusDesktop?.top}${imageHotspotsPopoverBorderRadiusUnits?.Desktop} ${imageHotspotsPopoverBorderRadiusDesktop?.right}${imageHotspotsPopoverBorderRadiusUnits?.Desktop} ${imageHotspotsPopoverBorderRadiusDesktop?.bottom}${imageHotspotsPopoverBorderRadiusUnits?.Desktop} ${imageHotspotsPopoverBorderRadiusDesktop?.left}${imageHotspotsPopoverBorderRadiusUnits?.Desktop}`;
+    // const popoverBorderRadiusTablet = `${imageHotspotsPopoverBorderRadiusTablet?.top}${imageHotspotsPopoverBorderRadiusUnits?.Tablet} ${imageHotspotsPopoverBorderRadiusTablet?.right}${imageHotspotsPopoverBorderRadiusTablet?.Tablet} ${imageHotspotsPopoverBorderRadiusTablet?.bottom}${imageHotspotsPopoverBorderRadiusTablet?.Tablet} ${imageHotspotsPopoverBorderRadiusTablet?.left}${imageHotspotsPopoverBorderRadiusUnits?.Tablet}`;
+    // const popoverBorderRadiusMobile = `${imageHotspotsPopoverBorderRadiusMobile?.top}${imageHotspotsPopoverBorderRadiusUnits?.Mobile} ${imageHotspotsPopoverBorderRadiusMobile?.right}${imageHotspotsPopoverBorderRadiusMobile?.right} ${imageHotspotsPopoverBorderRadiusMobile?.bottom}${imageHotspotsPopoverBorderRadiusMobile?.bottom} ${imageHotspotsPopoverBorderRadiusMobile?.left}${imageHotspotsPopoverBorderRadiusMobile?.left}`;
 
-    const popoverBorderWidthDesktop = `${imageHotspotsPopoverBorderDesktop?.top}${imageHotspotsPopoverBorderUnits?.Desktop} ${imageHotspotsPopoverBorderDesktop?.right}${imageHotspotsPopoverBorderUnits?.Desktop} ${imageHotspotsPopoverBorderDesktop?.bottom}${imageHotspotsPopoverBorderUnits?.Desktop} ${imageHotspotsPopoverBorderDesktop?.left}${imageHotspotsPopoverBorderUnits?.Desktop}`;
-    const popoverBorderWidthTablet = `${imageHotspotsPopoverBorderTablet?.top}${imageHotspotsPopoverBorderUnits?.Tablet} ${imageHotspotsPopoverBorderTablet?.right}${imageHotspotsPopoverBorderUnits?.Tablet} ${imageHotspotsPopoverBorderTablet?.bottom}${imageHotspotsPopoverBorderUnits?.Tablet} ${imageHotspotsPopoverBorderTablet?.left}${imageHotspotsPopoverBorderUnits?.Tablet}`;
-    const popoverBorderWidthMobile = `${imageHotspotsPopoverBorderMobile?.top}${imageHotspotsPopoverBorderUnits?.Mobile} ${imageHotspotsPopoverBorderMobile?.right}${imageHotspotsPopoverBorderUnits?.Mobile} ${imageHotspotsPopoverBorderMobile?.bottom}${imageHotspotsPopoverBorderUnits?.Mobile} ${imageHotspotsPopoverBorderMobile?.left}${imageHotspotsPopoverBorderUnits?.Mobile}`;
+    // const popoverBorderWidthDesktop = `${imageHotspotsPopoverBorderDesktop?.top}${imageHotspotsPopoverBorderUnits?.Desktop} ${imageHotspotsPopoverBorderDesktop?.right}${imageHotspotsPopoverBorderUnits?.Desktop} ${imageHotspotsPopoverBorderDesktop?.bottom}${imageHotspotsPopoverBorderUnits?.Desktop} ${imageHotspotsPopoverBorderDesktop?.left}${imageHotspotsPopoverBorderUnits?.Desktop}`;
+    // const popoverBorderWidthTablet = `${imageHotspotsPopoverBorderTablet?.top}${imageHotspotsPopoverBorderUnits?.Tablet} ${imageHotspotsPopoverBorderTablet?.right}${imageHotspotsPopoverBorderUnits?.Tablet} ${imageHotspotsPopoverBorderTablet?.bottom}${imageHotspotsPopoverBorderUnits?.Tablet} ${imageHotspotsPopoverBorderTablet?.left}${imageHotspotsPopoverBorderUnits?.Tablet}`;
+    // const popoverBorderWidthMobile = `${imageHotspotsPopoverBorderMobile?.top}${imageHotspotsPopoverBorderUnits?.Mobile} ${imageHotspotsPopoverBorderMobile?.right}${imageHotspotsPopoverBorderUnits?.Mobile} ${imageHotspotsPopoverBorderMobile?.bottom}${imageHotspotsPopoverBorderUnits?.Mobile} ${imageHotspotsPopoverBorderMobile?.left}${imageHotspotsPopoverBorderUnits?.Mobile}`;
 
     const popoverImageBorderWidthDesktop = `${imageHotspotPopoverImageBorderWidthDesktop?.top}${imageHotspotPopoverImageBorderWidthUnits?.Desktop} ${imageHotspotPopoverImageBorderWidthDesktop?.right}${imageHotspotPopoverImageBorderWidthUnits?.Desktop} ${imageHotspotPopoverImageBorderWidthDesktop?.bottom}${imageHotspotPopoverImageBorderWidthUnits?.Desktop} ${imageHotspotPopoverImageBorderWidthDesktop?.left}${imageHotspotPopoverImageBorderWidthUnits?.Desktop}`;
     const popoverImageBorderWidthTablet = `${imageHotspotPopoverImageBorderWidthTablet?.top}${imageHotspotPopoverImageBorderWidthUnits?.Tablet} ${imageHotspotPopoverImageBorderWidthTablet?.right}${imageHotspotPopoverImageBorderWidthUnits?.Tablet} ${imageHotspotPopoverImageBorderWidthTablet?.bottom}${imageHotspotPopoverImageBorderWidthUnits?.Tablet} ${imageHotspotPopoverImageBorderWidthTablet?.left}${imageHotspotPopoverImageBorderWidthUnits?.Tablet}`;
@@ -419,6 +414,11 @@ const generateImageHotspotStyle = (attributes) => {
     const imageHotspotsPopoverPaddingTabletWidth = `${imageHotspotsPopoverPaddingTablet?.top}${imageHotspotsPopoverPaddingUnits?.Tablet} ${imageHotspotsPopoverPaddingTablet?.right}${imageHotspotsPopoverPaddingUnits?.Tablet} ${imageHotspotsPopoverPaddingTablet?.bottom}${imageHotspotsPopoverPaddingUnits?.Tablet} ${imageHotspotsPopoverPaddingTablet?.left}${imageHotspotsPopoverPaddingUnits?.Tablet}`;
     const imageHotspotsPopoverPaddingMobileWidth = `${imageHotspotsPopoverPaddingMobile?.top}${imageHotspotsPopoverPaddingUnits?.Mobile} ${imageHotspotsPopoverPaddingMobile?.right}${imageHotspotsPopoverPaddingUnits?.Mobile} ${imageHotspotsPopoverPaddingMobile?.bottom}${imageHotspotsPopoverPaddingUnits?.Mobile} ${imageHotspotsPopoverPaddingMobile?.left}${imageHotspotsPopoverPaddingUnits?.Mobile}`;
 
+    /** Default margin for Image Hotspots Popovers */
+    const popoverMarginDesktop = `${imageHotspotsPopoverMarginDesktop?.top}${imageHotspotsPopoverMarginUnits?.Desktop} ${imageHotspotsPopoverMarginDesktop?.right}${imageHotspotsPopoverMarginUnits?.Desktop} ${imageHotspotsPopoverMarginDesktop?.bottom}${imageHotspotsPopoverMarginUnits?.Desktop} ${imageHotspotsPopoverMarginDesktop?.left}${imageHotspotsPopoverMarginUnits?.Desktop}`;
+    const popoverMarginTablet = `${imageHotspotsPopoverMarginTablet?.top}${imageHotspotsPopoverMarginUnits?.Tablet} ${imageHotspotsPopoverMarginTablet?.right}${imageHotspotsPopoverMarginUnits?.Tablet} ${imageHotspotsPopoverMarginTablet?.bottom}${imageHotspotsPopoverMarginUnits?.Tablet} ${imageHotspotsPopoverMarginTablet?.left}${imageHotspotsPopoverMarginUnits?.Tablet}`;
+    const popoverMarginMobile = `${imageHotspotsPopoverMarginMobile?.top}${imageHotspotsPopoverMarginUnits?.Mobile} ${imageHotspotsPopoverMarginMobile?.right}${imageHotspotsPopoverMarginUnits?.Mobile} ${imageHotspotsPopoverMarginMobile?.bottom}${imageHotspotsPopoverMarginUnits?.Mobile} ${imageHotspotsPopoverMarginMobile?.left}${imageHotspotsPopoverMarginUnits?.Mobile}`;
+
     /** Default border for Image Hotspots Popovers */
     const imageHotspotsPopoverBorderDesktopWidth = `${imageHotspotsPopoverBorderDesktop?.top}${imageHotspotsPopoverBorderUnits?.Desktop} ${imageHotspotsPopoverBorderDesktop?.right}${imageHotspotsPopoverBorderUnits?.Desktop} ${imageHotspotsPopoverBorderDesktop?.bottom}${imageHotspotsPopoverBorderUnits?.Desktop} ${imageHotspotsPopoverBorderDesktop?.left}${imageHotspotsPopoverBorderUnits?.Desktop}`;
     const imageHotspotsPopoverBorderTabletWidth = `${imageHotspotsPopoverBorderTablet?.top}${imageHotspotsPopoverBorderUnits?.Tablet} ${imageHotspotsPopoverBorderTablet?.right}${imageHotspotsPopoverBorderUnits?.Tablet} ${imageHotspotsPopoverBorderTablet?.bottom}${imageHotspotsPopoverBorderUnits?.Tablet} ${imageHotspotsPopoverBorderTablet?.left}${imageHotspotsPopoverBorderUnits?.Tablet}`;
@@ -428,10 +428,6 @@ const generateImageHotspotStyle = (attributes) => {
     const imageHotspotsPopoverBorderRadiusDesktopWidth = `${imageHotspotsPopoverBorderRadiusDesktop?.top}${imageHotspotsPopoverBorderRadiusUnits?.Desktop} ${imageHotspotsPopoverBorderRadiusDesktop?.right}${imageHotspotsPopoverBorderRadiusUnits?.Desktop} ${imageHotspotsPopoverBorderRadiusDesktop?.bottom}${imageHotspotsPopoverBorderRadiusUnits?.Desktop} ${imageHotspotsPopoverBorderRadiusDesktop?.left}${imageHotspotsPopoverBorderRadiusUnits?.Desktop}`;
     const imageHotspotsPopoverBorderRadiusTabletWidth = `${imageHotspotsPopoverBorderRadiusTablet?.top}${imageHotspotsPopoverBorderRadiusUnits?.Tablet} ${imageHotspotsPopoverBorderRadiusTablet?.right}${imageHotspotsPopoverBorderRadiusUnits?.Tablet} ${imageHotspotsPopoverBorderRadiusTablet?.bottom}${imageHotspotsPopoverBorderRadiusUnits?.Tablet} ${imageHotspotsPopoverBorderRadiusTablet?.left}${imageHotspotsPopoverBorderRadiusUnits?.Tablet}`;
     const imageHotspotsPopoverBorderRadiusMobileWidth = `${imageHotspotsPopoverBorderRadiusMobile?.top}${imageHotspotsPopoverBorderRadiusUnits?.Mobile} ${imageHotspotsPopoverBorderRadiusMobile?.right}${imageHotspotsPopoverBorderRadiusUnits?.Mobile} ${imageHotspotsPopoverBorderRadiusMobile?.bottom}${imageHotspotsPopoverBorderRadiusUnits?.Mobile} ${imageHotspotsPopoverBorderRadiusMobile?.left}${imageHotspotsPopoverBorderRadiusUnits?.Mobile}`;
-
-    console.log("imageHotspotMarkerSize");
-    console.log(imageHotspotMarkerSize);
-    console.log(imageHotspotMarkerHoverSize);
 
     const hotspotBaseStyles = (imageHotspotHotspots || []).map((hotspot) => `
         .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"] .fb-hotspot-trigger {
@@ -486,9 +482,6 @@ const generateImageHotspotStyle = (attributes) => {
     // ─── Per-hotspot: responsive sizes
 
     const hotspotSizeStyles = (imageHotspotHotspots || []).map((hotspot) => {
-
-        console.log("Hotspot ID : ", hotspot.id);
-
         return `
             .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"] {
                 aspect-ratio: 1 / 1;
@@ -538,7 +531,6 @@ const generateImageHotspotStyle = (attributes) => {
             }
         `;
     }).join('');
-
 
     const hotspotAnimationStyles = (imageHotspotHotspots || []).map((hotspot) => {
         const animation = hotspot.animation || 'none';
@@ -637,29 +629,7 @@ const generateImageHotspotStyle = (attributes) => {
         return '';
     }).join('');
 
-    const popoverBg = imageHotspotPopoverBgColor || '#ffffff';
 
-    const resolvedPopoverBg = (() => {
-        if (imageHotspotsPopoverNormalBackgroundType === 'gradient') {
-            if (imageHotspotsPopoverNormalCustomGradientSwitcher && imageHotspotsPopoverNormalCustomGradientInputValue) {
-                return imageHotspotsPopoverNormalCustomGradientInputValue;
-            }
-            return imageHotspotsPopoverNormalGradientColor || popoverBg;
-        }
-        return imageHotspotsPopoverNormalClassicColor || popoverBg;
-    })();
-
-    // const popoverBgHover = imageHotspotPopoverBgHoverColor || popoverBg;
-
-    const resolvedPopoverHoverBg = (() => {
-        if (imageHotspotsPopoverHoverBackgroundType === 'gradient') {
-            if (imageHotspotsPopoverHoverCustomGradientSwitcher && imageHotspotsPopoverHoverCustomGradientInputValue) {
-                return imageHotspotsPopoverHoverCustomGradientInputValue;
-            }
-            return imageHotspotsPopoverHoverGradientColor || resolvedPopoverBg;
-        }
-        return imageHotspotsPopoverHoverClassicColor || resolvedPopoverBg;
-    })();
     const gap = '25px';
 
     const popoverPositions = {
@@ -719,22 +689,22 @@ const generateImageHotspotStyle = (attributes) => {
         return `
             .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"] .fb-hotspot-popover {
                 ${imageHotspotsPopoverPaddingDesktopWidth && imageHotspotsPopoverPaddingDesktop?.top ? `padding: ${imageHotspotsPopoverPaddingDesktopWidth};` : ''}
+                ${popoverMarginDesktop && imageHotspotsPopoverMarginDesktop?.top ? `margin: ${popoverMarginDesktop};` : ''}
                 ${imageHotspotsPopoverBorderDesktopWidth && imageHotspotsPopoverBorderDesktop?.top ? `border-width: ${imageHotspotsPopoverBorderDesktopWidth};` : ''}
                 ${imageHotspotsPopoverBorderRadiusDesktopWidth && imageHotspotsPopoverBorderRadiusDesktop?.top ? `border-radius: ${imageHotspotsPopoverBorderRadiusDesktopWidth};` : ''}
-                // ${imageHotspotsPopoverBoxShadowCssValue ? `box-shadow: ${imageHotspotsPopoverBoxShadowCssValue};` : ''}
-                ${imageHotspotsPopoverNormalBackgroundType === 'gradient' ? ` ${imageHotspotsPopoverNormalCustomGradientSwitcher && imageHotspotsPopoverNormalCustomGradientInputValue ? `--fb-popover-bg: ${imageHotspotsPopoverNormalCustomGradientInputValue};` : `--fb-popover-bg: ${imageHotspotsPopoverNormalGradientColor};`} ` : ` ${imageHotspotsPopoverNormalClassicColor ? `--fb-popover-bg: ${imageHotspotsPopoverNormalClassicColor};` : ''} `}
+                ${imageHotspotsPopoverBoxShadowCssValue ? `box-shadow: ${imageHotspotsPopoverBoxShadowCssValue};` : ''}
+                ${imageHotspotsPopoverColor ? `--fb-popover-bg: ${imageHotspotsPopoverColor};` : ""}
                 ${imageHotspotsPopoverBorder && imageHotspotsPopoverBorder !== 'none' ? `border-style: ${imageHotspotsPopoverBorder};` : ''}
                 ${imageHotspotsPopoverBorderColor ? `border-color: ${imageHotspotsPopoverBorderColor};` : ''}
                 ${imageHotspotsPopoverBoxShadowCssValue ? `box-shadow: ${imageHotspotsPopoverBoxShadowCssValue};` : ''} 
+                background-color: var(--fb-popover-bg);
                 position: absolute;
                 inset: auto;
                 ${placement.position}
                 transform: ${placement.hiddenTransform};
                 transform-origin: center;
-                background-color: var(--fb-popover-bg);
-                width: ${popoverWidthDesktop};
+                ${imageHotspotPopoverWidth?.Desktop ? `width: ${imageHotspotPopoverWidth?.Desktop}${imageHotspotPopoverWidthUnits?.Desktop};` : ''} 
                 z-index: 200;
-                min-width: ${popoverWidthDesktop};
                 word-wrap: break-word;
                 white-space: normal;
                 box-sizing: border-box;
@@ -745,14 +715,20 @@ const generateImageHotspotStyle = (attributes) => {
                 transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease, background-color 0.2s ease;
             }
 
-           
+            .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"] .fb-hotspot-popover:hover {
+                ${imageHotspotsPopoverHoverColor ? `background-color: ${imageHotspotsPopoverHoverColor};` : ""}
+            }
+
+            .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"] .fb-hotspot-popover:hover::after {
+                ${imageHotspotsPopoverHoverColor ? `border-top-color: ${imageHotspotsPopoverHoverColor};` : ""}
+            }
+
             .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"]:hover .fb-hotspot-popover,
             .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"].locked .fb-hotspot-popover {
                 opacity: 1;
                 visibility: visible;
                 pointer-events: auto;
                 transform: ${placement.visibleTransform};
-                ${imageHotspotsPopoverHoverClassicColor || imageHotspotsPopoverHoverGradientColor || imageHotspotsPopoverHoverCustomGradientInputValue ? `--fb-popover-bg: ${resolvedPopoverHoverBg}; background: var(--fb-popover-bg) !important;` : ''}
                 ${imageHotspotsPopoverBorderHoverColor ? `border-color: ${imageHotspotsPopoverBorderHoverColor} !important;` : ''}
             }
 
@@ -789,6 +765,7 @@ const generateImageHotspotStyle = (attributes) => {
             ${imageHotspotImageSize ? `object-fit: ${imageHotspotImageSize};` : ''}
             ${imageHotspotImageBorderColor ? `border-color: ${imageHotspotImageBorderColor};` : ''}
             ${imageBorderRadiusDesktop ? `border-radius: ${imageBorderRadiusDesktop};` : ''}
+             ${imageBorderWidthTablet ? `border-width: ${imageBorderWidthTablet};` : ''}
         }
 
         .${blockID} .fb-hotspot-marker {
@@ -826,7 +803,7 @@ const generateImageHotspotStyle = (attributes) => {
             ${imageHotspotMarkerHoverSize?.Desktop ? `height: ${imageHotspotMarkerHoverSize?.Desktop}${imageHotspotMarkerHoverSizeUnits?.Desktop};` : ''}
             ${!imageHotspotMarkerSvg && imageHotspotMarkerHoverColor ? `background-color: ${imageHotspotMarkerHoverColor};` : ''}
             ${imageHotspotMarkerSvg && imageHotspotMarkerHoverColor ? `color: ${imageHotspotMarkerHoverColor};` : ''}
-        }
+        }      
 
         ${imageHotspotMarkerSvg && imageHotspotMarkerHoverColor ? `
         .${blockID} .fb-hotspot-trigger:hover .fb-hotspot-marker-svg svg *[stroke] {
@@ -964,7 +941,6 @@ const generateImageHotspotStyle = (attributes) => {
            height: ${imageHotspotSocialLinksIconSize?.Desktop !== undefined && imageHotspotSocialLinksIconSize.Desktop !== '' ? `${imageHotspotSocialLinksIconSize.Desktop}${imageHotspotSocialLinksIconSizeUnits?.Desktop || 'px'}` : ''};
         }
 
-
         @media only screen and (max-width: 1024px) {
 
             .${blockID} {
@@ -988,11 +964,12 @@ const generateImageHotspotStyle = (attributes) => {
             }
 
             .${blockID} .fb-hotspot-marker[data-hotspot-id] .fb-hotspot-popover {
-                ${popoverWidthTablet ? `width: ${popoverWidthTablet};` : ''}
+                ${imageHotspotPopoverWidth?.Tablet ? `width: ${imageHotspotPopoverWidth?.Tablet}${imageHotspotPopoverWidthUnits?.Tablet};` : ''}
                 ${popoverPaddingTablet ? `padding: ${popoverPaddingTablet};` : ''}
-                ${popoverMarginTablet ? `margin: ${popoverMarginTablet};` : ''}
-                ${popoverBorderRadiusTablet ? `border-radius: ${popoverBorderRadiusTablet};` : ''}
-                ${popoverBorderWidthTablet ? `border-width: ${popoverBorderWidthTablet};` : ''}
+                ${imageHotspotsPopoverBorderRadiusTabletWidth && imageHotspotsPopoverBorderRadiusTablet?.top ? `border-radius: ${imageHotspotsPopoverBorderRadiusTabletWidth};` : ''}
+                ${imageHotspotsPopoverBorderTabletWidth && imageHotspotsPopoverBorderTablet?.top ? `border-width: ${imageHotspotsPopoverBorderTabletWidth};` : ''}
+                ${popoverMarginTablet && imageHotspotsPopoverMarginTablet?.top ? `margin: ${popoverMarginTablet};` : ''}
+                ${imageHotspotsPopoverPaddingTabletWidth && imageHotspotsPopoverPaddingTablet?.top ? `padding: ${imageHotspotsPopoverPaddingTabletWidth};` : ''}
             }
 
             .${blockID} .fb-hotspot-popover-image {
@@ -1056,8 +1033,7 @@ const generateImageHotspotStyle = (attributes) => {
             }
 
             .${blockID} .fb-hotspot-base-image {
-                ${imageHotspotImageHeight?.Mobile && imageHotspotImageHeightUnits?.Mobile
-            ? `height: ${imageHotspotImageHeight.Mobile}${imageHotspotImageHeightUnits.Mobile};` : ''}
+                ${imageHotspotImageHeight?.Mobile && imageHotspotImageHeightUnits?.Mobile ? `height: ${imageHotspotImageHeight.Mobile}${imageHotspotImageHeightUnits.Mobile};` : ''}
                 ${imageBorderWidthMobile ? `border-width: ${imageBorderWidthMobile};` : ''}
                 ${imageBorderRadiusMobile ? `border-radius: ${imageBorderRadiusMobile};` : ''}
             }
@@ -1070,11 +1046,12 @@ const generateImageHotspotStyle = (attributes) => {
             }
 
             .${blockID} .fb-hotspot-marker[data-hotspot-id] .fb-hotspot-popover {
-                ${popoverWidthMobile ? `width: ${popoverWidthMobile};` : ''}
+                ${imageHotspotPopoverWidth?.Mobile ? `width: ${imageHotspotPopoverWidth?.Mobile}${imageHotspotPopoverWidthUnits?.Mobile};` : ''}
                 ${popoverPaddingMobile ? `padding: ${popoverPaddingMobile};` : ''}
-                ${popoverMarginMobile ? `margin: ${popoverMarginMobile};` : ''}
-                ${popoverBorderRadiusMobile ? `border-radius: ${popoverBorderRadiusMobile};` : ''}
-                ${popoverBorderWidthMobile ? `border-width: ${popoverBorderWidthMobile};` : ''}
+                ${imageHotspotsPopoverBorderMobileWidth && imageHotspotsPopoverBorderMobile?.top ? `border-width: ${imageHotspotsPopoverBorderMobileWidth};` : ''}
+                ${imageHotspotsPopoverBorderRadiusMobileWidth && imageHotspotsPopoverBorderRadiusMobile?.top ? `border-radius: ${imageHotspotsPopoverBorderRadiusMobileWidth};` : ''}
+                ${popoverMarginMobile && imageHotspotsPopoverMarginMobile?.top ? `margin: ${popoverMarginMobile};` : ''}
+                ${imageHotspotsPopoverPaddingMobileWidth && imageHotspotsPopoverPaddingMobile?.top ? `padding: ${imageHotspotsPopoverPaddingMobileWidth};` : ''}
             }
 
             .${blockID} .fb-hotspot-popover-image {
