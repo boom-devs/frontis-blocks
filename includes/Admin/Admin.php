@@ -485,6 +485,14 @@ class Admin
             },
         ]);
 
+        register_rest_route('frontis-blocks/v1', '/verify-surecart', [
+            'methods'             => 'POST',
+            'callback'            => [$this, 'verify_surecart_endpoint'],
+            'permission_callback' => function () {
+                return current_user_can('edit_posts');
+            },
+        ]);
+
         register_rest_route('frontis-blocks/v1', '/get-options', [
             'methods' => 'POST',
             'callback' => [$this, 'get_options_endpoint'],
@@ -1108,5 +1116,67 @@ class Admin
 
             echo $body; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             exit;
+    }
+
+    /**
+     * Securely forwards license checks to the portal's verify-surecart-license endpoint.
+     */
+    public function verify_surecart_endpoint($request)
+    {
+        $license_options = get_option('frontisblockspro_license_options');
+        $license_id = is_array($license_options) && !empty($license_options['sc_license_id']) ? (string) $license_options['sc_license_id'] : '';
+        $license_key = is_array($license_options) && !empty($license_options['sc_license_key']) ? (string) $license_options['sc_license_key'] : '';
+
+        if (empty($license_id) || empty($license_key)) {
+            return new \WP_REST_Response(['status' => false, 'message' => 'License is not activated'], 200);
+        }
+
+        // Cache setup (using transients for 12 hours)
+        $cache_key = 'fb_sc_license_' . md5($license_id . $license_key);
+        $cached_status = get_transient($cache_key);
+        if ($cached_status !== false) {
+            return new \WP_REST_Response(['status' => $cached_status === 'active'], 200);
+        }
+
+        $portal_url = defined('PORTAL_API') ? PORTAL_API : 'https://template-library.frontiswp.com';
+
+        // Secure server-to-server POST to portal's new endpoint
+        $response = wp_remote_post($portal_url . '/api/verify-surecart-license', [
+            'headers' => [
+                'Content-Type'  => 'application/json',
+                'Accept'        => 'application/json',
+            ],
+            'body' => json_encode([
+                'license_id'  => $license_id,
+                'license_key' => $license_key,
+            ]),
+            'timeout' => 15,
+        ]);
+
+        if (is_wp_error($response)) {
+            return new \WP_REST_Response([
+                'status'  => false,
+                'message' => 'Portal connection failed: ' . $response->get_error_message()
+            ], 500);
+        }
+
+        $code = wp_remote_retrieve_response_code($response);
+        $body = wp_remote_retrieve_body($response);
+        
+        $start = strpos($body, '{');
+        $end = strrpos($body, '}');
+        if ($start !== false && $end !== false && $end > $start) {
+            $body = substr($body, $start, $end - $start + 1);
+        }
+        
+        $data = json_decode($body, true);
+
+        $status = ($code === 200 && isset($data['status']) && $data['status'] === true);
+        set_transient($cache_key, $status ? 'active' : 'inactive', 12 * HOUR_IN_SECONDS);
+
+        return new \WP_REST_Response([
+            'status'  => $status,
+            'message' => $data['message'] ?? ($status ? 'Verification successful' : 'Verification failed'),
+        ], $code);
     }
 }

@@ -82,6 +82,11 @@ class Enqueues
         $current_post = $post_id ? get_post($post_id) : null;
         $current_page_name = $current_post ? $current_post->post_name : '';
         $frontis_used = $post_id ? get_post_meta($post_id, 'frontis_blocks_used', true) : false;
+        
+        if (in_array($template_name, ['page-cart', 'page-checkout', 'order-confirmation', 'archive-product'], true)) {
+            $current_page_name = $template_name;
+        }
+
         $current_page_css_path = $current_page_name
             ? $this->upload_dir['basedir'] . '/frontis-blocks/' . $current_page_name . '/' . $current_page_name . '.min.css'
             : '';
@@ -111,6 +116,11 @@ class Enqueues
         }
 
         $page_name = $post->post_name;
+        $template_name = Helper::resolve_template_slug($post_id);
+        if (in_array($template_name, ['page-cart', 'page-checkout', 'order-confirmation', 'archive-product'], true)) {
+            $page_name = $template_name;
+        }
+
         if (!$page_name) {
             return;
         }
