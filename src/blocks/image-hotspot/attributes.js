@@ -181,6 +181,8 @@ const attributes = {
 			Mobile: 'px'
 		}
 	},
+	// End Marker Size
+
 	imageHotspotMarkerColor: {
 		type: "string",
 		default: ""
