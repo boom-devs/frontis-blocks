@@ -51,6 +51,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		stackCardsGlobalWraperID,
 		stackCardsGlobalWraperClass,
 		stackCardsPresetFourShowNavigation,
+		stackCardsHasInitializedItems,
 	} = attributes;
 
 	const { replaceInnerBlocks, updateBlockAttributes } = useDispatch(blockEditorStore);
@@ -78,11 +79,12 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
     });
 
 	useLayoutEffect(() => {
-		if (childBlocks.length === 0) {
+		if (childBlocks.length === 0 && !stackCardsHasInitializedItems) {
 			const defaultItems = Array.from({ length: INITIAL_CARD_ITEMS }, (_, index) =>
 				createDefaultCardItemBlock(index + 1)
-			);
+			); 
 			replaceInnerBlocks(clientId, defaultItems, false);
+			setAttributes({stackCardsHasInitializedItems: true});
 			return; // Let the next cycle handle styling once blocks are added
 		}
 
@@ -99,12 +101,19 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		const css = `${baseCss} ${itemCss}`.replace(/\s+/g, ' ').trim();
 
 		const updates = {};
+
 		if (!blockID) {
 			updates.blockID = ensuredBlockId;
 		}
+
+		if (!stackCardsHasInitializedItems && childBlocks.length > 0) {
+			updates.stackCardsHasInitializedItems = true;
+		}
+
 		if (css !== blockStyle) {
 			updates.blockStyle = css;
 		}
+
 		if (Object.keys(updates).length > 0) {
 			setAttributes(updates);
 		}
@@ -116,6 +125,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		clientId,
 		setAttributes,
 		stackCardItemStyleSignature,
+		stackCardsHasInitializedItems,
 	]);
 
 	useEffect(() => {

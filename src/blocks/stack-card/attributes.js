@@ -7,6 +7,10 @@ const attributes = {
         type: 'string',
         default: 'Desktop'
     },
+	stackCardsHasInitializedItems: {
+		type: 'boolean',
+		default: false,
+	},
 	blockStyle: {
         type: 'string',
         default: '',
@@ -38,6 +42,11 @@ const attributes = {
 	stackCardsGlobalWraperClass : {
 		type: 'string',
 		default: ''
+	},
+
+	stackedCardScaleSwitcher: {
+		type: 'string',
+		default: 'horizontal'
 	},
 
 	stackCardsOffsetTop: {
@@ -104,6 +113,22 @@ const attributes = {
 		}
 	},
 	stackCardsPresetFourCardWidthUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	stackCardsPresetFourCardHeight: {
+		type: 'object',
+		default: {
+			Desktop: '280',
+			Tablet: '280',
+			Mobile: '280',
+		}
+	},
+	stackCardsPresetFourCardHeightUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -221,6 +246,22 @@ const attributes = {
 			Desktop: '%',
 			Tablet: '%',
 			Mobile: '%',
+		}
+	},
+	stackCardsPresetFourButtonGap: {
+		type: 'object',
+		default: {
+			Desktop: '10',
+			Tablet: '10',
+			Mobile: '10',
+		}
+	},
+	stackCardsPresetFourButtonGapUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
 		}
 	},
 	stackCardsPresetFourButtonSideOffset: {
@@ -1169,7 +1210,7 @@ const attributes = {
 	stackCardsNavigationButtonIconSpacing: {
 		type: 'object',
 		default: {
-			Desktop: '10',
+			Desktop: '',
 			Tablet: '',
 			Mobile: '',
 		}

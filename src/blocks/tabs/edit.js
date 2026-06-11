@@ -29,10 +29,15 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		showTitle,
 		showDescription,
 		tabLayoutSwitcher,
-
 		tabGlobalWraperID,
 		tabGlobalWraperClass,
+		tabSwitchMode,
+		tabAutoSwitchInterval,
+		tabAutoSwitchPauseOnHover,
 	} = attributes;
+
+	const [isHovered, setIsHovered] = useState(false);
+
 
   	// Handle block ID generation (handles duplication and initial ID)
 	useBlockIdGenerator({
@@ -228,7 +233,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 	};
 
 	const updateActiveTab = (nextIndex) => {
-		setAttributes({ tabActive: nextIndex, tabActiveFrontend: nextIndex });
+		setAttributes({ tabActive: nextIndex });
 		const childIds = getChildren();
 		childIds.forEach((childId) => {
 			beDispatch.updateBlockAttributes(childId, { tabActive: nextIndex });
@@ -236,9 +241,36 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		updateTabOrder();
 	};
 
+	// Auto switch in the editor backend
+	useEffect(() => {
+		if (tabSwitchMode !== 'auto' || !tabItems || tabItems.length <= 1) return;
+
+		// If hover pausing is enabled and mouse is over the block, do not transition
+		if (tabAutoSwitchPauseOnHover && isHovered) return;
+
+		let timer = null;
+
+		const getIntervalValue = () => {
+			const desktopVal = parseInt(tabAutoSwitchInterval?.Desktop || '3000', 10);
+			return isNaN(desktopVal) ? 3000 : desktopVal;
+		};
+
+		const tick = () => {
+			const nextIndex = (tabActive + 1) % tabItems.length;
+			updateActiveTab(nextIndex);
+		};
+
+		const interval = getIntervalValue();
+		timer = setTimeout(tick, interval);
+
+		return () => {
+			if (timer) clearTimeout(timer);
+		};
+	}, [tabSwitchMode, tabActive, tabAutoSwitchInterval, tabItems, isHovered, tabAutoSwitchPauseOnHover]);
+
 	useEffect(() => {
 		updateTabOrder();
-		updateActiveTab(tabActive);
+		updateActiveTab(0);
 	}, []);
 
 
@@ -266,7 +298,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 			});
 
 			if (needsFix) {
-				setAttributes({ tabActiveFrontend: attributes.tabActive ?? 0 });
+				setAttributes({ tabActiveFrontend: 0 });
 			}
 			if (kids.length) unSub();
 		});
@@ -313,7 +345,11 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
 	return (
 		<>
-			<div {...blockProps} >
+			<div 
+				{...blockProps} 
+				onMouseEnter={() => setIsHovered(true)}
+				onMouseLeave={() => setIsHovered(false)}
+			>
 
 				{isSelected && (
 					<Inspector
@@ -376,6 +412,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 											next[index] = { ...next[index], title: val };
 											setAttributes({ tabItems: next });
 										}}
+										placeholder={__('title...', 'frontis-blocks')}
 										className="fb-tab-title"
 										allowedFormats={['core/bold', 'core/italic']}
 									/>
@@ -389,6 +426,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 											next[index] = { ...next[index], description: val };
 											setAttributes({ tabItems: next });
 										}}
+										placeholder={__('description...', 'frontis-blocks')}
 										className="fb-tab-description"
 										allowedFormats={['core/bold', 'core/italic']}
 									/>

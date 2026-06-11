@@ -978,7 +978,6 @@ const attributes = {
         default: ''
     },
 
-
     accordionItemBoxShadowSwitcher: {
         type: 'string',
         default: 'normal',

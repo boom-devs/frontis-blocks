@@ -564,16 +564,20 @@ const generateFormBuilderStyle = (attributes) => {
             flex-direction: column;
             padding: 0;
             margin: 0;
+            ${inputFieldMarginDesktopWidth && inputFieldMarginDesktop?.top ? `margin: ${inputFieldMarginDesktopWidth};` : ''}
         }
         .fb-form-builder-main-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input textarea::placeholder,
-        .fb-form-builder-main-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input input::placeholder {
+        .fb-form-builder-main-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input input::placeholder,
+        .fb-form-builder-main-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input select::placeholder {
             ${inputFieldPlaceholderColor ? `color: ${inputFieldPlaceholderColor};` : ''}
         }
         .fb-form-builder-main-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input textarea:focus::placeholder,
+        .fb-form-builder-main-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input select:focus::placeholder,
         .fb-form-builder-main-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input input:focus::placeholder {
             ${inputFieldPlaceholderFocusColor ? `color: ${inputFieldPlaceholderFocusColor};` : ''}
         }
         .fb-form-builder-main-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input textarea,
+        .fb-form-builder-main-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input select,
         .fb-form-builder-main-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input input {
             width: 100%;
             
@@ -620,10 +624,10 @@ const generateFormBuilderStyle = (attributes) => {
             ${inputFieldBorderRadiusDesktopWidth && inputFieldBorderRadiusDesktop?.top ? `border-radius: ${inputFieldBorderRadiusDesktopWidth};` : ''}
             ${inputFieldBoxShadowCssValue ? `box-shadow: ${inputFieldBoxShadowCssValue};` : ""}
 
-            ${inputFieldMarginDesktopWidth && inputFieldMarginDesktop?.top ? `margin: ${inputFieldMarginDesktopWidth};` : ''}
             ${inputFieldPaddingDesktopWidth && inputFieldPaddingDesktop?.top ? `padding: ${inputFieldPaddingDesktopWidth};` : ''}
         }
         .fb-form-builder-main-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input textarea:focus,
+        .fb-form-builder-main-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input select:focus,
         .fb-form-builder-main-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input input:focus {
             box-shadow: none;
             outline: none;
@@ -929,6 +933,7 @@ const generateFormBuilderStyle = (attributes) => {
                 
             }
             .fb-form-builder-main-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input textarea,
+            .fb-form-builder-main-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input select,
             .fb-form-builder-main-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input input,
             .fb-form-builder-main-wrapper.${blockID} .fb-field-input-wrapper .fb-field-required-text {
                 ${inputFieldGlobalTypoSwitcher?.fontSize === false && inputFieldFontSize?.Tablet ? `font-size: ${inputFieldFontSize?.Tablet}${inputFieldFontSizeUnits?.Tablet};` : ''}
@@ -936,12 +941,16 @@ const generateFormBuilderStyle = (attributes) => {
                 ${inputFieldGlobalTypoSwitcher?.lineHeight === false && inputFieldLineHeight?.Tablet ? `line-height: ${inputFieldLineHeight?.Tablet}${inputFieldLineHeightUnits?.Tablet};` : ''}
             }
 
+            .fb-form-builder-main-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input {
+                ${inputFieldMarginTabletWidth && inputFieldMarginTablet?.top ? `margin: ${inputFieldMarginTabletWidth};` : ''}
+            }
+
             .fb-form-builder-main-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input textarea,
+            .fb-form-builder-main-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input select,
             .fb-form-builder-main-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input input {
                 ${inputFieldBorderTabletWidth && inputFieldBorderTablet?.top ? `border-width: ${inputFieldBorderTabletWidth};` : ''}
                 ${inputFieldBorderRadiusTabletWidth && inputFieldBorderRadiusTablet?.top ? `border-radius: ${inputFieldBorderRadiusTabletWidth};` : ''}
 
-                ${inputFieldMarginTabletWidth && inputFieldMarginTablet?.top ? `margin: ${inputFieldMarginTabletWidth};` : ''}
                 ${inputFieldPaddingTabletWidth && inputFieldPaddingTablet?.top ? `padding: ${inputFieldPaddingTabletWidth};` : ''}
             }
 
@@ -1035,7 +1044,12 @@ const generateFormBuilderStyle = (attributes) => {
                 ${labelGlobalTypoSwitcher?.lineHeight === false && labelLineHeight?.Mobile ? `line-height: ${labelLineHeight?.Mobile}${labelLineHeightUnits?.Mobile};` : ''}
                 
             }
+            .fb-form-builder-main-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input {
+                ${inputFieldMarginMobileWidth && inputFieldMarginMobile?.top ? `margin: ${inputFieldMarginMobileWidth};` : ''}
+            }
+
             .fb-form-builder-main-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input textarea,
+            .fb-form-builder-main-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input select,
             .fb-form-builder-main-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input input,
             .fb-form-builder-main-wrapper.${blockID} .fb-field-input-wrapper .fb-field-required-text {
                 ${inputFieldGlobalTypoSwitcher?.fontSize === false && inputFieldFontSize?.Mobile ? `font-size: ${inputFieldFontSize?.Mobile}${inputFieldFontSizeUnits?.Mobile};` : ''}
@@ -1044,11 +1058,11 @@ const generateFormBuilderStyle = (attributes) => {
             }
 
             .fb-form-builder-main-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input textarea,
+            .fb-form-builder-main-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input select,
             .fb-form-builder-main-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input input {
                 ${inputFieldBorderMobileWidth && inputFieldBorderMobile?.top ? `border-width: ${inputFieldBorderMobileWidth};` : ''}
                 ${inputFieldBorderRadiusMobileWidth && inputFieldBorderRadiusMobile?.top ? `border-radius: ${inputFieldBorderRadiusMobileWidth};` : ''}
 
-                ${inputFieldMarginMobileWidth && inputFieldMarginMobile?.top ? `margin: ${inputFieldMarginMobileWidth};` : ''}
                 ${inputFieldPaddingMobileWidth && inputFieldPaddingMobile?.top ? `padding: ${inputFieldPaddingMobileWidth};` : ''}
             }
 
