@@ -25,6 +25,7 @@ import FB_TypographyControl from "@Components/typography-control";
 import FB_SwitcherControl from "@Components/switcher-control";
 import SortableItem from "./sortableItem";
 import { BORDER_STYLES } from "@Constants/fbConstants";
+import { Panel } from "@wordpress/components";
 
 const Inspector = ({ attributes, setAttributes }) => {
 	const {
@@ -128,8 +129,10 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 		footerTextAlignment,
 		footerTitleNormalColor,
+		footerTitleTypography,
 		footerTitleHoverColor,
 		footerDescNormalColor,
+		footerDescTypography,
 		footerDescHoverColor,
 		footerPaddingDesktop,
 		footerPaddingLink,
@@ -688,7 +691,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 					setAttributes={setAttributes}
 				/>
 			</PanelBody>
-
 			<PanelBody title={__("Chart Body", "frontis-blocks")} initialOpen={false}>
 				<FB_BackgroundColorControl
 					label={__("Background", "frontis-blocks")}
@@ -767,7 +769,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 					setAttributes={setAttributes}
 				/>
 			</PanelBody>
-
 			<PanelBody
 				title={__("Filter Toggle Button", "frontis-blocks")}
 				initialOpen={false}
@@ -810,7 +811,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 					setAttributes={setAttributes}
 				/>
 			</PanelBody>
-
 			<PanelBody
 				title={__("Grid & Axis Style", "frontis-blocks")}
 				initialOpen={false}
@@ -843,7 +843,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 					setGlobalColor={(v) => setAttributes({ tooltipBg: v })}
 				/>
 			</PanelBody>
-
 			<PanelBody
 				title={__("Legend Style", "frontis-blocks")}
 				initialOpen={false}
@@ -871,14 +870,42 @@ const Inspector = ({ attributes, setAttributes }) => {
 				/>
 			</PanelBody>
 
-			<PanelBody
-				title={__("Footer Text Style", "frontis-blocks")}
-				initialOpen={false}
-			>
+			<PanelBody title={__("Title", "frontis-blocks")} initialOpen={true}>
+				<FB_TypographyControl
+					label={__("Typography", "frontis-blocks")}
+					globalTypography={footerTitleTypography}
+					setGlobalTypography={(v) =>
+						setAttributes({ footerTitleTypography: v })
+					}
+				/>
 				<FB_ColorControl
-					label={__("Description Color", "frontis-blocks")}
+					label={__("Normal Color", "frontis-blocks")}
+					globalColor={footerTitleNormalColor}
+					setGlobalColor={(v) => setAttributes({ footerTitleNormalColor: v })}
+				/>
+				<FB_ColorControl
+					label={__("Hover Color", "frontis-blocks")}
+					globalColor={footerTitleHoverColor}
+					setGlobalColor={(v) => setAttributes({ footerTitleHoverColor: v })}
+				/>
+			</PanelBody>
+			<PanelBody title={__("Description", "frontis-blocks")} initialOpen={true}>
+				<FB_TypographyControl
+					label={__("Typography", "frontis-blocks")}
+					globalTypography={footerDescTypography}
+					setGlobalTypography={(v) =>
+						setAttributes({ footerDescTypography: v })
+					}
+				/>
+				<FB_ColorControl
+					label={__("Normal Color", "frontis-blocks")}
 					globalColor={footerDescNormalColor}
 					setGlobalColor={(v) => setAttributes({ footerDescNormalColor: v })}
+				/>
+				<FB_ColorControl
+					label={__("Hover Color", "frontis-blocks")}
+					globalColor={footerDescHoverColor}
+					setGlobalColor={(v) => setAttributes({ footerDescHoverColor: v })}
 				/>
 			</PanelBody>
 		</>
@@ -940,6 +967,239 @@ const Inspector = ({ attributes, setAttributes }) => {
 					}
 				/>
 			</PanelBody>
+
+			{/* <PanelBody
+				title={__("Padding and Margin", "frontis-blocks")}
+				initialOpen={false}
+			>
+				<FB_Spacing
+					label={__("Padding", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={multiChartGlobalPaddingUnits}
+					spacingUnits={globalPaddingUnits}
+					spacingDesktop={multiChartGlobalPaddingDesktop}
+					spacingTablet={multiChartGlobalPaddingTablet}
+					spacingMobile={multiChartGlobalPaddingMobile}
+					handleSpacingUnitHandler={handleGlobalPaddingUnitChange}
+					spacingCombineBtn={multiChartGlobalPaddingLink}
+					setAttributes={setAttributes}
+				/>
+				<FB_Spacing
+					label={__("Margin", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={handleGlobalMarginUnitsHandler}
+					spacingUnits={globalMarginUnits}
+					spacingDesktop={globalMarginDesktop}
+					spacingTablet={globalMarginTablet}
+					spacingMobile={globalMarginMobile}
+					handleSpacingUnitHandler={handleGlobalMarginUnitChange}
+					spacingCombineBtn={globalMarginLink}
+					spacingCombineBtnHandler={handleGlobalMarginCombineBtn}
+					setAttributes={setAttributes}
+				/>
+			</PanelBody>
+
+			<PanelBody title="Background" initialOpen={false}>
+				<FB_BackgroundColorControl
+					bgColorSwitcher={testBgColorSwitcher}
+					setBgColorSwitcher={(value) =>
+						setAttributes({ testBgColorSwitcher: value })
+					}
+					normalBackgroundType={testBackgroundType}
+					setNormalBackgroundType={(value) =>
+						setAttributes({ testBackgroundType: value })
+					}
+					normalClassicColor={testClassicColor}
+					setNormalClassicColor={(value) =>
+						setAttributes({
+							testClassicColor: value === undefined ? "" : value,
+						})
+					}
+					normalGradientColor={testGradientColor}
+					setNormalGradientColor={(value) =>
+						setAttributes({
+							testGradientColor: value === undefined ? null : value,
+						})
+					}
+					normalCustomGradientSwitcher={testCustomGradientSwitcher}
+					setNormalCustomGradientSwitcher={(value) =>
+						setAttributes({ testCustomGradientSwitcher: value })
+					}
+					normalCustomGradientInputValue={testCustomGradientInputValue}
+					setNormalCustomGradientInputValue={(value) =>
+						setAttributes({ testCustomGradientInputValue: value })
+					}
+					normalBackgroundImageUrl={testBackgroundImageUrl}
+					setNormalBackgroundImageUrl={(value) =>
+						setAttributes({ testBackgroundImageUrl: value })
+					}
+					normalBackgroundImageAlt={testBackgroundImageAlt}
+					setNormalBackgroundImageAlt={(value) =>
+						setAttributes({ testBackgroundImageAlt: value })
+					}
+					normalBackgroundImageID={testBackgroundImageID}
+					setNormalBackgroundImageID={(value) =>
+						setAttributes({ testBackgroundImageID: value })
+					}
+					normalBackgroundImagePosition={testBackgroundImagePosition}
+					setNormalBackgroundImagePosition={(value) =>
+						setAttributes({ testBackgroundImagePosition: value })
+					}
+					normalBackgroundImageAttachment={testBackgroundImageAttachment}
+					setNormalBackgroundImageAttachment={(value) =>
+						setAttributes({ testBackgroundImageAttachment: value })
+					}
+					normalBackgroundImageRepeat={testBackgroundImageRepeat}
+					setNormalBackgroundImageRepeat={(value) =>
+						setAttributes({ testBackgroundImageRepeat: value })
+					}
+					normalBackgroundImageSize={testBackgroundImageSize}
+					setNormalBackgroundImageSize={(value) =>
+						setAttributes({ testBackgroundImageSize: value })
+					}
+					hoverBackgroundType={hoverBackgroundType}
+					setHoverBackgroundType={(value) =>
+						setAttributes({ hoverBackgroundType: value })
+					}
+					hoverClassicColor={hoverClassicColor}
+					setHoverClassicColor={(value) =>
+						setAttributes({
+							hoverClassicColor: value === undefined ? "" : value,
+						})
+					}
+					hoverGradientColor={hoverGradientColor}
+					setHoverGradientColor={(value) =>
+						setAttributes({
+							hoverGradientColor: value === undefined ? null : value,
+						})
+					}
+					hoverCustomGradientSwitcher={hoverCustomGradientSwitcher}
+					setHoverCustomGradientSwitcher={(value) =>
+						setAttributes({ hoverCustomGradientSwitcher: value })
+					}
+					hoverCustomGradientInputValue={hoverCustomGradientInputValue}
+					setHoverCustomGradientInputValue={(value) =>
+						setAttributes({ hoverCustomGradientInputValue: value })
+					}
+					hoverBackgroundImageUrl={hoverBackgroundImageUrl}
+					setHoverBackgroundImageUrl={(value) =>
+						setAttributes({ hoverBackgroundImageUrl: value })
+					}
+					hoverBackgroundImageAlt={hoverBackgroundImageAlt}
+					setHoverBackgroundImageAlt={(value) =>
+						setAttributes({ hoverBackgroundImageAlt: value })
+					}
+					hoverBackgroundImageID={hoverBackgroundImageID}
+					setHoverBackgroundImageID={(value) =>
+						setAttributes({ hoverBackgroundImageID: value })
+					}
+					hoverBackgroundImagePosition={hoverBackgroundImagePosition}
+					setHoverBackgroundImagePosition={(value) =>
+						setAttributes({ hoverBackgroundImagePosition: value })
+					}
+					hoverBackgroundImageAttachment={hoverBackgroundImageAttachment}
+					setHoverBackgroundImageAttachment={(value) =>
+						setAttributes({ hoverBackgroundImageAttachment: value })
+					}
+					hoverBackgroundImageRepeat={hoverBackgroundImageRepeat}
+					setHoverBackgroundImageRepeat={(value) =>
+						setAttributes({ hoverBackgroundImageRepeat: value })
+					}
+					hoverBackgroundImageSize={hoverBackgroundImageSize}
+					setHoverBackgroundImageSize={(value) =>
+						setAttributes({ hoverBackgroundImageSize: value })
+					}
+				/>
+			</PanelBody> */}
+			{/* <PanelBody
+				title={__("Border and Shadow", "frontis-blocks")}
+				initialOpen={false}
+			>
+				<SelectControl
+					label={__("Border Style", "frontis-blocks")}
+					value={globalBorder}
+					options={BORDER_STYLES}
+					onChange={(value) => setAttributes({ globalBorder: value })}
+				/>
+
+				<FB_Color
+					label={__("Border Color", "frontis-blocks")}
+					globalColorSwitcher={globalBorderColorSwitcher}
+					globalColor={globalBorderColor}
+					globalHoverColor={globalBorderHoverColor}
+					handleColorSwitcherChange={handleGlobalBorderColorSwitcherChange}
+					handleGlobalColorChange={handleGlobalBorderColorChange}
+					handleGlobalHoverColorChange={handleGlobalBorderHoverColorChange}
+				/>
+
+				<FB_Spacing
+					label={__("Border", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={handleGlobalBorderUnitsHandler}
+					spacingUnits={globalBorderUnits}
+					spacingDesktop={globalBorderDesktop}
+					spacingTablet={globalBorderTablet}
+					spacingMobile={globalBorderMobile}
+					handleSpacingUnitHandler={handleGlobalBorderUnitChange}
+					spacingCombineBtn={globalBorderLink}
+					spacingCombineBtnHandler={handleGlobalBorderCombineBtn}
+					setAttributes={setAttributes}
+				/>
+
+				<FB_Spacing
+					label={__("Border Radius", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={handleGlobalBorderRadiusUnitsHandler}
+					spacingUnits={globalBorderRadiusUnits}
+					spacingDesktop={globalBorderRadiusDesktop}
+					spacingTablet={globalBorderRadiusTablet}
+					spacingMobile={globalBorderRadiusMobile}
+					handleSpacingUnitHandler={handleGlobalBorderRadiusUnitChange}
+					spacingCombineBtn={globalBorderRadiusLink}
+					spacingCombineBtnHandler={handleGlobalBorderRadiusCombineBtn}
+					setAttributes={setAttributes}
+				/>
+				<FB_BoxShadowControl
+					onBoxShadowChange={(value) =>
+						setAttributes({ boxGlobalBoxShadowValues: value })
+					}
+					initialShadowValue={boxGlobalBoxShadowValues}
+					onBoxShadowStyleChange={(value) =>
+						setAttributes({
+							boxGlobalBoxShadowCssValue: value,
+						})
+					}
+				/>
+			</PanelBody> */}
+
+			{/* <PanelBody
+				title={__("Responsive Control", "frontis-blocks")}
+				initialOpen={false}
+				className="fb-setting-responsive-control-wrapper"
+			>
+				<FB_VisibilityControl
+					desktopValue={advancedImageDesktopSwitcher}
+					setDesktopValue={(value) =>
+						setAttributes({ advancedImageDesktopSwitcher: value })
+					}
+					tabletValue={advancedImageTabletSwitcher}
+					setTabletValue={(value) =>
+						setAttributes({ advancedImageTabletSwitcher: value })
+					}
+					mobileValue={advancedImageMobileSwitcher}
+					setMobileValue={(value) =>
+						setAttributes({ advancedImageMobileSwitcher: value })
+					}
+				/>
+			</PanelBody> */}
+			{/* <PanelBody title={__("Custom CSS", "frontis-blocks")} initialOpen={false}>
+				<FB_CustomCSSEditor
+					value={advancedImageCustomCSS}
+					onChangeValue={(value) =>
+						setAttributes({ advancedImageCustomCSS: value })
+					}
+				/>
+			</PanelBody> */}
 		</>
 	);
 

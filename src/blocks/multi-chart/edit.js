@@ -86,7 +86,7 @@ export default function Edit({
 			};
 
 			return {
-				label: ds.series_name || __("Series", "frontis-blocks"),
+				label: ds.series_name || __("Content", "frontis-blocks"),
 				data: ds.values ? ds.values.split(",").map((v) => parseFloat(v)) : [],
 				backgroundColor:
 					isArea || chartType === "radar"

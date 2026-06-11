@@ -41,7 +41,7 @@ export default function save({ attributes }) {
 		bar_variant: barVariant,
 		labels: chartLabels ? chartLabels.split(",").map((l) => l.trim()) : [],
 		datasets: (chartDatasets || []).map((ds) => ({
-			name: ds.series_name || __("Series", "frontis-blocks"),
+			name: ds.series_name || __("Content", "frontis-blocks"),
 			values: ds.values ? ds.values.split(",").map((v) => parseFloat(v)) : [],
 			color: ds.color || "#3b82f6",
 		})),

@@ -149,7 +149,7 @@ export default function SortableItem({
 					) : (
 						<>
 							<FB_InputControl
-								label={__("Series Name", "frontis-blocks")}
+								label={__("Content Name", "frontis-blocks")}
 								value={item.series_name}
 								onChangeValue={(val) => updateItem(id, "series_name", val)}
 							/>
@@ -158,14 +158,14 @@ export default function SortableItem({
 								label={__("Values", "frontis-blocks")}
 								value={item.values}
 								description={__(
-									"Comma separated values for the series",
+									"Comma separated values for the content",
 									"frontis-blocks",
 								)}
 								onChangeValue={(val) => updateItem(id, "values", val)}
 							/>
 
 							<FB_ColorControl
-								label={__("Series Color", "frontis-blocks")}
+								label={__("Content Color", "frontis-blocks")}
 								globalColor={item.color}
 								setGlobalColor={(val) => updateItem(id, "color", val)}
 							/>
