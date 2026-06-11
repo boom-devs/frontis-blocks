@@ -24,13 +24,16 @@ import {
     ICON_POSITION,
     MULTI_ICON_POSITION,
     BORDER_STYLES,
+    TAB_SWITCH_MODE,
 } from '@Constants/fbConstants';
+
 
 import FB_Range from '@Components/range';
 import FB_Spacing from '@Components/spacing';
 import FB_TypographyControl from '@Components/typography-control';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
+import FB_AlignmentControl from '@Components/alignment-control';
 import FB_BoxShadowControl from '@Components/box-shadow';
 import {useDeviceType} from "@Config/displayType";
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
@@ -53,9 +56,13 @@ const Inspector = ({ attributes, setAttributes, handleDragEnd, handleAddItem, ha
         blockID,
         blockStyle,
         tabLayoutSwitcher,
+        tabSwitchMode,
+        tabAutoSwitchInterval,
+        tabAutoSwitchPauseOnHover,
         tabsItems,
         tabTitleTag,
         tabDescriptionTag,
+        tabListAlignment,
 
         showIcon,
         showTitle,
@@ -2423,7 +2430,6 @@ const Inspector = ({ attributes, setAttributes, handleDragEnd, handleAddItem, ha
                         </Button>
                     </DndContext>
                 </div>
-
                 {showIcon && (
                     <FB_SwitcherControl
                         label={__("Icon Position", "frontis-blocks")}
@@ -2444,7 +2450,35 @@ const Inspector = ({ attributes, setAttributes, handleDragEnd, handleAddItem, ha
                     setGlobalHtmlTag={(value) => setAttributes({ tabDescriptionTag: value })}
                 />
 
+                <FB_SwitcherControl
+                    label={__("Switch Mode", "frontis-blocks")}
+                    options={TAB_SWITCH_MODE}
+                    globalSwitcher={tabSwitchMode}
+                    setGlobalSwitcher={(value) => setAttributes({ tabSwitchMode: value })}
+                />
+
+                {tabSwitchMode === 'auto' && (
+                    <>
+                        <FB_Range
+                            min={500}
+                            max={20000}
+                            label={__("Auto Switch Interval (ms)", "frontis-blocks")}
+                            rangeValue={tabAutoSwitchInterval}
+                            onChangeHandler={(value) => setAttributes({ tabAutoSwitchInterval: value })}
+                            deviceType={deviceType}
+                            rangeStep={500}
+                            resetFallbackValue={"3000"}
+                            isRangeUnit={false}
+                        />
+                        <ToggleControl
+                            label={__("Pause on Hover", "frontis-blocks")}
+                            checked={tabAutoSwitchPauseOnHover}
+                            onChange={(value) => setAttributes({ tabAutoSwitchPauseOnHover: value })}
+                        />
+                    </>
+                )}
             </PanelBody>
+
         </>
 	);
 
@@ -2590,6 +2624,12 @@ const Inspector = ({ attributes, setAttributes, handleDragEnd, handleAddItem, ha
                 title={__("Tab List", "frontis-blocks")} 
                 initialOpen={false}
             >
+                <FB_AlignmentControl
+                    label={__("Alignment", "frontis-blocks")}
+                    globalAlignment={tabListAlignment}
+                    setGlobalAlignment={(value) => setAttributes({ tabListAlignment: value })}
+                />
+
                 <FB_Range
                     min={0}
                     max={tabListMinWidthUnits[deviceType] === '%' ? 100 : 1000} 

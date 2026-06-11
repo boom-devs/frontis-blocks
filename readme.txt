@@ -3,26 +3,26 @@ Contributors: wpmessiah
 Tags: block, blocks, blocks-editor, gutenberg,  gutenberg blocks,
 Requires at least: 6.0
 Tested up to: 7.0
-Stable tag: 1.2.3
+Stable tag: 1.2.4
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html 
 
-Frontis Blocks - WordPress block library for Gutenberg Editor with 40+ blocks, patterns, sliders, galleries, CTAs, maps, forms, and global styles.
+Frontis Blocks - WordPress block library for Gutenberg Editor with 45+ blocks, patterns, sliders, galleries, CTAs, maps, forms, and global styles.
 
 == Description ==
 
-**Frontis Blocks** is a block library with **40+ blocks,** global styles, sliders/galleries, CTAs, and map/form integrations, plus **ready-made patterns** to help you build pages faster in the Block Editor.
+**Frontis Blocks** is a block library with **45+ blocks,** global styles, sliders/galleries, CTAs, and map/form integrations, plus **ready-made patterns** to help you build pages faster in the Block Editor.
 
 [youtube https://youtu.be/8d0m7ZHNrzI]
 
-**BUILD MODERN, FAST-LOADING PAGES IN THE WORDPRESS BLOCK EDITOR (GUTENBERG) WITH 40+ BLOCKS AND READY-MADE PATTERNS. NO CODING REQUIRED.**
+**BUILD MODERN, FAST-LOADING PAGES IN THE WORDPRESS BLOCK EDITOR (GUTENBERG) WITH 45+ BLOCKS AND READY-MADE PATTERNS. NO CODING REQUIRED.**
 
 **[You can try a live demo of Frontis](https://app.zipwp.com/wp?plugins=frontis-blocks)**
 
 Finally, a block library that lets you design beautiful, fast, and professional websites right inside WordPress. Frontis Blocks adds a wide set of powerful elements so you can build landing pages, blogs, portfolios, and stores in minutes. It works with **any theme** and pairs perfectly with the Frontis theme for a seamless full-site editing workflow.
 
-You open the WordPress editor and just want to make a good page fast. No heavy plugin, no code, no guesswork. That's why we built **Frontis Blocks**. It works right inside the Block Editor (Gutenberg Block Editor) so you can launch real pages right now. (With 40+ lightweight blocks plus premade designs.)
+You open the WordPress editor and just want to make a good page fast. No heavy plugin, no code, no guesswork. That's why we built **Frontis Blocks**. It works right inside the Block Editor (Gutenberg Block Editor) so you can launch real pages right now. (With 45+ lightweight blocks plus premade designs.)
 
 Add an animated heading, buttons, testimonials, pricing tables, galleries, sliders, and a map block—all with simple controls that feel consistent with the Editor.
 
@@ -38,7 +38,7 @@ Now, if you've tried big page builders — **Elementor, Divi, WPBakery, Bricks, 
 
 **Why is Frontis vs. other block libraries?**
 
-- **Focused, not bloated:** **40+ blocks** that cover real pages — headings, CTAs, accordions/tabs, sliders, counters, post grids, teams, pricing, testimonials, galleries and more.
+- **Focused, not bloated:** **45+ blocks** that cover real pages — headings, CTAs, accordions/tabs, sliders, counters, post grids, teams, pricing, testimonials, galleries and more.
 - **Premade designs are included:** Start with ready-made sections and full layouts, then tweak with global styles.
 - **Features:** Form styling for **Fluent Forms** and **Contact Form 7,** Google Map (no API key), animated headings, sliders/carousels.
 - **SEO-friendly structure:** Clean markup and clear structure help pages rank.
@@ -202,7 +202,7 @@ We're just a message away. Follow us for quick tips, release news, 60-second tut
 Frontis Blocks is a WordPress plugin that adds powerful blocks to the Gutenberg editor (Block Editor). It helps you build modern pages fast.
 
 = How many blocks are included? =  
-Right now, Frontis Blocks includes 40+ blocks (and growing). You'll find headings, buttons, galleries, sliders, tabs/accordions, pricing tables, testimonials, post grids, and more.
+Right now, Frontis Blocks includes 45+ blocks (and growing). You'll find headings, buttons, galleries, sliders, tabs/accordions, pricing tables, testimonials, post grids, and more.
 
 = Does it work with any theme? =  
 Yes. Frontis Blocks works with any WordPress theme. It works best with the Frontis Theme, which is built for Full Site Editing (FSE).
@@ -247,6 +247,22 @@ There is no prerequisites for installing **Frontis Blocks**. You can follow the 
 
 
 == Changelog ==
+
+= 1.2.4 – 05 June 2026 =
+- **New**: Added Back To Top block to easily navigate to the top of pages.
+- **Improved**: Added responsive auto-switching support (with milliseconds control, hover pause, page visibility check, and fade/slide transition animations) to native Tabs block on both frontend and editor.
+- **Improved**: Updated and enhanced native Tabs block (Tabs & Tabs Item) with custom controls and layouts.
+- **Improved**: Added post category image control and custom height settings in Post Category block.
+- **Improved**: Added dynamic category and post terms link support in Advanced Heading block.
+- **Improved**: Added submit button position control and improved responsive width controls in Form Builder.
+- **Improved**: Added mobile logo upload control support in Megamenu block.
+- **Improved**: Added rendering guard and validation check for Slider block.
+- **Fixed**: Resolved progress bar visibility issues in the editor backend.
+- **Fixed**: Resolved Post Grid block validation errors on imported templates.
+- **Fixed**: Resolved z-index and inner-block button placement issues in Form Builder.
+- **Fixed**: Resolved block template slug resolution for WooCommerce and Custom Post Types.
+- **Fixed**: Fixed container child block CSS rendering issues under Next.js.
+- **Fixed**: Resolved SVG REST API upload issues and cleared Gutenberg editor console warnings.
 
 = 1.2.3 – 15 May 2026 =
 - **New**: Added Stacked Card block with Pro features support.

@@ -16,18 +16,18 @@ import { useEffect } from '@wordpress/element';
 
 const ALLOWED_BLOCKS = [
     "frontis-blocks/container",
-    "frontis-blocks/field-text",
-    "frontis-blocks/field-textarea",
-    "frontis-blocks/field-radio",
-    "frontis-blocks/field-select",
-    "frontis-blocks/field-checkbox"
+    "frontis-blocks/text-field",
+    "frontis-blocks/textarea-field",
+    "frontis-blocks/radio-field",
+    "frontis-blocks/select-field",
+    "frontis-blocks/checkbox-field"
 ];
 
 export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
 
-    const { 
+    const {
         blockID,
-        
+
         classHook,
         formType,
 

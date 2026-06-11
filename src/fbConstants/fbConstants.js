@@ -49,6 +49,11 @@ export const TABS_LAYOUT = [
 	{ label: __('Vertical', 'frontis-blocks'), value: 'vertical' },
 ];
 
+export const TAB_SWITCH_MODE = [
+	{ label: __('On Click', 'frontis-blocks'), value: 'click' },
+	{ label: __('Auto Switch', 'frontis-blocks'), value: 'auto' },
+];
+
 export const ICON_POSITION = [
 	{ label: __("Left", "frontis-block"), value: "left" },
 	{ label: __("Right", "frontis-block"), value: "right" },
@@ -1104,5 +1109,9 @@ export const CAROUSEL_ITEM_ROTATE = [
 	{ label: __("Horizontal", "frontis-blocks"), value: "X" },
 	{ label: __("Vertical", "frontis-blocks"), value: "Y" },
 	{ label: __("Depth", "frontis-blocks"), value: "Z" },
+];
+export const STACKED_CARD_SCALE = [
+	{ label: __("Horizontal", "frontis-blocks"), value: "horizontal" },
+	{ label: __("Vertical", "frontis-blocks"), value: "vertical" },
 ];
 
