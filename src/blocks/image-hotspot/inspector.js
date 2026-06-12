@@ -404,10 +404,17 @@ export default function Inspector({ attributes, setAttributes }) {
     imageHotspotsPopoverGlobalZIndex,
     /** End Hotspot Popover Box Shadow */
 
-    imageHotspotsPopoverColorSwitcher,
-    imageHotspotsPopoverColor,
-    imageHotspotsPopoverHoverColor,
-
+    backToTopBgColorSwitcher,
+    backToTopNormalBackgroundType,
+    backToTopNormalClassicColor,
+    backToTopNormalGradientColor,
+    backToTopNormalCustomGradientSwitcher,
+    backToTopNormalCustomGradientInputValue,
+    backToTopHoverBackgroundType,
+    backToTopHoverClassicColor,
+    backToTopHoverGradientColor,
+    backToTopHoverCustomGradientSwitcher,
+    backToTopHoverCustomGradientInputValue,
 
   } = attributes;
 
@@ -2103,38 +2110,35 @@ export default function Inspector({ attributes, setAttributes }) {
           resetFallbackValue={""}
         />
 
-        <FB_SwitcherControl
+        <FB_BackgroundColorControl
           label={__("Background Color", "frontis-blocks")}
-          globalSwitcher={imageHotspotsPopoverColorSwitcher}
-          setGlobalSwitcher={(value) =>
-            setAttributes({
-              imageHotspotsPopoverColorSwitcher: value,
-            })
-          }
+          bgColorSwitcher={backToTopBgColorSwitcher}
+          setBgColorSwitcher={(value) => setAttributes({ backToTopBgColorSwitcher: value })}
+
+          normalBackgroundType={backToTopNormalBackgroundType}
+          setNormalBackgroundType={(value) => setAttributes({ backToTopNormalBackgroundType: value })}
+          normalClassicColor={backToTopNormalClassicColor}
+          setNormalClassicColor={(value) => setAttributes({ backToTopNormalClassicColor: value === undefined ? '' : value })}
+          normalGradientColor={backToTopNormalGradientColor}
+          setNormalGradientColor={(value) => setAttributes({ backToTopNormalGradientColor: value === undefined ? null : value })}
+          normalCustomGradientSwitcher={backToTopNormalCustomGradientSwitcher}
+          setNormalCustomGradientSwitcher={(value) => setAttributes({ backToTopNormalCustomGradientSwitcher: value })}
+          normalCustomGradientInputValue={backToTopNormalCustomGradientInputValue}
+          setNormalCustomGradientInputValue={(value) => setAttributes({ backToTopNormalCustomGradientInputValue: value })}
+
+          hoverBackgroundType={backToTopHoverBackgroundType}
+          setHoverBackgroundType={(value) => setAttributes({ backToTopHoverBackgroundType: value })}
+          hoverClassicColor={backToTopHoverClassicColor}
+          setHoverClassicColor={(value) => setAttributes({ backToTopHoverClassicColor: value === undefined ? '' : value })}
+          hoverGradientColor={backToTopHoverGradientColor}
+          setHoverGradientColor={(value) => setAttributes({ backToTopHoverGradientColor: value === undefined ? null : value })}
+          hoverCustomGradientSwitcher={backToTopHoverCustomGradientSwitcher}
+          setHoverCustomGradientSwitcher={(value) => setAttributes({ backToTopHoverCustomGradientSwitcher: value })}
+          hoverCustomGradientInputValue={backToTopHoverCustomGradientInputValue}
+          setHoverCustomGradientInputValue={(value) => setAttributes({ backToTopHoverCustomGradientInputValue: value })}
+
+          isBackgroundImage={false}
         />
-
-        {imageHotspotsPopoverColorSwitcher === "normal" && (
-          <FB_ColorControl
-            label={__("Normal Color", "frontis-blocks")}
-            globalColor={imageHotspotsPopoverColor}
-            setGlobalColor={(value) =>
-              setAttributes({ imageHotspotsPopoverColor: value })
-            }
-          />
-        )}
-
-        {imageHotspotsPopoverColorSwitcher === "hover" && (
-          <FB_ColorControl
-            label={__("Hover Color", "frontis-blocks")}
-            globalColor={imageHotspotsPopoverHoverColor}
-            setGlobalColor={(value) =>
-              setAttributes({
-                imageHotspotsPopoverHoverColor: value,
-              })
-            }
-          />
-        )}
-
 
         <SelectControl
           label={__("Border Style", "frontis-blocks")}
