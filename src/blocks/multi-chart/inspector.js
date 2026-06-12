@@ -27,7 +27,8 @@ import FB_TypographyControl from "@Components/typography-control";
 import FB_SwitcherControl from "@Components/switcher-control";
 
 import SortableItem from "./sortableItem";
-import { BORDER_STYLES } from "@Constants/fbConstants";
+import { BORDER_STYLES, OVERFLOW_OP } from "@Constants/fbConstants";
+
 import { Panel } from "@wordpress/components";
 
 const Inspector = ({ attributes, setAttributes }) => {
@@ -946,6 +947,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 			<PanelBody title={__("Title", "frontis-blocks")} initialOpen={true}>
 				<FB_TypographyControl
 					label={__("Typography", "frontis-blocks")}
+					deviceType={deviceType}
+					setAttributes={setAttributes}
 					globalTypography={footerTitleTypography}
 					setGlobalTypography={(v) =>
 						setAttributes({ footerTitleTypography: v })
@@ -965,6 +968,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 			<PanelBody title={__("Description", "frontis-blocks")} initialOpen={true}>
 				<FB_TypographyControl
 					label={__("Typography", "frontis-blocks")}
+					deviceType={deviceType}
+					setAttributes={setAttributes}
 					globalTypography={footerDescTypography}
 					setGlobalTypography={(v) =>
 						setAttributes({ footerDescTypography: v })
@@ -1000,12 +1005,14 @@ const Inspector = ({ attributes, setAttributes }) => {
 					isRangeUnit={false}
 				/>
 
-				{/* <SelectControl
+				{/* Overflow Control */}
+
+				<SelectControl
 					label={__("Overflow", "frontis-blocks")}
 					value={multiChartOverflow}
 					options={OVERFLOW_OP}
 					onChange={(value) => setAttributes({ multiChartOverflow: value })}
-				/> */}
+				/>
 
 				<FB_PositionControl
 					deviceType={deviceType}
@@ -1079,8 +1086,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 				<FB_Spacing
 					label={__("Padding", "frontis-blocks")}
 					deviceType={deviceType}
-					spacingUnitsHandler={multiChartGlobalPaddingUnits}
-					spacingUnits={globalPaddingUnits}
+					spacingUnitsHandler={multiChartGlobalPaddingUnitsHandler}
+					spacingUnits={multiChartGlobalPaddingUnits}
 					spacingDesktop={multiChartGlobalPaddingDesktop}
 					spacingTablet={multiChartGlobalPaddingTablet}
 					spacingMobile={multiChartGlobalPaddingMobile}
@@ -1101,7 +1108,9 @@ const Inspector = ({ attributes, setAttributes }) => {
 					spacingCombineBtnHandler={handleGlobalMarginCombineBtn}
 					setAttributes={setAttributes}
 				/>
-			</PanelBody>
+               </PanelBody> */}
+
+			{/* 
 
 			<PanelBody title="Background" initialOpen={false}>
 				<FB_BackgroundColorControl
