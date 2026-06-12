@@ -9,6 +9,8 @@ export default function save({ attributes }) {
 		imageAccordionPreset,
 		imageAccordionTrigger,
 		imageAccordionItems,
+		imageAccordionShowIcon,
+		imageAccordionShowButton,
 		imageAccordionShowTitle,
 		imageAccordionShowSubtitle,
 		imageAccordionShowDots,
@@ -76,19 +78,21 @@ export default function save({ attributes }) {
 				<div className="fb-image-accordion-content-wrapper">
 					{imageAccordionPreset === "preset-1" && (
 						<>
-							<div className="fb-image-accordion-icon-circle">
-								{item.mediaType === "image" && item.selectedImage?.url ? (
-									<img
-										src={item.selectedImage.url}
-										alt={item.title || ""}
-										loading="lazy"
-									/>
-								) : item.selectedIcon ? (
-									renderSVG(item.selectedIcon)
-								) : (
-									renderSVG("heart")
-								)}
-							</div>
+							{imageAccordionShowIcon && (
+								<div className="fb-image-accordion-icon-circle">
+									{item.mediaType === "image" && item.selectedImage?.url ? (
+										<img
+											src={item.selectedImage.url}
+											alt={item.title || ""}
+											loading="lazy"
+										/>
+									) : item.selectedIcon ? (
+										renderSVG(item.selectedIcon)
+									) : (
+										renderSVG("heart")
+									)}
+								</div>
+							)}
 							<div className="fb-image-accordion-text-group">
 								{imageAccordionShowTitle && (
 									<h3 className="fb-image-accordion-title">{item.title}</h3>
@@ -114,8 +118,10 @@ export default function save({ attributes }) {
 											{numLabel}
 										</span>
 									)}
-									<h3 className="fb-image-accordion-title">{item.title}</h3>
-									{item.subTitle && (
+									{imageAccordionShowTitle && (
+										<h3 className="fb-image-accordion-title">{item.title}</h3>
+									)}
+									{imageAccordionShowSubtitle && item.subTitle && (
 										<p className="fb-sub-title">{item.subTitle}</p>
 									)}
 								</div>
@@ -126,29 +132,35 @@ export default function save({ attributes }) {
 					{imageAccordionPreset === "preset-3" && (
 						<div className="fb-image-accordion-preset3-content">
 							<div className="fb-image-accordion-left-content">
-								<h3 className="fb-image-accordion-title">{item.title}</h3>
-								{item.subTitle && (
+								{imageAccordionShowTitle && (
+									<h3 className="fb-image-accordion-title">{item.title}</h3>
+								)}
+								{imageAccordionShowSubtitle && item.subTitle && (
 									<p className="fb-sub-title">{item.subTitle}</p>
 								)}
 							</div>
-							<a
-								href={item.buttonUrl || "#"}
-								target={target}
-								rel={rel}
-								className="fb-image-accordion-btn"
-							>
-								{item.buttonText || __("Read More", "frontis-blocks")}
-							</a>
+							{imageAccordionShowButton && (
+								<a
+									href={item.buttonUrl || "#"}
+									target={target}
+									rel={rel}
+									className="fb-image-accordion-btn"
+								>
+									{item.buttonText || __("Read More", "frontis-blocks")}
+								</a>
+							)}
 						</div>
 					)}
 
 					{imageAccordionPreset === "preset-4" && (
 						<>
-							<h3 className="fb-image-accordion-title">{item.title}</h3>
+							{imageAccordionShowTitle && (
+								<h3 className="fb-image-accordion-title">{item.title}</h3>
+							)}
 							{imageAccordionShowNumber && (
 								<span className="fb-image-accordion-number">{numLabel}</span>
 							)}
-							{item.subTitle && (
+							{imageAccordionShowSubtitle && item.subTitle && (
 								<p className="fb-image-accordion-desc">{item.subTitle}</p>
 							)}
 						</>
