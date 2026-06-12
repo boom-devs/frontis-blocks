@@ -5,7 +5,7 @@
 	"version": "1.0.0",
 	"title": "Image Accordion",
 	"category": "frontis-blocks",
-	"description": "A beautiful image accordion block with 4 preset styles and hover/click trigger modes.",
+	"description": "A beautiful image accordion block with 4 preset styles and hover/click trigger mode effect available.",
 	"example": {},
 	"supports": {
 		"align": ["wide", "full"],

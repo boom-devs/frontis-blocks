@@ -3,9 +3,6 @@
 ----------------- */
 .fb-image-accordion-container {
 	display: flex;
-	gap: 12px;
-	width: 100%;
-	height: 500px;
 	align-items: stretch;
 }
 
@@ -15,7 +12,6 @@
 .fb-image-accordion-item {
 	position: relative;
 	flex: 0 0 80px;
-	border-radius: 50px;
 	background-size: cover;
 	background-position: center;
 	cursor: pointer;
@@ -32,7 +28,6 @@
 .fb-image-accordion-overlay {
 	position: absolute;
 	inset: 0;
-	background: rgba(0, 0, 0, 0.55);
 	transition: opacity 0.4s ease;
 	pointer-events: none;
 	z-index: 1;
@@ -68,9 +63,6 @@
    ICON CIRCLE 
 ---------------- */
 .fb-image-accordion-icon-circle {
-	width: 44px;
-	height: 44px;
-	background: #fff;
 	border-radius: 50%;
 	display: flex;
 	align-items: center;
@@ -79,11 +71,7 @@
 	overflow: hidden;
 	color: #333;
 
-	i,
 	svg {
-		font-size: 18px;
-		width: 18px;
-		height: 18px;
 		color: currentColor;
 		fill: currentColor;
 	}
@@ -112,20 +100,14 @@
 		opacity 0.4s ease,
 		transform 0.4s ease;
 	white-space: nowrap;
-	color: #fff;
 	min-width: 0;
 
 	.fb-image-accordion-title {
 		margin: 0 0 3px;
-		font-size: 18px;
-		font-weight: 600;
-		line-height: 1.2;
 	}
 
 	.fb-image-accordion-desc {
 		margin: 0;
-		font-size: 13px;
-		opacity: 0.8;
 	}
 }
 
@@ -140,7 +122,6 @@
 ----------------- */
 .fb-image-accordion-item.is-active {
 	flex: 1 !important;
-	border-radius: 25px;
 }
 
 .fb-trigger-hover
@@ -155,7 +136,6 @@
 .fb-trigger-hover {
 	.fb-image-accordion-item:hover {
 		flex: 1 !important;
-		border-radius: 25px;
 
 		.fb-image-accordion-text-group {
 			display: block;
@@ -170,7 +150,6 @@
 ----------------- */
 .fb-trigger-click .fb-image-accordion-item.is-active {
 	flex: 1 !important;
-	border-radius: 25px;
 }
 
 .fb-trigger-click
@@ -188,7 +167,6 @@
 	.fb-image-accordion-container {
 		flex-direction: column;
 		height: auto;
-		min-height: 400px;
 	}
 
 	.fb-image-accordion-item {
@@ -211,18 +189,12 @@
    PRESET 2
    ==========*/
 .preset-2 {
-	.fb-image-accordion-container {
-		gap: 0;
-	}
-
 	.fb-image-accordion-item {
 		flex: 0 0 90px;
-		border-radius: 0;
 	}
 
 	.fb-image-accordion-item.is-active {
 		flex: 1;
-		border-radius: 0;
 	}
 
 	.fb-image-accordion-content-wrapper {
@@ -247,9 +219,6 @@
 	}
 
 	.fb-image-accordion-dot {
-		width: 16px;
-		height: 16px;
-		background: #fff;
 		display: block;
 		border-radius: 50%;
 	}
@@ -274,16 +243,10 @@
 
 	.fb-image-accordion-number {
 		display: block;
-		font-size: 13px;
-		opacity: 0.65;
-		color: #fff;
 		margin-bottom: 4px;
 	}
 
 	.fb-image-accordion-title {
-		font-size: 20px;
-		font-weight: 600;
-		color: #fff;
 		margin: 0 0 4px;
 		opacity: 0;
 		white-space: nowrap;
@@ -291,8 +254,6 @@
 	}
 
 	.fb-sub-title {
-		font-size: 13px;
-		color: rgba(255, 255, 255, 0.75);
 		margin: 0;
 		opacity: 0;
 		transition: opacity 0.45s ease 0.05s;
@@ -306,12 +267,8 @@
 	}
 }
 
-.preset-2.fb-trigger-hover .fb-image-accordion-item {
-	border-radius: 0 !important;
-}
 .preset-2.fb-trigger-hover .fb-image-accordion-item:hover {
 	flex: 1 !important;
-	border-radius: 0 !important;
 }
 
 /* =============
@@ -320,17 +277,14 @@
 .preset-3 {
 	.fb-image-accordion-container {
 		flex-direction: column;
-		gap: 10px;
 	}
 
 	.fb-image-accordion-item {
 		flex: 0 0 64px;
-		border-radius: 12px;
 	}
 
 	.fb-image-accordion-item.is-active {
 		flex: 1 !important;
-		border-radius: 12px;
 	}
 
 	.fb-image-accordion-content-wrapper {
@@ -361,26 +315,15 @@
 	}
 
 	.fb-image-accordion-title {
-		font-size: 18px;
-		font-weight: 600;
-		color: #fff;
 		margin: 0 0 4px;
 	}
 
 	.fb-sub-title {
-		font-size: 13px;
-		color: rgba(255, 255, 255, 0.8);
 		margin: 0;
 	}
 
 	.fb-image-accordion-btn {
 		display: inline-block;
-		padding: 8px 18px;
-		background: rgba(255, 255, 255, 0.18);
-		color: #fff;
-		border: 1px solid rgba(255, 255, 255, 0.35);
-		border-radius: 6px;
-		font-size: 13px;
 		cursor: pointer;
 		white-space: nowrap;
 		flex-shrink: 0;
@@ -388,10 +331,6 @@
 		transition:
 			background 0.25s ease,
 			color 0.25s ease;
-
-		&:hover {
-			background: rgba(255, 255, 255, 0.32);
-		}
 	}
 
 	@media screen and (max-width: 767px) {
@@ -406,7 +345,6 @@
 	&.fb-trigger-hover {
 		.fb-image-accordion-item:hover {
 			flex: 1 !important;
-			border-radius: 12px;
 
 			.fb-image-accordion-content-wrapper {
 				display: flex;
@@ -417,7 +355,6 @@
 		.fb-image-accordion-container:hover
 			.fb-image-accordion-item.is-active:not(:hover) {
 			flex: 0 0 64px;
-			border-radius: 12px;
 		}
 	}
 }
@@ -427,10 +364,7 @@
    ============== */
 .preset-4 {
 	.fb-image-accordion-container {
-		gap: 0;
-		border-radius: 0;
 		overflow: hidden;
-		padding: 0;
 	}
 
 	.fb-image-accordion-item {
@@ -439,8 +373,6 @@
 		transform: skewX(-12deg);
 		margin: 0 -7px;
 		overflow: hidden;
-		border-radius: 0 !important;
-		background-image: none !important;
 		transition: flex 0.55s cubic-bezier(0.25, 1, 0.5, 1);
 		z-index: 1;
 
@@ -476,7 +408,6 @@
 	}
 
 	.fb-image-accordion-overlay {
-		background: rgba(0, 0, 0, 0.48);
 		z-index: 2;
 	}
 
@@ -505,18 +436,12 @@
 
 	.fb-image-accordion-number {
 		display: block;
-		font-size: 13px;
-		font-weight: 500;
-		color: rgba(255, 255, 255, 0.75);
 		margin: 0 0 4px;
 		letter-spacing: 0.04em;
 	}
 
 	.fb-image-accordion-title {
 		display: block;
-		font-size: 18px;
-		font-weight: 600;
-		color: #fff;
 		margin: 0 0 4px;
 		line-height: 1.25;
 		white-space: nowrap;
@@ -535,8 +460,6 @@
 
 	.fb-image-accordion-desc {
 		display: block;
-		font-size: 12px;
-		color: rgba(255, 255, 255, 0.78);
 		margin: 0;
 		white-space: nowrap;
 	}
@@ -562,7 +485,6 @@
 		.fb-image-accordion-title,
 		.fb-image-accordion-desc {
 			white-space: normal;
-			font-size: 11px;
 		}
 	}
 
@@ -595,116 +517,5 @@
 @media screen and (max-width: 767px) {
 	.fb-mobile-responsive {
 		display: none !important;
-	}
-}
-
-/* Repeater Sidebar UI */
-.fb-repeater-item-wrap {
-	background: #fff;
-	padding: 0 !important;
-}
-
-.fb-repeater-header {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding: 8px 12px;
-	background: #f0f0f0;
-	cursor: pointer;
-	border-bottom: 1px solid #e0e0e0;
-
-	&:hover {
-		background: #e8e8e8;
-	}
-}
-
-.fb-repeater-title-wrap {
-	display: flex;
-	align-items: center;
-	gap: 10px;
-	flex: 1;
-}
-
-.fb-repeater-index {
-	font-size: 10px;
-	background: #404655;
-	color: #fff;
-	width: 18px;
-	height: 18px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	border-radius: 50%;
-}
-
-.fb-repeater-title {
-	font-weight: 500;
-	font-size: 13px;
-}
-
-.fb-repeater-body {
-	padding: 15px;
-	background: #fff;
-}
-.fb-accordion-item-control {
-	margin-bottom: 8px;
-	display: block;
-
-	.fb-accordion-item-header {
-		border: 1px solid #e0e0e0 !important;
-		padding: 10px 12px;
-		cursor: pointer;
-		background: #fff;
-		border-radius: 2px;
-		display: flex;
-		align-items: center;
-		transition: background-color 0.1s ease-in-out;
-
-		&:hover {
-			background-color: #f0f0f0;
-		}
-
-		&.is-open {
-			border-bottom: 1px solid #f0f0f0 !important;
-			border-radius: 2px 2px 0 0;
-			margin-bottom: 0;
-		}
-
-		.fb-accordion-item-title {
-			font-size: 13px;
-			font-weight: 600;
-			color: #1e1e1e;
-		}
-
-		.fb-accordion-item-remove {
-			background: transparent !important;
-			border: none !important;
-			box-shadow: none !important;
-			color: #cc1818 !important;
-			padding: 0 !important;
-			min-width: unset !important;
-			height: auto !important;
-			margin-left: 8px; // Gap with Chevron
-			text-decoration: none !important;
-
-			&:hover,
-			&:focus,
-			&:active {
-				color: #f00 !important;
-				text-decoration: none !important;
-			}
-		}
-
-		.fb-accordion-item-toggle {
-			color: #1e1e1e;
-		}
-	}
-
-	.fb-accordion-item-body {
-		border: 1px solid #e0e0e0;
-		border-top: none;
-		padding: 15px;
-		background: #fff;
-		border-radius: 0 0 2px 2px;
 	}
 }

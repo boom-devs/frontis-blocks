@@ -240,7 +240,15 @@ const attributes = {
 		type: "boolean",
 		default: true,
 	},
+	imageAccordionShowIcon: {
+		type: "boolean",
+		default: true,
+	},
 	imageAccordionShowSubtitle: {
+		type: "boolean",
+		default: true,
+	},
+	imageAccordionShowButton: {
 		type: "boolean",
 		default: true,
 	},
@@ -812,6 +820,54 @@ const attributes = {
 	imageAccordionWrapperBorderRadiusLink: {
 		type: "boolean",
 		default: true,
+	},
+	imageAccordionPositionType: {
+		type: "string",
+		default: "default",
+	},
+	imageAccordionHZOrientationType: {
+		type: "string",
+		default: "left",
+	},
+	imageAccordionVROrientationType: {
+		type: "string",
+		default: "top",
+	},
+	imageAccordionHZLeftOffset: {
+		type: "object",
+		default: { Desktop: "", Tablet: "", Mobile: "" },
+	},
+	imageAccordionHZLeftOffsetUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+	imageAccordionHZRightOffset: {
+		type: "object",
+		default: { Desktop: "", Tablet: "", Mobile: "" },
+	},
+	imageAccordionHZRightOffsetUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+	imageAccordionVRTopOffset: {
+		type: "object",
+		default: { Desktop: "", Tablet: "", Mobile: "" },
+	},
+	imageAccordionVRTopOffsetUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+	imageAccordionVRBottomOffset: {
+		type: "object",
+		default: { Desktop: "", Tablet: "", Mobile: "" },
+	},
+	imageAccordionVRBottomOffsetUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+	imageAccordionOverflow: {
+		type: "string",
+		default: "default",
 	},
 };
 

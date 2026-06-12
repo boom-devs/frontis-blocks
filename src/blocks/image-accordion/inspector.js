@@ -30,6 +30,7 @@ import FB_InputControl from "@Components/input-control";
 import FB_IconPicker from "@Components/icon-picker";
 import FB_BackgroundColorControl from "@Components/background-color-control";
 import FB_CustomCSSEditor from "@Components/custom-css-editor";
+import FB_PositionControl from "@Components/position-control";
 import FB_InspectorControls from "@Components/InspectorControls";
 import FB_TypographyControl from "@Components/typography-control";
 import SortableItem from "./sortableItem";
@@ -62,6 +63,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 		imageAccordionShowTitle,
 		imageAccordionShowSubtitle,
 		imageAccordionShowIcon,
+		imageAccordionShowButton,
 		imageAccordionItemBorderRadiusUnits,
 		imageAccordionItemBorderRadiusDesktop,
 		imageAccordionItemBorderRadiusTablet,
@@ -210,6 +212,19 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 		imageAccordionCustomCSS,
 		imageAccordionWraperID,
 		imageAccordionWraperClass,
+
+		imageAccordionPositionType,
+		imageAccordionHZOrientationType,
+		imageAccordionVROrientationType,
+		imageAccordionHZLeftOffset,
+		imageAccordionHZLeftOffsetUnits,
+		imageAccordionHZRightOffset,
+		imageAccordionHZRightOffsetUnits,
+		imageAccordionVRTopOffset,
+		imageAccordionVRTopOffsetUnits,
+		imageAccordionVRBottomOffset,
+		imageAccordionVRBottomOffsetUnits,
+		imageAccordionOverflow,
 
 		imageAccordionDesktopSwitcher,
 		imageAccordionTabletSwitcher,
@@ -507,7 +522,8 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 						</div>
 					))}
 				</div>
-
+				{/* // Toggle Switcher Controls // Common switcher for title,subtitle for
+				all presets */}
 				<ToggleControl
 					label={__("Show Title", "frontis-blocks")}
 					checked={imageAccordionShowTitle}
@@ -518,20 +534,28 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 				<ToggleControl
 					label={__("Show Subtitle", "frontis-blocks")}
 					checked={imageAccordionShowSubtitle}
-					description={__(
-						"Note: Icon is only shown the preset 1",
-						"frontis-blocks",
-					)}
 					onChange={(value) =>
 						setAttributes({ imageAccordionShowSubtitle: value })
 					}
 				/>
-				<ToggleControl
-					label={__("Show Icon", "frontis-blocks")}
-					checked={imageAccordionShowIcon}
-					onChange={(value) => setAttributes({ imageAccordionShowIcon: value })}
-				/>
-
+				{imageAccordionPreset === "preset-3" && (
+					<ToggleControl
+						label={__("Show Button", "frontis-blocks")}
+						checked={imageAccordionShowButton}
+						onChange={(value) =>
+							setAttributes({ imageAccordionShowButton: value })
+						}
+					/>
+				)}
+				{imageAccordionPreset === "preset-1" && (
+					<ToggleControl
+						label={__("Show Icon", "frontis-blocks")}
+						checked={imageAccordionShowIcon}
+						onChange={(value) =>
+							setAttributes({ imageAccordionShowIcon: value })
+						}
+					/>
+				)}
 				{imageAccordionPreset === "preset-2" && (
 					<ToggleControl
 						label={__("Show Dots", "frontis-blocks")}
@@ -1316,6 +1340,64 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 							isRangeUnit={false}
 						/>
 
+						{/* <SelectControl
+							label={__("Overflow", "frontis-blocks")}
+							value={imageAccordionOverflow}
+							options={OVERFLOW_OP}
+							onChange={(value) =>
+								setAttributes({ imageAccordionOverflow: value })
+							}
+						/> */}
+
+						<FB_PositionControl
+							deviceType={deviceType}
+							positionType={imageAccordionPositionType}
+							setPositionType={(value) =>
+								setAttributes({ imageAccordionPositionType: value })
+							}
+							HZOrientationType={imageAccordionHZOrientationType}
+							setHZOrientationType={(value) =>
+								setAttributes({ imageAccordionHZOrientationType: value })
+							}
+							VROrientationType={imageAccordionVROrientationType}
+							setVROrientationType={(value) =>
+								setAttributes({ imageAccordionVROrientationType: value })
+							}
+							HZLeftOffset={imageAccordionHZLeftOffset}
+							setHZLeftOffset={(value) =>
+								setAttributes({ imageAccordionHZLeftOffset: value })
+							}
+							HZLeftOffsetUnits={imageAccordionHZLeftOffsetUnits}
+							setHZLeftOffsetUnits={(value) =>
+								setAttributes({ imageAccordionHZLeftOffsetUnits: value })
+							}
+							HZRightOffset={imageAccordionHZRightOffset}
+							setHZRightOffset={(value) =>
+								setAttributes({ imageAccordionHZRightOffset: value })
+							}
+							HZRightOffsetUnits={imageAccordionHZRightOffsetUnits}
+							setHZRightOffsetUnits={(value) =>
+								setAttributes({ imageAccordionHZRightOffsetUnits: value })
+							}
+							VRTopOffset={imageAccordionVRTopOffset}
+							setVRTopOffset={(value) =>
+								setAttributes({ imageAccordionVRTopOffset: value })
+							}
+							VRTopOffsetUnits={imageAccordionVRTopOffsetUnits}
+							setVRTopOffsetUnits={(value) =>
+								setAttributes({ imageAccordionVRTopOffsetUnits: value })
+							}
+							VRBottomOffset={imageAccordionVRBottomOffset}
+							setVRBottomOffset={(value) =>
+								setAttributes({ imageAccordionVRBottomOffset: value })
+							}
+							VRBottomOffsetUnits={imageAccordionVRBottomOffsetUnits}
+							setVRBottomOffsetUnits={(value) =>
+								setAttributes({ imageAccordionVRBottomOffsetUnits: value })
+							}
+							setAttributes={setAttributes}
+						/>
+
 						<FB_InputControl
 							label={__("CSS ID", "frontis-blocks")}
 							value={imageAccordionWraperID}
@@ -1334,38 +1416,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 							helpText={__("Separate with spaces key.", "frontis-blocks")}
 						/>
 					</PanelBody>
-
-					<PanelBody
-						title={__("Responsive Control", "frontis-blocks")}
-						initialOpen={false}
-						className="fb-setting-responsive-control-wrapper"
-					>
-						<ToggleControl
-							label={__("Hide on Desktop", "frontis-blocks")}
-							className="fb-setting-responsive-control"
-							checked={imageAccordionDesktopSwitcher}
-							onChange={(value) =>
-								setAttributes({ imageAccordionDesktopSwitcher: value })
-							}
-						/>
-						<ToggleControl
-							label={__("Hide on Tablet", "frontis-blocks")}
-							className="fb-setting-responsive-control"
-							checked={imageAccordionTabletSwitcher}
-							onChange={(value) =>
-								setAttributes({ imageAccordionTabletSwitcher: value })
-							}
-						/>
-						<ToggleControl
-							label={__("Hide on Mobile", "frontis-blocks")}
-							className="fb-setting-responsive-control"
-							checked={imageAccordionMobileSwitcher}
-							onChange={(value) =>
-								setAttributes({ imageAccordionMobileSwitcher: value })
-							}
-						/>
-					</PanelBody>
-
 					<PanelBody
 						title={__("Background", "frontis-blocks")}
 						initialOpen={false}
@@ -1660,6 +1710,27 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 								})
 							}
 							setAttributes={setAttributes}
+						/>
+					</PanelBody>
+
+					<PanelBody
+						title={__("Responsive Control", "frontis-blocks")}
+						initialOpen={false}
+						className="fb-setting-responsive-control-wrapper"
+					>
+						<FB_VisibilityControl
+							desktopValue={imageAccordionDesktopSwitcher}
+							setDesktopValue={(value) =>
+								setAttributes({ imageAccordionDesktopSwitcher: value })
+							}
+							tabletValue={imageAccordionTabletSwitcher}
+							setTabletValue={(value) =>
+								setAttributes({ imageAccordionTabletSwitcher: value })
+							}
+							mobileValue={imageAccordionMobileSwitcher}
+							setMobileValue={(value) =>
+								setAttributes({ imageAccordionMobileSwitcher: value })
+							}
 						/>
 					</PanelBody>
 

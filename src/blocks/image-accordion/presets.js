@@ -5,8 +5,16 @@ import { __ } from "@wordpress/i18n";
  */
 export const presetStyles = {
 	"preset-1": {
-		imageAccordionGap: { Desktop: "12", Tablet: "12", Mobile: "8" },
-		imageAccordionGapUnits: { Desktop: "px", Tablet: "px", Mobile: "px" },
+		imageAccordionGap: {
+			Desktop: "12",
+			Tablet: "12",
+			Mobile: "8",
+		},
+		imageAccordionGapUnits: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
 		imageAccordionItemBorderRadiusDesktop: {
 			top: "50",
 			bottom: "50",
@@ -36,15 +44,31 @@ export const presetStyles = {
 		imageAccordionShowNumber: false,
 		imageAccordionTitleColor: "#ffffff",
 		imageAccordionSubtitleColor: "rgba(255,255,255,0.8)",
-		imageAccordionTitleFontSize: { Desktop: "18", Tablet: "", Mobile: "" },
+		imageAccordionTitleFontSize: {
+			Desktop: "18",
+			Tablet: "",
+			Mobile: "",
+		},
 		imageAccordionTitleFontWeight: "600",
-		imageAccordionSubtitleFontSize: { Desktop: "13", Tablet: "", Mobile: "" },
+		imageAccordionSubtitleFontSize: {
+			Desktop: "13",
+			Tablet: "",
+			Mobile: "",
+		},
 		imageAccordionIconColor: "#0875FF",
 		imageAccordionIconCircleBgColor: "#ffffff",
 	},
 	"preset-2": {
-		imageAccordionGap: { Desktop: "0", Tablet: "0", Mobile: "0" },
-		imageAccordionGapUnits: { Desktop: "px", Tablet: "px", Mobile: "px" },
+		imageAccordionGap: {
+			Desktop: "0",
+			Tablet: "0",
+			Mobile: "0",
+		},
+		imageAccordionGapUnits: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
 		imageAccordionItemBorderRadiusDesktop: {
 			top: "0",
 			bottom: "0",
@@ -72,18 +96,38 @@ export const presetStyles = {
 		imageAccordionOverlayColor: "rgba(0,0,0,0.45)",
 		imageAccordionShowDots: true,
 		imageAccordionDotColor: "#ffffff",
-		imageAccordionDotSize: { Desktop: "16", Tablet: "14", Mobile: "12" },
+		imageAccordionDotSize: {
+			Desktop: "16",
+			Tablet: "14",
+			Mobile: "12",
+		},
 		imageAccordionShowNumber: true,
 		imageAccordionNumberColor: "#ffffff",
 		imageAccordionTitleColor: "#ffffff",
 		imageAccordionSubtitleColor: "rgba(255,255,255,0.75)",
-		imageAccordionTitleFontSize: { Desktop: "20", Tablet: "", Mobile: "" },
+		imageAccordionTitleFontSize: {
+			Desktop: "20",
+			Tablet: "",
+			Mobile: "",
+		},
 		imageAccordionTitleFontWeight: "600",
-		imageAccordionSubtitleFontSize: { Desktop: "13", Tablet: "", Mobile: "" },
+		imageAccordionSubtitleFontSize: {
+			Desktop: "13",
+			Tablet: "",
+			Mobile: "",
+		},
 	},
 	"preset-3": {
-		imageAccordionGap: { Desktop: "10", Tablet: "10", Mobile: "8" },
-		imageAccordionGapUnits: { Desktop: "px", Tablet: "px", Mobile: "px" },
+		imageAccordionGap: {
+			Desktop: "10",
+			Tablet: "10",
+			Mobile: "8",
+		},
+		imageAccordionGapUnits: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
 		imageAccordionItemBorderRadiusDesktop: {
 			top: "12",
 			bottom: "12",
