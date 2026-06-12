@@ -11,7 +11,6 @@ import Chart from "chart.js/auto";
 
 		if (!$wrapper.length || !$canvas.length) return;
 
-		// Use blockID or unique identifier for tracking instance
 		const chartId =
 			$wrapper.data("block-id") ||
 			"fb-chart-" + Math.random().toString(36).substr(2, 9);

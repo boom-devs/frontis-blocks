@@ -14,15 +14,18 @@ import { useDeviceType } from "@Config/displayType";
 import FB_Spacing from "@Components/spacing";
 import FB_Range from "@Components/range";
 import FB_ColorControl from "@Components/color-control";
+import FB_Color from "@Components/color";
 import FB_InputControl from "@Components/input-control";
 import FB_IconPicker from "@Components/icon-picker";
 import FB_CustomCSSEditor from "@Components/custom-css-editor";
+import FB_PositionControl from "@Components/position-control";
 import FB_InspectorControls from "@Components/InspectorControls";
 import FB_VisibilityControl from "@Components/visibility-control";
 import FB_BackgroundColorControl from "@Components/background-color-control";
 import FB_ResponsiveAlignmentControl from "@Components/responsive-alignment-control";
 import FB_TypographyControl from "@Components/typography-control";
 import FB_SwitcherControl from "@Components/switcher-control";
+
 import SortableItem from "./sortableItem";
 import { BORDER_STYLES } from "@Constants/fbConstants";
 import { Panel } from "@wordpress/components";
@@ -95,8 +98,15 @@ const Inspector = ({ attributes, setAttributes }) => {
 		toggleBtnBgColor,
 		toggleBtnHoverColor,
 		toggleBtnHoverBgColor,
+		toggleBtnPaddingUnits,
 		toggleBtnPaddingDesktop,
+		toggleBtnPaddingTablet,
+		toggleBtnPaddingMobile,
 		toggleBtnBorderRadiusDesktop,
+		toggleBtnBorderRadiusTablet,
+		toggleBtnBorderRadiusMobile,
+		toggleBtnBorderRadiusLink,
+
 		filterIcon,
 		filterIconSize,
 		filterIconSizeUnits,
@@ -196,6 +206,19 @@ const Inspector = ({ attributes, setAttributes }) => {
 		multiChartDesktopSwitcher,
 		multiChartTabletSwitcher,
 		multiChartMobileSwitcher,
+
+		multiChartPositionType,
+		multiChartHZOrientationType,
+		multiChartVROrientationType,
+		multiChartHZLeftOffset,
+		multiChartHZLeftOffsetUnits,
+		multiChartHZRightOffset,
+		multiChartHZRightOffsetUnits,
+		multiChartVRTopOffset,
+		multiChartVRTopOffsetUnits,
+		multiChartVRBottomOffset,
+		multiChartVRBottomOffsetUnits,
+		multiChartOverflow,
 		footerPaddingUnits,
 		footerPaddingTablet,
 		footerPaddingMobile,
@@ -204,6 +227,9 @@ const Inspector = ({ attributes, setAttributes }) => {
 		footerMarginMobile,
 		footerMarginDesktop,
 		footerMarginLink,
+
+		toggleBtnPaddingLink,
+		toggleBtnBorderRadiusUnits,
 		xAxisTypography,
 		yAxisTypography,
 
@@ -256,7 +282,10 @@ const Inspector = ({ attributes, setAttributes }) => {
 					},
 				});
 		}
+		``;
 	};
+
+	// testing kit
 
 	const wrapperBorderRadiusChange = (event, position) => {
 		const value = event.target.value;
@@ -292,9 +321,9 @@ const Inspector = ({ attributes, setAttributes }) => {
 		}
 	};
 
-	/* =============================================
+	/* =================
        REPEATER HANDLERS
-    ============================================= */
+    ================= */
 	const updateFilter = (id, key, value) => {
 		const newList = filterList.map((item, index) =>
 			(item.id || index) === id ? { ...item, [key]: value } : item,
@@ -415,12 +444,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 						{ label: __("Doughnut", "frontis-blocks"), value: "doughnut" },
 						{ label: __("Radar", "frontis-blocks"), value: "radar" },
 						{ label: __("Polar Area", "frontis-blocks"), value: "polarArea" },
-						// {
-						// 	label: __("Waterfall (Bar)", "frontis-blocks"),
-						// 	value: "waterfall",
-						// },
-						// { label: __("Bubble", "frontis-blocks"), value: "bubble" },
-						// { label: __("Scatter", "frontis-blocks"), value: "scatter" },
 					]}
 					onChange={(value) => {
 						setAttributes({ chartType: value });
@@ -810,6 +833,56 @@ const Inspector = ({ attributes, setAttributes }) => {
 					units={filterIconSizeUnits}
 					setAttributes={setAttributes}
 				/>
+				<FB_Spacing
+					label={__("Padding", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnits={toggleBtnPaddingUnits}
+					spacingUnitsHandler={(v) =>
+						setAttributes({ toggleBtnPaddingUnits: v })
+					}
+					spacingDesktop={toggleBtnPaddingDesktop}
+					spacingTablet={toggleBtnPaddingTablet}
+					spacingMobile={toggleBtnPaddingMobile}
+					handleSpacingUnitHandler={(e, pos) =>
+						handleSpacingChange(
+							"toggleBtnPadding",
+							e,
+							pos,
+							toggleBtnPaddingLink,
+						)
+					}
+					spacingCombineBtn={toggleBtnPaddingLink}
+					spacingCombineBtnHandler={() =>
+						setAttributes({ toggleBtnPaddingLink: !toggleBtnPaddingLink })
+					}
+					setAttributes={setAttributes}
+				/>
+				<FB_Spacing
+					label={__("Border Radius", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnits={toggleBtnBorderRadiusUnits}
+					spacingUnitsHandler={(v) =>
+						setAttributes({ toggleBtnBorderRadiusUnits: v })
+					}
+					spacingDesktop={toggleBtnBorderRadiusDesktop}
+					spacingTablet={toggleBtnBorderRadiusTablet}
+					spacingMobile={toggleBtnBorderRadiusMobile}
+					handleSpacingUnitHandler={(e, pos) =>
+						handleSpacingChange(
+							"toggleBtnBorderRadius",
+							e,
+							pos,
+							toggleBtnBorderRadiusLink,
+						)
+					}
+					spacingCombineBtn={toggleBtnBorderRadiusLink}
+					spacingCombineBtnHandler={() =>
+						setAttributes({
+							toggleBtnBorderRadiusLink: !toggleBtnBorderRadiusLink,
+						})
+					}
+					setAttributes={setAttributes}
+				/>
 			</PanelBody>
 			<PanelBody
 				title={__("Grid & Axis Style", "frontis-blocks")}
@@ -926,6 +999,63 @@ const Inspector = ({ attributes, setAttributes }) => {
 					setAttributes={setAttributes}
 					isRangeUnit={false}
 				/>
+
+				{/* <SelectControl
+					label={__("Overflow", "frontis-blocks")}
+					value={multiChartOverflow}
+					options={OVERFLOW_OP}
+					onChange={(value) => setAttributes({ multiChartOverflow: value })}
+				/> */}
+
+				<FB_PositionControl
+					deviceType={deviceType}
+					positionType={multiChartPositionType}
+					setPositionType={(value) =>
+						setAttributes({ multiChartPositionType: value })
+					}
+					HZOrientationType={multiChartHZOrientationType}
+					setHZOrientationType={(value) =>
+						setAttributes({ multiChartHZOrientationType: value })
+					}
+					VROrientationType={multiChartVROrientationType}
+					setVROrientationType={(value) =>
+						setAttributes({ multiChartVROrientationType: value })
+					}
+					HZLeftOffset={multiChartHZLeftOffset}
+					setHZLeftOffset={(value) =>
+						setAttributes({ multiChartHZLeftOffset: value })
+					}
+					HZLeftOffsetUnits={multiChartHZLeftOffsetUnits}
+					setHZLeftOffsetUnits={(value) =>
+						setAttributes({ multiChartHZLeftOffsetUnits: value })
+					}
+					HZRightOffset={multiChartHZRightOffset}
+					setHZRightOffset={(value) =>
+						setAttributes({ multiChartHZRightOffset: value })
+					}
+					HZRightOffsetUnits={multiChartHZRightOffsetUnits}
+					setHZRightOffsetUnits={(value) =>
+						setAttributes({ multiChartHZRightOffsetUnits: value })
+					}
+					VRTopOffset={multiChartVRTopOffset}
+					setVRTopOffset={(value) =>
+						setAttributes({ multiChartVRTopOffset: value })
+					}
+					VRTopOffsetUnits={multiChartVRTopOffsetUnits}
+					setVRTopOffsetUnits={(value) =>
+						setAttributes({ multiChartVRTopOffsetUnits: value })
+					}
+					VRBottomOffset={multiChartVRBottomOffset}
+					setVRBottomOffset={(value) =>
+						setAttributes({ multiChartVRBottomOffset: value })
+					}
+					VRBottomOffsetUnits={multiChartVRBottomOffsetUnits}
+					setVRBottomOffsetUnits={(value) =>
+						setAttributes({ multiChartVRBottomOffsetUnits: value })
+					}
+					setAttributes={setAttributes}
+				/>
+
 				<FB_InputControl
 					label={__("CSS ID", "frontis-blocks")}
 					value={multiChartWrapperID}
@@ -938,32 +1068,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 					value={multiChartWrapperClass}
 					onChangeValue={(value) =>
 						setAttributes({ multiChartWrapperClass: value })
-					}
-				/>
-			</PanelBody>
-
-			<PanelBody
-				title={__("Responsive Visibility", "frontis-blocks")}
-				initialOpen={false}
-				className="fb-setting-responsive-control-wrapper"
-			>
-				<FB_VisibilityControl
-					desktopValue={multiChartDesktopSwitcher}
-					setDesktopValue={(v) =>
-						setAttributes({ multiChartDesktopSwitcher: v })
-					}
-					tabletValue={multiChartTabletSwitcher}
-					setTabletValue={(v) => setAttributes({ multiChartTabletSwitcher: v })}
-					mobileValue={multiChartMobileSwitcher}
-					setMobileValue={(v) => setAttributes({ multiChartMobileSwitcher: v })}
-				/>
-			</PanelBody>
-
-			<PanelBody title={__("Custom CSS", "frontis-blocks")} initialOpen={false}>
-				<FB_CustomCSSEditor
-					value={multiChartCustomCSS}
-					onChangeValue={(value) =>
-						setAttributes({ multiChartCustomCSS: value })
 					}
 				/>
 			</PanelBody>
@@ -1117,81 +1221,101 @@ const Inspector = ({ attributes, setAttributes }) => {
 			>
 				<SelectControl
 					label={__("Border Style", "frontis-blocks")}
-					value={globalBorder}
+					value={multiChartWrapperBorder}
 					options={BORDER_STYLES}
-					onChange={(value) => setAttributes({ globalBorder: value })}
+					onChange={(value) =>
+						setAttributes({ multiChartWrapperBorder: value })
+					}
 				/>
 
 				<FB_Color
 					label={__("Border Color", "frontis-blocks")}
-					globalColorSwitcher={globalBorderColorSwitcher}
-					globalColor={globalBorderColor}
-					globalHoverColor={globalBorderHoverColor}
-					handleColorSwitcherChange={handleGlobalBorderColorSwitcherChange}
-					handleGlobalColorChange={handleGlobalBorderColorChange}
-					handleGlobalHoverColorChange={handleGlobalBorderHoverColorChange}
+					globalColorSwitcher={multiChartGlobalBorderColorSwitcher}
+					globalColor={multiChartGlobalBorderColor}
+					globalHoverColor={multiChartGlobalBorderHoverColor}
+					handleColorSwitcherChange={
+						handleMultiChartGlobalBorderColorSwitcherChange
+					}
+					handleGlobalColorChange={handleMultiChartGlobalBorderColorChange}
+					handleGlobalHoverColorChange={
+						handleMultiChartGlobalBorderHoverColorChange
+					}
 				/>
 
 				<FB_Spacing
 					label={__("Border", "frontis-blocks")}
 					deviceType={deviceType}
-					spacingUnitsHandler={handleGlobalBorderUnitsHandler}
-					spacingUnits={globalBorderUnits}
-					spacingDesktop={globalBorderDesktop}
-					spacingTablet={globalBorderTablet}
-					spacingMobile={globalBorderMobile}
-					handleSpacingUnitHandler={handleGlobalBorderUnitChange}
-					spacingCombineBtn={globalBorderLink}
-					spacingCombineBtnHandler={handleGlobalBorderCombineBtn}
+					spacingUnitsHandler={handleMultiChartGlobalBorderUnitsHandler}
+					spacingUnits={multiChartGlobalBorderUnits}
+					spacingDesktop={multiChartGlobalBorderDesktop}
+					spacingTablet={multiChartGlobalBorderTablet}
+					spacingMobile={multiChartGlobalBorderMobile}
+					handleSpacingUnitHandler={handleMultiChartGlobalBorderUnitChange}
+					spacingCombineBtn={multiChartGlobalBorderLink}
+					spacingCombineBtnHandler={handleMultiChartGlobalBorderCombineBtn}
 					setAttributes={setAttributes}
 				/>
 
 				<FB_Spacing
 					label={__("Border Radius", "frontis-blocks")}
 					deviceType={deviceType}
-					spacingUnitsHandler={handleGlobalBorderRadiusUnitsHandler}
-					spacingUnits={globalBorderRadiusUnits}
-					spacingDesktop={globalBorderRadiusDesktop}
-					spacingTablet={globalBorderRadiusTablet}
-					spacingMobile={globalBorderRadiusMobile}
-					handleSpacingUnitHandler={handleGlobalBorderRadiusUnitChange}
-					spacingCombineBtn={globalBorderRadiusLink}
-					spacingCombineBtnHandler={handleGlobalBorderRadiusCombineBtn}
+					spacingUnitsHandler={handleMultiChartGlobalBorderRadiusUnitsHandler}
+					spacingUnits={multiChartGlobalBorderRadiusUnits}
+					spacingDesktop={multiChartGlobalBorderRadiusDesktop}
+					spacingTablet={multiChartGlobalBorderRadiusTablet}
+					spacingMobile={multiChartGlobalBorderRadiusMobile}
+					handleSpacingUnitHandler={
+						handleMultiChartGlobalBorderRadiusUnitChange
+					}
+					spacingCombineBtn={multiChartGlobalBorderRadiusLink}
+					spacingCombineBtnHandler={
+						handleMultiChartGlobalBorderRadiusCombineBtn
+					}
 					setAttributes={setAttributes}
 				/>
 				<FB_BoxShadowControl
 					onBoxShadowChange={(value) =>
-						setAttributes({ boxGlobalBoxShadowValues: value })
+						setAttributes({ boxMultiChartBoxShadowValues: value })
 					}
-					initialShadowValue={boxGlobalBoxShadowValues}
+					initialShadowValue={boxMultiChartBoxShadowValues}
 					onBoxShadowStyleChange={(value) =>
 						setAttributes({
-							boxGlobalBoxShadowCssValue: value,
+							boxMultiChartBoxShadowCssValue: value,
 						})
 					}
 				/>
 			</PanelBody> */}
 
-			{/* <PanelBody
+			<PanelBody
 				title={__("Responsive Control", "frontis-blocks")}
 				initialOpen={false}
 				className="fb-setting-responsive-control-wrapper"
 			>
 				<FB_VisibilityControl
-					desktopValue={advancedImageDesktopSwitcher}
+					desktopValue={multiChartDesktopSwitcher}
 					setDesktopValue={(value) =>
-						setAttributes({ advancedImageDesktopSwitcher: value })
+						setAttributes({ multiChartDesktopSwitcher: value })
 					}
-					tabletValue={advancedImageTabletSwitcher}
+					tabletValue={multiChartTabletSwitcher}
 					setTabletValue={(value) =>
-						setAttributes({ advancedImageTabletSwitcher: value })
+						setAttributes({ multiChartTabletSwitcher: value })
 					}
-					mobileValue={advancedImageMobileSwitcher}
+					mobileValue={multiChartMobileSwitcher}
 					setMobileValue={(value) =>
-						setAttributes({ advancedImageMobileSwitcher: value })
+						setAttributes({ multiChartMobileSwitcher: value })
 					}
 				/>
-			</PanelBody> */}
+			</PanelBody>
+
+			<PanelBody title={__("Custom CSS", "frontis-blocks")} initialOpen={false}>
+				<FB_CustomCSSEditor
+					value={multiChartCustomCSS}
+					onChangeValue={(value) =>
+						setAttributes({ multiChartCustomCSS: value })
+					}
+				/>
+			</PanelBody>
+
 			{/* <PanelBody title={__("Custom CSS", "frontis-blocks")} initialOpen={false}>
 				<FB_CustomCSSEditor
 					value={advancedImageCustomCSS}

@@ -41,6 +41,10 @@ export default function Edit({
 		multiChartMobileSwitcher,
 		multiChartWrapperID,
 		multiChartWrapperClass,
+		legendTextColor,
+		legendDotSize,
+		legendDotRadius,
+		legendGap,
 	} = attributes;
 
 	const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -245,7 +249,21 @@ export default function Edit({
 								)}
 								<canvas ref={canvasRef}></canvas>
 							</div>
-							{showChartLegend && <div className="fb-chart-legend"></div>}
+							{showChartLegend && (
+								<div className="fb-chart-legend">
+									{chartDatasets.map((series, i) => (
+										<div key={i} className="fb-legend-item">
+											<span
+												className="fb-legend-dot"
+												style={{ backgroundColor: series.color || "#3b82f6" }}
+											></span>
+											<span className="fb-legend-text">
+												{series.series_name || "Series"}
+											</span>
+										</div>
+									))}
+								</div>
+							)}
 						</div>
 					</div>
 

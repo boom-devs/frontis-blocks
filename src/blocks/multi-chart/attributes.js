@@ -400,9 +400,33 @@ const attributes = {
 		type: "object",
 		default: { top: "9", bottom: "9", left: "18", right: "18" },
 	},
+	toggleBtnPaddingUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+	toggleBtnPaddingTablet: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	toggleBtnPaddingMobile: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	toggleBtnPaddingLink: {
+		type: "boolean",
+		default: true,
+	},
 	toggleBtnBorderRadiusDesktop: {
 		type: "object",
 		default: { top: "999", bottom: "999", left: "999", right: "999" },
+	},
+	toggleBtnBorderRadiusUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+	toggleBtnBorderRadiusLink: {
+		type: "boolean",
+		default: true,
 	},
 	filterIcon: {
 		type: "object",
@@ -578,19 +602,35 @@ const attributes = {
 
 	legendTextAlignment: {
 		type: "object",
-		default: { Desktop: "center", Tablet: "", Mobile: "" },
+		default: {
+			Desktop: "center",
+			Tablet: "",
+			Mobile: "",
+		},
 	},
 	legendGap: {
 		type: "object",
-		default: { Desktop: "10", Tablet: "", Mobile: "" },
+		default: {
+			Desktop: "10",
+			Tablet: "",
+			Mobile: "",
+		},
 	},
 	legendDotSize: {
 		type: "object",
-		default: { Desktop: "10", Tablet: "", Mobile: "" },
+		default: {
+			Desktop: "10",
+			Tablet: "",
+			Mobile: "",
+		},
 	},
 	legendDotRadius: {
 		type: "object",
-		default: { Desktop: "50", Tablet: "", Mobile: "" },
+		default: {
+			Desktop: "50",
+			Tablet: "",
+			Mobile: "",
+		},
 	},
 	legendTextColor: {
 		type: "string",
@@ -623,7 +663,12 @@ const attributes = {
 	},
 	footerPaddingDesktop: {
 		type: "object",
-		default: { top: "24", bottom: "0", left: "0", right: "0" },
+		default: {
+			top: "24",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
 	},
 	footerPaddingLink: {
 		type: "boolean",
@@ -632,7 +677,11 @@ const attributes = {
 
 	multiChartGlobalZIndex: {
 		type: "object",
-		default: { Desktop: "", Tablet: "", Mobile: "" },
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
 	},
 	multiChartCustomCSS: {
 		type: "string",
@@ -773,15 +822,29 @@ const attributes = {
 	},
 	multiChartWrapperBorderTypeUnits: {
 		type: "object",
-		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
 	},
 	multiChartWrapperBorderTypeDesktop: {
 		type: "object",
-		default: { top: "", bottom: "", left: "", right: "" },
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
 	},
 	multiChartWrapperBorderTypeTablet: {
 		type: "object",
-		default: { top: "", bottom: "", left: "", right: "" },
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
 	},
 	multiChartWrapperBorderTypeMobile: {
 		type: "object",
@@ -838,19 +901,126 @@ const attributes = {
 	},
 	multiChartMarginDesktop: {
 		type: "object",
-		default: { top: "", bottom: "", left: "", right: "" },
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
 	},
 	multiChartMarginTablet: {
 		type: "object",
-		default: { top: "", bottom: "", left: "", right: "" },
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
 	},
 	multiChartMarginMobile: {
 		type: "object",
-		default: { top: "", bottom: "", left: "", right: "" },
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
 	},
 	multiChartMarginLink: {
 		type: "boolean",
 		default: true,
+	},
+	multiChartPositionType: {
+		type: "string",
+		default: "default",
+	},
+	multiChartHZOrientationType: {
+		type: "string",
+		default: "left",
+	},
+	multiChartVROrientationType: {
+		type: "string",
+		default: "top",
+	},
+	multiChartHZLeftOffset: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	multiChartHZLeftOffsetUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+
+			Mobile: "px",
+		},
+	},
+	multiChartHZRightOffset: {
+		type: "object",
+		default: {
+			Desktop: "",
+
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	multiChartHZRightOffsetUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+
+			Tablet: "px",
+
+			Mobile: "px",
+		},
+	},
+	multiChartVRTopOffset: {
+		type: "object",
+		default: {
+			Desktop: "",
+
+			Tablet: "",
+
+			Mobile: "",
+		},
+	},
+	multiChartVRTopOffsetUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+
+			Tablet: "px",
+
+			Mobile: "px",
+		},
+	},
+	multiChartVRBottomOffset: {
+		type: "object",
+		default: {
+			Desktop: "",
+
+			Tablet: "",
+
+			Mobile: "",
+		},
+	},
+	multiChartVRBottomOffsetUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+
+			Tablet: "px",
+
+			Mobile: "px",
+		},
+	},
+	multiChartOverflow: {
+		type: "string",
+		default: "default",
 	},
 };
 
