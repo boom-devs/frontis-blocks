@@ -163,27 +163,27 @@
 /* ------------
    RESPONSIVE 
 ----------------- */
-@media screen and (max-width: 767px) {
-	.fb-image-accordion-container {
-		flex-direction: column;
-		height: auto;
-	}
+// @media screen and (max-width: 767px) {
+// 	.fb-image-accordion-container {
+// 		flex-direction: column;
+// 		height: auto;
+// 	}
 
-	.fb-image-accordion-item {
-		flex: 0 0 60px !important;
-		border-radius: 16px !important;
-		width: 100%;
-	}
+// 	.fb-image-accordion-item {
+// 		flex: 0 0 60px !important;
+// 		border-radius: 16px !important;
+// 		width: 100%;
+// 	}
 
-	.fb-image-accordion-item.is-active {
-		flex: 1 1 200px !important;
-		border-radius: 16px !important;
-	}
+// 	.fb-image-accordion-item.is-active {
+// 		flex: 1 1 200px !important;
+// 		border-radius: 16px !important;
+// 	}
 
-	.fb-image-accordion-text-group {
-		white-space: normal;
-	}
-}
+// 	.fb-image-accordion-text-group {
+// 		white-space: normal;
+// 	}
+// }
 
 /* ==========
    PRESET 2
