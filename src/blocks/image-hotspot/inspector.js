@@ -325,6 +325,39 @@ export default function Inspector({ attributes, setAttributes }) {
     imgotsHpotsPopoverHoverCustomGradientSwitcher,
     imgotsHpotsPopoverHoverCustomGradientInputValue,
 
+    /** Start imageHotspotsGlobal Border */
+    imageHotspotsGlobalBorder,
+    imageHotspotsGlobalBorderColorSwitcher,
+    imageHotspotsGlobalBorderColor,
+    imageHotspotsGlobalBorderHoverColor,
+    /** End imageHotspotsGlobal Border */
+
+    /** Start imageHotspotsGlobal Border Units */
+    imageHotspotsGlobalBorderUnits,
+    imageHotspotsGlobalBorderDesktop,
+    imageHotspotsGlobalBorderTablet,
+    imageHotspotsGlobalBorderMobile,
+    imageHotspotsGlobalBorderLink,
+    /** End imageHotspotsGlobal Border Units */
+
+    /** Start imageHotspotsGlobal Border Radius */
+    imageHotspotsGlobalBorderRadiusUnits,
+    imageHotspotsGlobalBorderRadiusDesktop,
+    imageHotspotsGlobalBorderRadiusTablet,
+    imageHotspotsGlobalBorderRadiusMobile,
+    imageHotspotsGlobalBorderRadiusLink,
+    /** End imageHotspotsGlobal Border Radius */
+
+    /** Start imageHotspotsGlobal Box Shadow */
+    imageHotspotsGlobalBoxShadowSwitcher,
+    imageHotspotsGlobalBoxShadowValues,
+    imageHotspotsGlobalBoxShadowCssValue,
+    imageHotspotsGlobalBoxShadowHoverValues,
+    imageHotspotsGlobalBoxShadowHoverCssValue,
+    /** End imageHotspotsGlobal Box Shadow */
+
+
+
   } = attributes;
 
   const deviceType = useDeviceType();
@@ -611,38 +644,38 @@ export default function Inspector({ attributes, setAttributes }) {
   };
 
   /** Start Global border */
-  const handleGlobalBorderUnitChange = (event, position) => {
+  const imageHotspotsGlobalBorderUnitsChange = (event, position) => {
     const value = event.target.value;
-    if (globalBorderLink) {
+    if (imageHotspotsGlobalBorderLink) {
       switch (deviceType) {
-        case "Desktop":
+        case 'Desktop':
           setAttributes({
-            globalBorderDesktop: {
+            imageHotspotsGlobalBorderDesktop: {
               top: value,
               right: value,
               bottom: value,
-              left: value,
-            },
+              left: value
+            }
           });
           break;
-        case "Tablet":
+        case 'Tablet':
           setAttributes({
-            globalBorderTablet: {
+            imageHotspotsGlobalBorderTablet: {
               top: value,
               right: value,
               bottom: value,
-              left: value,
-            },
+              left: value
+            }
           });
           break;
-        case "Mobile":
+        case 'Mobile':
           setAttributes({
-            globalBorderMobile: {
+            imageHotspotsGlobalBorderMobile: {
               top: value,
               right: value,
               bottom: value,
-              left: value,
-            },
+              left: value
+            }
           });
           break;
         default:
@@ -650,20 +683,14 @@ export default function Inspector({ attributes, setAttributes }) {
       }
     } else {
       switch (deviceType) {
-        case "Desktop":
-          setAttributes({
-            globalBorderDesktop: { ...globalBorderDesktop, [position]: value },
-          });
+        case 'Desktop':
+          setAttributes({ imageHotspotsGlobalBorderDesktop: { ...imageHotspotsGlobalBorderDesktop, [position]: value } });
           break;
-        case "Tablet":
-          setAttributes({
-            globalBorderTablet: { ...globalBorderTablet, [position]: value },
-          });
+        case 'Tablet':
+          setAttributes({ imageHotspotsGlobalBorderTablet: { ...imageHotspotsGlobalBorderTablet, [position]: value } });
           break;
-        case "Mobile":
-          setAttributes({
-            globalBorderMobile: { ...globalBorderMobile, [position]: value },
-          });
+        case 'Mobile':
+          setAttributes({ imageHotspotsGlobalBorderMobile: { ...imageHotspotsGlobalBorderMobile, [position]: value } });
           break;
         default:
           break;
@@ -671,103 +698,93 @@ export default function Inspector({ attributes, setAttributes }) {
     }
   };
 
-  const handleGlobalBorderCombineBtn = () => {
-    setAttributes({ globalBorderLink: !globalBorderLink });
+  const imageHotspotsGlobalBorderLinkBtn = () => {
+    setAttributes({
+      imageHotspotsGlobalBorderLink: !imageHotspotsGlobalBorderLink
+    });
   };
 
-  const handleGlobalBorderUnitsHandler = (unit) => {
+  const imageHotspotsGlobalBorderUnitsHandler = (unit) => {
     setAttributes({
-      globalBorderUnits: {
-        ...globalBorderUnits,
-        [deviceType]: unit,
-      },
+      imageHotspotsGlobalBorderUnits: {
+        ...imageHotspotsGlobalBorderUnits,
+        [deviceType]: unit
+      }
+    });
+  };
+  /** End imageHotspotsGlobal Border */
+
+  /** Start imageHotspotsGlobal Border Radius */
+  const imageHotspotsGlobalBorderRadiusUnitsChange = (event, position) => {
+    const value = event.target.value;
+    if (imageHotspotsGlobalBorderRadiusLink) {
+      switch (deviceType) {
+        case 'Desktop':
+          setAttributes({
+            imageHotspotsGlobalBorderRadiusDesktop: {
+              top: value,
+              right: value,
+              bottom: value,
+              left: value
+            }
+          });
+          break;
+        case 'Tablet':
+          setAttributes({
+            imageHotspotsGlobalBorderRadiusTablet: {
+              top: value,
+              right: value,
+              bottom: value,
+              left: value
+            }
+          });
+          break;
+        case 'Mobile':
+          setAttributes({
+            imageHotspotsGlobalBorderRadiusMobile: {
+              top: value,
+              right: value,
+              bottom: value,
+              left: value
+            }
+          });
+          break;
+        default:
+          break;
+      }
+    } else {
+      switch (deviceType) {
+        case 'Desktop':
+          setAttributes({ imageHotspotsGlobalBorderRadiusDesktop: { ...imageHotspotsGlobalBorderRadiusDesktop, [position]: value } });
+          break;
+        case 'Tablet':
+          setAttributes({ imageHotspotsGlobalBorderRadiusTablet: { ...imageHotspotsGlobalBorderRadiusTablet, [position]: value } });
+          break;
+        case 'Mobile':
+          setAttributes({ imageHotspotsGlobalBorderRadiusMobile: { ...imageHotspotsGlobalBorderRadiusMobile, [position]: value } });
+          break;
+        default:
+          break;
+      }
+    }
+  };
+
+  const imageHotspotsGlobalBorderRadiusLinkBtn = () => {
+    setAttributes({
+      imageHotspotsGlobalBorderRadiusLink: !imageHotspotsGlobalBorderRadiusLink
+    });
+  };
+
+  const imageHotspotsGlobalBorderRadiusUnitsHandler = (unit) => {
+    setAttributes({
+      imageHotspotsGlobalBorderRadiusUnits: {
+        ...imageHotspotsGlobalBorderRadiusUnits,
+        [deviceType]: unit
+      }
     });
   };
   /** End Global border */
   /** End Border */
-
-  /** Start Global border radius*/
-  const handleGlobalBorderRadiusUnitChange = (event, position) => {
-    const value = event.target.value;
-    if (globalBorderRadiusLink) {
-      switch (deviceType) {
-        case "Desktop":
-          setAttributes({
-            globalBorderRadiusDesktop: {
-              top: value,
-              right: value,
-              bottom: value,
-              left: value,
-            },
-          });
-          break;
-        case "Tablet":
-          setAttributes({
-            globalBorderRadiusTablet: {
-              top: value,
-              right: value,
-              bottom: value,
-              left: value,
-            },
-          });
-          break;
-        case "Mobile":
-          setAttributes({
-            globalBorderRadiusMobile: {
-              top: value,
-              right: value,
-              bottom: value,
-              left: value,
-            },
-          });
-          break;
-        default:
-          break;
-      }
-    } else {
-      switch (deviceType) {
-        case "Desktop":
-          setAttributes({
-            globalBorderRadiusDesktop: {
-              ...globalBorderRadiusDesktop,
-              [position]: value,
-            },
-          });
-          break;
-        case "Tablet":
-          setAttributes({
-            globalBorderRadiusTablet: {
-              ...globalBorderRadiusTablet,
-              [position]: value,
-            },
-          });
-          break;
-        case "Mobile":
-          setAttributes({
-            globalBorderRadiusMobile: {
-              ...globalBorderRadiusMobile,
-              [position]: value,
-            },
-          });
-          break;
-        default:
-          break;
-      }
-    }
-  };
-
-  const handleGlobalBorderRadiusCombineBtn = () => {
-    setAttributes({ globalBorderRadiusLink: !globalBorderRadiusLink });
-  };
-
-  const handleGlobalBorderRadiusUnitsHandler = (unit) => {
-    setAttributes({
-      globalBorderRadiusUnits: {
-        ...globalBorderRadiusUnits,
-        [deviceType]: unit,
-      },
-    });
-  };
 
   useEffect(() => {
     let needsUpdate = false;
@@ -2771,108 +2788,86 @@ export default function Inspector({ attributes, setAttributes }) {
         title={__("Border and Shadow", "frontis-blocks")}
         initialOpen={false}
       >
+
         <SelectControl
           label={__("Border Style", "frontis-blocks")}
-          value={globalBorder}
+          value={imageHotspotsGlobalBorder}
           options={BORDER_STYLES}
-          onChange={(value) =>
-            setAttributes({ globalBorder: value })
-          }
+          onChange={(value) => setAttributes({ imageHotspotsGlobalBorder: value })}
         />
+
 
         <FB_SwitcherControl
           label={__("Border Color", "frontis-blocks")}
-          globalSwitcher={globalBorderColorSwitcher}
-          setGlobalSwitcher={(value) => setAttributes({ globalBorderColorSwitcher: value })}
+          globalSwitcher={imageHotspotsGlobalBorderColorSwitcher}
+          setGlobalSwitcher={(value) => setAttributes({ imageHotspotsGlobalBorderColorSwitcher: value })}
         />
 
-        {globalBorderColorSwitcher === 'normal' && (
+        {imageHotspotsGlobalBorderColorSwitcher === 'normal' && (
           <FB_ColorControl
             label={__("Normal Color", "frontis-blocks")}
-            globalColor={globalBorderColor}
-            setGlobalColor={(value) => setAttributes({ globalBorderColor: value === undefined ? '' : value })}
+            globalColor={imageHotspotsGlobalBorderColor}
+            setGlobalColor={(value) => setAttributes({ imageHotspotsGlobalBorderColor: value === undefined ? '' : value })}
           />
         )}
 
-        {globalBorderColorSwitcher === 'hover' && (
+        {imageHotspotsGlobalBorderColorSwitcher === 'hover' && (
           <FB_ColorControl
             label={__("Hover Color", "frontis-blocks")}
-            globalColor={globalBorderHoverColor}
-            setGlobalColor={(value) => setAttributes({ globalBorderHoverColor: value === undefined ? '' : value })}
+            globalColor={imageHotspotsGlobalBorderHoverColor}
+            setGlobalColor={(value) => setAttributes({ imageHotspotsGlobalBorderHoverColor: value === undefined ? '' : value })}
           />
         )}
 
         <FB_Spacing
           label={__("Border", "frontis-blocks")}
           deviceType={deviceType}
-          spacingUnitsHandler={handleGlobalBorderUnitsHandler}
-          spacingUnits={globalBorderUnits}
-          spacingDesktop={globalBorderDesktop}
-          spacingTablet={globalBorderTablet}
-          spacingMobile={globalBorderMobile}
-          handleSpacingUnitHandler={
-            handleGlobalBorderUnitChange
-          }
-          spacingCombineBtn={globalBorderLink}
-          spacingCombineBtnHandler={
-            handleGlobalBorderCombineBtn
-          }
+          spacingUnitsHandler={imageHotspotsGlobalBorderUnitsHandler}
+          spacingUnits={imageHotspotsGlobalBorderUnits}
+          spacingDesktop={imageHotspotsGlobalBorderDesktop}
+          spacingTablet={imageHotspotsGlobalBorderTablet}
+          spacingMobile={imageHotspotsGlobalBorderMobile}
+          handleSpacingUnitHandler={imageHotspotsGlobalBorderUnitsChange}
+          spacingCombineBtn={imageHotspotsGlobalBorderLink}
+          spacingCombineBtnHandler={imageHotspotsGlobalBorderLinkBtn}
           setAttributes={setAttributes}
         />
 
         <FB_Spacing
           label={__("Border Radius", "frontis-blocks")}
           deviceType={deviceType}
-          spacingUnitsHandler={
-            handleGlobalBorderRadiusUnitsHandler
-          }
-          spacingUnits={globalBorderRadiusUnits}
-          spacingDesktop={globalBorderRadiusDesktop}
-          spacingTablet={globalBorderRadiusTablet}
-          spacingMobile={globalBorderRadiusMobile}
-          handleSpacingUnitHandler={
-            handleGlobalBorderRadiusUnitChange
-          }
-          spacingCombineBtn={globalBorderRadiusLink}
-          spacingCombineBtnHandler={
-            handleGlobalBorderRadiusCombineBtn
-          }
+          spacingUnitsHandler={imageHotspotsGlobalBorderRadiusUnitsHandler}
+          spacingUnits={imageHotspotsGlobalBorderRadiusUnits}
+          spacingDesktop={imageHotspotsGlobalBorderRadiusDesktop}
+          spacingTablet={imageHotspotsGlobalBorderRadiusTablet}
+          spacingMobile={imageHotspotsGlobalBorderRadiusMobile}
+          handleSpacingUnitHandler={imageHotspotsGlobalBorderRadiusUnitsChange}
+          spacingCombineBtn={imageHotspotsGlobalBorderRadiusLink}
+          spacingCombineBtnHandler={imageHotspotsGlobalBorderRadiusLinkBtn}
           setAttributes={setAttributes}
         />
 
         <FB_SwitcherControl
           label={__("Box Shadow", "frontis-blocks")}
-          globalSwitcher={imageHotspotBoxShadowSwitcher}
-          setGlobalSwitcher={(value) => setAttributes({ imageHotspotBoxShadowSwitcher: value })}
+          globalSwitcher={imageHotspotsGlobalBoxShadowSwitcher}
+          setGlobalSwitcher={(value) => setAttributes({ imageHotspotsGlobalBoxShadowSwitcher: value })}
         />
 
-        {imageHotspotBoxShadowSwitcher === 'normal' && (
+        {imageHotspotsGlobalBoxShadowSwitcher === 'normal' && (
           <FB_BoxShadowControl
             label={__("Normal Shadow", "frontis-blocks")}
-            onBoxShadowChange={(value) =>
-              setAttributes({ imageHotspotBoxShadowValues: value })
-            }
-            initialShadowValue={imageHotspotBoxShadowValues}
-            onBoxShadowStyleChange={(value) =>
-              setAttributes({
-                imageHotspotBoxShadowCssValue: value,
-              })
-            }
+            onBoxShadowChange={(value) => setAttributes({ imageHotspotsGlobalBoxShadowValues: value })}
+            initialShadowValue={imageHotspotsGlobalBoxShadowValues}
+            onBoxShadowStyleChange={(value) => setAttributes({ imageHotspotsGlobalBoxShadowCssValue: value })}
           />
         )}
 
-        {imageHotspotBoxShadowSwitcher === 'hover' && (
+        {imageHotspotsGlobalBoxShadowSwitcher === 'hover' && (
           <FB_BoxShadowControl
             label={__("Hover Shadow", "frontis-blocks")}
-            onBoxShadowChange={(value) =>
-              setAttributes({ imageHotspotHoverBoxShadowValues: value })
-            }
-            initialShadowValue={imageHotspotHoverBoxShadowValues}
-            onBoxShadowStyleChange={(value) =>
-              setAttributes({
-                imageHotspotHoverBoxShadowCssValue: value,
-              })
-            }
+            onBoxShadowChange={(value) => setAttributes({ imageHotspotsGlobalBoxShadowHoverValues: value })}
+            initialShadowValue={imageHotspotsGlobalBoxShadowHoverValues}
+            onBoxShadowStyleChange={(value) => setAttributes({ imageHotspotsGlobalBoxShadowHoverCssValue: value })}
           />
         )}
       </PanelBody>

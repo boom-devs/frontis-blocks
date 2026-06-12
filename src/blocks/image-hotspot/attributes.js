@@ -1660,98 +1660,6 @@ const attributes = {
 		type: "boolean",
 		default: true
 	},
-	globalBorder: {
-		type: 'string',
-		default: "none",
-	},
-	globalBorderColorSwitcher: {
-		type: "string",
-		default: "normal"
-	},
-	globalBorderColor: {
-		type: 'string',
-	},
-	globalBorderHoverColor: {
-		type: 'string',
-	},
-	globalBorderUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
-	},
-	globalBorderDesktop: {
-		type: "object",
-		default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
-		},
-	},
-	globalBorderTablet: {
-		type: "object",
-		default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
-		},
-	},
-	globalBorderMobile: {
-		type: "object",
-		default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
-		},
-	},
-	globalBorderLink: {
-		type: "boolean",
-		default: true
-	},
-	globalBorderRadiusUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
-	},
-	globalBorderRadiusDesktop: {
-		type: "object",
-		default: {
-			top: '6',
-			bottom: '6',
-			left: '6',
-			right: '6',
-		},
-	},
-	globalBorderRadiusTablet: {
-		type: "object",
-		default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
-		},
-	},
-	globalBorderRadiusMobile: {
-		type: "object",
-		default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
-		},
-	},
-	globalBorderRadiusLink: {
-		type: "boolean",
-		default: true
-	},
 	imageHotspotGlobalimageHotspotShadowSwitcher: {
 		type: 'string',
 		default: 'normal',
@@ -2431,6 +2339,171 @@ const attributes = {
 		default: ''
 	},
 	/** End imageHotspotsGlobalBg Background */
+
+	/** Start imageHotspotsGlobal Border */
+	imageHotspotsGlobalBorder: {
+		type: 'string',
+		default: "none",
+	},
+	imageHotspotsGlobalBorderColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	imageHotspotsGlobalBorderColor: {
+		type: 'string',
+		default: ""
+	},
+	imageHotspotsGlobalBorderHoverColor: {
+		type: 'string',
+	},
+	imageHotspotsGlobalBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	imageHotspotsGlobalBorderDesktop: {
+		type: "object",
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	imageHotspotsGlobalBorderTablet: {
+		type: "object",
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	imageHotspotsGlobalBorderMobile: {
+		type: "object",
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	imageHotspotsGlobalBorderLink: {
+		type: "boolean",
+		default: true
+	},
+	/** End imageHotspotsGlobal Border */
+
+	/** Start imageHotspotsGlobal Border Units */
+	imageHotspotsGlobalBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	imageHotspotsGlobalBorderRadiusDesktop: {
+		type: "object",
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	imageHotspotsGlobalBorderRadiusTablet: {
+		type: "object",
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	imageHotspotsGlobalBorderRadiusMobile: {
+		type: "object",
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	imageHotspotsGlobalBorderRadiusLink: {
+		type: "boolean",
+		default: true
+	},
+	/** End imageHotspotsGlobal Border Units */
+
+	/** Start imageHotspotsGlobal Border Radius */
+	imageHotspotsGlobalBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	imageHotspotsGlobalBorderRadiusDesktop: {
+		type: 'object',
+		default: {
+			top: '0',
+			right: '0',
+			bottom: '0',
+			left: '0'
+		}
+	},
+	imageHotspotsGlobalBorderRadiusTablet: {
+		type: 'object',
+		default: {
+			top: '0',
+			right: '0',
+			bottom: '0',
+			left: '0'
+		}
+	},
+	imageHotspotsGlobalBorderRadiusMobile: {
+		type: 'object',
+		default: {
+			top: '0',
+			right: '0',
+			bottom: '0',
+			left: '0'
+		}
+	},
+	imageHotspotsGlobalBorderRadiusLink: {
+		type: 'boolean',
+		default: true
+	},
+	/** End imageHotspotsGlobal Border Radius */
+
+	/** Start Box Shadow */
+	imageHotspotsGlobalBoxShadowSwitcher: {
+		type: 'string',
+		default: 'normal',
+	},
+	imageHotspotsGlobalBoxShadowValues: {
+		type: 'array',
+		default: [],
+	},
+	imageHotspotsGlobalBoxShadowCssValue: {
+		type: 'string',
+		default: '',
+	},
+	imageHotspotsGlobalBoxShadowHoverValues: {
+		type: 'array',
+		default: [],
+	},
+	imageHotspotsGlobalBoxShadowHoverCssValue: {
+		type: 'string',
+		default: '',
+	},
+	/** End Box Shadow */
+
 }
 
 export default attributes;
