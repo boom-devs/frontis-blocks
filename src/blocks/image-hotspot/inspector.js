@@ -404,17 +404,17 @@ export default function Inspector({ attributes, setAttributes }) {
     imageHotspotsPopoverGlobalZIndex,
     /** End Hotspot Popover Box Shadow */
 
-    backToTopBgColorSwitcher,
-    backToTopNormalBackgroundType,
-    backToTopNormalClassicColor,
-    backToTopNormalGradientColor,
-    backToTopNormalCustomGradientSwitcher,
-    backToTopNormalCustomGradientInputValue,
-    backToTopHoverBackgroundType,
-    backToTopHoverClassicColor,
-    backToTopHoverGradientColor,
-    backToTopHoverCustomGradientSwitcher,
-    backToTopHoverCustomGradientInputValue,
+    imgotsHpotsPopoverBgColorSwitcher,
+    imgotsHpotsPopoverNormalBackgroundType,
+    imgotsHpotsPopoverNormalClassicColor,
+    imgotsHpotsPopoverNormalGradientColor,
+    imgotsHpotsPopoverNormalCustomGradientSwitcher,
+    imgotsHpotsPopoverNormalCustomGradientInputValue,
+    imgotsHpotsPopoverHoverBackgroundType,
+    imgotsHpotsPopoverHoverClassicColor,
+    imgotsHpotsPopoverHoverGradientColor,
+    imgotsHpotsPopoverHoverCustomGradientSwitcher,
+    imgotsHpotsPopoverHoverCustomGradientInputValue,
 
   } = attributes;
 
@@ -2112,30 +2112,30 @@ export default function Inspector({ attributes, setAttributes }) {
 
         <FB_BackgroundColorControl
           label={__("Background Color", "frontis-blocks")}
-          bgColorSwitcher={backToTopBgColorSwitcher}
-          setBgColorSwitcher={(value) => setAttributes({ backToTopBgColorSwitcher: value })}
+          bgColorSwitcher={imgotsHpotsPopoverBgColorSwitcher}
+          setBgColorSwitcher={(value) => setAttributes({ imgotsHpotsPopoverBgColorSwitcher: value })}
 
-          normalBackgroundType={backToTopNormalBackgroundType}
-          setNormalBackgroundType={(value) => setAttributes({ backToTopNormalBackgroundType: value })}
-          normalClassicColor={backToTopNormalClassicColor}
-          setNormalClassicColor={(value) => setAttributes({ backToTopNormalClassicColor: value === undefined ? '' : value })}
-          normalGradientColor={backToTopNormalGradientColor}
-          setNormalGradientColor={(value) => setAttributes({ backToTopNormalGradientColor: value === undefined ? null : value })}
-          normalCustomGradientSwitcher={backToTopNormalCustomGradientSwitcher}
-          setNormalCustomGradientSwitcher={(value) => setAttributes({ backToTopNormalCustomGradientSwitcher: value })}
-          normalCustomGradientInputValue={backToTopNormalCustomGradientInputValue}
-          setNormalCustomGradientInputValue={(value) => setAttributes({ backToTopNormalCustomGradientInputValue: value })}
+          normalBackgroundType={imgotsHpotsPopoverNormalBackgroundType}
+          setNormalBackgroundType={(value) => setAttributes({ imgotsHpotsPopoverNormalBackgroundType: value })}
+          normalClassicColor={imgotsHpotsPopoverNormalClassicColor}
+          setNormalClassicColor={(value) => setAttributes({ imgotsHpotsPopoverNormalClassicColor: value === undefined ? '' : value })}
+          normalGradientColor={imgotsHpotsPopoverNormalGradientColor}
+          setNormalGradientColor={(value) => setAttributes({ imgotsHpotsPopoverNormalGradientColor: value === undefined ? null : value })}
+          normalCustomGradientSwitcher={imgotsHpotsPopoverNormalCustomGradientSwitcher}
+          setNormalCustomGradientSwitcher={(value) => setAttributes({ imgotsHpotsPopoverNormalCustomGradientSwitcher: value })}
+          normalCustomGradientInputValue={imgotsHpotsPopoverNormalCustomGradientInputValue}
+          setNormalCustomGradientInputValue={(value) => setAttributes({ imgotsHpotsPopoverNormalCustomGradientInputValue: value })}
 
-          hoverBackgroundType={backToTopHoverBackgroundType}
-          setHoverBackgroundType={(value) => setAttributes({ backToTopHoverBackgroundType: value })}
-          hoverClassicColor={backToTopHoverClassicColor}
-          setHoverClassicColor={(value) => setAttributes({ backToTopHoverClassicColor: value === undefined ? '' : value })}
-          hoverGradientColor={backToTopHoverGradientColor}
-          setHoverGradientColor={(value) => setAttributes({ backToTopHoverGradientColor: value === undefined ? null : value })}
-          hoverCustomGradientSwitcher={backToTopHoverCustomGradientSwitcher}
-          setHoverCustomGradientSwitcher={(value) => setAttributes({ backToTopHoverCustomGradientSwitcher: value })}
-          hoverCustomGradientInputValue={backToTopHoverCustomGradientInputValue}
-          setHoverCustomGradientInputValue={(value) => setAttributes({ backToTopHoverCustomGradientInputValue: value })}
+          hoverBackgroundType={imgotsHpotsPopoverHoverBackgroundType}
+          setHoverBackgroundType={(value) => setAttributes({ imgotsHpotsPopoverHoverBackgroundType: value })}
+          hoverClassicColor={imgotsHpotsPopoverHoverClassicColor}
+          setHoverClassicColor={(value) => setAttributes({ imgotsHpotsPopoverHoverClassicColor: value === undefined ? '' : value })}
+          hoverGradientColor={imgotsHpotsPopoverHoverGradientColor}
+          setHoverGradientColor={(value) => setAttributes({ imgotsHpotsPopoverHoverGradientColor: value === undefined ? null : value })}
+          hoverCustomGradientSwitcher={imgotsHpotsPopoverHoverCustomGradientSwitcher}
+          setHoverCustomGradientSwitcher={(value) => setAttributes({ imgotsHpotsPopoverHoverCustomGradientSwitcher: value })}
+          hoverCustomGradientInputValue={imgotsHpotsPopoverHoverCustomGradientInputValue}
+          setHoverCustomGradientInputValue={(value) => setAttributes({ imgotsHpotsPopoverHoverCustomGradientInputValue: value })}
 
           isBackgroundImage={false}
         />
