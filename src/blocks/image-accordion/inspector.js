@@ -31,6 +31,7 @@ import FB_IconPicker from "@Components/icon-picker";
 import FB_BackgroundColorControl from "@Components/background-color-control";
 import FB_CustomCSSEditor from "@Components/custom-css-editor";
 import FB_PositionControl from "@Components/position-control";
+import FB_VisibilityControl from "@Components/visibility-control";
 import FB_InspectorControls from "@Components/InspectorControls";
 import FB_TypographyControl from "@Components/typography-control";
 import SortableItem from "./sortableItem";
