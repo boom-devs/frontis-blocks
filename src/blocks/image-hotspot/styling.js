@@ -274,6 +274,39 @@ const generateImageHotspotStyle = (attributes) => {
         imageHotspotsGlobalBgBgHoverImageSize,
         /**End imageHotspotsGlobalBg Background */
 
+        /** Start imageHotspotsGlobal Border */
+        imageHotspotsGlobalBorder,
+        imageHotspotsGlobalBorderColorSwitcher,
+        imageHotspotsGlobalBorderColor,
+        imageHotspotsGlobalBorderHoverColor,
+        /** End imageHotspotsGlobal Border */
+
+        /** Start imageHotspotsGlobal Border Units */
+        imageHotspotsGlobalBorderUnits,
+        imageHotspotsGlobalBorderDesktop,
+        imageHotspotsGlobalBorderTablet,
+        imageHotspotsGlobalBorderMobile,
+        imageHotspotsGlobalBorderLink,
+        /** End imageHotspotsGlobal Border Units */
+
+        /** Start imageHotspotsGlobal Border Radius */
+        imageHotspotsGlobalBorderRadiusUnits,
+        imageHotspotsGlobalBorderRadiusDesktop,
+        imageHotspotsGlobalBorderRadiusTablet,
+        imageHotspotsGlobalBorderRadiusMobile,
+        imageHotspotsGlobalBorderRadiusLink,
+        /** End imageHotspotsGlobal Border Radius */
+
+        /** Start imageHotspotsGlobal Box Shadow */
+        imageHotspotsGlobalBoxShadowSwitcher,
+        imageHotspotsGlobalBoxShadowValues,
+        imageHotspotsGlobalBoxShadowCssValue,
+        imageHotspotsGlobalBoxShadowHoverValues,
+        imageHotspotsGlobalBoxShadowHoverCssValue,
+        /** End imageHotspotsGlobal Box Shadow */
+
+
+
         /**start global border control */
         globalBorder,
         globalBorderColorSwitcher,
@@ -412,6 +445,16 @@ const generateImageHotspotStyle = (attributes) => {
     const globalMarginDesktopWidth = `${globalMarginDesktop?.top}${globalMarginUnits?.Desktop} ${globalMarginDesktop?.right}${globalMarginUnits?.Desktop} ${globalMarginDesktop?.bottom}${globalMarginUnits?.Desktop} ${globalMarginDesktop?.left}${globalMarginUnits?.Desktop}`;
     const globalMarginTabletWidth = `${globalMarginTablet?.top}${globalMarginUnits?.Tablet} ${globalMarginTablet?.right}${globalMarginUnits?.Tablet} ${globalMarginTablet?.bottom}${globalMarginUnits?.Tablet} ${globalMarginTablet?.left}${globalMarginUnits?.Tablet}`;
     const globalMarginMobileWidth = `${globalMarginMobile?.top}${globalMarginUnits?.Mobile} ${globalMarginMobile?.right}${globalMarginUnits?.Mobile} ${globalMarginMobile?.bottom}${globalMarginUnits?.Mobile} ${globalMarginMobile?.left}${globalMarginUnits?.Mobile}`;
+
+    /** Default border for imageHotspotsGlobal */
+    const imageHotspotsGlobalBorderDesktopWidth = `${imageHotspotsGlobalBorderDesktop?.top}${imageHotspotsGlobalBorderUnits?.Desktop} ${imageHotspotsGlobalBorderDesktop?.right}${imageHotspotsGlobalBorderUnits?.Desktop} ${imageHotspotsGlobalBorderDesktop?.bottom}${imageHotspotsGlobalBorderUnits?.Desktop} ${imageHotspotsGlobalBorderDesktop?.left}${imageHotspotsGlobalBorderUnits?.Desktop}`;
+    const imageHotspotsGlobalBorderTabletWidth = `${imageHotspotsGlobalBorderTablet?.top}${imageHotspotsGlobalBorderUnits?.Tablet} ${imageHotspotsGlobalBorderTablet?.right}${imageHotspotsGlobalBorderUnits?.Tablet} ${imageHotspotsGlobalBorderTablet?.bottom}${imageHotspotsGlobalBorderUnits?.Tablet} ${imageHotspotsGlobalBorderTablet?.left}${imageHotspotsGlobalBorderUnits?.Tablet}`;
+    const imageHotspotsGlobalBorderMobileWidth = `${imageHotspotsGlobalBorderMobile?.top}${imageHotspotsGlobalBorderUnits?.Mobile} ${imageHotspotsGlobalBorderMobile?.right}${imageHotspotsGlobalBorderUnits?.Mobile} ${imageHotspotsGlobalBorderMobile?.bottom}${imageHotspotsGlobalBorderUnits?.Mobile} ${imageHotspotsGlobalBorderMobile?.left}${imageHotspotsGlobalBorderUnits?.Mobile}`;
+
+    /** Default border radius for imageHotspotsGlobal */
+    const imageHotspotsGlobalBorderRadiusDesktopWidth = `${imageHotspotsGlobalBorderRadiusDesktop?.top}${imageHotspotsGlobalBorderRadiusUnits?.Desktop} ${imageHotspotsGlobalBorderRadiusDesktop?.right}${imageHotspotsGlobalBorderRadiusUnits?.Desktop} ${imageHotspotsGlobalBorderRadiusDesktop?.bottom}${imageHotspotsGlobalBorderRadiusUnits?.Desktop} ${imageHotspotsGlobalBorderRadiusDesktop?.left}${imageHotspotsGlobalBorderRadiusUnits?.Desktop}`;
+    const imageHotspotsGlobalBorderRadiusTabletWidth = `${imageHotspotsGlobalBorderRadiusTablet?.top}${imageHotspotsGlobalBorderRadiusUnits?.Tablet} ${imageHotspotsGlobalBorderRadiusTablet?.right}${imageHotspotsGlobalBorderRadiusUnits?.Tablet} ${imageHotspotsGlobalBorderRadiusTablet?.bottom}${imageHotspotsGlobalBorderRadiusUnits?.Tablet} ${imageHotspotsGlobalBorderRadiusTablet?.left}${imageHotspotsGlobalBorderRadiusUnits?.Tablet}`;
+    const imageHotspotsGlobalBorderRadiusMobileWidth = `${imageHotspotsGlobalBorderRadiusMobile?.top}${imageHotspotsGlobalBorderRadiusUnits?.Mobile} ${imageHotspotsGlobalBorderRadiusMobile?.right}${imageHotspotsGlobalBorderRadiusUnits?.Mobile} ${imageHotspotsGlobalBorderRadiusMobile?.bottom}${imageHotspotsGlobalBorderRadiusUnits?.Mobile} ${imageHotspotsGlobalBorderRadiusMobile?.left}${imageHotspotsGlobalBorderRadiusUnits?.Mobile}`;
 
 
 
@@ -944,6 +987,11 @@ const generateImageHotspotStyle = (attributes) => {
         .fb-hotspot-main-wrapper.${blockID} {
             ${globalPaddingDesktopWidth && globalPaddingDesktop?.top ? `padding: ${globalPaddingDesktopWidth};` : ''}
             ${globalMarginDesktopWidth && globalMarginDesktop?.top ? `margin: ${globalMarginDesktopWidth};` : ''} 
+            ${imageHotspotsGlobalBorder ? `border: ${imageHotspotsGlobalBorder};` : ''}
+            ${imageHotspotsGlobalBorderDesktopWidth && imageHotspotsGlobalBorderDesktop?.top ? `border-width: ${imageHotspotsGlobalBorderDesktopWidth};` : ''}
+            ${imageHotspotsGlobalBorderRadiusDesktopWidth && imageHotspotsGlobalBorderRadiusDesktop?.top ? `border-radius: ${imageHotspotsGlobalBorderRadiusDesktopWidth};` : ''}
+            ${imageHotspotsGlobalBorderColor ? `border-color: ${imageHotspotsGlobalBorderColor};` : ''}
+            ${imageHotspotsGlobalBoxShadowCssValue ? `box-shadow: ${imageHotspotsGlobalBoxShadowCssValue};` : ''}
             ${imageHotspotsGlobalBgBgType === "gradient"
             ? `background: ${imageHotspotsGlobalBgBgCustomGradientSwitcher && imageHotspotsGlobalBgBgCustomGradientInputValue
                 ? imageHotspotsGlobalBgBgCustomGradientInputValue
@@ -977,6 +1025,8 @@ const generateImageHotspotStyle = (attributes) => {
                     `
                 : imageHotspotsGlobalBgBgHoverClassicColor ? `background: ${imageHotspotsGlobalBgBgHoverClassicColor};` : ''
             }
+            ${imageHotspotsGlobalBorderHoverColor ? `border-color: ${imageHotspotsGlobalBorderHoverColor};` : ''}
+            ${imageHotspotsGlobalBoxShadowHoverCssValue ? `box-shadow: ${imageHotspotsGlobalBoxShadowHoverCssValue};` : ''}
         }
 
         @media only screen and (max-width: 1024px) {
