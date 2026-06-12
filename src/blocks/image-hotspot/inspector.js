@@ -94,17 +94,6 @@ export default function Inspector({ attributes, setAttributes }) {
     imageHotspotImageSize,
     imageHotspotImageHeight,
     imageHotspotImageHeightUnits,
-    imageHotspotImageBorderWidthDesktop,
-    imageHotspotImageBorderWidthTablet,
-    imageHotspotImageBorderWidthMobile,
-    imageHotspotImageBorderWidthUnits,
-    imageHotspotImageBorderWidthLink,
-    imageHotspotImageBorderColor,
-    imageHotspotImageBorderRadiusDesktop,
-    imageHotspotImageBorderRadiusTablet,
-    imageHotspotImageBorderRadiusMobile,
-    imageHotspotImageBorderRadiusUnits,
-    imageHotspotImageBorderRadiusLink,
 
     // Hotspots
     imageHotspotHotspots,
@@ -118,7 +107,6 @@ export default function Inspector({ attributes, setAttributes }) {
     imageHotspotMarkerHoverSizeUnits,
     imageHotspotMarkerColorSwitcher,
     imageHotspotMarkerSizeSwitcher,
-    imageHotspotContainerShadowCssValue,
 
     // Icon styles
     imageHotspotIconColorSwitcher,
@@ -147,16 +135,6 @@ export default function Inspector({ attributes, setAttributes }) {
     imageHotspotTitleMarginTablet,
     imageHotspotTitleMarginMobile,
     imageHotspotTitleMarginLink,
-    imageHotspotTitleBorderWidthDesktop,
-    imageHotspotTitleBorderWidthTablet,
-    imageHotspotTitleBorderWidthMobile,
-    imageHotspotTitleBorderWidthUnits,
-    imageHotspotTitleBorderWidthLink,
-    imageHotspotTitleBorderRadiusDesktop,
-    imageHotspotTitleBorderRadiusTablet,
-    imageHotspotTitleBorderRadiusMobile,
-    imageHotspotTitleBorderRadiusUnits,
-    imageHotspotTitleBorderRadiusLink,
 
     // Description typography
     imageHotspotDescFontFamily,
@@ -183,63 +161,6 @@ export default function Inspector({ attributes, setAttributes }) {
     imageHotspotDescMarginTablet,
     imageHotspotDescMarginMobile,
     imageHotspotDescMarginLink,
-    imageHotspotDescBorderWidthDesktop,
-    imageHotspotDescBorderWidthTablet,
-    imageHotspotDescBorderWidthMobile,
-    imageHotspotDescBorderWidthUnits,
-    imageHotspotDescBorderWidthLink,
-    imageHotspotDescBorderColor,
-    imageHotspotDescBorderRadiusDesktop,
-    imageHotspotDescBorderRadiusTablet,
-    imageHotspotDescBorderRadiusMobile,
-    imageHotspotDescBorderRadiusUnits,
-    imageHotspotDescBorderRadiusLink,
-
-    // Padding
-    imageHotspotPaddingUnits,
-    imageHotspotPaddingDesktop,
-    imageHotspotPaddingTablet,
-    imageHotspotPaddingMobile,
-    imageHotspotPaddingLink,
-    // imageHotspotPopoverPaddingUnits,
-    imageHotspotPopoverPaddingDesktop,
-    imageHotspotPopoverPaddingTablet,
-    imageHotspotPopoverPaddingMobile,
-    imageHotspotPopoverPaddingLink,
-    // imageHotspotPopoverMarginUnits,
-    imageHotspotPopoverMarginDesktop,
-    imageHotspotPopoverMarginTablet,
-    imageHotspotPopoverMarginMobile,
-    imageHotspotPopoverMarginLink,
-    imageHotspotPopoverBorderRadiusDesktop,
-    imageHotspotPopoverBorderRadiusTablet,
-    imageHotspotPopoverBorderRadiusMobile,
-    imageHotspotPopoverBorderRadiusUnits,
-    imageHotspotPopoverBorderRadiusLink,
-    imageHotspotPopoverBorderWidthDesktop,
-    imageHotspotPopoverBorderWidthTablet,
-    imageHotspotPopoverBorderWidthMobile,
-    imageHotspotPopoverBorderWidthUnits,
-    imageHotspotPopoverBorderWidthLink,
-    imageHotspotPopoverBorderColor,
-    imageHotspotPopoverImageBorderWidthDesktop,
-    imageHotspotPopoverImageBorderWidthTablet,
-    imageHotspotPopoverImageBorderWidthMobile,
-    imageHotspotPopoverImageBorderWidthUnits,
-    imageHotspotPopoverImageBorderWidthLink,
-    imageHotspotPopoverImageBorderRadiusDesktop,
-    imageHotspotPopoverImageBorderRadiusTablet,
-    imageHotspotPopoverImageBorderRadiusMobile,
-    imageHotspotPopoverImageBorderRadiusUnits,
-    imageHotspotPopoverImageBorderRadiusLink,
-    imageHotspotPopoverImageBorderColor,
-
-    // Margin
-    imageHotspotMarginUnits,
-    imageHotspotMarginDesktop,
-    imageHotspotMarginTablet,
-    imageHotspotMarginMobile,
-    imageHotspotMarginLink,
 
     // Responsive
     imageHotspotDesktopSwitcher,
@@ -248,12 +169,6 @@ export default function Inspector({ attributes, setAttributes }) {
 
     // Custom CSS
     imageHotspotCustomCSS,
-
-    imageHotspotPopoverBgColor,
-    imageHotspotPopoverBgColorSwitcher,
-    imageHotspotPopoverBgHoverColor,
-    imageHotspotContainerShadowValues,
-    imageHotspotPopoverShadowValues,
     globalZIndex,
     imageHotspotOverflow,
 
@@ -290,12 +205,6 @@ export default function Inspector({ attributes, setAttributes }) {
     globalBorderRadiusMobile,
     globalBorderRadiusLink,
 
-    imageHotspotGlobalimageHotspotShadowSwitcher,
-    imageHotspotGlobalimageHotspotShadowValues,
-    imageHotspotGlobalimageHotspotShadowCssValue,
-
-    imageHotspotGlobalHoverimageHotspotShadowValues,
-    imageHotspotGlobalHoverimageHotspotShadowCssValue,
     imageHotspotPositionType,
     imageHotspotHZOrientationType,
     imageHotspotVROrientationType,
@@ -315,10 +224,8 @@ export default function Inspector({ attributes, setAttributes }) {
     imageHotspotGlobalWraperID,
     imageHotspotBoxShadowSwitcher,
     imageHotspotBoxShadowValues,
-    imageHotspotBoxShadowCssValue,
 
     imageHotspotHoverBoxShadowValues,
-    imageHotspotHoverBoxShadowCssValue,
 
     imageHotspotSocialLinksGap,
     imageHotspotSocialLinksGapUnits,
@@ -337,13 +244,6 @@ export default function Inspector({ attributes, setAttributes }) {
     imageHotspotTitlePaddingLink,
     /** End Hotspot Title Padding */
 
-    /** Start Hotspot Title Border */
-    imageHotspotTitleBorder,
-    imageHotspotTitleBorderColorSwitcher,
-    imageHotspotTitleBorderColor,
-    imageHotspotTitleBorderHoverColor,
-    /** End Hotspot Title Border */
-
     /** Start Hotspot Popover Padding */
     imageHotspotsPopoverPaddingUnits,
     imageHotspotsPopoverPaddingDesktop,
@@ -359,20 +259,6 @@ export default function Inspector({ attributes, setAttributes }) {
     imageHotspotsPopoverMarginMobile,
     imageHotspotsPopoverMarginLink,
     /** End Image Hotspots Popover Margin */
-
-    /** Start Hotspot Popover Background */
-    imageHotspotsPopoverBgColorSwitcher,
-    imageHotspotsPopoverNormalBackgroundType,
-    imageHotspotsPopoverNormalClassicColor,
-    imageHotspotsPopoverNormalGradientColor,
-    imageHotspotsPopoverNormalCustomGradientSwitcher,
-    imageHotspotsPopoverNormalCustomGradientInputValue,
-    imageHotspotsPopoverHoverBackgroundType,
-    imageHotspotsPopoverHoverClassicColor,
-    imageHotspotsPopoverHoverGradientColor,
-    imageHotspotsPopoverHoverCustomGradientSwitcher,
-    imageHotspotsPopoverHoverCustomGradientInputValue,
-    /** End Hotspot Popover Background */
 
     /** Start Hotspot Popover Border */
     imageHotspotsPopoverBorder,
@@ -401,7 +287,6 @@ export default function Inspector({ attributes, setAttributes }) {
     imageHotspotsPopoverBoxShadowSwitcher,
     imageHotspotsPopoverBoxShadowValues,
     imageHotspotsPopoverBoxShadowHoverValues,
-    imageHotspotsPopoverGlobalZIndex,
     /** End Hotspot Popover Box Shadow */
 
     imgotsHpotsPopoverBgColorSwitcher,
