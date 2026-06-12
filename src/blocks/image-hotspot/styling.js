@@ -312,9 +312,17 @@ const generateImageHotspotStyle = (attributes) => {
         imageHotspotsPopoverGlobalZIndex,
         /** End Hotspot Popover Box Shadow */
 
-        imageHotspotsPopoverColorSwitcher,
-        imageHotspotsPopoverColor,
-        imageHotspotsPopoverHoverColor,
+        backToTopNormalBackgroundType,
+        backToTopNormalClassicColor,
+        backToTopNormalGradientColor,
+        backToTopNormalCustomGradientSwitcher,
+        backToTopNormalCustomGradientInputValue,
+        backToTopHoverBackgroundType,
+        backToTopHoverClassicColor,
+        backToTopHoverGradientColor,
+        backToTopHoverCustomGradientSwitcher,
+        backToTopHoverCustomGradientInputValue,
+
 
     } = attributes;
 
@@ -693,7 +701,11 @@ const generateImageHotspotStyle = (attributes) => {
                 ${imageHotspotsPopoverBorderDesktopWidth && imageHotspotsPopoverBorderDesktop?.top ? `border-width: ${imageHotspotsPopoverBorderDesktopWidth};` : ''}
                 ${imageHotspotsPopoverBorderRadiusDesktopWidth && imageHotspotsPopoverBorderRadiusDesktop?.top ? `border-radius: ${imageHotspotsPopoverBorderRadiusDesktopWidth};` : ''}
                 ${imageHotspotsPopoverBoxShadowCssValue ? `box-shadow: ${imageHotspotsPopoverBoxShadowCssValue};` : ''}
-                ${imageHotspotsPopoverColor ? `--fb-popover-bg: ${imageHotspotsPopoverColor};` : ""}
+                ${backToTopNormalBackgroundType === 'gradient' ? `  
+                ${backToTopNormalCustomGradientSwitcher && backToTopNormalCustomGradientInputValue ? `--fb-popover-bg: ${backToTopNormalCustomGradientInputValue};` : `background: ${backToTopNormalGradientColor};`}
+                  `: `
+                ${backToTopNormalClassicColor ? `--fb-popover-bg: ${backToTopNormalClassicColor};` : ''}
+                  `}
                 ${imageHotspotsPopoverBorder && imageHotspotsPopoverBorder !== 'none' ? `border-style: ${imageHotspotsPopoverBorder};` : ''}
                 ${imageHotspotsPopoverBorderColor ? `border-color: ${imageHotspotsPopoverBorderColor};` : ''}
                 ${imageHotspotsPopoverBoxShadowCssValue ? `box-shadow: ${imageHotspotsPopoverBoxShadowCssValue};` : ''} 
@@ -716,11 +728,19 @@ const generateImageHotspotStyle = (attributes) => {
             }
 
             .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"] .fb-hotspot-popover:hover {
-                ${imageHotspotsPopoverHoverColor ? `background-color: ${imageHotspotsPopoverHoverColor};` : ""}
+                ${backToTopHoverBackgroundType === 'gradient' ? `
+                ${backToTopHoverCustomGradientSwitcher && backToTopHoverCustomGradientInputValue ? `background-color: ${backToTopHoverCustomGradientInputValue};` : `background: ${backToTopHoverGradientColor};`}
+                `: `
+                ${backToTopHoverClassicColor ? `background-color: ${backToTopHoverClassicColor};` : ''}
+                `}
             }
 
             .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"] .fb-hotspot-popover:hover::after {
-                ${imageHotspotsPopoverHoverColor ? `border-top-color: ${imageHotspotsPopoverHoverColor};` : ""}
+                ${backToTopHoverBackgroundType === 'gradient' ? `
+                ${backToTopHoverCustomGradientSwitcher && backToTopHoverCustomGradientInputValue ? `border-top-color: ${backToTopHoverCustomGradientInputValue};` : `border-top-color: ${backToTopHoverGradientColor};`}
+                `: `
+                ${backToTopHoverClassicColor ? `border-top-color: ${backToTopHoverClassicColor};` : ''}
+            `}                
             }
 
             .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"]:hover .fb-hotspot-popover,

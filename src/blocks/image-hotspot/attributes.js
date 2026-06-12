@@ -2232,19 +2232,6 @@ const attributes = {
 	},
 	/** End Hotspot Popover Border (new) */
 
-	imageHotspotsPopoverColorSwitcher: {
-		type: "string",
-		default: "normal",
-	},
-	imageHotspotsPopoverColor: {
-		type: "string",
-		default: "#FFFFFF",
-	},
-	imageHotspotsPopoverHoverColor: {
-		type: "string",
-		default: "",
-	},
-
 	/** Start Hotspot Popover Border Radius (new) */
 	imageHotspotsPopoverBorderRadiusUnits: {
 		type: "object",
@@ -2301,6 +2288,54 @@ const attributes = {
 		default: "",
 	},
 	/** End Hotspot Popover Box Shadow (new) */
+
+	/** Start Background */
+	backToTopBgColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	backToTopNormalBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	backToTopNormalClassicColor: {
+		type: "string",
+		default: "#399CFF",
+	},
+	backToTopNormalGradientColor: {
+		type: "string",
+		default: null,
+	},
+	backToTopNormalCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	backToTopNormalCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+
+	backToTopHoverBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	backToTopHoverClassicColor: {
+		type: "string",
+		default: "",
+	},
+	backToTopHoverGradientColor: {
+		type: "string",
+		default: null,
+	},
+	backToTopHoverCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	backToTopHoverCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+	/** End Background */
 
 
 }
