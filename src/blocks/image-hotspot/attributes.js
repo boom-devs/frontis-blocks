@@ -1660,18 +1660,6 @@ const attributes = {
 		type: "boolean",
 		default: true
 	},
-	globalBgColorSwitcher: {
-		type: "string",
-		default: "normal"
-	},
-	globalBgColor: {
-		type: "string",
-		default: '#EBF5FF'
-	},
-	globalBgHoverColor: {
-		type: "string",
-		default: "#399CFF"
-	},
 	globalBorder: {
 		type: 'string',
 		default: "none",
@@ -2337,7 +2325,112 @@ const attributes = {
 	},
 	/** End Background */
 
-
+	/** Start imageHotspotsGlobalBg Background */
+	imageHotspotsGlobalBgBgColorSwitcher: {
+		type: 'string',
+		default: 'normal'
+	},
+	imageHotspotsGlobalBgBgType: {
+		type: 'string',
+		default: 'classic'
+	},
+	imageHotspotsGlobalBgBgClassicColor: {
+		type: 'string',
+	},
+	imageHotspotsGlobalBgBgGradientColor: {
+		type: 'string',
+	},
+	imageHotspotsGlobalBgBgCustomGradientSwitcher: {
+		type: 'boolean',
+		default: false
+	},
+	imageHotspotsGlobalBgBgCustomGradientInputValue: {
+		type: 'string',
+		default: ''
+	},
+	imageHotspotsGlobalBgBgColorStyle: {
+		type: 'string',
+		default: ''
+	},
+	imageHotspotsGlobalBgBgImageUrl: {
+		type: 'string',
+		default: ''
+	},
+	imageHotspotsGlobalBgBgImageAlt: {
+		type: 'string',
+		default: ''
+	},
+	imageHotspotsGlobalBgBgImageID: {
+		type: 'string',
+		default: ''
+	},
+	imageHotspotsGlobalBgBgImagePosition: {
+		type: 'string',
+		default: ''
+	},
+	imageHotspotsGlobalBgBgImageAttachment: {
+		type: 'string',
+		default: ''
+	},
+	imageHotspotsGlobalBgBgImageSize: {
+		type: 'string',
+		default: ''
+	},
+	imageHotspotsGlobalBgBgImageRepeat: {
+		type: 'string',
+		default: ''
+	},
+	imageHotspotsGlobalBgBgHoverType: {
+		type: 'string',
+		default: 'classic'
+	},
+	imageHotspotsGlobalBgBgHoverClassicColor: {
+		type: 'string',
+	},
+	imageHotspotsGlobalBgBgHoverGradientColor: {
+		type: 'string',
+	},
+	imageHotspotsGlobalBgBgHoverCustomGradientSwitcher: {
+		type: 'boolean',
+		default: false
+	},
+	imageHotspotsGlobalBgBgHoverCustomGradientInputValue: {
+		type: 'string',
+		default: ''
+	},
+	imageHotspotsGlobalBgBgHoverColorStyle: {
+		type: 'string',
+		default: ''
+	},
+	imageHotspotsGlobalBgBgHoverImageUrl: {
+		type: 'string',
+		default: ''
+	},
+	imageHotspotsGlobalBgBgHoverImageAlt: {
+		type: 'string',
+		default: ''
+	},
+	imageHotspotsGlobalBgBgHoverImageID: {
+		type: 'string',
+		default: ''
+	},
+	imageHotspotsGlobalBgBgHoverImagePosition: {
+		type: 'string',
+		default: ''
+	},
+	imageHotspotsGlobalBgBgHoverImageAttachment: {
+		type: 'string',
+		default: ''
+	},
+	imageHotspotsGlobalBgBgHoverImageSize: {
+		type: 'string',
+		default: ''
+	},
+	imageHotspotsGlobalBgBgHoverImageRepeat: {
+		type: 'string',
+		default: ''
+	},
+	/** End imageHotspotsGlobalBg Background */
 }
 
 export default attributes;
