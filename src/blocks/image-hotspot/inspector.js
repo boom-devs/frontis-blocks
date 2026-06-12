@@ -212,23 +212,6 @@ export default function Inspector({ attributes, setAttributes }) {
     imageHotspotsGlobalBgBgHoverImageSize,
     /**End imageHotspotsGlobalBg Background */
 
-    globalBorder,
-    globalBorderColorSwitcher,
-    globalBorderColor,
-    globalBorderHoverColor,
-
-    globalBorderUnits,
-    globalBorderDesktop,
-    globalBorderTablet,
-    globalBorderMobile,
-    globalBorderLink,
-
-    globalBorderRadiusUnits,
-    globalBorderRadiusDesktop,
-    globalBorderRadiusTablet,
-    globalBorderRadiusMobile,
-    globalBorderRadiusLink,
-
     imageHotspotPositionType,
     imageHotspotHZOrientationType,
     imageHotspotVROrientationType,

@@ -305,31 +305,6 @@ const generateImageHotspotStyle = (attributes) => {
         imageHotspotsGlobalBoxShadowHoverCssValue,
         /** End imageHotspotsGlobal Box Shadow */
 
-
-
-        /**start global border control */
-        globalBorder,
-        globalBorderColorSwitcher,
-        globalBorderColor,
-        globalBorderHoverColor,
-        /**end global border control */
-
-        /**start global border units control */
-        globalBorderUnits,
-        globalBorderDesktop,
-        globalBorderTablet,
-        globalBorderMobile,
-        globalBorderLink,
-        /**end global border units control */
-
-        /**start global border radius control */
-        globalBorderRadiusUnits,
-        globalBorderRadiusDesktop,
-        globalBorderRadiusTablet,
-        globalBorderRadiusMobile,
-        globalBorderRadiusLink,
-        /**end global border radius control */
-
         /**end global style control */
     } = attributes;
 
@@ -1006,7 +981,8 @@ const generateImageHotspotStyle = (attributes) => {
                     ${imageHotspotsGlobalBgBgImageSize !== undefined ? `background-size: ${imageHotspotsGlobalBgBgImageSize};` : ''}
                     `
                 : imageHotspotsGlobalBgBgClassicColor ? `background: ${imageHotspotsGlobalBgBgClassicColor};` : ''
-            }
+        }
+            transition: all 0.3s ease;
         }
 
         .fb-hotspot-main-wrapper.${blockID}:hover {
@@ -1024,7 +1000,7 @@ const generateImageHotspotStyle = (attributes) => {
                     ${imageHotspotsGlobalBgBgHoverImageSize !== undefined ? `background-size: ${imageHotspotsGlobalBgBgHoverImageSize};` : ''}
                     `
                 : imageHotspotsGlobalBgBgHoverClassicColor ? `background: ${imageHotspotsGlobalBgBgHoverClassicColor};` : ''
-            }
+        }
             ${imageHotspotsGlobalBorderHoverColor ? `border-color: ${imageHotspotsGlobalBorderHoverColor};` : ''}
             ${imageHotspotsGlobalBoxShadowHoverCssValue ? `box-shadow: ${imageHotspotsGlobalBoxShadowHoverCssValue};` : ''}
         }
@@ -1104,12 +1080,19 @@ const generateImageHotspotStyle = (attributes) => {
         }
 
         .${blockID} .fb-hotspot-social-links {
-                gap: ${imageHotspotSocialLinksGap?.Tablet !== undefined && imageHotspotSocialLinksGap.Tablet !== '' ? `${imageHotspotSocialLinksGap.Tablet}${imageHotspotSocialLinksGapUnits?.Tablet || 'px'}` : ''};
-            }
+            gap: ${imageHotspotSocialLinksGap?.Tablet !== undefined && imageHotspotSocialLinksGap.Tablet !== '' ? `${imageHotspotSocialLinksGap.Tablet}${imageHotspotSocialLinksGapUnits?.Tablet || 'px'}` : ''};
+        }
 
-            .${blockID} .fb-hotspot-social-icon {
-                ${imageHotspotSocialLinksIconSize?.Tablet !== undefined && imageHotspotSocialLinksIconSize.Tablet !== '' ? `width: ${imageHotspotSocialLinksIconSize.Tablet}${imageHotspotSocialLinksIconSizeUnits?.Tablet || 'px'}; height: ${imageHotspotSocialLinksIconSize.Tablet}${imageHotspotSocialLinksIconSizeUnits?.Tablet || 'px'};` : ''}
-            }
+        .${blockID} .fb-hotspot-social-icon {
+            ${imageHotspotSocialLinksIconSize?.Tablet !== undefined && imageHotspotSocialLinksIconSize.Tablet !== '' ? `width: ${imageHotspotSocialLinksIconSize.Tablet}${imageHotspotSocialLinksIconSizeUnits?.Tablet || 'px'}; height: ${imageHotspotSocialLinksIconSize.Tablet}${imageHotspotSocialLinksIconSizeUnits?.Tablet || 'px'};` : ''}
+        }
+
+        .fb-hotspot-main-wrapper.${blockID} {
+            ${globalPaddingTabletWidth && globalPaddingTablet?.top ? `padding: ${globalPaddingTabletWidth};` : ''}
+            ${globalMarginTabletWidth && globalMarginTablet?.top ? `margin: ${globalMarginTabletWidth};` : ''} 
+            ${imageHotspotsGlobalBorderTabletWidth && imageHotspotsGlobalBorderTablet?.top ? `border-width: ${imageHotspotsGlobalBorderTabletWidth};` : ''}
+            ${imageHotspotsGlobalBorderRadiusTabletWidth && imageHotspotsGlobalBorderRadiusTablet?.top ? `border-radius: ${imageHotspotsGlobalBorderRadiusTabletWidth};` : ''}
+        }
 
         @media only screen and (max-width: 767px) {
 
@@ -1190,6 +1173,13 @@ const generateImageHotspotStyle = (attributes) => {
 
             .${blockID} .fb-hotspot-social-icon {
                 ${imageHotspotSocialLinksIconSize?.Mobile !== undefined && imageHotspotSocialLinksIconSize.Mobile !== '' ? `width: ${imageHotspotSocialLinksIconSize.Mobile}${imageHotspotSocialLinksIconSizeUnits?.Mobile || 'px'}; height: ${imageHotspotSocialLinksIconSize.Mobile}${imageHotspotSocialLinksIconSizeUnits?.Mobile || 'px'};` : ''}
+            }
+
+            .fb-hotspot-main-wrapper.${blockID} {
+                ${globalPaddingMobileWidth && globalPaddingMobile?.top ? `padding: ${globalPaddingMobileWidth};` : ''}
+                ${globalMarginMobileWidth && globalMarginMobile?.top ? `margin: ${globalMarginMobileWidth};` : ''} 
+                ${imageHotspotsGlobalBorderMobileWidth && imageHotspotsGlobalBorderMobile?.top ? `border-width: ${imageHotspotsGlobalBorderMobileWidth};` : ''}
+                ${imageHotspotsGlobalBorderRadiusMobileWidth && imageHotspotsGlobalBorderRadiusMobile?.top ? `border-radius: ${imageHotspotsGlobalBorderRadiusMobileWidth};` : ''}
             }
         }
     `;
