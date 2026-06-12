@@ -2290,48 +2290,48 @@ const attributes = {
 	/** End Hotspot Popover Box Shadow (new) */
 
 	/** Start Background */
-	backToTopBgColorSwitcher: {
+	imgotsHpotsPopoverBgColorSwitcher: {
 		type: "string",
 		default: "normal"
 	},
-	backToTopNormalBackgroundType: {
+	imgotsHpotsPopoverNormalBackgroundType: {
 		type: "string",
 		default: "classic",
 	},
-	backToTopNormalClassicColor: {
+	imgotsHpotsPopoverNormalClassicColor: {
 		type: "string",
 		default: "#399CFF",
 	},
-	backToTopNormalGradientColor: {
+	imgotsHpotsPopoverNormalGradientColor: {
 		type: "string",
 		default: null,
 	},
-	backToTopNormalCustomGradientSwitcher: {
+	imgotsHpotsPopoverNormalCustomGradientSwitcher: {
 		type: "boolean",
 		default: false,
 	},
-	backToTopNormalCustomGradientInputValue: {
+	imgotsHpotsPopoverNormalCustomGradientInputValue: {
 		type: "string",
 		default: "",
 	},
 
-	backToTopHoverBackgroundType: {
+	imgotsHpotsPopoverHoverBackgroundType: {
 		type: "string",
 		default: "classic",
 	},
-	backToTopHoverClassicColor: {
+	imgotsHpotsPopoverHoverClassicColor: {
 		type: "string",
 		default: "",
 	},
-	backToTopHoverGradientColor: {
+	imgotsHpotsPopoverHoverGradientColor: {
 		type: "string",
 		default: null,
 	},
-	backToTopHoverCustomGradientSwitcher: {
+	imgotsHpotsPopoverHoverCustomGradientSwitcher: {
 		type: "boolean",
 		default: false,
 	},
-	backToTopHoverCustomGradientInputValue: {
+	imgotsHpotsPopoverHoverCustomGradientInputValue: {
 		type: "string",
 		default: "",
 	},

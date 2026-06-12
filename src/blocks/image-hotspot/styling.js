@@ -312,16 +312,17 @@ const generateImageHotspotStyle = (attributes) => {
         imageHotspotsPopoverGlobalZIndex,
         /** End Hotspot Popover Box Shadow */
 
-        backToTopNormalBackgroundType,
-        backToTopNormalClassicColor,
-        backToTopNormalGradientColor,
-        backToTopNormalCustomGradientSwitcher,
-        backToTopNormalCustomGradientInputValue,
-        backToTopHoverBackgroundType,
-        backToTopHoverClassicColor,
-        backToTopHoverGradientColor,
-        backToTopHoverCustomGradientSwitcher,
-        backToTopHoverCustomGradientInputValue,
+
+        imgotsHpotsPopoverNormalBackgroundType,
+        imgotsHpotsPopoverNormalClassicColor,
+        imgotsHpotsPopoverNormalGradientColor,
+        imgotsHpotsPopoverNormalCustomGradientSwitcher,
+        imgotsHpotsPopoverNormalCustomGradientInputValue,
+        imgotsHpotsPopoverHoverBackgroundType,
+        imgotsHpotsPopoverHoverClassicColor,
+        imgotsHpotsPopoverHoverGradientColor,
+        imgotsHpotsPopoverHoverCustomGradientSwitcher,
+        imgotsHpotsPopoverHoverCustomGradientInputValue,
 
 
     } = attributes;
@@ -701,10 +702,10 @@ const generateImageHotspotStyle = (attributes) => {
                 ${imageHotspotsPopoverBorderDesktopWidth && imageHotspotsPopoverBorderDesktop?.top ? `border-width: ${imageHotspotsPopoverBorderDesktopWidth};` : ''}
                 ${imageHotspotsPopoverBorderRadiusDesktopWidth && imageHotspotsPopoverBorderRadiusDesktop?.top ? `border-radius: ${imageHotspotsPopoverBorderRadiusDesktopWidth};` : ''}
                 ${imageHotspotsPopoverBoxShadowCssValue ? `box-shadow: ${imageHotspotsPopoverBoxShadowCssValue};` : ''}
-                ${backToTopNormalBackgroundType === 'gradient' ? `  
-                ${backToTopNormalCustomGradientSwitcher && backToTopNormalCustomGradientInputValue ? `--fb-popover-bg: ${backToTopNormalCustomGradientInputValue};` : `background: ${backToTopNormalGradientColor};`}
+                ${imgotsHpotsPopoverNormalBackgroundType === 'gradient' ? `  
+                ${imgotsHpotsPopoverNormalCustomGradientSwitcher && imgotsHpotsPopoverNormalCustomGradientInputValue ? `--fb-popover-bg: ${imgotsHpotsPopoverNormalCustomGradientInputValue};` : `background: ${imgotsHpotsPopoverNormalGradientColor};`}
                   `: `
-                ${backToTopNormalClassicColor ? `--fb-popover-bg: ${backToTopNormalClassicColor};` : ''}
+                ${imgotsHpotsPopoverNormalClassicColor ? `--fb-popover-bg: ${imgotsHpotsPopoverNormalClassicColor};` : ''}
                   `}
                 ${imageHotspotsPopoverBorder && imageHotspotsPopoverBorder !== 'none' ? `border-style: ${imageHotspotsPopoverBorder};` : ''}
                 ${imageHotspotsPopoverBorderColor ? `border-color: ${imageHotspotsPopoverBorderColor};` : ''}
@@ -728,18 +729,18 @@ const generateImageHotspotStyle = (attributes) => {
             }
 
             .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"] .fb-hotspot-popover:hover {
-                ${backToTopHoverBackgroundType === 'gradient' ? `
-                ${backToTopHoverCustomGradientSwitcher && backToTopHoverCustomGradientInputValue ? `background-color: ${backToTopHoverCustomGradientInputValue};` : `background: ${backToTopHoverGradientColor};`}
+                ${imgotsHpotsPopoverHoverBackgroundType === 'gradient' ? `
+                ${imgotsHpotsPopoverHoverCustomGradientSwitcher && imgotsHpotsPopoverHoverCustomGradientInputValue ? `background-color: ${imgotsHpotsPopoverHoverCustomGradientInputValue};` : `background: ${imgotsHpotsPopoverHoverGradientColor};`}
                 `: `
-                ${backToTopHoverClassicColor ? `background-color: ${backToTopHoverClassicColor};` : ''}
+                ${imgotsHpotsPopoverHoverClassicColor ? `background-color: ${imgotsHpotsPopoverHoverClassicColor};` : ''}
                 `}
             }
 
             .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"] .fb-hotspot-popover:hover::after {
-                ${backToTopHoverBackgroundType === 'gradient' ? `
-                ${backToTopHoverCustomGradientSwitcher && backToTopHoverCustomGradientInputValue ? `border-top-color: ${backToTopHoverCustomGradientInputValue};` : `border-top-color: ${backToTopHoverGradientColor};`}
+                ${imgotsHpotsPopoverHoverBackgroundType === 'gradient' ? `
+                ${imgotsHpotsPopoverHoverCustomGradientSwitcher && imgotsHpotsPopoverHoverCustomGradientInputValue ? `border-top-color: ${imgotsHpotsPopoverHoverCustomGradientInputValue};` : `border-top-color: ${imgotsHpotsPopoverHoverGradientColor};`}
                 `: `
-                ${backToTopHoverClassicColor ? `border-top-color: ${backToTopHoverClassicColor};` : ''}
+                ${imgotsHpotsPopoverHoverClassicColor ? `border-top-color: ${imgotsHpotsPopoverHoverClassicColor};` : ''}
             `}                
             }
 
