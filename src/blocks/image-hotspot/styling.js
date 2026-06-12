@@ -246,11 +246,33 @@ const generateImageHotspotStyle = (attributes) => {
         globalMarginLink,
         /**end global margin control */
 
-        /**start global background color control */
-        globalBgColorSwitcher,
-        globalBgColor,
-        globalBgHoverColor,
-        /**end global background color control */
+        /**Start imageHotspotsGlobalBg Background */
+        imageHotspotsGlobalBgBgColorSwitcher,
+        imageHotspotsGlobalBgBgType,
+        imageHotspotsGlobalBgBgClassicColor,
+        imageHotspotsGlobalBgBgGradientColor,
+        imageHotspotsGlobalBgBgCustomGradientSwitcher,
+        imageHotspotsGlobalBgBgCustomGradientInputValue,
+        imageHotspotsGlobalBgBgImageUrl,
+        imageHotspotsGlobalBgBgImageAlt,
+        imageHotspotsGlobalBgBgImageID,
+        imageHotspotsGlobalBgBgImagePosition,
+        imageHotspotsGlobalBgBgImageAttachment,
+        imageHotspotsGlobalBgBgImageRepeat,
+        imageHotspotsGlobalBgBgImageSize,
+        imageHotspotsGlobalBgBgHoverType,
+        imageHotspotsGlobalBgBgHoverClassicColor,
+        imageHotspotsGlobalBgBgHoverGradientColor,
+        imageHotspotsGlobalBgBgHoverCustomGradientSwitcher,
+        imageHotspotsGlobalBgBgHoverCustomGradientInputValue,
+        imageHotspotsGlobalBgBgHoverImageUrl,
+        imageHotspotsGlobalBgBgHoverImageAlt,
+        imageHotspotsGlobalBgBgHoverImageID,
+        imageHotspotsGlobalBgBgHoverImagePosition,
+        imageHotspotsGlobalBgBgHoverImageAttachment,
+        imageHotspotsGlobalBgBgHoverImageRepeat,
+        imageHotspotsGlobalBgBgHoverImageSize,
+        /**End imageHotspotsGlobalBg Background */
 
         /**start global border control */
         globalBorder,
@@ -386,7 +408,7 @@ const generateImageHotspotStyle = (attributes) => {
     const globalPaddingTabletWidth = `${globalPaddingTablet?.top}${globalPaddingUnits?.Tablet} ${globalPaddingTablet?.right}${globalPaddingUnits?.Tablet} ${globalPaddingTablet?.bottom}${globalPaddingUnits?.Tablet} ${globalPaddingTablet?.left}${globalPaddingUnits?.Tablet}`;
     const globalPaddingMobileWidth = `${globalPaddingMobile?.top}${globalPaddingUnits?.Mobile} ${globalPaddingMobile?.right}${globalPaddingUnits?.Mobile} ${globalPaddingMobile?.bottom}${globalPaddingUnits?.Mobile} ${globalPaddingMobile?.left}${globalPaddingUnits?.Mobile}`;
 
-    /**Default Global Margin For Image Hotspot */    
+    /**Default Global Margin For Image Hotspot */
     const globalMarginDesktopWidth = `${globalMarginDesktop?.top}${globalMarginUnits?.Desktop} ${globalMarginDesktop?.right}${globalMarginUnits?.Desktop} ${globalMarginDesktop?.bottom}${globalMarginUnits?.Desktop} ${globalMarginDesktop?.left}${globalMarginUnits?.Desktop}`;
     const globalMarginTabletWidth = `${globalMarginTablet?.top}${globalMarginUnits?.Tablet} ${globalMarginTablet?.right}${globalMarginUnits?.Tablet} ${globalMarginTablet?.bottom}${globalMarginUnits?.Tablet} ${globalMarginTablet?.left}${globalMarginUnits?.Tablet}`;
     const globalMarginMobileWidth = `${globalMarginMobile?.top}${globalMarginUnits?.Mobile} ${globalMarginMobile?.right}${globalMarginUnits?.Mobile} ${globalMarginMobile?.bottom}${globalMarginUnits?.Mobile} ${globalMarginMobile?.left}${globalMarginUnits?.Mobile}`;
@@ -922,6 +944,39 @@ const generateImageHotspotStyle = (attributes) => {
         .fb-hotspot-main-wrapper.${blockID} {
             ${globalPaddingDesktopWidth && globalPaddingDesktop?.top ? `padding: ${globalPaddingDesktopWidth};` : ''}
             ${globalMarginDesktopWidth && globalMarginDesktop?.top ? `margin: ${globalMarginDesktopWidth};` : ''} 
+            ${imageHotspotsGlobalBgBgType === "gradient"
+            ? `background: ${imageHotspotsGlobalBgBgCustomGradientSwitcher && imageHotspotsGlobalBgBgCustomGradientInputValue
+                ? imageHotspotsGlobalBgBgCustomGradientInputValue
+                : imageHotspotsGlobalBgBgGradientColor
+            };`
+            : imageHotspotsGlobalBgBgImageUrl !== undefined && imageHotspotsGlobalBgBgImageUrl !== null && imageHotspotsGlobalBgBgImageUrl !== ""
+                ? `
+                    ${imageHotspotsGlobalBgBgImageUrl !== undefined ? `background-image: url(${imageHotspotsGlobalBgBgImageUrl});` : ''}
+                    ${imageHotspotsGlobalBgBgImagePosition !== undefined ? `background-position: ${imageHotspotsGlobalBgBgImagePosition};` : ''}
+                    ${imageHotspotsGlobalBgBgImageAttachment !== undefined ? `background-attachment: ${imageHotspotsGlobalBgBgImageAttachment};` : ''}
+                    ${imageHotspotsGlobalBgBgImageRepeat !== undefined ? `background-repeat: ${imageHotspotsGlobalBgBgImageRepeat};` : ''}
+                    ${imageHotspotsGlobalBgBgImageSize !== undefined ? `background-size: ${imageHotspotsGlobalBgBgImageSize};` : ''}
+                    `
+                : imageHotspotsGlobalBgBgClassicColor ? `background: ${imageHotspotsGlobalBgBgClassicColor};` : ''
+            }
+        }
+
+        .fb-hotspot-main-wrapper.${blockID}:hover {
+            ${imageHotspotsGlobalBgBgHoverType === "gradient"
+            ? `background: ${imageHotspotsGlobalBgBgHoverCustomGradientSwitcher && imageHotspotsGlobalBgBgHoverCustomGradientInputValue
+                ? imageHotspotsGlobalBgBgHoverCustomGradientInputValue
+                : imageHotspotsGlobalBgBgHoverGradientColor
+            };`
+            : imageHotspotsGlobalBgBgHoverImageUrl !== undefined && imageHotspotsGlobalBgBgHoverImageUrl !== null && imageHotspotsGlobalBgBgHoverImageUrl !== ""
+                ? `
+                    ${imageHotspotsGlobalBgBgHoverImageUrl !== undefined ? `background-image: url(${imageHotspotsGlobalBgBgHoverImageUrl});` : ''}
+                    ${imageHotspotsGlobalBgBgHoverImagePosition !== undefined ? `background-position: ${imageHotspotsGlobalBgBgHoverImagePosition};` : ''}
+                    ${imageHotspotsGlobalBgBgHoverImageAttachment !== undefined ? `background-attachment: ${imageHotspotsGlobalBgBgHoverImageAttachment};` : ''}
+                    ${imageHotspotsGlobalBgBgHoverImageRepeat !== undefined ? `background-repeat: ${imageHotspotsGlobalBgBgHoverImageRepeat};` : ''}
+                    ${imageHotspotsGlobalBgBgHoverImageSize !== undefined ? `background-size: ${imageHotspotsGlobalBgBgHoverImageSize};` : ''}
+                    `
+                : imageHotspotsGlobalBgBgHoverClassicColor ? `background: ${imageHotspotsGlobalBgBgHoverClassicColor};` : ''
+            }
         }
 
         @media only screen and (max-width: 1024px) {

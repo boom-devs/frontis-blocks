@@ -184,9 +184,33 @@ export default function Inspector({ attributes, setAttributes }) {
     globalMarginMobile,
     globalMarginLink,
 
-    globalBgColorSwitcher,
-    globalBgColor,
-    globalBgHoverColor,
+    /**Start imageHotspotsGlobalBg Background */
+    imageHotspotsGlobalBgBgColorSwitcher,
+    imageHotspotsGlobalBgBgType,
+    imageHotspotsGlobalBgBgClassicColor,
+    imageHotspotsGlobalBgBgGradientColor,
+    imageHotspotsGlobalBgBgCustomGradientSwitcher,
+    imageHotspotsGlobalBgBgCustomGradientInputValue,
+    imageHotspotsGlobalBgBgImageUrl,
+    imageHotspotsGlobalBgBgImageAlt,
+    imageHotspotsGlobalBgBgImageID,
+    imageHotspotsGlobalBgBgImagePosition,
+    imageHotspotsGlobalBgBgImageAttachment,
+    imageHotspotsGlobalBgBgImageRepeat,
+    imageHotspotsGlobalBgBgImageSize,
+    imageHotspotsGlobalBgBgHoverType,
+    imageHotspotsGlobalBgBgHoverClassicColor,
+    imageHotspotsGlobalBgBgHoverGradientColor,
+    imageHotspotsGlobalBgBgHoverCustomGradientSwitcher,
+    imageHotspotsGlobalBgBgHoverCustomGradientInputValue,
+    imageHotspotsGlobalBgBgHoverImageUrl,
+    imageHotspotsGlobalBgBgHoverImageAlt,
+    imageHotspotsGlobalBgBgHoverImageID,
+    imageHotspotsGlobalBgBgHoverImagePosition,
+    imageHotspotsGlobalBgBgHoverImageAttachment,
+    imageHotspotsGlobalBgBgHoverImageRepeat,
+    imageHotspotsGlobalBgBgHoverImageSize,
+    /**End imageHotspotsGlobalBg Background */
 
     globalBorder,
     globalBorderColorSwitcher,
@@ -2688,27 +2712,58 @@ export default function Inspector({ attributes, setAttributes }) {
       </PanelBody>
 
       <PanelBody title="Background Color" initialOpen={false}>
-        <FB_SwitcherControl
-          label={__("Background Color", "frontis-blocks")}
-          globalSwitcher={globalBgColorSwitcher}
-          setGlobalSwitcher={(value) => setAttributes({ globalBgColorSwitcher: value })}
+
+        <FB_BackgroundColorControl
+          bgColorSwitcher={imageHotspotsGlobalBgBgColorSwitcher} setBgColorSwitcher={(value) => setAttributes({ imageHotspotsGlobalBgBgColorSwitcher: value })}
+          normalBackgroundType={imageHotspotsGlobalBgBgType}
+          setNormalBackgroundType={(value) => setAttributes({ imageHotspotsGlobalBgBgType: value })}
+          normalClassicColor={imageHotspotsGlobalBgBgClassicColor}
+          setNormalClassicColor={(value) => setAttributes({ imageHotspotsGlobalBgBgClassicColor: value === undefined ? '' : value })}
+          normalGradientColor={imageHotspotsGlobalBgBgGradientColor}
+          setNormalGradientColor={(value) => setAttributes({ imageHotspotsGlobalBgBgGradientColor: value === undefined ? null : value })}
+          normalCustomGradientSwitcher={imageHotspotsGlobalBgBgCustomGradientSwitcher}
+          setNormalCustomGradientSwitcher={(value) => setAttributes({ imageHotspotsGlobalBgBgCustomGradientSwitcher: value, })}
+          normalCustomGradientInputValue={imageHotspotsGlobalBgBgCustomGradientInputValue}
+          setNormalCustomGradientInputValue={(value) => setAttributes({ imageHotspotsGlobalBgBgCustomGradientInputValue: value, })}
+          normalBackgroundImageUrl={imageHotspotsGlobalBgBgImageUrl}
+          setNormalBackgroundImageUrl={(value) => setAttributes({ imageHotspotsGlobalBgBgImageUrl: value })}
+          normalBackgroundImageAlt={imageHotspotsGlobalBgBgImageAlt}
+          setNormalBackgroundImageAlt={(value) => setAttributes({ imageHotspotsGlobalBgBgImageAlt: value })}
+          normalBackgroundImageID={imageHotspotsGlobalBgBgImageID}
+          setNormalBackgroundImageID={(value) => setAttributes({ imageHotspotsGlobalBgBgImageID: value })}
+          normalBackgroundImagePosition={imageHotspotsGlobalBgBgImagePosition}
+          setNormalBackgroundImagePosition={(value) => setAttributes({ imageHotspotsGlobalBgBgImagePosition: value })}
+          normalBackgroundImageAttachment={imageHotspotsGlobalBgBgImageAttachment}
+          setNormalBackgroundImageAttachment={(value) => setAttributes({ imageHotspotsGlobalBgBgImageAttachment: value })}
+          normalBackgroundImageRepeat={imageHotspotsGlobalBgBgImageRepeat}
+          setNormalBackgroundImageRepeat={(value) => setAttributes({ imageHotspotsGlobalBgBgImageRepeat: value, })}
+          normalBackgroundImageSize={imageHotspotsGlobalBgBgImageSize}
+          setNormalBackgroundImageSize={(value) => setAttributes({ imageHotspotsGlobalBgBgImageSize: value })}
+          hoverBackgroundType={imageHotspotsGlobalBgBgHoverType}
+          setHoverBackgroundType={(value) => setAttributes({ imageHotspotsGlobalBgBgHoverType: value })}
+          hoverClassicColor={imageHotspotsGlobalBgBgHoverClassicColor}
+          setHoverClassicColor={(value) => setAttributes({ imageHotspotsGlobalBgBgHoverClassicColor: value === undefined ? '' : value })}
+          hoverGradientColor={imageHotspotsGlobalBgBgHoverGradientColor}
+          setHoverGradientColor={(value) => setAttributes({ imageHotspotsGlobalBgBgHoverGradientColor: value === undefined ? null : value })}
+          hoverCustomGradientSwitcher={imageHotspotsGlobalBgBgHoverCustomGradientSwitcher}
+          setHoverCustomGradientSwitcher={(value) => setAttributes({ imageHotspotsGlobalBgBgHoverCustomGradientSwitcher: value, })}
+          hoverCustomGradientInputValue={imageHotspotsGlobalBgBgHoverCustomGradientInputValue}
+          setHoverCustomGradientInputValue={(value) => setAttributes({ imageHotspotsGlobalBgBgHoverCustomGradientInputValue: value, })}
+          hoverBackgroundImageUrl={imageHotspotsGlobalBgBgHoverImageUrl}
+          setBgHoverImageUrl={(value) => setAttributes({ imageHotspotsGlobalBgBgHoverImageUrl: value })}
+          hoverBackgroundImageAlt={imageHotspotsGlobalBgBgHoverImageAlt}
+          setBgHoverImageAlt={(value) => setAttributes({ imageHotspotsGlobalBgBgHoverImageAlt: value })}
+          hoverBackgroundImageID={imageHotspotsGlobalBgBgHoverImageID}
+          setBgHoverImageID={(value) => setAttributes({ imageHotspotsGlobalBgBgHoverImageID: value })}
+          hoverBackgroundImagePosition={imageHotspotsGlobalBgBgHoverImagePosition}
+          setBgHoverImagePosition={(value) => setAttributes({ imageHotspotsGlobalBgBgHoverImagePosition: value, })}
+          hoverBackgroundImageAttachment={imageHotspotsGlobalBgBgHoverImageAttachment}
+          setBgHoverImageAttachment={(value) => setAttributes({ imageHotspotsGlobalBgBgHoverImageAttachment: value, })}
+          hoverBackgroundImageRepeat={imageHotspotsGlobalBgBgHoverImageRepeat}
+          setBgHoverImageRepeat={(value) => setAttributes({ imageHotspotsGlobalBgBgHoverImageRepeat: value, })}
+          hoverBackgroundImageSize={imageHotspotsGlobalBgBgHoverImageSize}
+          setBgHoverImageSize={(value) => setAttributes({ imageHotspotsGlobalBgBgHoverImageSize: value })}
         />
-
-        {globalBgColorSwitcher === 'normal' && (
-          <FB_ColorControl
-            label={__("Normal Color", "frontis-blocks")}
-            globalColor={globalBgColor}
-            setGlobalColor={(value) => setAttributes({ globalBgColor: value === undefined ? '' : value })}
-          />
-        )}
-
-        {globalBgColorSwitcher === 'hover' && (
-          <FB_ColorControl
-            label={__("Hover Color", "frontis-blocks")}
-            globalColor={globalBgHoverColor}
-            setGlobalColor={(value) => setAttributes({ globalBgHoverColor: value === undefined ? '' : value })}
-          />
-        )}
 
       </PanelBody>
 
