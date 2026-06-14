@@ -37,8 +37,20 @@ const attributes = {
 			"Exhibit trends and variations over time by enabling a clear depiction of data fluctuations.",
 	},
 	chartHeight: {
-		type: "number",
-		default: 280,
+		type: "object",
+		default: {
+			Desktop: "270",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	chartHeightUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
 	},
 
 	filterList: {
@@ -61,19 +73,19 @@ const attributes = {
 		default: [
 			{
 				id: "ds1",
-				series_name: "Series 1",
+				series_name: "Content 1",
 				values: "28,20,22,30,21,25,10",
 				color: "#3b82f6",
 			},
 			{
 				id: "ds2",
-				series_name: "Series 2",
+				series_name: "Content 2",
 				values: "15,30,21,34,16,28,12",
 				color: "#f59e0b",
 			},
 			{
 				id: "ds3",
-				series_name: "Series 3",
+				series_name: "Content 3",
 				values: "-15,40,23,10,21,25,10",
 				color: "#10b981",
 			},
@@ -103,7 +115,7 @@ const attributes = {
 	canvasHeight: {
 		type: "object",
 		default: {
-			Desktop: "280",
+			Desktop: "310",
 			Tablet: "",
 			Mobile: "",
 		},
@@ -120,34 +132,6 @@ const attributes = {
 		type: "string",
 		default: "#EBF5FF",
 	},
-	canvasBgColorSwitcher: {
-		type: "string",
-		default: "normal",
-	},
-	canvasNormalBackgroundType: {
-		type: "string",
-		default: "classic",
-	},
-	canvasNormalGradientColor: {
-		type: "string",
-		default: null,
-	},
-	canvasNormalCustomGradientSwitcher: {
-		type: "boolean",
-		default: false,
-	},
-	canvasNormalCustomGradientInputValue: {
-		type: "string",
-		default: "",
-	},
-	canvasHoverBackgroundType: {
-		type: "string",
-		default: "classic",
-	},
-	canvasHoverClassicColor: {
-		type: "string",
-		default: "",
-	},
 	canvasHoverGradientColor: {
 		type: "string",
 		default: null,
@@ -159,34 +143,6 @@ const attributes = {
 	canvasHoverColor: {
 		type: "string",
 		default: "",
-	},
-	canvasBgColorSwitcher: {
-		type: "string",
-		default: "normal",
-	},
-	canvasNormalBackgroundType: {
-		type: "string",
-		default: "classic",
-	},
-	canvasNormalGradientColor: {
-		type: "string",
-		default: null,
-	},
-	canvasHoverBackgroundType: {
-		type: "string",
-		default: "classic",
-	},
-	canvasHoverClassicColor: {
-		type: "string",
-		default: "",
-	},
-	canvasHoverGradientColor: {
-		type: "string",
-		default: null,
-	},
-	canvasNormalCustomGradientSwitcher: {
-		type: "boolean",
-		default: false,
 	},
 	canvasBorderHoverColor: {
 		type: "string",
@@ -292,19 +248,38 @@ const attributes = {
 	},
 	canvasMarginUnits: {
 		type: "object",
-		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
 	},
 	canvasMarginDesktop: {
 		type: "object",
-		default: { top: "", bottom: "", left: "", right: "" },
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
 	},
 	canvasMarginTablet: {
 		type: "object",
-		default: { top: "", bottom: "", left: "", right: "" },
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
 	},
 	canvasMarginMobile: {
 		type: "object",
-		default: { top: "", bottom: "", left: "", right: "" },
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
 	},
 	canvasMarginLink: {
 		type: "boolean",
@@ -397,15 +372,30 @@ const attributes = {
 	},
 	chartBodyBorderRadiusDesktop: {
 		type: "object",
-		default: { top: "24", bottom: "24", left: "24", right: "24" },
+		default: {
+			top: "24",
+			bottom: "24",
+			left: "24",
+			right: "24",
+		},
 	},
 	chartBodyBorderRadiusTablet: {
 		type: "object",
-		default: { top: "", bottom: "", left: "", right: "" },
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
 	},
 	chartBodyBorderRadiusMobile: {
 		type: "object",
-		default: { top: "", bottom: "", left: "", right: "" },
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
 	},
 	chartBodyBorderRadiusLink: {
 		type: "boolean",
@@ -413,7 +403,12 @@ const attributes = {
 	},
 	chartBodyPaddingDesktop: {
 		type: "object",
-		default: { top: "24", bottom: "24", left: "24", right: "24" },
+		default: {
+			top: "24",
+			bottom: "24",
+			left: "24",
+			right: "24",
+		},
 	},
 	chartBodyPaddingTablet: {
 		type: "object",
@@ -897,6 +892,152 @@ const attributes = {
 	footerTitleNormalColor: {
 		type: "string",
 		default: "#0f172a",
+	},
+	footerTitleColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	footerTitleGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	footerTitleGlobalTypographyData: {
+		type: "object",
+		default: {},
+	},
+	footerTitleGlobalTypoType: {
+		type: "string",
+		default: "default",
+	},
+	footerTitleGlobalTypoOption: {
+		type: "object",
+		default: { label: "Default", value: "default" },
+	},
+	footerTitleFontFamily: {
+		type: "string",
+		default: "Default",
+	},
+	footerTitleFontSize: {
+		type: "object",
+		default: { Desktop: "24", Tablet: "", Mobile: "" },
+	},
+	footerTitleFontSizeUnits: {
+		type: "string",
+		default: "px",
+	},
+	footerTitleFontWeight: {
+		type: "string",
+		default: "600",
+	},
+	footerTitleFontStyle: {
+		type: "string",
+		default: "",
+	},
+	footerTitleTextTransform: {
+		type: "string",
+		default: "",
+	},
+	footerTitleTextDecoration: {
+		type: "string",
+		default: "",
+	},
+	footerTitleLetterSpacing: {
+		type: "object",
+		default: { Desktop: "", Tablet: "", Mobile: "" },
+	},
+	footerTitleLetterSpacingUnits: {
+		type: "string",
+		default: "px",
+	},
+	footerTitleLineHeight: {
+		type: "object",
+		default: { Desktop: "", Tablet: "", Mobile: "" },
+	},
+	footerTitleLineHeightUnits: {
+		type: "string",
+		default: "px",
+	},
+	footerDescGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	footerDescGlobalTypographyData: {
+		type: "object",
+		default: {},
+	},
+	footerDescGlobalTypoType: {
+		type: "string",
+		default: "default",
+	},
+	footerDescGlobalTypoOption: {
+		type: "object",
+		default: { label: "Default", value: "default" },
+	},
+	footerDescFontFamily: {
+		type: "string",
+		default: "Default",
+	},
+	footerDescFontSize: {
+		type: "object",
+		default: { Desktop: "16", Tablet: "", Mobile: "" },
+	},
+	footerDescFontSizeUnits: {
+		type: "string",
+		default: "px",
+	},
+	footerDescFontWeight: {
+		type: "string",
+		default: "400",
+	},
+	footerDescFontStyle: {
+		type: "string",
+		default: "",
+	},
+	footerDescTextTransform: {
+		type: "string",
+		default: "",
+	},
+	footerDescTextDecoration: {
+		type: "string",
+		default: "",
+	},
+	footerDescLetterSpacing: {
+		type: "object",
+		default: { Desktop: "", Tablet: "", Mobile: "" },
+	},
+	footerDescLetterSpacingUnits: {
+		type: "string",
+		default: "px",
+	},
+	footerDescLineHeight: {
+		type: "object",
+		default: { Desktop: "", Tablet: "", Mobile: "" },
+	},
+	footerDescLineHeightUnits: {
+		type: "string",
+		default: "px",
+	},
+	footerDescColorSwitcher: {
+		type: "string",
+		default: "normal",
 	},
 	footerTitleHoverColor: {
 		type: "string",

@@ -38,6 +38,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 		chartTitle,
 		chartDescription,
 		chartHeight,
+		chartHeightUnits,
 		filterList,
 		chartDatasets,
 		chartLabels,
@@ -140,10 +141,40 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 		footerTextAlignment,
 		footerTitleNormalColor,
-		footerTitleTypography,
+		footerTitleColorSwitcher,
+		footerDescColorSwitcher,
+		footerTitleGlobalTypoSwitcher,
+		footerTitleGlobalTypographyData,
+		footerTitleGlobalTypoType,
+		footerTitleGlobalTypoOption,
+		footerTitleFontFamily,
+		footerTitleFontSize,
+		footerTitleFontSizeUnits,
+		footerTitleFontWeight,
+		footerTitleFontStyle,
+		footerTitleTextTransform,
+		footerTitleTextDecoration,
+		footerTitleLetterSpacing,
+		footerTitleLetterSpacingUnits,
+		footerTitleLineHeight,
+		footerTitleLineHeightUnits,
 		footerTitleHoverColor,
 		footerDescNormalColor,
-		footerDescTypography,
+		footerDescGlobalTypoSwitcher,
+		footerDescGlobalTypographyData,
+		footerDescGlobalTypoType,
+		footerDescGlobalTypoOption,
+		footerDescFontFamily,
+		footerDescFontSize,
+		footerDescFontSizeUnits,
+		footerDescFontWeight,
+		footerDescFontStyle,
+		footerDescTextTransform,
+		footerDescTextDecoration,
+		footerDescLetterSpacing,
+		footerDescLetterSpacingUnits,
+		footerDescLineHeight,
+		footerDescLineHeightUnits,
 		footerDescHoverColor,
 		footerPaddingDesktop,
 		footerPaddingLink,
@@ -248,79 +279,60 @@ const Inspector = ({ attributes, setAttributes }) => {
 	} = attributes;
 
 	const deviceType = useDeviceType();
-	const [footerTab, setFooterTab] = useState("normal");
-	const [axisTab, setAxisTab] = useState("normal");
 
-	const wrapperBorderTypeChange = (event, position) => {
-		const value = event.target.value;
-		if (multiChartWrapperBorderTypeLink) {
-			const val = { top: value, right: value, bottom: value, left: value };
-			if (deviceType === "Desktop")
-				setAttributes({ multiChartWrapperBorderTypeDesktop: val });
-			else if (deviceType === "Tablet")
-				setAttributes({ multiChartWrapperBorderTypeTablet: val });
-			else setAttributes({ multiChartWrapperBorderTypeMobile: val });
-		} else {
-			if (deviceType === "Desktop")
-				setAttributes({
-					multiChartWrapperBorderTypeDesktop: {
-						...multiChartWrapperBorderTypeDesktop,
-						[position]: value,
-					},
-				});
-			else if (deviceType === "Tablet")
-				setAttributes({
-					multiChartWrapperBorderTypeTablet: {
-						...multiChartWrapperBorderTypeTablet,
-						[position]: value,
-					},
-				});
-			else
-				setAttributes({
-					multiChartWrapperBorderTypeMobile: {
-						...multiChartWrapperBorderTypeMobile,
-						[position]: value,
-					},
-				});
-		}
-		``;
+	/** Helper: Handle spacing units */
+	const handleSpacingUnits = (attr, unit) => {
+		setAttributes({ [attr]: { ...attributes[attr], [deviceType]: unit } });
 	};
 
-	// testing kit
-
-	const wrapperBorderRadiusChange = (event, position) => {
+	/** Helper: Handle spacing values (Border Width/Radius, Padding, Margin) */
+	const handleGranularSpacing = (attrPrefix, event, position, isLinked) => {
 		const value = event.target.value;
-		if (multiChartWrapperBorderRadiusLink) {
-			const val = { top: value, right: value, bottom: value, left: value };
-			if (deviceType === "Desktop")
-				setAttributes({ multiChartWrapperBorderRadiusDesktop: val });
-			else if (deviceType === "Tablet")
-				setAttributes({ multiChartWrapperBorderRadiusTablet: val });
-			else setAttributes({ multiChartWrapperBorderRadiusMobile: val });
+		const attrName = `${attrPrefix}${deviceType}`;
+		if (isLinked) {
+			setAttributes({
+				[attrName]: { top: value, right: value, bottom: value, left: value },
+			});
 		} else {
-			if (deviceType === "Desktop")
-				setAttributes({
-					multiChartWrapperBorderRadiusDesktop: {
-						...multiChartWrapperBorderRadiusDesktop,
-						[position]: value,
-					},
-				});
-			else if (deviceType === "Tablet")
-				setAttributes({
-					multiChartWrapperBorderRadiusTablet: {
-						...multiChartWrapperBorderRadiusTablet,
-						[position]: value,
-					},
-				});
-			else
-				setAttributes({
-					multiChartWrapperBorderRadiusMobile: {
-						...multiChartWrapperBorderRadiusMobile,
-						[position]: value,
-					},
-				});
+			setAttributes({
+				[attrName]: { ...attributes[attrName], [position]: value },
+			});
 		}
 	};
+
+	// Wrapper Border Width Handlers
+	const multiChartWrapperBorderTypeUnitsHandler = (v) =>
+		handleSpacingUnits("multiChartWrapperBorderTypeUnits", v);
+	const handleMultiChartWrapperBorderUnitHandler = (e, pos) =>
+		handleGranularSpacing(
+			"multiChartWrapperBorderType",
+			e,
+			pos,
+			multiChartWrapperBorderTypeLink,
+		);
+
+	// Wrapper Border Radius Handlers
+	const multiChartWrapperBorderRadiusUnitsHandler = (v) =>
+		handleSpacingUnits("multiChartWrapperBorderRadiusUnits", v);
+	const handleMultiChartWrapperBorderRadiusUnitHandler = (e, pos) =>
+		handleGranularSpacing(
+			"multiChartWrapperBorderRadius",
+			e,
+			pos,
+			multiChartWrapperBorderRadiusLink,
+		);
+
+	// Wrapper Padding Handlers
+	const multiChartPaddingUnitsHandler = (v) =>
+		handleSpacingUnits("multiChartPaddingUnits", v);
+	const handleMultiChartPaddingUnitHandler = (e, pos) =>
+		handleGranularSpacing("multiChartPadding", e, pos, multiChartPaddingLink);
+
+	// Wrapper Margin Handlers
+	const multiChartMarginUnitsHandler = (v) =>
+		handleSpacingUnits("multiChartMarginUnits", v);
+	const handleMultiChartMarginUnitHandler = (e, pos) =>
+		handleGranularSpacing("multiChartMargin", e, pos, multiChartMarginLink);
 
 	/* =================
        REPEATER HANDLERS
@@ -472,16 +484,16 @@ const Inspector = ({ attributes, setAttributes }) => {
 				/>
 				<FB_Range
 					label={__("Chart Height", "frontis-blocks")}
-					min={100}
-					max={800}
-					rangeValue={{ Desktop: chartHeight }}
-					onChangeHandler={(value) =>
-						setAttributes({ chartHeight: value.Desktop })
-					}
-					deviceType="Desktop"
+					min={0}
+					max={2000}
+					rangeValue={chartHeight}
+					units={chartHeightUnits}
+					deviceType={deviceType}
+					onChangeHandler={(v) => setAttributes({ chartHeight: v })}
+					rangeUnitHandler={(v) => setAttributes({ chartHeightUnits: v })}
 					setAttributes={setAttributes}
-					isRangeUnit={false}
-					resetFallbackValue={280}
+					isRangeUnit={true}
+					resetFallbackValue={270}
 				/>
 				<ToggleControl
 					label={__("Show Header", "frontis-blocks")}
@@ -628,18 +640,20 @@ const Inspector = ({ attributes, setAttributes }) => {
 					max={2000}
 					resetFallbackValue=""
 				/>
-				<FB_Range
-					label={__("Height", "frontis-blocks")}
-					rangeValue={canvasHeight}
-					units={canvasHeightUnits}
-					deviceType={deviceType}
-					onChangeHandler={(v) => setAttributes({ canvasHeight: v })}
-					rangeUnitHandler={(v) => setAttributes({ canvasHeightUnits: v })}
-					setAttributes={setAttributes}
-					min={0}
-					max={2000}
-					resetFallbackValue=""
-				/>
+				{showChartLegend && (
+					<FB_Range
+						label={__("Height", "frontis-blocks")}
+						rangeValue={canvasHeight}
+						units={canvasHeightUnits}
+						deviceType={deviceType}
+						onChangeHandler={(v) => setAttributes({ canvasHeight: v })}
+						rangeUnitHandler={(v) => setAttributes({ canvasHeightUnits: v })}
+						setAttributes={setAttributes}
+						min={0}
+						max={2000}
+						resetFallbackValue=""
+					/>
+				)}
 				<FB_BackgroundColorControl
 					label={__("Background", "frontis-blocks")}
 					bgColorSwitcher={canvasBgColorSwitcher}
@@ -946,45 +960,320 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 			<PanelBody title={__("Title", "frontis-blocks")} initialOpen={true}>
 				<FB_TypographyControl
-					label={__("Typography", "frontis-blocks")}
+					globalTypoControlActive={true}
+					globalTypoSwitcher={footerTitleGlobalTypoSwitcher}
+					storeGlobalTypographyData={(value) =>
+						setAttributes({ footerTitleGlobalTypographyData: value })
+					}
+					globalTypoType={footerTitleGlobalTypoType}
+					onChangeGlobalTypoType={(value) => {
+						setAttributes({
+							footerTitleGlobalTypoType: value,
+							footerTitleGlobalTypoSwitcher:
+								value === "default"
+									? {
+											...footerTitleGlobalTypoSwitcher,
+											fontFamily: false,
+											fontSize: false,
+											fontWeight: false,
+											fontStyle: false,
+											textTransform: false,
+											textDecoration: false,
+											letterSpacing: false,
+											lineHeight: false,
+									  }
+									: {
+											...footerTitleGlobalTypoSwitcher,
+											fontFamily: true,
+											fontSize: true,
+											fontWeight: true,
+											fontStyle: true,
+											textTransform: true,
+											textDecoration: true,
+											letterSpacing: true,
+											lineHeight: true,
+									  },
+						});
+					}}
+					globalTypoOption={footerTitleGlobalTypoOption}
+					onChangeGlobalTypoOption={(value) =>
+						setAttributes({ footerTitleGlobalTypoOption: value })
+					}
+					fontFamily={footerTitleFontFamily}
+					onChangeFontFamily={(value) =>
+						setAttributes({
+							footerTitleFontFamily: value,
+							footerTitleGlobalTypoSwitcher: {
+								...footerTitleGlobalTypoSwitcher,
+								fontFamily: value && false,
+							},
+						})
+					}
+					fontSize={footerTitleFontSize}
+					onChangeFontSize={(value) =>
+						setAttributes({
+							footerTitleFontSize: value,
+							footerTitleGlobalTypoSwitcher: {
+								...footerTitleGlobalTypoSwitcher,
+								fontSize: value && false,
+							},
+						})
+					}
+					fontSizeUnits={footerTitleFontSizeUnits}
+					onChangeFontSizeUnit={(value) =>
+						setAttributes({ footerTitleFontSizeUnits: value })
+					}
+					fontWeight={footerTitleFontWeight}
+					onChangeFontWeight={(value) =>
+						setAttributes({
+							footerTitleFontWeight: value,
+							footerTitleGlobalTypoSwitcher: {
+								...footerTitleGlobalTypoSwitcher,
+								fontWeight: value && false,
+							},
+						})
+					}
+					fontStyle={footerTitleFontStyle}
+					onChangeFontStyle={(value) =>
+						setAttributes({
+							footerTitleFontStyle: value,
+							footerTitleGlobalTypoSwitcher: {
+								...footerTitleGlobalTypoSwitcher,
+								fontStyle: value && false,
+							},
+						})
+					}
+					textTransform={footerTitleTextTransform}
+					onChangeTextTransform={(value) =>
+						setAttributes({
+							footerTitleTextTransform: value,
+							footerTitleGlobalTypoSwitcher: {
+								...footerTitleGlobalTypoSwitcher,
+								textTransform: value && false,
+							},
+						})
+					}
+					textDecoration={footerTitleTextDecoration}
+					onChangeTextDecoration={(value) =>
+						setAttributes({
+							footerTitleTextDecoration: value,
+							footerTitleGlobalTypoSwitcher: {
+								...footerTitleGlobalTypoSwitcher,
+								textDecoration: value && false,
+							},
+						})
+					}
+					letterSpacing={footerTitleLetterSpacing}
+					onChangeLetterSpacing={(value) =>
+						setAttributes({
+							footerTitleLetterSpacing: value,
+							footerTitleGlobalTypoSwitcher: {
+								...footerTitleGlobalTypoSwitcher,
+								letterSpacing: value && false,
+							},
+						})
+					}
+					letterSpacingUnits={footerTitleLetterSpacingUnits}
+					onChangeLetterSpacingUnit={(value) =>
+						setAttributes({ footerTitleLetterSpacingUnits: value })
+					}
+					lineHeight={footerTitleLineHeight}
+					onChangeLineHeight={(value) =>
+						setAttributes({
+							footerTitleLineHeight: value,
+							footerTitleGlobalTypoSwitcher: {
+								...footerTitleGlobalTypoSwitcher,
+								lineHeight: value && false,
+							},
+						})
+					}
+					lineHeightUnits={footerTitleLineHeightUnits}
+					onChangeLineHeightUnit={(value) =>
+						setAttributes({ footerTitleLineHeightUnits: value })
+					}
 					deviceType={deviceType}
 					setAttributes={setAttributes}
-					globalTypography={footerTitleTypography}
-					setGlobalTypography={(v) =>
-						setAttributes({ footerTitleTypography: v })
+				/>
+				<FB_SwitcherControl
+					label={__("Color", "frontis-blocks")}
+					globalSwitcher={footerTitleColorSwitcher}
+					setGlobalSwitcher={(v) =>
+						setAttributes({ footerTitleColorSwitcher: v })
 					}
 				/>
-				<FB_ColorControl
-					label={__("Normal Color", "frontis-blocks")}
-					globalColor={footerTitleNormalColor}
-					setGlobalColor={(v) => setAttributes({ footerTitleNormalColor: v })}
-				/>
-				<FB_ColorControl
-					label={__("Hover Color", "frontis-blocks")}
-					globalColor={footerTitleHoverColor}
-					setGlobalColor={(v) => setAttributes({ footerTitleHoverColor: v })}
-				/>
+				{footerTitleColorSwitcher === "normal" && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={footerTitleNormalColor}
+						setGlobalColor={(v) => setAttributes({ footerTitleNormalColor: v })}
+					/>
+				)}
+				{footerTitleColorSwitcher === "hover" && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={footerTitleHoverColor}
+						setGlobalColor={(v) => setAttributes({ footerTitleHoverColor: v })}
+					/>
+				)}
 			</PanelBody>
+
 			<PanelBody title={__("Description", "frontis-blocks")} initialOpen={true}>
 				<FB_TypographyControl
-					label={__("Typography", "frontis-blocks")}
+					globalTypoControlActive={true}
+					globalTypoSwitcher={footerDescGlobalTypoSwitcher}
+					storeGlobalTypographyData={(value) =>
+						setAttributes({ footerDescGlobalTypographyData: value })
+					}
+					globalTypoType={footerDescGlobalTypoType}
+					onChangeGlobalTypoType={(value) => {
+						setAttributes({
+							footerDescGlobalTypoType: value,
+							footerDescGlobalTypoSwitcher:
+								value === "default"
+									? {
+											...footerDescGlobalTypoSwitcher,
+											fontFamily: false,
+											fontSize: false,
+											fontWeight: false,
+											fontStyle: false,
+											textTransform: false,
+											textDecoration: false,
+											letterSpacing: false,
+											lineHeight: false,
+									  }
+									: {
+											...footerDescGlobalTypoSwitcher,
+											fontFamily: true,
+											fontSize: true,
+											fontWeight: true,
+											fontStyle: true,
+											textTransform: true,
+											textDecoration: true,
+											letterSpacing: true,
+											lineHeight: true,
+									  },
+						});
+					}}
+					globalTypoOption={footerDescGlobalTypoOption}
+					onChangeGlobalTypoOption={(value) =>
+						setAttributes({ footerDescGlobalTypoOption: value })
+					}
+					fontFamily={footerDescFontFamily}
+					onChangeFontFamily={(value) =>
+						setAttributes({
+							footerDescFontFamily: value,
+							footerDescGlobalTypoSwitcher: {
+								...footerDescGlobalTypoSwitcher,
+								fontFamily: value && false,
+							},
+						})
+					}
+					fontSize={footerDescFontSize}
+					onChangeFontSize={(value) =>
+						setAttributes({
+							footerDescFontSize: value,
+							footerDescGlobalTypoSwitcher: {
+								...footerDescGlobalTypoSwitcher,
+								fontSize: value && false,
+							},
+						})
+					}
+					fontSizeUnits={footerDescFontSizeUnits}
+					onChangeFontSizeUnit={(value) =>
+						setAttributes({ footerDescFontSizeUnits: value })
+					}
+					fontWeight={footerDescFontWeight}
+					onChangeFontWeight={(value) =>
+						setAttributes({
+							footerDescFontWeight: value,
+							footerDescGlobalTypoSwitcher: {
+								...footerDescGlobalTypoSwitcher,
+								fontWeight: value && false,
+							},
+						})
+					}
+					fontStyle={footerDescFontStyle}
+					onChangeFontStyle={(value) =>
+						setAttributes({
+							footerDescFontStyle: value,
+							footerDescGlobalTypoSwitcher: {
+								...footerDescGlobalTypoSwitcher,
+								fontStyle: value && false,
+							},
+						})
+					}
+					textTransform={footerDescTextTransform}
+					onChangeTextTransform={(value) =>
+						setAttributes({
+							footerDescTextTransform: value,
+							footerDescGlobalTypoSwitcher: {
+								...footerDescGlobalTypoSwitcher,
+								textTransform: value && false,
+							},
+						})
+					}
+					textDecoration={footerDescTextDecoration}
+					onChangeTextDecoration={(value) =>
+						setAttributes({
+							footerDescTextDecoration: value,
+							footerDescGlobalTypoSwitcher: {
+								...footerDescGlobalTypoSwitcher,
+								textDecoration: value && false,
+							},
+						})
+					}
+					letterSpacing={footerDescLetterSpacing}
+					onChangeLetterSpacing={(value) =>
+						setAttributes({
+							footerDescLetterSpacing: value,
+							footerDescGlobalTypoSwitcher: {
+								...footerDescGlobalTypoSwitcher,
+								letterSpacing: value && false,
+							},
+						})
+					}
+					letterSpacingUnits={footerDescLetterSpacingUnits}
+					onChangeLetterSpacingUnit={(value) =>
+						setAttributes({ footerDescLetterSpacingUnits: value })
+					}
+					lineHeight={footerDescLineHeight}
+					onChangeLineHeight={(value) =>
+						setAttributes({
+							footerDescLineHeight: value,
+							footerDescGlobalTypoSwitcher: {
+								...footerDescGlobalTypoSwitcher,
+								lineHeight: value && false,
+							},
+						})
+					}
+					lineHeightUnits={footerDescLineHeightUnits}
+					onChangeLineHeightUnit={(value) =>
+						setAttributes({ footerDescLineHeightUnits: value })
+					}
 					deviceType={deviceType}
 					setAttributes={setAttributes}
-					globalTypography={footerDescTypography}
-					setGlobalTypography={(v) =>
-						setAttributes({ footerDescTypography: v })
+				/>
+				<FB_SwitcherControl
+					label={__("Color", "frontis-blocks")}
+					globalSwitcher={footerDescColorSwitcher}
+					setGlobalSwitcher={(v) =>
+						setAttributes({ footerDescColorSwitcher: v })
 					}
 				/>
-				<FB_ColorControl
-					label={__("Normal Color", "frontis-blocks")}
-					globalColor={footerDescNormalColor}
-					setGlobalColor={(v) => setAttributes({ footerDescNormalColor: v })}
-				/>
-				<FB_ColorControl
-					label={__("Hover Color", "frontis-blocks")}
-					globalColor={footerDescHoverColor}
-					setGlobalColor={(v) => setAttributes({ footerDescHoverColor: v })}
-				/>
+				{footerDescColorSwitcher === "normal" && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={footerDescNormalColor}
+						setGlobalColor={(v) => setAttributes({ footerDescNormalColor: v })}
+					/>
+				)}
+				{footerDescColorSwitcher === "hover" && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={footerDescHoverColor}
+						setGlobalColor={(v) => setAttributes({ footerDescHoverColor: v })}
+					/>
+				)}
 			</PanelBody>
 		</>
 	);
@@ -994,306 +1283,309 @@ const Inspector = ({ attributes, setAttributes }) => {
 			<PanelBody title={__("Layout", "frontis-blocks")} initialOpen={true}>
 				<FB_Range
 					min={0}
-					max={1000}
+					max={10000000}
 					label={__("Z Index", "frontis-blocks")}
 					rangeValue={multiChartGlobalZIndex}
 					onChangeHandler={(value) =>
-						setAttributes({ multiChartGlobalZIndex: value })
+						setAttributes({
+							multiChartGlobalZIndex: value === 0 ? undefined : value,
+						})
 					}
 					deviceType={deviceType}
 					setAttributes={setAttributes}
+					rangeStep={1}
+					resetFallbackValue={""}
 					isRangeUnit={false}
 				/>
-
-				{/* Overflow Control */}
-
 				<SelectControl
 					label={__("Overflow", "frontis-blocks")}
 					value={multiChartOverflow}
 					options={OVERFLOW_OP}
 					onChange={(value) => setAttributes({ multiChartOverflow: value })}
 				/>
-
 				<FB_PositionControl
 					deviceType={deviceType}
 					positionType={multiChartPositionType}
-					setPositionType={(value) =>
-						setAttributes({ multiChartPositionType: value })
-					}
+					setPositionType={(v) => setAttributes({ multiChartPositionType: v })}
 					HZOrientationType={multiChartHZOrientationType}
-					setHZOrientationType={(value) =>
-						setAttributes({ multiChartHZOrientationType: value })
+					setHZOrientationType={(v) =>
+						setAttributes({ multiChartHZOrientationType: v })
 					}
 					VROrientationType={multiChartVROrientationType}
-					setVROrientationType={(value) =>
-						setAttributes({ multiChartVROrientationType: value })
+					setVROrientationType={(v) =>
+						setAttributes({ multiChartVROrientationType: v })
 					}
 					HZLeftOffset={multiChartHZLeftOffset}
-					setHZLeftOffset={(value) =>
-						setAttributes({ multiChartHZLeftOffset: value })
-					}
+					setHZLeftOffset={(v) => setAttributes({ multiChartHZLeftOffset: v })}
 					HZLeftOffsetUnits={multiChartHZLeftOffsetUnits}
-					setHZLeftOffsetUnits={(value) =>
-						setAttributes({ multiChartHZLeftOffsetUnits: value })
+					setHZLeftOffsetUnits={(v) =>
+						setAttributes({ multiChartHZLeftOffsetUnits: v })
 					}
 					HZRightOffset={multiChartHZRightOffset}
-					setHZRightOffset={(value) =>
-						setAttributes({ multiChartHZRightOffset: value })
+					setHZRightOffset={(v) =>
+						setAttributes({ multiChartHZRightOffset: v })
 					}
 					HZRightOffsetUnits={multiChartHZRightOffsetUnits}
-					setHZRightOffsetUnits={(value) =>
-						setAttributes({ multiChartHZRightOffsetUnits: value })
+					setHZRightOffsetUnits={(v) =>
+						setAttributes({ multiChartHZRightOffsetUnits: v })
 					}
 					VRTopOffset={multiChartVRTopOffset}
-					setVRTopOffset={(value) =>
-						setAttributes({ multiChartVRTopOffset: value })
-					}
+					setVRTopOffset={(v) => setAttributes({ multiChartVRTopOffset: v })}
 					VRTopOffsetUnits={multiChartVRTopOffsetUnits}
-					setVRTopOffsetUnits={(value) =>
-						setAttributes({ multiChartVRTopOffsetUnits: value })
+					setVRTopOffsetUnits={(v) =>
+						setAttributes({ multiChartVRTopOffsetUnits: v })
 					}
 					VRBottomOffset={multiChartVRBottomOffset}
-					setVRBottomOffset={(value) =>
-						setAttributes({ multiChartVRBottomOffset: value })
+					setVRBottomOffset={(v) =>
+						setAttributes({ multiChartVRBottomOffset: v })
 					}
 					VRBottomOffsetUnits={multiChartVRBottomOffsetUnits}
-					setVRBottomOffsetUnits={(value) =>
-						setAttributes({ multiChartVRBottomOffsetUnits: value })
+					setVRBottomOffsetUnits={(v) =>
+						setAttributes({ multiChartVRBottomOffsetUnits: v })
 					}
 					setAttributes={setAttributes}
 				/>
-
 				<FB_InputControl
 					label={__("CSS ID", "frontis-blocks")}
 					value={multiChartWrapperID}
-					onChangeValue={(value) =>
-						setAttributes({ multiChartWrapperID: value })
-					}
+					onChangeValue={(v) => setAttributes({ multiChartWrapperID: v })}
+					helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
 				/>
 				<FB_InputControl
 					label={__("CSS Class", "frontis-blocks")}
 					value={multiChartWrapperClass}
-					onChangeValue={(value) =>
-						setAttributes({ multiChartWrapperClass: value })
+					onChangeValue={(v) => setAttributes({ multiChartWrapperClass: v })}
+					helpText={__("Separate with spaces key.", "frontis-blocks")}
+				/>
+			</PanelBody>
+
+			<PanelBody title={__("Background", "frontis-blocks")} initialOpen={false}>
+				<FB_BackgroundColorControl
+					bgColorSwitcher={multiChartBgColorSwitcher}
+					setBgColorSwitcher={(v) =>
+						setAttributes({ multiChartBgColorSwitcher: v })
+					}
+					normalBackgroundType={multiChartBackgroundType}
+					setNormalBackgroundType={(v) =>
+						setAttributes({ multiChartBackgroundType: v })
+					}
+					normalClassicColor={multiChartClassicColor}
+					setNormalClassicColor={(v) =>
+						setAttributes({
+							multiChartClassicColor: v === undefined ? "" : v,
+						})
+					}
+					normalGradientColor={multiChartGradientColor}
+					setNormalGradientColor={(v) =>
+						setAttributes({
+							multiChartGradientColor: v === undefined ? null : v,
+						})
+					}
+					normalCustomGradientSwitcher={multiChartCustomGradientSwitcher}
+					setNormalCustomGradientSwitcher={(v) =>
+						setAttributes({ multiChartCustomGradientSwitcher: v })
+					}
+					normalCustomGradientInputValue={multiChartCustomGradientInputValue}
+					setNormalCustomGradientInputValue={(v) =>
+						setAttributes({ multiChartCustomGradientInputValue: v })
+					}
+					normalBackgroundImageUrl={multiChartBackgroundImageUrl}
+					setNormalBackgroundImageUrl={(v) =>
+						setAttributes({ multiChartBackgroundImageUrl: v })
+					}
+					normalBackgroundImageAlt={multiChartBackgroundImageAlt}
+					setNormalBackgroundImageAlt={(v) =>
+						setAttributes({ multiChartBackgroundImageAlt: v })
+					}
+					normalBackgroundImageID={multiChartBackgroundImageID}
+					setNormalBackgroundImageID={(v) =>
+						setAttributes({ multiChartBackgroundImageID: v })
+					}
+					normalBackgroundImagePosition={multiChartBackgroundImagePosition}
+					setNormalBackgroundImagePosition={(v) =>
+						setAttributes({ multiChartBackgroundImagePosition: v })
+					}
+					normalBackgroundImageAttachment={multiChartBackgroundImageAttachment}
+					setNormalBackgroundImageAttachment={(v) =>
+						setAttributes({ multiChartBackgroundImageAttachment: v })
+					}
+					normalBackgroundImageRepeat={multiChartBackgroundImageRepeat}
+					setNormalBackgroundImageRepeat={(v) =>
+						setAttributes({ multiChartBackgroundImageRepeat: v })
+					}
+					normalBackgroundImageSize={multiChartBackgroundImageSize}
+					setNormalBackgroundImageSize={(v) =>
+						setAttributes({ multiChartBackgroundImageSize: v })
+					}
+					hoverBackgroundType={multiChartHoverBackgroundType}
+					setHoverBackgroundType={(v) =>
+						setAttributes({ multiChartHoverBackgroundType: v })
+					}
+					hoverClassicColor={multiChartHoverClassicColor}
+					setHoverClassicColor={(v) =>
+						setAttributes({
+							multiChartHoverClassicColor: v === undefined ? "" : v,
+						})
+					}
+					hoverGradientColor={multiChartHoverGradientColor}
+					setHoverGradientColor={(v) =>
+						setAttributes({
+							multiChartHoverGradientColor: v === undefined ? null : v,
+						})
+					}
+					hoverCustomGradientSwitcher={multiChartHoverCustomGradientSwitcher}
+					setHoverCustomGradientSwitcher={(v) =>
+						setAttributes({ multiChartHoverCustomGradientSwitcher: v })
+					}
+					hoverCustomGradientInputValue={
+						multiChartHoverCustomGradientInputValue
+					}
+					setHoverCustomGradientInputValue={(v) =>
+						setAttributes({ multiChartHoverCustomGradientInputValue: v })
+					}
+					hoverBackgroundImageUrl={multiChartHoverBackgroundImageUrl}
+					setHoverBackgroundImageUrl={(v) =>
+						setAttributes({ multiChartHoverBackgroundImageUrl: v })
+					}
+					hoverBackgroundImageAlt={multiChartHoverBackgroundImageAlt}
+					setHoverBackgroundImageAlt={(v) =>
+						setAttributes({ multiChartHoverBackgroundImageAlt: v })
+					}
+					hoverBackgroundImageID={multiChartHoverBackgroundImageID}
+					setHoverBackgroundImageID={(v) =>
+						setAttributes({ multiChartHoverBackgroundImageID: v })
+					}
+					hoverBackgroundImagePosition={multiChartHoverBackgroundImagePosition}
+					setHoverBackgroundImagePosition={(v) =>
+						setAttributes({ multiChartHoverBackgroundImagePosition: v })
+					}
+					hoverBackgroundImageAttachment={
+						multiChartHoverBackgroundImageAttachment
+					}
+					setHoverBackgroundImageAttachment={(v) =>
+						setAttributes({ multiChartHoverBackgroundImageAttachment: v })
+					}
+					hoverBackgroundImageRepeat={multiChartHoverBackgroundImageRepeat}
+					setHoverBackgroundImageRepeat={(v) =>
+						setAttributes({ multiChartHoverBackgroundImageRepeat: v })
+					}
+					hoverBackgroundImageSize={multiChartHoverBackgroundImageSize}
+					setHoverBackgroundImageSize={(v) =>
+						setAttributes({ multiChartHoverBackgroundImageSize: v })
 					}
 				/>
 			</PanelBody>
 
-			{/* <PanelBody
-				title={__("Padding and Margin", "frontis-blocks")}
+			<PanelBody title={__("Border", "frontis-blocks")} initialOpen={false}>
+				<SelectControl
+					label={__("Border Style", "frontis-blocks")}
+					value={multiChartWrapperBorder}
+					options={BORDER_STYLES}
+					onChange={(v) => setAttributes({ multiChartWrapperBorder: v })}
+				/>
+				<FB_SwitcherControl
+					label={__("Border Color", "frontis-blocks")}
+					globalSwitcher={multiChartWrapperBorderColorSwitcher}
+					setGlobalSwitcher={(v) =>
+						setAttributes({ multiChartWrapperBorderColorSwitcher: v })
+					}
+				/>
+				{multiChartWrapperBorderColorSwitcher === "normal" && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={multiChartWrapperBorderColor}
+						setGlobalColor={(v) =>
+							setAttributes({
+								multiChartWrapperBorderColor: v === undefined ? "" : v,
+							})
+						}
+					/>
+				)}
+				{multiChartWrapperBorderColorSwitcher === "hover" && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={multiChartWrapperBorderHoverColor}
+						setGlobalColor={(v) =>
+							setAttributes({
+								multiChartWrapperBorderHoverColor: v === undefined ? "" : v,
+							})
+						}
+					/>
+				)}
+				<FB_Spacing
+					label={__("Border Width", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={multiChartWrapperBorderTypeUnitsHandler}
+					spacingUnits={multiChartWrapperBorderTypeUnits}
+					spacingDesktop={multiChartWrapperBorderTypeDesktop}
+					spacingTablet={multiChartWrapperBorderTypeTablet}
+					spacingMobile={multiChartWrapperBorderTypeMobile}
+					handleSpacingUnitHandler={handleMultiChartWrapperBorderUnitHandler}
+					spacingCombineBtn={multiChartWrapperBorderTypeLink}
+					spacingCombineBtnHandler={() =>
+						setAttributes({
+							multiChartWrapperBorderTypeLink: !multiChartWrapperBorderTypeLink,
+						})
+					}
+					setAttributes={setAttributes}
+				/>
+				<FB_Spacing
+					label={__("Border Radius", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={multiChartWrapperBorderRadiusUnitsHandler}
+					spacingUnits={multiChartWrapperBorderRadiusUnits}
+					spacingDesktop={multiChartWrapperBorderRadiusDesktop}
+					spacingTablet={multiChartWrapperBorderRadiusTablet}
+					spacingMobile={multiChartWrapperBorderRadiusMobile}
+					handleSpacingUnitHandler={
+						handleMultiChartWrapperBorderRadiusUnitHandler
+					}
+					spacingCombineBtn={multiChartWrapperBorderRadiusLink}
+					spacingCombineBtnHandler={() =>
+						setAttributes({
+							multiChartWrapperBorderRadiusLink:
+								!multiChartWrapperBorderRadiusLink,
+						})
+					}
+					setAttributes={setAttributes}
+				/>
+			</PanelBody>
+
+			<PanelBody
+				title={__("Padding/Margin", "frontis-blocks")}
 				initialOpen={false}
 			>
 				<FB_Spacing
 					label={__("Padding", "frontis-blocks")}
 					deviceType={deviceType}
-					spacingUnitsHandler={multiChartGlobalPaddingUnitsHandler}
-					spacingUnits={multiChartGlobalPaddingUnits}
-					spacingDesktop={multiChartGlobalPaddingDesktop}
-					spacingTablet={multiChartGlobalPaddingTablet}
-					spacingMobile={multiChartGlobalPaddingMobile}
-					handleSpacingUnitHandler={handleGlobalPaddingUnitChange}
-					spacingCombineBtn={multiChartGlobalPaddingLink}
+					spacingUnitsHandler={multiChartPaddingUnitsHandler}
+					spacingUnits={multiChartPaddingUnits}
+					spacingDesktop={multiChartPaddingDesktop}
+					spacingTablet={multiChartPaddingTablet}
+					spacingMobile={multiChartPaddingMobile}
+					handleSpacingUnitHandler={handleMultiChartPaddingUnitHandler}
+					spacingCombineBtn={multiChartPaddingLink}
+					spacingCombineBtnHandler={() =>
+						setAttributes({ multiChartPaddingLink: !multiChartPaddingLink })
+					}
 					setAttributes={setAttributes}
 				/>
 				<FB_Spacing
 					label={__("Margin", "frontis-blocks")}
 					deviceType={deviceType}
-					spacingUnitsHandler={handleGlobalMarginUnitsHandler}
-					spacingUnits={globalMarginUnits}
-					spacingDesktop={globalMarginDesktop}
-					spacingTablet={globalMarginTablet}
-					spacingMobile={globalMarginMobile}
-					handleSpacingUnitHandler={handleGlobalMarginUnitChange}
-					spacingCombineBtn={globalMarginLink}
-					spacingCombineBtnHandler={handleGlobalMarginCombineBtn}
-					setAttributes={setAttributes}
-				/>
-               </PanelBody> */}
-
-			{/* 
-
-			<PanelBody title="Background" initialOpen={false}>
-				<FB_BackgroundColorControl
-					bgColorSwitcher={testBgColorSwitcher}
-					setBgColorSwitcher={(value) =>
-						setAttributes({ testBgColorSwitcher: value })
-					}
-					normalBackgroundType={testBackgroundType}
-					setNormalBackgroundType={(value) =>
-						setAttributes({ testBackgroundType: value })
-					}
-					normalClassicColor={testClassicColor}
-					setNormalClassicColor={(value) =>
-						setAttributes({
-							testClassicColor: value === undefined ? "" : value,
-						})
-					}
-					normalGradientColor={testGradientColor}
-					setNormalGradientColor={(value) =>
-						setAttributes({
-							testGradientColor: value === undefined ? null : value,
-						})
-					}
-					normalCustomGradientSwitcher={testCustomGradientSwitcher}
-					setNormalCustomGradientSwitcher={(value) =>
-						setAttributes({ testCustomGradientSwitcher: value })
-					}
-					normalCustomGradientInputValue={testCustomGradientInputValue}
-					setNormalCustomGradientInputValue={(value) =>
-						setAttributes({ testCustomGradientInputValue: value })
-					}
-					normalBackgroundImageUrl={testBackgroundImageUrl}
-					setNormalBackgroundImageUrl={(value) =>
-						setAttributes({ testBackgroundImageUrl: value })
-					}
-					normalBackgroundImageAlt={testBackgroundImageAlt}
-					setNormalBackgroundImageAlt={(value) =>
-						setAttributes({ testBackgroundImageAlt: value })
-					}
-					normalBackgroundImageID={testBackgroundImageID}
-					setNormalBackgroundImageID={(value) =>
-						setAttributes({ testBackgroundImageID: value })
-					}
-					normalBackgroundImagePosition={testBackgroundImagePosition}
-					setNormalBackgroundImagePosition={(value) =>
-						setAttributes({ testBackgroundImagePosition: value })
-					}
-					normalBackgroundImageAttachment={testBackgroundImageAttachment}
-					setNormalBackgroundImageAttachment={(value) =>
-						setAttributes({ testBackgroundImageAttachment: value })
-					}
-					normalBackgroundImageRepeat={testBackgroundImageRepeat}
-					setNormalBackgroundImageRepeat={(value) =>
-						setAttributes({ testBackgroundImageRepeat: value })
-					}
-					normalBackgroundImageSize={testBackgroundImageSize}
-					setNormalBackgroundImageSize={(value) =>
-						setAttributes({ testBackgroundImageSize: value })
-					}
-					hoverBackgroundType={hoverBackgroundType}
-					setHoverBackgroundType={(value) =>
-						setAttributes({ hoverBackgroundType: value })
-					}
-					hoverClassicColor={hoverClassicColor}
-					setHoverClassicColor={(value) =>
-						setAttributes({
-							hoverClassicColor: value === undefined ? "" : value,
-						})
-					}
-					hoverGradientColor={hoverGradientColor}
-					setHoverGradientColor={(value) =>
-						setAttributes({
-							hoverGradientColor: value === undefined ? null : value,
-						})
-					}
-					hoverCustomGradientSwitcher={hoverCustomGradientSwitcher}
-					setHoverCustomGradientSwitcher={(value) =>
-						setAttributes({ hoverCustomGradientSwitcher: value })
-					}
-					hoverCustomGradientInputValue={hoverCustomGradientInputValue}
-					setHoverCustomGradientInputValue={(value) =>
-						setAttributes({ hoverCustomGradientInputValue: value })
-					}
-					hoverBackgroundImageUrl={hoverBackgroundImageUrl}
-					setHoverBackgroundImageUrl={(value) =>
-						setAttributes({ hoverBackgroundImageUrl: value })
-					}
-					hoverBackgroundImageAlt={hoverBackgroundImageAlt}
-					setHoverBackgroundImageAlt={(value) =>
-						setAttributes({ hoverBackgroundImageAlt: value })
-					}
-					hoverBackgroundImageID={hoverBackgroundImageID}
-					setHoverBackgroundImageID={(value) =>
-						setAttributes({ hoverBackgroundImageID: value })
-					}
-					hoverBackgroundImagePosition={hoverBackgroundImagePosition}
-					setHoverBackgroundImagePosition={(value) =>
-						setAttributes({ hoverBackgroundImagePosition: value })
-					}
-					hoverBackgroundImageAttachment={hoverBackgroundImageAttachment}
-					setHoverBackgroundImageAttachment={(value) =>
-						setAttributes({ hoverBackgroundImageAttachment: value })
-					}
-					hoverBackgroundImageRepeat={hoverBackgroundImageRepeat}
-					setHoverBackgroundImageRepeat={(value) =>
-						setAttributes({ hoverBackgroundImageRepeat: value })
-					}
-					hoverBackgroundImageSize={hoverBackgroundImageSize}
-					setHoverBackgroundImageSize={(value) =>
-						setAttributes({ hoverBackgroundImageSize: value })
-					}
-				/>
-			</PanelBody> */}
-			{/* <PanelBody
-				title={__("Border and Shadow", "frontis-blocks")}
-				initialOpen={false}
-			>
-				<SelectControl
-					label={__("Border Style", "frontis-blocks")}
-					value={multiChartWrapperBorder}
-					options={BORDER_STYLES}
-					onChange={(value) =>
-						setAttributes({ multiChartWrapperBorder: value })
-					}
-				/>
-
-				<FB_Color
-					label={__("Border Color", "frontis-blocks")}
-					globalColorSwitcher={multiChartGlobalBorderColorSwitcher}
-					globalColor={multiChartGlobalBorderColor}
-					globalHoverColor={multiChartGlobalBorderHoverColor}
-					handleColorSwitcherChange={
-						handleMultiChartGlobalBorderColorSwitcherChange
-					}
-					handleGlobalColorChange={handleMultiChartGlobalBorderColorChange}
-					handleGlobalHoverColorChange={
-						handleMultiChartGlobalBorderHoverColorChange
-					}
-				/>
-
-				<FB_Spacing
-					label={__("Border", "frontis-blocks")}
-					deviceType={deviceType}
-					spacingUnitsHandler={handleMultiChartGlobalBorderUnitsHandler}
-					spacingUnits={multiChartGlobalBorderUnits}
-					spacingDesktop={multiChartGlobalBorderDesktop}
-					spacingTablet={multiChartGlobalBorderTablet}
-					spacingMobile={multiChartGlobalBorderMobile}
-					handleSpacingUnitHandler={handleMultiChartGlobalBorderUnitChange}
-					spacingCombineBtn={multiChartGlobalBorderLink}
-					spacingCombineBtnHandler={handleMultiChartGlobalBorderCombineBtn}
-					setAttributes={setAttributes}
-				/>
-
-				<FB_Spacing
-					label={__("Border Radius", "frontis-blocks")}
-					deviceType={deviceType}
-					spacingUnitsHandler={handleMultiChartGlobalBorderRadiusUnitsHandler}
-					spacingUnits={multiChartGlobalBorderRadiusUnits}
-					spacingDesktop={multiChartGlobalBorderRadiusDesktop}
-					spacingTablet={multiChartGlobalBorderRadiusTablet}
-					spacingMobile={multiChartGlobalBorderRadiusMobile}
-					handleSpacingUnitHandler={
-						handleMultiChartGlobalBorderRadiusUnitChange
-					}
-					spacingCombineBtn={multiChartGlobalBorderRadiusLink}
-					spacingCombineBtnHandler={
-						handleMultiChartGlobalBorderRadiusCombineBtn
+					spacingUnitsHandler={multiChartMarginUnitsHandler}
+					spacingUnits={multiChartMarginUnits}
+					spacingDesktop={multiChartMarginDesktop}
+					spacingTablet={multiChartMarginTablet}
+					spacingMobile={multiChartMarginMobile}
+					handleSpacingUnitHandler={handleMultiChartMarginUnitHandler}
+					spacingCombineBtn={multiChartMarginLink}
+					spacingCombineBtnHandler={() =>
+						setAttributes({ multiChartMarginLink: !multiChartMarginLink })
 					}
 					setAttributes={setAttributes}
 				/>
-				<FB_BoxShadowControl
-					onBoxShadowChange={(value) =>
-						setAttributes({ boxMultiChartBoxShadowValues: value })
-					}
-					initialShadowValue={boxMultiChartBoxShadowValues}
-					onBoxShadowStyleChange={(value) =>
-						setAttributes({
-							boxMultiChartBoxShadowCssValue: value,
-						})
-					}
-				/>
-			</PanelBody> */}
+			</PanelBody>
 
 			<PanelBody
 				title={__("Responsive Control", "frontis-blocks")}

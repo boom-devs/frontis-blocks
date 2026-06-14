@@ -3,6 +3,8 @@ import getCustomCss from "@Utils/getCustomCss";
 const generateMultiChartStyle = (attributes) => {
 	const {
 		blockID,
+		chartHeight,
+		chartHeightUnits,
 		canvasWidth,
 		canvasWidthUnits,
 		canvasHeight,
@@ -64,10 +66,33 @@ const generateMultiChartStyle = (attributes) => {
 		legendDotSize,
 		legendDotRadius,
 		legendTextColor,
+		showChartLegend,
 
 		footerTitleNormalColor,
+		footerTitleFontFamily,
+		footerTitleFontSize,
+		footerTitleFontSizeUnits,
+		footerTitleFontWeight,
+		footerTitleFontStyle,
+		footerTitleTextTransform,
+		footerTitleTextDecoration,
+		footerTitleLetterSpacing,
+		footerTitleLetterSpacingUnits,
+		footerTitleLineHeight,
+		footerTitleLineHeightUnits,
 		footerTitleHoverColor,
 		footerDescNormalColor,
+		footerDescFontFamily,
+		footerDescFontSize,
+		footerDescFontSizeUnits,
+		footerDescFontWeight,
+		footerDescFontStyle,
+		footerDescTextTransform,
+		footerDescTextDecoration,
+		footerDescLetterSpacing,
+		footerDescLetterSpacingUnits,
+		footerDescLineHeight,
+		footerDescLineHeightUnits,
 		footerDescHoverColor,
 		footerPaddingDesktop,
 		footerPaddingUnits,
@@ -139,10 +164,6 @@ const generateMultiChartStyle = (attributes) => {
 		multiChartVRBottomOffsetUnits,
 		multiChartOverflow,
 		multiChartCustomCSS,
-	} = attributes;
-
-	// Destructure responsive attributes that might not be directly in the main list
-	const {
 		canvasPaddingTablet,
 		canvasPaddingMobile,
 		canvasMarginTablet,
@@ -163,15 +184,7 @@ const generateMultiChartStyle = (attributes) => {
 		toggleBtnPaddingMobile,
 		toggleBtnBorderRadiusTablet,
 		toggleBtnBorderRadiusMobile,
-	} = attributes; // Destructure for tablet/mobile attributes that might not be directly in the main list
-
-	/** Helper: shorthand spacing */
-	// const spacing4 = (obj, unit = "px") =>
-	// 	obj
-	// 		? `${obj.top ?? 0}${unit} ${obj.right ?? 0}${unit} ${
-	// 				obj.bottom ?? 0
-	// 		  }${unit} ${obj.left ?? 0}${unit}`
-	// 		: "";
+	} = attributes;
 
 	// Canvas Padding
 	const canvasPaddingGetDesktop = `${canvasPaddingDesktop?.top}${canvasPaddingUnits?.Desktop} ${canvasPaddingDesktop?.right}${canvasPaddingUnits?.Desktop} ${canvasPaddingDesktop?.bottom}${canvasPaddingUnits?.Desktop} ${canvasPaddingDesktop?.left}${canvasPaddingUnits?.Desktop}`;
@@ -200,7 +213,7 @@ const generateMultiChartStyle = (attributes) => {
 		? `${canvasBorderRadiusMobile?.top}${canvasBorderRadiusUnits?.Mobile} ${canvasBorderRadiusMobile?.right}${canvasBorderRadiusUnits?.Mobile} ${canvasBorderRadiusMobile?.bottom}${canvasBorderRadiusUnits?.Mobile} ${canvasBorderRadiusMobile?.left}${canvasBorderRadiusUnits?.Mobile}`
 		: "";
 
-	// Chart Body Padding (only Desktop attribute exists)
+	// Chart Body Padding
 	const chartBodyPaddingGetDesktop = chartBodyPaddingDesktop
 		? `${chartBodyPaddingDesktop?.top}px ${chartBodyPaddingDesktop?.right}px ${chartBodyPaddingDesktop?.bottom}px ${chartBodyPaddingDesktop?.left}px`
 		: "";
@@ -220,7 +233,7 @@ const generateMultiChartStyle = (attributes) => {
 		? `${chartBodyBorderRadiusMobile?.top}${chartBodyBorderRadiusUnits?.Mobile} ${chartBodyBorderRadiusMobile?.right}${chartBodyBorderRadiusUnits?.Mobile} ${chartBodyBorderRadiusMobile?.bottom}${chartBodyBorderRadiusUnits?.Mobile} ${chartBodyBorderRadiusMobile?.left}${chartBodyBorderRadiusUnits?.Mobile}`
 		: "";
 
-	// Chart Header Padding (only Desktop attribute exists)
+	// Chart Header Padding
 	const chartHeaderPaddingGetDesktop = chartHeaderPaddingDesktop
 		? `${chartHeaderPaddingDesktop?.top}px ${chartHeaderPaddingDesktop?.right}px ${chartHeaderPaddingDesktop?.bottom}px ${chartHeaderPaddingDesktop?.left}px`
 		: "";
@@ -278,7 +291,7 @@ const generateMultiChartStyle = (attributes) => {
 			? `${multiChartWrapperBorderRadiusMobile?.top}${multiChartWrapperBorderRadiusUnits?.Mobile} ${multiChartWrapperBorderRadiusMobile?.right}${multiChartWrapperBorderRadiusUnits?.Mobile} ${multiChartWrapperBorderRadiusMobile?.bottom}${multiChartWrapperBorderRadiusUnits?.Mobile} ${multiChartWrapperBorderRadiusMobile?.left}${multiChartWrapperBorderRadiusUnits?.Mobile}`
 			: "";
 
-	// MultiChart Wrapper Border Type (Width)
+	// MultiChart Wrapper Border Type
 	const multiChartWrapperBorderTypeGetDesktop = `${multiChartWrapperBorderTypeDesktop?.top}${multiChartWrapperBorderTypeUnits?.Desktop} ${multiChartWrapperBorderTypeDesktop?.right}${multiChartWrapperBorderTypeUnits?.Desktop} ${multiChartWrapperBorderTypeDesktop?.bottom}${multiChartWrapperBorderTypeUnits?.Desktop} ${multiChartWrapperBorderTypeDesktop?.left}${multiChartWrapperBorderTypeUnits?.Desktop}`;
 	const multiChartWrapperBorderTypeGetTablet = multiChartWrapperBorderTypeTablet
 		? `${multiChartWrapperBorderTypeTablet?.top}${multiChartWrapperBorderTypeUnits?.Tablet} ${multiChartWrapperBorderTypeTablet?.right}${multiChartWrapperBorderTypeUnits?.Tablet} ${multiChartWrapperBorderTypeTablet?.bottom}${multiChartWrapperBorderTypeUnits?.Tablet} ${multiChartWrapperBorderTypeTablet?.left}${multiChartWrapperBorderTypeUnits?.Tablet}`
@@ -287,7 +300,7 @@ const generateMultiChartStyle = (attributes) => {
 		? `${multiChartWrapperBorderTypeMobile?.top}${multiChartWrapperBorderTypeUnits?.Mobile} ${multiChartWrapperBorderTypeMobile?.right}${multiChartWrapperBorderTypeUnits?.Mobile} ${multiChartWrapperBorderTypeMobile?.bottom}${multiChartWrapperBorderTypeUnits?.Mobile} ${multiChartWrapperBorderTypeMobile?.left}${multiChartWrapperBorderTypeUnits?.Mobile}`
 		: "";
 
-	// Toggle Button Padding (only Desktop attribute exists)
+	// Toggle Button Padding
 	const toggleBtnPaddingGetDesktop = toggleBtnPaddingDesktop
 		? `${toggleBtnPaddingDesktop?.top}px ${toggleBtnPaddingDesktop?.right}px ${toggleBtnPaddingDesktop?.bottom}px ${toggleBtnPaddingDesktop?.left}px`
 		: "";
@@ -579,13 +592,22 @@ const generateMultiChartStyle = (attributes) => {
 					: ""
 			}
 			${
-				canvasHeight?.Desktop
+				showChartLegend && canvasHeight?.Desktop
 					? `height: ${canvasHeight.Desktop}${canvasHeightUnits?.Desktop};`
 					: ""
 			}
 		}
 		.fb-elegant-chart-block.${blockID} .fb-chart-card-body:hover {
 			${bodyBgHover}
+		}
+		.fb-elegant-chart-block.${blockID} .fb-canvas-wrapper {
+			${
+				chartHeight?.Desktop
+					? `height: ${chartHeight.Desktop}${
+							chartHeightUnits?.Desktop || "px"
+					  };`
+					: ""
+			}
 		}
 		.fb-elegant-chart-block.${blockID} .fb-chart-legend {
 			display: flex;
@@ -688,7 +710,7 @@ const generateMultiChartStyle = (attributes) => {
 			} }
 
 			.fb-elegant-chart-block.${blockID} .fb-chart-card-body { ${
-				canvasHeight?.Tablet
+				showChartLegend && canvasHeight?.Tablet
 					? `height: ${canvasHeight.Tablet}${canvasHeightUnits?.Tablet};`
 					: ""
 			} ${
@@ -846,7 +868,7 @@ const generateMultiChartStyle = (attributes) => {
 			} }
 
 			.fb-elegant-chart-block.${blockID} .fb-chart-card-body { ${
-				canvasHeight?.Mobile
+				showChartLegend && canvasHeight?.Mobile
 					? `height: ${canvasHeight.Mobile}${canvasHeightUnits?.Mobile};`
 					: ""
 			} ${
@@ -859,6 +881,15 @@ const generateMultiChartStyle = (attributes) => {
 					? `border-radius: ${chartBodyBorderRadiusGetMobile};`
 					: ""
 			} }
+			.fb-elegant-chart-block.${blockID} .fb-canvas-wrapper {
+				${
+					chartHeight?.Mobile
+						? `height: ${chartHeight.Mobile}${
+								chartHeightUnits?.Mobile || "px"
+						  };`
+						: ""
+				}
+			}
 			.fb-elegant-chart-block.${blockID} .fb-chart-footer {
 				${
 					footerTextAlignment?.Mobile

@@ -37,7 +37,7 @@ export default function save({ attributes }) {
 	const chartConfig = {
 		type: chartType,
 		index_axis: chartType === "horizontalBar" ? "y" : "x",
-		height: chartHeight,
+		height: chartHeight?.Desktop || 270,
 		bar_variant: barVariant,
 		labels: chartLabels ? chartLabels.split(",").map((l) => l.trim()) : [],
 		datasets: (chartDatasets || []).map((ds) => ({
@@ -121,13 +121,24 @@ export default function save({ attributes }) {
 						)}
 
 						<div className="fb-chart-card-body">
-							<div
-								className="fb-canvas-wrapper"
-								style={{ height: `${chartHeight}px` }}
-							>
+							<div className="fb-canvas-wrapper">
 								<canvas></canvas>
 							</div>
-							{showChartLegend && <div className="fb-chart-legend"></div>}
+							{showChartLegend && (
+								<div className="fb-chart-legend">
+									{chartDatasets.map((series, i) => (
+										<div key={i} className="fb-legend-item">
+											<span
+												className="fb-legend-dot"
+												style={{ backgroundColor: series.color || "#3b82f6" }}
+											></span>
+											<span className="fb-legend-text">
+												{series.series_name || "Series"}
+											</span>
+										</div>
+									))}
+								</div>
+							)}
 						</div>
 					</div>
 

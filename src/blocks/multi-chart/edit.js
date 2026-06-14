@@ -2,6 +2,7 @@ import { __ } from "@wordpress/i18n";
 import { useBlockProps } from "@wordpress/block-editor";
 import { useEffect, useState, useRef } from "@wordpress/element";
 import Chart from "chart.js/auto";
+import SwitchToBlockSettings from "@Utils/SwitchToBlockSettings";
 
 import "./editor.scss";
 import Inspector from "./inspector";
@@ -48,6 +49,7 @@ export default function Edit({
 	} = attributes;
 
 	const [isFilterOpen, setIsFilterOpen] = useState(false);
+	const [activeFilterIndex, setActiveFilterIndex] = useState(0);
 	const canvasRef = useRef(null);
 	const chartInstance = useRef(null);
 
@@ -59,6 +61,12 @@ export default function Edit({
 		attributes,
 		setAttributes,
 	});
+
+	/**
+	 * Manages tab button settings and switches to block settings on click
+	 */
+	const panelRef = useRef(null);
+	SwitchToBlockSettings(panelRef);
 
 	useEffect(() => {
 		if (blockID) {
@@ -82,6 +90,17 @@ export default function Edit({
 			const isArea = chartType === "areaChart";
 			const baseColor = ds.color || "#3b82f6";
 
+			let data = ds.values
+				? ds.values.split(",").map((v) => parseFloat(v))
+				: [];
+
+			// Handle dynamic data update based on filter index (rotation logic like view.js)
+			if (activeFilterIndex > 0 && data.length > 0) {
+				data = data
+					.slice(activeFilterIndex)
+					.concat(data.slice(0, activeFilterIndex));
+			}
+
 			const hexToRgba = (hex, opacity) => {
 				const r = parseInt(hex.slice(1, 3), 16);
 				const g = parseInt(hex.slice(3, 5), 16);
@@ -91,7 +110,7 @@ export default function Edit({
 
 			return {
 				label: ds.series_name || __("Content", "frontis-blocks"),
-				data: ds.values ? ds.values.split(",").map((v) => parseFloat(v)) : [],
+				data: data,
 				backgroundColor:
 					isArea || chartType === "radar"
 						? hexToRgba(baseColor, 0.2)
@@ -167,6 +186,7 @@ export default function Edit({
 		yAxisNormalColor,
 		tooltipBg,
 		isFilterOpen,
+		activeFilterIndex,
 	]);
 
 	// Dynamic Title Logic from PHP
@@ -198,7 +218,10 @@ export default function Edit({
 			)}
 
 			<div {...blockProps}>
-				<div className={`fb-chart-card ${multiChartWrapperClass}`}>
+				<div
+					className={`fb-chart-card ${multiChartWrapperClass}`}
+					ref={panelRef}
+				>
 					<div className="fb-chart-body-wrapper">
 						{showChartHeader && (
 							<div className="fb-chart-header">
@@ -213,7 +236,7 @@ export default function Edit({
 										onClick={() => setIsFilterOpen(!isFilterOpen)}
 									>
 										<span className="fb-current-filter">
-											{filterList[0]?.filter_label ||
+											{filterList[activeFilterIndex]?.filter_label ||
 												__("This Week", "frontis-blocks")}
 										</span>
 										<span className="fb-filter-icon">
@@ -225,8 +248,15 @@ export default function Edit({
 													<li
 														key={index}
 														className={`fb-dropdown-item ${
-															0 === index ? "fb-item-active" : ""
+															activeFilterIndex === index
+																? "fb-item-active"
+																: ""
 														}`}
+														onClick={(e) => {
+															e.stopPropagation();
+															setActiveFilterIndex(index);
+															setIsFilterOpen(false);
+														}}
 													>
 														{item.filter_label || __("Item", "frontis-blocks")}
 													</li>
@@ -238,10 +268,7 @@ export default function Edit({
 						)}
 
 						<div className="fb-chart-card-body">
-							<div
-								className="fb-canvas-wrapper"
-								style={{ height: `${chartHeight}px` }}
-							>
+							<div className="fb-canvas-wrapper">
 								{(!chartDatasets || chartDatasets.length === 0) && (
 									<div className="fb-chart-preview-placeholder">
 										{__("Chart Data Preview Area", "frontis-blocks")}
@@ -258,7 +285,7 @@ export default function Edit({
 												style={{ backgroundColor: series.color || "#3b82f6" }}
 											></span>
 											<span className="fb-legend-text">
-												{series.series_name || "Series"}
+												{series.series_name || __("Content", "frontis-blocks")}
 											</span>
 										</div>
 									))}

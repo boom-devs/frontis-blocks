@@ -191,31 +191,42 @@ import Chart from "chart.js/auto";
 
 		// Filter Dropdown Interaction
 		$filterBtn.on("click", function (e) {
-			e.stopPropagation();
-			$(this).toggleClass("fb-active");
-		});
+			const $item = $(e.target).closest(".fb-dropdown-item");
 
-		$(document).on("click", () => $filterBtn.removeClass("fb-active"));
+			if ($item.length) {
+				e.preventDefault();
+				e.stopPropagation();
 
-		$wrapper.on("click", ".fb-dropdown-item", function () {
-			const $item = $(this);
-			const idx = parseInt($item.data("index"), 10) || 0;
+				const idx = parseInt($item.attr("data-index"), 10) || 0;
+				const $this = $(this);
 
-			$wrapper.find(".fb-dropdown-item").removeClass("fb-item-active");
-			$item.addClass("fb-item-active");
-			$wrapper.find(".fb-current-filter").text($item.text().trim());
+				$this.find(".fb-dropdown-item").removeClass("fb-item-active");
+				$item.addClass("fb-item-active");
+				$this.find(".fb-current-filter").text($item.text().trim());
 
-			const chart = window.fbCharts[chartId];
-			if (chart && !isCircular) {
-				chart.data.datasets.forEach((ds, di) => {
-					const original = config.datasets[di]?.values || [];
-					ds.data = original.slice(idx).concat(original.slice(0, idx));
-				});
-				chart.update();
+				const chart = window.fbCharts[chartId];
+				if (chart && config.datasets) {
+					chart.data.datasets.forEach((ds, di) => {
+						const originalSource = config.datasets[di]?.values || [];
+						if (originalSource.length > 0) {
+							ds.data = originalSource
+								.slice(idx)
+								.concat(originalSource.slice(0, idx));
+						}
+					});
+					chart.update();
+				}
+				$this.removeClass("fb-active");
+			} else {
+				e.stopPropagation();
+				$(this).toggleClass("fb-active");
 			}
 		});
 
-		// Legend Interaction
+		$(document).on("click", function () {
+			$(".fb-chart-filter").removeClass("fb-active");
+		});
+
 		if ($legendContainer.length) {
 			$legendContainer.empty();
 			config.datasets.forEach((series, i) => {
