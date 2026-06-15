@@ -163,11 +163,23 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 		imageAccordionPaddingMobile,
 		imageAccordionPaddingLink,
 
+		imageAccordionItemPaddingUnits,
+		imageAccordionItemPaddingDesktop,
+		imageAccordionItemPaddingTablet,
+		imageAccordionItemPaddingMobile,
+		imageAccordionItemPaddingLink,
+
 		imageAccordionMarginUnits,
 		imageAccordionMarginDesktop,
 		imageAccordionMarginTablet,
 		imageAccordionMarginMobile,
 		imageAccordionMarginLink,
+
+		imageAccordionItemMarginUnits,
+		imageAccordionItemMarginDesktop,
+		imageAccordionItemMarginTablet,
+		imageAccordionItemMarginMobile,
+		imageAccordionItemMarginLink,
 
 		imageAccordionBgColorSwitcher,
 		imageAccordionBackgroundType,
@@ -317,175 +329,192 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 		}
 	};
 
-	/** Padding handlers */
-	const paddingUnitsChange = (event, position) => {
+	/** Item Padding handlers */
+	const handleItemPaddingUnitHandler = (event, position) => {
 		const value = event.target.value;
-		if (imageAccordionPaddingLink) {
-			const padded = { top: value, right: value, bottom: value, left: value };
-			if (deviceType === "Desktop")
-				setAttributes({ imageAccordionPaddingDesktop: padded });
-			else if (deviceType === "Tablet")
-				setAttributes({ imageAccordionPaddingTablet: padded });
-			else setAttributes({ imageAccordionPaddingMobile: padded });
-		} else {
-			if (deviceType === "Desktop")
-				setAttributes({
-					imageAccordionPaddingDesktop: {
-						...imageAccordionPaddingDesktop,
-						[position]: value,
-					},
-				});
-			else if (deviceType === "Tablet")
-				setAttributes({
-					imageAccordionPaddingTablet: {
-						...imageAccordionPaddingTablet,
-						[position]: value,
-					},
-				});
-			else
-				setAttributes({
-					imageAccordionPaddingMobile: {
-						...imageAccordionPaddingMobile,
-						[position]: value,
-					},
-				});
-		}
+		const update = imageAccordionItemPaddingLink
+			? { top: value, right: value, bottom: value, left: value }
+			: {
+					...attributes[`imageAccordionItemPadding${deviceType}`],
+					[position]: value,
+			  };
+		setAttributes({ [`imageAccordionItemPadding${deviceType}`]: update });
 	};
 
-	const marginUnitsChange = (event, position) => {
-		const value = event.target.value;
-		if (imageAccordionMarginLink) {
-			const margined = { top: value, right: value, bottom: value, left: value };
-			if (deviceType === "Desktop")
-				setAttributes({ imageAccordionMarginDesktop: margined });
-			else if (deviceType === "Tablet")
-				setAttributes({ imageAccordionMarginTablet: margined });
-			else setAttributes({ imageAccordionMarginMobile: margined });
-		} else {
-			if (deviceType === "Desktop")
-				setAttributes({
-					imageAccordionMarginDesktop: {
-						...imageAccordionMarginDesktop,
-						[position]: value,
-					},
-				});
-			else if (deviceType === "Tablet")
-				setAttributes({
-					imageAccordionMarginTablet: {
-						...imageAccordionMarginTablet,
-						[position]: value,
-					},
-				});
-			else
-				setAttributes({
-					imageAccordionMarginMobile: {
-						...imageAccordionMarginMobile,
-						[position]: value,
-					},
-				});
-		}
+	const itemPaddingCombineBtnHandler = () => {
+		setAttributes({
+			imageAccordionItemPaddingLink: !imageAccordionItemPaddingLink,
+		});
 	};
 
-	const borderRadiusChange = (event, position) => {
-		const value = event.target.value;
-		if (imageAccordionItemBorderRadiusLink) {
-			const val = { top: value, right: value, bottom: value, left: value };
-			if (deviceType === "Desktop")
-				setAttributes({ imageAccordionItemBorderRadiusDesktop: val });
-			else if (deviceType === "Tablet")
-				setAttributes({ imageAccordionItemBorderRadiusTablet: val });
-			else setAttributes({ imageAccordionItemBorderRadiusMobile: val });
-		} else {
-			if (deviceType === "Desktop")
-				setAttributes({
-					imageAccordionItemBorderRadiusDesktop: {
-						...imageAccordionItemBorderRadiusDesktop,
-						[position]: value,
-					},
-				});
-			else if (deviceType === "Tablet")
-				setAttributes({
-					imageAccordionItemBorderRadiusTablet: {
-						...imageAccordionItemBorderRadiusTablet,
-						[position]: value,
-					},
-				});
-			else
-				setAttributes({
-					imageAccordionItemBorderRadiusMobile: {
-						...imageAccordionItemBorderRadiusMobile,
-						[position]: value,
-					},
-				});
-		}
+	const itemPaddingUnitsHandler = (unit) => {
+		setAttributes({
+			imageAccordionItemPaddingUnits: {
+				...imageAccordionItemPaddingUnits,
+				[deviceType]: unit,
+			},
+		});
 	};
 
-	const wrapperBorderTypeChange = (event, position) => {
+	/** Item Margin handlers */
+	const handleItemMarginUnitHandler = (event, position) => {
 		const value = event.target.value;
-		if (imageAccordionWrapperBorderTypeLink) {
-			const val = { top: value, right: value, bottom: value, left: value };
-			if (deviceType === "Desktop")
-				setAttributes({ imageAccordionWrapperBorderTypeDesktop: val });
-			else if (deviceType === "Tablet")
-				setAttributes({ imageAccordionWrapperBorderTypeTablet: val });
-			else setAttributes({ imageAccordionWrapperBorderTypeMobile: val });
-		} else {
-			if (deviceType === "Desktop")
-				setAttributes({
-					imageAccordionWrapperBorderTypeDesktop: {
-						...imageAccordionWrapperBorderTypeDesktop,
-						[position]: value,
-					},
-				});
-			else if (deviceType === "Tablet")
-				setAttributes({
-					imageAccordionWrapperBorderTypeTablet: {
-						...imageAccordionWrapperBorderTypeTablet,
-						[position]: value,
-					},
-				});
-			else
-				setAttributes({
-					imageAccordionWrapperBorderTypeMobile: {
-						...imageAccordionWrapperBorderTypeMobile,
-						[position]: value,
-					},
-				});
-		}
+		const update = imageAccordionItemMarginLink
+			? { top: value, right: value, bottom: value, left: value }
+			: {
+					...attributes[`imageAccordionItemMargin${deviceType}`],
+					[position]: value,
+			  };
+		setAttributes({ [`imageAccordionItemMargin${deviceType}`]: update });
 	};
 
-	const wrapperBorderRadiusChange = (event, position) => {
+	const itemMarginCombineBtnHandler = () => {
+		setAttributes({
+			imageAccordionItemMarginLink: !imageAccordionItemMarginLink,
+		});
+	};
+
+	const itemMarginUnitsHandler = (unit) => {
+		setAttributes({
+			imageAccordionItemMarginUnits: {
+				...imageAccordionItemMarginUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+
+	/** Wrapper Padding handlers */
+	const handleWrapperPaddingUnitHandler = (event, position) => {
 		const value = event.target.value;
-		if (imageAccordionWrapperBorderRadiusLink) {
-			const val = { top: value, right: value, bottom: value, left: value };
-			if (deviceType === "Desktop")
-				setAttributes({ imageAccordionWrapperBorderRadiusDesktop: val });
-			else if (deviceType === "Tablet")
-				setAttributes({ imageAccordionWrapperBorderRadiusTablet: val });
-			else setAttributes({ imageAccordionWrapperBorderRadiusMobile: val });
-		} else {
-			if (deviceType === "Desktop")
-				setAttributes({
-					imageAccordionWrapperBorderRadiusDesktop: {
-						...imageAccordionWrapperBorderRadiusDesktop,
-						[position]: value,
-					},
-				});
-			else if (deviceType === "Tablet")
-				setAttributes({
-					imageAccordionWrapperBorderRadiusTablet: {
-						...imageAccordionWrapperBorderRadiusTablet,
-						[position]: value,
-					},
-				});
-			else
-				setAttributes({
-					imageAccordionWrapperBorderRadiusMobile: {
-						...imageAccordionWrapperBorderRadiusMobile,
-						[position]: value,
-					},
-				});
-		}
+		const update = imageAccordionPaddingLink
+			? { top: value, right: value, bottom: value, left: value }
+			: {
+					...attributes[`imageAccordionPadding${deviceType}`],
+					[position]: value,
+			  };
+		setAttributes({ [`imageAccordionPadding${deviceType}`]: update });
+	};
+
+	const wrapperPaddingCombineBtnHandler = () => {
+		setAttributes({ imageAccordionPaddingLink: !imageAccordionPaddingLink });
+	};
+
+	const wrapperPaddingUnitsHandler = (unit) => {
+		setAttributes({
+			imageAccordionPaddingUnits: {
+				...imageAccordionPaddingUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+
+	/** Wrapper Margin handlers */
+	const handleWrapperMarginUnitHandler = (event, position) => {
+		const value = event.target.value;
+		const update = imageAccordionMarginLink
+			? { top: value, right: value, bottom: value, left: value }
+			: {
+					...attributes[`imageAccordionMargin${deviceType}`],
+					[position]: value,
+			  };
+		setAttributes({ [`imageAccordionMargin${deviceType}`]: update });
+	};
+
+	const wrapperMarginCombineBtnHandler = () => {
+		setAttributes({ imageAccordionMarginLink: !imageAccordionMarginLink });
+	};
+
+	const wrapperMarginUnitsHandler = (unit) => {
+		setAttributes({
+			imageAccordionMarginUnits: {
+				...imageAccordionMarginUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+
+	/** Border Radius handlers */
+	const handleBorderRadiusUnitHandler = (event, position) => {
+		const value = event.target.value;
+		const update = imageAccordionItemBorderRadiusLink
+			? { top: value, right: value, bottom: value, left: value }
+			: {
+					...attributes[`imageAccordionItemBorderRadius${deviceType}`],
+					[position]: value,
+			  };
+		setAttributes({ [`imageAccordionItemBorderRadius${deviceType}`]: update });
+	};
+
+	const borderRadiusCombineBtnHandler = () => {
+		setAttributes({
+			imageAccordionItemBorderRadiusLink: !imageAccordionItemBorderRadiusLink,
+		});
+	};
+
+	const borderRadiusUnitsHandler = (unit) => {
+		setAttributes({
+			imageAccordionItemBorderRadiusUnits: {
+				...imageAccordionItemBorderRadiusUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+
+	/** Wrapper Border Type handlers */
+	const handleWrapperBorderUnitHandler = (event, position) => {
+		const value = event.target.value;
+		const update = imageAccordionWrapperBorderTypeLink
+			? { top: value, right: value, bottom: value, left: value }
+			: {
+					...attributes[`imageAccordionWrapperBorderType${deviceType}`],
+					[position]: value,
+			  };
+		setAttributes({ [`imageAccordionWrapperBorderType${deviceType}`]: update });
+	};
+
+	const wrapperBorderCombineBtnHandler = () => {
+		setAttributes({
+			imageAccordionWrapperBorderTypeLink: !imageAccordionWrapperBorderTypeLink,
+		});
+	};
+
+	const wrapperBorderUnitsHandler = (unit) => {
+		setAttributes({
+			imageAccordionWrapperBorderTypeUnits: {
+				...imageAccordionWrapperBorderTypeUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+
+	/** Wrapper Border Radius handlers */
+	const handleWrapperBorderRadiusUnitHandler = (event, position) => {
+		const value = event.target.value;
+		const update = imageAccordionWrapperBorderRadiusLink
+			? { top: value, right: value, bottom: value, left: value }
+			: {
+					...attributes[`imageAccordionWrapperBorderRadius${deviceType}`],
+					[position]: value,
+			  };
+		setAttributes({
+			[`imageAccordionWrapperBorderRadius${deviceType}`]: update,
+		});
+	};
+
+	const wrapperBorderRadiusCombineBtnHandler = () => {
+		setAttributes({
+			imageAccordionWrapperBorderRadiusLink:
+				!imageAccordionWrapperBorderRadiusLink,
+		});
+	};
+
+	const wrapperBorderRadiusUnitsHandler = (unit) => {
+		setAttributes({
+			imageAccordionWrapperBorderRadiusUnits: {
+				...imageAccordionWrapperBorderRadiusUnits,
+				[deviceType]: unit,
+			},
+		});
 	};
 
 	const generalControls = (
@@ -503,8 +532,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 					defaultPresetValue="preset-1"
 					setAttributes={setAttributes}
 				/>
-				{/* // Toggle Switcher Controls // Common switcher for title,subtitle for
-				all presets */}
 				<ToggleControl
 					label={__("Show Title", "frontis-blocks")}
 					checked={imageAccordionShowTitle}
@@ -676,49 +703,27 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 				<FB_Spacing
 					label={__("Padding", "frontis-blocks")}
 					deviceType={deviceType}
-					spacingUnitsHandler={(unit) =>
-						setAttributes({
-							imageAccordionPaddingUnits: {
-								...imageAccordionPaddingUnits,
-								[deviceType]: unit,
-							},
-						})
-					}
-					spacingUnits={imageAccordionPaddingUnits}
-					spacingDesktop={imageAccordionPaddingDesktop}
-					spacingTablet={imageAccordionPaddingTablet}
-					spacingMobile={imageAccordionPaddingMobile}
-					handleSpacingUnitHandler={paddingUnitsChange}
-					spacingCombineBtn={imageAccordionPaddingLink}
-					spacingCombineBtnHandler={() =>
-						setAttributes({
-							imageAccordionPaddingLink: !imageAccordionPaddingLink,
-						})
-					}
+					spacingUnitsHandler={itemPaddingUnitsHandler}
+					spacingUnits={imageAccordionItemPaddingUnits}
+					spacingDesktop={imageAccordionItemPaddingDesktop}
+					spacingTablet={imageAccordionItemPaddingTablet}
+					spacingMobile={imageAccordionItemPaddingMobile}
+					handleSpacingUnitHandler={handleItemPaddingUnitHandler}
+					spacingCombineBtn={imageAccordionItemPaddingLink}
+					spacingCombineBtnHandler={itemPaddingCombineBtnHandler}
 					setAttributes={setAttributes}
 				/>
 				<FB_Spacing
 					label={__("Margin", "frontis-blocks")}
 					deviceType={deviceType}
-					spacingUnitsHandler={(unit) =>
-						setAttributes({
-							imageAccordionMarginUnits: {
-								...imageAccordionMarginUnits,
-								[deviceType]: unit,
-							},
-						})
-					}
-					spacingUnits={imageAccordionMarginUnits}
-					spacingDesktop={imageAccordionMarginDesktop}
-					spacingTablet={imageAccordionMarginTablet}
-					spacingMobile={imageAccordionMarginMobile}
-					handleSpacingUnitHandler={marginUnitsChange}
-					spacingCombineBtn={imageAccordionMarginLink}
-					spacingCombineBtnHandler={() =>
-						setAttributes({
-							imageAccordionMarginLink: !imageAccordionMarginLink,
-						})
-					}
+					spacingUnitsHandler={itemMarginUnitsHandler}
+					spacingUnits={imageAccordionItemMarginUnits}
+					spacingDesktop={imageAccordionItemMarginDesktop}
+					spacingTablet={imageAccordionItemMarginTablet}
+					spacingMobile={imageAccordionItemMarginMobile}
+					handleSpacingUnitHandler={handleItemMarginUnitHandler}
+					spacingCombineBtn={imageAccordionItemMarginLink}
+					spacingCombineBtnHandler={itemMarginCombineBtnHandler}
 					setAttributes={setAttributes}
 				/>
 			</PanelBody>
@@ -727,26 +732,14 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 				<FB_Spacing
 					label={__("Border Radius", "frontis-blocks")}
 					deviceType={deviceType}
-					spacingUnitsHandler={(unit) =>
-						setAttributes({
-							imageAccordionItemBorderRadiusUnits: {
-								...imageAccordionItemBorderRadiusUnits,
-								[deviceType]: unit,
-							},
-						})
-					}
+					spacingUnitsHandler={borderRadiusUnitsHandler}
 					spacingUnits={imageAccordionItemBorderRadiusUnits}
 					spacingDesktop={imageAccordionItemBorderRadiusDesktop}
 					spacingTablet={imageAccordionItemBorderRadiusTablet}
 					spacingMobile={imageAccordionItemBorderRadiusMobile}
-					handleSpacingUnitHandler={borderRadiusChange}
+					handleSpacingUnitHandler={handleBorderRadiusUnitHandler}
 					spacingCombineBtn={imageAccordionItemBorderRadiusLink}
-					spacingCombineBtnHandler={() =>
-						setAttributes({
-							imageAccordionItemBorderRadiusLink:
-								!imageAccordionItemBorderRadiusLink,
-						})
-					}
+					spacingCombineBtnHandler={borderRadiusCombineBtnHandler}
 					setAttributes={setAttributes}
 				/>
 			</PanelBody>
@@ -1592,51 +1585,27 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 						<FB_Spacing
 							label={"Border Width"}
 							deviceType={deviceType}
-							spacingUnitsHandler={(unit) =>
-								setAttributes({
-									imageAccordionWrapperBorderTypeUnits: {
-										...imageAccordionWrapperBorderTypeUnits,
-										[deviceType]: unit,
-									},
-								})
-							}
+							spacingUnitsHandler={wrapperBorderUnitsHandler}
 							spacingUnits={imageAccordionWrapperBorderTypeUnits}
 							spacingDesktop={imageAccordionWrapperBorderTypeDesktop}
 							spacingTablet={imageAccordionWrapperBorderTypeTablet}
 							spacingMobile={imageAccordionWrapperBorderTypeMobile}
-							handleSpacingUnitHandler={wrapperBorderTypeChange}
+							handleSpacingUnitHandler={handleWrapperBorderUnitHandler}
 							spacingCombineBtn={imageAccordionWrapperBorderTypeLink}
-							spacingCombineBtnHandler={() =>
-								setAttributes({
-									imageAccordionWrapperBorderTypeLink:
-										!imageAccordionWrapperBorderTypeLink,
-								})
-							}
+							spacingCombineBtnHandler={wrapperBorderCombineBtnHandler}
 							setAttributes={setAttributes}
 						/>
 						<FB_Spacing
 							label={"Border Radius"}
 							deviceType={deviceType}
-							spacingUnitsHandler={(unit) =>
-								setAttributes({
-									imageAccordionWrapperBorderRadiusUnits: {
-										...imageAccordionWrapperBorderRadiusUnits,
-										[deviceType]: unit,
-									},
-								})
-							}
+							spacingUnitsHandler={wrapperBorderRadiusUnitsHandler}
 							spacingUnits={imageAccordionWrapperBorderRadiusUnits}
 							spacingDesktop={imageAccordionWrapperBorderRadiusDesktop}
 							spacingTablet={imageAccordionWrapperBorderRadiusTablet}
 							spacingMobile={imageAccordionWrapperBorderRadiusMobile}
-							handleSpacingUnitHandler={wrapperBorderRadiusChange}
+							handleSpacingUnitHandler={handleWrapperBorderRadiusUnitHandler}
 							spacingCombineBtn={imageAccordionWrapperBorderRadiusLink}
-							spacingCombineBtnHandler={() =>
-								setAttributes({
-									imageAccordionWrapperBorderRadiusLink:
-										!imageAccordionWrapperBorderRadiusLink,
-								})
-							}
+							spacingCombineBtnHandler={wrapperBorderRadiusCombineBtnHandler}
 							setAttributes={setAttributes}
 						/>
 					</PanelBody>
@@ -1647,49 +1616,27 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 						<FB_Spacing
 							label={"Padding"}
 							deviceType={deviceType}
-							spacingUnitsHandler={(unit) =>
-								setAttributes({
-									imageAccordionPaddingUnits: {
-										...imageAccordionPaddingUnits,
-										[deviceType]: unit,
-									},
-								})
-							}
+							spacingUnitsHandler={wrapperPaddingUnitsHandler}
 							spacingUnits={imageAccordionPaddingUnits}
 							spacingDesktop={imageAccordionPaddingDesktop}
 							spacingTablet={imageAccordionPaddingTablet}
 							spacingMobile={imageAccordionPaddingMobile}
-							handleSpacingUnitHandler={paddingUnitsChange}
+							handleSpacingUnitHandler={handleWrapperPaddingUnitHandler}
 							spacingCombineBtn={imageAccordionPaddingLink}
-							spacingCombineBtnHandler={() =>
-								setAttributes({
-									imageAccordionPaddingLink: !imageAccordionPaddingLink,
-								})
-							}
+							spacingCombineBtnHandler={wrapperPaddingCombineBtnHandler}
 							setAttributes={setAttributes}
 						/>
 						<FB_Spacing
 							label={"Margin"}
 							deviceType={deviceType}
-							spacingUnitsHandler={(unit) =>
-								setAttributes({
-									imageAccordionMarginUnits: {
-										...imageAccordionMarginUnits,
-										[deviceType]: unit,
-									},
-								})
-							}
+							spacingUnitsHandler={wrapperMarginUnitsHandler}
 							spacingUnits={imageAccordionMarginUnits}
 							spacingDesktop={imageAccordionMarginDesktop}
 							spacingTablet={imageAccordionMarginTablet}
 							spacingMobile={imageAccordionMarginMobile}
-							handleSpacingUnitHandler={marginUnitsChange}
+							handleSpacingUnitHandler={handleWrapperMarginUnitHandler}
 							spacingCombineBtn={imageAccordionMarginLink}
-							spacingCombineBtnHandler={() =>
-								setAttributes({
-									imageAccordionMarginLink: !imageAccordionMarginLink,
-								})
-							}
+							spacingCombineBtnHandler={wrapperMarginCombineBtnHandler}
 							setAttributes={setAttributes}
 						/>
 					</PanelBody>
