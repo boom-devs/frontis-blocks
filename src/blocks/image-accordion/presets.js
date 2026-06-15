@@ -157,17 +157,33 @@ export const presetStyles = {
 		imageAccordionShowNumber: false,
 		imageAccordionTitleColor: "#ffffff",
 		imageAccordionSubtitleColor: "rgba(255,255,255,0.8)",
-		imageAccordionTitleFontSize: { Desktop: "18", Tablet: "", Mobile: "" },
+		imageAccordionTitleFontSize: {
+			Desktop: "18",
+			Tablet: "",
+			Mobile: "",
+		},
 		imageAccordionTitleFontWeight: "600",
-		imageAccordionSubtitleFontSize: { Desktop: "13", Tablet: "", Mobile: "" },
+		imageAccordionSubtitleFontSize: {
+			Desktop: "13",
+			Tablet: "",
+			Mobile: "",
+		},
 		imageAccordionBtnTextColor: "#ffffff",
 		imageAccordionBtnBgColor: "rgba(255,255,255,0.18)",
 		imageAccordionBtnBorderColor: "rgba(255,255,255,0.35)",
 		imageAccordionBtnBorder: "solid",
 	},
 	"preset-4": {
-		imageAccordionGap: { Desktop: "0", Tablet: "0", Mobile: "0" },
-		imageAccordionGapUnits: { Desktop: "px", Tablet: "px", Mobile: "px" },
+		imageAccordionGap: {
+			Desktop: "0",
+			Tablet: "0",
+			Mobile: "0",
+		},
+		imageAccordionGapUnits: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
 		imageAccordionItemBorderRadiusDesktop: {
 			top: "0",
 			bottom: "0",
@@ -198,9 +214,17 @@ export const presetStyles = {
 		imageAccordionNumberColor: "rgba(255,255,255,0.75)",
 		imageAccordionTitleColor: "#ffffff",
 		imageAccordionSubtitleColor: "rgba(255,255,255,0.78)",
-		imageAccordionTitleFontSize: { Desktop: "18", Tablet: "", Mobile: "" },
+		imageAccordionTitleFontSize: {
+			Desktop: "18",
+			Tablet: "",
+			Mobile: "",
+		},
 		imageAccordionTitleFontWeight: "600",
-		imageAccordionSubtitleFontSize: { Desktop: "12", Tablet: "", Mobile: "" },
+		imageAccordionSubtitleFontSize: {
+			Desktop: "12",
+			Tablet: "",
+			Mobile: "",
+		},
 	},
 };
 

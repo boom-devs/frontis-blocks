@@ -201,7 +201,7 @@ export default function SortableItem({
 								onChangeValue={(value) =>
 									updateItem(item.id, "buttonUrl", value)
 								}
-								placeholder="https://..."
+								placeholder="https://test.com"
 							/>
 							<div style={{ marginTop: "10px" }}>
 								<ToggleControl
