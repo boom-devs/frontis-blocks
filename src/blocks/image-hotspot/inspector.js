@@ -436,6 +436,21 @@ export default function Inspector({ attributes, setAttributes }) {
     }
   };
 
+  const imageHotspotTitlePaddingLinkBtn = () => {
+    setAttributes({
+      imageHotspotTitlePaddingLink: !imageHotspotTitlePaddingLink
+    })
+  };
+
+  const imageHotspotTitlePaddingUnitsHandler = (unit) => {
+    setAttributes({
+      imageHotspotTitlePaddingUnits: {
+        ...imageHotspotTitlePaddingUnits,
+        [deviceType]: unit
+      }
+    });
+  };
+
   const imageHotspotTitleMarginUnitsChange = (event, position) => {
     const value = event.target.value;
     if (imageHotspotTitleMarginLink) {
@@ -499,6 +514,21 @@ export default function Inspector({ attributes, setAttributes }) {
           break;
       }
     }
+  };
+
+  const imageHotspotTitleMarginLinkBtn = () => {
+    setAttributes({
+      imageHotspotTitleMarginLink: !imageHotspotTitleMarginLink
+    })
+  };
+
+  const imageHotspotTitleMarginUnitsHandler = (unit) => {
+    setAttributes({
+      imageHotspotTitleMarginUnits: {
+        ...imageHotspotTitleMarginUnits,
+        [deviceType]: unit
+      }
+    })
   };
 
   /** Start Global padding */
@@ -1089,6 +1119,23 @@ export default function Inspector({ attributes, setAttributes }) {
     }
   };
 
+  const imageHotspotCategoryPaddingLinkBtn = () => {
+    setAttributes({
+      imageHotspotCategoryPaddingLink: !imageHotspotCategoryPaddingLink
+    })
+  };
+
+  const imageHotspotCategoryPaddingUnitsHandler = (unit) => {
+    setAttributes({
+      imageHotspotCategoryPaddingUnits:
+      {
+        ...imageHotspotCategoryPaddingUnits,
+        [deviceType]: unit
+      }
+    })
+  };
+
+
   const imageHotspotCategoryMarginUnitsChange = (event, position) => {
     const value = event.target.value;
     if (imageHotspotCategoryMarginLink) {
@@ -1152,6 +1199,21 @@ export default function Inspector({ attributes, setAttributes }) {
           break;
       }
     }
+  };
+
+  const imageHotspotCategoryMarginLinkBtn = () => {
+    setAttributes({
+      imageHotspotCategoryMarginLink: !imageHotspotCategoryMarginLink
+    })
+  };
+
+  const imageHotspotCategoryMarginUnitsHandler = (unit) => {
+    setAttributes({
+      imageHotspotCategoryMarginUnits: {
+        ...imageHotspotCategoryMarginUnits,
+        [deviceType]: unit
+      }
+    })
   };
 
   const imageHotspotDescPaddingUnitsChange = (event, position) => {
@@ -1219,6 +1281,21 @@ export default function Inspector({ attributes, setAttributes }) {
     }
   };
 
+  const imageHotspotDescPaddingLinkBtn = () => {
+    setAttributes({
+      imageHotspotDescPaddingLink: !imageHotspotDescPaddingLink
+    })
+  };
+
+  const imageHotspotDescPaddingHandler = (unit) => {
+    setAttributes({
+      imageHotspotDescPaddingUnits: {
+        ...imageHotspotDescPaddingUnits,
+        [deviceType]: unit
+      }
+    })
+  };
+
   const imageHotspotDescMarginUnitsChange = (event, position) => {
     const value = event.target.value;
     if (imageHotspotDescMarginLink) {
@@ -1282,6 +1359,21 @@ export default function Inspector({ attributes, setAttributes }) {
           break;
       }
     }
+  };
+
+  const imageHotspotDescMarginLinkBtn = () => {
+    setAttributes({
+      imageHotspotDescMarginLink: !imageHotspotDescMarginLink
+    })
+  };
+
+  const imageHotspotDescMarginUnitsHandler = (unit) => {
+    setAttributes({
+      imageHotspotDescMarginUnits: {
+        ...imageHotspotDescMarginUnits,
+        [deviceType]: unit
+      }
+    })
   };
 
   const imageHotspotPricePaddingUnitsChange = (event, position) => {
@@ -1349,6 +1441,21 @@ export default function Inspector({ attributes, setAttributes }) {
     }
   };
 
+  const imageHotspotPricePaddingLinkBtn = () => {
+    setAttributes({
+      imageHotspotPricePaddingLink: !imageHotspotPricePaddingLink
+    })
+  };
+
+  const imageHotspotPricePaddingUnitsHandler = (unit) => {
+    setAttributes({
+      imageHotspotPricePaddingUnits: {
+        ...imageHotspotPricePaddingUnits,
+        [deviceType]: unit
+      }
+    })
+  };
+
   const imageHotspotPriceMarginUnitsChange = (event, position) => {
     const value = event.target.value;
     if (imageHotspotPriceMarginLink) {
@@ -1412,6 +1519,21 @@ export default function Inspector({ attributes, setAttributes }) {
           break;
       }
     }
+  };
+
+  const imageHotspotPriceMarginLinkBtn = () => {
+    setAttributes({
+      imageHotspotPriceMarginLink: !imageHotspotPriceMarginLink
+    });
+  };
+
+  const imageHotspotPriceMarginUnitsHandler = (unit) => {
+    setAttributes({
+      imageHotspotPriceMarginUnits: {
+        ...imageHotspotPriceMarginUnits,
+        [deviceType]: unit
+      }
+    })
   };
 
   /** Start Back To Top Padding */
@@ -2303,42 +2425,28 @@ export default function Inspector({ attributes, setAttributes }) {
         <FB_Spacing
           label={__("Padding", "frontis-blocks")}
           deviceType={deviceType}
-          spacingUnitsHandler={(unit) => setAttributes({
-            imageHotspotTitlePaddingUnits: {
-              ...imageHotspotTitlePaddingUnits,
-              [deviceType]: unit
-            }
-          })}
+          spacingUnitsHandler={imageHotspotTitlePaddingUnitsHandler}
           spacingUnits={imageHotspotTitlePaddingUnits}
           spacingDesktop={imageHotspotTitlePaddingDesktop}
           spacingTablet={imageHotspotTitlePaddingTablet}
           spacingMobile={imageHotspotTitlePaddingMobile}
           handleSpacingUnitHandler={imageHotspotTitlePaddingUnitsChange}
           spacingCombineBtn={imageHotspotTitlePaddingLink}
-          spacingCombineBtnHandler={() => setAttributes({
-            imageHotspotTitlePaddingLink: !imageHotspotTitlePaddingLink
-          })}
+          spacingCombineBtnHandler={imageHotspotTitlePaddingLinkBtn}
           setAttributes={setAttributes}
         />
 
         <FB_Spacing
           label={__("Margin", "frontis-blocks")}
           deviceType={deviceType}
-          spacingUnitsHandler={(unit) => setAttributes({
-            imageHotspotTitleMarginUnits: {
-              ...imageHotspotTitleMarginUnits,
-              [deviceType]: unit
-            }
-          })}
+          spacingUnitsHandler={imageHotspotTitleMarginUnitsHandler}
           spacingUnits={imageHotspotTitleMarginUnits}
           spacingDesktop={imageHotspotTitleMarginDesktop}
           spacingTablet={imageHotspotTitleMarginTablet}
           spacingMobile={imageHotspotTitleMarginMobile}
           handleSpacingUnitHandler={imageHotspotTitleMarginUnitsChange}
           spacingCombineBtn={imageHotspotTitleMarginLink}
-          spacingCombineBtnHandler={() => setAttributes({
-            imageHotspotTitleMarginLink: !imageHotspotTitleMarginLink
-          })}
+          spacingCombineBtnHandler={imageHotspotTitleMarginLinkBtn}
           setAttributes={setAttributes}
         />
 
@@ -2401,28 +2509,28 @@ export default function Inspector({ attributes, setAttributes }) {
         <FB_Spacing
           label={__("Padding", "frontis-blocks")}
           deviceType={deviceType}
-          spacingUnitsHandler={(unit) => setAttributes({ imageHotspotCategoryPaddingUnits: { ...imageHotspotCategoryPaddingUnits, [deviceType]: unit } })}
+          spacingUnitsHandler={imageHotspotCategoryPaddingUnitsHandler}
           spacingUnits={imageHotspotCategoryPaddingUnits}
           spacingDesktop={imageHotspotCategoryPaddingDesktop}
           spacingTablet={imageHotspotCategoryPaddingTablet}
           spacingMobile={imageHotspotCategoryPaddingMobile}
           handleSpacingUnitHandler={imageHotspotCategoryPaddingUnitsChange}
           spacingCombineBtn={imageHotspotCategoryPaddingLink}
-          spacingCombineBtnHandler={() => setAttributes({ imageHotspotCategoryPaddingLink: !imageHotspotCategoryPaddingLink })}
+          spacingCombineBtnHandler={imageHotspotCategoryPaddingLinkBtn}
           setAttributes={setAttributes}
         />
 
         <FB_Spacing
           label={__("Margin", "frontis-blocks")}
           deviceType={deviceType}
-          spacingUnitsHandler={(unit) => setAttributes({ imageHotspotCategoryMarginUnits: { ...imageHotspotCategoryMarginUnits, [deviceType]: unit } })}
+          spacingUnitsHandler={imageHotspotCategoryMarginUnitsHandler}
           spacingUnits={imageHotspotCategoryMarginUnits}
           spacingDesktop={imageHotspotCategoryMarginDesktop}
           spacingTablet={imageHotspotCategoryMarginTablet}
           spacingMobile={imageHotspotCategoryMarginMobile}
           handleSpacingUnitHandler={imageHotspotCategoryMarginUnitsChange}
           spacingCombineBtn={imageHotspotCategoryMarginLink}
-          spacingCombineBtnHandler={() => setAttributes({ imageHotspotCategoryMarginLink: !imageHotspotCategoryMarginLink })}
+          spacingCombineBtnHandler={imageHotspotCategoryMarginLinkBtn}
           setAttributes={setAttributes}
         />
 
@@ -2485,42 +2593,28 @@ export default function Inspector({ attributes, setAttributes }) {
         <FB_Spacing
           label={__("Padding", "frontis-blocks")}
           deviceType={deviceType}
-          spacingUnitsHandler={(unit) => setAttributes({
-            imageHotspotDescPaddingUnits: {
-              ...imageHotspotDescPaddingUnits,
-              [deviceType]: unit
-            }
-          })}
+          spacingUnitsHandler={imageHotspotDescPaddingHandler}
           spacingUnits={imageHotspotDescPaddingUnits}
           spacingDesktop={imageHotspotDescPaddingDesktop}
           spacingTablet={imageHotspotDescPaddingTablet}
           spacingMobile={imageHotspotDescPaddingMobile}
           handleSpacingUnitHandler={imageHotspotDescPaddingUnitsChange}
           spacingCombineBtn={imageHotspotDescPaddingLink}
-          spacingCombineBtnHandler={() => setAttributes({
-            imageHotspotDescPaddingLink: !imageHotspotDescPaddingLink
-          })}
+          spacingCombineBtnHandler={imageHotspotDescPaddingLinkBtn}
           setAttributes={setAttributes}
         />
 
         <FB_Spacing
           label={__("Margin", "frontis-blocks")}
           deviceType={deviceType}
-          spacingUnitsHandler={(unit) => setAttributes({
-            imageHotspotDescMarginUnits: {
-              ...imageHotspotDescMarginUnits,
-              [deviceType]: unit
-            }
-          })}
+          spacingUnitsHandler={imageHotspotDescMarginUnitsHandler}
           spacingUnits={imageHotspotDescMarginUnits}
           spacingDesktop={imageHotspotDescMarginDesktop}
           spacingTablet={imageHotspotDescMarginTablet}
           spacingMobile={imageHotspotDescMarginMobile}
           handleSpacingUnitHandler={imageHotspotDescMarginUnitsChange}
           spacingCombineBtn={imageHotspotDescMarginLink}
-          spacingCombineBtnHandler={() => setAttributes({
-            imageHotspotDescMarginLink: !imageHotspotDescMarginLink
-          })}
+          spacingCombineBtnHandler={imageHotspotDescMarginLinkBtn}
           setAttributes={setAttributes}
         />
 
@@ -2582,42 +2676,28 @@ export default function Inspector({ attributes, setAttributes }) {
         <FB_Spacing
           label={__("Padding", "frontis-blocks")}
           deviceType={deviceType}
-          spacingUnitsHandler={(unit) => setAttributes({
-            imageHotspotPricePaddingUnits: {
-              ...imageHotspotPricePaddingUnits,
-              [deviceType]: unit
-            }
-          })}
+          spacingUnitsHandler={imageHotspotPricePaddingUnitsHandler}
           spacingUnits={imageHotspotPricePaddingUnits}
           spacingDesktop={imageHotspotPricePaddingDesktop}
           spacingTablet={imageHotspotPricePaddingTablet}
           spacingMobile={imageHotspotPricePaddingMobile}
           handleSpacingUnitHandler={imageHotspotPricePaddingUnitsChange}
           spacingCombineBtn={imageHotspotPricePaddingLink}
-          spacingCombineBtnHandler={() => setAttributes({
-            imageHotspotPricePaddingLink: !imageHotspotPricePaddingLink
-          })}
+          spacingCombineBtnHandler={imageHotspotPricePaddingLinkBtn}
           setAttributes={setAttributes}
         />
 
         <FB_Spacing
           label={__("Margin", "frontis-blocks")}
           deviceType={deviceType}
-          spacingUnitsHandler={(unit) => setAttributes({
-            imageHotspotPriceMarginUnits: {
-              ...imageHotspotPriceMarginUnits,
-              [deviceType]: unit
-            }
-          })}
+          spacingUnitsHandler={imageHotspotPriceMarginUnitsHandler}
           spacingUnits={imageHotspotPriceMarginUnits}
           spacingDesktop={imageHotspotPriceMarginDesktop}
           spacingTablet={imageHotspotPriceMarginTablet}
           spacingMobile={imageHotspotPriceMarginMobile}
           handleSpacingUnitHandler={imageHotspotPriceMarginUnitsChange}
           spacingCombineBtn={imageHotspotPriceMarginLink}
-          spacingCombineBtnHandler={() => setAttributes({
-            imageHotspotPriceMarginLink: !imageHotspotPriceMarginLink
-          })}
+          spacingCombineBtnHandler={imageHotspotPriceMarginLinkBtn}
           setAttributes={setAttributes}
         />
 
@@ -2793,22 +2873,17 @@ export default function Inspector({ attributes, setAttributes }) {
         <FB_Spacing
           label={__("Padding", "frontis-blocks")}
           deviceType={deviceType}
-          spacingUnitsHandler={
-            handleGlobalPaddingUnitsHandler
-          }
+          spacingUnitsHandler={handleGlobalPaddingUnitsHandler}
           spacingUnits={globalPaddingUnits}
           spacingDesktop={globalPaddingDesktop}
           spacingTablet={globalPaddingTablet}
           spacingMobile={globalPaddingMobile}
-          handleSpacingUnitHandler={
-            handleGlobalPaddingUnitChange
-          }
+          handleSpacingUnitHandler={handleGlobalPaddingUnitChange}
           spacingCombineBtn={globalPaddingLink}
-          spacingCombineBtnHandler={
-            handleGlobalPaddingCombineBtn
-          }
+          spacingCombineBtnHandler={handleGlobalPaddingCombineBtn}
           setAttributes={setAttributes}
         />
+
         <FB_Spacing
           label={__("Margin", "frontis-blocks")}
           deviceType={deviceType}
@@ -2817,13 +2892,9 @@ export default function Inspector({ attributes, setAttributes }) {
           spacingDesktop={globalMarginDesktop}
           spacingTablet={globalMarginTablet}
           spacingMobile={globalMarginMobile}
-          handleSpacingUnitHandler={
-            handleGlobalMarginUnitChange
-          }
+          handleSpacingUnitHandler={handleGlobalMarginUnitChange}
           spacingCombineBtn={globalMarginLink}
-          spacingCombineBtnHandler={
-            handleGlobalMarginCombineBtn
-          }
+          spacingCombineBtnHandler={handleGlobalMarginCombineBtn}
           setAttributes={setAttributes}
         />
       </PanelBody>
