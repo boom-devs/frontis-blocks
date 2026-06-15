@@ -766,6 +766,48 @@ const attributes = {
 		default: true,
 	},
 
+	// item padding unit
+
+	imageAccordionItemPaddingUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	imageAccordionItemPaddingDesktop: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	imageAccordionItemPaddingTablet: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	imageAccordionItemPaddingMobile: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	imageAccordionItemPaddingLink: {
+		type: "boolean",
+		default: true,
+	},
+
 	imageAccordionMarginUnits: {
 		type: "object",
 		default: {
@@ -802,6 +844,48 @@ const attributes = {
 		},
 	},
 	imageAccordionMarginLink: {
+		type: "boolean",
+		default: true,
+	},
+
+	// item margin unit
+
+	imageAccordionItemMarginUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	imageAccordionItemMarginDesktop: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	imageAccordionItemMarginTablet: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	imageAccordionItemMarginMobile: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	imageAccordionItemMarginLink: {
 		type: "boolean",
 		default: true,
 	},
