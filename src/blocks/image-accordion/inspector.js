@@ -34,6 +34,7 @@ import FB_PositionControl from "@Components/position-control";
 import FB_VisibilityControl from "@Components/visibility-control";
 import FB_InspectorControls from "@Components/InspectorControls";
 import FB_TypographyControl from "@Components/typography-control";
+import FB_Presets from "@Components/presets";
 import SortableItem from "./sortableItem";
 import { BORDER_STYLES } from "@Constants/fbConstants";
 
@@ -241,17 +242,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 	const [overlayColorTab, setOverlayColorTab] = useState("normal");
 	const [numberColorTab, setNumberColorTab] = useState("normal");
 	const [subtitleColorTab, setSubtitleColorTab] = useState("normal");
-
-	/** Apply preset */
-	const applyPreset = (preset) => {
-		const presetData = imageAccordionPresets.find((p) => p.value === preset);
-		if (!presetData) return;
-		const newAttrs = { imageAccordionPreset: preset };
-		presetData.attributes.forEach(({ label, value }) => {
-			newAttrs[label] = value;
-		});
-		setAttributes(newAttrs);
-	};
 
 	/** Item handlers */
 	const updateItem = (id, keyOrUpdates, value) => {
@@ -504,25 +494,15 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 				title={__("Preset Style", "frontis-blocks")}
 				initialOpen={true}
 			>
-				<div className="fb-image-accordion-presets">
-					{imageAccordionPresets.map((preset) => (
-						<div
-							key={preset.value}
-							className={`fb-preset-item ${
-								imageAccordionPreset === preset.value ? "is-active" : ""
-							}`}
-							onClick={() => applyPreset(preset.value)}
-							title={preset.label}
-							// style={{ marginBottom: "20px" }}
-						>
-							<div
-								className="fb-preset-icon"
-								dangerouslySetInnerHTML={{ __html: preset.icon }}
-							/>
-							<span className="fb-preset-label">{preset.label}</span>
-						</div>
-					))}
-				</div>
+				<FB_Presets
+					className="fb-image-accordion-presets"
+					label={__("Select Preset", "frontis-blocks")}
+					presets={imageAccordionPresets}
+					value={imageAccordionPreset}
+					onChangeValue="imageAccordionPreset"
+					defaultPresetValue="preset-1"
+					setAttributes={setAttributes}
+				/>
 				{/* // Toggle Switcher Controls // Common switcher for title,subtitle for
 				all presets */}
 				<ToggleControl

@@ -1,5 +1,15 @@
+/**
+ * Image Accordion Block - Style Generation
+ * Returns Dynamic Generated CSS
+ */
+
 import getCustomCss from "@Utils/getCustomCss";
 
+/**
+ * Generate block styles from attributes
+ * @param {Object} attributes - Block attributes
+ * @returns {string} CSS string
+ */
 const generateImageAccordionStyle = (attributes) => {
 	const {
 		blockID,
@@ -240,7 +250,9 @@ const generateImageAccordionStyle = (attributes) => {
 					? `overflow: ${imageAccordionOverflow};`
 					: ""
 			}
+		}
 
+		.fb-image-accordion-wrapper.${blockID} {
 			${
 				imageAccordionWrapperBorder
 					? `border-style: ${imageAccordionWrapperBorder};`
@@ -282,9 +294,13 @@ const generateImageAccordionStyle = (attributes) => {
 					: ""
 			}
 			transition: all .3s ease-in-out;
+			/* Ensure shadow is visible and not clipped */
+			overflow: visible !important;
+			padding-bottom: 20px; 
+			margin-bottom: -20px;
 		}
 
-		.fb-image-accordion-main-wrapper:hover.${blockID} {
+		.fb-image-accordion-wrapper.${blockID}:hover {
 			${
 				imageAccordionWrapperBorderHoverColor
 					? `border-color: ${imageAccordionWrapperBorderHoverColor};`
@@ -306,7 +322,7 @@ const generateImageAccordionStyle = (attributes) => {
 			}
 		}
 
-		.fb-image-accordion-container.${blockID}  {
+		.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-container {
 			${
 				imageAccordionWidth?.Desktop
 					? `width: ${imageAccordionWidth.Desktop}${
@@ -340,17 +356,22 @@ const generateImageAccordionStyle = (attributes) => {
 					? `margin: ${marginGetDesktop};`
 					: ""
 			}
+				overflow: visible !important;
 		}
 
-		.fb-image-accordion-item.${blockID}  {
+		.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-item {
 			${
 				itemBrGetDesktop && imageAccordionItemBorderRadiusDesktop?.top
 					? `border-radius: ${itemBrGetDesktop};`
 					: ""
 			}
+			transition: all 0.4s ease;
 		}
-		.fb-image-accordion-item.${blockID}.is-active,
-		.fb-trigger-hover .fb-image-accordion-item.${blockID}:hover {
+		.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-item.is-active,
+		.fb-image-accordion-wrapper.${blockID}.fb-trigger-hover .fb-image-accordion-item:hover {
+			/* High quality gradient-style shadow */
+			box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3), 0 15px 25px -5px rgba(67, 97, 238, 0.2);
+			z-index: 99;
 			${
 				itemActiveBrGetDesktop &&
 				imageAccordionItemActiveBorderRadiusDesktop?.top
@@ -359,15 +380,15 @@ const generateImageAccordionStyle = (attributes) => {
 			}
 		}
 
-		.fb-image-accordion-overlay.${blockID} {
+		.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-overlay {
 			${
 				imageAccordionOverlayColor
 					? `background: ${imageAccordionOverlayColor};`
 					: ""
 			}
 		}
-		.fb-image-accordion-item.${blockID}:hover .fb-image-accordion-overlay,
-		.fb-image-accordion-item.${blockID}.is-active .fb-image-accordion-overlay {
+		.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-item:hover .fb-image-accordion-overlay,
+		.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-item.is-active .fb-image-accordion-overlay {
 			${
 				imageAccordionOverlayHoverColor
 					? `background: ${imageAccordionOverlayHoverColor};`
@@ -375,7 +396,7 @@ const generateImageAccordionStyle = (attributes) => {
 			}
 		}
 
-		.fb-image-accordion-title.${blockID} {
+		.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-title {
 			${imageAccordionTitleColor ? `color: ${imageAccordionTitleColor};` : ""}
 			${
 				imageAccordionTitleFontSize?.Desktop
@@ -426,8 +447,8 @@ const generateImageAccordionStyle = (attributes) => {
 					: ""
 			}
 		}
-		.fb-image-accordion-item.${blockID}:hover .fb-image-accordion-title,
-		.fb-image-accordion-item.${blockID}.is-active .fb-image-accordion-title {
+		.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-item:hover .fb-image-accordion-title,
+		.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-item.is-active .fb-image-accordion-title {
 			${
 				imageAccordionTitleHoverColor
 					? `color: ${imageAccordionTitleHoverColor};`
@@ -435,8 +456,8 @@ const generateImageAccordionStyle = (attributes) => {
 			}
 		}
 
-		.fb-image-accordion-desc.${blockID},
-		.fb-sub-title.${blockID} {
+		.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-desc,
+		.fb-image-accordion-wrapper.${blockID} .fb-sub-title {
 			${imageAccordionSubtitleColor ? `color: ${imageAccordionSubtitleColor};` : ""}
 			${
 				imageAccordionSubtitleFontSize?.Desktop
@@ -480,10 +501,10 @@ const generateImageAccordionStyle = (attributes) => {
 					: ""
 			}
 		}
-		.fb-image-accordion-item.${blockID}:hover .fb-image-accordion-desc,
-		.fb-image-accordion-item.${blockID}:hover .fb-sub-title,
-		.fb-image-accordion-item.${blockID}.is-active .fb-image-accordion-desc,
-		.fb-image-accordion-item.${blockID}.is-active .fb-sub-title {
+		.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-item:hover .fb-image-accordion-desc,
+		.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-item:hover .fb-sub-title,
+		.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-item.is-active .fb-image-accordion-desc,
+		.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-item.is-active .fb-sub-title {
 			${
 				imageAccordionSubtitleHoverColor
 					? `color: ${imageAccordionSubtitleHoverColor};`
@@ -491,7 +512,7 @@ const generateImageAccordionStyle = (attributes) => {
 			}
 		}
 
-		.fb-image-accordion-icon-circle.${blockID} {
+		.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-icon-circle {
 			${
 				imageAccordionIconCircleBgColor
 					? `background: ${imageAccordionIconCircleBgColor};`
@@ -507,8 +528,8 @@ const generateImageAccordionStyle = (attributes) => {
 					: ""
 			}
 		}
-		.fb-image-accordion-icon-circle.${blockID} i,
-		.fb-image-accordion-icon-circle.${blockID} svg {
+		.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-icon-circle i,
+		.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-icon-circle svg {
 			${
 				imageAccordionIconColor
 					? `color: ${imageAccordionIconColor}; fill: ${imageAccordionIconColor};`
@@ -526,10 +547,10 @@ const generateImageAccordionStyle = (attributes) => {
 					: ""
 			}
 		}
-		.fb-image-accordion-item.${blockID}:hover .fb-image-accordion-icon-circle i,
-		.fb-image-accordion-item.${blockID}:hover .fb-image-accordion-icon-circle svg,
-		.fb-image-accordion-item.${blockID}.is-active .fb-image-accordion-icon-circle i,
-		.fb-image-accordion-item.${blockID}.is-active .fb-image-accordion-icon-circle svg {
+		.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-item:hover .fb-image-accordion-icon-circle i,
+		.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-item:hover .fb-image-accordion-icon-circle svg,
+		.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-item.is-active .fb-image-accordion-icon-circle i,
+		.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-item.is-active .fb-image-accordion-icon-circle svg {
 			${
 				imageAccordionIconHoverColor
 					? `color: ${imageAccordionIconHoverColor}; fill: ${imageAccordionIconHoverColor};`
@@ -537,7 +558,7 @@ const generateImageAccordionStyle = (attributes) => {
 			}
 		}
 
-		.fb-image-accordion-dot.${blockID} {
+		.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-dot {
 			${imageAccordionDotColor ? `background-color: ${imageAccordionDotColor};` : ""}
 			${
 				imageAccordionDotSize?.Desktop
@@ -550,7 +571,7 @@ const generateImageAccordionStyle = (attributes) => {
 			}
 		}
 
-		.fb-image-accordion-number.${blockID} {
+		.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-number {
 			${imageAccordionNumberColor ? `color: ${imageAccordionNumberColor};` : ""}
 			${
 				imageAccordionNumberFontSize?.Desktop
@@ -565,8 +586,8 @@ const generateImageAccordionStyle = (attributes) => {
 					: ""
 			}
 		}
-		.fb-image-accordion-item.${blockID}:hover .fb-image-accordion-number,
-		.fb-image-accordion-item.${blockID}.is-active .fb-image-accordion-number {
+		.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-item:hover .fb-image-accordion-number,
+		.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-item.is-active .fb-image-accordion-number {
 			${
 				imageAccordionNumberHoverColor
 					? `color: ${imageAccordionNumberHoverColor};`
@@ -574,7 +595,7 @@ const generateImageAccordionStyle = (attributes) => {
 			}
 		}
 
-		.fb-image-accordion-btn.${blockID} {
+		.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-btn {
 			${imageAccordionBtnTextColor ? `color: ${imageAccordionBtnTextColor};` : ""}
 			${imageAccordionBtnBgColor ? `background: ${imageAccordionBtnBgColor};` : ""}
 			${
@@ -639,7 +660,7 @@ const generateImageAccordionStyle = (attributes) => {
 					: ""
 			}
 		}
-		.fb-image-accordion-btn.${blockID}:hover {
+		.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-btn:hover {
 			${
 				imageAccordionBtnHoverTextColor
 					? `color: ${imageAccordionBtnHoverTextColor};`
@@ -721,7 +742,7 @@ const generateImageAccordionStyle = (attributes) => {
 				}
 			}
 
-			.fb-image-accordion-container.${blockID} {
+			.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-container {
 				${
 					imageAccordionWidth?.Tablet
 						? `width: ${imageAccordionWidth.Tablet}${
@@ -757,15 +778,17 @@ const generateImageAccordionStyle = (attributes) => {
 				}
 			}
 
-			.fb-image-accordion-item.${blockID} {
+			.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-item {
 				${
 					itemBrGetTablet && imageAccordionItemBorderRadiusTablet?.top
 						? `border-radius: ${itemBrGetTablet};`
 						: ""
 				}
 			}
-			.fb-image-accordion-item.${blockID}.is-active,
-			.fb-trigger-hover .fb-image-accordion-item.${blockID}:hover {
+			.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-item.is-active,
+			.fb-image-accordion-wrapper.${blockID}.fb-trigger-hover .fb-image-accordion-item:hover {
+				box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3), 0 15px 25px -5px rgba(67, 97, 238, 0.2);
+				z-index: 99;
 				${
 					itemActiveBrGetTablet &&
 					imageAccordionItemActiveBorderRadiusTablet?.top
@@ -774,7 +797,7 @@ const generateImageAccordionStyle = (attributes) => {
 				}
 			}
 
-			.fb-image-accordion-title.${blockID} {
+			.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-title {
 				${
 					imageAccordionTitleFontSize?.Tablet
 						? `font-size: ${imageAccordionTitleFontSize.Tablet}${
@@ -790,8 +813,8 @@ const generateImageAccordionStyle = (attributes) => {
 						: ""
 				}
 			}
-			.fb-image-accordion-desc.${blockID},
-			.fb-sub-title.${blockID} {
+			.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-desc,
+			.fb-image-accordion-wrapper.${blockID} .fb-sub-title {
 				${
 					imageAccordionSubtitleFontSize?.Tablet
 						? `font-size: ${imageAccordionSubtitleFontSize.Tablet}${
@@ -807,7 +830,7 @@ const generateImageAccordionStyle = (attributes) => {
 						: ""
 				}
 			}
-			.fb-image-accordion-dot.${blockID} {
+			.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-dot {
 				${
 					imageAccordionDotSize?.Tablet
 						? `width: ${imageAccordionDotSize.Tablet}${
@@ -889,7 +912,7 @@ const generateImageAccordionStyle = (attributes) => {
 				}
 			}
 
-			.fb-image-accordion-container.${blockID} {
+			.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-container {
 				${
 					imageAccordionWidth?.Mobile
 						? `width: ${imageAccordionWidth.Mobile}${
@@ -925,15 +948,17 @@ const generateImageAccordionStyle = (attributes) => {
 				}
 			}
 
-			.fb-image-accordion-item.${blockID}  {
+			.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-item  {
 				${
 					itemBrGetMobile && imageAccordionItemBorderRadiusMobile?.top
 						? `border-radius: ${itemBrGetMobile};`
 						: ""
 				}
 			}
-			.fb-image-accordion-item.${blockID}.is-active,
-			.fb-trigger-hover .fb-image-accordion-item.${blockID}:hover {
+			.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-item.is-active,
+			.fb-image-accordion-wrapper.${blockID}.fb-trigger-hover .fb-image-accordion-item:hover {
+				box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3), 0 15px 25px -5px rgba(67, 97, 238, 0.2);
+				z-index: 99;
 				${
 					itemActiveBrGetMobile &&
 					imageAccordionItemActiveBorderRadiusMobile?.top
@@ -942,7 +967,7 @@ const generateImageAccordionStyle = (attributes) => {
 				}
 			}
 
-			.fb-image-accordion-title.${blockID} {
+			.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-title {
 				${
 					imageAccordionTitleFontSize?.Mobile
 						? `font-size: ${imageAccordionTitleFontSize.Mobile}${
@@ -958,8 +983,8 @@ const generateImageAccordionStyle = (attributes) => {
 						: ""
 				}
 			}
-			.fb-image-accordion-desc.${blockID},
-			.fb-sub-title.${blockID} {
+			.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-desc,
+			.fb-image-accordion-wrapper.${blockID} .fb-sub-title {
 				${
 					imageAccordionSubtitleFontSize?.Mobile
 						? `font-size: ${imageAccordionSubtitleFontSize.Mobile}${
@@ -975,7 +1000,7 @@ const generateImageAccordionStyle = (attributes) => {
 						: ""
 				}
 			}
-			.${blockID} .fb-image-accordion-dot {
+			.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-dot {
 				${
 					imageAccordionDotSize?.Mobile
 						? `width: ${imageAccordionDotSize.Mobile}${

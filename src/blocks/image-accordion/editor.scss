@@ -4,6 +4,7 @@
 .fb-image-accordion-container {
 	display: flex;
 	align-items: stretch;
+	overflow: visible;
 }
 
 /* --------------
@@ -12,13 +13,14 @@
 .fb-image-accordion-item {
 	position: relative;
 	flex: 0 0 80px;
-	background-size: cover;
-	background-position: center;
 	cursor: pointer;
 	transition:
 		flex 0.6s cubic-bezier(0.25, 1, 0.5, 1),
 		border-radius 0.6s cubic-bezier(0.25, 1, 0.5, 1),
-		opacity 0.4s ease;
+		opacity 0.4s ease,
+		box-shadow 0.4s ease;
+	/* overflow: hidden is removed or handled carefully to show shadow */
+	will-change: flex, box-shadow;
 	overflow: hidden;
 }
 
@@ -48,17 +50,6 @@
 	width: calc(100% - 36px);
 }
 
-.fb-image-accordion-presets {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	margin-bottom: 20px;
-}
-
-.fb-preset-item svg {
-	width: 90px;
-	height: 90px;
-}
-
 /* --------------
    ICON CIRCLE 
 ---------------- */
@@ -69,7 +60,6 @@
 	justify-content: center;
 	flex-shrink: 0;
 	overflow: hidden;
-	color: #333;
 
 	svg {
 		color: currentColor;
@@ -111,79 +101,15 @@
 	}
 }
 
-.fb-image-accordion-item.is-active .fb-image-accordion-text-group {
-	display: block;
-	opacity: 1;
-	transform: translateX(0);
-}
-
-/* ------------
-   ACTIVE or OPEN ITEM
------------------ */
 .fb-image-accordion-item.is-active {
 	flex: 1 !important;
-}
 
-.fb-trigger-hover
-	.fb-image-accordion-container:hover
-	.fb-image-accordion-item.is-active:not(:hover) {
-	flex: 0 0 80px;
-}
-
-/* -----------
-   TRIGGER: HOVER 
---------------------- */
-.fb-trigger-hover {
-	.fb-image-accordion-item:hover {
-		flex: 1 !important;
-
-		.fb-image-accordion-text-group {
-			display: block;
-			opacity: 1;
-			transform: translateX(0);
-		}
+	.fb-image-accordion-text-group {
+		display: block;
+		opacity: 1;
+		transform: translateX(0);
 	}
 }
-
-/* ----------------
-   CLICK
------------------ */
-.fb-trigger-click .fb-image-accordion-item.is-active {
-	flex: 1 !important;
-}
-
-.fb-trigger-click
-	.fb-image-accordion-item.is-active
-	.fb-image-accordion-text-group {
-	display: block;
-	opacity: 1;
-	transform: translateX(0);
-}
-
-/* ------------
-   RESPONSIVE 
------------------ */
-// @media screen and (max-width: 767px) {
-// 	.fb-image-accordion-container {
-// 		flex-direction: column;
-// 		height: auto;
-// 	}
-
-// 	.fb-image-accordion-item {
-// 		flex: 0 0 60px !important;
-// 		border-radius: 16px !important;
-// 		width: 100%;
-// 	}
-
-// 	.fb-image-accordion-item.is-active {
-// 		flex: 1 1 200px !important;
-// 		border-radius: 16px !important;
-// 	}
-
-// 	.fb-image-accordion-text-group {
-// 		white-space: normal;
-// 	}
-// }
 
 /* ==========
    PRESET 2
@@ -191,10 +117,6 @@
 .preset-2 {
 	.fb-image-accordion-item {
 		flex: 0 0 90px;
-	}
-
-	.fb-image-accordion-item.is-active {
-		flex: 1;
 	}
 
 	.fb-image-accordion-content-wrapper {
@@ -223,9 +145,6 @@
 		border-radius: 50%;
 	}
 
-	&.fb-trigger-hover
-		.fb-image-accordion-item:hover
-		.fb-image-accordion-dot-wrapper,
 	.fb-image-accordion-item.is-active .fb-image-accordion-dot-wrapper {
 		opacity: 0;
 		visibility: hidden;
@@ -233,7 +152,6 @@
 
 	.fb-image-accordion-preset2-content {
 		text-align: center;
-		color: #fff;
 		z-index: 5;
 	}
 
@@ -259,16 +177,10 @@
 		transition: opacity 0.45s ease 0.05s;
 	}
 
-	&.fb-trigger-hover .fb-image-accordion-item:hover .fb-image-accordion-title,
 	.fb-image-accordion-item.is-active .fb-image-accordion-title,
-	&.fb-trigger-hover .fb-image-accordion-item:hover .fb-sub-title,
 	.fb-image-accordion-item.is-active .fb-sub-title {
 		opacity: 1;
 	}
-}
-
-.preset-2.fb-trigger-hover .fb-image-accordion-item:hover {
-	flex: 1 !important;
 }
 
 /* =============
@@ -281,10 +193,6 @@
 
 	.fb-image-accordion-item {
 		flex: 0 0 64px;
-	}
-
-	.fb-image-accordion-item.is-active {
-		flex: 1 !important;
 	}
 
 	.fb-image-accordion-content-wrapper {
@@ -320,42 +228,6 @@
 
 	.fb-sub-title {
 		margin: 0;
-	}
-
-	.fb-image-accordion-btn {
-		display: inline-block;
-		cursor: pointer;
-		white-space: nowrap;
-		flex-shrink: 0;
-		text-decoration: none;
-		transition:
-			background 0.25s ease,
-			color 0.25s ease;
-	}
-
-	@media screen and (max-width: 767px) {
-		.fb-image-accordion-container {
-			min-height: 480px;
-		}
-	}
-}
-
-/* Preset 3 Trigger Scoping */
-.preset-3 {
-	&.fb-trigger-hover {
-		.fb-image-accordion-item:hover {
-			flex: 1 !important;
-
-			.fb-image-accordion-content-wrapper {
-				display: flex;
-				opacity: 1;
-			}
-		}
-
-		.fb-image-accordion-container:hover
-			.fb-image-accordion-item.is-active:not(:hover) {
-			flex: 0 0 64px;
-		}
 	}
 }
 
@@ -395,25 +267,13 @@
 		left: -55%;
 		width: 210%;
 		height: 100%;
-		background-size: cover;
-		background-position: center;
 		transform: skewX(12deg);
 		transition: transform 0.55s ease;
 		will-change: transform;
 	}
 
-	&.fb-trigger-hover .fb-image-accordion-item:hover .fb-skew-bg,
-	.fb-image-accordion-item.is-active .fb-skew-bg {
-		transform: skewX(0deg) scale(1.02);
-	}
-
 	.fb-image-accordion-overlay {
 		z-index: 2;
-	}
-
-	&.fb-trigger-hover .fb-image-accordion-item:hover .fb-image-accordion-overlay,
-	.fb-image-accordion-item.is-active .fb-image-accordion-overlay {
-		background: rgba(0, 0, 0, 0.25);
 	}
 
 	.fb-image-accordion-content-wrapper {
@@ -443,7 +303,6 @@
 	.fb-image-accordion-title {
 		display: block;
 		margin: 0 0 4px;
-		line-height: 1.25;
 		white-space: nowrap;
 		opacity: 0;
 		transform: translateY(6px);
@@ -452,70 +311,19 @@
 			transform 0.4s ease 0.05s;
 	}
 
-	&.fb-trigger-hover .fb-image-accordion-item:hover .fb-image-accordion-title,
 	.fb-image-accordion-item.is-active .fb-image-accordion-title {
 		opacity: 1;
 		transform: translateY(0);
 	}
 
-	.fb-image-accordion-desc {
-		display: block;
-		margin: 0;
-		white-space: nowrap;
-	}
-
-	.fb-image-accordion-item.is-active {
-		flex: 1.4 !important;
-	}
-
 	@media screen and (max-width: 767px) {
 		.fb-image-accordion-container {
 			flex-direction: row !important;
-			height: 300px;
-		}
-
-		.fb-image-accordion-item {
-			flex: 1 !important;
-		}
-
-		.fb-image-accordion-item.is-active {
-			flex: 1.4 !important;
 		}
 
 		.fb-image-accordion-title,
 		.fb-image-accordion-desc {
 			white-space: normal;
 		}
-	}
-
-	&.fb-trigger-hover {
-		.fb-image-accordion-item:hover {
-			flex: 1.4 !important;
-			z-index: 5;
-		}
-
-		.fb-image-accordion-container:hover
-			.fb-image-accordion-item.is-active:not(:hover) {
-			flex: 1 !important;
-		}
-	}
-}
-
-/* ===========
-   RESPONSIVE VISIBILITY
-   =========== */
-@media screen and (min-width: 1025px) {
-	.fb-desktop-responsive {
-		display: none !important;
-	}
-}
-@media screen and (min-width: 768px) and (max-width: 1024px) {
-	.fb-tablet-responsive {
-		display: none !important;
-	}
-}
-@media screen and (max-width: 767px) {
-	.fb-mobile-responsive {
-		display: none !important;
 	}
 }

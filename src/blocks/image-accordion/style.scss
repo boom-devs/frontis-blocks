@@ -102,54 +102,14 @@
 	}
 }
 
-.fb-image-accordion-item.is-active .fb-image-accordion-text-group {
-	display: block;
-	opacity: 1;
-	transform: translateX(0);
-}
-
-/* ----------------
-   ACTIVE / OPEN ITEM
------------------ */
 .fb-image-accordion-item.is-active {
 	flex: 1 !important;
-}
 
-.fb-trigger-hover
-	.fb-image-accordion-container:hover
-	.fb-image-accordion-item.is-active:not(:hover) {
-	flex: 0 0 80px;
-}
-
-/* ---------------
-    HOVER 
-------------------- */
-.fb-trigger-hover {
-	.fb-image-accordion-item:hover {
-		flex: 1 !important;
-
-		.fb-image-accordion-text-group {
-			display: block;
-			opacity: 1;
-			transform: translateX(0);
-		}
-	}
-}
-
-/* -----------
-  CLICK
------------------ */
-.fb-trigger-click .fb-image-accordion-item.is-active {
-	flex: 1 !important;
-	border-radius: 25px;
-}
-
-.fb-trigger-click
-	.fb-image-accordion-item.is-active
 	.fb-image-accordion-text-group {
-	display: block;
-	opacity: 1;
-	transform: translateX(0);
+		display: block;
+		opacity: 1;
+		transform: translateX(0);
+	}
 }
 
 /* ------------
@@ -184,10 +144,6 @@
 		flex: 0 0 90px;
 	}
 
-	.fb-image-accordion-item.is-active {
-		flex: 1;
-	}
-
 	.fb-image-accordion-content-wrapper {
 		transform: none !important;
 		align-items: center;
@@ -206,9 +162,6 @@
 		border-radius: 50%;
 	}
 
-	&.fb-trigger-hover
-		.fb-image-accordion-item:hover
-		.fb-image-accordion-dot-wrapper,
 	.fb-image-accordion-item.is-active .fb-image-accordion-dot-wrapper {
 		opacity: 0;
 		visibility: hidden;
@@ -241,16 +194,10 @@
 		transition: opacity 0.45s ease 0.05s;
 	}
 
-	&.fb-trigger-hover .fb-image-accordion-item:hover .fb-image-accordion-title,
 	.fb-image-accordion-item.is-active .fb-image-accordion-title,
-	&.fb-trigger-hover .fb-image-accordion-item:hover .fb-sub-title,
 	.fb-image-accordion-item.is-active .fb-sub-title {
 		opacity: 1;
 	}
-}
-
-.preset-2.fb-trigger-hover .fb-image-accordion-item:hover {
-	flex: 1 !important;
 }
 
 /* =============
@@ -263,10 +210,6 @@
 
 	.fb-image-accordion-item {
 		flex: 0 0 64px;
-	}
-
-	.fb-image-accordion-item.is-active {
-		flex: 1 !important;
 	}
 
 	.fb-image-accordion-content-wrapper {
@@ -300,39 +243,9 @@
 		margin: 0;
 	}
 
-	.fb-image-accordion-btn {
-		display: inline-block;
-		cursor: pointer;
-		white-space: nowrap;
-		flex-shrink: 0;
-		text-decoration: none;
-		transition:
-			background 0.25s ease,
-			color 0.25s ease;
-	}
-
 	@media screen and (max-width: 767px) {
 		.fb-image-accordion-container {
 			min-height: 480px;
-		}
-	}
-}
-
-/* Preset 3 Trigger Scoping */
-.preset-3 {
-	&.fb-trigger-hover {
-		.fb-image-accordion-item:hover {
-			flex: 1 !important;
-
-			.fb-image-accordion-content-wrapper {
-				display: flex;
-				opacity: 1;
-			}
-		}
-
-		.fb-image-accordion-container:hover
-			.fb-image-accordion-item.is-active:not(:hover) {
-			flex: 0 0 64px;
 		}
 	}
 }
@@ -378,11 +291,6 @@
 		transform: skewX(12deg);
 		transition: transform 0.55s ease;
 		will-change: transform;
-	}
-
-	&.fb-trigger-hover .fb-image-accordion-item:hover .fb-skew-bg,
-	.fb-image-accordion-item.is-active .fb-skew-bg {
-		transform: skewX(0deg) scale(1.02);
 	}
 
 	.fb-image-accordion-overlay {
@@ -431,7 +339,6 @@
 			transform 0.4s ease 0.05s;
 	}
 
-	&.fb-trigger-hover .fb-image-accordion-item:hover .fb-image-accordion-title,
 	.fb-image-accordion-item.is-active .fb-image-accordion-title {
 		opacity: 1;
 		transform: translateY(0);
@@ -441,10 +348,6 @@
 		display: block;
 		margin: 0;
 		white-space: nowrap;
-	}
-
-	.fb-image-accordion-item.is-active {
-		flex: 1.4 !important;
 	}
 
 	@media screen and (max-width: 767px) {
@@ -457,26 +360,10 @@
 			flex: 1 !important;
 		}
 
-		.fb-image-accordion-item.is-active {
-			flex: 1.4 !important;
-		}
-
 		.fb-image-accordion-title,
 		.fb-image-accordion-desc {
 			white-space: normal;
 			font-size: 11px;
-		}
-	}
-
-	&.fb-trigger-hover {
-		.fb-image-accordion-item:hover {
-			flex: 1.4 !important;
-			z-index: 5;
-		}
-
-		.fb-image-accordion-container:hover
-			.fb-image-accordion-item.is-active:not(:hover) {
-			flex: 1 !important;
 		}
 	}
 }
