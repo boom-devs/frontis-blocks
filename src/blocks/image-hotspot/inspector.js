@@ -339,6 +339,32 @@ export default function Inspector({ attributes, setAttributes }) {
     imageHotspotsGlobalBoxShadowHoverCssValue,
     /** End imageHotspotsGlobal Box Shadow */
 
+    /** Start Marker Border Radius */
+    markerBorderRadiusUnits,
+    markerBorderRadiusDesktop,
+    markerBorderRadiusTablet,
+    markerBorderRadiusMobile,
+    markerBorderRadiusLink,
+    submenuBorderRadiusUnits,
+    submenuBorderRadiusDesktop,
+    submenuBorderRadiusTablet,
+    submenuBorderRadiusMobile,
+    submenuBorderRadiusLink,
+    /** End Marker Border Radius */
+
+    /** Start Marker Border */
+    markerBorder,
+    markerBorderColorSwitcher,
+    markerBorderColor,
+    markerBorderHoverColor,
+
+    markerBorderUnits,
+    markerBorderDesktop,
+    markerBorderTablet,
+    markerBorderMobile,
+    markerBorderLink,
+    /** End Marker Border */
+
 
 
   } = attributes;
@@ -696,6 +722,50 @@ export default function Inspector({ attributes, setAttributes }) {
     });
   };
   /** End imageHotspotsGlobal Border */
+
+  /** Start Marker boder Radius */
+  const handlemarkerBorderRadiusUnitChange = (event, position) => {
+    const value = event.target.value;
+    if (markerBorderRadiusLink) {
+      const newValue = { top: value, right: value, bottom: value, left: value };
+      switch (deviceType) {
+        case "Desktop":
+          setAttributes({ markerBorderRadiusDesktop: newValue });
+          break;
+        case "Tablet":
+          setAttributes({ markerBorderRadiusTablet: newValue });
+          break;
+        case "Mobile":
+          setAttributes({ markerBorderRadiusMobile: newValue });
+          break;
+      }
+    } else {
+      const current =
+        deviceType === "Desktop"
+          ? markerBorderRadiusDesktop
+          : deviceType === "Tablet"
+            ? markerBorderRadiusTablet
+            : markerBorderRadiusMobile || {};
+      setAttributes({
+        [`markerBorderRadius${deviceType}`]: {
+          ...current,
+          [position]: value,
+        },
+      });
+    }
+  };
+  const handlemarkerBorderRadiusUnitsHandler = (unit) => {
+    setAttributes({
+      markerBorderRadiusUnits: {
+        ...markerBorderRadiusUnits,
+        [deviceType]: unit,
+      },
+    });
+  };
+  const handlemarkerBorderRadiusCombineBtn = () => {
+    setAttributes({ markerBorderRadiusLink: !markerBorderRadiusLink });
+  };
+  /** End Marker border Radius */
 
   /** Start imageHotspotsGlobal Border Radius */
   const imageHotspotsGlobalBorderRadiusUnitsChange = (event, position) => {
@@ -1669,7 +1739,7 @@ export default function Inspector({ attributes, setAttributes }) {
                             onChange={(value) => updateHotspot(hotspot.id, 'showImage', value)}
                           />
 
-                          {hotspot.showImage && (
+                          {hotspot.showImage !== false && (
                             <FB_ImageControl
                               label={__("Popover Image", "frontis-blocks")}
                               globalImageUrl={hotspot.popoverImageUrl || ''}
@@ -2178,6 +2248,53 @@ export default function Inspector({ attributes, setAttributes }) {
             resetFallbackValue={""}
           />
         )}
+
+        <SelectControl
+          label={__("Border Style", "frontis-blocks")}
+          value={markerBorder}
+          options={BORDER_STYLES}
+          onChange={(value) => setAttributes({ markerBorder: value })}
+        />
+
+        <FB_SwitcherControl
+          label={__("Border Color", "frontis-blocks")}
+          options={[
+            { label: __('Normal', 'frontis-blocks'), value: 'normal' },
+            { label: __('Hover', 'frontis-blocks'), value: 'hover' },
+          ]}
+          globalSwitcher={markerBorderColorSwitcher}
+          setGlobalSwitcher={(value) => setAttributes({ markerBorderColorSwitcher: value })}
+        />
+
+        {markerBorderColorSwitcher === 'normal' && (
+          <FB_ColorControl
+            label={__("Normal Color", "frontis-blocks")}
+            globalColor={markerBorderColor}
+            setGlobalColor={(value) => setAttributes({ markerBorderColor: value === undefined ? '' : value })}
+          />
+        )}
+
+        {markerBorderColorSwitcher === 'hover' && (
+          <FB_ColorControl
+            label={__("Hover Color", "frontis-blocks")}
+            globalColor={markerBorderHoverColor}
+            setGlobalColor={(value) => setAttributes({ markerBorderHoverColor: value === undefined ? '' : value })}
+          />
+        )}
+
+        <FB_Spacing
+          label={__("Radius Border", "frontis-blocks")}
+          deviceType={deviceType}
+          spacingUnitsHandler={handlemarkerBorderRadiusUnitsHandler}
+          spacingUnits={markerBorderRadiusUnits}
+          spacingDesktop={markerBorderRadiusDesktop}
+          spacingTablet={markerBorderRadiusTablet}
+          spacingMobile={markerBorderRadiusMobile}
+          handleSpacingUnitHandler={handlemarkerBorderRadiusUnitChange}
+          spacingCombineBtn={markerBorderRadiusLink}
+          spacingCombineBtnHandler={handlemarkerBorderRadiusCombineBtn}
+          setAttributes={setAttributes}
+        />
 
       </PanelBody>
 

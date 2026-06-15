@@ -17,7 +17,6 @@ export default function Save({ attributes }) {
     imageHotspotMobileSwitcher,
     imageHotspotMarkerSvg,
     imageHotspotMarkerColor,
-    imageHotspotShowPopoverImage,
   } = attributes;
 
   if (!imageHotspotImageUrl) {
@@ -69,7 +68,7 @@ export default function Save({ attributes }) {
                   </div>
 
                   <div className="fb-hotspot-popover">
-                    {imageHotspotShowPopoverImage && hotspot.popoverImageUrl && (
+                    {hotspot.showImage !== false && hotspot.popoverImageUrl && (
                       <img
                         src={hotspot.popoverImageUrl}
                         alt={hotspot.popoverImageAlt || ''}
