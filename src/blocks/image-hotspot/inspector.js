@@ -371,6 +371,7 @@ export default function Inspector({ attributes, setAttributes }) {
 
   const deviceType = useDeviceType();
 
+  /** Start Image Hotspot Title Padding Units */
   const imageHotspotTitlePaddingUnitsChange = (event, position) => {
     const value = event.target.value;
     if (imageHotspotTitlePaddingLink) {
@@ -450,7 +451,9 @@ export default function Inspector({ attributes, setAttributes }) {
       }
     });
   };
+  /** End image Hotspot Title Padding Units */
 
+  /** Start image Hotspot Title Margin Units */
   const imageHotspotTitleMarginUnitsChange = (event, position) => {
     const value = event.target.value;
     if (imageHotspotTitleMarginLink) {
@@ -530,6 +533,7 @@ export default function Inspector({ attributes, setAttributes }) {
       }
     })
   };
+  /** End image Hotspot Title Margin Units */
 
   /** Start Global padding */
   const handleGlobalPaddingUnitChange = (event, position) => {
@@ -607,6 +611,7 @@ export default function Inspector({ attributes, setAttributes }) {
       },
     });
   };
+  /** End Global padding */
 
   /** Start Global margin */
   const handleGlobalMarginUnitChange = (event, position) => {
@@ -681,6 +686,7 @@ export default function Inspector({ attributes, setAttributes }) {
       },
     });
   };
+  /** End Global margin */
 
   /** Start Global border */
   const imageHotspotsGlobalBorderUnitsChange = (event, position) => {
@@ -1054,6 +1060,7 @@ export default function Inspector({ attributes, setAttributes }) {
     updateHotspot(hotspotId, 'socialLinks', updatedLinks);
   };
 
+/** Start Image Hotspot Category Padding */
   const imageHotspotCategoryPaddingUnitsChange = (event, position) => {
     const value = event.target.value;
     if (imageHotspotCategoryPaddingLink) {
@@ -1133,9 +1140,9 @@ export default function Inspector({ attributes, setAttributes }) {
         [deviceType]: unit
       }
     })
-  };
+  };/** End Image Hotspot Category Padding */
 
-
+/** Start Image Hotspot Category Margin */
   const imageHotspotCategoryMarginUnitsChange = (event, position) => {
     const value = event.target.value;
     if (imageHotspotCategoryMarginLink) {
@@ -1215,7 +1222,9 @@ export default function Inspector({ attributes, setAttributes }) {
       }
     })
   };
+/** End Image Hotspot Category */
 
+/** Start Image Hotspot Description Padding */
   const imageHotspotDescPaddingUnitsChange = (event, position) => {
     const value = event.target.value;
     if (imageHotspotDescPaddingLink) {
@@ -1295,7 +1304,9 @@ export default function Inspector({ attributes, setAttributes }) {
       }
     })
   };
+  /** End Image Hotspot Description Padding */
 
+  /** Start Image Hotspot Description Margin */
   const imageHotspotDescMarginUnitsChange = (event, position) => {
     const value = event.target.value;
     if (imageHotspotDescMarginLink) {
@@ -1375,7 +1386,9 @@ export default function Inspector({ attributes, setAttributes }) {
       }
     })
   };
+  /** End Image Hotspot Description Margin */
 
+  /** Start Image Hotspot Price Padding */
   const imageHotspotPricePaddingUnitsChange = (event, position) => {
     const value = event.target.value;
     if (imageHotspotPricePaddingLink) {
@@ -1455,7 +1468,9 @@ export default function Inspector({ attributes, setAttributes }) {
       }
     })
   };
+  /** End Image Hotspot Price Padding */
 
+  /** Start Image Hotspot Price Margin */
   const imageHotspotPriceMarginUnitsChange = (event, position) => {
     const value = event.target.value;
     if (imageHotspotPriceMarginLink) {
@@ -1535,8 +1550,9 @@ export default function Inspector({ attributes, setAttributes }) {
       }
     })
   };
+  /** End Image Hotspot Price Margin */
 
-  /** Start Back To Top Padding */
+  /** Start Image Hotspot Popover Padding */
   const imageHotspotsPopoverPaddingUnitsChange = (event, position) => {
     const value = event.target.value;
     if (imageHotspotsPopoverPaddingLink) {
@@ -1584,9 +1600,9 @@ export default function Inspector({ attributes, setAttributes }) {
       }
     });
   };
-  /** End Back To Top Padding */
+  /** End Image Hotspot Popover Padding */
 
-  /** Start Image Hotspots Popover Margin */
+  /** Start Image Hotspot Popover Margin */
   const imageHotspotsPopoverMarginUnitsChange = (event, position) => {
     const value = event.target.value;
     if (imageHotspotsPopoverMarginLink) {
@@ -1743,6 +1759,7 @@ export default function Inspector({ attributes, setAttributes }) {
       }
     });
   };
+  /** End Border Radius Controls */
 
   const generalControls = (
     <>
@@ -1772,12 +1789,7 @@ export default function Inspector({ attributes, setAttributes }) {
           label={__("Image Height", "frontis-blocks")}
           rangeValue={imageHotspotImageHeight}
           onChangeHandler={(value) => setAttributes({ imageHotspotImageHeight: value })}
-          rangeUnitHandler={(unit) => setAttributes({
-            imageHotspotImageHeightUnits: {
-              ...imageHotspotImageHeightUnits,
-              [deviceType]: unit
-            }
-          })}
+          rangeUnitHandler={(unit) => setAttributes({ imageHotspotImageHeightUnits: unit })}
           deviceType={deviceType}
           units={imageHotspotImageHeightUnits}
           min={100}
@@ -2250,10 +2262,6 @@ export default function Inspector({ attributes, setAttributes }) {
 
         <FB_SwitcherControl
           label={__("Border Color", "frontis-blocks")}
-          options={[
-            { label: __('Normal', 'frontis-blocks'), value: 'normal' },
-            { label: __('Hover', 'frontis-blocks'), value: 'hover' },
-          ]}
           globalSwitcher={imageHotspotsPopoverBorderColorSwitcher}
           setGlobalSwitcher={(value) => setAttributes({ imageHotspotsPopoverBorderColorSwitcher: value })}
         />
@@ -2380,10 +2388,6 @@ export default function Inspector({ attributes, setAttributes }) {
 
         <FB_SwitcherControl
           label={__("Border Color", "frontis-blocks")}
-          options={[
-            { label: __('Normal', 'frontis-blocks'), value: 'normal' },
-            { label: __('Hover', 'frontis-blocks'), value: 'hover' },
-          ]}
           globalSwitcher={markerBorderColorSwitcher}
           setGlobalSwitcher={(value) => setAttributes({ markerBorderColorSwitcher: value })}
         />
