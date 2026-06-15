@@ -1,15 +1,5 @@
-/**
- * Image Accordion Block - Style Generation
- * Returns Dynamic Generated CSS
- */
-
 import getCustomCss from "@Utils/getCustomCss";
 
-/**
- * Generate block styles from attributes
- * @param {Object} attributes - Block attributes
- * @returns {string} CSS string
- */
 const generateImageAccordionStyle = (attributes) => {
 	const {
 		blockID,
