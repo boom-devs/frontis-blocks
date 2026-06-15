@@ -3,26 +3,25 @@ const attributes = {
 		type: "string",
 		default: "",
 	},
-	blockStyle: {
+	countDownPresetStyle: {
 		type: "string",
-		default: "",
-	},
-	highlightColor: {
-		type: "string",
-		default: "",
-	},
-	hoverHighlightColor: {
-		type: "string",
-		default: "",
-	},
-
-	advancedCountdownPresetStyle: {
-		type: "string",
-		default: "default",
+		default: "style-1",
 	},
 	advancedCountdownStartDate: {
 		type: "string",
 		default: "",
+	},
+	until_text: {
+		type: "string",
+		default: "Until Morning Digest",
+	},
+	show_sun_icon: {
+		type: "string",
+		default: "yes",
+	},
+	sun_icon: {
+		type: "object",
+		default: { value: "far fa-sun", library: "fa-regular" },
 	},
 
 	// Show Hide Label Attributes
@@ -43,53 +42,6 @@ const attributes = {
 		default: true,
 	},
 
-	// Label Name Attributes
-	advancedCountdownLabelDay: {
-		type: "string",
-		default: "Days",
-	},
-	advancedCountdownLabelHour: {
-		type: "string",
-		default: "Hours",
-	},
-	advancedCountdownLabelMinute: {
-		type: "string",
-		default: "Minutes",
-	},
-	advancedCountdownLabelSecond: {
-		type: "string",
-		default: "Seconds",
-	},
-	advancedCountdownUntilText: {
-		type: "string",
-		default: "Until Morning Digest",
-	},
-	advancedCountdownShowSunIcon: {
-		type: "string",
-		default: "yes",
-	},
-	advancedCountdownSunIcon: {
-		type: "object",
-		default: { value: "far fa-sun", library: "fa-regular" },
-	},
-
-	// Label Background Attributes
-	advancedCountdownLabelBgColorDay: {
-		type: "string",
-		default: "#6B4EFF",
-	},
-	advancedCountdownLabelBgColorHour: {
-		type: "string",
-		default: "",
-	},
-	advancedCountdownLabelBgColorMinute: {
-		type: "string",
-		default: "#6B4EFF",
-	},
-	advancedCountdownLabelBgColorSecond: {
-		type: "string",
-		default: "",
-	},
 	targetDate: {
 		type: "string",
 	},
@@ -140,15 +92,11 @@ const attributes = {
 			isLinked: true,
 		},
 	},
-	advancedCountdownPreset5DashGap: {
-		type: "object",
-		default: { unit: "px", Desktop: 62 },
-	},
 	advancedCountdownPreset4DashGap: {
 		type: "object",
 		default: { unit: "px", Desktop: 10 },
 	},
-	advancedCountdownContainerAlignment: {
+	countDownLayoutAlignment: {
 		type: "string",
 		default: "center",
 	},
@@ -158,19 +106,19 @@ const attributes = {
 	},
 	advancedCountdownStyle2DashCount: {
 		type: "object",
-		default: { Desktop: 5 },
+		default: { Desktop: "5" },
 	},
-	advancedCountdownDaysTotalDots: {
+	days_total_dots: {
 		type: "object",
 		default: { Desktop: 12 },
 	},
-	advancedCountdownHoursTotalDots: {
+	hours_total_dots: {
 		type: "object",
 		default: { Desktop: 24 },
 	},
-	advancedCountdownMinutesTotalDots: {
+	minutes_total_dots: {
 		type: "object",
-		default: { Desktop: 30 },
+		default: { Desktop: 60 },
 	},
 	advancedCountdownStyle3ContainerBg: {
 		type: "string",

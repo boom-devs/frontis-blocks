@@ -169,13 +169,16 @@ export default function Edit({
 
 	const mask_id_style2 = `mask-style-2-${blockID}`;
 
-	const label_d = attributes.advancedCountdownLabelDays || "Days";
-	const label_h = attributes.advancedCountdownLabelHours || "Hours";
-	const label_m = attributes.advancedCountdownLabelMinutes || "Minutes";
+	const label_d =
+		attributes.advancedCountdownLabelDays || __("Days", "frontis-blocks");
+	const label_h =
+		attributes.advancedCountdownLabelHours || __("Hours", "frontis-blocks");
+	const label_m =
+		attributes.advancedCountdownLabelMinutes || __("Minutes", "frontis-blocks");
 
 	const d_val = days_total_dots?.size || 12;
 	const h_val = hours_total_dots?.size || 24;
-	const m_val = minutes_total_dots?.size || 60;
+	const m_val = minutes_total_dots?.size || 30;
 
 	const config_style5 = {
 		days: { label: label_d, dots: d_val },

@@ -1454,8 +1454,22 @@ const Inspector = ({ attributes, setAttributes }) => {
 					currentDate={date}
 					onChange={(newDate) => setDate(new Date(newDate))}
 					is12Hour={true}
-					style={{ marginBottom: '20px' }}
 				/>
+
+				<BaseControl label={__("Start Date & Time", "frontis-blocks")}>
+					<DateTimePicker
+						currentDate={startDate}
+						onChange={(newDate) => setStartDate(new Date(newDate))}
+						is12Hour={true}
+					/>
+				</BaseControl>
+
+				<TextControl
+					label={__("Footer Text", "frontis-blocks")}
+					value={until_text}
+					onChange={(value) => setAttributes({ until_text: value })}
+				/>
+
 				<ToggleControl
 					label={__("Show Days", "frontis-blocks")}
 					checked={showDays}
