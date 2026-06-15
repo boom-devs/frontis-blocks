@@ -730,7 +730,12 @@ const attributes = {
 	},
 	footerMarginTablet: {
 		type: "object",
-		default: { top: "", bottom: "", left: "", right: "" },
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
 	},
 	footerMarginMobile: {
 		type: "object",
@@ -920,7 +925,10 @@ const attributes = {
 	},
 	footerTitleGlobalTypoOption: {
 		type: "object",
-		default: { label: "Default", value: "default" },
+		default: {
+			label: "Default",
+			value: "default",
+		},
 	},
 	footerTitleFontFamily: {
 		type: "string",
@@ -928,7 +936,11 @@ const attributes = {
 	},
 	footerTitleFontSize: {
 		type: "object",
-		default: { Desktop: "24", Tablet: "", Mobile: "" },
+		default: {
+			Desktop: "24",
+			Tablet: "",
+			Mobile: "",
+		},
 	},
 	footerTitleFontSizeUnits: {
 		type: "string",
@@ -952,7 +964,11 @@ const attributes = {
 	},
 	footerTitleLetterSpacing: {
 		type: "object",
-		default: { Desktop: "", Tablet: "", Mobile: "" },
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
 	},
 	footerTitleLetterSpacingUnits: {
 		type: "string",
@@ -960,7 +976,11 @@ const attributes = {
 	},
 	footerTitleLineHeight: {
 		type: "object",
-		default: { Desktop: "", Tablet: "", Mobile: "" },
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
 	},
 	footerTitleLineHeightUnits: {
 		type: "string",
@@ -989,7 +1009,10 @@ const attributes = {
 	},
 	footerDescGlobalTypoOption: {
 		type: "object",
-		default: { label: "Default", value: "default" },
+		default: {
+			label: "Default",
+			value: "default",
+		},
 	},
 	footerDescFontFamily: {
 		type: "string",
@@ -997,7 +1020,11 @@ const attributes = {
 	},
 	footerDescFontSize: {
 		type: "object",
-		default: { Desktop: "16", Tablet: "", Mobile: "" },
+		default: {
+			Desktop: "16",
+			Tablet: "",
+			Mobile: "",
+		},
 	},
 	footerDescFontSizeUnits: {
 		type: "string",
@@ -1238,7 +1265,12 @@ const attributes = {
 	},
 	multiChartWrapperBorderTypeMobile: {
 		type: "object",
-		default: { top: "", bottom: "", left: "", right: "" },
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
 	},
 	multiChartWrapperBorderTypeLink: {
 		type: "boolean",
@@ -1246,19 +1278,38 @@ const attributes = {
 	},
 	multiChartWrapperBorderRadiusUnits: {
 		type: "object",
-		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
 	},
 	multiChartWrapperBorderRadiusDesktop: {
 		type: "object",
-		default: { top: "", bottom: "", left: "", right: "" },
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
 	},
 	multiChartWrapperBorderRadiusTablet: {
 		type: "object",
-		default: { top: "", bottom: "", left: "", right: "" },
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
 	},
 	multiChartWrapperBorderRadiusMobile: {
 		type: "object",
-		default: { top: "", bottom: "", left: "", right: "" },
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
 	},
 	multiChartWrapperBorderRadiusLink: {
 		type: "boolean",
@@ -1267,19 +1318,38 @@ const attributes = {
 
 	multiChartPaddingUnits: {
 		type: "object",
-		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
 	},
 	multiChartPaddingDesktop: {
 		type: "object",
-		default: { top: "", bottom: "", left: "", right: "" },
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
 	},
 	multiChartPaddingTablet: {
 		type: "object",
-		default: { top: "", bottom: "", left: "", right: "" },
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
 	},
 	multiChartPaddingMobile: {
 		type: "object",
-		default: { top: "", bottom: "", left: "", right: "" },
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
 	},
 	multiChartPaddingLink: {
 		type: "boolean",
@@ -1287,7 +1357,11 @@ const attributes = {
 	},
 	multiChartMarginUnits: {
 		type: "object",
-		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
 	},
 	multiChartMarginDesktop: {
 		type: "object",

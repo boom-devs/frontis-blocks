@@ -280,18 +280,21 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 	const deviceType = useDeviceType();
 
-	/** Helper: Handle spacing units */
 	const handleSpacingUnits = (attr, unit) => {
 		setAttributes({ [attr]: { ...attributes[attr], [deviceType]: unit } });
 	};
 
-	/** Helper: Handle spacing values (Border Width/Radius, Padding, Margin) */
 	const handleGranularSpacing = (attrPrefix, event, position, isLinked) => {
 		const value = event.target.value;
 		const attrName = `${attrPrefix}${deviceType}`;
 		if (isLinked) {
 			setAttributes({
-				[attrName]: { top: value, right: value, bottom: value, left: value },
+				[attrName]: {
+					top: value,
+					right: value,
+					bottom: value,
+					left: value,
+				},
 			});
 		} else {
 			setAttributes({
