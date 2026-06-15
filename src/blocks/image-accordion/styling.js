@@ -11,6 +11,10 @@ const generateImageAccordionStyle = (attributes) => {
 		imageAccordionGap,
 		imageAccordionGapUnits,
 
+		imageAccordionItemPaddingUnits,
+		imageAccordionItemPaddingDesktop,
+		imageAccordionItemPaddingTablet,
+		imageAccordionItemPaddingMobile,
 		imageAccordionItemBorderRadiusUnits,
 		imageAccordionItemBorderRadiusDesktop,
 		imageAccordionItemBorderRadiusTablet,
@@ -89,6 +93,10 @@ const generateImageAccordionStyle = (attributes) => {
 		imageAccordionBtnLetterSpacing,
 		imageAccordionBtnLetterSpacingUnits,
 
+		imageAccordionItemMarginUnits,
+		imageAccordionItemMarginDesktop,
+		imageAccordionItemMarginTablet,
+		imageAccordionItemMarginMobile,
 		imageAccordionPaddingUnits,
 		imageAccordionPaddingDesktop,
 		imageAccordionPaddingTablet,
@@ -156,10 +164,17 @@ const generateImageAccordionStyle = (attributes) => {
 		imageAccordionCustomCSS,
 	} = attributes;
 
-	/* Spacing Shorthands */
 	const itemBrGetDesktop = `${imageAccordionItemBorderRadiusDesktop?.top}${imageAccordionItemBorderRadiusUnits?.Desktop} ${imageAccordionItemBorderRadiusDesktop?.right}${imageAccordionItemBorderRadiusUnits?.Desktop} ${imageAccordionItemBorderRadiusDesktop?.bottom}${imageAccordionItemBorderRadiusUnits?.Desktop} ${imageAccordionItemBorderRadiusDesktop?.left}${imageAccordionItemBorderRadiusUnits?.Desktop}`;
 	const itemBrGetTablet = `${imageAccordionItemBorderRadiusTablet?.top}${imageAccordionItemBorderRadiusUnits?.Tablet} ${imageAccordionItemBorderRadiusTablet?.right}${imageAccordionItemBorderRadiusUnits?.Tablet} ${imageAccordionItemBorderRadiusTablet?.bottom}${imageAccordionItemBorderRadiusUnits?.Tablet} ${imageAccordionItemBorderRadiusTablet?.left}${imageAccordionItemBorderRadiusUnits?.Tablet}`;
 	const itemBrGetMobile = `${imageAccordionItemBorderRadiusMobile?.top}${imageAccordionItemBorderRadiusUnits?.Mobile} ${imageAccordionItemBorderRadiusMobile?.right}${imageAccordionItemBorderRadiusUnits?.Mobile} ${imageAccordionItemBorderRadiusMobile?.bottom}${imageAccordionItemBorderRadiusUnits?.Mobile} ${imageAccordionItemBorderRadiusMobile?.left}${imageAccordionItemBorderRadiusUnits?.Mobile}`;
+
+	const itemPaddingGetDesktop = `${imageAccordionItemPaddingDesktop?.top}${imageAccordionItemPaddingUnits?.Desktop} ${imageAccordionItemPaddingDesktop?.right}${imageAccordionItemPaddingUnits?.Desktop} ${imageAccordionItemPaddingDesktop?.bottom}${imageAccordionItemPaddingUnits?.Desktop} ${imageAccordionItemPaddingDesktop?.left}${imageAccordionItemPaddingUnits?.Desktop}`;
+	const itemPaddingGetTablet = `${imageAccordionItemPaddingTablet?.top}${imageAccordionItemPaddingUnits?.Tablet} ${imageAccordionItemPaddingTablet?.right}${imageAccordionItemPaddingUnits?.Tablet} ${imageAccordionItemPaddingTablet?.bottom}${imageAccordionItemPaddingUnits?.Tablet} ${imageAccordionItemPaddingTablet?.left}${imageAccordionItemPaddingUnits?.Tablet}`;
+	const itemPaddingGetMobile = `${imageAccordionItemPaddingMobile?.top}${imageAccordionItemPaddingUnits?.Mobile} ${imageAccordionItemPaddingMobile?.right}${imageAccordionItemPaddingUnits?.Mobile} ${imageAccordionItemPaddingMobile?.bottom}${imageAccordionItemPaddingUnits?.Mobile} ${imageAccordionItemPaddingMobile?.left}${imageAccordionItemPaddingUnits?.Mobile}`;
+
+	const itemMarginGetDesktop = `${imageAccordionItemMarginDesktop?.top}${imageAccordionItemMarginUnits?.Desktop} ${imageAccordionItemMarginDesktop?.right}${imageAccordionItemMarginUnits?.Desktop} ${imageAccordionItemMarginDesktop?.bottom}${imageAccordionItemMarginUnits?.Desktop} ${imageAccordionItemMarginDesktop?.left}${imageAccordionItemMarginUnits?.Desktop}`;
+	const itemMarginGetTablet = `${imageAccordionItemMarginTablet?.top}${imageAccordionItemMarginUnits?.Tablet} ${imageAccordionItemMarginTablet?.right}${imageAccordionItemMarginUnits?.Tablet} ${imageAccordionItemMarginTablet?.bottom}${imageAccordionItemMarginUnits?.Tablet} ${imageAccordionItemMarginTablet?.left}${imageAccordionItemMarginUnits?.Tablet}`;
+	const itemMarginGetMobile = `${imageAccordionItemMarginMobile?.top}${imageAccordionItemMarginUnits?.Mobile} ${imageAccordionItemMarginMobile?.right}${imageAccordionItemMarginUnits?.Mobile} ${imageAccordionItemMarginMobile?.bottom}${imageAccordionItemMarginUnits?.Mobile} ${imageAccordionItemMarginMobile?.left}${imageAccordionItemMarginUnits?.Mobile}`;
 
 	const itemActiveBrGetDesktop = `${imageAccordionItemActiveBorderRadiusDesktop?.top}${imageAccordionItemBorderRadiusUnits?.Desktop} ${imageAccordionItemActiveBorderRadiusDesktop?.right}${imageAccordionItemBorderRadiusUnits?.Desktop} ${imageAccordionItemActiveBorderRadiusDesktop?.bottom}${imageAccordionItemBorderRadiusUnits?.Desktop} ${imageAccordionItemActiveBorderRadiusDesktop?.left}${imageAccordionItemBorderRadiusUnits?.Desktop}`;
 	const itemActiveBrGetTablet = `${imageAccordionItemActiveBorderRadiusTablet?.top}${imageAccordionItemBorderRadiusUnits?.Tablet} ${imageAccordionItemActiveBorderRadiusTablet?.right}${imageAccordionItemBorderRadiusUnits?.Tablet} ${imageAccordionItemActiveBorderRadiusTablet?.bottom}${imageAccordionItemBorderRadiusUnits?.Tablet} ${imageAccordionItemActiveBorderRadiusTablet?.left}${imageAccordionItemBorderRadiusUnits?.Tablet}`;
@@ -284,7 +299,6 @@ const generateImageAccordionStyle = (attributes) => {
 					: ""
 			}
 			transition: all .3s ease-in-out;
-			/* Ensure shadow is visible and not clipped */
 			overflow: visible !important;
 			padding-bottom: 20px; 
 			margin-bottom: -20px;
@@ -355,11 +369,21 @@ const generateImageAccordionStyle = (attributes) => {
 					? `border-radius: ${itemBrGetDesktop};`
 					: ""
 			}
+			${
+				itemPaddingGetDesktop && imageAccordionItemPaddingDesktop?.top
+					? `padding: ${itemPaddingGetDesktop};`
+					: ""
+			}
+			${
+				itemMarginGetDesktop && imageAccordionItemMarginDesktop?.top
+					? `margin: ${itemMarginGetDesktop};`
+					: ""
+			}
 			transition: all 0.4s ease;
 		}
 		.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-item.is-active,
 		.fb-image-accordion-wrapper.${blockID}.fb-trigger-hover .fb-image-accordion-item:hover {
-			/* High quality gradient-style shadow */
+			
 			box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3), 0 15px 25px -5px rgba(67, 97, 238, 0.2);
 			z-index: 99;
 			${
@@ -774,6 +798,16 @@ const generateImageAccordionStyle = (attributes) => {
 						? `border-radius: ${itemBrGetTablet};`
 						: ""
 				}
+				${
+					itemPaddingGetTablet && imageAccordionItemPaddingTablet?.top
+						? `padding: ${itemPaddingGetTablet};`
+						: ""
+				}
+				${
+					itemMarginGetTablet && imageAccordionItemMarginTablet?.top
+						? `margin: ${itemMarginGetTablet};`
+						: ""
+				}
 			}
 			.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-item.is-active,
 			.fb-image-accordion-wrapper.${blockID}.fb-trigger-hover .fb-image-accordion-item:hover {
@@ -942,6 +976,16 @@ const generateImageAccordionStyle = (attributes) => {
 				${
 					itemBrGetMobile && imageAccordionItemBorderRadiusMobile?.top
 						? `border-radius: ${itemBrGetMobile};`
+						: ""
+				}
+				${
+					itemPaddingGetMobile && imageAccordionItemPaddingMobile?.top
+						? `padding: ${itemPaddingGetMobile};`
+						: ""
+				}
+				${
+					itemMarginGetMobile && imageAccordionItemMarginMobile?.top
+						? `margin: ${itemMarginGetMobile};`
 						: ""
 				}
 			}
