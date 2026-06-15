@@ -24,10 +24,10 @@ export default function save({ attributes }) {
 
 	const blockProps = useBlockProps.save({
 		className: `fb-image-accordion-main-wrapper ${blockID} ${
-			imageAccordionDesktopSwitcher ? "fb-desktop-responsive" : ""
-		} ${imageAccordionTabletSwitcher ? "fb-tablet-responsive" : ""} ${
-			imageAccordionMobileSwitcher ? "fb-mobile-responsive" : ""
-		}`.trim(),
+			imageAccordionDesktopSwitcher && "fb-desktop-responsive"
+		} ${imageAccordionTabletSwitcher && "fb-tablet-responsive"} ${
+			imageAccordionMobileSwitcher && "fb-mobile-responsive"
+		}`,
 	});
 
 	const renderItem = (item, index) => {
@@ -105,28 +105,19 @@ export default function save({ attributes }) {
 					)}
 
 					{imageAccordionPreset === "preset-2" && (
-						<>
-							{imageAccordionShowDots && (
-								<div className="fb-image-accordion-dot-wrapper">
-									<span className="fb-image-accordion-dot" />
-								</div>
-							)}
-							<div className="fb-image-accordion-preset2-content">
-								<div className="fb-image-accordion-bottom-content">
-									{imageAccordionShowNumber && (
-										<span className="fb-image-accordion-number">
-											{numLabel}
-										</span>
-									)}
-									{imageAccordionShowTitle && (
-										<h3 className="fb-image-accordion-title">{item.title}</h3>
-									)}
-									{imageAccordionShowSubtitle && item.subTitle && (
-										<p className="fb-sub-title">{item.subTitle}</p>
-									)}
-								</div>
+						<div className="fb-image-accordion-preset2-content">
+							<div className="fb-image-accordion-bottom-content">
+								{imageAccordionShowNumber && (
+									<span className="fb-image-accordion-number">{numLabel}</span>
+								)}
+								{imageAccordionShowTitle && (
+									<h3 className="fb-image-accordion-title">{item.title}</h3>
+								)}
+								{imageAccordionShowSubtitle && item.subTitle && (
+									<p className="fb-sub-title">{item.subTitle}</p>
+								)}
 							</div>
-						</>
+						</div>
 					)}
 
 					{imageAccordionPreset === "preset-3" && (
@@ -174,7 +165,7 @@ export default function save({ attributes }) {
 		<>
 			<div {...blockProps}>
 				<div
-					className={`fb-image-accordion-wrapper ${imageAccordionPreset} fb-trigger-${imageAccordionTrigger} ${imageAccordionWraperClass}`}
+					className={`fb-parent-wrapper fb-image-accordion-wrapper ${blockID} ${imageAccordionPreset} fb-trigger-${imageAccordionTrigger} ${imageAccordionWraperClass}`}
 					id={imageAccordionWraperID}
 					data-trigger={imageAccordionTrigger}
 				>

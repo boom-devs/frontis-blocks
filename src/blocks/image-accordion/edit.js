@@ -1,9 +1,10 @@
 import { __ } from "@wordpress/i18n";
 import { useBlockProps } from "@wordpress/block-editor";
-import { useEffect, useState } from "@wordpress/element";
+import { useEffect, useState, useRef } from "@wordpress/element";
 
 import "./editor.scss";
 import Inspector from "./inspector";
+import SwitchToBlockSettings from "@Utils/SwitchToBlockSettings";
 import useBlockIdGenerator from "@Utils/useBlockIdGenerator";
 import generateImageAccordionStyle from "./styling";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
@@ -17,111 +18,19 @@ export default function Edit({
 	const {
 		blockID,
 		blockStyle,
-		imageAccordionPreset,
 		imageAccordionTrigger,
 		imageAccordionItems,
-		imageAccordionShowIcon,
-		imageAccordionShowTitle,
-		imageAccordionShowSubtitle,
-		imageAccordionShowDots,
-		imageAccordionShowButton,
-		imageAccordionShowNumber,
+		imageAccordionPreset,
 		imageAccordionWraperID,
 		imageAccordionWraperClass,
 		imageAccordionDesktopSwitcher,
 		imageAccordionTabletSwitcher,
 		imageAccordionMobileSwitcher,
-		imageAccordionWidth,
-		imageAccordionWidthUnits,
-		imageAccordionHeight,
-		imageAccordionHeightUnits,
-		imageAccordionGap,
-		imageAccordionGapUnits,
-		imageAccordionItemBorderRadiusUnits,
-		imageAccordionItemBorderRadiusDesktop,
-		imageAccordionItemBorderRadiusTablet,
-		imageAccordionItemBorderRadiusMobile,
-		imageAccordionOverlayColor,
-		imageAccordionOverlayHoverColor,
-		imageAccordionDotColor,
-		imageAccordionDotSize,
-		imageAccordionDotSizeUnits,
-		imageAccordionNumberColor,
-		imageAccordionNumberHoverColor,
-		imageAccordionNumberFontSize,
-		imageAccordionNumberFontSizeUnits,
-		imageAccordionNumberFontWeight,
-		imageAccordionIconColor,
-		imageAccordionIconHoverColor,
-		imageAccordionIconSize,
-		imageAccordionIconSizeUnits,
-		imageAccordionIconCircleBgColor,
-		imageAccordionIconCircleSize,
-		imageAccordionIconCircleSizeUnits,
-		imageAccordionTitleColor,
-		imageAccordionTitleHoverColor,
-		imageAccordionTitleFontSize,
-		imageAccordionTitleFontSizeUnits,
-		imageAccordionTitleFontWeight,
-		imageAccordionTitleLineHeight,
-		imageAccordionTitleLineHeightUnits,
-		imageAccordionTitleFontFamily,
-		imageAccordionTitleFontStyle,
-		imageAccordionTitleTransform,
-		imageAccordionTitleDecoration,
-		imageAccordionTitleLetterSpacing,
-		imageAccordionTitleLetterSpacingUnits,
-		imageAccordionTitleTypoType,
-		imageAccordionTitleTypoOption,
-		imageAccordionSubtitleColor,
-		imageAccordionSubtitleHoverColor,
-		imageAccordionSubtitleFontSize,
-		imageAccordionSubtitleFontSizeUnits,
-		imageAccordionSubtitleFontWeight,
-		imageAccordionSubtitleLineHeight,
-		imageAccordionSubtitleLineHeightUnits,
-		imageAccordionSubtitleFontFamily,
-		imageAccordionSubtitleFontStyle,
-		imageAccordionSubtitleTransform,
-		imageAccordionSubtitleDecoration,
-		imageAccordionSubtitleLetterSpacing,
-		imageAccordionSubtitleLetterSpacingUnits,
-		imageAccordionSubtitleTypoType,
-		imageAccordionSubtitleTypoOption,
-		imageAccordionBtnTextColor,
-		imageAccordionBtnHoverTextColor,
-		imageAccordionBtnBgColor,
-		imageAccordionBtnHoverBgColor,
-		imageAccordionBtnBorderColor,
-		imageAccordionBtnBorder,
-		imageAccordionBtnLineHeight,
-		imageAccordionBtnLineHeightUnits,
-		imageAccordionBtnFontFamily,
-		imageAccordionBtnFontStyle,
-		imageAccordionBtnTransform,
-		imageAccordionBtnDecoration,
-		imageAccordionBtnLetterSpacing,
-		imageAccordionBtnLetterSpacingUnits,
-		imageAccordionBtnTypoType,
-		imageAccordionBtnTypoOption,
-		imageAccordionBtnBorderRadiusUnits,
-		imageAccordionBtnBorderRadiusDesktop,
-		imageAccordionBtnPaddingUnits,
-		imageAccordionBtnPaddingDesktop,
-		imageAccordionBtnFontSize,
-		imageAccordionBtnFontSizeUnits,
-		imageAccordionBtnFontWeight,
-		imageAccordionPaddingUnits,
-		imageAccordionPaddingDesktop,
-		imageAccordionPaddingTablet,
-		imageAccordionPaddingMobile,
-		imageAccordionMarginUnits,
-		imageAccordionMarginDesktop,
-		imageAccordionMarginTablet,
-		imageAccordionMarginMobile,
-		imageAccordionGlobalZIndex,
-		imageAccordionCustomCSS,
 	} = attributes;
+
+	/** Manages tab button settings and switches to block settings on click */
+	const panelRef = useRef(null);
+	SwitchToBlockSettings(panelRef);
 
 	// State to track active item in the editor for interactive preview
 	const [activeIndex, setActiveIndex] = useState(0);
@@ -148,109 +57,23 @@ export default function Edit({
 		if (css !== blockStyle) {
 			setAttributes({ blockStyle: css });
 		}
-	}, [
-		imageAccordionPreset,
-		imageAccordionWidth,
-		imageAccordionWidthUnits,
-		imageAccordionHeight,
-		imageAccordionHeightUnits,
-		imageAccordionGap,
-		imageAccordionGapUnits,
-		imageAccordionItemBorderRadiusUnits,
-		imageAccordionItemBorderRadiusDesktop,
-		imageAccordionItemBorderRadiusTablet,
-		imageAccordionItemBorderRadiusMobile,
-		imageAccordionOverlayColor,
-		imageAccordionOverlayHoverColor,
-		imageAccordionShowDots,
-		imageAccordionDotColor,
-		imageAccordionDotSize,
-		imageAccordionDotSizeUnits,
-		imageAccordionShowNumber,
-		imageAccordionNumberColor,
-		imageAccordionNumberHoverColor,
-		imageAccordionNumberFontSize,
-		imageAccordionNumberFontSizeUnits,
-		imageAccordionNumberFontWeight,
-		imageAccordionIconColor,
-		imageAccordionIconHoverColor,
-		imageAccordionIconSize,
-		imageAccordionIconSizeUnits,
-		imageAccordionIconCircleBgColor,
-		imageAccordionIconCircleSize,
-		imageAccordionIconCircleSizeUnits,
-		imageAccordionTitleColor,
-		imageAccordionTitleHoverColor,
-		imageAccordionTitleFontSize,
-		imageAccordionTitleFontSizeUnits,
-		imageAccordionTitleFontWeight,
-		imageAccordionTitleLineHeight,
-		imageAccordionTitleLineHeightUnits,
-		imageAccordionTitleFontFamily,
-		imageAccordionTitleFontStyle,
-		imageAccordionTitleTransform,
-		imageAccordionTitleDecoration,
-		imageAccordionTitleLetterSpacing,
-		imageAccordionTitleLetterSpacingUnits,
-		imageAccordionTitleTypoType,
-		imageAccordionTitleTypoOption,
-		imageAccordionSubtitleColor,
-		imageAccordionSubtitleHoverColor,
-		imageAccordionSubtitleFontSize,
-		imageAccordionSubtitleFontSizeUnits,
-		imageAccordionSubtitleFontWeight,
-		imageAccordionSubtitleLineHeight,
-		imageAccordionSubtitleLineHeightUnits,
-		imageAccordionSubtitleFontFamily,
-		imageAccordionSubtitleFontStyle,
-		imageAccordionSubtitleTransform,
-		imageAccordionSubtitleDecoration,
-		imageAccordionSubtitleLetterSpacing,
-		imageAccordionSubtitleLetterSpacingUnits,
-		imageAccordionSubtitleTypoType,
-		imageAccordionSubtitleTypoOption,
-		imageAccordionBtnTextColor,
-		imageAccordionBtnHoverTextColor,
-		imageAccordionBtnBgColor,
-		imageAccordionBtnHoverBgColor,
-		imageAccordionBtnBorderColor,
-		imageAccordionBtnBorder,
-		imageAccordionBtnLineHeight,
-		imageAccordionBtnLineHeightUnits,
-		imageAccordionBtnFontFamily,
-		imageAccordionBtnFontStyle,
-		imageAccordionBtnTransform,
-		imageAccordionBtnDecoration,
-		imageAccordionBtnLetterSpacing,
-		imageAccordionBtnLetterSpacingUnits,
-		imageAccordionBtnTypoType,
-		imageAccordionBtnTypoOption,
-		imageAccordionBtnBorderRadiusUnits,
-		imageAccordionBtnBorderRadiusDesktop,
-		imageAccordionBtnPaddingUnits,
-		imageAccordionBtnPaddingDesktop,
-		imageAccordionBtnFontSize,
-		imageAccordionBtnFontSizeUnits,
-		imageAccordionBtnFontWeight,
-		imageAccordionPaddingUnits,
-		imageAccordionPaddingDesktop,
-		imageAccordionPaddingTablet,
-		imageAccordionPaddingMobile,
-		imageAccordionMarginUnits,
-		imageAccordionMarginDesktop,
-		imageAccordionMarginTablet,
-		imageAccordionMarginMobile,
-		imageAccordionGlobalZIndex,
-		imageAccordionCustomCSS,
-		blockID,
-	]);
+	}, [attributes, blockID]);
+
+	// Generate unique block ID if not set
+	useEffect(() => {
+		if (clientId && typeof clientId === "string") {
+			setAttributes({
+				blockID: "fb-image-accordion-" + clientId.slice(0, 8),
+			});
+		}
+	}, [clientId]);
 
 	const blockProps = useBlockProps({
 		className: `fb-image-accordion-main-wrapper ${blockID} ${
-			imageAccordionDesktopSwitcher ? "fb-desktop-responsive" : ""
-		} ${imageAccordionTabletSwitcher ? "fb-tablet-responsive" : ""} ${
-			imageAccordionMobileSwitcher ? "fb-mobile-responsive" : ""
-		}`.trim(),
+			imageAccordionDesktopSwitcher && "fb-desktop-responsive"
+		} ${imageAccordionTabletSwitcher && "fb-tablet-responsive"} ${
+			imageAccordionMobileSwitcher && "fb-mobile-responsive"
+		}`,
 	});
 
 	const renderItem = (item, index) => {
@@ -277,8 +100,6 @@ export default function Edit({
 				className={`fb-image-accordion-item ${isActive ? "is-active" : ""}`}
 				role="button"
 				tabIndex="0"
-				onMouseEnter={handleItemHover}
-				onClick={handleItemInteraction}
 				aria-expanded={isActive ? "true" : "false"}
 				aria-label={item.title || ""}
 				style={
@@ -292,6 +113,8 @@ export default function Edit({
 						  }
 						: {}
 				}
+				onMouseEnter={handleItemHover}
+				onClick={handleItemInteraction}
 			>
 				{imageAccordionPreset === "preset-4" && item.image?.url && (
 					<div
@@ -306,16 +129,17 @@ export default function Edit({
 
 				<div className="fb-image-accordion-overlay" />
 
-				{imageAccordionPreset === "preset-2" && imageAccordionShowDots && (
-					<div className="fb-image-accordion-dot-wrapper">
-						<span className="fb-image-accordion-dot" />
-					</div>
-				)}
+				{imageAccordionPreset === "preset-2" &&
+					attributes.imageAccordionShowDots && (
+						<div className="fb-image-accordion-dot-wrapper">
+							<span className="fb-image-accordion-dot" />
+						</div>
+					)}
 
 				<div className="fb-image-accordion-content-wrapper">
 					{imageAccordionPreset === "preset-1" && (
 						<>
-							{imageAccordionShowIcon && (
+							{attributes.imageAccordionShowIcon && (
 								<div className="fb-image-accordion-icon-circle">
 									{item.mediaType === "image" && item.selectedImage?.url ? (
 										<img
@@ -331,10 +155,10 @@ export default function Edit({
 								</div>
 							)}
 							<div className="fb-image-accordion-text-group">
-								{imageAccordionShowTitle && (
+								{attributes.imageAccordionShowTitle && (
 									<h3 className="fb-image-accordion-title">{item.title}</h3>
 								)}
-								{imageAccordionShowSubtitle && item.subTitle && (
+								{attributes.imageAccordionShowSubtitle && item.subTitle && (
 									<p className="fb-image-accordion-desc">{item.subTitle}</p>
 								)}
 							</div>
@@ -344,13 +168,13 @@ export default function Edit({
 					{imageAccordionPreset === "preset-2" && (
 						<div className="fb-image-accordion-preset2-content">
 							<div className="fb-image-accordion-bottom-content">
-								{imageAccordionShowNumber && (
+								{attributes.imageAccordionShowNumber && (
 									<span className="fb-image-accordion-number">{numLabel}</span>
 								)}
-								{imageAccordionShowTitle && (
+								{attributes.imageAccordionShowTitle && (
 									<h3 className="fb-image-accordion-title">{item.title}</h3>
 								)}
-								{imageAccordionShowSubtitle && item.subTitle && (
+								{attributes.imageAccordionShowSubtitle && item.subTitle && (
 									<p className="fb-sub-title">{item.subTitle}</p>
 								)}
 							</div>
@@ -360,14 +184,14 @@ export default function Edit({
 					{imageAccordionPreset === "preset-3" && (
 						<div className="fb-image-accordion-preset3-content">
 							<div className="fb-image-accordion-left-content">
-								{imageAccordionShowTitle && (
+								{attributes.imageAccordionShowTitle && (
 									<h3 className="fb-image-accordion-title">{item.title}</h3>
 								)}
-								{imageAccordionShowSubtitle && item.subTitle && (
+								{attributes.imageAccordionShowSubtitle && item.subTitle && (
 									<p className="fb-sub-title">{item.subTitle}</p>
 								)}
 							</div>
-							{imageAccordionShowButton && (
+							{attributes.imageAccordionShowButton && (
 								<a
 									href={item.buttonUrl || "#"}
 									target={target}
@@ -383,13 +207,13 @@ export default function Edit({
 
 					{imageAccordionPreset === "preset-4" && (
 						<>
-							{imageAccordionShowTitle && (
+							{attributes.imageAccordionShowTitle && (
 								<h3 className="fb-image-accordion-title">{item.title}</h3>
 							)}
-							{imageAccordionShowNumber && (
+							{attributes.imageAccordionShowNumber && (
 								<span className="fb-image-accordion-number">{numLabel}</span>
 							)}
-							{imageAccordionShowSubtitle && item.subTitle && (
+							{attributes.imageAccordionShowSubtitle && item.subTitle && (
 								<p className="fb-image-accordion-desc">{item.subTitle}</p>
 							)}
 						</>
@@ -411,9 +235,10 @@ export default function Edit({
 
 			<div {...blockProps}>
 				<div
-					className={`fb-image-accordion-wrapper ${imageAccordionPreset} fb-trigger-${imageAccordionTrigger} ${imageAccordionWraperClass}`}
+					className={`fb-parent-wrapper fb-image-accordion-wrapper ${blockID} ${imageAccordionPreset} fb-trigger-${imageAccordionTrigger} ${imageAccordionWraperClass}`}
 					id={imageAccordionWraperID}
 					data-trigger={imageAccordionTrigger}
+					ref={panelRef}
 					onMouseLeave={handleMouseLeave}
 				>
 					<div className="fb-image-accordion-container">
