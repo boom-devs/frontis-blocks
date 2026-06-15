@@ -2439,6 +2439,106 @@ const attributes = {
 	},
 	/** End imageHotspotsGlobal Border Units */
 
+	/** Start marker border radius */
+	markerBorderRadiusUnits: {
+		type: "object",
+		default: {
+			Desktop: "%",
+			Tablet: "%",
+			Mobile: "%",
+		},
+	},
+	markerBorderRadiusDesktop: {
+		type: "object",
+		default: {
+			top: "50",
+			right: "50",
+			bottom: "50",
+			left: "50",
+		},
+	},
+	markerBorderRadiusTablet: {
+		type: "object",
+		default: {
+			top: "50",
+			right: "50",
+			bottom: "50",
+			left: "50",
+		},
+	},
+	markerBorderRadiusMobile: {
+		type: "object",
+		default: {
+			top: "50",
+			right: "50",
+			bottom: "50",
+			left: "50",
+		},
+	},
+	markerBorderRadiusLink: {
+		type: "boolean",
+		default: true,
+	},
+	/** End marker border radius */
+
+	/** Start Marker Border */
+	markerBorder: {
+		type: "string",
+		default: "none",
+	},
+	markerBorderColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	markerBorderColor: {
+		type: "string",
+		default: "",
+	},
+	markerBorderHoverColor: {
+		type: "string",
+		default: "",
+	},
+	markerBorderUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	markerBorderDesktop: {
+		type: "object",
+		default: {
+			top: '',
+			right: '',
+			bottom: '',
+			left: ''
+		},
+	},
+	markerBorderTablet: {
+		type: "object",
+		default: {
+			top: '',
+			right: '',
+			bottom: '',
+			left: ''
+		},
+	},
+	markerBorderMobile: {
+		type: "object",
+		default: {
+			top: '',
+			right: '',
+			bottom: '',
+			left: ''
+		},
+	},
+	markerBorderLink: {
+		type: "boolean",
+		default: true,
+	},
+	/** End Marker Border */
+
 	/** Start imageHotspotsGlobal Border Radius */
 	imageHotspotsGlobalBorderRadiusUnits: {
 		type: 'object',
