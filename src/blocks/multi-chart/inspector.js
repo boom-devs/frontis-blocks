@@ -47,38 +47,53 @@ const Inspector = ({ attributes, setAttributes }) => {
 		canvasWidthUnits,
 		canvasHeight,
 		canvasHeightUnits,
+		// canvasPaddingTablet,
+		// canvasPaddingMobile,
 		canvasBgColorSwitcher,
 		canvasNormalBackgroundType,
 		canvasNormalColor,
 		canvasNormalGradientColor,
 		canvasNormalCustomGradientSwitcher,
 		canvasNormalCustomGradientInputValue,
+
 		canvasHoverBackgroundType,
 		canvasHoverColor,
 		canvasHoverGradientColor,
 		canvasHoverCustomGradientSwitcher,
 		canvasHoverCustomGradientInputValue,
+
 		canvasBorderHoverColor,
 		canvasBorderRadiusUnits,
 		canvasBorderRadiusDesktop,
 		canvasBorderRadiusLink,
+		canvasBorderRadiusTablet,
+		canvasBorderRadiusMobile,
+
 		canvasPaddingUnits,
 		canvasPaddingDesktop,
+		canvasPaddingTablet,
+		canvasPaddingMobile,
 		canvasPaddingLink,
+
 		canvasMarginUnits,
 		canvasMarginDesktop,
+		canvasMarginTablet,
+		canvasMarginMobile,
 		canvasMarginLink,
 
 		chartBodyWidth,
 		chartBodyWidthUnits,
+
 		chartBodyHeight,
 		chartBodyHeightUnits,
+
 		chartBodyNormalColor,
 		chartBodyBgColorSwitcher,
 		chartBodyNormalBackgroundType,
 		chartBodyNormalGradientColor,
 		chartBodyNormalCustomGradientSwitcher,
 		chartBodyNormalCustomGradientInputValue,
+
 		chartBodyHoverBackgroundType,
 		chartBodyHoverGradientColor,
 		chartBodyHoverCustomGradientSwitcher,
@@ -88,11 +103,26 @@ const Inspector = ({ attributes, setAttributes }) => {
 		chartBodyBorderRadiusUnits,
 		chartBodyBorderRadiusDesktop,
 		chartBodyBorderRadiusLink,
+		chartBodyBorderRadiusTablet,
+		chartBodyBorderRadiusMobile,
+
 		chartBodyPaddingDesktop,
+		chartBodyPaddingTablet,
+		chartBodyPaddingMobile,
 		chartBodyPaddingLink,
+		chartBodyPaddingUnits,
+
+		chartBodyMarginUnitsHandler,
+		chartBodyMarginUnits,
+		chartBodyMarginDesktop,
+		chartBodyMarginTablet,
+		chartBodyMarginMobile,
+		chartBodyMarginLink,
 
 		chartTitleColor,
 		chartTitleHoverColor,
+		chartHeaderPaddingTablet,
+		chartHeaderPaddingMobile,
 		chartHeaderPaddingDesktop,
 		chartHeaderPaddingLink,
 
@@ -175,9 +205,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 		footerDescLetterSpacingUnits,
 		footerDescLineHeight,
 		footerDescLineHeightUnits,
-		footerDescHoverColor,
-		footerPaddingDesktop,
-		footerPaddingLink,
 
 		multiChartBgColorSwitcher,
 		multiChartBackgroundType,
@@ -265,16 +292,16 @@ const Inspector = ({ attributes, setAttributes }) => {
 		xAxisTypography,
 		yAxisTypography,
 
-		canvasPaddingTablet,
-		canvasPaddingMobile,
-		canvasMarginTablet,
-		canvasMarginMobile,
-		canvasBorderRadiusTablet,
-		canvasBorderRadiusMobile,
-		chartBodyBorderRadiusTablet,
-		chartBodyBorderRadiusMobile,
-		chartHeaderPaddingTablet,
-		chartHeaderPaddingMobile,
+		// canvasPaddingTablet,
+		// canvasPaddingMobile,
+		// canvasMarginTablet,
+		// canvasMarginMobile,
+		// canvasBorderRadiusTablet,
+		// canvasBorderRadiusMobile,
+		// chartBodyBorderRadiusTablet,
+		// chartBodyBorderRadiusMobile,
+		// chartHeaderPaddingTablet,
+		// chartHeaderPaddingMobile,
 		legendDotSizeUnits,
 	} = attributes;
 
@@ -304,38 +331,48 @@ const Inspector = ({ attributes, setAttributes }) => {
 	};
 
 	// Wrapper Border Width Handlers
-	const multiChartWrapperBorderTypeUnitsHandler = (v) =>
-		handleSpacingUnits("multiChartWrapperBorderTypeUnits", v);
-	const handleMultiChartWrapperBorderUnitHandler = (e, pos) =>
+	const multiChartWrapperBorderTypeUnitsHandler = (value) =>
+		handleSpacingUnits("multiChartWrapperBorderTypeUnits", value);
+	const handleMultiChartWrapperBorderUnitHandler = (event, position) =>
 		handleGranularSpacing(
 			"multiChartWrapperBorderType",
-			e,
-			pos,
+			event,
+			position,
 			multiChartWrapperBorderTypeLink,
 		);
 
 	// Wrapper Border Radius Handlers
-	const multiChartWrapperBorderRadiusUnitsHandler = (v) =>
-		handleSpacingUnits("multiChartWrapperBorderRadiusUnits", v);
-	const handleMultiChartWrapperBorderRadiusUnitHandler = (e, pos) =>
+	const multiChartWrapperBorderRadiusUnitsHandler = (value) =>
+		handleSpacingUnits("multiChartWrapperBorderRadiusUnits", value);
+	const handleMultiChartWrapperBorderRadiusUnitHandler = (event, position) =>
 		handleGranularSpacing(
 			"multiChartWrapperBorderRadius",
-			e,
-			pos,
+			event,
+			position,
 			multiChartWrapperBorderRadiusLink,
 		);
 
 	// Wrapper Padding Handlers
-	const multiChartPaddingUnitsHandler = (v) =>
-		handleSpacingUnits("multiChartPaddingUnits", v);
-	const handleMultiChartPaddingUnitHandler = (e, pos) =>
-		handleGranularSpacing("multiChartPadding", e, pos, multiChartPaddingLink);
+	const multiChartPaddingUnitsHandler = (value) =>
+		handleSpacingUnits("multiChartPaddingUnits", value);
+	const handleMultiChartPaddingUnitHandler = (event, position) =>
+		handleGranularSpacing(
+			"multiChartPadding",
+			event,
+			position,
+			multiChartPaddingLink,
+		);
 
 	// Wrapper Margin Handlers
-	const multiChartMarginUnitsHandler = (v) =>
-		handleSpacingUnits("multiChartMarginUnits", v);
-	const handleMultiChartMarginUnitHandler = (e, pos) =>
-		handleGranularSpacing("multiChartMargin", e, pos, multiChartMarginLink);
+	const multiChartMarginUnitsHandler = (value) =>
+		handleSpacingUnits("multiChartMarginUnits", value);
+	const handleMultiChartMarginUnitHandler = (event, position) =>
+		handleGranularSpacing(
+			"multiChartMargin",
+			event,
+			position,
+			multiChartMarginLink,
+		);
 
 	/* =================
        REPEATER HANDLERS
@@ -409,7 +446,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 		const newItem = {
 			id: "ds-" + Date.now(),
 			series_name: __("Series Name", "frontis-blocks"),
-			values: "10,20,30",
+			values: "10,20,30,50,78,23,12,43,20",
 			color: "#3b82f6",
 		};
 		setAttributes({ chartDatasets: [...chartDatasets, newItem] });
@@ -636,8 +673,10 @@ const Inspector = ({ attributes, setAttributes }) => {
 					rangeValue={canvasWidth}
 					units={canvasWidthUnits}
 					deviceType={deviceType}
-					onChangeHandler={(v) => setAttributes({ canvasWidth: v })}
-					rangeUnitHandler={(v) => setAttributes({ canvasWidthUnits: v })}
+					onChangeHandler={(value) => setAttributes({ canvasWidth: value })}
+					rangeUnitHandler={(value) =>
+						setAttributes({ canvasWidthUnits: value })
+					}
 					setAttributes={setAttributes}
 					min={0}
 					max={2000}
@@ -649,8 +688,10 @@ const Inspector = ({ attributes, setAttributes }) => {
 						rangeValue={canvasHeight}
 						units={canvasHeightUnits}
 						deviceType={deviceType}
-						onChangeHandler={(v) => setAttributes({ canvasHeight: v })}
-						rangeUnitHandler={(v) => setAttributes({ canvasHeightUnits: v })}
+						onChangeHandler={(value) => setAttributes({ canvasHeight: value })}
+						rangeUnitHandler={(value) =>
+							setAttributes({ canvasHeightUnits: value })
+						}
 						setAttributes={setAttributes}
 						min={0}
 						max={2000}
@@ -660,40 +701,44 @@ const Inspector = ({ attributes, setAttributes }) => {
 				<FB_BackgroundColorControl
 					label={__("Background", "frontis-blocks")}
 					bgColorSwitcher={canvasBgColorSwitcher}
-					setBgColorSwitcher={(v) =>
-						setAttributes({ canvasBgColorSwitcher: v })
+					setBgColorSwitcher={(value) =>
+						setAttributes({ canvasBgColorSwitcher: value })
 					}
 					normalBackgroundType={canvasNormalBackgroundType}
-					setNormalBackgroundType={(v) =>
-						setAttributes({ canvasNormalBackgroundType: v })
+					setNormalBackgroundType={(value) =>
+						setAttributes({ canvasNormalBackgroundType: value })
 					}
 					normalClassicColor={canvasNormalColor}
-					setNormalClassicColor={(v) => setAttributes({ canvasNormalColor: v })}
+					setNormalClassicColor={(value) =>
+						setAttributes({ canvasNormalColor: value })
+					}
 					normalGradientColor={canvasNormalGradientColor}
-					setNormalGradientColor={(v) =>
-						setAttributes({ canvasNormalGradientColor: v })
+					setNormalGradientColor={(value) =>
+						setAttributes({ canvasNormalGradientColor: value })
 					}
 					normalCustomGradientSwitcher={canvasNormalCustomGradientSwitcher}
-					setNormalCustomGradientSwitcher={(v) =>
-						setAttributes({ canvasNormalCustomGradientSwitcher: v })
+					setNormalCustomGradientSwitcher={(value) =>
+						setAttributes({ canvasNormalCustomGradientSwitcher: value })
 					}
 					normalCustomGradientInputValue={canvasNormalCustomGradientInputValue}
-					setNormalCustomGradientInputValue={(v) =>
-						setAttributes({ canvasNormalCustomGradientInputValue: v })
+					setNormalCustomGradientInputValue={(value) =>
+						setAttributes({ canvasNormalCustomGradientInputValue: value })
 					}
 					hoverBackgroundType={canvasHoverBackgroundType}
-					setHoverBackgroundType={(v) =>
-						setAttributes({ canvasHoverBackgroundType: v })
+					setHoverBackgroundType={(value) =>
+						setAttributes({ canvasHoverBackgroundType: value })
 					}
 					hoverClassicColor={canvasHoverColor}
-					setHoverClassicColor={(v) => setAttributes({ canvasHoverColor: v })}
+					setHoverClassicColor={(value) =>
+						setAttributes({ canvasHoverColor: value })
+					}
 					hoverGradientColor={canvasHoverGradientColor}
-					setHoverGradientColor={(v) =>
-						setAttributes({ canvasHoverGradientColor: v })
+					setHoverGradientColor={(value) =>
+						setAttributes({ canvasHoverGradientColor: value })
 					}
 					hoverCustomGradientSwitcher={canvasHoverCustomGradientSwitcher}
-					setHoverCustomGradientSwitcher={(v) =>
-						setAttributes({ canvasHoverCustomGradientSwitcher: v })
+					setHoverCustomGradientSwitcher={(value) =>
+						setAttributes({ canvasHoverCustomGradientSwitcher: value })
 					}
 					isBackgroundImage={false}
 				/>
@@ -701,12 +746,19 @@ const Inspector = ({ attributes, setAttributes }) => {
 					label={__("Padding", "frontis-blocks")}
 					deviceType={deviceType}
 					spacingUnits={canvasPaddingUnits}
-					spacingUnitsHandler={(v) => setAttributes({ canvasPaddingUnits: v })}
+					spacingUnitsHandler={(value) =>
+						setAttributes({ canvasPaddingUnits: value })
+					}
 					spacingDesktop={canvasPaddingDesktop}
 					spacingTablet={canvasPaddingTablet}
 					spacingMobile={canvasPaddingMobile}
-					handleSpacingUnitHandler={(e, pos) =>
-						handleSpacingChange("canvasPadding", e, pos, canvasPaddingLink)
+					handleSpacingUnitHandler={(event, position) =>
+						handleSpacingChange(
+							"canvasPadding",
+							event,
+							position,
+							canvasPaddingLink,
+						)
 					}
 					spacingCombineBtn={canvasPaddingLink}
 					spacingCombineBtnHandler={() =>
@@ -718,12 +770,19 @@ const Inspector = ({ attributes, setAttributes }) => {
 					label={__("Margin", "frontis-blocks")}
 					deviceType={deviceType}
 					spacingUnits={canvasMarginUnits}
-					spacingUnitsHandler={(v) => setAttributes({ canvasMarginUnits: v })}
+					spacingUnitsHandler={(value) =>
+						setAttributes({ canvasMarginUnits: value })
+					}
 					spacingDesktop={canvasMarginDesktop}
 					spacingTablet={canvasMarginTablet}
 					spacingMobile={canvasMarginMobile}
-					handleSpacingUnitHandler={(e, pos) =>
-						handleSpacingChange("canvasMargin", e, pos, canvasMarginLink)
+					handleSpacingUnitHandler={(event, position) =>
+						handleSpacingChange(
+							"canvasMargin",
+							event,
+							position,
+							canvasMarginLink,
+						)
 					}
 					spacingCombineBtn={canvasMarginLink}
 					spacingCombineBtnHandler={() =>
@@ -736,68 +795,79 @@ const Inspector = ({ attributes, setAttributes }) => {
 				<FB_BackgroundColorControl
 					label={__("Background", "frontis-blocks")}
 					bgColorSwitcher={chartBodyBgColorSwitcher}
-					setBgColorSwitcher={(v) =>
-						setAttributes({ chartBodyBgColorSwitcher: v })
+					setBgColorSwitcher={(value) =>
+						setAttributes({ chartBodyBgColorSwitcher: value })
 					}
 					normalBackgroundType={chartBodyNormalBackgroundType}
-					setNormalBackgroundType={(v) =>
-						setAttributes({ chartBodyNormalBackgroundType: v })
+					setNormalBackgroundType={(value) =>
+						setAttributes({ chartBodyNormalBackgroundType: value })
 					}
 					normalClassicColor={chartBodyNormalColor}
-					setNormalClassicColor={(v) =>
-						setAttributes({ chartBodyNormalColor: v })
+					setNormalClassicColor={(value) =>
+						setAttributes({ chartBodyNormalColor: value })
 					}
 					normalGradientColor={chartBodyNormalGradientColor}
-					setNormalGradientColor={(v) =>
-						setAttributes({ chartBodyNormalGradientColor: v })
+					setNormalGradientColor={(value) =>
+						setAttributes({ chartBodyNormalGradientColor: value })
 					}
 					normalCustomGradientSwitcher={chartBodyNormalCustomGradientSwitcher}
-					setNormalCustomGradientSwitcher={(v) =>
-						setAttributes({ chartBodyNormalCustomGradientSwitcher: v })
+					setNormalCustomGradientSwitcher={(value) =>
+						setAttributes({ chartBodyNormalCustomGradientSwitcher: value })
 					}
 					normalCustomGradientInputValue={
 						chartBodyNormalCustomGradientInputValue
 					}
-					setNormalCustomGradientInputValue={(v) =>
-						setAttributes({ chartBodyNormalCustomGradientInputValue: v })
+					setNormalCustomGradientInputValue={(value) =>
+						setAttributes({ chartBodyNormalCustomGradientInputValue: value })
 					}
 					hoverBackgroundType={chartBodyHoverBackgroundType}
-					setHoverBackgroundType={(v) =>
-						setAttributes({ chartBodyHoverBackgroundType: v })
+					setHoverBackgroundType={(value) =>
+						setAttributes({ chartBodyHoverBackgroundType: value })
 					}
 					hoverClassicColor={chartBodyHoverColor}
-					setHoverClassicColor={(v) =>
-						setAttributes({ chartBodyHoverColor: v })
+					setHoverClassicColor={(value) =>
+						setAttributes({ chartBodyHoverColor: value })
 					}
 					hoverGradientColor={chartBodyHoverGradientColor}
-					setHoverGradientColor={(v) =>
-						setAttributes({ chartBodyHoverGradientColor: v })
+					setHoverGradientColor={(value) =>
+						setAttributes({ chartBodyHoverGradientColor: value })
 					}
 					hoverCustomGradientSwitcher={chartBodyHoverCustomGradientSwitcher}
-					setHoverCustomGradientSwitcher={(v) =>
-						setAttributes({ chartBodyHoverCustomGradientSwitcher: v })
+					setHoverCustomGradientSwitcher={(value) =>
+						setAttributes({ chartBodyHoverCustomGradientSwitcher: value })
 					}
 					hoverCustomGradientInputValue={chartBodyHoverCustomGradientInputValue}
-					setHoverCustomGradientInputValue={(v) =>
-						setAttributes({ chartBodyHoverCustomGradientInputValue: v })
+					setHoverCustomGradientInputValue={(value) =>
+						setAttributes({ chartBodyHoverCustomGradientInputValue: value })
 					}
 					isBackgroundImage={false}
 				/>
+
+				{/* Border Type Control */}
+				<FB_Spacing
+					label={__("Border Type", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnits={multiChartWrapperBorderTypeUnits}
+					spacingUnitsHandler={(value) =>
+						multiChartWrapperBorderTypeUnitsHandler(value)
+					}
+				/>
+
 				<FB_Spacing
 					label={__("Border Radius", "frontis-blocks")}
 					deviceType={deviceType}
 					spacingUnits={chartBodyBorderRadiusUnits}
-					spacingUnitsHandler={(v) =>
-						setAttributes({ chartBodyBorderRadiusUnits: v })
+					spacingUnitsHandler={(value) =>
+						setAttributes({ chartBodyBorderRadiusUnits: value })
 					}
 					spacingDesktop={chartBodyBorderRadiusDesktop}
 					spacingTablet={chartBodyBorderRadiusTablet}
 					spacingMobile={chartBodyBorderRadiusMobile}
-					handleSpacingUnitHandler={(e, pos) =>
+					handleSpacingUnitHandler={(event, position) =>
 						handleSpacingChange(
 							"chartBodyBorderRadius",
-							e,
-							pos,
+							event,
+							position,
 							chartBodyBorderRadiusLink,
 						)
 					}
@@ -809,6 +879,35 @@ const Inspector = ({ attributes, setAttributes }) => {
 					}
 					setAttributes={setAttributes}
 				/>
+
+				{/* padding and margin controls */}
+				{/* <FB_Spacing
+					label={__("Padding", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnits={chartBodyPaddingUnits}
+					spacingUnitsHandler={(value) =>
+						setAttributes({ chartBodyPaddingUnits: value })
+					}
+					spacingDesktop={chartBodyPaddingDesktop}
+					spacingTablet={chartBodyPaddingTablet}
+					spacingMobile={chartBodyPaddingMobile}
+				/> */}
+
+				{/* <FB_Spacing
+					label={__("Margin", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={chartBodyMarginUnitsHandler}
+					spacingUnits={chartBodyMarginUnits}
+					spacingDesktop={chartBodyMarginDesktop}
+					spacingTablet={chartBodyMarginTablet}
+					spacingMobile={chartBodyMarginMobile}
+					handleSpacingUnitHandler={handleMultiChartMarginUnitHandler}
+					spacingCombineBtn={chartBodyMarginLink}
+					spacingCombineBtnHandler={() =>
+						setAttributes({ chartBodyMarginLink: !chartBodyMarginLink })
+					}
+					setAttributes={setAttributes}
+				/> */}
 			</PanelBody>
 			<PanelBody
 				title={__("Filter Toggle Button", "frontis-blocks")}
@@ -817,27 +916,31 @@ const Inspector = ({ attributes, setAttributes }) => {
 				<FB_ColorControl
 					label={__("Text Color", "frontis-blocks")}
 					globalColor={toggleBtnColor}
-					setGlobalColor={(v) => setAttributes({ toggleBtnColor: v })}
+					setGlobalColor={(value) => setAttributes({ toggleBtnColor: value })}
 				/>
 				<FB_ColorControl
 					label={__("BG Color", "frontis-blocks")}
 					globalColor={toggleBtnBgColor}
-					setGlobalColor={(v) => setAttributes({ toggleBtnBgColor: v })}
+					setGlobalColor={(value) => setAttributes({ toggleBtnBgColor: value })}
 				/>
 				<FB_ColorControl
 					label={__("Hover Text Color", "frontis-blocks")}
 					globalColor={toggleBtnHoverColor}
-					setGlobalColor={(v) => setAttributes({ toggleBtnHoverColor: v })}
+					setGlobalColor={(value) =>
+						setAttributes({ toggleBtnHoverColor: value })
+					}
 				/>
 				<FB_ColorControl
 					label={__("Hover BG Color", "frontis-blocks")}
 					globalColor={toggleBtnHoverBgColor}
-					setGlobalColor={(v) => setAttributes({ toggleBtnHoverBgColor: v })}
+					setGlobalColor={(value) =>
+						setAttributes({ toggleBtnHoverBgColor: value })
+					}
 				/>
 				<FB_IconPicker
 					value={filterIcon.value}
-					setIconHandler={(v) =>
-						setAttributes({ filterIcon: { ...filterIcon, value: v } })
+					setIconHandler={(value) =>
+						setAttributes({ filterIcon: { ...filterIcon, value: value } })
 					}
 				/>
 				<FB_Range
@@ -845,8 +948,10 @@ const Inspector = ({ attributes, setAttributes }) => {
 					min={1}
 					max={100}
 					rangeValue={filterIconSize}
-					onChangeHandler={(v) => setAttributes({ filterIconSize: v })}
-					rangeUnitHandler={(v) => setAttributes({ filterIconSizeUnits: v })}
+					onChangeHandler={(value) => setAttributes({ filterIconSize: value })}
+					rangeUnitHandler={(value) =>
+						setAttributes({ filterIconSizeUnits: value })
+					}
 					deviceType={deviceType}
 					units={filterIconSizeUnits}
 					setAttributes={setAttributes}
@@ -855,17 +960,17 @@ const Inspector = ({ attributes, setAttributes }) => {
 					label={__("Padding", "frontis-blocks")}
 					deviceType={deviceType}
 					spacingUnits={toggleBtnPaddingUnits}
-					spacingUnitsHandler={(v) =>
-						setAttributes({ toggleBtnPaddingUnits: v })
+					spacingUnitsHandler={(value) =>
+						setAttributes({ toggleBtnPaddingUnits: value })
 					}
 					spacingDesktop={toggleBtnPaddingDesktop}
 					spacingTablet={toggleBtnPaddingTablet}
 					spacingMobile={toggleBtnPaddingMobile}
-					handleSpacingUnitHandler={(e, pos) =>
+					handleSpacingUnitHandler={(event, position) =>
 						handleSpacingChange(
 							"toggleBtnPadding",
-							e,
-							pos,
+							event,
+							position,
 							toggleBtnPaddingLink,
 						)
 					}
@@ -879,17 +984,17 @@ const Inspector = ({ attributes, setAttributes }) => {
 					label={__("Border Radius", "frontis-blocks")}
 					deviceType={deviceType}
 					spacingUnits={toggleBtnBorderRadiusUnits}
-					spacingUnitsHandler={(v) =>
-						setAttributes({ toggleBtnBorderRadiusUnits: v })
+					spacingUnitsHandler={(value) =>
+						setAttributes({ toggleBtnBorderRadiusUnits: value })
 					}
 					spacingDesktop={toggleBtnBorderRadiusDesktop}
 					spacingTablet={toggleBtnBorderRadiusTablet}
 					spacingMobile={toggleBtnBorderRadiusMobile}
-					handleSpacingUnitHandler={(e, pos) =>
+					handleSpacingUnitHandler={(event, position) =>
 						handleSpacingChange(
 							"toggleBtnBorderRadius",
-							e,
-							pos,
+							event,
+							position,
 							toggleBtnBorderRadiusLink,
 						)
 					}
@@ -902,6 +1007,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 					setAttributes={setAttributes}
 				/>
 			</PanelBody>
+
 			<PanelBody
 				title={__("Grid & Axis Style", "frontis-blocks")}
 				initialOpen={false}
@@ -909,29 +1015,29 @@ const Inspector = ({ attributes, setAttributes }) => {
 				<ToggleControl
 					label={__("Show Grid Lines", "frontis-blocks")}
 					checked={showGrid}
-					onChange={(v) => setAttributes({ showGrid: v })}
+					onChange={(v) => setAttributes({ showGrid: value })}
 				/>
 				{showGrid && (
 					<FB_ColorControl
 						label={__("Grid Color", "frontis-blocks")}
 						globalColor={gridColor}
-						setGlobalColor={(v) => setAttributes({ gridColor: v })}
+						setGlobalColor={(value) => setAttributes({ gridColor: value })}
 					/>
 				)}
 				<FB_ColorControl
 					label={__("X-Axis Color", "frontis-blocks")}
 					globalColor={xAxisNormalColor}
-					setGlobalColor={(v) => setAttributes({ xAxisNormalColor: v })}
+					setGlobalColor={(value) => setAttributes({ xAxisNormalColor: value })}
 				/>
 				<FB_ColorControl
 					label={__("Y-Axis Color", "frontis-blocks")}
 					globalColor={yAxisNormalColor}
-					setGlobalColor={(v) => setAttributes({ yAxisNormalColor: v })}
+					setGlobalColor={(value) => setAttributes({ yAxisNormalColor: value })}
 				/>
 				<FB_ColorControl
 					label={__("Tooltip Background", "frontis-blocks")}
 					globalColor={tooltipBg}
-					setGlobalColor={(v) => setAttributes({ tooltipBg: v })}
+					setGlobalColor={(value) => setAttributes({ tooltipBg: value })}
 				/>
 			</PanelBody>
 			<PanelBody
@@ -943,21 +1049,25 @@ const Inspector = ({ attributes, setAttributes }) => {
 					deviceType={deviceType}
 					setAttributes={setAttributes}
 					globalAlignment={legendTextAlignment}
-					setGlobalAlignment={(v) => setAttributes({ legendTextAlignment: v })}
+					setGlobalAlignment={(value) =>
+						setAttributes({ legendTextAlignment: value })
+					}
 				/>
 				<FB_Range
 					label={__("Dot Size", "frontis-blocks")}
 					rangeValue={legendDotSize}
 					units={legendDotSizeUnits}
-					rangeUnitHandler={(v) => setAttributes({ legendDotSizeUnits: v })}
+					rangeUnitHandler={(value) =>
+						setAttributes({ legendDotSizeUnits: value })
+					}
 					deviceType={deviceType}
-					onChangeHandler={(v) => setAttributes({ legendDotSize: v })}
+					onChangeHandler={(value) => setAttributes({ legendDotSize: value })}
 					setAttributes={setAttributes}
 				/>
 				<FB_ColorControl
 					label={__("Text Color", "frontis-blocks")}
 					globalColor={legendTextColor}
-					setGlobalColor={(v) => setAttributes({ legendTextColor: v })}
+					setGlobalColor={(value) => setAttributes({ legendTextColor: value })}
 				/>
 			</PanelBody>
 
@@ -1100,22 +1210,26 @@ const Inspector = ({ attributes, setAttributes }) => {
 				<FB_SwitcherControl
 					label={__("Color", "frontis-blocks")}
 					globalSwitcher={footerTitleColorSwitcher}
-					setGlobalSwitcher={(v) =>
-						setAttributes({ footerTitleColorSwitcher: v })
+					setGlobalSwitcher={(value) =>
+						setAttributes({ footerTitleColorSwitcher: value })
 					}
 				/>
 				{footerTitleColorSwitcher === "normal" && (
 					<FB_ColorControl
 						label={__("Normal Color", "frontis-blocks")}
 						globalColor={footerTitleNormalColor}
-						setGlobalColor={(v) => setAttributes({ footerTitleNormalColor: v })}
+						setGlobalColor={(value) =>
+							setAttributes({ footerTitleNormalColor: value })
+						}
 					/>
 				)}
 				{footerTitleColorSwitcher === "hover" && (
 					<FB_ColorControl
 						label={__("Hover Color", "frontis-blocks")}
 						globalColor={footerTitleHoverColor}
-						setGlobalColor={(v) => setAttributes({ footerTitleHoverColor: v })}
+						setGlobalColor={(value) =>
+							setAttributes({ footerTitleHoverColor: value })
+						}
 					/>
 				)}
 			</PanelBody>
@@ -1259,22 +1373,26 @@ const Inspector = ({ attributes, setAttributes }) => {
 				<FB_SwitcherControl
 					label={__("Color", "frontis-blocks")}
 					globalSwitcher={footerDescColorSwitcher}
-					setGlobalSwitcher={(v) =>
-						setAttributes({ footerDescColorSwitcher: v })
+					setGlobalSwitcher={(value) =>
+						setAttributes({ footerDescColorSwitcher: value })
 					}
 				/>
 				{footerDescColorSwitcher === "normal" && (
 					<FB_ColorControl
 						label={__("Normal Color", "frontis-blocks")}
 						globalColor={footerDescNormalColor}
-						setGlobalColor={(v) => setAttributes({ footerDescNormalColor: v })}
+						setGlobalColor={(value) =>
+							setAttributes({ footerDescNormalColor: value })
+						}
 					/>
 				)}
 				{footerDescColorSwitcher === "hover" && (
 					<FB_ColorControl
 						label={__("Hover Color", "frontis-blocks")}
 						globalColor={footerDescHoverColor}
-						setGlobalColor={(v) => setAttributes({ footerDescHoverColor: v })}
+						setGlobalColor={(value) =>
+							setAttributes({ footerDescHoverColor: value })
+						}
 					/>
 				)}
 			</PanelBody>
@@ -1309,55 +1427,65 @@ const Inspector = ({ attributes, setAttributes }) => {
 				<FB_PositionControl
 					deviceType={deviceType}
 					positionType={multiChartPositionType}
-					setPositionType={(v) => setAttributes({ multiChartPositionType: v })}
+					setPositionType={(value) =>
+						setAttributes({ multiChartPositionType: value })
+					}
 					HZOrientationType={multiChartHZOrientationType}
-					setHZOrientationType={(v) =>
-						setAttributes({ multiChartHZOrientationType: v })
+					setHZOrientationType={(value) =>
+						setAttributes({ multiChartHZOrientationType: value })
 					}
 					VROrientationType={multiChartVROrientationType}
-					setVROrientationType={(v) =>
-						setAttributes({ multiChartVROrientationType: v })
+					setVROrientationType={(value) =>
+						setAttributes({ multiChartVROrientationType: value })
 					}
 					HZLeftOffset={multiChartHZLeftOffset}
-					setHZLeftOffset={(v) => setAttributes({ multiChartHZLeftOffset: v })}
+					setHZLeftOffset={(value) =>
+						setAttributes({ multiChartHZLeftOffset: value })
+					}
 					HZLeftOffsetUnits={multiChartHZLeftOffsetUnits}
-					setHZLeftOffsetUnits={(v) =>
-						setAttributes({ multiChartHZLeftOffsetUnits: v })
+					setHZLeftOffsetUnits={(value) =>
+						setAttributes({ multiChartHZLeftOffsetUnits: value })
 					}
 					HZRightOffset={multiChartHZRightOffset}
-					setHZRightOffset={(v) =>
-						setAttributes({ multiChartHZRightOffset: v })
+					setHZRightOffset={(value) =>
+						setAttributes({ multiChartHZRightOffset: value })
 					}
 					HZRightOffsetUnits={multiChartHZRightOffsetUnits}
-					setHZRightOffsetUnits={(v) =>
-						setAttributes({ multiChartHZRightOffsetUnits: v })
+					setHZRightOffsetUnits={(value) =>
+						setAttributes({ multiChartHZRightOffsetUnits: value })
 					}
 					VRTopOffset={multiChartVRTopOffset}
-					setVRTopOffset={(v) => setAttributes({ multiChartVRTopOffset: v })}
+					setVRTopOffset={(value) =>
+						setAttributes({ multiChartVRTopOffset: value })
+					}
 					VRTopOffsetUnits={multiChartVRTopOffsetUnits}
-					setVRTopOffsetUnits={(v) =>
-						setAttributes({ multiChartVRTopOffsetUnits: v })
+					setVRTopOffsetUnits={(value) =>
+						setAttributes({ multiChartVRTopOffsetUnits: value })
 					}
 					VRBottomOffset={multiChartVRBottomOffset}
-					setVRBottomOffset={(v) =>
-						setAttributes({ multiChartVRBottomOffset: v })
+					setVRBottomOffset={(value) =>
+						setAttributes({ multiChartVRBottomOffset: value })
 					}
 					VRBottomOffsetUnits={multiChartVRBottomOffsetUnits}
-					setVRBottomOffsetUnits={(v) =>
-						setAttributes({ multiChartVRBottomOffsetUnits: v })
+					setVRBottomOffsetUnits={(value) =>
+						setAttributes({ multiChartVRBottomOffsetUnits: value })
 					}
 					setAttributes={setAttributes}
 				/>
 				<FB_InputControl
 					label={__("CSS ID", "frontis-blocks")}
 					value={multiChartWrapperID}
-					onChangeValue={(v) => setAttributes({ multiChartWrapperID: v })}
+					onChangeValue={(value) =>
+						setAttributes({ multiChartWrapperID: value })
+					}
 					helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
 				/>
 				<FB_InputControl
 					label={__("CSS Class", "frontis-blocks")}
 					value={multiChartWrapperClass}
-					onChangeValue={(v) => setAttributes({ multiChartWrapperClass: v })}
+					onChangeValue={(value) =>
+						setAttributes({ multiChartWrapperClass: value })
+					}
 					helpText={__("Separate with spaces key.", "frontis-blocks")}
 				/>
 			</PanelBody>
@@ -1365,115 +1493,115 @@ const Inspector = ({ attributes, setAttributes }) => {
 			<PanelBody title={__("Background", "frontis-blocks")} initialOpen={false}>
 				<FB_BackgroundColorControl
 					bgColorSwitcher={multiChartBgColorSwitcher}
-					setBgColorSwitcher={(v) =>
-						setAttributes({ multiChartBgColorSwitcher: v })
+					setBgColorSwitcher={(value) =>
+						setAttributes({ multiChartBgColorSwitcher: value })
 					}
 					normalBackgroundType={multiChartBackgroundType}
-					setNormalBackgroundType={(v) =>
-						setAttributes({ multiChartBackgroundType: v })
+					setNormalBackgroundType={(value) =>
+						setAttributes({ multiChartBackgroundType: value })
 					}
 					normalClassicColor={multiChartClassicColor}
-					setNormalClassicColor={(v) =>
+					setNormalClassicColor={(value) =>
 						setAttributes({
-							multiChartClassicColor: v === undefined ? "" : v,
+							multiChartClassicColor: value === undefined ? "" : value,
 						})
 					}
 					normalGradientColor={multiChartGradientColor}
-					setNormalGradientColor={(v) =>
+					setNormalGradientColor={(value) =>
 						setAttributes({
-							multiChartGradientColor: v === undefined ? null : v,
+							multiChartGradientColor: value === undefined ? null : value,
 						})
 					}
 					normalCustomGradientSwitcher={multiChartCustomGradientSwitcher}
-					setNormalCustomGradientSwitcher={(v) =>
-						setAttributes({ multiChartCustomGradientSwitcher: v })
+					setNormalCustomGradientSwitcher={(value) =>
+						setAttributes({ multiChartCustomGradientSwitcher: value })
 					}
 					normalCustomGradientInputValue={multiChartCustomGradientInputValue}
-					setNormalCustomGradientInputValue={(v) =>
-						setAttributes({ multiChartCustomGradientInputValue: v })
+					setNormalCustomGradientInputValue={(value) =>
+						setAttributes({ multiChartCustomGradientInputValue: value })
 					}
 					normalBackgroundImageUrl={multiChartBackgroundImageUrl}
-					setNormalBackgroundImageUrl={(v) =>
-						setAttributes({ multiChartBackgroundImageUrl: v })
+					setNormalBackgroundImageUrl={(value) =>
+						setAttributes({ multiChartBackgroundImageUrl: value })
 					}
 					normalBackgroundImageAlt={multiChartBackgroundImageAlt}
-					setNormalBackgroundImageAlt={(v) =>
-						setAttributes({ multiChartBackgroundImageAlt: v })
+					setNormalBackgroundImageAlt={(value) =>
+						setAttributes({ multiChartBackgroundImageAlt: value })
 					}
 					normalBackgroundImageID={multiChartBackgroundImageID}
-					setNormalBackgroundImageID={(v) =>
-						setAttributes({ multiChartBackgroundImageID: v })
+					setNormalBackgroundImageID={(value) =>
+						setAttributes({ multiChartBackgroundImageID: value })
 					}
 					normalBackgroundImagePosition={multiChartBackgroundImagePosition}
-					setNormalBackgroundImagePosition={(v) =>
-						setAttributes({ multiChartBackgroundImagePosition: v })
+					setNormalBackgroundImagePosition={(value) =>
+						setAttributes({ multiChartBackgroundImagePosition: value })
 					}
 					normalBackgroundImageAttachment={multiChartBackgroundImageAttachment}
-					setNormalBackgroundImageAttachment={(v) =>
-						setAttributes({ multiChartBackgroundImageAttachment: v })
+					setNormalBackgroundImageAttachment={(value) =>
+						setAttributes({ multiChartBackgroundImageAttachment: value })
 					}
 					normalBackgroundImageRepeat={multiChartBackgroundImageRepeat}
-					setNormalBackgroundImageRepeat={(v) =>
-						setAttributes({ multiChartBackgroundImageRepeat: v })
+					setNormalBackgroundImageRepeat={(value) =>
+						setAttributes({ multiChartBackgroundImageRepeat: value })
 					}
 					normalBackgroundImageSize={multiChartBackgroundImageSize}
-					setNormalBackgroundImageSize={(v) =>
-						setAttributes({ multiChartBackgroundImageSize: v })
+					setNormalBackgroundImageSize={(value) =>
+						setAttributes({ multiChartBackgroundImageSize: value })
 					}
 					hoverBackgroundType={multiChartHoverBackgroundType}
-					setHoverBackgroundType={(v) =>
-						setAttributes({ multiChartHoverBackgroundType: v })
+					setHoverBackgroundType={(value) =>
+						setAttributes({ multiChartHoverBackgroundType: value })
 					}
 					hoverClassicColor={multiChartHoverClassicColor}
-					setHoverClassicColor={(v) =>
+					setHoverClassicColor={(value) =>
 						setAttributes({
-							multiChartHoverClassicColor: v === undefined ? "" : v,
+							multiChartHoverClassicColor: value === undefined ? "" : value,
 						})
 					}
 					hoverGradientColor={multiChartHoverGradientColor}
-					setHoverGradientColor={(v) =>
+					setHoverGradientColor={(value) =>
 						setAttributes({
-							multiChartHoverGradientColor: v === undefined ? null : v,
+							multiChartHoverGradientColor: value === undefined ? null : value,
 						})
 					}
 					hoverCustomGradientSwitcher={multiChartHoverCustomGradientSwitcher}
-					setHoverCustomGradientSwitcher={(v) =>
-						setAttributes({ multiChartHoverCustomGradientSwitcher: v })
+					setHoverCustomGradientSwitcher={(value) =>
+						setAttributes({ multiChartHoverCustomGradientSwitcher: value })
 					}
 					hoverCustomGradientInputValue={
 						multiChartHoverCustomGradientInputValue
 					}
-					setHoverCustomGradientInputValue={(v) =>
-						setAttributes({ multiChartHoverCustomGradientInputValue: v })
+					setHoverCustomGradientInputValue={(value) =>
+						setAttributes({ multiChartHoverCustomGradientInputValue: value })
 					}
 					hoverBackgroundImageUrl={multiChartHoverBackgroundImageUrl}
-					setHoverBackgroundImageUrl={(v) =>
-						setAttributes({ multiChartHoverBackgroundImageUrl: v })
+					setHoverBackgroundImageUrl={(value) =>
+						setAttributes({ multiChartHoverBackgroundImageUrl: value })
 					}
 					hoverBackgroundImageAlt={multiChartHoverBackgroundImageAlt}
-					setHoverBackgroundImageAlt={(v) =>
-						setAttributes({ multiChartHoverBackgroundImageAlt: v })
+					setHoverBackgroundImageAlt={(value) =>
+						setAttributes({ multiChartHoverBackgroundImageAlt: value })
 					}
 					hoverBackgroundImageID={multiChartHoverBackgroundImageID}
-					setHoverBackgroundImageID={(v) =>
-						setAttributes({ multiChartHoverBackgroundImageID: v })
+					setHoverBackgroundImageID={(value) =>
+						setAttributes({ multiChartHoverBackgroundImageID: value })
 					}
 					hoverBackgroundImagePosition={multiChartHoverBackgroundImagePosition}
-					setHoverBackgroundImagePosition={(v) =>
-						setAttributes({ multiChartHoverBackgroundImagePosition: v })
+					setHoverBackgroundImagePosition={(value) =>
+						setAttributes({ multiChartHoverBackgroundImagePosition: value })
 					}
 					hoverBackgroundImageAttachment={
 						multiChartHoverBackgroundImageAttachment
 					}
-					setHoverBackgroundImageAttachment={(v) =>
-						setAttributes({ multiChartHoverBackgroundImageAttachment: v })
+					setHoverBackgroundImageAttachment={(value) =>
+						setAttributes({ multiChartHoverBackgroundImageAttachment: value })
 					}
 					hoverBackgroundImageRepeat={multiChartHoverBackgroundImageRepeat}
-					setHoverBackgroundImageRepeat={(v) =>
-						setAttributes({ multiChartHoverBackgroundImageRepeat: v })
+					setHoverBackgroundImageRepeat={(value) =>
+						setAttributes({ multiChartHoverBackgroundImageRepeat: value })
 					}
 					hoverBackgroundImageSize={multiChartHoverBackgroundImageSize}
-					setHoverBackgroundImageSize={(v) =>
+					setHoverBackgroundImageSize={(value) =>
 						setAttributes({ multiChartHoverBackgroundImageSize: v })
 					}
 				/>
@@ -1484,7 +1612,9 @@ const Inspector = ({ attributes, setAttributes }) => {
 					label={__("Border Style", "frontis-blocks")}
 					value={multiChartWrapperBorder}
 					options={BORDER_STYLES}
-					onChange={(v) => setAttributes({ multiChartWrapperBorder: v })}
+					onChange={(value) =>
+						setAttributes({ multiChartWrapperBorder: value })
+					}
 				/>
 				<FB_SwitcherControl
 					label={__("Border Color", "frontis-blocks")}
@@ -1619,15 +1749,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 					}
 				/>
 			</PanelBody>
-
-			{/* <PanelBody title={__("Custom CSS", "frontis-blocks")} initialOpen={false}>
-				<FB_CustomCSSEditor
-					value={advancedImageCustomCSS}
-					onChangeValue={(value) =>
-						setAttributes({ advancedImageCustomCSS: value })
-					}
-				/>
-			</PanelBody> */}
 		</>
 	);
 
