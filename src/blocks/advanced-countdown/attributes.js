@@ -15,11 +15,11 @@ const attributes = {
 		type: "string",
 		default: "Until Morning Digest",
 	},
-	show_sun_icon: {
+	advancedCountdownShowSunIcon: {
 		type: "string",
 		default: "yes",
 	},
-	sun_icon: {
+	advancedCountdownSunIcon: {
 		type: "object",
 		default: { value: "far fa-sun", library: "fa-regular" },
 	},
@@ -82,6 +82,7 @@ const attributes = {
 		default: { Desktop: 0.35 },
 	},
 	advancedCountdownBorderRadius: {
+		// This is for the main container
 		type: "object",
 		default: {
 			top: "12",
@@ -108,17 +109,17 @@ const attributes = {
 		type: "object",
 		default: { Desktop: "5" },
 	},
-	days_total_dots: {
+	advancedCountdownDaysTotalDots: {
 		type: "object",
 		default: { Desktop: 12 },
 	},
-	hours_total_dots: {
+	advancedCountdownHoursTotalDots: {
 		type: "object",
 		default: { Desktop: 24 },
 	},
 	minutes_total_dots: {
 		type: "object",
-		default: { Desktop: 60 },
+		default: { Desktop: 30 },
 	},
 	advancedCountdownStyle3ContainerBg: {
 		type: "string",
@@ -310,7 +311,8 @@ const attributes = {
 		type: "object",
 		default: { Desktop: "px" },
 	},
-	advancedCountdownLabelColorStyle4: {
+	advancedCountdownSvgBgOverlayColor: {
+		// Renamed from advancedCountdownSvgBgOverlayColor
 		type: "string",
 		default: "rgba(0, 0, 0, 0.9)",
 	},
@@ -580,6 +582,7 @@ const attributes = {
 		default: { unit: "px", Desktop: 8 },
 	},
 	advancedCountdownSvgBgOverlayColor: {
+		// Renamed from advancedCountdownSvgBgOverlayColor
 		type: "string",
 		default: "rgba(0,0,0,0.9)",
 	},
@@ -592,6 +595,7 @@ const attributes = {
 		default: "#FF8C00",
 	},
 	advancedCountdownProgressCircleInactiveColor: {
+		// Renamed from advancedCountdownProgressCircleInactiveColor
 		type: "string",
 		default: "rgba(255, 255, 255, 0.1)",
 	},
@@ -604,6 +608,7 @@ const attributes = {
 		default: "#ff8c00",
 	},
 	advancedCountdownSvgStrokeWidthStyle2: {
+		// Renamed from advancedCountdownSvgStrokeWidthStyle2
 		type: "object",
 		default: { unit: "px", Desktop: 15 },
 	},
@@ -675,6 +680,7 @@ const attributes = {
 		default: "#ffffff",
 	},
 	advancedCountdownFooterBgColor: {
+		// Renamed from advancedCountdownFooterBgColor
 		type: "string",
 		default: "",
 	},
@@ -687,6 +693,7 @@ const attributes = {
 		default: "",
 	},
 	advancedCountdownFooterBgCustomStyle2: {
+		// Renamed from advancedCountdownFooterBgCustomStyle2
 		type: "string",
 		default: "rgba(255, 135, 1, 0.2)",
 	},
@@ -702,6 +709,7 @@ const attributes = {
 		},
 	},
 	advancedCountdownFooterPaddingLink: {
+		// Renamed from advancedCountdownFooterPaddingLink
 		type: "boolean",
 		default: false,
 	},
@@ -717,6 +725,7 @@ const attributes = {
 		},
 	},
 	advancedCountdownFooterMarginLink: {
+		// Renamed from advancedCountdownFooterMarginLink
 		type: "boolean",
 		default: false,
 	},
@@ -732,6 +741,7 @@ const attributes = {
 		default: "normal",
 	},
 	advancedCountdownItemBgColor: {
+		// Renamed from advancedCountdownItemBgColor
 		type: "string",
 		default: "#399CFF",
 	},
@@ -822,6 +832,7 @@ const attributes = {
 		default: "none",
 	},
 	advancedCountdownItemBorderColor: {
+		// Renamed from advancedCountdownItemBorderColor
 		type: "string",
 	},
 	advancedCountdownItemBorderTypeUnits: {
@@ -906,6 +917,7 @@ const attributes = {
 		default: "normal",
 	},
 	advancedCountdownItemBgColor: {
+		// Renamed from advancedCountdownItemBgColor
 		type: "string",
 		default: "",
 	},
@@ -940,6 +952,7 @@ const attributes = {
 		default: "normal",
 	},
 	advancedCountdownItemWrapperBgFontColor: {
+		// Renamed from advancedCountdownItemWrapperBgFontColor
 		type: "string",
 		default: "",
 	},
@@ -988,6 +1001,7 @@ const attributes = {
 		default: "normal",
 	},
 	advancedCountdownItemWrapperBorderColor: {
+		// Renamed from advancedCountdownItemWrapperBorderColor
 		type: "string",
 		default: "",
 	},
@@ -1146,7 +1160,7 @@ const attributes = {
 	advancedCountdownItemWrapperMarginDesktop: {
 		type: "object",
 		default: {
-			top: "",
+			top: "0",
 			bottom: "",
 			left: "",
 			right: "",
@@ -1186,6 +1200,7 @@ const attributes = {
 		default: "normal",
 	},
 	daysDigitFontColor: {
+		// Renamed from daysDigitFontColor
 		type: "string",
 		default: "",
 	},
@@ -1199,6 +1214,7 @@ const attributes = {
 		default: "normal",
 	},
 	hoursDigitFontColor: {
+		// Renamed from hoursDigitFontColor
 		type: "string",
 		default: "",
 	},
@@ -1212,6 +1228,7 @@ const attributes = {
 		default: "normal",
 	},
 	minutesDigitFontColor: {
+		// Renamed from minutesDigitFontColor
 		type: "string",
 		default: "",
 	},
@@ -1225,6 +1242,7 @@ const attributes = {
 		default: "normal",
 	},
 	secondsDigitFontColor: {
+		// Renamed from secondsDigitFontColor
 		type: "string",
 		default: "",
 	},
@@ -1238,6 +1256,7 @@ const attributes = {
 		default: "normal",
 	},
 	digitFontColor: {
+		// Renamed from digitFontColor
 		type: "string",
 		default: "#FFFFFF",
 	},
@@ -1344,6 +1363,7 @@ const attributes = {
 		default: "normal",
 	},
 	labelFontColor: {
+		// Renamed from labelFontColor
 		type: "string",
 		default: "#FFFFFF",
 	},
@@ -1356,6 +1376,7 @@ const attributes = {
 		default: "normal",
 	},
 	labelBgColor: {
+		// Renamed from labelBgColor
 		type: "string",
 		default: "",
 	},
@@ -1461,6 +1482,7 @@ const attributes = {
 		default: true,
 	},
 	advancedCountdownSeparatorType: {
+		// Renamed from advancedCountdownSeparatorType
 		type: "string",
 		default: "colon",
 	},
@@ -1473,6 +1495,7 @@ const attributes = {
 		default: "normal",
 	},
 	advancedCountdownSeparatorFontColor: {
+		// Renamed from advancedCountdownSeparatorFontColor
 		type: "string",
 		default: "#ffffff",
 	},
@@ -2038,7 +2061,7 @@ const attributes = {
 		type: "object",
 		default: {
 			top: "",
-			bottom: "",
+			bottom: "0",
 			left: "",
 			right: "",
 		},
@@ -2047,7 +2070,7 @@ const attributes = {
 		type: "object",
 		default: {
 			top: "",
-			bottom: "",
+			bottom: "0",
 			left: "",
 			right: "",
 		},

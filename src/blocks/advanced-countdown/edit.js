@@ -31,26 +31,17 @@ export default function Edit({
 		showSeconds,
 		countDownPresetStyle,
 
-		// Attributes for style-1
-		sun_icon,
-		show_sun_icon,
-		advancedCountdownUntilText,
+		// preet 1
+		advancedCountdownSunIcon,
+		advancedCountdownShowSunIcon,
+		until_text, 
 
-		// New attributes for style-3
+		// preset 3
 		advancedCountdownStyle3TimeGap,
-		advancedCountdownStyle3TextFontSize,
-		advancedCountdownStyle3TextFontSizeUnits,
-		advancedCountdownStyle3TextFontWeight,
-		advancedCountdownStyle3TextLineHeight,
-		advancedCountdownStyle3TextLineHeightUnits,
-
-		// New attributes for style-4
+		// preset 4
 		advancedCountdownLabelAlignmentStyle4,
 
-		// New attributes for style-5
-		until_text,
-
-		// Attributes for style-5
+		// preset 5
 		days_total_dots,
 		hours_total_dots,
 		minutes_total_dots,
@@ -69,11 +60,9 @@ export default function Edit({
 		countDownMobileSwitcher,
 	} = attributes;
 
-	// PHP calculations for style-5
 	const dot_thickness = attributes.dots_size_thickness?.size || 5;
 	const user_gap = attributes.dots_gap?.size || 1;
 
-	// Handle block ID generation (handles duplication and initial ID)
 	useBlockIdGenerator({
 		clientId,
 		blockID,
@@ -83,24 +72,20 @@ export default function Edit({
 		setAttributes,
 	});
 
-	/** Start Generate Block Style */
+	
 	useEffect(() => {
 		if (blockID) {
 			const css = generateCountdownStyle(attributes);
 			setAttributes({ blockStyle: css });
 		}
 	}, [attributes, blockID]);
-	/** End Generate Block Style */
+	
 
-	/**
-	 * Manages tab button settings and switches to block settings on click
-	 */
 	const panelRef = useRef(null);
 	SwitchToBlockSettings(panelRef);
 
 	const [timeRemaining, setTimeRemaining] = useState({});
 
-	// Set default date to one week from today
 	const defaultDate = new Date();
 	defaultDate.setDate(defaultDate.getDate() + 7);
 	const defaultStartDate = new Date();
@@ -109,7 +94,7 @@ export default function Edit({
 		targetDate ? new Date(targetDate) : defaultDate,
 	);
 
-	// Sync date with attributes if not already set
+	
 	useEffect(() => {
 		if (!targetDate) {
 			setAttributes({ targetDate: defaultDate.toISOString() });
@@ -119,18 +104,16 @@ export default function Edit({
 		}
 	}, [targetDate, setAttributes, defaultDate]);
 
-	// Update target date when date changes
+	
 	useEffect(() => {
 		setAttributes({ targetDate: date.toISOString() });
 	}, [date, setAttributes]);
 
-	// Countdown Timer Logic
+	// Countdown Timer 
 	useEffect(() => {
-		// Helper function to format time with leading zero
 		const formatTime = (time) => (time < 10 ? `0${time}` : time);
 
 		if (!targetDate || isNaN(new Date(targetDate).getTime())) return;
-		// New: Use advancedCountdownStartDate for start date
 
 		const intervalId = setInterval(() => {
 			const now = Date.now();
@@ -161,15 +144,15 @@ export default function Edit({
 		return () => clearInterval(intervalId);
 	}, [targetDate]);
 
-	const M_PI = Math.PI; // Math.PI for circle calculations
-	const c = 2 * M_PI * 45; // Circumference for a circle with radius 45
-	const total_dashes = 60; // Total dashes for style-2
-	const dash_width = 2; // Width of each dash
-	const dash_gap = c / total_dashes - dash_width; // Gap between dashes
+	const M_PI = Math.PI;
+	const c = 2 * M_PI * 45;
+	const total_dashes = 60;
+	const dash_width_style2 = 2;
+	const dash_gap_style2 = c / total_dashes - dash_width_style2;
 
 	const mask_id_style2 = `mask-style-2-${blockID}`;
 
-	const label_d =
+	const label_d_style5 =
 		attributes.advancedCountdownLabelDays || __("Days", "frontis-blocks");
 	const label_h =
 		attributes.advancedCountdownLabelHours || __("Hours", "frontis-blocks");
@@ -181,7 +164,7 @@ export default function Edit({
 	const m_val = minutes_total_dots?.size || 30;
 
 	const config_style5 = {
-		days: { label: label_d, dots: d_val },
+		days: { label: label_d_style5, dots: d_val },
 		hours: { label: label_h, dots: h_val },
 		minutes: { label: label_m, dots: m_val },
 	};
@@ -194,13 +177,30 @@ export default function Edit({
 		? `--glow-clr: ${advancedCountdownGlowColor};`
 		: "";
 
-	// New: Use advancedCountdownStartDate for start date
-	const start_ts = new Date(targetDate).getTime();
+	const start_ts = new Date(advancedCountdownStartDate).getTime();
 	const due_ts = new Date(targetDate).getTime();
-	const diff = (due_ts - start_ts) / 1000;
+	const diff_seconds = (due_ts - start_ts) / 1000;
 
-	let start_label_style3 = "";
-	let due_label_style3 = "";
+	const start_label_style3 =
+		diff_seconds >= 86400
+			? new Date(start_ts).toLocaleTimeString([], {
+					hour: "2-digit",
+					minute: "2-digit",
+			  })
+			: new Date(start_ts).toLocaleDateString([], {
+					day: "2-digit",
+					month: "short",
+			  });
+	const due_label_style3 =
+		diff_seconds >= 86400
+			? new Date(due_ts).toLocaleTimeString([], {
+					hour: "2-digit",
+					minute: "2-digit",
+			  })
+			: new Date(due_ts).toLocaleDateString([], {
+					day: "2-digit",
+					month: "short",
+			  });
 
 	const blockProps = useBlockProps({
 		className: `fb-count-down-main-wrapper ${blockID} ${
@@ -245,9 +245,9 @@ export default function Edit({
 							</svg>
 
 							<div className="countdown-content">
-								{show_sun_icon === "yes" && (
+								{advancedCountdownShowSunIcon === "yes" && (
 									<div className="countdown-icon">
-										{renderSVG(sun_icon, setAttributes, {
+										{renderSVG(advancedCountdownSunIcon, setAttributes, {
 											"aria-hidden": "true",
 										})}
 									</div>
@@ -278,11 +278,12 @@ export default function Edit({
 									</div>
 								</div>
 
-								{until_text && (
-									<div className="countdown-footer">
-										<p>{until_text}</p>
-									</div>
-								)}
+								{until_text &&
+									["style-1", "style-2"].includes(countDownPresetStyle) && (
+										<div className="countdown-footer">
+											<p>{until_text}</p>
+										</div>
+									)}
 							</div>
 						</div>
 					)}
@@ -312,7 +313,6 @@ export default function Edit({
 												></circle>
 											</mask>
 										</defs>
-
 										<circle
 											className="dash-bg"
 											cx="50"
@@ -321,10 +321,9 @@ export default function Edit({
 											style={{
 												fill: "none",
 												stroke: "rgb(180, 176, 167)",
-												strokeDasharray: dash_gap,
+												strokeDasharray: dash_gap_style2,
 											}}
 										></circle>
-
 										<circle
 											className="progress-circle"
 											cx="50"
@@ -332,7 +331,7 @@ export default function Edit({
 											r="45"
 											mask={`url(#${mask_id_style2})`}
 											style={{ fill: "none", strokeDasharray: dash_gap }}
-										></circle>
+										></circle>{" "}
 									</svg>
 
 									<div className="count-content">
@@ -344,12 +343,13 @@ export default function Edit({
 											{timeRemaining.minutes || "00"}
 										</span>
 									</div>
-								</div>
-								{advancedCountdownUntilText && (
-									<div className="countdown-footer">
-										<p>{advancedCountdownUntilText}</p>
-									</div>
-								)}
+								</div>{" "}
+								{until_text &&
+									["style-1", "style-2"].includes(countDownPresetStyle) && (
+										<div className="countdown-footer">
+											<p>{advancedCountdownUntilText}</p>
+										</div>
+									)}
 							</div>
 						</div>
 					)}
@@ -367,13 +367,12 @@ export default function Edit({
 								<span className="start-time-display">{start_label_style3}</span>
 							</div>
 							<div className="progress-track-wrapper">
-								<div className="dash-track-base"></div>
+								<div className="dash-track-base"></div>{" "}
 								<div className="dash-track-progress"></div>
 								<div className="progress-indicator">
 									<span className="current-remaining-time"></span>
 								</div>
 							</div>{" "}
-							{/* End progress-track-wrapper */}
 							<div className="time-box">
 								<span className="end-time-display">{due_label_style3}</span>
 							</div>
@@ -413,7 +412,7 @@ export default function Edit({
 									<span className="time-val seconds">
 										{timeRemaining.seconds || "00"}
 									</span>
-									<span className="label">Sec</span>
+									<span className="label">Seconds</span>
 								</div>
 							</div>
 						</div>
@@ -423,7 +422,7 @@ export default function Edit({
 						<div
 							className={`pea-countdown-wrapper style-6 style-5-container ${glow_effect_class}`}
 							data-due={targetDate}
-							data-start={targetDate} // Assuming start_date is also targetDate for simplicity
+							data-start={targetDate}
 						>
 							{Object.entries(config_style5).map(([unit, info]) => {
 								const r = 45;
@@ -431,7 +430,7 @@ export default function Edit({
 								const dots_count = parseInt(info.dots);
 								const gap =
 									(c_unit / (dots_count > 0 ? dots_count : 1)) * user_gap;
-								const mask_id_unit = `countdown-mask-${unit}-${blockID}`; // Ensure unique mask ID
+								const mask_id_unit = `countdown-mask-${unit}-${blockID}`;
 
 								return (
 									<div className={`dotted-item ${unit}`} key={unit}>
@@ -483,11 +482,11 @@ export default function Edit({
 													r="45"
 													mask={`url(#${mask_id_unit})`}
 													style={{
-														strokeDasharray: `0.1 ${gap}`, // This is for the dashes
-														fill: "none", // No fill for the progress circle
-														stroke: advancedCountdownActiveDotColor, // Active color for the dots
-														strokeWidth: `${attributes.advancedCountdownDotsThickness.Desktop}px`, // Thickness of the dots
-														strokeLinecap: "round", // Round caps for the dots
+														strokeDasharray: `0.1 ${gap}`,
+														fill: "none",
+														stroke: advancedCountdownActiveDotColor,
+														strokeWidth: `${attributes.advancedCountdownDotsThickness.Desktop}px`,
+														strokeLinecap: "round",
 														...(glow_color_var && {
 															[glow_color_var.split(":")[0]]:
 																glow_color_var.split(":")[1],
@@ -509,7 +508,6 @@ export default function Edit({
 						</div>
 					)}
 
-					{/* Default case if no preset matches or for generic display */}
 					{countDownPresetStyle === "default" && (
 						<>
 							{showDays && (

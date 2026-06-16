@@ -15,7 +15,7 @@ export default function save({ attributes }) {
 		showSeconds,
 		countDownGlobalWraperID,
 		countDownPresetStyle,
-		until_text,
+		until_text, // This is the footer text
 		show_sun_icon,
 		sun_icon,
 		advancedCountdownStyle3TimeGap,
@@ -28,6 +28,10 @@ export default function save({ attributes }) {
 		advancedCountdownActiveDotColor,
 		advancedCountdownInactiveDotColor,
 		countDownGlobalWraperClass,
+		advancedCountdownLabelDays,
+		advancedCountdownLabelHours,
+		advancedCountdownLabelMinutes,
+		advancedCountdownDotsThickness,
 		countDownDesktopSwitcher,
 		countDownTabletSwitcher,
 		countDownMobileSwitcher,
@@ -49,6 +53,11 @@ export default function save({ attributes }) {
 			data-start={advancedCountdownStartDate}
 		>
 			<div
+				// The PHP render function adds 'pea-countdown-wrapper' and 'preset_styles' to the wrapper.
+				// In Gutenberg, the main block wrapper already has the blockID and responsive classes.
+				// The inner div should have the specific preset style class for styling.
+				// The PHP render also adds data-due and data-start to the wrapper, which we've moved to the outer blockProps.
+				// So, this inner div primarily needs the preset style class and any custom classes/ID.
 				className={`fb-parent-wrapper fb-count-down-wrapper ${blockID} ${countDownGlobalWraperClass} ${countDownPresetStyle}`}
 				id={countDownGlobalWraperID}
 			>
@@ -75,9 +84,9 @@ export default function save({ attributes }) {
 						</svg>
 
 						<div className="countdown-content">
-							{advancedCountdownShowSunIcon === "yes" && (
+							{show_sun_icon === "yes" && (
 								<div className="countdown-icon">
-									{/* Render icon here if needed, but for save it's usually just markup */}
+									{/* Icon is rendered by JS on frontend, so just a div here */}
 								</div>
 							)}
 
@@ -100,9 +109,9 @@ export default function save({ attributes }) {
 								</div>
 							</div>
 
-							{advancedCountdownUntilText && (
+							{until_text && (
 								<div className="countdown-footer">
-									<p>{advancedCountdownUntilText}</p>
+									<p>{until_text}</p>
 								</div>
 							)}
 						</div>
@@ -111,10 +120,17 @@ export default function save({ attributes }) {
 
 				{countDownPresetStyle === "style-2" && (
 					<div className="pea-countdown-items-container style-2-layout">
+						{" "}
+						{/* Matches PHP's outer div */}
 						<div className="dotted-item seconds style_2_container">
 							<div className="svg-container">
 								<svg viewBox="0 0 100 100" className="style-2-countdown-preset">
 									<defs>
+										{/* PHP calculates $c, $total_dashes, $dash_width, $dash_gap, $mask_id */}
+										{/* For save.js, we need to replicate these calculations or use fixed values if they are constant */}
+										{/* Assuming $c = 3 * M_PI * $r; where $r = 45, so $c = 3 * Math.PI * 45 = 424.115 */}
+										{/* Assuming $total_dashes = 60, $dash_width = 2 */}
+										{/* $dash_gap = ($c / $total_dashes) - $dash_width; */}
 										<mask id={`mask-style-2-${blockID}`}>
 											<circle
 												className="progress-mask-circle"
@@ -122,7 +138,7 @@ export default function save({ attributes }) {
 												cy="50"
 												r="45"
 												data-circumference={2 * Math.PI * 45}
-												data-dots={60}
+												data-dots={60} // Fixed value from PHP
 												style={{
 													fill: "none",
 													stroke: "#fff",
@@ -132,13 +148,23 @@ export default function save({ attributes }) {
 										</mask>
 									</defs>
 
-									<circle className="dash-bg" cx="50" cy="50" r="45"></circle>
+									<circle
+										className="dash-bg"
+										cx="50"
+										cy="50"
+										r="45"
+										style={{
+											fill: "none",
+											stroke: "rgb(180, 176, 167)",
+											strokeDasharray: (2 * Math.PI * 45) / 60 - 2,
+										}}
+									></circle>
 									<circle
 										className="progress-circle"
 										cx="50"
 										cy="50"
 										r="45"
-										mask={`url(#mask-style-2-${blockID})`}
+										mask={`url(#mask-style-2-${blockID})`} // Apply mask
 									></circle>
 								</svg>
 
@@ -161,6 +187,7 @@ export default function save({ attributes }) {
 					<div
 						className="style-3-container"
 						style={{
+							// PHP uses $settings['style3_time_gap'] which maps to advancedCountdownStyle3TimeGap
 							gap:
 								advancedCountdownStyle3TimeGap.Desktop +
 								advancedCountdownStyle3TimeGap.unit,
@@ -168,14 +195,17 @@ export default function save({ attributes }) {
 					>
 						<div className="time-box">
 							<span className="start-time-display"></span>
-						</div>
+						</div>{" "}
+						{/* Populated by JS on frontend */}
 						<div className="progress-track-wrapper">
 							<div className="dash-track-base"></div>
 							<div className="dash-track-progress"></div>
 							<div className="progress-indicator">
 								<span className="current-remaining-time"></span>
-							</div>
-						</div>
+							</div>{" "}
+							{/* Populated by JS on frontend */}
+						</div>{" "}
+						{/* End progress-track-wrapper */}
 						<div className="time-box">
 							<span className="end-time-display"></span>
 						</div>
@@ -224,11 +254,15 @@ export default function save({ attributes }) {
 						data-start={advancedCountdownStartDate}
 						data-glow-enabled={advancedCountdownDotsGlowEffect}
 						data-glow-intensity={advancedCountdownGlowIntensity.Desktop}
+						style={
+							advancedCountdownGlowColor
+								? { "--glow-clr": advancedCountdownGlowColor }
+								: {}
+						} // Pass glow color as CSS variable
 					>
 						{Object.entries({
 							days: {
 								label: advancedCountdownLabelDays || "Days",
-								dots: advancedCountdownDaysTotalDots.Desktop || 12,
 							},
 							hours: {
 								label: advancedCountdownLabelHours || "Hours",
@@ -239,10 +273,17 @@ export default function save({ attributes }) {
 								dots: advancedCountdownMinutesTotalDots.Desktop || 30,
 							},
 						}).map(([unit, info]) => {
+							// Loop through days, hours, minutes
 							const r = 45;
 							const c_unit = 2 * Math.PI * r;
-							const dots_count = parseInt(info.dots);
-							const user_gap = advancedCountdownDotsGap.Desktop || 1;
+							// Use the actual dots count from attributes for each unit
+							const dots_count =
+								unit === "days"
+									? advancedCountdownDaysTotalDots.Desktop || 12
+									: unit === "hours"
+									? advancedCountdownHoursTotalDots.Desktop || 24
+									: advancedCountdownMinutesTotalDots.Desktop || 30;
+							const user_gap = advancedCountdownDotsGap.Desktop || 1; // Use Desktop value for save
 							const gap =
 								(c_unit / (dots_count > 0 ? dots_count : 1)) * user_gap;
 							const mask_id_unit = `countdown-mask-${unit}-${blockID}`;
@@ -261,12 +302,12 @@ export default function save({ attributes }) {
 														data-circumference={c_unit}
 														data-dots={dots_count}
 														style={{
-															fill: "none",
-															stroke: "#fff",
+															fill: "none", // No fill
+															stroke: "#fff", // White stroke for mask
 															strokeWidth: `${
-																attributes.advancedCountdownDotsThickness
-																	.Desktop + 2
-															}px`,
+																(advancedCountdownDotsThickness.Desktop || 5) +
+																2
+															}px`, // Thickness + a little extra for mask
 															strokeDasharray: c_unit,
 															strokeDashoffset: c_unit,
 															strokeLinecap: "round",
@@ -283,8 +324,10 @@ export default function save({ attributes }) {
 												style={{
 													strokeDasharray: `0.1 ${gap}`,
 													fill: "none",
-													stroke: advancedCountdownInactiveDotColor,
-													strokeWidth: `${attributes.advancedCountdownDotsThickness.Desktop}px`,
+													stroke: advancedCountdownInactiveDotColor, // Inactive color
+													strokeWidth: `${
+														advancedCountdownDotsThickness.Desktop || 5
+													}px`, // Thickness
 													strokeLinecap: "round",
 												}}
 											></circle>
@@ -298,8 +341,10 @@ export default function save({ attributes }) {
 												style={{
 													strokeDasharray: `0.1 ${gap}`,
 													fill: "none",
-													stroke: advancedCountdownActiveDotColor,
-													strokeWidth: `${attributes.advancedCountdownDotsThickness.Desktop}px`,
+													stroke: advancedCountdownActiveDotColor, // Active color
+													strokeWidth: `${
+														advancedCountdownDotsThickness.Desktop || 5
+													}px`, // Thickness
 													strokeLinecap: "round",
 												}}
 											></circle>

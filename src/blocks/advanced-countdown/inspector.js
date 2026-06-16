@@ -1,9 +1,6 @@
-import { __ } from '@wordpress/i18n';
+import { __ } from "@wordpress/i18n";
 
-import {
-	useBlockProps,
-	InspectorControls,
-} from '@wordpress/block-editor';
+import { useBlockProps, InspectorControls } from "@wordpress/block-editor";
 
 import {
 	PanelBody,
@@ -12,226 +9,60 @@ import {
 	ToggleControl,
 	SelectControl,
 	ColorPicker,
-	BaseControl
-} from '@wordpress/components';
-import { useEffect, useState, memo } from '@wordpress/element';
+	BaseControl,
+} from "@wordpress/components";
+import { useEffect, useState, memo } from "@wordpress/element";
 
 import {
 	BORDER_STYLES,
 	LAYOUT_ALIGNMENT,
-	LAYOUT_TYPE,
-	OVERFLOW_OP,
 	TEXT_ALIGNMENT,
 	SELECT_SEPARATOR_TYPE,
-} from '@Constants/fbConstants';
+} from "@Constants/fbConstants";
 
 import FB_Range from "@Components/range";
 import FB_Spacing from "@Components/spacing";
-import FB_TypographyControl from '@Components/typography-control';
-import FB_SwitcherControl from '@Components/switcher-control';
-import FB_ColorControl from '@Components/color-control';
+import FB_TypographyControl from "@Components/typography-control";
+import FB_SwitcherControl from "@Components/switcher-control";
+import FB_ColorControl from "@Components/color-control";
 import FB_BackgroundColorControl from "@Components/background-color-control";
 import { useDeviceType } from "@Config/displayType";
-import './editor.scss';
-import { ButtonGroup } from '@wordpress/components';
-import { Button } from '@wordpress/components';
-import FB_InputControl from '@Components/input-control';
-import FB_CustomCSSEditor from '@Components/custom-css-editor';
-import FB_AlignmentControl from '@Components/alignment-control';
-import FB_PositionControl from '@Components/position-control';
-import FB_VisibilityControl from '@Components/visibility-control';
-import FB_IconPicker from '@Components/icon-picker';
-import FB_InspectorControls from '@Components/InspectorControls';
-import FB_Presets from '@Components/presets';
+import "./editor.scss";
+import { ButtonGroup } from "@wordpress/components";
+import { Button } from "@wordpress/components";
+import FB_InputControl from "@Components/input-control";
+import FB_CustomCSSEditor from "@Components/custom-css-editor";
+import FB_AlignmentControl from "@Components/alignment-control";
+import FB_PositionControl from "@Components/position-control";
+import FB_VisibilityControl from "@Components/visibility-control";
+import FB_IconPicker from "@Components/icon-picker";
+import FB_InspectorControls from "@Components/InspectorControls";
+import FB_Presets from "@Components/presets";
 import { countdownPresets } from "./presets";
 
 const Inspector = ({ attributes, setAttributes }) => {
 	const {
 		blockID,
 		countDownPresetStyle,
-
-		countDownLabelDay,
-		countDownLabelHour,
-		countDownLabelMinute,
-		countDownLabelSecond,
-
+		advancedCountdownStartDate,
 		targetDate,
-		showDays,
-		showHours,
-		showMinutes,
-		showSeconds,
+		until_text,
+		advancedCountdownShowSunIcon,
+		advancedCountdownSunIcon,
 
-		// Countdown Separator
-		countDownSeparatorEnabled,
-		countDownSeparatorType,
-		countDownSeparatorCustom,
-
-		countDownSeparatorFontColorSwitcher,
-		countDownSeparatorFontColor,
-		countDownSeparatorFontHoverColor,
-
-		countDownSeparatorGlobalTypoSwitcher,
-		countDownSeparatorGlobalTypographyData,
-		countDownSeparatorGlobalTypoType,
-		countDownSeparatorGlobalTypoOption,
-		countDownSeparatorFontFamily,
-		countDownSeparatorFontSize,
-		countDownSeparatorFontSizeUnits,
-		countDownSeparatorFontWeight,
-		countDownSeparatorFontStyle,
-		countDownSeparatorTextTransform,
-		countDownSeparatorTextDecoration,
-		countDownSeparatorLetterSpacing,
-		countDownSeparatorLetterSpacingUnits,
-		countDownSeparatorLineHeight,
-		countDownSeparatorLineHeightUnits,
-
-		countDownSeparatorHorizontalGap,
-		countDownSeparatorHorizontalGapUnits,
-		countDownSeparatorVerticalGap,
-		countDownSeparatorVerticalGapUnits,
-
-		// Countdown item
-		countDownItemSize,
-		countDownItemSizeUnits,
-		countDownItemSizeHeight,
-
-		countDownLayoutType,
-		countDownFlexWrap,
-		countDownLayoutAlignment,
-		countDownGrid,
-		countDownItemGap,
-		countDownItemGapUnits,
-
-		/** Background Image */
-		countDownItemBgImageEnabled,
-		countDownItemBgImageUrl,
-		countDownItemBgImageAlt,
-		countDownItemBgImageID,
-
-		countDownItemBgImagePositionType,
-		countDownItemBgImageAttachmentType,
-		countDownItemBgImageRepeatType,
-		countDownItemBgImageSizeType,
-		countDownItemBgColorSwitcher,
-		countDownItemBgColor,
-		countDownItemBgHoverColor,
-
-		/** Background Image */
-		// Border Type
-		countDownItemBorder,
-		countDownItemBorderColor,
-		countDownItemBackgroundColor,
-
-		countDownItemBorderTypeUnits,
-		countDownItemBorderTypeDesktop,
-		countDownItemBorderTypeTablet,
-		countDownItemBorderTypeMobile,
-		countDownItemBorderTypeLink,
-		countDownItemBorderColorSwitcher,
-		countDownItemBorderHoverColor,
-
-		// Border Radius
-		countDownItemBorderRadiusUnits,
-		countDownItemBorderRadiusDesktop,
-		countDownItemBorderRadiusTablet,
-		countDownItemBorderRadiusMobile,
-		countDownItemBorderRadiusLink,
-
-		digitFontColor,
-		digitFontHoverColor,
-		digitGlobalTypoSwitcher,
-		digitGlobalTypographyData,
-		digitGlobalTypoType,
-		digitGlobalTypoOption,
-		digitFontFamily,
-		digitFontSize,
-		digitFontSizeUnits,
-		digitFontWeight,
-		digitFontStyle,
-		digitTextTransform,
-		digitTextDecoration,
-		digitLetterSpacing,
-		digitLetterSpacingUnits,
-		digitLineHeight,
-		digitLineHeightUnits,
-		digitFontColorSwitcher,
-
-		labelFontColorSwitcher,
-		labelFontColor,
-		labelFontHoverColor,
-		labelBgColorSwitcher,
-		labelBgColor,
-		labelBgHoverColor,
-		labelGlobalTypoSwitcher,
-		labelGlobalTypographyData,
-		labelGlobalTypoType,
-		labelGlobalTypoOption,
-		labelFontFamily,
-		labelFontSize,
-		labelFontSizeUnits,
-		labelFontWeight,
-		labelFontStyle,
-		labelTextTransform,
-		labelTextDecoration,
-		labelLetterSpacing,
-		labelLetterSpacingUnits,
-		labelLineHeight,
-		labelLineHeightUnits,
-
-		/** Start Item Wrapper */
-		countDownItemWrapperBgFontHoverColor,
-
-		countDownItemWrapperBoxShadowValues,
-		countDownItemWrapperBoxShadowCssValue,
-
-		/** Start Background Image */
-		countDownItemWrapperBackgroundImageEnabled,
-		countDownItemWrapperBackgroundImageUrl,
-		countDownItemWrapperBackgroundImageAlt,
-		countDownItemWrapperBackgroundImageID,
-
-		countDownItemWrapperBgImagePositionType,
-		countDownItemWrapperBgImageAttachmentType,
-		countDownItemWrapperBgImageRepeatType,
-		countDownItemWrapperBgImageSizeType,
-		/** End Background Image */
-
-
-		countDownItemWrapperBorderTypeUnits,
-		countDownItemWrapperBorderTypeDesktop,
-		countDownItemWrapperBorderTypeTablet,
-		countDownItemWrapperBorderTypeMobile,
-		countDownItemWrapperBorderTypeLink,
-		countDownItemWrapperBorder,
-		countDownItemWrapperBorderColorSwitcher,
-		countDownItemWrapperBorderColor,
-		countDownItemWrapperBorderHoverColor,
-		countDownItemWrapperBorderRadiusUnits,
-		countDownItemWrapperBorderRadiusDesktop,
-		countDownItemWrapperBorderRadiusTablet,
-		countDownItemWrapperBorderRadiusMobile,
-		countDownItemWrapperBorderRadiusLink,
-
-		countDownItemWrapperPaddingUnits,
-		countDownItemWrapperPaddingDesktop,
-		countDownItemWrapperPaddingTablet,
-		countDownItemWrapperPaddingMobile,
-		countDownItemWrapperPaddingLink,
-
-		countDownItemWrapperMarginUnits,
-		countDownItemWrapperMarginDesktop,
-		countDownItemWrapperMarginTablet,
-		countDownItemWrapperMarginMobile,
-		countDownItemWrapperMarginLink,
-		/** End Item Wrapper */
+		// Style Tab: Container
+		advancedCountdownContainerSize,
+		advancedCountdownSvgProgressSize,
+		advancedCountdownStyle2ProgressBarSize,
+		advancedCountdownContainerSizeStyle3,
+		advancedCountdownContainerSizeStyle3Container,
+		advancedCountdownContainerSizeStyle5,
 		globalBgColorSwitcher,
 		globalBackgroundType,
 		globalClassicColor,
 		globalGradientColor,
 		globalCustomGradientSwitcher,
 		globalCustomGradientInputValue,
-		globalBackgroundColorStyle,
 		globalBackgroundImageUrl,
 		globalBackgroundImageAlt,
 		globalBackgroundImageID,
@@ -251,122 +82,39 @@ const Inspector = ({ attributes, setAttributes }) => {
 		hoverBackgroundImageAttachment,
 		hoverBackgroundImageSize,
 		hoverBackgroundImageRepeat,
-
-		// Label
-		countDownLabelBorderTypeUnits,
-		countDownLabelBorderTypeDesktop,
-		countDownLabelBorderTypeTablet,
-		countDownLabelBorderTypeMobile,
-		countDownLabelBorderTypeLink,
-		countDownLabelBorder,
-		countDownLabelBorderColorSwitcher,
-		countDownLabelBorderColor,
-		countDownLabelBorderHoverColor,
-		countDownLabelBorderRadiusUnits,
-		countDownLabelBorderRadiusDesktop,
-		countDownLabelBorderRadiusTablet,
-		countDownLabelBorderRadiusMobile,
-		countDownLabelBorderRadiusLink,
-		countDownLabelMarginUnits,
-		countDownLabelMarginDesktop,
-		countDownLabelMarginTablet,
-		countDownLabelMarginMobile,
-		countDownLabelMarginLink,
-		countDownLabelWidth,
-		countDownLabelWidthUnits,
-		countDownLabelHeight,
-		countDownLabelHeightUnits,
-		countDownLabelAlignmentHz,
-		countDownLabelAlignmentVr,
-
-		// Digit
-		countDownDigitBgColorSwitcher,
-		countDownDigitBgColor,
-		countDownDigitBgHoverColor,
-		countDownDigitBorderTypeUnits,
-		countDownDigitBorderTypeDesktop,
-		countDownDigitBorderTypeTablet,
-		countDownDigitBorderTypeMobile,
-		countDownDigitBorderTypeLink,
-		countDownDigitBorder,
-		countDownDigitBorderColorSwitcher,
-		countDownDigitBorderColor,
-		countDownDigitBorderHoverColor,
-		countDownDigitBorderRadiusUnits,
-		countDownDigitBorderRadiusDesktop,
-		countDownDigitBorderRadiusTablet,
-		countDownDigitBorderRadiusMobile,
-		countDownDigitBorderRadiusLink,
-		countDownDigitMarginUnits,
-		countDownDigitMarginDesktop,
-		countDownDigitMarginTablet,
-		countDownDigitMarginMobile,
-		countDownDigitMarginLink,
-		countDownDigitWidth,
-		countDownDigitWidthUnits,
-		countDownDigitHeight,
-		countDownDigitHeightUnits,
-		countDownDigitAlignmentHz,
-		countDownDigitAlignmentVr,
-
-		// single digit color
-		singleDigitFontColorSwitcher,
-		daysDigitFontColorSwitcher,
-		daysDigitFontColor,
-		daysDigitFontHoverColor,
-		hoursDigitFontColorSwitcher,
-		hoursDigitFontColor,
-		hoursDigitFontHoverColor,
-		minutesDigitFontColorSwitcher,
-		minutesDigitFontColor,
-		minutesDigitFontHoverColor,
-		secondsDigitFontColorSwitcher,
-		secondsDigitFontColor,
-		secondsDigitFontHoverColor,
-
-		countDownDesktopSwitcher,
-		countDownTabletSwitcher,
-		countDownMobileSwitcher,
-
-		countDownGlobalWraperCustomCSS,
-		countDownGlobalWraperID,
-		countDownGlobalWraperClass,
-
-		// Position
-		countDownZIndex,
-		countDownOverflow,
-		countDownPositionType,
-		countDownHZOrientationType,
-		countDownVROrientationType,
-		countDownHZLeftOffset,
-		countDownHZLeftOffsetUnits,
-		countDownHZRightOffset,
-		countDownHZRightOffsetUnits,
-		countDownVRTopOffset,
-		countDownVRTopOffsetUnits,
-		countDownVRBottomOffset,
-		countDownVRBottomOffsetUnits,
-		
-		// New attributes from Elementor controls
-		advancedCountdownStartDate,
-		advancedCountdownUntilText,
-		advancedCountdownShowSunIcon,
-		advancedCountdownSunIcon,
-		advancedCountdownContainerSize,
-		advancedCountdownSvgProgressSize,
-		advancedCountdownStyle2ProgressBarSize,
-		advancedCountdownContainerSizeStyle3,
-		advancedCountdownContainerSizeStyle3Container,
-		advancedCountdownContainerSizeStyle5,
 		advancedCountdownContainerHoverTransition,
+		advancedCountdownItemWrapperBorder, // This is the main border style
+		advancedCountdownItemWrapperBorderColorSwitcher,
+		advancedCountdownItemWrapperBorderColor,
+		advancedCountdownBorderHoverColor,
 		advancedCountdownBorderHoverTransition,
+		advancedCountdownItemWrapperBorderTypeUnits,
+		advancedCountdownItemWrapperBorderTypeDesktop,
+		advancedCountdownItemWrapperBorderTypeTablet,
+		advancedCountdownItemWrapperBorderTypeMobile,
+		advancedCountdownItemWrapperBorderTypeLink,
+		advancedCountdownBorderRadius, // This is the main border radius
 		advancedCountdownPreset5DashGap,
 		advancedCountdownPreset4DashGap,
+		countDownLayoutAlignment, // Renamed from container_alignment
+		advancedCountdownItemWrapperMarginUnits,
+		advancedCountdownItemWrapperMarginDesktop,
+		advancedCountdownItemWrapperMarginTablet,
+		advancedCountdownItemWrapperMarginMobile,
+		advancedCountdownItemWrapperMarginLink,
+		advancedCountdownFooterPadding, // Renamed from container_padding
+		advancedCountdownFooterPaddingLink, // Renamed from container_padding_link
+
+		// Style Tab: Dashed Progress Bar (Style 2)
 		advancedCountdownStyle2ProgressBarColor,
 		advancedCountdownStyle2DashCount,
+
+		// Style Tab: Dots Configuration (Style 5)
 		advancedCountdownDaysTotalDots,
 		advancedCountdownHoursTotalDots,
 		advancedCountdownMinutesTotalDots,
+
+		// Style Tab: Progress & Indicator (Style 3)
 		advancedCountdownStyle3ContainerBg,
 		advancedCountdownStyle3TimeboxBg,
 		advancedCountdownStyle3IndicatorColor,
@@ -388,6 +136,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 		advancedCountdownStyle3TextLetterSpacingUnits,
 		advancedCountdownStyle3TextLineHeight,
 		advancedCountdownStyle3TextLineHeightUnits,
+
+		// Style Tab: Dots Style (Style 5)
 		advancedCountdownActiveDotColor,
 		advancedCountdownInactiveDotColor,
 		advancedCountdownDotsThickness,
@@ -395,8 +145,12 @@ const Inspector = ({ attributes, setAttributes }) => {
 		advancedCountdownDotsGlowEffect,
 		advancedCountdownGlowIntensity,
 		advancedCountdownGlowColor,
+
+		// Style Tab: Dash Pattern (Style 4)
 		advancedCountdownDashColor,
 		advancedCountdownDashSize,
+
+		// Style Tab: Label Alignment (Style 4)
 		advancedCountdownLabelAlignmentStyle4,
 		advancedCountdownLabelTypographyStyle4GlobalTypoSwitcher,
 		advancedCountdownLabelTypographyStyle4GlobalTypographyData,
@@ -414,11 +168,15 @@ const Inspector = ({ attributes, setAttributes }) => {
 		advancedCountdownLabelTypographyStyle4LineHeight,
 		advancedCountdownLabelTypographyStyle4LineHeightUnits,
 		advancedCountdownLabelColorStyle4,
+
+		// Style Tab: Icon (Preset 1)
 		advancedCountdownIconSize,
 		advancedCountdownIconColorNormal,
 		advancedCountdownIconBgColorNormal,
 		advancedCountdownIconColorHover,
 		advancedCountdownIconBgColorHover,
+
+		// Style Tab: Countdown Text
 		advancedCountdownLabelDays,
 		advancedCountdownLabelHours,
 		advancedCountdownLabelMinutes,
@@ -457,6 +215,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 		advancedCountdownLabelColorStyle4Digit,
 		advancedCountdownTextColorStyle2,
 		advancedCountdownTextColorStyle3,
+
+		// Style Tab: Separator
 		advancedCountdownSeparatorTypographyGlobalTypoSwitcher,
 		advancedCountdownSeparatorTypographyGlobalTypographyData,
 		advancedCountdownSeparatorTypographyGlobalTypoType,
@@ -475,13 +235,21 @@ const Inspector = ({ attributes, setAttributes }) => {
 		advancedCountdownSeparatorColor,
 		advancedCountdownSeparatorHoverColor,
 		advancedCountdownSeparatorSpacing,
+
+		// Style Tab: Overlay Bg
 		advancedCountdownSvgBgOverlayColor,
 		advancedCountdownSvgBgOverlayOpacity,
+
+		// Style Tab: SVG Progress Bar (Style 1)
 		advancedCountdownProgressCircleActiveColor,
 		advancedCountdownProgressCircleInactiveColor,
 		advancedCountdownSvgStrokeWidth,
+
+		// Style Tab: SVG Progress Bar (Style 2)
 		advancedCountdownProgressColorStyle2,
 		advancedCountdownSvgStrokeWidthStyle2,
+
+		// Style Tab: Footer Text
 		advancedCountdownFooterTypographyGlobalTypoSwitcher,
 		advancedCountdownFooterTypographyGlobalTypographyData,
 		advancedCountdownFooterTypographyGlobalTypoType,
@@ -502,937 +270,171 @@ const Inspector = ({ attributes, setAttributes }) => {
 		advancedCountdownFooterTextColorHover,
 		advancedCountdownFooterBgColorHover,
 		advancedCountdownFooterBgCustomStyle2,
-		advancedCountdownFooterPadding,
-		advancedCountdownFooterPaddingLink,
 		advancedCountdownFooterMargin,
 		advancedCountdownFooterMarginLink,
+
+		// Global Settings
+		countDownGlobalWraperCustomCSS,
+		countDownGlobalWraperID,
+		countDownGlobalWraperClass,
+		countDownDesktopSwitcher,
+		countDownTabletSwitcher,
+		countDownMobileSwitcher,
+		countDownZIndex,
+		countDownOverflow,
+		countDownPositionType,
+		countDownHZOrientationType,
+		countDownVROrientationType,
+		countDownHZLeftOffset,
+		countDownHZLeftOffsetUnits,
+		countDownHZRightOffset,
+		countDownHZRightOffsetUnits,
+		countDownVRTopOffset,
+		countDownVRTopOffsetUnits,
+		countDownVRBottomOffset,
+		countDownVRBottomOffsetUnits,
 	} = attributes;
 
 	const deviceType = useDeviceType();
-
-	const [timeRemaining, setTimeRemaining] = useState({});
 
 	// Set default date to one week from today
 	const defaultDate = new Date();
 	defaultDate.setDate(defaultDate.getDate() + 7);
 
-	const [startDate, setStartDate] = useState(advancedCountdownStartDate ? new Date(advancedCountdownStartDate) : new Date()); // New state for start date
-	const [date, setDate] = useState(targetDate ? new Date(targetDate) : defaultDate);
+	const [startDate, setStartDate] = useState(
+		advancedCountdownStartDate
+			? new Date(advancedCountdownStartDate)
+			: new Date(),
+	);
+	const [date, setDate] = useState(
+		targetDate ? new Date(targetDate) : defaultDate,
+	);
 
 	// Sync date with attributes if not already set
 	useEffect(() => {
 		if (!targetDate) {
 			setAttributes({ targetDate: defaultDate.toISOString() });
 		}
-		// New: Set default for advancedCountdownStartDate
 		if (!advancedCountdownStartDate) {
 			setAttributes({ advancedCountdownStartDate: new Date().toISOString() });
 		}
-	}, [targetDate, setAttributes, defaultDate]);
+	}, [targetDate, setAttributes, defaultDate, advancedCountdownStartDate]);
 
 	// Update target date when date changes
 	useEffect(() => {
 		setAttributes({ targetDate: date.toISOString() });
-		// New: Update advancedCountdownStartDate when startDate changes
 	}, [date, setAttributes]);
+
+	// Update advancedCountdownStartDate when startDate changes
 	useEffect(() => {
 		setAttributes({ advancedCountdownStartDate: startDate.toISOString() });
 	}, [startDate, setAttributes]);
 
-	// Countdown Timer Logic
-	useEffect(() => {
-		// Helper function to format time with leading zero
-		const formatTime = (time) => (time < 10 ? `0${time}` : time);
-
-		if (!targetDate || isNaN(new Date(targetDate).getTime())) return;
-		// New: Check advancedCountdownStartDate as well
-
-		const intervalId = setInterval(() => {
-			const now = Date.now();
-			const distance = new Date(targetDate).getTime() - now;
-
-			const days = formatTime(Math.floor(distance / (1000 * 60 * 60 * 24)));
-			const hours = formatTime(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
-			const minutes = formatTime(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)));
-			const seconds = formatTime(Math.floor((distance % (1000 * 60)) / 1000));
-
-			if (distance < 0) {
-				clearInterval(intervalId);
-				setTimeRemaining({ days: "00", hours: "00", minutes: "00", seconds: "00" });
-			} else {
-				setTimeRemaining({ days, hours, minutes, seconds });
-			}
-		}, 1000);
-
-		return () => clearInterval(intervalId);
-	}, [targetDate]);
-
-	const blockProps = useBlockProps();
-
-
-	{/* Inspector Controls */ }
-	const handleCountdownItemBorderUnitHandler = (event, position) => {
+	// Helper Handlers for Spacing/Border/Radius
+	const handleSpacingUnits = (attr, unit) => {
+		setAttributes({ [attr]: { ...attributes[attr], [deviceType]: unit } });
+	};
+	const handleSpacingValue = (attrPrefix, event, position, isLinked) => {
 		const value = event.target.value;
-		if (countDownItemBorderTypeLink) {
-			switch (deviceType) {
-				case 'Desktop':
-					setAttributes({
-						countDownItemBorderTypeDesktop: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					});
-					break;
-				case 'Tablet':
-					setAttributes({
-						countDownItemBorderTypeTablet: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					});
-					break;
-				case 'Mobile':
-					setAttributes({
-						countDownItemBorderTypeMobile: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					});
-					break;
-				default:
-					break;
-			}
-		} else {
-			switch (deviceType) {
-				case 'Desktop':
-					setAttributes({ countDownItemBorderTypeDesktop: { ...countDownItemBorderTypeDesktop, [position]: value } });
-					break;
-				case 'Tablet':
-					setAttributes({ countDownItemBorderTypeTablet: { ...countDownItemBorderTypeTablet, [position]: value } });
-					break;
-				case 'Mobile':
-					setAttributes({ countDownItemBorderTypeMobile: { ...countDownItemBorderTypeMobile, [position]: value } });
-					break;
-				default:
-					break;
-			}
-		}
-
-	}
-	const countdownItemBorderCombineBtnHandler = () => {
-		setAttributes({ countDownItemBorderTypeLink: !countDownItemBorderTypeLink });
-	}
-
-	const countDownItemBorderUnitsHandler = (unit) => {
-		setAttributes({
-			countDownItemBorderTypeUnits: {
-				...countDownItemBorderTypeUnits,
-				[deviceType]: unit
-			}
-		})
-	}
-
-	// New helper functions for padding/margin (if needed for new attributes)
-	const handleFooterPaddingUnitHandler = (event, position) => {
-		const value = event.target.value;
-		if (advancedCountdownFooterPaddingLink) {
+		const attrName = `${attrPrefix}${deviceType}`;
+		if (isLinked) {
 			setAttributes({
-				advancedCountdownFooterPadding: {
-					...advancedCountdownFooterPadding,
-					top: value, right: value, bottom: value, left: value
-				}
+				[attrName]: { top: value, right: value, bottom: value, left: value },
 			});
 		} else {
-			setAttributes({ advancedCountdownFooterPadding: { ...advancedCountdownFooterPadding, [position]: value } });
+			setAttributes({
+				[attrName]: { ...attributes[attrName], [position]: value },
+			});
 		}
 	};
-	const footerPaddingCombineBtnHandler = () => {
-		setAttributes({ advancedCountdownFooterPaddingLink: !advancedCountdownFooterPaddingLink });
-	};
-	const footerPaddingUnitsHandler = (unit) => {
+
+	// Container Border
+	const handleContainerBorderUnits = (value) =>
+		handleSpacingUnits("advancedCountdownItemWrapperBorderTypeUnits", value);
+	const handleContainerBorderValue = (event, position) =>
+		handleSpacingValue(
+			"advancedCountdownItemWrapperBorderType",
+			event,
+			position,
+			advancedCountdownItemWrapperBorderTypeLink,
+		);
+
+	// Container Border Radius
+	const handleContainerBorderRadiusUnits = (value) =>
+		handleSpacingUnits("advancedCountdownItemWrapperBorderRadiusUnits", value);
+	const handleContainerBorderRadiusValue = (event, position) =>
+		handleSpacingValue(
+			"advancedCountdownItemWrapperBorderRadius",
+			event,
+			position,
+			advancedCountdownItemWrapperBorderRadiusLink,
+		);
+
+	// Container Padding
+	const handleContainerPaddingUnits = (value) =>
+		handleSpacingUnits("advancedCountdownFooterPaddingUnits", value);
+	const handleContainerPaddingValue = (event, position) =>
+		handleSpacingValue(
+			"advancedCountdownFooterPadding",
+			event,
+			position,
+			advancedCountdownFooterPaddingLink,
+		);
+
+	// Container Margin
+	const handleContainerMarginUnits = (value) =>
+		handleSpacingUnits("advancedCountdownItemWrapperMarginUnits", value);
+	const handleContainerMarginValue = (event, position) =>
+		handleSpacingValue(
+			"advancedCountdownItemWrapperMargin",
+			event,
+			position,
+			advancedCountdownItemWrapperMarginLink,
+		);
+
+	// Separator Spacing
+	const handleSeparatorSpacingUnits = (value) =>
+		handleSpacingUnits("advancedCountdownSeparatorSpacingUnits", value);
+	const handleSeparatorSpacingValue = (event, position) =>
+		handleSpacingValue(
+			"advancedCountdownSeparatorSpacing",
+			event,
+			position,
+			false,
+		); // Separator spacing is not linked
+
+	// Icon Size
+	const handleIconSizeUnits = (value) =>
+		handleSpacingUnits("advancedCountdownIconSizeUnits", value);
+	const handleIconSizeValue = (event, position) =>
 		setAttributes({
-			advancedCountdownFooterPadding: {
-				...advancedCountdownFooterPadding,
-				[`${deviceType}Units`]: unit
-			}
+			advancedCountdownIconSize: {
+				...advancedCountdownIconSize,
+				[deviceType]: event.target.value,
+			},
 		});
-	};
 
-	const handleFooterMarginUnitHandler = (event, position) => {
-		const value = event.target.value;
-		if (advancedCountdownFooterMarginLink) {
-			setAttributes({
-				advancedCountdownFooterMargin: {
-					...advancedCountdownFooterMargin,
-					top: value, right: value, bottom: value, left: value
-				}
-			});
-		} else {
-			setAttributes({ advancedCountdownFooterMargin: { ...advancedCountdownFooterMargin, [position]: value } });
-		}
-	};
-	const footerMarginCombineBtnHandler = () => {
-		setAttributes({ advancedCountdownFooter
-	const handleCountDownItemBorderRadiusUnitHandler = (event, position) => {
-		const value = event.target.value;
-		if (countDownItemBorderRadiusLink) {
-			switch (deviceType) {
-				case 'Desktop':
-					setAttributes({
-						countDownItemBorderRadiusDesktop: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					});
-					break;
-				case 'Tablet':
-					setAttributes({
-						countDownItemBorderRadiusTablet: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					});
-					break;
-				case 'Mobile':
-					setAttributes({
-						countDownItemBorderRadiusMobile: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					});
-					break;
-				default:
-					break;
-			}
-		} else {
-			switch (deviceType) {
-				case 'Desktop':
-					setAttributes({ countDownItemBorderRadiusDesktop: { ...countDownItemBorderRadiusDesktop, [position]: value } });
-					break;
-				case 'Tablet':
-					setAttributes({ countDownItemBorderRadiusTablet: { ...countDownItemBorderRadiusTablet, [position]: value } });
-					break;
-				case 'Mobile':
-					setAttributes({ countDownItemBorderRadiusMobile: { ...countDownItemBorderRadiusMobile, [position]: value } });
-					break;
-				default:
-					break;
-			}
-		}
+	// Footer Padding
+	const handleFooterPaddingUnits = (value) =>
+		handleSpacingUnits("advancedCountdownFooterPaddingUnits", value);
+	const handleFooterPaddingValue = (event, position) =>
+		handleSpacingValue(
+			"advancedCountdownFooterPadding",
+			event,
+			position,
+			advancedCountdownFooterPaddingLink,
+		);
 
-	}
-	const countDownItemBorderRadiusCombineBtnHandler = () => {
-		setAttributes({ countDownItemBorderRadiusLink: !countDownItemBorderRadiusLink });
-	}
-
-	const countDownItemBorderRadiusUnitsHandler = (unit) => {
-		setAttributes({
-			countDownItemBorderRadiusUnits: {
-				...countDownItemBorderRadiusUnits,
-				[deviceType]: unit
-			}
-		})
-	}
-
-	/** Start Border Type*/
-	const handleCountDownItemWrapperBorderUnitHandlerFn = (event, position) => {
-		const value = event.target.value;
-		if (countDownItemWrapperBorderTypeLink) {
-			switch (deviceType) {
-				case 'Desktop':
-					setAttributes({
-						countDownItemWrapperBorderTypeDesktop: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					});
-					break;
-				case 'Tablet':
-					setAttributes({
-						countDownItemWrapperBorderTypeTablet: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					});
-					break;
-				case 'Mobile':
-					setAttributes({
-						countDownItemWrapperBorderTypeMobile: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					});
-					break;
-				default:
-					break;
-			}
-		} else {
-			switch (deviceType) {
-				case 'Desktop':
-					setAttributes({ countDownItemWrapperBorderTypeDesktop: { ...countDownItemWrapperBorderTypeDesktop, [position]: value } });
-					break;
-				case 'Tablet':
-					setAttributes({ countDownItemWrapperBorderTypeTablet: { ...countDownItemWrapperBorderTypeTablet, [position]: value } });
-					break;
-				case 'Mobile':
-					setAttributes({ countDownItemWrapperBorderTypeMobile: { ...countDownItemWrapperBorderTypeMobile, [position]: value } });
-					break;
-				default:
-					break;
-			}
-		}
-
-	}
-	const countDownItemWrapperBorderCombineBtnHandlerFn = () => {
-		setAttributes({ countDownItemWrapperBorderTypeLink: !countDownItemWrapperBorderTypeLink });
-	}
-
-	const countDownItemWrapperBorderTypeUnitsHandler = (unit) => {
-		setAttributes({
-			countDownItemWrapperBorderTypeUnits: {
-				...countDownItemWrapperBorderTypeUnits,
-				[deviceType]: unit
-			}
-		})
-	}
-
-	/** Start Border Type*/
-
-	/** Start Border Radius*/
-	const countDownItemWrapperHandleSpacingUnitHandlerFn = (event, position) => {
-		const value = event.target.value;
-		if (countDownItemWrapperBorderRadiusLink) {
-			switch (deviceType) {
-				case 'Desktop':
-					setAttributes({
-						countDownItemWrapperBorderRadiusDesktop: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					});
-					break;
-				case 'Tablet':
-					setAttributes({
-						countDownItemWrapperBorderRadiusTablet: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					});
-					break;
-				case 'Mobile':
-					setAttributes({
-						countDownItemWrapperBorderRadiusMobile: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					});
-					break;
-				default:
-					break;
-			}
-		} else {
-			switch (deviceType) {
-				case 'Desktop':
-					setAttributes({ countDownItemWrapperBorderRadiusDesktop: { ...countDownItemWrapperBorderRadiusDesktop, [position]: value } });
-					break;
-				case 'Tablet':
-					setAttributes({ countDownItemWrapperBorderRadiusTablet: { ...countDownItemWrapperBorderRadiusTablet, [position]: value } });
-					break;
-				case 'Mobile':
-					setAttributes({ countDownItemWrapperBorderRadiusMobile: { ...countDownItemWrapperBorderRadiusMobile, [position]: value } });
-					break;
-				default:
-					break;
-			}
-		}
-
-	}
-	const countDownItemWrapperCombineBtnHandlerFn = () => {
-		setAttributes({ countDownItemWrapperBorderRadiusLink: !countDownItemWrapperBorderRadiusLink });
-	}
-
-	const countDownItemWrapperBorderRadiusUnitsHandler = (unit) => {
-		setAttributes({
-			countDownItemWrapperBorderRadiusUnits: {
-				...countDownItemWrapperBorderRadiusUnits,
-				[deviceType]: unit
-			}
-		})
-	}
-
-	/** Start Padding */
-	const countDownItemWrapperPaddingHandleSpacingUnitHandler = (event, position) => {
-		const value = event.target.value;
-		if (countDownItemWrapperPaddingLink) {
-			switch (deviceType) {
-				case 'Desktop':
-					setAttributes({
-						countDownItemWrapperPaddingDesktop: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					});
-					break;
-				case 'Tablet':
-					setAttributes({
-						countDownItemWrapperPaddingTablet: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					});
-					break;
-				case 'Mobile':
-					setAttributes({
-						countDownItemWrapperPaddingMobile: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					});
-					break;
-				default:
-					break;
-			}
-		} else {
-			switch (deviceType) {
-				case 'Desktop':
-					setAttributes({ countDownItemWrapperPaddingDesktop: { ...countDownItemWrapperPaddingDesktop, [position]: value } });
-					break;
-				case 'Tablet':
-					setAttributes({ countDownItemWrapperPaddingTablet: { ...countDownItemWrapperPaddingTablet, [position]: value } });
-					break;
-				case 'Mobile':
-					setAttributes({ countDownItemWrapperPaddingMobile: { ...countDownItemWrapperPaddingMobile, [position]: value } });
-					break;
-				default:
-					break;
-			}
-		}
-
-	}
-	const countDownItemWrapperPaddingSpacingCombineBtnHandlerFn = () => {
-		setAttributes({ countDownItemWrapperPaddingLink: !countDownItemWrapperPaddingLink });
-	}
-
-	const countDownItemWrapperPaddingSpacingUnitsHandler = (unit) => {
-		setAttributes({
-			countDownItemWrapperPaddingUnits: {
-				...countDownItemWrapperPaddingUnits,
-				[deviceType]: unit
-			}
-		})
-	}
-	/** End Padding */
-
-	/** Start Margin */
-	const countDownItemWrapperMarginHandleSpacingUnitHandler = (event, position) => {
-		const value = event.target.value;
-		if (countDownItemWrapperMarginLink) {
-			switch (deviceType) {
-				case 'Desktop':
-					setAttributes({
-						countDownItemWrapperMarginDesktop: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					});
-					break;
-				case 'Tablet':
-					setAttributes({
-						countDownItemWrapperMarginTablet: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					});
-					break;
-				case 'Mobile':
-					setAttributes({
-						countDownItemWrapperMarginMobile: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					});
-					break;
-				default:
-					break;
-			}
-		} else {
-			switch (deviceType) {
-				case 'Desktop':
-					setAttributes({ countDownItemWrapperMarginDesktop: { ...countDownItemWrapperMarginDesktop, [position]: value } });
-					break;
-				case 'Tablet':
-					setAttributes({ countDownItemWrapperMarginTablet: { ...countDownItemWrapperMarginTablet, [position]: value } });
-					break;
-				case 'Mobile':
-					setAttributes({ countDownItemWrapperMarginMobile: { ...countDownItemWrapperMarginMobile, [position]: value } });
-					break;
-				default:
-					break;
-			}
-		}
-
-	}
-	const countDownItemWrapperMarginSpacingCombineBtnHandlerFn = () => {
-		setAttributes({ countDownItemWrapperMarginLink: !countDownItemWrapperMarginLink });
-	}
-
-	const countDownItemWrapperMarginSpacingUnitsHandler = (unit) => {
-		setAttributes({
-			countDownItemWrapperMarginUnits: {
-				...countDownItemWrapperMarginUnits,
-				[deviceType]: unit
-			}
-		})
-	}
-	/** End Margin */
-
-	/** Label Start Border Type*/
-	const handleCountDownLabelBorderUnitHandlerFn = (event, position) => {
-		const value = event.target.value;
-		if (countDownLabelBorderTypeLink) {
-			switch (deviceType) {
-				case 'Desktop':
-					setAttributes({
-						countDownLabelBorderTypeDesktop: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					});
-					break;
-				case 'Tablet':
-					setAttributes({
-						countDownLabelBorderTypeTablet: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					});
-					break;
-				case 'Mobile':
-					setAttributes({
-						countDownLabelBorderTypeMobile: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					});
-					break;
-				default:
-					break;
-			}
-		} else {
-			switch (deviceType) {
-				case 'Desktop':
-					setAttributes({ countDownLabelBorderTypeDesktop: { ...countDownLabelBorderTypeDesktop, [position]: value } });
-					break;
-				case 'Tablet':
-					setAttributes({ countDownLabelBorderTypeTablet: { ...countDownLabelBorderTypeTablet, [position]: value } });
-					break;
-				case 'Mobile':
-					setAttributes({ countDownLabelBorderTypeMobile: { ...countDownLabelBorderTypeMobile, [position]: value } });
-					break;
-				default:
-					break;
-			}
-		}
-
-	}
-	const countDownLabelBorderCombineBtnHandlerFn = () => {
-		setAttributes({ countDownLabelBorderTypeLink: !countDownLabelBorderTypeLink });
-	}
-
-	const countDownLabelBorderTypeUnitsHandler = (unit) => {
-		setAttributes({
-			countDownLabelBorderTypeUnits: {
-				...countDownLabelBorderTypeUnits,
-				[deviceType]: unit
-			}
-		})
-	}
-
-	/** Label Start Border Type*/
-
-	/** Label Start Border Radius*/
-	const countDownLabelHandleSpacingUnitHandlerFn = (event, position) => {
-		const value = event.target.value;
-		if (countDownLabelBorderRadiusLink) {
-			switch (deviceType) {
-				case 'Desktop':
-					setAttributes({
-						countDownLabelBorderRadiusDesktop: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					});
-					break;
-				case 'Tablet':
-					setAttributes({
-						countDownLabelBorderRadiusTablet: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					});
-					break;
-				case 'Mobile':
-					setAttributes({
-						countDownLabelBorderRadiusMobile: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					});
-					break;
-				default:
-					break;
-			}
-		} else {
-			switch (deviceType) {
-				case 'Desktop':
-					setAttributes({ countDownLabelBorderRadiusDesktop: { ...countDownLabelBorderRadiusDesktop, [position]: value } });
-					break;
-				case 'Tablet':
-					setAttributes({ countDownLabelBorderRadiusTablet: { ...countDownLabelBorderRadiusTablet, [position]: value } });
-					break;
-				case 'Mobile':
-					setAttributes({ countDownLabelBorderRadiusMobile: { ...countDownLabelBorderRadiusMobile, [position]: value } });
-					break;
-				default:
-					break;
-			}
-		}
-
-	}
-	const countDownLabelCombineBtnHandlerFn = () => {
-		setAttributes({ countDownLabelBorderRadiusLink: !countDownLabelBorderRadiusLink });
-	}
-
-	const countDownLabelBorderRadiusUnitsHandler = (unit) => {
-		setAttributes({
-			countDownLabelBorderRadiusUnits: {
-				...countDownLabelBorderRadiusUnits,
-				[deviceType]: unit
-			}
-		})
-	}
-
-	// Label Margin
-	const countDownLabelHandleMarginUnit = (event, position) => {
-		const value = event.target.value;
-		if (countDownLabelMarginLink) {
-			switch (deviceType) {
-				case 'Desktop':
-					setAttributes({
-						countDownLabelMarginDesktop: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					});
-					break;
-				case 'Tablet':
-					setAttributes({
-						countDownLabelMarginTablet: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					});
-					break;
-				case 'Mobile':
-					setAttributes({
-						countDownLabelMarginMobile: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					});
-					break;
-				default:
-					break;
-			}
-		} else {
-			switch (deviceType) {
-				case 'Desktop':
-					setAttributes({ countDownLabelMarginDesktop: { ...countDownLabelMarginDesktop, [position]: value } });
-					break;
-				case 'Tablet':
-					setAttributes({ countDownLabelMarginTablet: { ...countDownLabelMarginTablet, [position]: value } });
-					break;
-				case 'Mobile':
-					setAttributes({ countDownLabelMarginMobile: { ...countDownLabelMarginMobile, [position]: value } });
-					break;
-				default:
-					break;
-			}
-		}
-
-	}
-	const countDownLabelMarginCombineBtnHandle = () => {
-		setAttributes({ countDownLabelMarginLink: !countDownLabelMarginLink });
-	}
-
-	const countDownLabelMarginUnitsHandler = (unit) => {
-		setAttributes({
-			countDownLabelMarginUnits: {
-				...countDownLabelMarginUnits,
-				[deviceType]: unit
-			}
-		})
-	}
-
-	/** Digit Start Border Type*/
-	const handleCountDownDigitBorderUnitHandlerFn = (event, position) => {
-		const value = event.target.value;
-		if (countDownDigitBorderTypeLink) {
-			switch (deviceType) {
-				case 'Desktop':
-					setAttributes({
-						countDownDigitBorderTypeDesktop: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					});
-					break;
-				case 'Tablet':
-					setAttributes({
-						countDownDigitBorderTypeTablet: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					});
-					break;
-				case 'Mobile':
-					setAttributes({
-						countDownDigitBorderTypeMobile: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					});
-					break;
-				default:
-					break;
-			}
-		} else {
-			switch (deviceType) {
-				case 'Desktop':
-					setAttributes({ countDownDigitBorderTypeDesktop: { ...countDownDigitBorderTypeDesktop, [position]: value } });
-					break;
-				case 'Tablet':
-					setAttributes({ countDownDigitBorderTypeTablet: { ...countDownDigitBorderTypeTablet, [position]: value } });
-					break;
-				case 'Mobile':
-					setAttributes({ countDownDigitBorderTypeMobile: { ...countDownDigitBorderTypeMobile, [position]: value } });
-					break;
-				default:
-					break;
-			}
-		}
-
-	}
-	const countDownDigitBorderCombineBtnHandlerFn = () => {
-		setAttributes({ countDownDigitBorderTypeLink: !countDownDigitBorderTypeLink });
-	}
-
-	const countDownDigitBorderTypeUnitsHandler = (unit) => {
-		setAttributes({
-			countDownDigitBorderTypeUnits: {
-				...countDownDigitBorderTypeUnits,
-				[deviceType]: unit
-			}
-		})
-	}
-
-	/** Digit Start Border Type*/
-
-	/** Digit Start Border Radius*/
-	const countDownDigitHandleSpacingUnitHandlerFn = (event, position) => {
-		const value = event.target.value;
-		if (countDownDigitBorderRadiusLink) {
-			switch (deviceType) {
-				case 'Desktop':
-					setAttributes({
-						countDownDigitBorderRadiusDesktop: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					});
-					break;
-				case 'Tablet':
-					setAttributes({
-						countDownDigitBorderRadiusTablet: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					});
-					break;
-				case 'Mobile':
-					setAttributes({
-						countDownDigitBorderRadiusMobile: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					});
-					break;
-				default:
-					break;
-			}
-		} else {
-			switch (deviceType) {
-				case 'Desktop':
-					setAttributes({ countDownDigitBorderRadiusDesktop: { ...countDownDigitBorderRadiusDesktop, [position]: value } });
-					break;
-				case 'Tablet':
-					setAttributes({ countDownDigitBorderRadiusTablet: { ...countDownDigitBorderRadiusTablet, [position]: value } });
-					break;
-				case 'Mobile':
-					setAttributes({ countDownDigitBorderRadiusMobile: { ...countDownDigitBorderRadiusMobile, [position]: value } });
-					break;
-				default:
-					break;
-			}
-		}
-
-	}
-	const countDownDigitCombineBtnHandlerFn = () => {
-		setAttributes({ countDownDigitBorderRadiusLink: !countDownDigitBorderRadiusLink });
-	}
-
-	const countDownDigitBorderRadiusUnitsHandler = (unit) => {
-		setAttributes({
-			countDownDigitBorderRadiusUnits: {
-				...countDownDigitBorderRadiusUnits,
-				[deviceType]: unit
-			}
-		})
-	}
-
-	// Digit Margin
-	const countDownDigitHandleMarginUnit = (event, position) => {
-		const value = event.target.value;
-		if (countDownDigitMarginLink) {
-			switch (deviceType) {
-				case 'Desktop':
-					setAttributes({
-						countDownDigitMarginDesktop: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					});
-					break;
-				case 'Tablet':
-					setAttributes({
-						countDownDigitMarginTablet: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					});
-					break;
-				case 'Mobile':
-					setAttributes({
-						countDownDigitMarginMobile: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					});
-					break;
-				default:
-					break;
-			}
-		} else {
-			switch (deviceType) {
-				case 'Desktop':
-					setAttributes({ countDownDigitMarginDesktop: { ...countDownDigitMarginDesktop, [position]: value } });
-					break;
-				case 'Tablet':
-					setAttributes({ countDownDigitMarginTablet: { ...countDownDigitMarginTablet, [position]: value } });
-					break;
-				case 'Mobile':
-					setAttributes({ countDownDigitMarginMobile: { ...countDownDigitMarginMobile, [position]: value } });
-					break;
-				default:
-					break;
-			}
-		}
-
-	}
-	const countDownDigitMarginCombineBtnHandle = () => {
-		setAttributes({ countDownDigitMarginLink: !countDownDigitMarginLink });
-	}
-
-	const countDownDigitMarginUnitsHandler = (unit) => {
-		setAttributes({
-			countDownDigitMarginUnits: {
-				...countDownDigitMarginUnits,
-				[deviceType]: unit
-			}
-		})
-	}
+	// Footer Margin
+	const handleFooterMarginUnits = (value) =>
+		handleSpacingUnits("advancedCountdownFooterMarginUnits", value);
+	const handleFooterMarginValue = (event, position) =>
+		handleSpacingValue(
+			"advancedCountdownFooterMargin",
+			event,
+			position,
+			advancedCountdownFooterMarginLink,
+		);
 
 	/**
 	 * Inspector General Controls
@@ -1442,167 +444,60 @@ const Inspector = ({ attributes, setAttributes }) => {
 			<PanelBody title={__("General", "frontis-blocks")} initialOpen={true}>
 				<FB_Presets
 					className="fb-countdown-presets"
-					label={__('Select Preset', 'frontis-blocks')}
+					label={__("Layout Style", "frontis-blocks")}
 					presets={countdownPresets}
 					value={countDownPresetStyle}
-					onChangeValue='countDownPresetStyle'
-					defaultPresetValue="preset-1"
+					onChangeValue="countDownPresetStyle"
+					defaultPresetValue="style-1"
 					setAttributes={setAttributes}
 				/>
 
 				<DateTimePicker
-					currentDate={date}
-					onChange={(newDate) => setDate(new Date(newDate))}
+					currentDate={targetDate}
+					onChange={(newDate) => setAttributes({ targetDate: newDate })}
 					is12Hour={true}
+					dateFormat="Y-m-d H:i"
+					time_24hr={true}
+					label={__("Due Date & Time", "prime-elementor-addons-pro")}
 				/>
 
-				<BaseControl label={__("Start Date & Time", "frontis-blocks")}>
-					<DateTimePicker
-						currentDate={startDate}
-						onChange={(newDate) => setStartDate(new Date(newDate))}
-						is12Hour={true}
+				<DateTimePicker
+					currentDate={advancedCountdownStartDate}
+					onChange={(newDate) =>
+						setAttributes({ advancedCountdownStartDate: newDate })
+					}
+					is12Hour={true}
+					dateFormat="Y-m-d H:i"
+					time_24hr={true}
+					label={__("Start Date & Time", "prime-elementor-addons-pro")}
+				/>
+
+				{["style-1", "style-2"].includes(countDownPresetStyle) && (
+					<TextControl
+						label={__("Footer Text", "prime-elementor-addons-pro")}
+						value={until_text}
+						onChange={(value) => setAttributes({ until_text: value })}
 					/>
-				</BaseControl>
+				)}
 
-				<TextControl
-					label={__("Footer Text", "frontis-blocks")}
-					value={until_text}
-					onChange={(value) => setAttributes({ until_text: value })}
-				/>
-
-				<ToggleControl
-					label={__("Show Days", "frontis-blocks")}
-					checked={showDays}
-					onChange={(value) => setAttributes({ showDays: value })}
-					style={{ marginTop: '20px' }}
-				/>
-				<ToggleControl
-					label={__("Show Hours", "frontis-blocks")}
-					checked={showHours}
-					onChange={(value) => setAttributes({ showHours: value })}
-				/>
-				<ToggleControl
-					label={__("Show Minutes", "frontis-blocks")}
-					checked={showMinutes}
-					onChange={(value) => setAttributes({ showMinutes: value })}
-				/>
-				<ToggleControl
-					label={__("Show Seconds", "frontis-blocks")}
-					checked={showSeconds}
-					onChange={(value) => setAttributes({ showSeconds: value })}
-				/>
-			</PanelBody>
-
-			<PanelBody title={__("Layout", "frontis-blocks")} initialOpen={false}>
-				<SelectControl
-					label={__("Layout Type", "frontis-blocks")}
-					value={countDownLayoutType}
-					options={LAYOUT_TYPE}
-					onChange={(value) => setAttributes({ countDownLayoutType: value })}
-				/>
-				{countDownLayoutType === 'grid' &&
-					<FB_Range
-						min={1}
-						max={4}
-						label={__("Column Number", "frontis-blocks")}
-						rangeValue={countDownGrid}
-						onChangeHandler={(value) => setAttributes({ countDownGrid: value })}
-						deviceType={deviceType}
-						setAttributes={setAttributes}
-						rangeStep={1}
-						resetFallbackValue={1}
-						isRangeUnit={false}
-					/>
-				}
-
-				<FB_Range
-					min={1}
-					max={400}
-					label={__("Item Gap", "frontis-blocks")}
-					rangeValue={countDownItemGap}
-					onChangeHandler={(value) => setAttributes({ countDownItemGap: value })}
-					rangeUnitHandler={(value) => setAttributes({ countDownItemGapUnits: value })}
-					deviceType={deviceType}
-					units={countDownItemGapUnits}
-					setAttributes={setAttributes}
-					rangeStep={1}
-					resetFallbackValue={""}
-				/>
-
-				{countDownLayoutType === 'flex' &&
+				{countDownPresetStyle === "style-1" && (
 					<>
 						<ToggleControl
-							label={__("Flex Wrap", "frontis-blocks")}
-							checked={countDownFlexWrap}
-							onChange={(value) => setAttributes({ countDownFlexWrap: value })}
+							label={__("Show Icon", "prime-elementor-addons-pro")}
+							checked={advancedCountdownShowSunIcon === "yes"}
+							onChange={(value) =>
+								setAttributes({
+									advancedCountdownShowSunIcon: value ? "yes" : "no",
+								})
+							}
 						/>
-
-						<BaseControl
-							label={__(
-								"Alignment",
-								"frontis-blocks"
-							)}
-							id="fb-setting-text-alignment"
-							className="fb-setting-text-alignment"
-						>
-							<ButtonGroup className="fb-setting-text-alignment-group-btn">
-								{LAYOUT_ALIGNMENT.map((item) => (
-									<Button
-										key={item.value}
-										onClick={() => setAttributes({ countDownLayoutAlignment: item.value })}
-										className={`fb-setting-text-alignment-single-btn ${countDownLayoutAlignment === item.value ? 'active' : ''}`}
-									>
-										{item.label}
-									</Button>
-								))}
-							</ButtonGroup>
-						</BaseControl>
-					</>
-				}
-			</PanelBody>
-
-			<PanelBody title={__("Labels", "frontis-blocks")} initialOpen={false}>
-				<TextControl
-					label={__("Days", "frontis-blocks")}
-					value={countDownLabelDay}
-					onChange={(value) => setAttributes({ countDownLabelDay: value })}
-				/>
-				<TextControl
-					label={__("Hours", "frontis-blocks")}
-					value={countDownLabelHour}
-					onChange={(value) => setAttributes({ countDownLabelHour: value })}
-				/>
-				<TextControl
-					label={__("Minutes", "frontis-blocks")}
-					value={countDownLabelMinute}
-					onChange={(value) => setAttributes({ countDownLabelMinute: value })}
-				/>
-				<TextControl
-					label={__("Seconds", "frontis-blocks")}
-					value={countDownLabelSecond}
-					onChange={(value) => setAttributes({ countDownLabelSecond: value })}
-				/>
-			</PanelBody>
-			<PanelBody title={__("Separator", "frontis-blocks")} initialOpen={false}>
-				<ToggleControl
-					label={__("Show Separator", "frontis-blocks")}
-					checked={countDownSeparatorEnabled}
-					onChange={(value) => setAttributes({ countDownSeparatorEnabled: value })}
-				/>
-				{countDownSeparatorEnabled && (
-					<>
-						<SelectControl
-							label={__("Separator Type", "frontis-blocks")}
-							value={countDownSeparatorType}
-							options={SELECT_SEPARATOR_TYPE}
-							onChange={(value) => setAttributes({ countDownSeparatorType: value })}
-						/>
-
-						{countDownSeparatorType === 'custom' && (
-							<TextControl
-								label={__("Custom Separetor", "frontis-blocks")}
-								value={countDownSeparatorCustom}
-								onChange={(value) => setAttributes({ countDownSeparatorCustom: value.replace(/[a-zA-Z0-9]/g, '') })}
+						{advancedCountdownShowSunIcon === "yes" && (
+							<FB_IconPicker
+								label={__("Icon", "prime-elementor-addons-pro")}
+								value={advancedCountdownSunIcon}
+								setIconHandler={(value) =>
+									setAttributes({ advancedCountdownSunIcon: value })
+								}
 							/>
 						)}
 					</>
@@ -1617,729 +512,1985 @@ const Inspector = ({ attributes, setAttributes }) => {
 	const styleControls = (
 		<>
 			<PanelBody
-				title={__("Item", "frontis-blocks")}
+				title={__("Container", "prime-elementor-addons-pro")}
 				initialOpen={true}
 			>
+				{["style-1", "style-2", "style-4"].includes(countDownPresetStyle) && (
+					<FB_Range
+						label={__("Size", "prime-elementor-addons-pro")}
+						min={200}
+						max={1200}
+						rangeValue={advancedCountdownContainerSize}
+						onChangeHandler={(value) =>
+							setAttributes({
+								advancedCountdownContainerSize: {
+									...advancedCountdownContainerSize,
+									[deviceType]: value,
+								},
+							})
+						}
+						rangeUnitHandler={(value) =>
+							setAttributes({
+								advancedCountdownContainerSize: {
+									...advancedCountdownContainerSize,
+									unit: value,
+								},
+							})
+						}
+						deviceType={deviceType}
+						units={advancedCountdownContainerSize.unit}
+						setAttributes={setAttributes}
+						rangeStep={1}
+						resetFallbackValue={100}
+					/>
+				)}
+				{countDownPresetStyle === "style-1" && (
+					<FB_Range
+						label={__("Progress Bar Size", "prime-elementor-addons-pro")}
+						min={414}
+						max={1000}
+						rangeValue={advancedCountdownSvgProgressSize}
+						onChangeHandler={(value) =>
+							setAttributes({
+								advancedCountdownSvgProgressSize: {
+									...advancedCountdownSvgProgressSize,
+									[deviceType]: value,
+								},
+							})
+						}
+						rangeUnitHandler={(value) =>
+							setAttributes({
+								advancedCountdownSvgProgressSize: {
+									...advancedCountdownSvgProgressSize,
+									unit: value,
+								},
+							})
+						}
+						deviceType={deviceType}
+						units={advancedCountdownSvgProgressSize.unit}
+						setAttributes={setAttributes}
+						rangeStep={1}
+						resetFallbackValue={524}
+					/>
+				)}
+				{countDownPresetStyle === "style-2" && (
+					<FB_Range
+						label={__("Progress Bar Size", "prime-elementor-addons-pro")}
+						min={200}
+						max={1000}
+						rangeValue={advancedCountdownStyle2ProgressBarSize}
+						onChangeHandler={(value) =>
+							setAttributes({
+								advancedCountdownStyle2ProgressBarSize: {
+									...advancedCountdownStyle2ProgressBarSize,
+									[deviceType]: value,
+								},
+							})
+						}
+						rangeUnitHandler={(value) =>
+							setAttributes({
+								advancedCountdownStyle2ProgressBarSize: {
+									...advancedCountdownStyle2ProgressBarSize,
+									unit: value,
+								},
+							})
+						}
+						deviceType={deviceType}
+						units={advancedCountdownStyle2ProgressBarSize.unit}
+						setAttributes={setAttributes}
+						rangeStep={1}
+						resetFallbackValue={200}
+					/>
+				)}
+				{countDownPresetStyle === "style-3" && (
+					<>
+						<FB_Range
+							label={__("Size", "prime-elementor-addons-pro")}
+							min={400}
+							max={700}
+							rangeValue={advancedCountdownContainerSizeStyle3}
+							onChangeHandler={(value) =>
+								setAttributes({
+									advancedCountdownContainerSizeStyle3: {
+										...advancedCountdownContainerSizeStyle3,
+										[deviceType]: value,
+									},
+								})
+							}
+							rangeUnitHandler={(value) =>
+								setAttributes({
+									advancedCountdownContainerSizeStyle3: {
+										...advancedCountdownContainerSizeStyle3,
+										unit: value,
+									},
+								})
+							}
+							deviceType={deviceType}
+							units={advancedCountdownContainerSizeStyle3.unit}
+							setAttributes={setAttributes}
+							rangeStep={1}
+							resetFallbackValue={570}
+						/>
+						<FB_Range
+							label={__("Container Size", "prime-elementor-addons-pro")}
+							min={0}
+							max={700}
+							rangeValue={advancedCountdownContainerSizeStyle3Container}
+							onChangeHandler={(value) =>
+								setAttributes({
+									advancedCountdownContainerSizeStyle3Container: {
+										...advancedCountdownContainerSizeStyle3Container,
+										[deviceType]: value,
+									},
+								})
+							}
+							rangeUnitHandler={(value) =>
+								setAttributes({
+									advancedCountdownContainerSizeStyle3Container: {
+										...advancedCountdownContainerSizeStyle3Container,
+										unit: value,
+									},
+								})
+							}
+							deviceType={deviceType}
+							units={advancedCountdownContainerSizeStyle3Container.unit}
+							setAttributes={setAttributes}
+							rangeStep={1}
+							resetFallbackValue={530}
+						/>
+					</>
+				)}
+				{countDownPresetStyle === "style-5" && (
+					<FB_Range
+						label={__("Size", "prime-elementor-addons-pro")}
+						min={300}
+						max={1200}
+						rangeValue={advancedCountdownContainerSizeStyle5}
+						onChangeHandler={(value) =>
+							setAttributes({
+								advancedCountdownContainerSizeStyle5: {
+									...advancedCountdownContainerSizeStyle5,
+									[deviceType]: value,
+								},
+							})
+						}
+						rangeUnitHandler={(value) =>
+							setAttributes({
+								advancedCountdownContainerSizeStyle5: {
+									...advancedCountdownContainerSizeStyle5,
+									unit: value,
+								},
+							})
+						}
+						deviceType={deviceType}
+						units={advancedCountdownContainerSizeStyle5.unit}
+						setAttributes={setAttributes}
+						rangeStep={1}
+						resetFallbackValue={771}
+					/>
+				)}
+
+				<FB_BackgroundColorControl
+					label={__("Background", "prime-elementor-addons-pro")}
+					bgColorSwitcher={globalBgColorSwitcher}
+					setBgColorSwitcher={(value) =>
+						setAttributes({ globalBgColorSwitcher: value })
+					}
+					normalBackgroundType={globalBackgroundType}
+					setNormalBackgroundType={(value) =>
+						setAttributes({ globalBackgroundType: value })
+					}
+					normalClassicColor={globalClassicColor}
+					setNormalClassicColor={(value) =>
+						setAttributes({
+							globalClassicColor: value === undefined ? "" : value,
+						})
+					}
+					normalGradientColor={globalGradientColor}
+					setNormalGradientColor={(value) =>
+						setAttributes({
+							globalGradientColor: value === undefined ? null : value,
+						})
+					}
+					normalCustomGradientSwitcher={globalCustomGradientSwitcher}
+					setNormalCustomGradientSwitcher={(value) =>
+						setAttributes({ globalCustomGradientSwitcher: value })
+					}
+					normalCustomGradientInputValue={globalCustomGradientInputValue}
+					setNormalCustomGradientInputValue={(value) =>
+						setAttributes({ globalCustomGradientInputValue: value })
+					}
+					normalBackgroundImageUrl={globalBackgroundImageUrl}
+					setNormalBackgroundImageUrl={(value) =>
+						setAttributes({ globalBackgroundImageUrl: value })
+					}
+					normalBackgroundImageAlt={globalBackgroundImageAlt}
+					setNormalBackgroundImageAlt={(value) =>
+						setAttributes({ globalBackgroundImageAlt: value })
+					}
+					normalBackgroundImageID={globalBackgroundImageID}
+					setNormalBackgroundImageID={(value) =>
+						setAttributes({ globalBackgroundImageID: value })
+					}
+					normalBackgroundImagePosition={globalBackgroundImagePosition}
+					setNormalBackgroundImagePosition={(value) =>
+						setAttributes({ globalBackgroundImagePosition: value })
+					}
+					normalBackgroundImageAttachment={globalBackgroundImageAttachment}
+					setNormalBackgroundImageAttachment={(value) =>
+						setAttributes({ globalBackgroundImageAttachment: value })
+					}
+					normalBackgroundImageRepeat={globalBackgroundImageRepeat}
+					setNormalBackgroundImageRepeat={(value) =>
+						setAttributes({ globalBackgroundImageRepeat: value })
+					}
+					normalBackgroundImageSize={globalBackgroundImageSize}
+					setNormalBackgroundImageSize={(value) =>
+						setAttributes({ globalBackgroundImageSize: value })
+					}
+					hoverBackgroundType={hoverBackgroundType}
+					setHoverBackgroundType={(value) =>
+						setAttributes({ hoverBackgroundType: value })
+					}
+					hoverClassicColor={hoverClassicColor}
+					setHoverClassicColor={(value) =>
+						setAttributes({
+							hoverClassicColor: value === undefined ? "" : value,
+						})
+					}
+					hoverGradientColor={hoverGradientColor}
+					setHoverGradientColor={(value) =>
+						setAttributes({
+							hoverGradientColor: value === undefined ? null : value,
+						})
+					}
+					hoverCustomGradientSwitcher={hoverCustomGradientSwitcher}
+					setHoverCustomGradientSwitcher={(value) =>
+						setAttributes({ hoverCustomGradientSwitcher: value })
+					}
+					hoverCustomGradientInputValue={hoverCustomGradientInputValue}
+					setHoverCustomGradientInputValue={(value) =>
+						setAttributes({ hoverCustomGradientInputValue: value })
+					}
+					hoverBackgroundImageUrl={hoverBackgroundImageUrl}
+					setHoverBackgroundImageUrl={(value) =>
+						setAttributes({ hoverBackgroundImageUrl: value })
+					}
+					hoverBackgroundImageAlt={hoverBackgroundImageAlt}
+					setHoverBackgroundImageAlt={(value) =>
+						setAttributes({ hoverBackgroundImageAlt: value })
+					}
+					hoverBackgroundImageID={hoverBackgroundImageID}
+					setHoverBackgroundImageID={(value) =>
+						setAttributes({ hoverBackgroundImageID: value })
+					}
+					hoverBackgroundImagePosition={hoverBackgroundImagePosition}
+					setHoverBackgroundImagePosition={(value) =>
+						setAttributes({ hoverBackgroundImagePosition: value })
+					}
+					hoverBackgroundImageAttachment={hoverBackgroundImageAttachment}
+					setHoverBackgroundImageAttachment={(value) =>
+						setAttributes({ hoverBackgroundImageAttachment: value })
+					}
+					hoverBackgroundImageRepeat={hoverBackgroundImageRepeat}
+					setHoverBackgroundImageRepeat={(value) =>
+						setAttributes({ hoverBackgroundImageRepeat: value })
+					}
+					hoverBackgroundImageSize={hoverBackgroundImageSize}
+					setHoverBackgroundImageSize={(value) =>
+						setAttributes({ hoverBackgroundImageSize: value })
+					}
+				/>
+
 				<FB_Range
-					min={1}
-					max={400}
-					label={__("Item Size", "frontis-blocks")}
-					rangeValue={countDownItemSize}
-					onChangeHandler={(value) => setAttributes({ countDownItemSize: value })}
-					rangeUnitHandler={(value) => setAttributes({ countDownItemSizeUnits: value })}
+					label={__("Transition Duration", "prime-elementor-addons-pro")}
+					min={0}
+					max={3}
+					rangeValue={advancedCountdownContainerHoverTransition}
+					onChangeHandler={(value) =>
+						setAttributes({
+							advancedCountdownContainerHoverTransition: {
+								...advancedCountdownContainerHoverTransition,
+								[deviceType]: value,
+							},
+						})
+					}
 					deviceType={deviceType}
-					units={countDownItemSizeUnits}
+					units="s"
 					setAttributes={setAttributes}
-					rangeStep={1}
-					resetFallbackValue={""}
+					rangeStep={0.1}
+					resetFallbackValue={0.4}
 				/>
-
-				<ToggleControl
-					label={__("Item Size With Height", "frontis-blocks")}
-					checked={countDownItemSizeHeight}
-					onChange={(value) => setAttributes({ countDownItemSizeHeight: value })}
-				/>
-
-				<FB_SwitcherControl
-					label={__("Background Color", "frontis-blocks")}
-					globalSwitcher={countDownItemBgColorSwitcher}
-					setGlobalSwitcher={(value) => setAttributes({ countDownItemBgColorSwitcher: value })}
-				/>
-
-				{countDownItemBgColorSwitcher === 'normal' && (
-					<FB_ColorControl
-						label={__("Normal Color", "frontis-blocks")}
-						globalColor={countDownItemBgColor}
-						setGlobalColor={(value) => setAttributes({ countDownItemBgColor: value === undefined ? '' : value })}
-					/>
-				)}
-
-				{countDownItemBgColorSwitcher === 'hover' && (
-					<FB_ColorControl
-						label={__("Hover Color", "frontis-blocks")}
-						globalColor={countDownItemBgHoverColor}
-						setGlobalColor={(value) => setAttributes({ countDownItemBgHoverColor: value === undefined ? '' : value })}
-					/>
-				)}
-
 
 				<SelectControl
-					label={__("Border Style", "frontis-blocks")}
-					value={countDownItemBorder}
+					label={__("Border Style", "prime-elementor-addons-pro")}
+					value={advancedCountdownItemWrapperBorder}
 					options={BORDER_STYLES}
-					onChange={(value) => setAttributes({ countDownItemBorder: value })}
+					onChange={(value) =>
+						setAttributes({ advancedCountdownItemWrapperBorder: value })
+					}
 				/>
 
 				<FB_SwitcherControl
-					label={__("Border Color", "frontis-blocks")}
-					globalSwitcher={countDownItemBorderColorSwitcher}
-					setGlobalSwitcher={(value) => setAttributes({ countDownItemBorderColorSwitcher: value })}
+					label={__("Border Color", "prime-elementor-addons-pro")}
+					globalSwitcher={advancedCountdownItemWrapperBorderColorSwitcher}
+					setGlobalSwitcher={(value) =>
+						setAttributes({
+							advancedCountdownItemWrapperBorderColorSwitcher: value,
+						})
+					}
 				/>
 
-				{countDownItemBorderColorSwitcher === 'normal' && (
+				{advancedCountdownItemWrapperBorderColorSwitcher === "normal" && (
 					<FB_ColorControl
-						label={__("Normal Color", "frontis-blocks")}
-						globalColor={countDownItemBorderColor}
-						setGlobalColor={(value) => setAttributes({ countDownItemBorderColor: value === undefined ? '' : value })}
+						label={__("Normal Color", "prime-elementor-addons-pro")}
+						globalColor={advancedCountdownItemWrapperBorderColor}
+						setGlobalColor={(value) =>
+							setAttributes({
+								advancedCountdownItemWrapperBorderColor:
+									value === undefined ? "" : value,
+							})
+						}
 					/>
 				)}
 
-				{countDownItemBorderColorSwitcher === 'hover' && (
+				{advancedCountdownItemWrapperBorderColorSwitcher === "hover" && (
 					<FB_ColorControl
-						label={__("Hover Color", "frontis-blocks")}
-						globalColor={countDownItemBorderHoverColor}
-						setGlobalColor={(value) => setAttributes({ countDownItemBorderHoverColor: value === undefined ? '' : value })}
+						label={__("Hover Color", "prime-elementor-addons-pro")}
+						globalColor={advancedCountdownBorderHoverColor}
+						setGlobalColor={(value) =>
+							setAttributes({
+								advancedCountdownBorderHoverColor:
+									value === undefined ? "" : value,
+							})
+						}
 					/>
 				)}
 
-				<FB_Spacing
-					label={'Border Width'}
+				<FB_Range
+					label={__("Transition Duration", "prime-elementor-addons-pro")}
+					min={0}
+					max={3}
+					rangeValue={advancedCountdownBorderHoverTransition}
+					onChangeHandler={(value) =>
+						setAttributes({
+							advancedCountdownBorderHoverTransition: {
+								...advancedCountdownBorderHoverTransition,
+								[deviceType]: value,
+							},
+						})
+					}
 					deviceType={deviceType}
-					spacingUnitsHandler={countDownItemBorderUnitsHandler}
-					spacingUnits={countDownItemBorderTypeUnits}
-					spacingDesktop={countDownItemBorderTypeDesktop}
-					spacingTablet={countDownItemBorderTypeTablet}
-					spacingMobile={countDownItemBorderTypeMobile}
-					handleSpacingUnitHandler={handleCountdownItemBorderUnitHandler}
-					spacingCombineBtn={countDownItemBorderTypeLink}
-					spacingCombineBtnHandler={countdownItemBorderCombineBtnHandler} setAttributes={setAttributes}
+					units="s"
+					setAttributes={setAttributes}
+					rangeStep={0.1}
+					resetFallbackValue={0.35}
 				/>
 
 				<FB_Spacing
-					label={'Border Radius'}
+					label={__("Border Radius", "prime-elementor-addons-pro")}
 					deviceType={deviceType}
-					spacingUnitsHandler={countDownItemBorderRadiusUnitsHandler}
-					spacingUnits={countDownItemBorderRadiusUnits}
-					spacingDesktop={countDownItemBorderRadiusDesktop}
-					spacingTablet={countDownItemBorderRadiusTablet}
-					spacingMobile={countDownItemBorderRadiusMobile}
-					handleSpacingUnitHandler={handleCountDownItemBorderRadiusUnitHandler}
-					spacingCombineBtn={countDownItemBorderRadiusLink}
-					spacingCombineBtnHandler={countDownItemBorderRadiusCombineBtnHandler} setAttributes={setAttributes}
+					spacingUnitsHandler={(unit) =>
+						setAttributes({
+							advancedCountdownBorderRadius: {
+								...advancedCountdownBorderRadius,
+								unit: unit,
+							},
+						})
+					}
+					spacingUnits={advancedCountdownBorderRadius.unit}
+					spacingDesktop={advancedCountdownBorderRadius}
+					handleSpacingUnitHandler={(event, position) =>
+						setAttributes({
+							advancedCountdownBorderRadius: {
+								...advancedCountdownBorderRadius,
+								[position]: event.target.value,
+							},
+						})
+					}
+					spacingCombineBtn={advancedCountdownBorderRadius.isLinked}
+					spacingCombineBtnHandler={() =>
+						setAttributes({
+							advancedCountdownBorderRadius: {
+								...advancedCountdownBorderRadius,
+								isLinked: !advancedCountdownBorderRadius.isLinked,
+							},
+						})
+					}
+					setAttributes={setAttributes}
+				/>
+
+				{countDownPresetStyle === "style-5" && (
+					<FB_Range
+						label={__("Gap", "prime-elementor-addons-pro")}
+						min={0}
+						max={100}
+						rangeValue={advancedCountdownPreset5DashGap}
+						onChangeHandler={(value) =>
+							setAttributes({
+								advancedCountdownPreset5DashGap: {
+									...advancedCountdownPreset5DashGap,
+									[deviceType]: value,
+								},
+							})
+						}
+						rangeUnitHandler={(value) =>
+							setAttributes({
+								advancedCountdownPreset5DashGap: {
+									...advancedCountdownPreset5DashGap,
+									unit: value,
+								},
+							})
+						}
+						deviceType={deviceType}
+						units={advancedCountdownPreset5DashGap.unit}
+						setAttributes={setAttributes}
+						rangeStep={1}
+						resetFallbackValue={62}
+					/>
+				)}
+
+				{countDownPresetStyle === "style-4" && (
+					<FB_Range
+						label={__("Gap", "prime-elementor-addons-pro")}
+						min={5}
+						max={100}
+						rangeValue={advancedCountdownPreset4DashGap}
+						onChangeHandler={(value) =>
+							setAttributes({
+								advancedCountdownPreset4DashGap: {
+									...advancedCountdownPreset4DashGap,
+									[deviceType]: value,
+								},
+							})
+						}
+						rangeUnitHandler={(value) =>
+							setAttributes({
+								advancedCountdownPreset4DashGap: {
+									...advancedCountdownPreset4DashGap,
+									unit: value,
+								},
+							})
+						}
+						deviceType={deviceType}
+						units={advancedCountdownPreset4DashGap.unit}
+						setAttributes={setAttributes}
+						rangeStep={1}
+						resetFallbackValue={10}
+					/>
+				)}
+
+				<BaseControl
+					label={__("Alignment", "prime-elementor-addons-pro")}
+					id="fb-setting-text-alignment"
+					className="fb-setting-text-alignment"
+				>
+					<ButtonGroup className="fb-setting-text-alignment-group-btn">
+						{LAYOUT_ALIGNMENT.map((item) => (
+							<Button
+								key={item.value}
+								onClick={() =>
+									setAttributes({ countDownLayoutAlignment: item.value })
+								}
+								className={`fb-setting-text-alignment-single-btn ${
+									countDownLayoutAlignment === item.value ? "active" : ""
+								}`}
+							>
+								{item.label}
+							</Button>
+						))}
+					</ButtonGroup>
+				</BaseControl>
+
+				<FB_Spacing
+					label={__("Margin", "prime-elementor-addons-pro")}
+					deviceType={deviceType}
+					spacingUnitsHandler={handleContainerMarginUnits}
+					spacingUnits={advancedCountdownItemWrapperMarginUnits}
+					spacingDesktop={advancedCountdownItemWrapperMarginDesktop}
+					spacingTablet={advancedCountdownItemWrapperMarginTablet}
+					spacingMobile={advancedCountdownItemWrapperMarginMobile}
+					handleSpacingUnitHandler={handleContainerMarginValue}
+					spacingCombineBtn={advancedCountdownItemWrapperMarginLink}
+					spacingCombineBtnHandler={() =>
+						setAttributes({
+							advancedCountdownItemWrapperMarginLink:
+								!advancedCountdownItemWrapperMarginLink,
+						})
+					}
+					setAttributes={setAttributes}
+				/>
+
+				<FB_Spacing
+					label={__("Padding", "prime-elementor-addons-pro")}
+					deviceType={deviceType}
+					spacingUnitsHandler={handleContainerPaddingUnits}
+					spacingUnits={advancedCountdownFooterPadding.unit}
+					spacingDesktop={advancedCountdownFooterPadding}
+					handleSpacingUnitHandler={(event, position) =>
+						setAttributes({
+							advancedCountdownFooterPadding: {
+								...advancedCountdownFooterPadding,
+								[position]: event.target.value,
+							},
+						})
+					}
+					spacingCombineBtn={advancedCountdownFooterPaddingLink}
+					spacingCombineBtnHandler={() =>
+						setAttributes({
+							advancedCountdownFooterPaddingLink:
+								!advancedCountdownFooterPaddingLink,
+						})
+					}
+					setAttributes={setAttributes}
 				/>
 			</PanelBody>
 
+			{countDownPresetStyle === "style-2" && (
+				<PanelBody
+					title={__("Dashed Progress Bar", "prime-elementor-addons-pro")}
+					initialOpen={false}
+				>
+					<FB_ColorControl
+						label={__("Bar Color", "prime-elementor-addons-pro")}
+						globalColor={advancedCountdownStyle2ProgressBarColor}
+						setGlobalColor={(value) =>
+							setAttributes({
+								advancedCountdownStyle2ProgressBarColor:
+									value === undefined ? "" : value,
+							})
+						}
+					/>
+					<FB_Range
+						label={__("Dash Spacing", "prime-elementor-addons-pro")}
+						min={1}
+						max={20}
+						rangeValue={advancedCountdownStyle2DashCount}
+						onChangeHandler={(value) =>
+							setAttributes({
+								advancedCountdownStyle2DashCount: {
+									...advancedCountdownStyle2DashCount,
+									[deviceType]: value,
+								},
+							})
+						}
+						deviceType={deviceType}
+						units="px"
+						setAttributes={setAttributes}
+						rangeStep={1}
+						resetFallbackValue={5}
+					/>
+				</PanelBody>
+			)}
+
+			{countDownPresetStyle === "style-5" && (
+				<PanelBody
+					title={__("Dots Configuration", "prime-elementor-addons-pro")}
+					initialOpen={false}
+				>
+					<FB_Range
+						label={__("Days Dots", "prime-elementor-addons-pro")}
+						min={12}
+						max={30}
+						rangeValue={advancedCountdownDaysTotalDots}
+						onChangeHandler={(value) =>
+							setAttributes({
+								advancedCountdownDaysTotalDots: {
+									...advancedCountdownDaysTotalDots,
+									[deviceType]: value,
+								},
+							})
+						}
+						deviceType={deviceType}
+						units="px"
+						setAttributes={setAttributes}
+						rangeStep={1}
+						resetFallbackValue={12}
+					/>
+					<FB_Range
+						label={__("Hours Dots", "prime-elementor-addons-pro")}
+						min={12}
+						max={30}
+						rangeValue={advancedCountdownHoursTotalDots}
+						onChangeHandler={(value) =>
+							setAttributes({
+								advancedCountdownHoursTotalDots: {
+									...advancedCountdownHoursTotalDots,
+									[deviceType]: value,
+								},
+							})
+						}
+						deviceType={deviceType}
+						units="px"
+						setAttributes={setAttributes}
+						rangeStep={1}
+						resetFallbackValue={24}
+					/>
+					<FB_Range
+						label={__("Minutes Dots", "prime-elementor-addons-pro")}
+						min={12}
+						max={30}
+						rangeValue={advancedCountdownMinutesTotalDots}
+						onChangeHandler={(value) =>
+							setAttributes({
+								advancedCountdownMinutesTotalDots: {
+									...advancedCountdownMinutesTotalDots,
+									[deviceType]: value,
+								},
+							})
+						}
+						deviceType={deviceType}
+						units="px"
+						setAttributes={setAttributes}
+						rangeStep={1}
+						resetFallbackValue={30}
+					/>
+				</PanelBody>
+			)}
+
+			{countDownPresetStyle === "style-3" && (
+				<PanelBody
+					title={__("Progress & Indicator", "prime-elementor-addons-pro")}
+					initialOpen={false}
+				>
+					<FB_ColorControl
+						label={__("Background", "prime-elementor-addons-pro")}
+						globalColor={advancedCountdownStyle3ContainerBg}
+						setGlobalColor={(value) =>
+							setAttributes({
+								advancedCountdownStyle3ContainerBg:
+									value === undefined ? "" : value,
+							})
+						}
+					/>
+					<FB_ColorControl
+						label={__("Time Box Background", "prime-elementor-addons-pro")}
+						globalColor={advancedCountdownStyle3TimeboxBg}
+						setGlobalColor={(value) =>
+							setAttributes({
+								advancedCountdownStyle3TimeboxBg:
+									value === undefined ? "" : value,
+							})
+						}
+					/>
+					<FB_ColorControl
+						label={__("Indicator Color", "prime-elementor-addons-pro")}
+						globalColor={advancedCountdownStyle3IndicatorColor}
+						setGlobalColor={(value) =>
+							setAttributes({
+								advancedCountdownStyle3IndicatorColor:
+									value === undefined ? "" : value,
+							})
+						}
+					/>
+					<FB_ColorControl
+						label={__("Text Color", "prime-elementor-addons-pro")}
+						globalColor={advancedCountdownStyle3IndicatorTextColor}
+						setGlobalColor={(value) =>
+							setAttributes({
+								advancedCountdownStyle3IndicatorTextColor:
+									value === undefined ? "" : value,
+							})
+						}
+					/>
+					<FB_Range
+						label={__("Time Gap", "prime-elementor-addons-pro")}
+						min={10}
+						max={50}
+						rangeValue={advancedCountdownStyle3TimeGap}
+						onChangeHandler={(value) =>
+							setAttributes({
+								advancedCountdownStyle3TimeGap: {
+									...advancedCountdownStyle3TimeGap,
+									[deviceType]: value,
+								},
+							})
+						}
+						rangeUnitHandler={(value) =>
+							setAttributes({
+								advancedCountdownStyle3TimeGap: {
+									...advancedCountdownStyle3TimeGap,
+									unit: value,
+								},
+							})
+						}
+						deviceType={deviceType}
+						units={advancedCountdownStyle3TimeGap.unit}
+						setAttributes={setAttributes}
+						rangeStep={1}
+						resetFallbackValue={10}
+					/>
+					<FB_ColorControl
+						label={__("Highlighted Dash Color", "prime-elementor-addons-pro")}
+						globalColor={advancedCountdownStyle3DashHighlight}
+						setGlobalColor={(value) =>
+							setAttributes({
+								advancedCountdownStyle3DashHighlight:
+									value === undefined ? "" : value,
+							})
+						}
+					/>
+					<FB_TypographyControl
+						globalTypoControlActive={true}
+						globalTypoSwitcher={advancedCountdownStyle3TextGlobalTypoSwitcher}
+						storeGlobalTypographyData={(value) =>
+							setAttributes({
+								advancedCountdownStyle3TextGlobalTypographyData: value,
+							})
+						}
+						globalTypoType={advancedCountdownStyle3TextGlobalTypoType}
+						onChangeGlobalTypoType={(value) =>
+							setAttributes({
+								advancedCountdownStyle3TextGlobalTypoType: value,
+							})
+						}
+						globalTypoOption={advancedCountdownStyle3TextGlobalTypoOption}
+						onChangeGlobalTypoOption={(value) =>
+							setAttributes({
+								advancedCountdownStyle3TextGlobalTypoOption: value,
+							})
+						}
+						fontFamily={advancedCountdownStyle3TextFontFamily}
+						onChangeFontFamily={(value) =>
+							setAttributes({ advancedCountdownStyle3TextFontFamily: value })
+						}
+						fontSize={advancedCountdownStyle3TextFontSize}
+						onChangeFontSize={(value) =>
+							setAttributes({ advancedCountdownStyle3TextFontSize: value })
+						}
+						fontSizeUnits={advancedCountdownStyle3TextFontSizeUnits}
+						onChangeFontSizeUnit={(value) =>
+							setAttributes({ advancedCountdownStyle3TextFontSizeUnits: value })
+						}
+						fontWeight={advancedCountdownStyle3TextFontWeight}
+						onChangeFontWeight={(value) =>
+							setAttributes({ advancedCountdownStyle3TextFontWeight: value })
+						}
+						fontStyle={advancedCountdownStyle3TextFontStyle}
+						onChangeFontStyle={(value) =>
+							setAttributes({ advancedCountdownStyle3TextFontStyle: value })
+						}
+						textTransform={advancedCountdownStyle3TextTextTransform}
+						onChangeTextTransform={(value) =>
+							setAttributes({ advancedCountdownStyle3TextTextTransform: value })
+						}
+						textDecoration={advancedCountdownStyle3TextTextDecoration}
+						onChangeTextDecoration={(value) =>
+							setAttributes({
+								advancedCountdownStyle3TextTextDecoration: value,
+							})
+						}
+						letterSpacing={advancedCountdownStyle3TextLetterSpacing}
+						onChangeLetterSpacing={(value) =>
+							setAttributes({ advancedCountdownStyle3TextLetterSpacing: value })
+						}
+						letterSpacingUnits={advancedCountdownStyle3TextLetterSpacingUnits}
+						onChangeLetterSpacingUnit={(value) =>
+							setAttributes({
+								advancedCountdownStyle3TextLetterSpacingUnits: value,
+							})
+						}
+						lineHeight={advancedCountdownStyle3TextLineHeight}
+						onChangeLineHeight={(value) =>
+							setAttributes({ advancedCountdownStyle3TextLineHeight: value })
+						}
+						lineHeightUnits={advancedCountdownStyle3TextLineHeightUnits}
+						onChangeLineHeightUnit={(value) =>
+							setAttributes({
+								advancedCountdownStyle3TextLineHeightUnits: value,
+							})
+						}
+						deviceType={deviceType}
+						setAttributes={setAttributes}
+					/>
+				</PanelBody>
+			)}
+
+			{countDownPresetStyle === "style-5" && (
+				<PanelBody
+					title={__("Dots", "prime-elementor-addons-pro")}
+					initialOpen={false}
+				>
+					<FB_ColorControl
+						label={__("Active Dot Color", "prime-elementor-addons-pro")}
+						globalColor={advancedCountdownActiveDotColor}
+						setGlobalColor={(value) =>
+							setAttributes({
+								advancedCountdownActiveDotColor:
+									value === undefined ? "" : value,
+							})
+						}
+					/>
+					<FB_ColorControl
+						label={__("Inactive Dot Color", "prime-elementor-addons-pro")}
+						globalColor={advancedCountdownInactiveDotColor}
+						setGlobalColor={(value) =>
+							setAttributes({
+								advancedCountdownInactiveDotColor:
+									value === undefined ? "" : value,
+							})
+						}
+					/>
+					<FB_Range
+						label={__("Dots Size", "prime-elementor-addons-pro")}
+						min={1}
+						max={20}
+						rangeValue={advancedCountdownDotsThickness}
+						onChangeHandler={(value) =>
+							setAttributes({
+								advancedCountdownDotsThickness: {
+									...advancedCountdownDotsThickness,
+									[deviceType]: value,
+								},
+							})
+						}
+						deviceType={deviceType}
+						units="px"
+						setAttributes={setAttributes}
+						rangeStep={1}
+						resetFallbackValue={5}
+					/>
+					<FB_Range
+						label={__("Dots Gap", "prime-elementor-addons-pro")}
+						min={1}
+						max={3}
+						rangeValue={advancedCountdownDotsGap}
+						onChangeHandler={(value) =>
+							setAttributes({
+								advancedCountdownDotsGap: {
+									...advancedCountdownDotsGap,
+									[deviceType]: value,
+								},
+							})
+						}
+						deviceType={deviceType}
+						units="px"
+						setAttributes={setAttributes}
+						rangeStep={0.1}
+						resetFallbackValue={1}
+					/>
+					<ToggleControl
+						label={__("Dots Glow Effect", "prime-elementor-addons-pro")}
+						checked={advancedCountdownDotsGlowEffect === "yes"}
+						onChange={(value) =>
+							setAttributes({
+								advancedCountdownDotsGlowEffect: value ? "yes" : "no",
+							})
+						}
+					/>
+					{advancedCountdownDotsGlowEffect === "yes" && (
+						<>
+							<FB_Range
+								label={__("Glow Intensity", "prime-elementor-addons-pro")}
+								min={5}
+								max={40}
+								rangeValue={advancedCountdownGlowIntensity}
+								onChangeHandler={(value) =>
+									setAttributes({
+										advancedCountdownGlowIntensity: {
+											...advancedCountdownGlowIntensity,
+											[deviceType]: value,
+										},
+									})
+								}
+								deviceType={deviceType}
+								units="px"
+								setAttributes={setAttributes}
+								rangeStep={1}
+								resetFallbackValue={12}
+							/>
+							<FB_ColorControl
+								label={__("Glow Color", "prime-elementor-addons-pro")}
+								globalColor={advancedCountdownGlowColor}
+								setGlobalColor={(value) =>
+									setAttributes({
+										advancedCountdownGlowColor:
+											value === undefined ? "" : value,
+									})
+								}
+							/>
+						</>
+					)}
+				</PanelBody>
+			)}
+
+			{countDownPresetStyle === "style-4" && (
+				<PanelBody
+					title={__("Dash Pattern", "prime-elementor-addons-pro")}
+					initialOpen={false}
+				>
+					<FB_ColorControl
+						label={__("Dash Color", "prime-elementor-addons-pro")}
+						globalColor={advancedCountdownDashColor}
+						setGlobalColor={(value) =>
+							setAttributes({
+								advancedCountdownDashColor: value === undefined ? "" : value,
+							})
+						}
+					/>
+					<FB_Range
+						label={__("Dash Size", "prime-elementor-addons-pro")}
+						min={1}
+						max={20}
+						rangeValue={advancedCountdownDashSize}
+						onChangeHandler={(value) =>
+							setAttributes({
+								advancedCountdownDashSize: {
+									...advancedCountdownDashSize,
+									[deviceType]: value,
+								},
+							})
+						}
+						deviceType={deviceType}
+						units="px"
+						setAttributes={setAttributes}
+						rangeStep={1}
+						resetFallbackValue={4}
+					/>
+				</PanelBody>
+			)}
+
+			{countDownPresetStyle === "style-4" && (
+				<PanelBody
+					title={__("Label Alignment", "prime-elementor-addons-pro")}
+					initialOpen={false}
+				>
+					<BaseControl
+						label={__("Alignment", "prime-elementor-addons-pro")}
+						id="fb-setting-text-alignment"
+						className="fb-setting-text-alignment"
+					>
+						<ButtonGroup className="fb-setting-text-alignment-group-btn">
+							{[
+								{
+									label: "Left Top",
+									value: "left_top",
+									icon: "eicon-v-align-top eicon-h-align-left",
+								},
+								{
+									label: "Right Top",
+									value: "right_top",
+									icon: "eicon-v-align-top eicon-h-align-right",
+								},
+								{
+									label: "Left Bottom",
+									value: "left_bottom",
+									icon: "eicon-v-align-bottom eicon-h-align-left",
+								},
+								{
+									label: "Right Bottom",
+									value: "right_bottom",
+									icon: "eicon-v-align-bottom eicon-h-align-right",
+								},
+							].map((item) => (
+								<Button
+									key={item.value}
+									onClick={() =>
+										setAttributes({
+											advancedCountdownLabelAlignmentStyle4: item.value,
+										})
+									}
+									className={`fb-setting-text-alignment-single-btn ${
+										advancedCountdownLabelAlignmentStyle4 === item.value
+											? "active"
+											: ""
+									}`}
+								>
+									{item.label}
+								</Button>
+							))}
+						</ButtonGroup>
+					</BaseControl>
+					<FB_TypographyControl
+						globalTypoControlActive={true}
+						globalTypoSwitcher={
+							advancedCountdownLabelTypographyStyle4GlobalTypoSwitcher
+						}
+						storeGlobalTypographyData={(value) =>
+							setAttributes({
+								advancedCountdownLabelTypographyStyle4GlobalTypographyData:
+									value,
+							})
+						}
+						globalTypoType={
+							advancedCountdownLabelTypographyStyle4GlobalTypoType
+						}
+						onChangeGlobalTypoType={(value) =>
+							setAttributes({
+								advancedCountdownLabelTypographyStyle4GlobalTypoType: value,
+							})
+						}
+						globalTypoOption={
+							advancedCountdownLabelTypographyStyle4GlobalTypoOption
+						}
+						onChangeGlobalTypoOption={(value) =>
+							setAttributes({
+								advancedCountdownLabelTypographyStyle4GlobalTypoOption: value,
+							})
+						}
+						fontFamily={advancedCountdownLabelTypographyStyle4FontFamily}
+						onChangeFontFamily={(value) =>
+							setAttributes({
+								advancedCountdownLabelTypographyStyle4FontFamily: value,
+							})
+						}
+						fontSize={advancedCountdownLabelTypographyStyle4FontSize}
+						onChangeFontSize={(value) =>
+							setAttributes({
+								advancedCountdownLabelTypographyStyle4FontSize: value,
+							})
+						}
+						fontSizeUnits={advancedCountdownLabelTypographyStyle4FontSizeUnits}
+						onChangeFontSizeUnit={(value) =>
+							setAttributes({
+								advancedCountdownLabelTypographyStyle4FontSizeUnits: value,
+							})
+						}
+						fontWeight={advancedCountdownLabelTypographyStyle4FontWeight}
+						onChangeFontWeight={(value) =>
+							setAttributes({
+								advancedCountdownLabelTypographyStyle4FontWeight: value,
+							})
+						}
+						fontStyle={advancedCountdownLabelTypographyStyle4FontStyle}
+						onChangeFontStyle={(value) =>
+							setAttributes({
+								advancedCountdownLabelTypographyStyle4FontStyle: value,
+							})
+						}
+						textTransform={advancedCountdownLabelTypographyStyle4TextTransform}
+						onChangeTextTransform={(value) =>
+							setAttributes({
+								advancedCountdownLabelTypographyStyle4TextTransform: value,
+							})
+						}
+						textDecoration={
+							advancedCountdownLabelTypographyStyle4TextDecoration
+						}
+						onChangeTextDecoration={(value) =>
+							setAttributes({
+								advancedCountdownLabelTypographyStyle4TextDecoration: value,
+							})
+						}
+						letterSpacing={advancedCountdownLabelTypographyStyle4LetterSpacing}
+						onChangeLetterSpacing={(value) =>
+							setAttributes({
+								advancedCountdownLabelTypographyStyle4LetterSpacing: value,
+							})
+						}
+						letterSpacingUnits={
+							advancedCountdownLabelTypographyStyle4LetterSpacingUnits
+						}
+						onChangeLetterSpacingUnit={(value) =>
+							setAttributes({
+								advancedCountdownLabelTypographyStyle4LetterSpacingUnits: value,
+							})
+						}
+						lineHeight={advancedCountdownLabelTypographyStyle4LineHeight}
+						onChangeLineHeight={(value) =>
+							setAttributes({
+								advancedCountdownLabelTypographyStyle4LineHeight: value,
+							})
+						}
+						lineHeightUnits={
+							advancedCountdownLabelTypographyStyle4LineHeightUnits
+						}
+						onChangeLineHeightUnit={(value) =>
+							setAttributes({
+								advancedCountdownLabelTypographyStyle4LineHeightUnits: value,
+							})
+						}
+						deviceType={deviceType}
+						setAttributes={setAttributes}
+					/>
+					<FB_ColorControl
+						label={__("Label Color", "prime-elementor-addons-pro")}
+						globalColor={advancedCountdownLabelColorStyle4}
+						setGlobalColor={(value) =>
+							setAttributes({
+								advancedCountdownLabelColorStyle4:
+									value === undefined ? "" : value,
+							})
+						}
+					/>
+				</PanelBody>
+			)}
+
+			{countDownPresetStyle === "style-1" &&
+				advancedCountdownShowSunIcon === "yes" && (
+					<PanelBody
+						title={__("Icon", "prime-elementor-addons-pro")}
+						initialOpen={false}
+					>
+						<FB_Range
+							label={__("Icon Size", "prime-elementor-addons-pro")}
+							min={5}
+							max={200}
+							rangeValue={advancedCountdownIconSize}
+							onChangeHandler={(value) =>
+								setAttributes({
+									advancedCountdownIconSize: {
+										...advancedCountdownIconSize,
+										[deviceType]: value,
+									},
+								})
+							}
+							deviceType={deviceType}
+							units={advancedCountdownIconSize.unit}
+							setAttributes={setAttributes}
+							rangeStep={1}
+							resetFallbackValue={60}
+						/>
+						<FB_SwitcherControl
+							label={__("Color", "prime-elementor-addons-pro")}
+							globalSwitcher={advancedCountdownItemWrapperBorderColorSwitcher} // Reusing switcher for simplicity, consider dedicated if needed
+							setGlobalSwitcher={(value) =>
+								setAttributes({
+									advancedCountdownItemWrapperBorderColorSwitcher: value,
+								})
+							}
+						/>
+						{advancedCountdownItemWrapperBorderColorSwitcher === "normal" && (
+							<>
+								<FB_ColorControl
+									label={__("Icon Color", "prime-elementor-addons-pro")}
+									globalColor={advancedCountdownIconColorNormal}
+									setGlobalColor={(value) =>
+										setAttributes({
+											advancedCountdownIconColorNormal:
+												value === undefined ? "" : value,
+										})
+									}
+								/>
+								<FB_ColorControl
+									label={__("Background Color", "prime-elementor-addons-pro")}
+									globalColor={advancedCountdownIconBgColorNormal}
+									setGlobalColor={(value) =>
+										setAttributes({
+											advancedCountdownIconBgColorNormal:
+												value === undefined ? "" : value,
+										})
+									}
+								/>
+							</>
+						)}
+						{advancedCountdownItemWrapperBorderColorSwitcher === "hover" && (
+							<>
+								<FB_ColorControl
+									label={__("Icon Color", "prime-elementor-addons-pro")}
+									globalColor={advancedCountdownIconColorHover}
+									setGlobalColor={(value) =>
+										setAttributes({
+											advancedCountdownIconColorHover:
+												value === undefined ? "" : value,
+										})
+									}
+								/>
+								<FB_ColorControl
+									label={__("Background Color", "prime-elementor-addons-pro")}
+									globalColor={advancedCountdownIconBgColorHover}
+									setGlobalColor={(value) =>
+										setAttributes({
+											advancedCountdownIconBgColorHover:
+												value === undefined ? "" : value,
+										})
+									}
+								/>
+							</>
+						)}
+					</PanelBody>
+				)}
+
 			<PanelBody
-				title={__("Digit", "frontis-blocks")}
+				title={__("Countdown Text", "prime-elementor-addons-pro")}
 				initialOpen={false}
 			>
-				<FB_Range
-					min={1}
-					max={400}
-					label={__("Width", "frontis-blocks")}
-					rangeValue={countDownDigitWidth}
-					onChangeHandler={(value) => setAttributes({ countDownDigitWidth: value })}
-					rangeUnitHandler={(value) => setAttributes({ countDownDigitWidthUnits: value })}
-					deviceType={deviceType}
-					units={countDownDigitWidthUnits}
-					setAttributes={setAttributes}
-					rangeStep={1}
-					resetFallbackValue={""}
-				/>
-
-				<FB_Range
-					min={1}
-					max={400}
-					label={__("Height", "frontis-blocks")}
-					rangeValue={countDownDigitHeight}
-					onChangeHandler={(value) => setAttributes({ countDownDigitHeight: value })}
-					rangeUnitHandler={(value) => setAttributes({ countDownDigitHeightUnits: value })}
-					deviceType={deviceType}
-					units={countDownDigitHeightUnits}
-					setAttributes={setAttributes}
-					rangeStep={1}
-					resetFallbackValue={""}
-				/>
-
-				<FB_AlignmentControl
-					label={__("Horizontal Alignment", "frontis-blocks")}
-					globalAlignment={countDownDigitAlignmentHz}
-					setGlobalAlignment={(value) => setAttributes({ countDownDigitAlignmentHz: value })}
-				/>
-
-				<FB_AlignmentControl
-					label={__("Vertical Alignment", "frontis-blocks")}
-					globalAlignment={countDownDigitAlignmentVr}
-					setGlobalAlignment={(value) => setAttributes({ countDownDigitAlignmentVr: value })}
-				/>
-
-				<FB_TypographyControl
-					globalTypoControlActive={true}
-					globalTypoSwitcher={digitGlobalTypoSwitcher}
-					storeGlobalTypographyData={(value) => setAttributes({ digitGlobalTypographyData: value })}
-
-					globalTypoType={digitGlobalTypoType}
-					onChangeGlobalTypoType={(value) => {
-						setAttributes({
-							digitGlobalTypoType: value,
-							digitGlobalTypoSwitcher: value === 'default' ? { ...digitGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...digitGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
-						})
-					}}
-
-					globalTypoOption={digitGlobalTypoOption}
-					onChangeGlobalTypoOption={(value) => setAttributes({ digitGlobalTypoOption: value })}
-
-					fontFamily={digitFontFamily}
-					onChangeFontFamily={(value) => setAttributes({ digitFontFamily: value, digitGlobalTypoSwitcher: { ...digitGlobalTypoSwitcher, fontFamily: value && false } })}
-
-					fontSize={digitFontSize}
-					onChangeFontSize={(value) => setAttributes({ digitFontSize: value, digitGlobalTypoSwitcher: { ...digitGlobalTypoSwitcher, fontSize: value && false } })}
-
-					fontSizeUnits={digitFontSizeUnits}
-					onChangeFontSizeUnit={(value) => setAttributes({ digitFontSizeUnits: value })}
-
-					fontWeight={digitFontWeight}
-					onChangeFontWeight={(value) => setAttributes({ digitFontWeight: value, digitGlobalTypoSwitcher: { ...digitGlobalTypoSwitcher, fontWeight: value && false } })}
-
-					fontStyle={digitFontStyle}
-					onChangeFontStyle={(value) => setAttributes({ digitFontStyle: value, digitGlobalTypoSwitcher: { ...digitGlobalTypoSwitcher, fontStyle: value && false } })}
-
-					textTransform={digitTextTransform}
-					onChangeTextTransform={(value) => setAttributes({ digitTextTransform: value, digitGlobalTypoSwitcher: { ...digitGlobalTypoSwitcher, textTransform: value && false } })}
-
-					textDecoration={digitTextDecoration}
-					onChangeTextDecoration={(value) => setAttributes({ digitTextDecoration: value, digitGlobalTypoSwitcher: { ...digitGlobalTypoSwitcher, textDecoration: value && false } })}
-
-					letterSpacing={digitLetterSpacing}
-					onChangeLetterSpacing={(value) => setAttributes({ digitLetterSpacing: value, digitGlobalTypoSwitcher: { ...digitGlobalTypoSwitcher, letterSpacing: value && false } })}
-
-					letterSpacingUnits={digitLetterSpacingUnits}
-					onChangeLetterSpacingUnit={(value) => setAttributes({ digitLetterSpacingUnits: value })}
-
-					lineHeight={digitLineHeight}
-					onChangeLineHeight={(value) => setAttributes({ digitLineHeight: value, digitGlobalTypoSwitcher: { ...digitGlobalTypoSwitcher, lineHeight: value && false } })}
-
-					lineHeightUnits={digitLineHeightUnits}
-					onChangeLineHeightUnit={(value) => setAttributes({ digitLineHeightUnits: value })}
-
-					deviceType={deviceType}
-					setAttributes={setAttributes}
-				/>
-
-				<FB_SwitcherControl
-					label={__("Background Color", "frontis-blocks")}
-					globalSwitcher={countDownDigitBgColorSwitcher}
-					setGlobalSwitcher={(value) => setAttributes({ countDownDigitBgColorSwitcher: value })}
-				/>
-
-				{countDownDigitBgColorSwitcher === 'normal' && (
-					<FB_ColorControl
-						label={__("Normal Color", "frontis-blocks")}
-						globalColor={countDownDigitBgColor}
-						setGlobalColor={(value) => setAttributes({ countDownDigitBgColor: value === undefined ? '' : value })}
-					/>
-				)}
-
-				{countDownDigitBgColorSwitcher === 'hover' && (
-					<FB_ColorControl
-						label={__("Hover Color", "frontis-blocks")}
-						globalColor={countDownDigitBgHoverColor}
-						setGlobalColor={(value) => setAttributes({ countDownDigitBgHoverColor: value === undefined ? '' : value })}
-					/>
-				)}
-
-				<FB_SwitcherControl
-					label={__("Color", "frontis-blocks")}
-					globalSwitcher={digitFontColorSwitcher}
-					setGlobalSwitcher={(value) => setAttributes({ digitFontColorSwitcher: value })}
-				/>
-
-				{digitFontColorSwitcher === 'normal' && (
-					<FB_ColorControl
-						label={__("Normal Color", "frontis-blocks")}
-						globalColor={digitFontColor}
-						setGlobalColor={(value) => setAttributes({ digitFontColor: value === undefined ? '' : value })}
-					/>
-				)}
-
-				{digitFontColorSwitcher === 'hover' && (
-					<FB_ColorControl
-						label={__("Hover Color", "frontis-blocks")}
-						globalColor={digitFontHoverColor}
-						setGlobalColor={(value) => setAttributes({ digitFontHoverColor: value === undefined ? '' : value })}
-					/>
-				)}
-
-				<ToggleControl
-					label={__("Enable For Single Color", "frontis-blocks")}
-					checked={singleDigitFontColorSwitcher}
-					onChange={(value) => setAttributes({ singleDigitFontColorSwitcher: value })}
-					style={{ marginTop: '20px' }}
-				/>
-
-				{singleDigitFontColorSwitcher === true && (
+				{countDownPresetStyle === "style-5" && (
 					<>
-						<FB_SwitcherControl
-							label={__("Days Color", "frontis-blocks")}
-							globalSwitcher={daysDigitFontColorSwitcher}
-							setGlobalSwitcher={(value) => setAttributes({ daysDigitFontColorSwitcher: value })}
+						<TextControl
+							label={__("Days Label", "prime-elementor-addons-pro")}
+							value={advancedCountdownLabelDays}
+							onChange={(value) =>
+								setAttributes({ advancedCountdownLabelDays: value })
+							}
 						/>
-
-						{daysDigitFontColorSwitcher === 'normal' && (
-							<FB_ColorControl
-								label={__("Normal Color", "frontis-blocks")}
-								globalColor={daysDigitFontColor}
-								setGlobalColor={(value) => setAttributes({ daysDigitFontColor: value === undefined ? '' : value })}
-							/>
-						)}
-
-						{daysDigitFontColorSwitcher === 'hover' && (
-							<FB_ColorControl
-								label={__("Hover Color", "frontis-blocks")}
-								globalColor={daysDigitFontHoverColor}
-								setGlobalColor={(value) => setAttributes({ daysDigitFontHoverColor: value === undefined ? '' : value })}
-							/>
-						)}
-
-						<FB_SwitcherControl
-							label={__("Hours Color", "frontis-blocks")}
-							globalSwitcher={hoursDigitFontColorSwitcher}
-							setGlobalSwitcher={(value) => setAttributes({ hoursDigitFontColorSwitcher: value })}
+						<TextControl
+							label={__("Hours Label", "prime-elementor-addons-pro")}
+							value={advancedCountdownLabelHours}
+							onChange={(value) =>
+								setAttributes({ advancedCountdownLabelHours: value })
+							}
 						/>
-
-						{hoursDigitFontColorSwitcher === 'normal' && (
-							<FB_ColorControl
-								label={__("Normal Color", "frontis-blocks")}
-								globalColor={hoursDigitFontColor}
-								setGlobalColor={(value) => setAttributes({ hoursDigitFontColor: value === undefined ? '' : value })}
-							/>
-						)}
-
-						{hoursDigitFontColorSwitcher === 'hover' && (
-							<FB_ColorControl
-								label={__("Hover Color", "frontis-blocks")}
-								globalColor={hoursDigitFontHoverColor}
-								setGlobalColor={(value) => setAttributes({ hoursDigitFontHoverColor: value === undefined ? '' : value })}
-							/>
-						)}
-
-						<FB_SwitcherControl
-							label={__("Minutes Color", "frontis-blocks")}
-							globalSwitcher={minutesDigitFontColorSwitcher}
-							setGlobalSwitcher={(value) => setAttributes({ minutesDigitFontColorSwitcher: value })}
+						<TextControl
+							label={__("Minutes Label", "prime-elementor-addons-pro")}
+							value={advancedCountdownLabelMinutes}
+							onChange={(value) =>
+								setAttributes({ advancedCountdownLabelMinutes: value })
+							}
 						/>
-
-						{minutesDigitFontColorSwitcher === 'normal' && (
-							<FB_ColorControl
-								label={__("Normal Color", "frontis-blocks")}
-								globalColor={minutesDigitFontColor}
-								setGlobalColor={(value) => setAttributes({ minutesDigitFontColor: value === undefined ? '' : value })}
-							/>
-						)}
-
-						{minutesDigitFontColorSwitcher === 'hover' && (
-							<FB_ColorControl
-								label={__("Hover Color", "frontis-blocks")}
-								globalColor={minutesDigitFontHoverColor}
-								setGlobalColor={(value) => setAttributes({ minutesDigitFontHoverColor: value === undefined ? '' : value })}
-							/>
-						)}
-
-						<FB_SwitcherControl
-							label={__("Seconds Color", "frontis-blocks")}
-							globalSwitcher={secondsDigitFontColorSwitcher}
-							setGlobalSwitcher={(value) => setAttributes({ secondsDigitFontColorSwitcher: value })}
-						/>
-
-						{secondsDigitFontColorSwitcher === 'normal' && (
-							<FB_ColorControl
-								label={__("Normal Color", "frontis-blocks")}
-								globalColor={secondsDigitFontColor}
-								setGlobalColor={(value) => setAttributes({ secondsDigitFontColor: value === undefined ? '' : value })}
-							/>
-						)}
-
-						{secondsDigitFontColorSwitcher === 'hover' && (
-							<FB_ColorControl
-								label={__("Hover Color", "frontis-blocks")}
-								globalColor={secondsDigitFontHoverColor}
-								setGlobalColor={(value) => setAttributes({ secondsDigitFontHoverColor: value === undefined ? '' : value })}
-							/>
-						)}
 					</>
 				)}
 
-				<FB_Spacing
-					label={'Margin'}
-					deviceType={deviceType}
-					spacingUnitsHandler={countDownDigitMarginUnitsHandler}
-					spacingUnits={countDownDigitMarginUnits}
-					spacingDesktop={countDownDigitMarginDesktop}
-					spacingTablet={countDownDigitMarginTablet}
-					spacingMobile={countDownDigitMarginMobile}
-					handleSpacingUnitHandler={countDownDigitHandleMarginUnit}
-					spacingCombineBtn={countDownDigitMarginLink}
-					spacingCombineBtnHandler={countDownDigitMarginCombineBtnHandle} setAttributes={setAttributes}
-				/>
-
-				<SelectControl
-					label={__("Border Style", "frontis-blocks")}
-					value={countDownDigitBorder}
-					options={BORDER_STYLES}
-					onChange={(value) => setAttributes({ countDownDigitBorder: value })}
-				/>
-				{/** Item Background Control */}
-				<FB_SwitcherControl
-					label={__("Border Color", "frontis-blocks")}
-					globalSwitcher={countDownDigitBorderColorSwitcher}
-					setGlobalSwitcher={(value) => setAttributes({ countDownDigitBorderColorSwitcher: value })}
-				/>
-
-				{countDownDigitBorderColorSwitcher === 'normal' && (
-					<FB_ColorControl
-						label={__("Normal Color", "frontis-blocks")}
-						globalColor={countDownDigitBorderColor}
-						setGlobalColor={(value) => setAttributes({ countDownDigitBorderColor: value === undefined ? '' : value })}
-					/>
-				)}
-
-				{countDownDigitBorderColorSwitcher === 'hover' && (
-					<FB_ColorControl
-						label={__("Hover Color", "frontis-blocks")}
-						globalColor={countDownDigitBorderHoverColor}
-						setGlobalColor={(value) => setAttributes({ countDownDigitBorderHoverColor: value === undefined ? '' : value })}
-					/>
-				)}
-
-				<FB_Spacing
-					label={'Border Width'}
-					deviceType={deviceType}
-					spacingUnitsHandler={countDownDigitBorderTypeUnitsHandler}
-					spacingUnits={countDownDigitBorderTypeUnits}
-					spacingDesktop={countDownDigitBorderTypeDesktop}
-					spacingTablet={countDownDigitBorderTypeTablet}
-					spacingMobile={countDownDigitBorderTypeMobile}
-					handleSpacingUnitHandler={handleCountDownDigitBorderUnitHandlerFn}
-					spacingCombineBtn={countDownDigitBorderTypeLink}
-					spacingCombineBtnHandler={countDownDigitBorderCombineBtnHandlerFn} setAttributes={setAttributes}
-				/>
-				<FB_Spacing
-					label={'Border Radius'}
-					deviceType={deviceType}
-					spacingUnitsHandler={countDownDigitBorderRadiusUnitsHandler}
-					spacingUnits={countDownDigitBorderRadiusUnits}
-					spacingDesktop={countDownDigitBorderRadiusDesktop}
-					spacingTablet={countDownDigitBorderRadiusTablet}
-					spacingMobile={countDownDigitBorderRadiusMobile}
-					handleSpacingUnitHandler={countDownDigitHandleSpacingUnitHandlerFn}
-					spacingCombineBtn={countDownDigitBorderRadiusLink}
-					spacingCombineBtnHandler={countDownDigitCombineBtnHandlerFn} setAttributes={setAttributes}
-				/>
-
-			</PanelBody>
-
-			<PanelBody
-				title={__("Label", "frontis-blocks")}
-				initialOpen={false}
-			>
-				<FB_Range
-					min={1}
-					max={400}
-					label={__("Width", "frontis-blocks")}
-					rangeValue={countDownLabelWidth}
-					onChangeHandler={(value) => setAttributes({ countDownLabelWidth: value })}
-					rangeUnitHandler={(value) => setAttributes({ countDownLabelWidthUnits: value })}
-					deviceType={deviceType}
-					units={countDownLabelWidthUnits}
-					setAttributes={setAttributes}
-					rangeStep={1}
-					resetFallbackValue={""}
-				/>
-
-				<FB_Range
-					min={1}
-					max={400}
-					label={__("Height", "frontis-blocks")}
-					rangeValue={countDownLabelHeight}
-					onChangeHandler={(value) => setAttributes({ countDownLabelHeight: value })}
-					rangeUnitHandler={(value) => setAttributes({ countDownLabelHeightUnits: value })}
-					deviceType={deviceType}
-					units={countDownLabelHeightUnits}
-					setAttributes={setAttributes}
-					rangeStep={1}
-					resetFallbackValue={""}
-				/>
-
-				<FB_AlignmentControl
-					label={__("Horizontal Alignment", "frontis-blocks")}
-					globalAlignment={countDownLabelAlignmentHz}
-					setGlobalAlignment={(value) => setAttributes({ countDownLabelAlignmentHz: value })}
-				/>
-
-				<FB_AlignmentControl
-					label={__("Vertical Alignment", "frontis-blocks")}
-					globalAlignment={countDownLabelAlignmentVr}
-					setGlobalAlignment={(value) => setAttributes({ countDownLabelAlignmentVr: value })}
-				/>
-
 				<FB_TypographyControl
 					globalTypoControlActive={true}
-					globalTypoSwitcher={labelGlobalTypoSwitcher}
-					storeGlobalTypographyData={(value) => setAttributes({ labelGlobalTypographyData: value })}
-
-					globalTypoType={labelGlobalTypoType}
-					onChangeGlobalTypoType={(value) => {
+					globalTypoSwitcher={
+						advancedCountdownCountdownTypographyGlobalTypoSwitcher
+					}
+					storeGlobalTypographyData={(value) =>
 						setAttributes({
-							labelGlobalTypoType: value,
-							labelGlobalTypoSwitcher: value === 'default' ? { ...labelGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...labelGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
+							advancedCountdownCountdownTypographyGlobalTypographyData: value,
 						})
-					}}
-
-					globalTypoOption={labelGlobalTypoOption}
-					onChangeGlobalTypoOption={(value) => setAttributes({ labelGlobalTypoOption: value })}
-
-					fontFamily={labelFontFamily}
-					onChangeFontFamily={(value) => setAttributes({ labelFontFamily: value, labelGlobalTypoSwitcher: { ...labelGlobalTypoSwitcher, fontFamily: value && false } })}
-
-					fontSize={labelFontSize}
-					onChangeFontSize={(value) => setAttributes({ labelFontSize: value, labelGlobalTypoSwitcher: { ...labelGlobalTypoSwitcher, fontSize: value && false } })}
-
-					fontSizeUnits={labelFontSizeUnits}
-					onChangeFontSizeUnit={(value) => setAttributes({ labelFontSizeUnits: value })}
-
-					fontWeight={labelFontWeight}
-					onChangeFontWeight={(value) => setAttributes({ labelFontWeight: value, labelGlobalTypoSwitcher: { ...labelGlobalTypoSwitcher, fontWeight: value && false } })}
-
-					fontStyle={labelFontStyle}
-					onChangeFontStyle={(value) => setAttributes({ labelFontStyle: value, labelGlobalTypoSwitcher: { ...labelGlobalTypoSwitcher, fontStyle: value && false } })}
-
-					textTransform={labelTextTransform}
-					onChangeTextTransform={(value) => setAttributes({ labelTextTransform: value, labelGlobalTypoSwitcher: { ...labelGlobalTypoSwitcher, textTransform: value && false } })}
-
-					textDecoration={labelTextDecoration}
-					onChangeTextDecoration={(value) => setAttributes({ labelTextDecoration: value, labelGlobalTypoSwitcher: { ...labelGlobalTypoSwitcher, textDecoration: value && false } })}
-
-					letterSpacing={labelLetterSpacing}
-					onChangeLetterSpacing={(value) => setAttributes({ labelLetterSpacing: value, labelGlobalTypoSwitcher: { ...labelGlobalTypoSwitcher, letterSpacing: value && false } })}
-
-					letterSpacingUnits={labelLetterSpacingUnits}
-					onChangeLetterSpacingUnit={(value) => setAttributes({ labelLetterSpacingUnits: value })}
-
-					lineHeight={labelLineHeight}
-					onChangeLineHeight={(value) => setAttributes({ labelLineHeight: value, labelGlobalTypoSwitcher: { ...labelGlobalTypoSwitcher, lineHeight: value && false } })}
-
-					lineHeightUnits={labelLineHeightUnits}
-					onChangeLineHeightUnit={(value) => setAttributes({ labelLineHeightUnits: value })}
-
+					}
+					globalTypoType={advancedCountdownCountdownTypographyGlobalTypoType}
+					onChangeGlobalTypoType={(value) =>
+						setAttributes({
+							advancedCountdownCountdownTypographyGlobalTypoType: value,
+						})
+					}
+					globalTypoOption={
+						advancedCountdownCountdownTypographyGlobalTypoOption
+					}
+					onChangeGlobalTypoOption={(value) =>
+						setAttributes({
+							advancedCountdownCountdownTypographyGlobalTypoOption: value,
+						})
+					}
+					fontFamily={advancedCountdownCountdownTypographyFontFamily}
+					onChangeFontFamily={(value) =>
+						setAttributes({
+							advancedCountdownCountdownTypographyFontFamily: value,
+						})
+					}
+					fontSize={advancedCountdownCountdownTypographyFontSize}
+					onChangeFontSize={(value) =>
+						setAttributes({
+							advancedCountdownCountdownTypographyFontSize: value,
+						})
+					}
+					fontSizeUnits={advancedCountdownCountdownTypographyFontSizeUnits}
+					onChangeFontSizeUnit={(value) =>
+						setAttributes({
+							advancedCountdownCountdownTypographyFontSizeUnits: value,
+						})
+					}
+					fontWeight={advancedCountdownCountdownTypographyFontWeight}
+					onChangeFontWeight={(value) =>
+						setAttributes({
+							advancedCountdownCountdownTypographyFontWeight: value,
+						})
+					}
+					fontStyle={advancedCountdownCountdownTypographyFontStyle}
+					onChangeFontStyle={(value) =>
+						setAttributes({
+							advancedCountdownCountdownTypographyFontStyle: value,
+						})
+					}
+					textTransform={advancedCountdownCountdownTypographyTextTransform}
+					onChangeTextTransform={(value) =>
+						setAttributes({
+							advancedCountdownCountdownTypographyTextTransform: value,
+						})
+					}
+					textDecoration={advancedCountdownCountdownTypographyTextDecoration}
+					onChangeTextDecoration={(value) =>
+						setAttributes({
+							advancedCountdownCountdownTypographyTextDecoration: value,
+						})
+					}
+					letterSpacing={advancedCountdownCountdownTypographyLetterSpacing}
+					onChangeLetterSpacing={(value) =>
+						setAttributes({
+							advancedCountdownCountdownTypographyLetterSpacing: value,
+						})
+					}
+					letterSpacingUnits={
+						advancedCountdownCountdownTypographyLetterSpacingUnits
+					}
+					onChangeLetterSpacingUnit={(value) =>
+						setAttributes({
+							advancedCountdownCountdownTypographyLetterSpacingUnits: value,
+						})
+					}
+					lineHeight={advancedCountdownCountdownTypographyLineHeight}
+					onChangeLineHeight={(value) =>
+						setAttributes({
+							advancedCountdownCountdownTypographyLineHeight: value,
+						})
+					}
+					lineHeightUnits={advancedCountdownCountdownTypographyLineHeightUnits}
+					onChangeLineHeightUnit={(value) =>
+						setAttributes({
+							advancedCountdownCountdownTypographyLineHeightUnits: value,
+						})
+					}
 					deviceType={deviceType}
 					setAttributes={setAttributes}
 				/>
 
-				<FB_SwitcherControl
-					label={__("Color", "frontis-blocks")}
-					globalSwitcher={labelFontColorSwitcher}
-					setGlobalSwitcher={(value) => setAttributes({ labelFontColorSwitcher: value })}
-				/>
-
-				{labelFontColorSwitcher === 'normal' && (
+				{["style-1", "style-5"].includes(countDownPresetStyle) && (
 					<FB_ColorControl
-						label={__("Normal Color", "frontis-blocks")}
-						globalColor={labelFontColor}
-						setGlobalColor={(value) => setAttributes({ labelFontColor: value === undefined ? '' : value })}
+						label={__("Label Color", "prime-elementor-addons-pro")}
+						globalColor={advancedCountdownLabelColorStyleMultiple}
+						setGlobalColor={(value) =>
+							setAttributes({
+								advancedCountdownLabelColorStyleMultiple:
+									value === undefined ? "" : value,
+							})
+						}
 					/>
 				)}
 
-				{labelFontColorSwitcher === 'hover' && (
+				{countDownPresetStyle === "style-5" && (
+					<>
+						<FB_TypographyControl
+							label={__("Typography", "prime-elementor-addons-pro")}
+							globalTypoControlActive={true}
+							globalTypoSwitcher={
+								advancedCountdownTimeValTypographyGlobalTypoSwitcher
+							}
+							storeGlobalTypographyData={(value) =>
+								setAttributes({
+									advancedCountdownTimeValTypographyGlobalTypographyData: value,
+								})
+							}
+							globalTypoType={advancedCountdownTimeValTypographyGlobalTypoType}
+							onChangeGlobalTypoType={(value) =>
+								setAttributes({
+									advancedCountdownTimeValTypographyGlobalTypoType: value,
+								})
+							}
+							globalTypoOption={
+								advancedCountdownTimeValTypographyGlobalTypoOption
+							}
+							onChangeGlobalTypoOption={(value) =>
+								setAttributes({
+									advancedCountdownTimeValTypographyGlobalTypoOption: value,
+								})
+							}
+							fontFamily={advancedCountdownTimeValTypographyFontFamily}
+							onChangeFontFamily={(value) =>
+								setAttributes({
+									advancedCountdownTimeValTypographyFontFamily: value,
+								})
+							}
+							fontSize={advancedCountdownTimeValTypographyFontSize}
+							onChangeFontSize={(value) =>
+								setAttributes({
+									advancedCountdownTimeValTypographyFontSize: value,
+								})
+							}
+							fontSizeUnits={advancedCountdownTimeValTypographyFontSizeUnits}
+							onChangeFontSizeUnit={(value) =>
+								setAttributes({
+									advancedCountdownTimeValTypographyFontSizeUnits: value,
+								})
+							}
+							fontWeight={advancedCountdownTimeValTypographyFontWeight}
+							onChangeFontWeight={(value) =>
+								setAttributes({
+									advancedCountdownTimeValTypographyFontWeight: value,
+								})
+							}
+							fontStyle={advancedCountdownTimeValTypographyFontStyle}
+							onChangeFontStyle={(value) =>
+								setAttributes({
+									advancedCountdownTimeValTypographyFontStyle: value,
+								})
+							}
+							textTransform={advancedCountdownTimeValTypographyTextTransform}
+							onChangeTextTransform={(value) =>
+								setAttributes({
+									advancedCountdownTimeValTypographyTextTransform: value,
+								})
+							}
+							textDecoration={advancedCountdownTimeValTypographyTextDecoration}
+							onChangeTextDecoration={(value) =>
+								setAttributes({
+									advancedCountdownTimeValTypographyTextDecoration: value,
+								})
+							}
+							letterSpacing={advancedCountdownTimeValTypographyLetterSpacing}
+							onChangeLetterSpacing={(value) =>
+								setAttributes({
+									advancedCountdownTimeValTypographyLetterSpacing: value,
+								})
+							}
+							letterSpacingUnits={
+								advancedCountdownTimeValTypographyLetterSpacingUnits
+							}
+							onChangeLetterSpacingUnit={(value) =>
+								setAttributes({
+									advancedCountdownTimeValTypographyLetterSpacingUnits: value,
+								})
+							}
+							lineHeight={advancedCountdownTimeValTypographyLineHeight}
+							onChangeLineHeight={(value) =>
+								setAttributes({
+									advancedCountdownTimeValTypographyLineHeight: value,
+								})
+							}
+							lineHeightUnits={
+								advancedCountdownTimeValTypographyLineHeightUnits
+							}
+							onChangeLineHeightUnit={(value) =>
+								setAttributes({
+									advancedCountdownTimeValTypographyLineHeightUnits: value,
+								})
+							}
+							deviceType={deviceType}
+							setAttributes={setAttributes}
+						/>
+						<FB_ColorControl
+							label={__("Color", "prime-elementor-addons-pro")}
+							globalColor={advancedCountdownTimeValLabelColor}
+							setGlobalColor={(value) =>
+								setAttributes({
+									advancedCountdownTimeValLabelColor:
+										value === undefined ? "" : value,
+								})
+							}
+						/>
+					</>
+				)}
+
+				{countDownPresetStyle === "style-4" && (
 					<FB_ColorControl
-						label={__("Hover Color", "frontis-blocks")}
-						globalColor={labelFontHoverColor}
-						setGlobalColor={(value) => setAttributes({ labelFontHoverColor: value === undefined ? '' : value })}
+						label={__("Label Color", "prime-elementor-addons-pro")}
+						globalColor={advancedCountdownLabelColorStyle4Digit}
+						setGlobalColor={(value) =>
+							setAttributes({
+								advancedCountdownLabelColorStyle4Digit:
+									value === undefined ? "" : value,
+							})
+						}
 					/>
 				)}
 
-				<FB_SwitcherControl
-					label={__("Background Color", "frontis-blocks")}
-					globalSwitcher={labelBgColorSwitcher}
-					setGlobalSwitcher={(value) => setAttributes({ labelBgColorSwitcher: value })}
-				/>
-
-				{labelBgColorSwitcher === 'normal' && (
+				{countDownPresetStyle === "style-2" && (
 					<FB_ColorControl
-						label={__("Normal Color", "frontis-blocks")}
-						globalColor={labelBgColor}
-						setGlobalColor={(value) => setAttributes({ labelBgColor: value === undefined ? '' : value })}
+						label={__("Text Color", "prime-elementor-addons-pro")}
+						globalColor={advancedCountdownTextColorStyle2}
+						setGlobalColor={(value) =>
+							setAttributes({
+								advancedCountdownTextColorStyle2:
+									value === undefined ? "" : value,
+							})
+						}
 					/>
 				)}
 
-				{labelBgColorSwitcher === 'hover' && (
+				{countDownPresetStyle === "style-3" && (
 					<FB_ColorControl
-						label={__("Hover Color", "frontis-blocks")}
-						globalColor={labelBgHoverColor}
-						setGlobalColor={(value) => setAttributes({ labelBgHoverColor: value === undefined ? '' : value })}
+						label={__("Text Color", "prime-elementor-addons-pro")}
+						globalColor={advancedCountdownTextColorStyle3}
+						setGlobalColor={(value) =>
+							setAttributes({
+								advancedCountdownTextColorStyle3:
+									value === undefined ? "" : value,
+							})
+						}
 					/>
 				)}
-
-				<FB_Spacing
-					label={'Margin'}
-					deviceType={deviceType}
-					spacingUnitsHandler={countDownLabelMarginUnitsHandler}
-					spacingUnits={countDownLabelMarginUnits}
-					spacingDesktop={countDownLabelMarginDesktop}
-					spacingTablet={countDownLabelMarginTablet}
-					spacingMobile={countDownLabelMarginMobile}
-					handleSpacingUnitHandler={countDownLabelHandleMarginUnit}
-					spacingCombineBtn={countDownLabelMarginLink}
-					spacingCombineBtnHandler={countDownLabelMarginCombineBtnHandle} setAttributes={setAttributes}
-				/>
-
-				<SelectControl
-					label={__("Border Style", "frontis-blocks")}
-					value={countDownLabelBorder}
-					options={BORDER_STYLES}
-					onChange={(value) => setAttributes({ countDownLabelBorder: value })}
-				/>
-				{/** Item Background Control */}
-				<FB_SwitcherControl
-					label={__("Border Color", "frontis-blocks")}
-					globalSwitcher={countDownLabelBorderColorSwitcher}
-					setGlobalSwitcher={(value) => setAttributes({ countDownLabelBorderColorSwitcher: value })}
-				/>
-
-				{countDownLabelBorderColorSwitcher === 'normal' && (
-					<FB_ColorControl
-						label={__("Normal Color", "frontis-blocks")}
-						globalColor={countDownLabelBorderColor}
-						setGlobalColor={(value) => setAttributes({ countDownLabelBorderColor: value === undefined ? '' : value })}
-					/>
-				)}
-
-				{countDownLabelBorderColorSwitcher === 'hover' && (
-					<FB_ColorControl
-						label={__("Hover Color", "frontis-blocks")}
-						globalColor={countDownLabelBorderHoverColor}
-						setGlobalColor={(value) => setAttributes({ countDownLabelBorderHoverColor: value === undefined ? '' : value })}
-					/>
-				)}
-				<FB_Spacing
-					label={'Border Width'}
-					deviceType={deviceType}
-					spacingUnitsHandler={countDownLabelBorderTypeUnitsHandler}
-					spacingUnits={countDownLabelBorderTypeUnits}
-					spacingDesktop={countDownLabelBorderTypeDesktop}
-					spacingTablet={countDownLabelBorderTypeTablet}
-					spacingMobile={countDownLabelBorderTypeMobile}
-					handleSpacingUnitHandler={handleCountDownLabelBorderUnitHandlerFn}
-					spacingCombineBtn={countDownLabelBorderTypeLink}
-					spacingCombineBtnHandler={countDownLabelBorderCombineBtnHandlerFn} setAttributes={setAttributes}
-				/>
-				<FB_Spacing
-					label={'Border Radius'}
-					deviceType={deviceType}
-					spacingUnitsHandler={countDownLabelBorderRadiusUnitsHandler}
-					spacingUnits={countDownLabelBorderRadiusUnits}
-					spacingDesktop={countDownLabelBorderRadiusDesktop}
-					spacingTablet={countDownLabelBorderRadiusTablet}
-					spacingMobile={countDownLabelBorderRadiusMobile}
-					handleSpacingUnitHandler={countDownLabelHandleSpacingUnitHandlerFn}
-					spacingCombineBtn={countDownLabelBorderRadiusLink}
-					spacingCombineBtnHandler={countDownLabelCombineBtnHandlerFn} setAttributes={setAttributes}
-				/>
-
 			</PanelBody>
-			{countDownSeparatorEnabled && (
-				<PanelBody title={__("Separator", "frontis-blocks")} initialOpen={false}>
 
-					<FB_SwitcherControl
-						label={__("Color", "frontis-blocks")}
-						globalSwitcher={countDownSeparatorFontColorSwitcher}
-						setGlobalSwitcher={(value) => setAttributes({ countDownSeparatorFontColorSwitcher: value })}
-					/>
-
-					{countDownSeparatorFontColorSwitcher === 'normal' && (
-						<FB_ColorControl
-							label={__("Normal Color", "frontis-blocks")}
-							globalColor={countDownSeparatorFontColor}
-							setGlobalColor={(value) => setAttributes({ countDownSeparatorFontColor: value === undefined ? '' : value })}
-						/>
-					)}
-
-					{countDownSeparatorFontColorSwitcher === 'hover' && (
-						<FB_ColorControl
-							label={__("Hover Color", "frontis-blocks")}
-							globalColor={countDownSeparatorFontHoverColor}
-							setGlobalColor={(value) => setAttributes({ countDownSeparatorFontHoverColor: value === undefined ? '' : value })}
-						/>
-					)}
-
+			{["style-1", "style-2"].includes(countDownPresetStyle) && (
+				<PanelBody
+					title={__("Separator", "prime-elementor-addons-pro")}
+					initialOpen={false}
+				>
 					<FB_TypographyControl
 						globalTypoControlActive={true}
-						globalTypoSwitcher={countDownSeparatorGlobalTypoSwitcher}
-						storeGlobalTypographyData={(value) => setAttributes({ countDownSeparatorGlobalTypographyData: value })}
-
-						globalTypoType={countDownSeparatorGlobalTypoType}
-						onChangeGlobalTypoType={(value) => {
+						globalTypoSwitcher={
+							advancedCountdownSeparatorTypographyGlobalTypoSwitcher
+						}
+						storeGlobalTypographyData={(value) =>
 							setAttributes({
-								countDownSeparatorGlobalTypoType: value,
-								countDownSeparatorGlobalTypoSwitcher: value === 'default' ? { ...countDownSeparatorGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...countDownSeparatorGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
+								advancedCountdownSeparatorTypographyGlobalTypographyData: value,
 							})
-						}}
-
-						globalTypoOption={countDownSeparatorGlobalTypoOption}
-						onChangeGlobalTypoOption={(value) => setAttributes({ countDownSeparatorGlobalTypoOption: value })}
-
-						fontFamily={countDownSeparatorFontFamily}
-						onChangeFontFamily={(value) => setAttributes({ countDownSeparatorFontFamily: value, countDownSeparatorGlobalTypoSwitcher: { ...countDownSeparatorGlobalTypoSwitcher, fontFamily: value && false } })}
-
-						fontSize={countDownSeparatorFontSize}
-						onChangeFontSize={(value) => setAttributes({ countDownSeparatorFontSize: value, countDownSeparatorGlobalTypoSwitcher: { ...countDownSeparatorGlobalTypoSwitcher, fontSize: value && false } })}
-
-						fontSizeUnits={countDownSeparatorFontSizeUnits}
-						onChangeFontSizeUnit={(value) => setAttributes({ countDownSeparatorFontSizeUnits: value })}
-
-						fontWeight={countDownSeparatorFontWeight}
-						onChangeFontWeight={(value) => setAttributes({ countDownSeparatorFontWeight: value, countDownSeparatorGlobalTypoSwitcher: { ...countDownSeparatorGlobalTypoSwitcher, fontWeight: value && false } })}
-
-						fontStyle={countDownSeparatorFontStyle}
-						onChangeFontStyle={(value) => setAttributes({ countDownSeparatorFontStyle: value, countDownSeparatorGlobalTypoSwitcher: { ...countDownSeparatorGlobalTypoSwitcher, fontStyle: value && false } })}
-
-						textTransform={countDownSeparatorTextTransform}
-						onChangeTextTransform={(value) => setAttributes({ countDownSeparatorTextTransform: value, countDownSeparatorGlobalTypoSwitcher: { ...countDownSeparatorGlobalTypoSwitcher, textTransform: value && false } })}
-
-						textDecoration={countDownSeparatorTextDecoration}
-						onChangeTextDecoration={(value) => setAttributes({ countDownSeparatorTextDecoration: value, countDownSeparatorGlobalTypoSwitcher: { ...countDownSeparatorGlobalTypoSwitcher, textDecoration: value && false } })}
-
-						letterSpacing={countDownSeparatorLetterSpacing}
-						onChangeLetterSpacing={(value) => setAttributes({ countDownSeparatorLetterSpacing: value, countDownSeparatorGlobalTypoSwitcher: { ...countDownSeparatorGlobalTypoSwitcher, letterSpacing: value && false } })}
-
-						letterSpacingUnits={countDownSeparatorLetterSpacingUnits}
-						onChangeLetterSpacingUnit={(value) => setAttributes({ countDownSeparatorLetterSpacingUnits: value })}
-
-						lineHeight={countDownSeparatorLineHeight}
-						onChangeLineHeight={(value) => setAttributes({ countDownSeparatorLineHeight: value, countDownSeparatorGlobalTypoSwitcher: { ...countDownSeparatorGlobalTypoSwitcher, lineHeight: value && false } })}
-
-						lineHeightUnits={countDownSeparatorLineHeightUnits}
-						onChangeLineHeightUnit={(value) => setAttributes({ countDownSeparatorLineHeightUnits: value })}
-
+						}
+						globalTypoType={advancedCountdownSeparatorTypographyGlobalTypoType}
+						onChangeGlobalTypoType={(value) =>
+							setAttributes({
+								advancedCountdownSeparatorTypographyGlobalTypoType: value,
+							})
+						}
+						globalTypoOption={
+							advancedCountdownSeparatorTypographyGlobalTypoOption
+						}
+						onChangeGlobalTypoOption={(value) =>
+							setAttributes({
+								advancedCountdownSeparatorTypographyGlobalTypoOption: value,
+							})
+						}
+						fontFamily={advancedCountdownSeparatorTypographyFontFamily}
+						onChangeFontFamily={(value) =>
+							setAttributes({
+								advancedCountdownSeparatorTypographyFontFamily: value,
+							})
+						}
+						fontSize={advancedCountdownSeparatorTypographyFontSize}
+						onChangeFontSize={(value) =>
+							setAttributes({
+								advancedCountdownSeparatorTypographyFontSize: value,
+							})
+						}
+						fontSizeUnits={advancedCountdownSeparatorTypographyFontSizeUnits}
+						onChangeFontSizeUnit={(value) =>
+							setAttributes({
+								advancedCountdownSeparatorTypographyFontSizeUnits: value,
+							})
+						}
+						fontWeight={advancedCountdownSeparatorTypographyFontWeight}
+						onChangeFontWeight={(value) =>
+							setAttributes({
+								advancedCountdownSeparatorTypographyFontWeight: value,
+							})
+						}
+						fontStyle={advancedCountdownSeparatorTypographyFontStyle}
+						onChangeFontStyle={(value) =>
+							setAttributes({
+								advancedCountdownSeparatorTypographyFontStyle: value,
+							})
+						}
+						textTransform={advancedCountdownSeparatorTypographyTextTransform}
+						onChangeTextTransform={(value) =>
+							setAttributes({
+								advancedCountdownSeparatorTypographyTextTransform: value,
+							})
+						}
+						textDecoration={advancedCountdownSeparatorTypographyTextDecoration}
+						onChangeTextDecoration={(value) =>
+							setAttributes({
+								advancedCountdownSeparatorTypographyTextDecoration: value,
+							})
+						}
+						letterSpacing={advancedCountdownSeparatorTypographyLetterSpacing}
+						onChangeLetterSpacing={(value) =>
+							setAttributes({
+								advancedCountdownSeparatorTypographyLetterSpacing: value,
+							})
+						}
+						letterSpacingUnits={
+							advancedCountdownSeparatorTypographyLetterSpacingUnits
+						}
+						onChangeLetterSpacingUnit={(value) =>
+							setAttributes({
+								advancedCountdownSeparatorTypographyLetterSpacingUnits: value,
+							})
+						}
+						lineHeight={advancedCountdownSeparatorTypographyLineHeight}
+						onChangeLineHeight={(value) =>
+							setAttributes({
+								advancedCountdownSeparatorTypographyLineHeight: value,
+							})
+						}
+						lineHeightUnits={
+							advancedCountdownSeparatorTypographyLineHeightUnits
+						}
+						onChangeLineHeightUnit={(value) =>
+							setAttributes({
+								advancedCountdownSeparatorTypographyLineHeightUnits: value,
+							})
+						}
 						deviceType={deviceType}
 						setAttributes={setAttributes}
 					/>
-
-					<FB_Range
-						min={1}
-						max={400}
-						label={__("Hz Spacing", "frontis-blocks")}
-						rangeValue={countDownSeparatorHorizontalGap}
-						onChangeHandler={(value) => setAttributes({ countDownSeparatorHorizontalGap: value })}
-						rangeUnitHandler={(value) => setAttributes({ countDownSeparatorHorizontalGapUnits: value })}
-						deviceType={deviceType}
-						units={countDownSeparatorHorizontalGapUnits}
-						setAttributes={setAttributes}
-						rangeStep={1}
-						resetFallbackValue={70}
+					<FB_SwitcherControl
+						label={__("Color", "prime-elementor-addons-pro")}
+						globalSwitcher={advancedCountdownItemWrapperBorderColorSwitcher} // Reusing switcher
+						setGlobalSwitcher={(value) =>
+							setAttributes({
+								advancedCountdownItemWrapperBorderColorSwitcher: value,
+							})
+						}
 					/>
-
+					{advancedCountdownItemWrapperBorderColorSwitcher === "normal" && (
+						<FB_ColorControl
+							label={__("Color", "prime-elementor-addons-pro")}
+							globalColor={advancedCountdownSeparatorColor}
+							setGlobalColor={(value) =>
+								setAttributes({
+									advancedCountdownSeparatorColor:
+										value === undefined ? "" : value,
+								})
+							}
+						/>
+					)}
+					{advancedCountdownItemWrapperBorderColorSwitcher === "hover" && (
+						<FB_ColorControl
+							label={__("Hover Color", "prime-elementor-addons-pro")}
+							globalColor={advancedCountdownSeparatorHoverColor}
+							setGlobalColor={(value) =>
+								setAttributes({
+									advancedCountdownSeparatorHoverColor:
+										value === undefined ? "" : value,
+								})
+							}
+						/>
+					)}
 					<FB_Range
-						min={1}
-						max={400}
-						label={__("Vr Spacing", "frontis-blocks")}
-						rangeValue={countDownSeparatorVerticalGap}
-						onChangeHandler={(value) => setAttributes({ countDownSeparatorVerticalGap: value })}
-						rangeUnitHandler={(value) => setAttributes({ countDownSeparatorVerticalGapUnits: value })}
+						label={__("Gap", "prime-elementor-addons-pro")}
+						min={0}
+						max={100}
+						rangeValue={advancedCountdownSeparatorSpacing}
+						onChangeHandler={(value) =>
+							setAttributes({
+								advancedCountdownSeparatorSpacing: {
+									...advancedCountdownSeparatorSpacing,
+									[deviceType]: value,
+								},
+							})
+						}
+						rangeUnitHandler={(value) =>
+							setAttributes({
+								advancedCountdownSeparatorSpacing: {
+									...advancedCountdownSeparatorSpacing,
+									unit: value,
+								},
+							})
+						}
 						deviceType={deviceType}
-						units={countDownSeparatorVerticalGapUnits}
+						units={advancedCountdownSeparatorSpacing.unit}
 						setAttributes={setAttributes}
 						rangeStep={1}
-						resetFallbackValue={20}
+						resetFallbackValue={8}
+					/>
+				</PanelBody>
+			)}
+
+			{["style-1", "style-2"].includes(countDownPresetStyle) && (
+				<PanelBody
+					title={__("Overlay Bg", "prime-elementor-addons-pro")}
+					initialOpen={false}
+				>
+					<FB_ColorControl
+						label={__("Background Color", "prime-elementor-addons-pro")}
+						globalColor={advancedCountdownSvgBgOverlayColor}
+						setGlobalColor={(value) =>
+							setAttributes({
+								advancedCountdownSvgBgOverlayColor:
+									value === undefined ? "" : value,
+							})
+						}
+					/>
+					<FB_Range
+						label={__("Opacity", "prime-elementor-addons-pro")}
+						min={0}
+						max={1}
+						rangeValue={advancedCountdownSvgBgOverlayOpacity}
+						onChangeHandler={(value) =>
+							setAttributes({
+								advancedCountdownSvgBgOverlayOpacity: {
+									...advancedCountdownSvgBgOverlayOpacity,
+									[deviceType]: value,
+								},
+							})
+						}
+						deviceType={deviceType}
+						units="px"
+						setAttributes={setAttributes}
+						rangeStep={0.1}
+						resetFallbackValue={0.4}
+					/>
+				</PanelBody>
+			)}
+
+			{countDownPresetStyle === "style-1" && (
+				<PanelBody
+					title={__("SVG Progress Bar", "prime-elementor-addons-pro")}
+					initialOpen={false}
+				>
+					<FB_ColorControl
+						label={__("Active Color", "prime-elementor-addons-pro")}
+						globalColor={advancedCountdownProgressCircleActiveColor}
+						setGlobalColor={(value) =>
+							setAttributes({
+								advancedCountdownProgressCircleActiveColor:
+									value === undefined ? "" : value,
+							})
+						}
+					/>
+					<FB_ColorControl
+						label={__("In Active Color", "prime-elementor-addons-pro")}
+						globalColor={advancedCountdownProgressCircleInactiveColor}
+						setGlobalColor={(value) =>
+							setAttributes({
+								advancedCountdownProgressCircleInactiveColor:
+									value === undefined ? "" : value,
+							})
+						}
+					/>
+					<FB_Range
+						label={__("Stroke Width", "prime-elementor-addons-pro")}
+						min={0}
+						max={100}
+						rangeValue={advancedCountdownSvgStrokeWidth}
+						onChangeHandler={(value) =>
+							setAttributes({
+								advancedCountdownSvgStrokeWidth: {
+									...advancedCountdownSvgStrokeWidth,
+									[deviceType]: value,
+								},
+							})
+						}
+						deviceType={deviceType}
+						units="px"
+						setAttributes={setAttributes}
+						rangeStep={1}
+						resetFallbackValue={0}
+					/>
+				</PanelBody>
+			)}
+
+			{countDownPresetStyle === "style-2" && (
+				<PanelBody
+					title={__("SVG Progress Bar", "prime-elementor-addons-pro")}
+					initialOpen={false}
+				>
+					<FB_ColorControl
+						label={__("Progress Color", "prime-elementor-addons-pro")}
+						globalColor={advancedCountdownProgressColorStyle2}
+						setGlobalColor={(value) =>
+							setAttributes({
+								advancedCountdownProgressColorStyle2:
+									value === undefined ? "" : value,
+							})
+						}
+					/>
+					<FB_Range
+						label={__("Stroke Width", "prime-elementor-addons-pro")}
+						min={5}
+						max={20}
+						rangeValue={advancedCountdownSvgStrokeWidthStyle2}
+						onChangeHandler={(value) =>
+							setAttributes({
+								advancedCountdownSvgStrokeWidthStyle2: {
+									...advancedCountdownSvgStrokeWidthStyle2,
+									[deviceType]: value,
+								},
+							})
+						}
+						deviceType={deviceType}
+						units="px"
+						setAttributes={setAttributes}
+						rangeStep={1}
+						resetFallbackValue={15}
+					/>
+				</PanelBody>
+			)}
+
+			{["style-1", "style-2"].includes(countDownPresetStyle) && (
+				<PanelBody
+					title={__("Footer Text", "prime-elementor-addons-pro")}
+					initialOpen={false}
+				>
+					<FB_TypographyControl
+						globalTypoControlActive={true}
+						globalTypoSwitcher={
+							advancedCountdownFooterTypographyGlobalTypoSwitcher
+						}
+						storeGlobalTypographyData={(value) =>
+							setAttributes({
+								advancedCountdownFooterTypographyGlobalTypographyData: value,
+							})
+						}
+						globalTypoType={advancedCountdownFooterTypographyGlobalTypoType}
+						onChangeGlobalTypoType={(value) =>
+							setAttributes({
+								advancedCountdownFooterTypographyGlobalTypoType: value,
+							})
+						}
+						globalTypoOption={advancedCountdownFooterTypographyGlobalTypoOption}
+						onChangeGlobalTypoOption={(value) =>
+							setAttributes({
+								advancedCountdownFooterTypographyGlobalTypoOption: value,
+							})
+						}
+						fontFamily={advancedCountdownFooterTypographyFontFamily}
+						onChangeFontFamily={(value) =>
+							setAttributes({
+								advancedCountdownFooterTypographyFontFamily: value,
+							})
+						}
+						fontSize={advancedCountdownFooterTypographyFontSize}
+						onChangeFontSize={(value) =>
+							setAttributes({
+								advancedCountdownFooterTypographyFontSize: value,
+							})
+						}
+						fontSizeUnits={advancedCountdownFooterTypographyFontSizeUnits}
+						onChangeFontSizeUnit={(value) =>
+							setAttributes({
+								advancedCountdownFooterTypographyFontSizeUnits: value,
+							})
+						}
+						fontWeight={advancedCountdownFooterTypographyFontWeight}
+						onChangeFontWeight={(value) =>
+							setAttributes({
+								advancedCountdownFooterTypographyFontWeight: value,
+							})
+						}
+						fontStyle={advancedCountdownFooterTypographyFontStyle}
+						onChangeFontStyle={(value) =>
+							setAttributes({
+								advancedCountdownFooterTypographyFontStyle: value,
+							})
+						}
+						textTransform={advancedCountdownFooterTypographyTextTransform}
+						onChangeTextTransform={(value) =>
+							setAttributes({
+								advancedCountdownFooterTypographyTextTransform: value,
+							})
+						}
+						textDecoration={advancedCountdownFooterTypographyTextDecoration}
+						onChangeTextDecoration={(value) =>
+							setAttributes({
+								advancedCountdownFooterTypographyTextDecoration: value,
+							})
+						}
+						letterSpacing={advancedCountdownFooterTypographyLetterSpacing}
+						onChangeLetterSpacing={(value) =>
+							setAttributes({
+								advancedCountdownFooterTypographyLetterSpacing: value,
+							})
+						}
+						letterSpacingUnits={
+							advancedCountdownFooterTypographyLetterSpacingUnits
+						}
+						onChangeLetterSpacingUnit={(value) =>
+							setAttributes({
+								advancedCountdownFooterTypographyLetterSpacingUnits: value,
+							})
+						}
+						lineHeight={advancedCountdownFooterTypographyLineHeight}
+						onChangeLineHeight={(value) =>
+							setAttributes({
+								advancedCountdownFooterTypographyLineHeight: value,
+							})
+						}
+						lineHeightUnits={advancedCountdownFooterTypographyLineHeightUnits}
+						onChangeLineHeightUnit={(value) =>
+							setAttributes({
+								advancedCountdownFooterTypographyLineHeightUnits: value,
+							})
+						}
+						deviceType={deviceType}
+						setAttributes={setAttributes}
+					/>
+					<FB_SwitcherControl
+						label={__("Color", "prime-elementor-addons-pro")}
+						globalSwitcher={advancedCountdownItemWrapperBorderColorSwitcher} // Reusing switcher
+						setGlobalSwitcher={(value) =>
+							setAttributes({
+								advancedCountdownItemWrapperBorderColorSwitcher: value,
+							})
+						}
+					/>
+					{advancedCountdownItemWrapperBorderColorSwitcher === "normal" && (
+						<>
+							<FB_ColorControl
+								label={__("Text Color", "prime-elementor-addons-pro")}
+								globalColor={advancedCountdownFooterTextColor}
+								setGlobalColor={(value) =>
+									setAttributes({
+										advancedCountdownFooterTextColor:
+											value === undefined ? "" : value,
+									})
+								}
+							/>
+							<FB_ColorControl
+								label={__("Background Color", "prime-elementor-addons-pro")}
+								globalColor={advancedCountdownFooterBgColor}
+								setGlobalColor={(value) =>
+									setAttributes({
+										advancedCountdownFooterBgColor:
+											value === undefined ? "" : value,
+									})
+								}
+							/>
+						</>
+					)}
+					{advancedCountdownItemWrapperBorderColorSwitcher === "hover" && (
+						<>
+							<FB_ColorControl
+								label={__("Text Color", "prime-elementor-addons-pro")}
+								globalColor={advancedCountdownFooterTextColorHover}
+								setGlobalColor={(value) =>
+									setAttributes({
+										advancedCountdownFooterTextColorHover:
+											value === undefined ? "" : value,
+									})
+								}
+							/>
+							<FB_ColorControl
+								label={__("Background Color", "prime-elementor-addons-pro")}
+								globalColor={advancedCountdownFooterBgColorHover}
+								setGlobalColor={(value) =>
+									setAttributes({
+										advancedCountdownFooterBgColorHover:
+											value === undefined ? "" : value,
+									})
+								}
+							/>
+						</>
+					)}
+					{countDownPresetStyle === "style-2" && (
+						<FB_ColorControl
+							label={__("Background Gradient", "prime-elementor-addons-pro")}
+							globalColor={advancedCountdownFooterBgCustomStyle2}
+							setGlobalColor={(value) =>
+								setAttributes({
+									advancedCountdownFooterBgCustomStyle2:
+										value === undefined ? "" : value,
+								})
+							}
+						/>
+					)}
+					<FB_Spacing
+						label={__("Padding", "prime-elementor-addons-pro")}
+						deviceType={deviceType}
+						spacingUnitsHandler={handleFooterPaddingUnits}
+						spacingUnits={advancedCountdownFooterPadding.unit}
+						spacingDesktop={advancedCountdownFooterPadding}
+						handleSpacingUnitHandler={(event, position) =>
+							setAttributes({
+								advancedCountdownFooterPadding: {
+									...advancedCountdownFooterPadding,
+									[position]: event.target.value,
+								},
+							})
+						}
+						spacingCombineBtn={advancedCountdownFooterPaddingLink}
+						spacingCombineBtnHandler={() =>
+							setAttributes({
+								advancedCountdownFooterPaddingLink:
+									!advancedCountdownFooterPaddingLink,
+							})
+						}
+						setAttributes={setAttributes}
+					/>
+					<FB_Spacing
+						label={__("Margin", "prime-elementor-addons-pro")}
+						deviceType={deviceType}
+						spacingUnitsHandler={handleFooterMarginUnits}
+						spacingUnits={advancedCountdownFooterMargin.unit}
+						spacingDesktop={advancedCountdownFooterMargin}
+						handleSpacingUnitHandler={(event, position) =>
+							setAttributes({
+								advancedCountdownFooterMargin: {
+									...advancedCountdownFooterMargin,
+									[position]: event.target.value,
+								},
+							})
+						}
+						spacingCombineBtn={advancedCountdownFooterMarginLink}
+						spacingCombineBtnHandler={() =>
+							setAttributes({
+								advancedCountdownFooterMarginLink:
+									!advancedCountdownFooterMarginLink,
+							})
+						}
+						setAttributes={setAttributes}
 					/>
 				</PanelBody>
 			)}
@@ -2351,16 +2502,15 @@ const Inspector = ({ attributes, setAttributes }) => {
 	 */
 	const advancedControls = (
 		<>
-			<PanelBody
-				title={__("Layout", "frontis-blocks")}
-				initialOpen={true}
-			>
+			<PanelBody title={__("Layout", "frontis-blocks")} initialOpen={true}>
 				<FB_Range
 					min={0}
 					max={10000000}
 					label={__("Z Index", "frontis-blocks")}
 					rangeValue={countDownZIndex}
-					onChangeHandler={(value) => setAttributes({ countDownZIndex: value === 0 ? undefined : value })}
+					onChangeHandler={(value) =>
+						setAttributes({ countDownZIndex: value === 0 ? undefined : value })
+					}
 					deviceType={deviceType}
 					setAttributes={setAttributes}
 					rangeStep={1}
@@ -2371,15 +2521,18 @@ const Inspector = ({ attributes, setAttributes }) => {
 				<SelectControl
 					label={__("Overflow", "frontis-blocks")}
 					value={countDownOverflow}
-					options={OVERFLOW_OP}
+					options={["default", "auto", "hidden", "scroll", "clip"].map(
+						(val) => ({ label: val, value: val }),
+					)}
 					onChange={(value) => setAttributes({ countDownOverflow: value })}
 				/>
 
 				<FB_PositionControl
 					deviceType={deviceType}
 					positionType={countDownPositionType}
-					setPositionType={(value) => setAttributes({ countDownPositionType: value })}
-
+					setPositionType={(value) =>
+						setAttributes({ countDownPositionType: value })
+					}
 					HZOrientationType={countDownHZOrientationType}
 					setHZOrientationType={(value) =>
 						setAttributes({ countDownHZOrientationType: value })
@@ -2388,177 +2541,57 @@ const Inspector = ({ attributes, setAttributes }) => {
 					setVROrientationType={(value) =>
 						setAttributes({ countDownVROrientationType: value })
 					}
-
 					HZLeftOffset={countDownHZLeftOffset}
-					setHZLeftOffset={(value) => setAttributes({ countDownHZLeftOffset: value })}
+					setHZLeftOffset={(value) =>
+						setAttributes({ countDownHZLeftOffset: value })
+					}
 					HZLeftOffsetUnits={countDownHZLeftOffsetUnits}
-					setHZLeftOffsetUnits={(value) => setAttributes({ countDownHZLeftOffsetUnits: value })}
+					setHZLeftOffsetUnits={(value) =>
+						setAttributes({ countDownHZLeftOffsetUnits: value })
+					}
 					HZRightOffset={countDownHZRightOffset}
-					setHZRightOffset={(value) => setAttributes({ countDownHZRightOffset: value })}
+					setHZRightOffset={(value) =>
+						setAttributes({ countDownHZRightOffset: value })
+					}
 					HZRightOffsetUnits={countDownHZRightOffsetUnits}
-					setHZRightOffsetUnits={(value) => setAttributes({ countDownHZRightOffsetUnits: value })}
-
+					setHZRightOffsetUnits={(value) =>
+						setAttributes({ countDownHZRightOffsetUnits: value })
+					}
 					VRTopOffset={countDownVRTopOffset}
-					setVRTopOffset={(value) => setAttributes({ countDownVRTopOffset: value })}
+					setVRTopOffset={(value) =>
+						setAttributes({ countDownVRTopOffset: value })
+					}
 					VRTopOffsetUnits={countDownVRTopOffsetUnits}
-					setVRTopOffsetUnits={(value) => setAttributes({ countDownVRTopOffsetUnits: value })}
+					setVRTopOffsetUnits={(value) =>
+						setAttributes({ countDownVRTopOffsetUnits: value })
+					}
 					VRBottomOffset={countDownVRBottomOffset}
-					setVRBottomOffset={(value) => setAttributes({ countDownVRBottomOffset: value })}
+					setVRBottomOffset={(value) =>
+						setAttributes({ countDownVRBottomOffset: value })
+					}
 					VRBottomOffsetUnits={countDownVRBottomOffsetUnits}
-					setVRBottomOffsetUnits={(value) => setAttributes({ countDownVRBottomOffsetUnits: value })}
-
+					setVRBottomOffsetUnits={(value) =>
+						setAttributes({ countDownVRBottomOffsetUnits: value })
+					}
 					setAttributes={setAttributes}
 				/>
 
 				<FB_InputControl
 					label={__("CSS ID", "frontis-blocks")}
 					value={countDownGlobalWraperID}
-					onChangeValue={(value) => setAttributes({ countDownGlobalWraperID: value })}
+					onChangeValue={(value) =>
+						setAttributes({ countDownGlobalWraperID: value })
+					}
 					helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
 				/>
 
 				<FB_InputControl
 					label={__("CSS Class", "frontis-blocks")}
 					value={countDownGlobalWraperClass}
-					onChangeValue={(value) => setAttributes({ countDownGlobalWraperClass: value })}
+					onChangeValue={(value) =>
+						setAttributes({ countDownGlobalWraperClass: value })
+					}
 					helpText={__("Separate with spaces key.", "frontis-blocks")}
-				/>
-
-			</PanelBody>
-			<PanelBody title={__("Background", "frontis-blocks")} initialOpen={false}>
-				<FB_BackgroundColorControl
-					bgColorSwitcher={globalBgColorSwitcher}
-					setBgColorSwitcher={(value) => setAttributes({ globalBgColorSwitcher: value })}
-					normalBackgroundType={globalBackgroundType}
-					setNormalBackgroundType={(value) => setAttributes({ globalBackgroundType: value })}
-					normalClassicColor={globalClassicColor}
-					setNormalClassicColor={(value) => setAttributes({ globalClassicColor: value === undefined ? '' : value })}
-					normalGradientColor={globalGradientColor}
-					setNormalGradientColor={(value) => setAttributes({ globalGradientColor: value === undefined ? null : value })}
-					normalCustomGradientSwitcher={globalCustomGradientSwitcher}
-					setNormalCustomGradientSwitcher={(value) => setAttributes({ globalCustomGradientSwitcher: value, })}
-					normalCustomGradientInputValue={globalCustomGradientInputValue}
-					setNormalCustomGradientInputValue={(value) => setAttributes({ globalCustomGradientInputValue: value, })}
-					normalBackgroundImageUrl={globalBackgroundImageUrl}
-					setNormalBackgroundImageUrl={(value) => setAttributes({ globalBackgroundImageUrl: value })}
-					normalBackgroundImageAlt={globalBackgroundImageAlt}
-					setNormalBackgroundImageAlt={(value) => setAttributes({ globalBackgroundImageAlt: value })}
-					normalBackgroundImageID={globalBackgroundImageID}
-					setNormalBackgroundImageID={(value) => setAttributes({ globalBackgroundImageID: value })}
-					normalBackgroundImagePosition={globalBackgroundImagePosition}
-					setNormalBackgroundImagePosition={(value) => setAttributes({ globalBackgroundImagePosition: value, })}
-					normalBackgroundImageAttachment={globalBackgroundImageAttachment}
-					setNormalBackgroundImageAttachment={(value) => setAttributes({ globalBackgroundImageAttachment: value, })}
-					normalBackgroundImageRepeat={globalBackgroundImageRepeat}
-					setNormalBackgroundImageRepeat={(value) => setAttributes({ globalBackgroundImageRepeat: value, })}
-					normalBackgroundImageSize={globalBackgroundImageSize}
-					setNormalBackgroundImageSize={(value) => setAttributes({ globalBackgroundImageSize: value })}
-					hoverBackgroundType={hoverBackgroundType}
-					setHoverBackgroundType={(value) => setAttributes({ hoverBackgroundType: value })}
-					hoverClassicColor={hoverClassicColor}
-					setHoverClassicColor={(value) => setAttributes({ hoverClassicColor: value === undefined ? '' : value })}
-					hoverGradientColor={hoverGradientColor}
-					setHoverGradientColor={(value) => setAttributes({ hoverGradientColor: value === undefined ? null : value })}
-					hoverCustomGradientSwitcher={hoverCustomGradientSwitcher}
-					setHoverCustomGradientSwitcher={(value) => setAttributes({ hoverCustomGradientSwitcher: value, })}
-					hoverCustomGradientInputValue={hoverCustomGradientInputValue}
-					setHoverCustomGradientInputValue={(value) => setAttributes({ hoverCustomGradientInputValue: value, })}
-					hoverBackgroundImageUrl={hoverBackgroundImageUrl}
-					setHoverBackgroundImageUrl={(value) => setAttributes({ hoverBackgroundImageUrl: value })}
-					hoverBackgroundImageAlt={hoverBackgroundImageAlt}
-					setHoverBackgroundImageAlt={(value) => setAttributes({ hoverBackgroundImageAlt: value })}
-					hoverBackgroundImageID={hoverBackgroundImageID}
-					setHoverBackgroundImageID={(value) => setAttributes({ hoverBackgroundImageID: value })}
-					hoverBackgroundImagePosition={hoverBackgroundImagePosition}
-					setHoverBackgroundImagePosition={(value) => setAttributes({ hoverBackgroundImagePosition: value, })}
-					hoverBackgroundImageAttachment={hoverBackgroundImageAttachment}
-					setHoverBackgroundImageAttachment={(value) => setAttributes({ hoverBackgroundImageAttachment: value, })}
-					hoverBackgroundImageRepeat={hoverBackgroundImageRepeat}
-					setHoverBackgroundImageRepeat={(value) => setAttributes({ hoverBackgroundImageRepeat: value, })}
-					hoverBackgroundImageSize={hoverBackgroundImageSize}
-					setHoverBackgroundImageSize={(value) => setAttributes({ hoverBackgroundImageSize: value })}
-				/>
-
-			</PanelBody>
-			<PanelBody title={__("Border", "frontis-blocks")} initialOpen={false}>
-
-				<SelectControl
-					label={__("Border Style", "frontis-blocks")}
-					value={countDownItemWrapperBorder}
-					options={BORDER_STYLES}
-					onChange={(value) => setAttributes({ countDownItemWrapperBorder: value })}
-				/>
-				{/** Item Background Control */}
-				<FB_SwitcherControl
-					label={__("Border Color", "frontis-blocks")}
-					globalSwitcher={countDownItemWrapperBorderColorSwitcher}
-					setGlobalSwitcher={(value) => setAttributes({ countDownItemWrapperBorderColorSwitcher: value })}
-				/>
-
-				{countDownItemWrapperBorderColorSwitcher === 'normal' && (
-					<FB_ColorControl
-						label={__("Normal Color", "frontis-blocks")}
-						globalColor={countDownItemWrapperBorderColor}
-						setGlobalColor={(value) => setAttributes({ countDownItemWrapperBorderColor: value === undefined ? '' : value })}
-					/>
-				)}
-
-				{countDownItemWrapperBorderColorSwitcher === 'hover' && (
-					<FB_ColorControl
-						label={__("Hover Color", "frontis-blocks")}
-						globalColor={countDownItemWrapperBorderHoverColor}
-						setGlobalColor={(value) => setAttributes({ countDownItemWrapperBorderHoverColor: value === undefined ? '' : value })}
-					/>
-				)}
-				<FB_Spacing
-					label={'Border Width'}
-					deviceType={deviceType}
-					spacingUnitsHandler={countDownItemWrapperBorderTypeUnitsHandler}
-					spacingUnits={countDownItemWrapperBorderTypeUnits}
-					spacingDesktop={countDownItemWrapperBorderTypeDesktop}
-					spacingTablet={countDownItemWrapperBorderTypeTablet}
-					spacingMobile={countDownItemWrapperBorderTypeMobile}
-					handleSpacingUnitHandler={handleCountDownItemWrapperBorderUnitHandlerFn}
-					spacingCombineBtn={countDownItemWrapperBorderTypeLink}
-					spacingCombineBtnHandler={countDownItemWrapperBorderCombineBtnHandlerFn} setAttributes={setAttributes}
-				/>
-				<FB_Spacing
-					label={'Border Radius'}
-					deviceType={deviceType}
-					spacingUnitsHandler={countDownItemWrapperBorderRadiusUnitsHandler}
-					spacingUnits={countDownItemWrapperBorderRadiusUnits}
-					spacingDesktop={countDownItemWrapperBorderRadiusDesktop}
-					spacingTablet={countDownItemWrapperBorderRadiusTablet}
-					spacingMobile={countDownItemWrapperBorderRadiusMobile}
-					handleSpacingUnitHandler={countDownItemWrapperHandleSpacingUnitHandlerFn}
-					spacingCombineBtn={countDownItemWrapperBorderRadiusLink}
-					spacingCombineBtnHandler={countDownItemWrapperCombineBtnHandlerFn} setAttributes={setAttributes}
-				/>
-			</PanelBody>
-			<PanelBody title={__("Padding/Margin", "frontis-blocks")} initialOpen={false}>
-				<FB_Spacing
-					label={'Padding'}
-					deviceType={deviceType}
-					spacingUnitsHandler={countDownItemWrapperPaddingSpacingUnitsHandler}
-					spacingUnits={countDownItemWrapperPaddingUnits}
-					spacingDesktop={countDownItemWrapperPaddingDesktop}
-					spacingTablet={countDownItemWrapperPaddingTablet}
-					spacingMobile={countDownItemWrapperPaddingMobile}
-					handleSpacingUnitHandler={countDownItemWrapperPaddingHandleSpacingUnitHandler}
-					spacingCombineBtn={countDownItemWrapperPaddingLink}
-					spacingCombineBtnHandler={countDownItemWrapperPaddingSpacingCombineBtnHandlerFn} setAttributes={setAttributes}
-				/>
-				<FB_Spacing
-					label={'Margin'}
-					deviceType={deviceType}
-					spacingUnitsHandler={countDownItemWrapperMarginSpacingUnitsHandler}
-					spacingUnits={countDownItemWrapperMarginUnits}
-					spacingDesktop={countDownItemWrapperMarginDesktop}
-					spacingTablet={countDownItemWrapperMarginTablet}
-					spacingMobile={countDownItemWrapperMarginMobile}
-					handleSpacingUnitHandler={countDownItemWrapperMarginHandleSpacingUnitHandler}
-					spacingCombineBtn={countDownItemWrapperMarginLink}
-					spacingCombineBtnHandler={countDownItemWrapperMarginSpacingCombineBtnHandlerFn} setAttributes={setAttributes}
 				/>
 			</PanelBody>
 			<PanelBody
@@ -2568,22 +2601,25 @@ const Inspector = ({ attributes, setAttributes }) => {
 			>
 				<FB_VisibilityControl
 					desktopValue={countDownDesktopSwitcher}
-					setDesktopValue={(value) => setAttributes({ countDownDesktopSwitcher: value })}
-
+					setDesktopValue={(value) =>
+						setAttributes({ countDownDesktopSwitcher: value })
+					}
 					tabletValue={countDownTabletSwitcher}
-					setTabletValue={(value) => setAttributes({ countDownTabletSwitcher: value })}
-
+					setTabletValue={(value) =>
+						setAttributes({ countDownTabletSwitcher: value })
+					}
 					mobileValue={countDownMobileSwitcher}
-					setMobileValue={(value) => setAttributes({ countDownMobileSwitcher: value })}
+					setMobileValue={(value) =>
+						setAttributes({ countDownMobileSwitcher: value })
+					}
 				/>
 			</PanelBody>
-			<PanelBody
-				title={__("Custom CSS", "frontis-blocks")}
-				initialOpen={false}
-			>
+			<PanelBody title={__("Custom CSS", "frontis-blocks")} initialOpen={false}>
 				<FB_CustomCSSEditor
 					value={countDownGlobalWraperCustomCSS}
-					onChangeValue={(value) => setAttributes({ countDownGlobalWraperCustomCSS: value })}
+					onChangeValue={(value) =>
+						setAttributes({ countDownGlobalWraperCustomCSS: value })
+					}
 				/>
 			</PanelBody>
 		</>
@@ -2598,5 +2634,5 @@ const Inspector = ({ attributes, setAttributes }) => {
 			/>
 		</>
 	);
-}
+};
 export default memo(Inspector);
