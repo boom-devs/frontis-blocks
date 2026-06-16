@@ -1,13 +1,45 @@
 import { useState } from 'react';
 import { __ } from '@wordpress/i18n';
-import { Button } from '@wordpress/components';
-import { useSortable } from '@dnd-kit/sortable';
+import { Button, TextareaControl, SelectControl, ToggleControl } from '@wordpress/components';
+import { useSortable, SortableContext, arrayMove } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
+import { DndContext, closestCenter } from '@dnd-kit/core';
 
-export default function SortableItem({ id, item, index, handleDeleteItem, handleDuplicateItem, children, title, duplicateLabel, deleteLabel }) {
-    const { attributes, listeners, setNodeRef } = useSortable({ id });
+import FB_InputControl from '../../components/input-control';
+import FB_UrlControl from '../../components/url-control';
+import FB_ImageControl from '../../components/image-control';
+import FBIconPicker from '../../components/icon-picker';
+import FB_Range from '../../components/range';
+import FB_SwitcherControl from '../../components/switcher-control';
+import FB_ColorControl from '../../components/color-control';
+import SocialSortableItem from './socialSortableItem';
+
+export default function SortableItem({
+    id,
+    item,
+    index,
+    handleDeleteItem,
+    handleDuplicateItem,
+    handleChangeItem,
+    deviceType,
+    imageHotspotMarkerColor,
+    imageHotspotMarkerColorSwitcher,
+    imageHotspotIconColorSwitcher,
+    imageHotspotSocialLinkIconColorSwitcher,
+    setAttributes,
+    title,
+    duplicateLabel,
+    deleteLabel
+}) {
+    const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleOpen = () => setIsOpen(!isOpen);
+
+    const style = {
+        transform: CSS.Transform.toString(transform),
+        transition,
+    };
 
     const TrashIcon = (
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -27,14 +59,68 @@ export default function SortableItem({ id, item, index, handleDeleteItem, handle
         </svg>
     );
 
+    const handleChangeSocialLink = (socialLinkId, field, value) => {
+        const updatedLinks = (item.socialLinks || []).map((link) => {
+            if (link.id === socialLinkId) {
+                return { ...link, [field]: value };
+            }
+            return link;
+        });
+        handleChangeItem(item.id, 'socialLinks', updatedLinks);
+    };
+
+    const handleDeleteSocialLink = (socialLinkId) => {
+        const updatedLinks = (item.socialLinks || []).filter((link) => link.id !== socialLinkId);
+        handleChangeItem(item.id, 'socialLinks', updatedLinks);
+    };
+
+    const handleDuplicateSocialLink = (socialLinkId) => {
+        const socialLinks = item.socialLinks || [];
+        const linkIndex = socialLinks.findIndex((link) => link.id === socialLinkId);
+        if (linkIndex === -1) {
+            return;
+        }
+
+        const sourceLink = socialLinks[linkIndex];
+        const duplicatedLink = {
+            ...sourceLink,
+            id: `social-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+        };
+
+        const updatedLinks = [
+            ...socialLinks.slice(0, linkIndex + 1),
+            duplicatedLink,
+            ...socialLinks.slice(linkIndex + 1),
+        ];
+        handleChangeItem(item.id, 'socialLinks', updatedLinks);
+    };
+
+    const handleSocialLinkDragEnd = (event) => {
+        const { active, over } = event;
+        if (!over || active.id === over.id) {
+            return;
+        }
+
+        const socialLinks = item.socialLinks || [];
+        const oldIndex = socialLinks.findIndex((link) => link.id === active.id);
+        const newIndex = socialLinks.findIndex((link) => link.id === over.id);
+
+        if (oldIndex === -1 || newIndex === -1) {
+            return;
+        }
+
+        const updatedLinks = arrayMove(socialLinks, oldIndex, newIndex);
+        handleChangeItem(item.id, 'socialLinks', updatedLinks);
+    };
+
     return (
-        <li className="sortable-item" ref={setNodeRef} {...attributes}>
+        <li className="sortable-item" ref={setNodeRef} {...attributes} style={style}>
             <div className="sortable-header">
                 <span className="sortable-title" onClick={toggleOpen}>
                     {title || item.title || `${__('Hotspot', 'frontis-blocks')} ${index + 1}`}
                 </span>
 
-                <span className="sortable-sort" {...listeners}>
+                <span className="sortable-sort" {...listeners} style={{ cursor: "grab" }}>
                     <Button icon={MoveIcon} label={__('Sort', 'frontis-blocks')} />
                 </span>
 
@@ -59,7 +145,271 @@ export default function SortableItem({ id, item, index, handleDeleteItem, handle
 
             {isOpen && (
                 <div className="sortable-item-content">
-                    {children}
+                    <div className="fb-hotspot-selected-wrapper">
+                        <div>
+                            <h3 className="fb-hotspot-section-heading">
+                                {__('Content', 'frontis-blocks')}
+                            </h3>
+                            <FB_InputControl
+                                label={__("Category", "frontis-blocks")}
+                                value={item.category || ''}
+                                onChangeValue={(value) => handleChangeItem(item.id, 'category', value)}
+                                placeholder={__("Enter category", "frontis-blocks")}
+                            />
+
+                            <FB_InputControl
+                                label={__("Hotspot Title", "frontis-blocks")}
+                                value={item.title || ''}
+                                onChangeValue={(value) => handleChangeItem(item.id, 'title', value)}
+                                placeholder={__("Enter title", "frontis-blocks")}
+                            />
+
+                            <FB_UrlControl
+                                label={__("Title Link", "frontis-blocks")}
+                                url={item.titleLink || ''}
+                                onChangeUrl={(value) => handleChangeItem(item.id, 'titleLink', value)}
+                                openInNewTab={!!item.titleLinkOpenInNewTab}
+                                onChangeOpenInNewTab={(value) => handleChangeItem(item.id, 'titleLinkOpenInNewTab', value)}
+                            />
+
+                            <TextareaControl
+                                label={__("Hotspot Description", "frontis-blocks")}
+                                value={item.description || ''}
+                                onChange={(value) => handleChangeItem(item.id, 'description', value)}
+                                placeholder={__("Enter description that will appear in popup", "frontis-blocks")}
+                                rows={4}
+                            />
+
+                            <FB_InputControl
+                                label={__("Price", "frontis-blocks")}
+                                value={item.price || ''}
+                                onChangeValue={(value) => handleChangeItem(item.id, 'price', value)}
+                                placeholder={__("Enter price", "frontis-blocks")}
+                            />
+
+                            <ToggleControl
+                                label={__("Show Popover Image", "frontis-blocks")}
+                                checked={item.showImage !== false}
+                                onChange={(value) => handleChangeItem(item.id, 'showImage', value)}
+                            />
+
+                            {item.showImage !== false && (
+                                <FB_ImageControl
+                                    label={__("Popover Image", "frontis-blocks")}
+                                    globalImageUrl={item.popoverImageUrl || ''}
+                                    setglobalImageUrl={(url) => handleChangeItem(item.id, 'popoverImageUrl', url)}
+                                    globalImageAlt={item.popoverImageAlt || ''}
+                                    setglobalImageAlt={(alt) => handleChangeItem(item.id, 'popoverImageAlt', alt)}
+                                    globalImageID={item.popoverImageId || 0}
+                                    setglobalImageID={(id) => handleChangeItem(item.id, 'popoverImageId', id)}
+                                    isImageSize={false}
+                                />
+                            )}
+
+                            <ToggleControl
+                                label={__('Show Social Links', 'frontis-blocks')}
+                                checked={item.showSocialLinks || false}
+                                onChange={(value) => handleChangeItem(item.id, 'showSocialLinks', value)}
+                            />
+
+                            {item.showSocialLinks && (
+                                <div className="fb-hotspot-social-links-repeater">
+                                    <p className="fb-hotspot-control-label">{__('Social Links', 'frontis-blocks')}</p>
+
+                                    {(item.socialLinks || []).length > 0 && (
+                                        <div className="fb-hotspot-repeater-wrapper">
+                                            <DndContext
+                                                collisionDetection={closestCenter}
+                                                onDragEnd={handleSocialLinkDragEnd}
+                                            >
+                                                <SortableContext items={(item.socialLinks || []).map((link) => link.id)}>
+                                                    <ul className="dnd-items-wrapper">
+                                                        {(item.socialLinks || []).map((socialLink, socialIndex) => {
+                                                            const iconName = socialLink.icon
+                                                                ? socialLink.icon.charAt(0).toUpperCase() + socialLink.icon.slice(1)
+                                                                : 'Facebook';
+                                                            const itemTitle = `${iconName} (${socialIndex + 1})`;
+
+                                                            return (
+                                                                <SocialSortableItem
+                                                                    key={socialLink.id}
+                                                                    id={socialLink.id}
+                                                                    item={socialLink}
+                                                                    index={socialIndex}
+                                                                    title={itemTitle}
+                                                                    duplicateLabel={__('Duplicate Social Link', 'frontis-blocks')}
+                                                                    deleteLabel={__('Delete Social Link', 'frontis-blocks')}
+                                                                    handleDeleteItem={handleDeleteSocialLink}
+                                                                    handleDuplicateItem={handleDuplicateSocialLink}
+                                                                    handleChangeItem={handleChangeSocialLink}
+                                                                    imageHotspotSocialLinkIconColorSwitcher={imageHotspotSocialLinkIconColorSwitcher}
+                                                                    setAttributes={setAttributes}
+                                                                />
+                                                            );
+                                                        })}
+                                                    </ul>
+                                                </SortableContext>
+                                            </DndContext>
+                                        </div>
+                                    )}
+
+                                    <Button
+                                        variant="secondary"
+                                        onClick={() => {
+                                            const currentLinks = item.socialLinks || [];
+                                            const newLink = {
+                                                id: `social-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+                                                icon: 'facebook',
+                                                url: '',
+                                                openInNewTab: false,
+                                            };
+                                            handleChangeItem(item.id, 'socialLinks', [...currentLinks, newLink]);
+                                        }}
+                                        className="fb-hotspot-full-btn"
+                                    >
+                                        {__('+ Add Social Link', 'frontis-blocks')}
+                                    </Button>
+                                </div>
+                            )}
+
+                            <SelectControl
+                                label={__("Popover Position", "frontis-blocks")}
+                                value={item.popoverPosition || 'top'}
+                                options={[
+                                    { label: __('Top', 'frontis-blocks'), value: 'top' },
+                                    { label: __('Bottom', 'frontis-blocks'), value: 'bottom' },
+                                    { label: __('Left', 'frontis-blocks'), value: 'left' },
+                                    { label: __('Right', 'frontis-blocks'), value: 'right' },
+                                    { label: __('Top Left', 'frontis-blocks'), value: 'top-left' },
+                                    { label: __('Top Right', 'frontis-blocks'), value: 'top-right' },
+                                    { label: __('Bottom Left', 'frontis-blocks'), value: 'bottom-left' },
+                                    { label: __('Bottom Right', 'frontis-blocks'), value: 'bottom-right' },
+                                ]}
+                                onChange={(value) => handleChangeItem(item.id, 'popoverPosition', value)}
+                            />
+
+                            <p className="fb-hotspot-control-label">{__("Marker Icon", "frontis-blocks")}</p>
+                            <FBIconPicker
+                                value={item.icon || 'plus'}
+                                setIconHandler={(icon) => handleChangeItem(item.id, 'icon', icon)}
+                            />
+                        </div>
+
+                        <div>
+                            <SelectControl
+                                label={__("Marker Animation", "frontis-blocks")}
+                                value={item.animation || 'none'}
+                                options={[
+                                    { label: __('None', 'frontis-blocks'), value: 'none' },
+                                    { label: __('Pulse', 'frontis-blocks'), value: 'pulse' },
+                                    { label: __('Glow', 'frontis-blocks'), value: 'glow' },
+                                    { label: __('Float', 'frontis-blocks'), value: 'float' },
+                                ]}
+                                onChange={(value) => handleChangeItem(item.id, 'animation', value)}
+                            />
+                            {(item.animation || 'none') !== 'none' && (
+                                <>
+                                    <ToggleControl
+                                        label={__("Autoplay", "frontis-blocks")}
+                                        checked={item.autoplay !== false}
+                                        onChange={(value) => handleChangeItem(item.id, 'autoplay', value)}
+                                    />
+
+                                    {item.autoplay !== false && (
+                                        <FB_Range
+                                            label={__("Animation Interval (s)", "frontis-blocks")}
+                                            rangeValue={{ [deviceType]: item.animationInterval || 0 }}
+                                            onChangeHandler={(value) => handleChangeItem(item.id, 'animationInterval', value[deviceType])}
+                                            deviceType={deviceType}
+                                            min={0}
+                                            max={10}
+                                            rangeStep={0.1}
+                                            isRangeUnit={false}
+                                            resetFallbackValue={0}
+                                        />
+                                    )}
+                                </>
+                            )}
+                        </div>
+
+                        <div>
+                            <h3 className="fb-hotspot-section-heading">
+                                {__('Position', 'frontis-blocks')}
+                            </h3>
+                            <FB_Range
+                                label={__("X Position (%)", "frontis-blocks")}
+                                rangeValue={{ [deviceType]: item.x }}
+                                onChangeHandler={(value) => handleChangeItem(item.id, 'x', value[deviceType])}
+                                deviceType={deviceType}
+                                min={0}
+                                max={100}
+                                rangeStep={1}
+                                isRangeUnit={false}
+                                resetFallbackValue={50}
+                            />
+
+                            <FB_Range
+                                label={__("Y Position (%)", "frontis-blocks")}
+                                rangeValue={{ [deviceType]: item.y }}
+                                onChangeHandler={(value) => handleChangeItem(item.id, 'y', value[deviceType])}
+                                deviceType={deviceType}
+                                min={0}
+                                max={100}
+                                rangeStep={1}
+                                isRangeUnit={false}
+                                resetFallbackValue={50}
+                            />
+                        </div>
+
+                        <div>
+                            <h3 className="fb-hotspot-section-heading">
+                                {__('Styling', 'frontis-blocks')}
+                            </h3>
+
+                            <FB_SwitcherControl
+                                label={__("Marker Color", "frontis-blocks")}
+                                globalSwitcher={imageHotspotMarkerColorSwitcher}
+                                setGlobalSwitcher={(value) => setAttributes({ imageHotspotMarkerColorSwitcher: value })}
+                            />
+
+                            {imageHotspotMarkerColorSwitcher === 'normal' && (
+                                <FB_ColorControl
+                                    label={__("Color", "frontis-blocks")}
+                                    globalColor={item.markerColor || imageHotspotMarkerColor}
+                                    setGlobalColor={(color) => handleChangeItem(item.id, 'markerColor', color)}
+                                />
+                            )}
+
+                            {imageHotspotMarkerColorSwitcher === 'hover' && (
+                                <FB_ColorControl
+                                    label={__("Hover Color", "frontis-blocks")}
+                                    globalColor={item.hoverBackgroundColor || ''}
+                                    setGlobalColor={(color) => handleChangeItem(item.id, 'hoverBackgroundColor', color)}
+                                />
+                            )}
+                            <FB_SwitcherControl
+                                label={__("Marker Icon Color", "frontis-blocks")}
+                                globalSwitcher={imageHotspotIconColorSwitcher}
+                                setGlobalSwitcher={(value) => setAttributes({ imageHotspotIconColorSwitcher: value })}
+                            />
+
+                            {imageHotspotIconColorSwitcher === 'normal' && (
+                                <FB_ColorControl
+                                    label={__("Icon Color", "frontis-blocks")}
+                                    globalColor={item.iconColor || '#ffffff'}
+                                    setGlobalColor={(color) => handleChangeItem(item.id, 'iconColor', color)}
+                                />
+                            )}
+
+                            {imageHotspotIconColorSwitcher === 'hover' && (
+                                <FB_ColorControl
+                                    label={__("Icon Hover Color", "frontis-blocks")}
+                                    globalColor={item.iconHoverColor || ''}
+                                    setGlobalColor={(color) => handleChangeItem(item.id, 'iconHoverColor', color)}
+                                />
+                            )}
+                        </div>
+                    </div>
                 </div>
             )}
         </li>
