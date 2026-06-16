@@ -2521,7 +2521,7 @@ export default function Inspector({ attributes, setAttributes }) {
         />
       </PanelBody>
 
-      <PanelBody title="Background Color" initialOpen={false}>
+      <PanelBody title="Background" initialOpen={false}>
 
         <FB_BackgroundColorControl
           bgColorSwitcher={imageHotspotsGlobalBgBgColorSwitcher} setBgColorSwitcher={(value) => setAttributes({ imageHotspotsGlobalBgBgColorSwitcher: value })}
