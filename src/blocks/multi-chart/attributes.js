@@ -410,6 +410,14 @@ const attributes = {
 			right: "24",
 		},
 	},
+	chartHeaderPaddingUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
 	chartBodyPaddingTablet: {
 		type: "object",
 		default: {
@@ -429,6 +437,53 @@ const attributes = {
 		},
 	},
 	chartBodyPaddingLink: {
+		type: "boolean",
+		default: true,
+	},
+	chartBodyPaddingUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	chartBodyMarginUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	chartBodyMarginDesktop: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	chartBodyMarginTablet: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	chartBodyMarginMobile: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	chartBodyMarginLink: {
 		type: "boolean",
 		default: true,
 	},
@@ -560,6 +615,24 @@ const attributes = {
 			bottom: "999",
 			left: "999",
 			right: "999",
+		},
+	},
+	toggleBtnBorderRadiusTablet: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	toggleBtnBorderRadiusMobile: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
 		},
 	},
 	toggleBtnBorderRadiusUnits: {

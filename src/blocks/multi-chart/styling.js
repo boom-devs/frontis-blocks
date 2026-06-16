@@ -43,10 +43,14 @@ const generateMultiChartStyle = (attributes) => {
 		chartBodyHoverCustomGradientInputValue,
 		chartBodyBorderRadiusUnits,
 		chartBodyBorderRadiusDesktop,
+		chartBodyPaddingUnits,
 		chartBodyPaddingDesktop,
+		chartBodyMarginUnits,
+		chartBodyMarginDesktop,
 
 		chartTitleColor,
 		chartTitleHoverColor,
+		chartHeaderPaddingUnits,
 		chartHeaderPaddingDesktop,
 
 		toggleBtnColor,
@@ -54,7 +58,9 @@ const generateMultiChartStyle = (attributes) => {
 		toggleBtnHoverColor,
 		toggleBtnHoverBgColor,
 		toggleBtnPaddingDesktop,
+		toggleBtnPaddingUnits,
 		toggleBtnBorderRadiusDesktop,
+		toggleBtnBorderRadiusUnits,
 
 		filterIconSize,
 		filterIconSizeUnits,
@@ -172,6 +178,8 @@ const generateMultiChartStyle = (attributes) => {
 		canvasBorderRadiusMobile,
 		chartBodyPaddingTablet,
 		chartBodyPaddingMobile,
+		chartBodyMarginTablet,
+		chartBodyMarginMobile,
 		chartBodyBorderRadiusTablet,
 		chartBodyBorderRadiusMobile,
 		chartHeaderPaddingTablet,
@@ -184,6 +192,8 @@ const generateMultiChartStyle = (attributes) => {
 		toggleBtnPaddingMobile,
 		toggleBtnBorderRadiusTablet,
 		toggleBtnBorderRadiusMobile,
+
+		legendDotSizeUnits,
 	} = attributes;
 
 	// Canvas Padding
@@ -214,14 +224,21 @@ const generateMultiChartStyle = (attributes) => {
 		: "";
 
 	// Chart Body Padding
-	const chartBodyPaddingGetDesktop = chartBodyPaddingDesktop
-		? `${chartBodyPaddingDesktop?.top}px ${chartBodyPaddingDesktop?.right}px ${chartBodyPaddingDesktop?.bottom}px ${chartBodyPaddingDesktop?.left}px`
-		: "";
+	const chartBodyPaddingGetDesktop = `${chartBodyPaddingDesktop?.top}${chartBodyPaddingUnits?.Desktop} ${chartBodyPaddingDesktop?.right}${chartBodyPaddingUnits?.Desktop} ${chartBodyPaddingDesktop?.bottom}${chartBodyPaddingUnits?.Desktop} ${chartBodyPaddingDesktop?.left}${chartBodyPaddingUnits?.Desktop}`;
 	const chartBodyPaddingGetTablet = chartBodyPaddingTablet
-		? `${chartBodyPaddingTablet?.top}px ${chartBodyPaddingTablet?.right}px ${chartBodyPaddingTablet?.bottom}px ${chartBodyPaddingTablet?.left}px`
+		? `${chartBodyPaddingTablet?.top}${chartBodyPaddingUnits?.Tablet} ${chartBodyPaddingTablet?.right}${chartBodyPaddingUnits?.Tablet} ${chartBodyPaddingTablet?.bottom}${chartBodyPaddingUnits?.Tablet} ${chartBodyPaddingTablet?.left}${chartBodyPaddingUnits?.Tablet}`
 		: "";
 	const chartBodyPaddingGetMobile = chartBodyPaddingMobile
-		? `${chartBodyPaddingMobile?.top}px ${chartBodyPaddingMobile?.right}px ${chartBodyPaddingMobile?.bottom}px ${chartBodyPaddingMobile?.left}px`
+		? `${chartBodyPaddingMobile?.top}${chartBodyPaddingUnits?.Mobile} ${chartBodyPaddingMobile?.right}${chartBodyPaddingUnits?.Mobile} ${chartBodyPaddingMobile?.bottom}${chartBodyPaddingUnits?.Mobile} ${chartBodyPaddingMobile?.left}${chartBodyPaddingUnits?.Mobile}`
+		: "";
+
+	// Chart Body Margin
+	const chartBodyMarginGetDesktop = `${chartBodyMarginDesktop?.top}${chartBodyMarginUnits?.Desktop} ${chartBodyMarginDesktop?.right}${chartBodyMarginUnits?.Desktop} ${chartBodyMarginDesktop?.bottom}${chartBodyMarginUnits?.Desktop} ${chartBodyMarginDesktop?.left}${chartBodyMarginUnits?.Desktop}`;
+	const chartBodyMarginGetTablet = chartBodyMarginTablet
+		? `${chartBodyMarginTablet?.top}${chartBodyMarginUnits?.Tablet} ${chartBodyMarginTablet?.right}${chartBodyMarginUnits?.Tablet} ${chartBodyMarginTablet?.bottom}${chartBodyMarginUnits?.Tablet} ${chartBodyMarginTablet?.left}${chartBodyMarginUnits?.Tablet}`
+		: "";
+	const chartBodyMarginGetMobile = chartBodyMarginMobile
+		? `${chartBodyMarginMobile?.top}${chartBodyMarginUnits?.Mobile} ${chartBodyMarginMobile?.right}${chartBodyMarginUnits?.Mobile} ${chartBodyMarginMobile?.bottom}${chartBodyMarginUnits?.Mobile} ${chartBodyMarginMobile?.left}${chartBodyMarginUnits?.Mobile}`
 		: "";
 
 	// Chart Body Border Radius
@@ -235,13 +252,13 @@ const generateMultiChartStyle = (attributes) => {
 
 	// Chart Header Padding
 	const chartHeaderPaddingGetDesktop = chartHeaderPaddingDesktop
-		? `${chartHeaderPaddingDesktop?.top}px ${chartHeaderPaddingDesktop?.right}px ${chartHeaderPaddingDesktop?.bottom}px ${chartHeaderPaddingDesktop?.left}px`
+		? `${chartHeaderPaddingDesktop?.top}${chartHeaderPaddingUnits?.Desktop} ${chartHeaderPaddingDesktop?.right}${chartHeaderPaddingUnits?.Desktop} ${chartHeaderPaddingDesktop?.bottom}${chartHeaderPaddingUnits?.Desktop} ${chartHeaderPaddingDesktop?.left}${chartHeaderPaddingUnits?.Desktop}`
 		: "";
 	const chartHeaderPaddingGetTablet = chartHeaderPaddingTablet
-		? `${chartHeaderPaddingTablet?.top}px ${chartHeaderPaddingTablet?.right}px ${chartHeaderPaddingTablet?.bottom}px ${chartHeaderPaddingTablet?.left}px`
+		? `${chartHeaderPaddingTablet?.top}${chartHeaderPaddingUnits?.Tablet} ${chartHeaderPaddingTablet?.right}${chartHeaderPaddingUnits?.Tablet} ${chartHeaderPaddingTablet?.bottom}${chartHeaderPaddingUnits?.Tablet} ${chartHeaderPaddingTablet?.left}${chartHeaderPaddingUnits?.Tablet}`
 		: "";
 	const chartHeaderPaddingGetMobile = chartHeaderPaddingMobile
-		? `${chartHeaderPaddingMobile?.top}px ${chartHeaderPaddingMobile?.right}px ${chartHeaderPaddingMobile?.bottom}px ${chartHeaderPaddingMobile?.left}px`
+		? `${chartHeaderPaddingMobile?.top}${chartHeaderPaddingUnits?.Mobile} ${chartHeaderPaddingMobile?.right}${chartHeaderPaddingUnits?.Mobile} ${chartHeaderPaddingMobile?.bottom}${chartHeaderPaddingUnits?.Mobile} ${chartHeaderPaddingMobile?.left}${chartHeaderPaddingUnits?.Mobile}`
 		: "";
 
 	// Footer Padding
@@ -587,6 +604,11 @@ const generateMultiChartStyle = (attributes) => {
 					: ""
 			}
 			${
+				chartBodyMarginGetDesktop && chartBodyMarginDesktop?.top
+					? `margin: ${chartBodyMarginGetDesktop};`
+					: ""
+			}
+			${
 				chartBodyBorderRadiusGetDesktop && chartBodyBorderRadiusDesktop?.top
 					? `border-radius: ${chartBodyBorderRadiusGetDesktop};`
 					: ""
@@ -628,7 +650,7 @@ const generateMultiChartStyle = (attributes) => {
 		.fb-elegant-chart-block.${blockID} .fb-legend-dot {
 			${
 				legendDotSize?.Desktop
-					? `width: ${legendDotSize.Desktop}px; height: ${legendDotSize.Desktop}px;`
+					? `width: ${legendDotSize.Desktop}${legendDotSizeUnits?.Desktop}; height: ${legendDotSize.Desktop}${legendDotSizeUnits?.Desktop};`
 					: ""
 			}
 			${legendDotRadius?.Desktop ? `border-radius: ${legendDotRadius.Desktop}%;` : ""}
@@ -717,6 +739,10 @@ const generateMultiChartStyle = (attributes) => {
 				chartBodyPaddingGetTablet && chartBodyPaddingTablet?.top
 					? `padding: ${chartBodyPaddingGetTablet};`
 					: ""
+			} ${
+				chartBodyMarginGetTablet && chartBodyMarginTablet?.top
+					? `margin: ${chartBodyMarginGetTablet};`
+					: ""
 			} }
 			.fb-elegant-chart-block.${blockID} .fb-chart-card-body { ${
 				chartBodyBorderRadiusGetTablet && chartBodyBorderRadiusTablet?.top
@@ -767,7 +793,7 @@ const generateMultiChartStyle = (attributes) => {
 
 			.fb-elegant-chart-block.${blockID} .fb-legend-dot { ${
 				legendDotSize?.Tablet
-					? `width: ${legendDotSize.Tablet}px; height: ${legendDotSize.Tablet}px;`
+					? `width: ${legendDotSize.Tablet}${legendDotSizeUnits?.Tablet}; height: ${legendDotSize.Tablet}${legendDotSizeUnits?.Tablet};`
 					: ""
 			} }
 		}
@@ -875,6 +901,10 @@ const generateMultiChartStyle = (attributes) => {
 				chartBodyPaddingGetMobile && chartBodyPaddingMobile?.top
 					? `padding: ${chartBodyPaddingGetMobile};`
 					: ""
+			} ${
+				chartBodyMarginGetMobile && chartBodyMarginMobile?.top
+					? `margin: ${chartBodyMarginGetMobile};`
+					: ""
 			} }
 			.fb-elegant-chart-block.${blockID} .fb-chart-card-body { ${
 				chartBodyBorderRadiusGetMobile && chartBodyBorderRadiusMobile?.top
@@ -934,7 +964,7 @@ const generateMultiChartStyle = (attributes) => {
 
 			.fb-elegant-chart-block.${blockID} .fb-legend-dot { ${
 				legendDotSize?.Mobile
-					? `width: ${legendDotSize.Mobile}px; height: ${legendDotSize.Mobile}px;`
+					? `width: ${legendDotSize.Mobile}${legendDotSizeUnits?.Mobile}; height: ${legendDotSize.Mobile}${legendDotSizeUnits?.Mobile};`
 					: ""
 			} }
 		}

@@ -47,72 +47,59 @@ const Inspector = ({ attributes, setAttributes }) => {
 		canvasWidthUnits,
 		canvasHeight,
 		canvasHeightUnits,
-		// canvasPaddingTablet,
-		// canvasPaddingMobile,
+		canvasPaddingUnits,
+		canvasPaddingDesktop,
+		canvasPaddingTablet,
+		canvasPaddingMobile,
+		canvasPaddingLink,
+		canvasMarginUnits,
+		canvasMarginDesktop,
+		canvasMarginTablet,
+		canvasMarginMobile,
+		canvasMarginLink,
 		canvasBgColorSwitcher,
 		canvasNormalBackgroundType,
 		canvasNormalColor,
 		canvasNormalGradientColor,
 		canvasNormalCustomGradientSwitcher,
 		canvasNormalCustomGradientInputValue,
-
 		canvasHoverBackgroundType,
 		canvasHoverColor,
 		canvasHoverGradientColor,
 		canvasHoverCustomGradientSwitcher,
 		canvasHoverCustomGradientInputValue,
-
 		canvasBorderHoverColor,
 		canvasBorderRadiusUnits,
 		canvasBorderRadiusDesktop,
-		canvasBorderRadiusLink,
 		canvasBorderRadiusTablet,
 		canvasBorderRadiusMobile,
-
-		canvasPaddingUnits,
-		canvasPaddingDesktop,
-		canvasPaddingTablet,
-		canvasPaddingMobile,
-		canvasPaddingLink,
-
-		canvasMarginUnits,
-		canvasMarginDesktop,
-		canvasMarginTablet,
-		canvasMarginMobile,
-		canvasMarginLink,
+		canvasBorderRadiusLink,
 
 		chartBodyWidth,
 		chartBodyWidthUnits,
-
 		chartBodyHeight,
 		chartBodyHeightUnits,
-
-		chartBodyNormalColor,
 		chartBodyBgColorSwitcher,
 		chartBodyNormalBackgroundType,
+		chartBodyNormalColor,
 		chartBodyNormalGradientColor,
 		chartBodyNormalCustomGradientSwitcher,
 		chartBodyNormalCustomGradientInputValue,
-
 		chartBodyHoverBackgroundType,
+		chartBodyHoverColor,
 		chartBodyHoverGradientColor,
 		chartBodyHoverCustomGradientSwitcher,
 		chartBodyHoverCustomGradientInputValue,
-
-		chartBodyHoverColor,
 		chartBodyBorderRadiusUnits,
 		chartBodyBorderRadiusDesktop,
-		chartBodyBorderRadiusLink,
 		chartBodyBorderRadiusTablet,
 		chartBodyBorderRadiusMobile,
-
+		chartBodyBorderRadiusLink,
+		chartBodyPaddingUnits,
 		chartBodyPaddingDesktop,
 		chartBodyPaddingTablet,
 		chartBodyPaddingMobile,
 		chartBodyPaddingLink,
-		chartBodyPaddingUnits,
-
-		chartBodyMarginUnitsHandler,
 		chartBodyMarginUnits,
 		chartBodyMarginDesktop,
 		chartBodyMarginTablet,
@@ -121,9 +108,10 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 		chartTitleColor,
 		chartTitleHoverColor,
+		chartHeaderPaddingUnits,
+		chartHeaderPaddingDesktop,
 		chartHeaderPaddingTablet,
 		chartHeaderPaddingMobile,
-		chartHeaderPaddingDesktop,
 		chartHeaderPaddingLink,
 
 		toggleBtnColor,
@@ -134,6 +122,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 		toggleBtnPaddingDesktop,
 		toggleBtnPaddingTablet,
 		toggleBtnPaddingMobile,
+		toggleBtnPaddingLink,
+		toggleBtnBorderRadiusUnits,
 		toggleBtnBorderRadiusDesktop,
 		toggleBtnBorderRadiusTablet,
 		toggleBtnBorderRadiusMobile,
@@ -153,26 +143,23 @@ const Inspector = ({ attributes, setAttributes }) => {
 		gridColor,
 		gridLineWidth,
 		xAxisNormalColor,
-		xAxisNormalFontSize,
-		xAxisNormalFontWeight,
-		xAxisNormalFontFamily,
 		yAxisNormalColor,
-		yAxisNormalFontSize,
-		yAxisNormalFontWeight,
-		yAxisNormalFontFamily,
 		tooltipBg,
 		tooltipColor,
+		xAxisTypography,
+		yAxisTypography,
 
 		legendTextAlignment,
 		legendGap,
 		legendDotSize,
+		legendDotSizeUnits,
 		legendDotRadius,
 		legendTextColor,
 
 		footerTextAlignment,
 		footerTitleNormalColor,
 		footerTitleColorSwitcher,
-		footerDescColorSwitcher,
+		footerTitleHoverColor,
 		footerTitleGlobalTypoSwitcher,
 		footerTitleGlobalTypographyData,
 		footerTitleGlobalTypoType,
@@ -188,8 +175,9 @@ const Inspector = ({ attributes, setAttributes }) => {
 		footerTitleLetterSpacingUnits,
 		footerTitleLineHeight,
 		footerTitleLineHeightUnits,
-		footerTitleHoverColor,
 		footerDescNormalColor,
+		footerDescColorSwitcher,
+		footerDescHoverColor,
 		footerDescGlobalTypoSwitcher,
 		footerDescGlobalTypographyData,
 		footerDescGlobalTypoType,
@@ -205,6 +193,16 @@ const Inspector = ({ attributes, setAttributes }) => {
 		footerDescLetterSpacingUnits,
 		footerDescLineHeight,
 		footerDescLineHeightUnits,
+		footerPaddingUnits,
+		footerPaddingDesktop,
+		footerPaddingTablet,
+		footerPaddingMobile,
+		footerPaddingLink,
+		footerMarginUnits,
+		footerMarginDesktop,
+		footerMarginTablet,
+		footerMarginMobile,
+		footerMarginLink,
 
 		multiChartBgColorSwitcher,
 		multiChartBackgroundType,
@@ -278,113 +276,15 @@ const Inspector = ({ attributes, setAttributes }) => {
 		multiChartVRBottomOffset,
 		multiChartVRBottomOffsetUnits,
 		multiChartOverflow,
-		footerPaddingUnits,
-		footerPaddingTablet,
-		footerPaddingMobile,
-		footerMarginUnits,
-		footerMarginTablet,
-		footerMarginMobile,
-		footerMarginDesktop,
-		footerMarginLink,
-
-		toggleBtnPaddingLink,
-		toggleBtnBorderRadiusUnits,
-		xAxisTypography,
-		yAxisTypography,
-
-		// canvasPaddingTablet,
-		// canvasPaddingMobile,
-		// canvasMarginTablet,
-		// canvasMarginMobile,
-		// canvasBorderRadiusTablet,
-		// canvasBorderRadiusMobile,
-		// chartBodyBorderRadiusTablet,
-		// chartBodyBorderRadiusMobile,
-		// chartHeaderPaddingTablet,
-		// chartHeaderPaddingMobile,
-		legendDotSizeUnits,
 	} = attributes;
 
 	const deviceType = useDeviceType();
 
+	// Helper Handlers
 	const handleSpacingUnits = (attr, unit) => {
 		setAttributes({ [attr]: { ...attributes[attr], [deviceType]: unit } });
 	};
-
-	const handleGranularSpacing = (attrPrefix, event, position, isLinked) => {
-		const value = event.target.value;
-		const attrName = `${attrPrefix}${deviceType}`;
-		if (isLinked) {
-			setAttributes({
-				[attrName]: {
-					top: value,
-					right: value,
-					bottom: value,
-					left: value,
-				},
-			});
-		} else {
-			setAttributes({
-				[attrName]: { ...attributes[attrName], [position]: value },
-			});
-		}
-	};
-
-	// Wrapper Border Width Handlers
-	const multiChartWrapperBorderTypeUnitsHandler = (value) =>
-		handleSpacingUnits("multiChartWrapperBorderTypeUnits", value);
-	const handleMultiChartWrapperBorderUnitHandler = (event, position) =>
-		handleGranularSpacing(
-			"multiChartWrapperBorderType",
-			event,
-			position,
-			multiChartWrapperBorderTypeLink,
-		);
-
-	// Wrapper Border Radius Handlers
-	const multiChartWrapperBorderRadiusUnitsHandler = (value) =>
-		handleSpacingUnits("multiChartWrapperBorderRadiusUnits", value);
-	const handleMultiChartWrapperBorderRadiusUnitHandler = (event, position) =>
-		handleGranularSpacing(
-			"multiChartWrapperBorderRadius",
-			event,
-			position,
-			multiChartWrapperBorderRadiusLink,
-		);
-
-	// Wrapper Padding Handlers
-	const multiChartPaddingUnitsHandler = (value) =>
-		handleSpacingUnits("multiChartPaddingUnits", value);
-	const handleMultiChartPaddingUnitHandler = (event, position) =>
-		handleGranularSpacing(
-			"multiChartPadding",
-			event,
-			position,
-			multiChartPaddingLink,
-		);
-
-	// Wrapper Margin Handlers
-	const multiChartMarginUnitsHandler = (value) =>
-		handleSpacingUnits("multiChartMarginUnits", value);
-	const handleMultiChartMarginUnitHandler = (event, position) =>
-		handleGranularSpacing(
-			"multiChartMargin",
-			event,
-			position,
-			multiChartMarginLink,
-		);
-
-	/* =================
-       REPEATER HANDLERS
-    ================= */
-	const updateFilter = (id, key, value) => {
-		const newList = filterList.map((item, index) =>
-			(item.id || index) === id ? { ...item, [key]: value } : item,
-		);
-		setAttributes({ filterList: newList });
-	};
-
-	const handleSpacingChange = (attrPrefix, event, position, isLinked) => {
+	const handleSpacingValue = (attrPrefix, event, position, isLinked) => {
 		const value = event.target.value;
 		const attrName = `${attrPrefix}${deviceType}`;
 		if (isLinked) {
@@ -396,6 +296,104 @@ const Inspector = ({ attributes, setAttributes }) => {
 				[attrName]: { ...attributes[attrName], [position]: value },
 			});
 		}
+	};
+
+	// MultiChart Wrapper Handlers
+	const handleMultiChartBorderUnits = (value) =>
+		handleSpacingUnits("multiChartWrapperBorderTypeUnits", value);
+	const handleMultiChartBorderValue = (event, position) =>
+		handleSpacingValue(
+			"multiChartWrapperBorderType",
+			event,
+			position,
+			multiChartWrapperBorderTypeLink,
+		);
+
+	const handleMultiChartBorderRadiusUnits = (value) =>
+		handleSpacingUnits("multiChartWrapperBorderRadiusUnits", value);
+	const handleMultiChartBorderRadiusValue = (event, position) =>
+		handleSpacingValue(
+			"multiChartWrapperBorderRadius",
+			event,
+			position,
+			multiChartWrapperBorderRadiusLink,
+		);
+
+	const handleMultiChartPaddingUnits = (value) =>
+		handleSpacingUnits("multiChartPaddingUnits", value);
+	const handleMultiChartPaddingValue = (event, position) =>
+		handleSpacingValue(
+			"multiChartPadding",
+			event,
+			position,
+			multiChartPaddingLink,
+		);
+
+	const handleMultiChartMarginUnits = (value) =>
+		handleSpacingUnits("multiChartMarginUnits", value);
+	const handleMultiChartMarginValue = (event, position) =>
+		handleSpacingValue(
+			"multiChartMargin",
+			event,
+			position,
+			multiChartMarginLink,
+		);
+
+	// Chart Body Handlers
+	const handleChartBodyPaddingUnits = (value) =>
+		handleSpacingUnits("chartBodyPaddingUnits", value);
+	const handleChartBodyPaddingValue = (event, position) =>
+		handleSpacingValue(
+			"chartBodyPadding",
+			event,
+			position,
+			chartBodyPaddingLink,
+		);
+
+	const handleChartBodyMarginUnits = (value) =>
+		handleSpacingUnits("chartBodyMarginUnits", value);
+	const handleChartBodyMarginValue = (event, position) =>
+		handleSpacingValue("chartBodyMargin", event, position, chartBodyMarginLink);
+
+	const handleChartBodyBorderRadiusUnits = (value) =>
+		handleSpacingUnits("chartBodyBorderRadiusUnits", value);
+	const handleChartBodyBorderRadiusValue = (event, position) =>
+		handleSpacingValue(
+			"chartBodyBorderRadius",
+			event,
+			position,
+			chartBodyBorderRadiusLink,
+		);
+
+	// Toggle Button Handlers
+	const handleToggleBtnPaddingUnits = (value) =>
+		handleSpacingUnits("toggleBtnPaddingUnits", value);
+	const handleToggleBtnPaddingValue = (event, position) =>
+		handleSpacingValue(
+			"toggleBtnPadding",
+			event,
+			position,
+			toggleBtnPaddingLink,
+		);
+
+	const handleToggleBtnBorderRadiusUnits = (value) =>
+		handleSpacingUnits("toggleBtnBorderRadiusUnits", value);
+	const handleToggleBtnBorderRadiusValue = (event, position) =>
+		handleSpacingValue(
+			"toggleBtnBorderRadius",
+			event,
+			position,
+			toggleBtnBorderRadiusLink,
+		);
+
+	/* =================
+       REPEATER HANDLERS
+    ================= */
+	const updateFilter = (id, key, value) => {
+		const newList = filterList.map((item, index) =>
+			(item.id || index) === id ? { ...item, [key]: value } : item,
+		);
+		setAttributes({ filterList: newList });
 	};
 
 	const updateDataset = (id, key, value) => {
@@ -446,7 +444,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 		const newItem = {
 			id: "ds-" + Date.now(),
 			series_name: __("Series Name", "frontis-blocks"),
-			values: "10,20,30,50,78,23,12,43,20",
+			values: "10,20,30",
 			color: "#3b82f6",
 		};
 		setAttributes({ chartDatasets: [...chartDatasets, newItem] });
@@ -746,14 +744,14 @@ const Inspector = ({ attributes, setAttributes }) => {
 					label={__("Padding", "frontis-blocks")}
 					deviceType={deviceType}
 					spacingUnits={canvasPaddingUnits}
-					spacingUnitsHandler={(value) =>
+					handleSpacingUnitHandler={(value) =>
 						setAttributes({ canvasPaddingUnits: value })
 					}
 					spacingDesktop={canvasPaddingDesktop}
 					spacingTablet={canvasPaddingTablet}
 					spacingMobile={canvasPaddingMobile}
 					handleSpacingUnitHandler={(event, position) =>
-						handleSpacingChange(
+						handleSpacingValue(
 							"canvasPadding",
 							event,
 							position,
@@ -770,14 +768,14 @@ const Inspector = ({ attributes, setAttributes }) => {
 					label={__("Margin", "frontis-blocks")}
 					deviceType={deviceType}
 					spacingUnits={canvasMarginUnits}
-					spacingUnitsHandler={(value) =>
+					handleSpacingUnitHandler={(value) =>
 						setAttributes({ canvasMarginUnits: value })
 					}
 					spacingDesktop={canvasMarginDesktop}
 					spacingTablet={canvasMarginTablet}
 					spacingMobile={canvasMarginMobile}
 					handleSpacingUnitHandler={(event, position) =>
-						handleSpacingChange(
+						handleSpacingValue(
 							"canvasMargin",
 							event,
 							position,
@@ -843,34 +841,15 @@ const Inspector = ({ attributes, setAttributes }) => {
 					isBackgroundImage={false}
 				/>
 
-				{/* Border Type Control */}
-				<FB_Spacing
-					label={__("Border Type", "frontis-blocks")}
-					deviceType={deviceType}
-					spacingUnits={multiChartWrapperBorderTypeUnits}
-					spacingUnitsHandler={(value) =>
-						multiChartWrapperBorderTypeUnitsHandler(value)
-					}
-				/>
-
 				<FB_Spacing
 					label={__("Border Radius", "frontis-blocks")}
 					deviceType={deviceType}
+					spacingUnitsHandler={handleChartBodyBorderRadiusUnits}
 					spacingUnits={chartBodyBorderRadiusUnits}
-					spacingUnitsHandler={(value) =>
-						setAttributes({ chartBodyBorderRadiusUnits: value })
-					}
 					spacingDesktop={chartBodyBorderRadiusDesktop}
 					spacingTablet={chartBodyBorderRadiusTablet}
 					spacingMobile={chartBodyBorderRadiusMobile}
-					handleSpacingUnitHandler={(event, position) =>
-						handleSpacingChange(
-							"chartBodyBorderRadius",
-							event,
-							position,
-							chartBodyBorderRadiusLink,
-						)
-					}
+					handleSpacingUnitHandler={handleChartBodyBorderRadiusValue}
 					spacingCombineBtn={chartBodyBorderRadiusLink}
 					spacingCombineBtnHandler={() =>
 						setAttributes({
@@ -881,33 +860,37 @@ const Inspector = ({ attributes, setAttributes }) => {
 				/>
 
 				{/* padding and margin controls */}
-				{/* <FB_Spacing
+				<FB_Spacing
 					label={__("Padding", "frontis-blocks")}
 					deviceType={deviceType}
+					spacingUnitsHandler={handleChartBodyPaddingUnits}
 					spacingUnits={chartBodyPaddingUnits}
-					spacingUnitsHandler={(value) =>
-						setAttributes({ chartBodyPaddingUnits: value })
-					}
 					spacingDesktop={chartBodyPaddingDesktop}
 					spacingTablet={chartBodyPaddingTablet}
 					spacingMobile={chartBodyPaddingMobile}
-				/> */}
+					handleSpacingUnitHandler={handleChartBodyPaddingValue}
+					spacingCombineBtn={chartBodyPaddingLink}
+					spacingCombineBtnHandler={() =>
+						setAttributes({ chartBodyPaddingLink: !chartBodyPaddingLink })
+					}
+					setAttributes={setAttributes}
+				/>
 
-				{/* <FB_Spacing
+				<FB_Spacing
 					label={__("Margin", "frontis-blocks")}
 					deviceType={deviceType}
-					spacingUnitsHandler={chartBodyMarginUnitsHandler}
+					spacingUnitsHandler={handleChartBodyMarginUnits}
 					spacingUnits={chartBodyMarginUnits}
 					spacingDesktop={chartBodyMarginDesktop}
 					spacingTablet={chartBodyMarginTablet}
 					spacingMobile={chartBodyMarginMobile}
-					handleSpacingUnitHandler={handleMultiChartMarginUnitHandler}
+					handleSpacingUnitHandler={handleChartBodyMarginValue}
 					spacingCombineBtn={chartBodyMarginLink}
 					spacingCombineBtnHandler={() =>
 						setAttributes({ chartBodyMarginLink: !chartBodyMarginLink })
 					}
 					setAttributes={setAttributes}
-				/> */}
+				/>
 			</PanelBody>
 			<PanelBody
 				title={__("Filter Toggle Button", "frontis-blocks")}
@@ -959,21 +942,12 @@ const Inspector = ({ attributes, setAttributes }) => {
 				<FB_Spacing
 					label={__("Padding", "frontis-blocks")}
 					deviceType={deviceType}
+					spacingUnitsHandler={handleToggleBtnPaddingUnits}
 					spacingUnits={toggleBtnPaddingUnits}
-					spacingUnitsHandler={(value) =>
-						setAttributes({ toggleBtnPaddingUnits: value })
-					}
 					spacingDesktop={toggleBtnPaddingDesktop}
 					spacingTablet={toggleBtnPaddingTablet}
 					spacingMobile={toggleBtnPaddingMobile}
-					handleSpacingUnitHandler={(event, position) =>
-						handleSpacingChange(
-							"toggleBtnPadding",
-							event,
-							position,
-							toggleBtnPaddingLink,
-						)
-					}
+					handleSpacingUnitHandler={handleToggleBtnPaddingValue}
 					spacingCombineBtn={toggleBtnPaddingLink}
 					spacingCombineBtnHandler={() =>
 						setAttributes({ toggleBtnPaddingLink: !toggleBtnPaddingLink })
@@ -983,21 +957,12 @@ const Inspector = ({ attributes, setAttributes }) => {
 				<FB_Spacing
 					label={__("Border Radius", "frontis-blocks")}
 					deviceType={deviceType}
+					spacingUnitsHandler={handleToggleBtnBorderRadiusUnits}
 					spacingUnits={toggleBtnBorderRadiusUnits}
-					spacingUnitsHandler={(value) =>
-						setAttributes({ toggleBtnBorderRadiusUnits: value })
-					}
 					spacingDesktop={toggleBtnBorderRadiusDesktop}
 					spacingTablet={toggleBtnBorderRadiusTablet}
 					spacingMobile={toggleBtnBorderRadiusMobile}
-					handleSpacingUnitHandler={(event, position) =>
-						handleSpacingChange(
-							"toggleBtnBorderRadius",
-							event,
-							position,
-							toggleBtnBorderRadiusLink,
-						)
-					}
+					handleSpacingUnitHandler={handleToggleBtnBorderRadiusValue}
 					spacingCombineBtn={toggleBtnBorderRadiusLink}
 					spacingCombineBtnHandler={() =>
 						setAttributes({
@@ -1007,7 +972,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 					setAttributes={setAttributes}
 				/>
 			</PanelBody>
-
 			<PanelBody
 				title={__("Grid & Axis Style", "frontis-blocks")}
 				initialOpen={false}
@@ -1015,7 +979,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 				<ToggleControl
 					label={__("Show Grid Lines", "frontis-blocks")}
 					checked={showGrid}
-					onChange={(v) => setAttributes({ showGrid: value })}
+					onChange={(v) => setAttributes({ showGrid: v })}
 				/>
 				{showGrid && (
 					<FB_ColorControl
@@ -1648,12 +1612,12 @@ const Inspector = ({ attributes, setAttributes }) => {
 				<FB_Spacing
 					label={__("Border Width", "frontis-blocks")}
 					deviceType={deviceType}
-					spacingUnitsHandler={multiChartWrapperBorderTypeUnitsHandler}
+					spacingUnitsHandler={handleMultiChartBorderUnits}
 					spacingUnits={multiChartWrapperBorderTypeUnits}
 					spacingDesktop={multiChartWrapperBorderTypeDesktop}
 					spacingTablet={multiChartWrapperBorderTypeTablet}
 					spacingMobile={multiChartWrapperBorderTypeMobile}
-					handleSpacingUnitHandler={handleMultiChartWrapperBorderUnitHandler}
+					handleSpacingUnitHandler={handleMultiChartBorderValue}
 					spacingCombineBtn={multiChartWrapperBorderTypeLink}
 					spacingCombineBtnHandler={() =>
 						setAttributes({
@@ -1665,14 +1629,12 @@ const Inspector = ({ attributes, setAttributes }) => {
 				<FB_Spacing
 					label={__("Border Radius", "frontis-blocks")}
 					deviceType={deviceType}
-					spacingUnitsHandler={multiChartWrapperBorderRadiusUnitsHandler}
+					spacingUnitsHandler={handleMultiChartBorderRadiusUnits}
 					spacingUnits={multiChartWrapperBorderRadiusUnits}
 					spacingDesktop={multiChartWrapperBorderRadiusDesktop}
 					spacingTablet={multiChartWrapperBorderRadiusTablet}
 					spacingMobile={multiChartWrapperBorderRadiusMobile}
-					handleSpacingUnitHandler={
-						handleMultiChartWrapperBorderRadiusUnitHandler
-					}
+					handleSpacingUnitHandler={handleMultiChartBorderRadiusValue}
 					spacingCombineBtn={multiChartWrapperBorderRadiusLink}
 					spacingCombineBtnHandler={() =>
 						setAttributes({
@@ -1691,12 +1653,12 @@ const Inspector = ({ attributes, setAttributes }) => {
 				<FB_Spacing
 					label={__("Padding", "frontis-blocks")}
 					deviceType={deviceType}
-					spacingUnitsHandler={multiChartPaddingUnitsHandler}
+					spacingUnitsHandler={handleMultiChartPaddingUnits}
 					spacingUnits={multiChartPaddingUnits}
 					spacingDesktop={multiChartPaddingDesktop}
 					spacingTablet={multiChartPaddingTablet}
 					spacingMobile={multiChartPaddingMobile}
-					handleSpacingUnitHandler={handleMultiChartPaddingUnitHandler}
+					handleSpacingUnitHandler={handleMultiChartPaddingValue}
 					spacingCombineBtn={multiChartPaddingLink}
 					spacingCombineBtnHandler={() =>
 						setAttributes({ multiChartPaddingLink: !multiChartPaddingLink })
@@ -1706,12 +1668,12 @@ const Inspector = ({ attributes, setAttributes }) => {
 				<FB_Spacing
 					label={__("Margin", "frontis-blocks")}
 					deviceType={deviceType}
-					spacingUnitsHandler={multiChartMarginUnitsHandler}
+					spacingUnitsHandler={handleMultiChartMarginUnits}
 					spacingUnits={multiChartMarginUnits}
 					spacingDesktop={multiChartMarginDesktop}
 					spacingTablet={multiChartMarginTablet}
 					spacingMobile={multiChartMarginMobile}
-					handleSpacingUnitHandler={handleMultiChartMarginUnitHandler}
+					handleSpacingUnitHandler={handleMultiChartMarginValue}
 					spacingCombineBtn={multiChartMarginLink}
 					spacingCombineBtnHandler={() =>
 						setAttributes({ multiChartMarginLink: !multiChartMarginLink })
