@@ -1239,6 +1239,63 @@ const FB_Block_Icons = {
 			strokeLinecap: 'round',
 		}),
 	),
+
+	image_hotspot: fb(
+		"svg",
+		{
+			version: "1.1",
+			id: "mobileHotspotIcon",
+			xmlns: "http://www.w3.org/2000/svg",
+			width: "24",
+			height: "24",
+			viewBox: "0 0 24 24",
+			fill: "none",
+			className: "frontis-blocks-editor-icons",
+		},
+		fb("path", {
+			d: "M12 13V21",
+			fill: "none",
+			stroke: "#0B0C0E",
+			strokeWidth: 1.2,
+			strokeLinecap: "round",
+			strokeLinejoin: "round",
+		}),
+		fb("path", {
+			d: "M9 21H15",
+			fill: "none",
+			stroke: "#0B0C0E",
+			strokeWidth: 1.2,
+			strokeLinecap: "round",
+			strokeLinejoin: "round",
+		}),
+		fb("line", {
+			x1: "11.95",
+			y1: "12",
+			x2: "12.05",
+			y2: "12",
+			fill: "none",
+			stroke: "#0B0C0E",
+			strokeWidth: 1.2,
+			strokeLinecap: "round",
+			strokeLinejoin: "round",
+		}),
+		fb("path", {
+			d: "M5.64 18.36A9 9 0 1 1 18.36 18.36",
+			fill: "none",
+			stroke: "#0B0C0E",
+			strokeWidth: 1.2,
+			strokeLinecap: "round",
+			strokeLinejoin: "round",
+		}),
+		fb("path", {
+			d: "M15.54 15.54A5 5 0 1 0 8.46 15.54",
+			fill: "none",
+			stroke: "#0B0C0E",
+			strokeWidth: 1.2,
+			strokeLinecap: "round",
+			strokeLinejoin: "round",
+		}),
+	),
 };
 
 export const renderFbBlockIcon = (blockName) => (
