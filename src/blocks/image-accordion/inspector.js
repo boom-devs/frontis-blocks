@@ -1248,8 +1248,8 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 								},
 							});
 						}}
-						spacingCombineBtn={true}
-						spacingCombineBtnHandler={() => {}}
+						spacingCombineBtn={imageAccordionItemBorderRadiusLink}
+						spacingCombineBtnHandler={borderRadiusCombineBtnHandler}
 						setAttributes={setAttributes}
 					/>
 					<FB_Spacing
@@ -1276,8 +1276,8 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 								},
 							});
 						}}
-						spacingCombineBtn={false}
-						spacingCombineBtnHandler={() => {}}
+						spacingCombineBtn={imageAccordionItemPaddingLink}
+						spacingCombineBtnHandler={itemPaddingCombineBtnHandler}
 						setAttributes={setAttributes}
 					/>
 				</PanelBody>
