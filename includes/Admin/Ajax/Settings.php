@@ -209,13 +209,22 @@ class Settings extends AjaxBase
 
 		// Calculate offset
 		$offset = $batch * $batch_size;
+		$current_theme = get_stylesheet();
 
 		// Query to get total count
-		$count_query = "SELECT COUNT(ID) as total
-			FROM {$wpdb->posts}
-			WHERE post_status = 'publish'
-			AND post_name != 'wp-global-styles-frontis-theme'
-			AND post_type NOT IN ('wp_font_family', 'wp_navigation', 'wp_global_styles', 'wp_font_face', 'attachment', 'mc4wp-form', 'acf-post-type', 'wp_template_part', 'wp_block')";
+		$count_query = $wpdb->prepare(
+			"SELECT COUNT(DISTINCT p.ID) as total
+			FROM {$wpdb->posts} p
+			LEFT JOIN {$wpdb->term_relationships} tr ON p.ID = tr.object_id
+			LEFT JOIN {$wpdb->term_taxonomy} tt ON tr.term_taxonomy_id = tt.term_taxonomy_id AND tt.taxonomy = 'wp_theme'
+			LEFT JOIN {$wpdb->terms} t ON tt.term_id = t.term_id
+			WHERE p.post_status = 'publish'
+			AND p.post_name != %s
+			AND p.post_type NOT IN ('wp_font_family', 'wp_navigation', 'wp_global_styles', 'wp_font_face', 'attachment', 'mc4wp-form', 'acf-post-type', 'wp_template_part', 'wp_block')
+			AND (p.post_type != 'wp_template' OR t.slug = %s)",
+			'wp-global-styles-' . $current_theme,
+			$current_theme
+		);
 
 		$total_posts = wp_cache_get('fb_assets_total_count', 'frontis_blocks');
 		if (false === $total_posts) {
@@ -225,13 +234,19 @@ class Settings extends AjaxBase
 
 		// Query to get batch of post IDs
 		$query = $wpdb->prepare(
-			"SELECT ID, post_content, post_name
-			FROM {$wpdb->posts}
-			WHERE post_status = 'publish'
-			AND post_name != 'wp-global-styles-frontis-theme'
-			AND post_type NOT IN ('wp_font_family', 'wp_navigation', 'wp_global_styles', 'wp_font_face', 'attachment', 'mc4wp-form', 'acf-post-type', 'wp_template_part', 'wp_block')
-			ORDER BY post_date DESC
+			"SELECT DISTINCT p.ID, p.post_content, p.post_name
+			FROM {$wpdb->posts} p
+			LEFT JOIN {$wpdb->term_relationships} tr ON p.ID = tr.object_id
+			LEFT JOIN {$wpdb->term_taxonomy} tt ON tr.term_taxonomy_id = tt.term_taxonomy_id AND tt.taxonomy = 'wp_theme'
+			LEFT JOIN {$wpdb->terms} t ON tt.term_id = t.term_id
+			WHERE p.post_status = 'publish'
+			AND p.post_name != %s
+			AND p.post_type NOT IN ('wp_font_family', 'wp_navigation', 'wp_global_styles', 'wp_font_face', 'attachment', 'mc4wp-form', 'acf-post-type', 'wp_template_part', 'wp_block')
+			AND (p.post_type != 'wp_template' OR t.slug = %s)
+			ORDER BY p.post_date DESC
 			LIMIT %d OFFSET %d",
+			'wp-global-styles-' . $current_theme,
+			$current_theme,
 			$batch_size,
 			$offset
 		);
