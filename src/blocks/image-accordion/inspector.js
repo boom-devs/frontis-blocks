@@ -330,7 +330,10 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 	};
 
 	/** Item Padding handlers */
-	const handleItemPaddingUnitHandler = (event, position) => {
+	const imageAccordionItemPaddingHandleSpacingUnitHandler = (
+		event,
+		position,
+	) => {
 		const value = event.target.value;
 		const update = imageAccordionItemPaddingLink
 			? { top: value, right: value, bottom: value, left: value }
@@ -341,13 +344,13 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 		setAttributes({ [`imageAccordionItemPadding${deviceType}`]: update });
 	};
 
-	const itemPaddingCombineBtnHandler = () => {
+	const imageAccordionItemPaddingSpacingCombineBtnHandlerFn = () => {
 		setAttributes({
 			imageAccordionItemPaddingLink: !imageAccordionItemPaddingLink,
 		});
 	};
 
-	const itemPaddingUnitsHandler = (unit) => {
+	const imageAccordionItemPaddingSpacingUnitsHandler = (unit) => {
 		setAttributes({
 			imageAccordionItemPaddingUnits: {
 				...imageAccordionItemPaddingUnits,
@@ -357,7 +360,10 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 	};
 
 	/** Item Margin handlers */
-	const handleItemMarginUnitHandler = (event, position) => {
+	const imageAccordionItemMarginHandleSpacingUnitHandler = (
+		event,
+		position,
+	) => {
 		const value = event.target.value;
 		const update = imageAccordionItemMarginLink
 			? { top: value, right: value, bottom: value, left: value }
@@ -368,13 +374,13 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 		setAttributes({ [`imageAccordionItemMargin${deviceType}`]: update });
 	};
 
-	const itemMarginCombineBtnHandler = () => {
+	const imageAccordionItemMarginSpacingCombineBtnHandlerFn = () => {
 		setAttributes({
 			imageAccordionItemMarginLink: !imageAccordionItemMarginLink,
 		});
 	};
 
-	const itemMarginUnitsHandler = (unit) => {
+	const imageAccordionItemMarginSpacingUnitsHandler = (unit) => {
 		setAttributes({
 			imageAccordionItemMarginUnits: {
 				...imageAccordionItemMarginUnits,
@@ -384,7 +390,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 	};
 
 	/** Wrapper Padding handlers */
-	const handleWrapperPaddingUnitHandler = (event, position) => {
+	const imageAccordionPaddingHandleSpacingUnitHandler = (event, position) => {
 		const value = event.target.value;
 		const update = imageAccordionPaddingLink
 			? { top: value, right: value, bottom: value, left: value }
@@ -395,11 +401,11 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 		setAttributes({ [`imageAccordionPadding${deviceType}`]: update });
 	};
 
-	const wrapperPaddingCombineBtnHandler = () => {
+	const imageAccordionPaddingSpacingCombineBtnHandlerFn = () => {
 		setAttributes({ imageAccordionPaddingLink: !imageAccordionPaddingLink });
 	};
 
-	const wrapperPaddingUnitsHandler = (unit) => {
+	const imageAccordionPaddingSpacingUnitsHandler = (unit) => {
 		setAttributes({
 			imageAccordionPaddingUnits: {
 				...imageAccordionPaddingUnits,
@@ -409,7 +415,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 	};
 
 	/** Wrapper Margin handlers */
-	const handleWrapperMarginUnitHandler = (event, position) => {
+	const imageAccordionMarginHandleSpacingUnitHandler = (event, position) => {
 		const value = event.target.value;
 		const update = imageAccordionMarginLink
 			? { top: value, right: value, bottom: value, left: value }
@@ -420,11 +426,11 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 		setAttributes({ [`imageAccordionMargin${deviceType}`]: update });
 	};
 
-	const wrapperMarginCombineBtnHandler = () => {
+	const imageAccordionMarginSpacingCombineBtnHandlerFn = () => {
 		setAttributes({ imageAccordionMarginLink: !imageAccordionMarginLink });
 	};
 
-	const wrapperMarginUnitsHandler = (unit) => {
+	const imageAccordionMarginSpacingUnitsHandler = (unit) => {
 		setAttributes({
 			imageAccordionMarginUnits: {
 				...imageAccordionMarginUnits,
@@ -434,7 +440,10 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 	};
 
 	/** Border Radius handlers */
-	const handleBorderRadiusUnitHandler = (event, position) => {
+	const imageAccordionItemBorderRadiusHandleSpacingUnitHandler = (
+		event,
+		position,
+	) => {
 		const value = event.target.value;
 		const update = imageAccordionItemBorderRadiusLink
 			? { top: value, right: value, bottom: value, left: value }
@@ -445,13 +454,13 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 		setAttributes({ [`imageAccordionItemBorderRadius${deviceType}`]: update });
 	};
 
-	const borderRadiusCombineBtnHandler = () => {
+	const imageAccordionItemBorderRadiusCombineBtnHandlerFn = () => {
 		setAttributes({
 			imageAccordionItemBorderRadiusLink: !imageAccordionItemBorderRadiusLink,
 		});
 	};
 
-	const borderRadiusUnitsHandler = (unit) => {
+	const imageAccordionItemBorderRadiusUnitsHandler = (unit) => {
 		setAttributes({
 			imageAccordionItemBorderRadiusUnits: {
 				...imageAccordionItemBorderRadiusUnits,
@@ -461,7 +470,10 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 	};
 
 	/** Wrapper Border Type handlers */
-	const handleWrapperBorderUnitHandler = (event, position) => {
+	const imageAccordionWrapperBorderTypeHandleSpacingUnitHandler = (
+		event,
+		position,
+	) => {
 		const value = event.target.value;
 		const update = imageAccordionWrapperBorderTypeLink
 			? { top: value, right: value, bottom: value, left: value }
@@ -472,13 +484,13 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 		setAttributes({ [`imageAccordionWrapperBorderType${deviceType}`]: update });
 	};
 
-	const wrapperBorderCombineBtnHandler = () => {
+	const imageAccordionWrapperBorderTypeCombineBtnHandlerFn = () => {
 		setAttributes({
 			imageAccordionWrapperBorderTypeLink: !imageAccordionWrapperBorderTypeLink,
 		});
 	};
 
-	const wrapperBorderUnitsHandler = (unit) => {
+	const imageAccordionWrapperBorderTypeUnitsHandler = (unit) => {
 		setAttributes({
 			imageAccordionWrapperBorderTypeUnits: {
 				...imageAccordionWrapperBorderTypeUnits,
@@ -488,7 +500,10 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 	};
 
 	/** Wrapper Border Radius handlers */
-	const handleWrapperBorderRadiusUnitHandler = (event, position) => {
+	const imageAccordionWrapperBorderRadiusHandleSpacingUnitHandler = (
+		event,
+		position,
+	) => {
 		const value = event.target.value;
 		const update = imageAccordionWrapperBorderRadiusLink
 			? { top: value, right: value, bottom: value, left: value }
@@ -501,14 +516,14 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 		});
 	};
 
-	const wrapperBorderRadiusCombineBtnHandler = () => {
+	const imageAccordionWrapperBorderRadiusCombineBtnHandlerFn = () => {
 		setAttributes({
 			imageAccordionWrapperBorderRadiusLink:
 				!imageAccordionWrapperBorderRadiusLink,
 		});
 	};
 
-	const wrapperBorderRadiusUnitsHandler = (unit) => {
+	const imageAccordionWrapperBorderRadiusUnitsHandler = (unit) => {
 		setAttributes({
 			imageAccordionWrapperBorderRadiusUnits: {
 				...imageAccordionWrapperBorderRadiusUnits,
@@ -703,27 +718,35 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 				<FB_Spacing
 					label={__("Padding", "frontis-blocks")}
 					deviceType={deviceType}
-					spacingUnitsHandler={itemPaddingUnitsHandler}
+					spacingUnitsHandler={imageAccordionItemPaddingSpacingUnitsHandler}
 					spacingUnits={imageAccordionItemPaddingUnits}
 					spacingDesktop={imageAccordionItemPaddingDesktop}
 					spacingTablet={imageAccordionItemPaddingTablet}
 					spacingMobile={imageAccordionItemPaddingMobile}
-					handleSpacingUnitHandler={handleItemPaddingUnitHandler}
+					handleSpacingUnitHandler={
+						imageAccordionItemPaddingHandleSpacingUnitHandler
+					}
 					spacingCombineBtn={imageAccordionItemPaddingLink}
-					spacingCombineBtnHandler={itemPaddingCombineBtnHandler}
+					spacingCombineBtnHandler={
+						imageAccordionItemPaddingSpacingCombineBtnHandlerFn
+					}
 					setAttributes={setAttributes}
 				/>
 				<FB_Spacing
 					label={__("Margin", "frontis-blocks")}
 					deviceType={deviceType}
-					spacingUnitsHandler={itemMarginUnitsHandler}
+					spacingUnitsHandler={imageAccordionItemMarginSpacingUnitsHandler}
 					spacingUnits={imageAccordionItemMarginUnits}
 					spacingDesktop={imageAccordionItemMarginDesktop}
 					spacingTablet={imageAccordionItemMarginTablet}
 					spacingMobile={imageAccordionItemMarginMobile}
-					handleSpacingUnitHandler={handleItemMarginUnitHandler}
+					handleSpacingUnitHandler={
+						imageAccordionItemMarginHandleSpacingUnitHandler
+					}
 					spacingCombineBtn={imageAccordionItemMarginLink}
-					spacingCombineBtnHandler={itemMarginCombineBtnHandler}
+					spacingCombineBtnHandler={
+						imageAccordionItemMarginSpacingCombineBtnHandlerFn
+					}
 					setAttributes={setAttributes}
 				/>
 			</PanelBody>
@@ -732,14 +755,18 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 				<FB_Spacing
 					label={__("Border Radius", "frontis-blocks")}
 					deviceType={deviceType}
-					spacingUnitsHandler={borderRadiusUnitsHandler}
+					spacingUnitsHandler={imageAccordionItemBorderRadiusUnitsHandler}
 					spacingUnits={imageAccordionItemBorderRadiusUnits}
 					spacingDesktop={imageAccordionItemBorderRadiusDesktop}
 					spacingTablet={imageAccordionItemBorderRadiusTablet}
 					spacingMobile={imageAccordionItemBorderRadiusMobile}
-					handleSpacingUnitHandler={handleBorderRadiusUnitHandler}
+					handleSpacingUnitHandler={
+						imageAccordionItemBorderRadiusHandleSpacingUnitHandler
+					}
 					spacingCombineBtn={imageAccordionItemBorderRadiusLink}
-					spacingCombineBtnHandler={borderRadiusCombineBtnHandler}
+					spacingCombineBtnHandler={
+						imageAccordionItemBorderRadiusCombineBtnHandlerFn
+					}
 					setAttributes={setAttributes}
 				/>
 			</PanelBody>
@@ -1616,27 +1643,35 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 						<FB_Spacing
 							label={"Padding"}
 							deviceType={deviceType}
-							spacingUnitsHandler={wrapperPaddingUnitsHandler}
+							spacingUnitsHandler={imageAccordionPaddingSpacingUnitsHandler}
 							spacingUnits={imageAccordionPaddingUnits}
 							spacingDesktop={imageAccordionPaddingDesktop}
 							spacingTablet={imageAccordionPaddingTablet}
 							spacingMobile={imageAccordionPaddingMobile}
-							handleSpacingUnitHandler={handleWrapperPaddingUnitHandler}
+							handleSpacingUnitHandler={
+								imageAccordionPaddingHandleSpacingUnitHandler
+							}
 							spacingCombineBtn={imageAccordionPaddingLink}
-							spacingCombineBtnHandler={wrapperPaddingCombineBtnHandler}
+							spacingCombineBtnHandler={
+								imageAccordionPaddingSpacingCombineBtnHandlerFn
+							}
 							setAttributes={setAttributes}
 						/>
 						<FB_Spacing
 							label={"Margin"}
 							deviceType={deviceType}
-							spacingUnitsHandler={wrapperMarginUnitsHandler}
+							spacingUnitsHandler={imageAccordionMarginSpacingUnitsHandler}
 							spacingUnits={imageAccordionMarginUnits}
 							spacingDesktop={imageAccordionMarginDesktop}
 							spacingTablet={imageAccordionMarginTablet}
 							spacingMobile={imageAccordionMarginMobile}
-							handleSpacingUnitHandler={handleWrapperMarginUnitHandler}
+							handleSpacingUnitHandler={
+								imageAccordionMarginHandleSpacingUnitHandler
+							}
 							spacingCombineBtn={imageAccordionMarginLink}
-							spacingCombineBtnHandler={wrapperMarginCombineBtnHandler}
+							spacingCombineBtnHandler={
+								imageAccordionMarginSpacingCombineBtnHandlerFn
+							}
 							setAttributes={setAttributes}
 						/>
 					</PanelBody>
