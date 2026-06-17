@@ -199,6 +199,92 @@ const generateImageAccordionStyle = (attributes) => {
     const btnBrGetDesktop = `${imageAccordionBtnBorderRadiusDesktop?.top}${imageAccordionBtnBorderRadiusUnits?.Desktop} ${imageAccordionBtnBorderRadiusDesktop?.right}${imageAccordionBtnBorderRadiusUnits?.Desktop} ${imageAccordionBtnBorderRadiusDesktop?.bottom}${imageAccordionBtnBorderRadiusUnits?.Desktop} ${imageAccordionBtnBorderRadiusDesktop?.left}${imageAccordionBtnBorderRadiusUnits?.Desktop}`;
     const btnPadGetDesktop = `${imageAccordionBtnPaddingDesktop?.top}${imageAccordionBtnPaddingUnits?.Desktop} ${imageAccordionBtnPaddingDesktop?.right}${imageAccordionBtnPaddingUnits?.Desktop} ${imageAccordionBtnPaddingDesktop?.bottom}${imageAccordionBtnPaddingUnits?.Desktop} ${imageAccordionBtnPaddingDesktop?.left}${imageAccordionBtnPaddingUnits?.Desktop}`;
 
+    /**
+     * Get background normal styles
+     */
+    const getBackgroundNormalStyles = () => {
+        const bgType = imageAccordionBackgroundType;
+        const bgColor = imageAccordionClassicColor;
+        const bgGradient = imageAccordionGradientColor;
+        const customGradient = imageAccordionCustomGradientInputValue;
+        const customGradientEnabled = imageAccordionCustomGradientSwitcher;
+        const bgImageUrl = imageAccordionBackgroundImageUrl;
+        const bgImagePosition = imageAccordionBackgroundImagePosition;
+        const bgAttachment = imageAccordionBackgroundImageAttachment;
+        const bgRepeat = imageAccordionBackgroundImageRepeat;
+        const bgSize = imageAccordionBackgroundImageSize;
+
+        if (bgType === 'gradient') {
+            return {
+                background: customGradientEnabled && customGradient ? customGradient : bgGradient || bgColor
+            };
+        }
+
+        let styles = { background: bgColor };
+
+        if (bgType !== 'gradient' && bgImageUrl) {
+            styles = {
+                ...styles,
+                'background-image': `url(${bgImageUrl})`,
+                'background-position': bgImagePosition || undefined,
+                'background-attachment': bgAttachment || undefined,
+                'background-repeat': bgRepeat || undefined,
+                'background-size': bgSize || undefined,
+            };
+        }
+
+        return styles;
+    };
+
+    /**
+     * Get background hover styles
+     */
+    const getBackgroundHoverStyles = () => {
+        const bgType = imageAccordionHoverBackgroundType;
+        const bgColor = imageAccordionHoverClassicColor;
+        const bgGradient = imageAccordionHoverGradientColor;
+        const customGradient = imageAccordionHoverCustomGradientInputValue;
+        const customGradientEnabled = imageAccordionHoverCustomGradientSwitcher;
+        const bgImageUrl = imageAccordionHoverBackgroundImageUrl;
+        const bgImagePosition = imageAccordionHoverBackgroundImagePosition;
+        const bgAttachment = imageAccordionHoverBackgroundImageAttachment;
+        const bgRepeat = imageAccordionHoverBackgroundImageRepeat;
+        const bgSize = imageAccordionHoverBackgroundImageSize;
+
+        if (bgType === 'gradient') {
+            return {
+                background: customGradientEnabled && customGradient ? customGradient : bgGradient || bgColor
+            };
+        }
+
+        let styles = { background: bgColor };
+
+        if (bgType !== 'gradient' && bgImageUrl) {
+            styles = {
+                ...styles,
+                'background-image': `url(${bgImageUrl})`,
+                'background-position': bgImagePosition || undefined,
+                'background-attachment': bgAttachment || undefined,
+                'background-repeat': bgRepeat || undefined,
+                'background-size': bgSize || undefined,
+            };
+        }
+
+        return styles;
+    };
+
+    /**
+     * Convert object to string
+     */
+    const backgroundStyleObjectToString = (styleObj) =>
+        Object.entries(styleObj)
+            .map(([key, value]) => value ? `${key}: ${value};` : '')
+            .filter(Boolean)
+            .join(' ');
+
+    const backgroundNormalStyles = backgroundStyleObjectToString(getBackgroundNormalStyles());
+    const backgroundHoverStyles = backgroundStyleObjectToString(getBackgroundHoverStyles());
+
     const blockStyle = `
 		.fb-image-accordion-main-wrapper.${blockID} {
 			${imageAccordionPositionType === 'default' ? `position: relative;` : ''}
@@ -217,7 +303,7 @@ const generateImageAccordionStyle = (attributes) => {
 			${imageAccordionWrapperBorderColor ? `border-color: ${imageAccordionWrapperBorderColor};` : ''}
 			${wrapperBorderGetDesktop && imageAccordionWrapperBorderTypeDesktop?.top ? `border-width: ${wrapperBorderGetDesktop};` : ''}
 			${wrapperBrGetDesktop && imageAccordionWrapperBorderRadiusDesktop?.top ? `border-radius: ${wrapperBrGetDesktop};` : ''}
-			${imageAccordionBackgroundType === 'gradient' ? (imageAccordionCustomGradientSwitcher && imageAccordionCustomGradientInputValue ? `background: ${imageAccordionCustomGradientInputValue};` : (imageAccordionGradientColor ? `background: ${imageAccordionGradientColor};` : `background: ${imageAccordionClassicColor};`)) : (imageAccordionBackgroundImageUrl ? `background-image: url(${imageAccordionBackgroundImageUrl}); background-position: ${imageAccordionBackgroundImagePosition}; background-attachment: ${imageAccordionBackgroundImageAttachment}; background-repeat: ${imageAccordionBackgroundImageRepeat}; background-size: ${imageAccordionBackgroundImageSize};` : (imageAccordionClassicColor ? `background-color: ${imageAccordionClassicColor};` : ''))}
+			${backgroundNormalStyles}
 			transition: all .3s ease-in-out;
 			overflow: visible !important;
 			padding-bottom: 20px; 
@@ -226,7 +312,7 @@ const generateImageAccordionStyle = (attributes) => {
 
 		.fb-image-accordion-wrapper.${blockID}:hover {
 			${imageAccordionWrapperBorderHoverColor ? `border-color: ${imageAccordionWrapperBorderHoverColor};` : ''}
-			${imageAccordionHoverBackgroundType === 'gradient' ? (imageAccordionHoverCustomGradientSwitcher && imageAccordionHoverCustomGradientInputValue ? `background: ${imageAccordionHoverCustomGradientInputValue};` : (imageAccordionHoverGradientColor ? `background: ${imageAccordionHoverGradientColor};` : `background: ${imageAccordionHoverClassicColor};`)) : (imageAccordionHoverBackgroundImageUrl ? `background-image: url(${imageAccordionHoverBackgroundImageUrl});` : (imageAccordionHoverClassicColor ? `background-color: ${imageAccordionHoverClassicColor};` : ''))}
+			${backgroundHoverStyles}
 		}
 
 		.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-container {

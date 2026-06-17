@@ -136,33 +136,19 @@ export default function SortableItem({
 					<FB_BackgroundImageControl
 						label={__("Background Image", "frontis-blocks")}
 						globalBackgroundImageUrl={item.image?.url}
-						setGlobalBackgroundImageUrl={(url) =>
-							updateItem(item.id, "image", { url: url || "" })
-						}
+						setGlobalBackgroundImageUrl={(url) => updateItem(item.id, "image", { url: url || "" })}
 						globalBackgroundImageID={item.image?.id}
-						setGlobalBackgroundImageID={(imageId) =>
-							updateItem(item.id, "image", { id: imageId || "" })
-						}
+						setGlobalBackgroundImageID={(imageId) => updateItem(item.id, "image", { id: imageId || "" })}
 						globalBackgroundImageAlt={item.image?.alt}
-						setGlobalBackgroundImageAlt={(alt) =>
-							updateItem(item.id, "image", { alt: alt || "" })
-						}
+						setGlobalBackgroundImageAlt={(alt) => updateItem(item.id, "image", { alt: alt || "" })}
 						globalBackgroundImagePosition={item.image?.position}
-						setGlobalBackgroundImagePosition={(value) => {
-							updateItem(item.id, "image", { position: value });
-						}}
+						setGlobalBackgroundImagePosition={(value) => updateItem(item.id, "image", { position: value })}
 						globalBackgroundImageAttachment={item.image?.attachment}
-						setGlobalBackgroundImageAttachment={(value) => {
-							updateItem(item.id, "image", { attachment: value });
-						}}
+						setGlobalBackgroundImageAttachment={(value) => updateItem(item.id, "image", { attachment: value })}
 						globalBackgroundImageRepeat={item.image?.repeat}
-						setGlobalBackgroundImageRepeat={(value) => {
-							updateItem(item.id, "image", { repeat: value });
-						}}
+						setGlobalBackgroundImageRepeat={(value) => updateItem(item.id, "image", { repeat: value })}
 						globalBackgroundImageSize={item.image?.size}
-						setGlobalBackgroundImageSize={(value) => {
-							updateItem(item.id, "image", { size: value });
-						}}
+						setGlobalBackgroundImageSize={(value) => updateItem(item.id, "image", { size: value })}
 					/>
 
 					<FB_InputControl

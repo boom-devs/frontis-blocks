@@ -1,15 +1,11 @@
-/* --------------
-   BASE CONTAINER
------------------ */
+/* Base Container */
 .fb-image-accordion-container {
 	display: flex;
 	align-items: stretch;
 	overflow: visible;
 }
 
-/* --------------
-   BASE ITEM 
------------------ */
+/* Base Item */
 .fb-image-accordion-item {
 	position: relative;
 	flex: 0 0 80px;
@@ -24,9 +20,7 @@
 	overflow: hidden;
 }
 
-/* ------------
-   OVERLAY
----------------- */
+/* Overlay */
 .fb-image-accordion-overlay {
 	position: absolute;
 	inset: 0;
@@ -35,9 +29,7 @@
 	z-index: 1;
 }
 
-/* ----------
-   CONTENT WRAPPER 
------------------ */
+/* Content Wrapper */
 .fb-image-accordion-content-wrapper {
 	position: absolute;
 	left: 18px;
@@ -50,9 +42,7 @@
 	width: calc(100% - 36px);
 }
 
-/* --------------
-   ICON CIRCLE 
----------------- */
+/* Icon Circle */
 .fb-image-accordion-icon-circle {
 	border-radius: 50%;
 	display: flex;
@@ -73,9 +63,7 @@
 	}
 }
 
-/* -------------
-   TEXT GROUP 
---------------------*/
+/* Text Group */
 .preset-1 .fb-image-accordion-content-wrapper {
 	flex-direction: row;
 	align-items: center;
@@ -111,9 +99,7 @@
 	}
 }
 
-/* ==========
-   PRESET 2
-   ==========*/
+/* Preset 2 */
 .preset-2 {
 	.fb-image-accordion-item {
 		flex: 0 0 90px;
@@ -183,9 +169,7 @@
 	}
 }
 
-/* =============
-   PRESET 3 Vertical Stack
-   ============ */
+/* Preset 3 Vertical Stack */
 .preset-3 {
 	.fb-image-accordion-container {
 		flex-direction: column;
@@ -231,9 +215,7 @@
 	}
 }
 
-/* ===============
-   PRESET 4 Skewed Panels
-   ============== */
+/* Preset 4 Skewed Panels */
 .preset-4 {
 	.fb-image-accordion-container {
 		overflow: hidden;
