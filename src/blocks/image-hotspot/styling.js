@@ -693,7 +693,7 @@ const generateImageHotspotStyle = (attributes) => {
 
         return `
             .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"] .fb-hotspot-popover {
-                ${imageHotspotsPopoverPaddingDesktopWidth && imageHotspotsPopoverPaddingDesktop?.top ? `padding: ${imageHotspotsPopoverPaddingDesktopWidth};` : ''}
+                ${popoverPaddingDesktop ? `padding: ${popoverPaddingDesktop};` : ''}
                 ${popoverMarginDesktop && imageHotspotsPopoverMarginDesktop?.top ? `margin: ${popoverMarginDesktop};` : ''}
                 ${imageHotspotsPopoverBorderDesktopWidth && imageHotspotsPopoverBorderDesktop?.top ? `border-width: ${imageHotspotsPopoverBorderDesktopWidth};` : ''}
                 ${imageHotspotsPopoverBorderRadiusDesktopWidth && imageHotspotsPopoverBorderRadiusDesktop?.top ? `border-radius: ${imageHotspotsPopoverBorderRadiusDesktopWidth};` : ''}
@@ -782,7 +782,7 @@ const generateImageHotspotStyle = (attributes) => {
             ${imageHotspotImageSize ? `object-fit: ${imageHotspotImageSize};` : ''}
             ${imageHotspotImageBorderColor ? `border-color: ${imageHotspotImageBorderColor};` : ''}
             ${imageBorderRadiusDesktop ? `border-radius: ${imageBorderRadiusDesktop};` : ''}
-             ${imageBorderWidthTablet ? `border-width: ${imageBorderWidthTablet};` : ''}
+             ${imageBorderWidthDesktop ? `border-width: ${imageBorderWidthDesktop};` : ''}
         }
 
         .${blockID} .fb-hotspot-marker {
