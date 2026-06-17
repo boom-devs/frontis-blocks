@@ -35,15 +35,17 @@ export default function Edit({
 		advancedCountdownSunIcon,
 		advancedCountdownShowSunIcon,
 		until_text,
+		advancedCountdownStartDate,
 
 		// preset 3
 		advancedCountdownStyle3TimeGap,
 		// preset 4
 		advancedCountdownLabelAlignmentStyle4,
+		advancedCountdownGlowColor,
 
 		// preset 5
-		days_total_dots,
-		hours_total_dots,
+		advancedCountdownDaysTotalDots,
+		advancedCountdownHoursTotalDots,
 		minutes_total_dots,
 		active_dot_color,
 		advancedCountdownActiveDotColor,
@@ -55,13 +57,15 @@ export default function Edit({
 		countDownGlobalWraperID,
 		countDownGlobalWraperClass,
 
+		advancedCountdownDotsThickness,
 		countDownDesktopSwitcher,
 		countDownTabletSwitcher,
 		countDownMobileSwitcher,
+		advancedCountdownDotsGap,
 	} = attributes;
 
-	const dot_thickness = attributes.dots_size_thickness?.size || 5;
-	const user_gap = attributes.dots_gap?.size || 1;
+	const dot_thickness = advancedCountdownDotsThickness?.Desktop || 5;
+	const user_gap = advancedCountdownDotsGap?.Desktop || 1;
 
 	useBlockIdGenerator({
 		clientId,
@@ -155,9 +159,9 @@ export default function Edit({
 	const label_m =
 		attributes.advancedCountdownLabelMinutes || __("Minutes", "frontis-blocks");
 
-	const d_val = days_total_dots?.size || 12;
-	const h_val = hours_total_dots?.size || 24;
-	const m_val = minutes_total_dots?.size || 30;
+	const d_val = advancedCountdownDaysTotalDots?.Desktop || 12;
+	const h_val = advancedCountdownHoursTotalDots?.Desktop || 24;
+	const m_val = minutes_total_dots?.Desktop || 30;
 
 	const config_style5 = {
 		days: { label: label_d_style5, dots: d_val },
@@ -167,14 +171,16 @@ export default function Edit({
 
 	const glow_effect_class =
 		advancedCountdownDotsGlowEffect === "yes"
-			? `dots-glow-enabled dots-glow-intensity-${advancedCountdownGlowIntensity.Desktop}`
+			? `dots-glow-enabled dots-glow-intensity-${
+					advancedCountdownGlowIntensity?.Desktop || 0
+			  }`
 			: "";
 	const glow_color_var = advancedCountdownGlowColor
 		? `--glow-clr: ${advancedCountdownGlowColor};`
 		: "";
 
-	const start_ts = new Date(advancedCountdownStartDate).getTime();
-	const due_ts = new Date(targetDate).getTime();
+	const start_ts = new Date(advancedCountdownStartDate || Date.now()).getTime();
+	const due_ts = new Date(targetDate || Date.now()).getTime();
 	const diff_seconds = (due_ts - start_ts) / 1000;
 
 	const start_label_style3 =
@@ -243,9 +249,10 @@ export default function Edit({
 							<div className="countdown-content">
 								{advancedCountdownShowSunIcon === "yes" && (
 									<div className="countdown-icon">
-										{renderSVG(advancedCountdownSunIcon, setAttributes, {
-											"aria-hidden": "true",
-										})}
+										{advancedCountdownSunIcon?.value &&
+											renderSVG(advancedCountdownSunIcon.value, setAttributes, {
+												"aria-hidden": "true",
+											})}
 									</div>
 								)}
 
@@ -326,7 +333,7 @@ export default function Edit({
 											cy="50"
 											r="45"
 											mask={`url(#${mask_id_style2})`}
-											style={{ fill: "none", strokeDasharray: dash_gap }}
+											style={{ fill: "none", strokeDasharray: dash_gap_style2 }}
 										></circle>{" "}
 									</svg>
 
@@ -343,7 +350,7 @@ export default function Edit({
 								{until_text &&
 									["style-1", "style-2"].includes(countDownPresetStyle) && (
 										<div className="countdown-footer">
-											<p>{advancedCountdownUntilText}</p>
+											<p>{until_text}</p>
 										</div>
 									)}
 							</div>
@@ -355,8 +362,8 @@ export default function Edit({
 							className="style-3-container"
 							style={{
 								gap:
-									advancedCountdownStyle3TimeGap.Desktop +
-									advancedCountdownStyle3TimeGap.unit,
+									(advancedCountdownStyle3TimeGap?.Desktop || 0) +
+									(advancedCountdownStyle3TimeGap?.unit || "px"),
 							}}
 						>
 							<div className="time-box">
@@ -462,7 +469,9 @@ export default function Edit({
 														strokeDasharray: `0.1 ${gap}`,
 														fill: "none",
 														stroke: advancedCountdownInactiveDotColor,
-														strokeWidth: `${attributes.advancedCountdownDotsThickness.Desktop}px`,
+														strokeWidth: `${
+															advancedCountdownDotsThickness?.Desktop || 5
+														}px`,
 														strokeLinecap: "round",
 														...(glow_color_var && {
 															[glow_color_var.split(":")[0]]:
@@ -481,7 +490,9 @@ export default function Edit({
 														strokeDasharray: `0.1 ${gap}`,
 														fill: "none",
 														stroke: advancedCountdownActiveDotColor,
-														strokeWidth: `${attributes.advancedCountdownDotsThickness.Desktop}px`,
+														strokeWidth: `${
+															advancedCountdownDotsThickness?.Desktop || 5
+														}px`,
 														strokeLinecap: "round",
 														...(glow_color_var && {
 															[glow_color_var.split(":")[0]]:

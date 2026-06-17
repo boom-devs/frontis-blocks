@@ -15,13 +15,12 @@ export default function save({ attributes }) {
 		showSeconds,
 		countDownGlobalWraperID,
 		countDownPresetStyle,
-		until_text, // This is the footer text
-		show_sun_icon,
-		sun_icon,
+		until_text,
+		advancedCountdownShowSunIcon,
+		advancedCountdownSunIcon,
 		advancedCountdownStyle3TimeGap,
 		advancedCountdownLabelAlignmentStyle4,
-		days_total_dots,
-		hours_total_dots,
+		advancedCountdownHoursTotalDots,
 		minutes_total_dots,
 		advancedCountdownDotsGlowEffect,
 		advancedCountdownGlowIntensity,
@@ -36,6 +35,10 @@ export default function save({ attributes }) {
 		countDownTabletSwitcher,
 		countDownMobileSwitcher,
 		advancedCountdownStartDate,
+		advancedCountdownGlowColor,
+		advancedCountdownMinutesTotalDots,
+		advancedCountdownDaysTotalDots,
+		advancedCountdownDotsGap,
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
@@ -53,11 +56,6 @@ export default function save({ attributes }) {
 			data-start={advancedCountdownStartDate}
 		>
 			<div
-				// The PHP render function adds 'pea-countdown-wrapper' and 'preset_styles' to the wrapper.
-				// In Gutenberg, the main block wrapper already has the blockID and responsive classes.
-				// The inner div should have the specific preset style class for styling.
-				// The PHP render also adds data-due and data-start to the wrapper, which we've moved to the outer blockProps.
-				// So, this inner div primarily needs the preset style class and any custom classes/ID.
 				className={`fb-parent-wrapper fb-count-down-wrapper ${blockID} ${countDownGlobalWraperClass} ${countDownPresetStyle}`}
 				id={countDownGlobalWraperID}
 			>
@@ -84,10 +82,8 @@ export default function save({ attributes }) {
 						</svg>
 
 						<div className="countdown-content">
-							{show_sun_icon === "yes" && (
-								<div className="countdown-icon">
-									{/* Icon is rendered by JS on frontend, so just a div here */}
-								</div>
+							{advancedCountdownShowSunIcon === "yes" && (
+								<div className="countdown-icon"></div>
 							)}
 
 							<div className="content-inner">
@@ -121,16 +117,10 @@ export default function save({ attributes }) {
 				{countDownPresetStyle === "style-2" && (
 					<div className="fb-countdown-items-container style-2-layout">
 						{" "}
-						{/* Matches PHP's outer div */}
 						<div className="dotted-item seconds style_2_container">
 							<div className="svg-container">
 								<svg viewBox="0 0 100 100" className="style-2-countdown-preset">
 									<defs>
-										{/* PHP calculates $c, $total_dashes, $dash_width, $dash_gap, $mask_id */}
-										{/* For save.js, we need to replicate these calculations or use fixed values if they are constant */}
-										{/* Assuming $c = 3 * M_PI * $r; where $r = 45, so $c = 3 * Math.PI * 45 = 424.115 */}
-										{/* Assuming $total_dashes = 60, $dash_width = 2 */}
-										{/* $dash_gap = ($c / $total_dashes) - $dash_width; */}
 										<mask id={`mask-style-2-${blockID}`}>
 											<circle
 												className="progress-mask-circle"
@@ -138,7 +128,7 @@ export default function save({ attributes }) {
 												cy="50"
 												r="45"
 												data-circumference={2 * Math.PI * 45}
-												data-dots={60} // Fixed value from PHP
+												data-dots={60}
 												style={{
 													fill: "none",
 													stroke: "#fff",
@@ -174,9 +164,9 @@ export default function save({ attributes }) {
 									<span className="time-val minutes">00</span>
 								</div>
 							</div>
-							{advancedCountdownUntilText && (
+							{until_text && (
 								<div className="countdown-footer">
-									<p>{advancedCountdownUntilText}</p>
+									<p>{until_text}</p>
 								</div>
 							)}
 						</div>
@@ -189,8 +179,8 @@ export default function save({ attributes }) {
 						style={{
 							// PHP uses $settings['style3_time_gap'] which maps to advancedCountdownStyle3TimeGap
 							gap:
-								advancedCountdownStyle3TimeGap.Desktop +
-								advancedCountdownStyle3TimeGap.unit,
+								(advancedCountdownStyle3TimeGap?.Desktop || 0) +
+								(advancedCountdownStyle3TimeGap?.unit || "px"),
 						}}
 					>
 						<div className="time-box">
@@ -247,13 +237,15 @@ export default function save({ attributes }) {
 					<div
 						className={`fb-count-down-wrapper style-6 style-5-container ${
 							advancedCountdownDotsGlowEffect === "yes"
-								? `dots-glow-enabled dots-glow-intensity-${advancedCountdownGlowIntensity.Desktop}`
+								? `dots-glow-enabled dots-glow-intensity-${
+										advancedCountdownGlowIntensity?.Desktop || 0
+								  }`
 								: ""
 						}`}
 						data-due={targetDate}
 						data-start={advancedCountdownStartDate}
 						data-glow-enabled={advancedCountdownDotsGlowEffect}
-						data-glow-intensity={advancedCountdownGlowIntensity.Desktop}
+						data-glow-intensity={advancedCountdownGlowIntensity?.Desktop || 0}
 						style={
 							advancedCountdownGlowColor
 								? { "--glow-clr": advancedCountdownGlowColor }
@@ -266,11 +258,11 @@ export default function save({ attributes }) {
 							},
 							hours: {
 								label: advancedCountdownLabelHours || "Hours",
-								dots: advancedCountdownHoursTotalDots.Desktop || 24,
+								dots: advancedCountdownHoursTotalDots?.Desktop || 24,
 							},
 							minutes: {
 								label: advancedCountdownLabelMinutes || "Minutes",
-								dots: advancedCountdownMinutesTotalDots.Desktop || 30,
+								dots: advancedCountdownMinutesTotalDots?.Desktop || 30,
 							},
 						}).map(([unit, info]) => {
 							// Loop through days, hours, minutes
@@ -279,11 +271,11 @@ export default function save({ attributes }) {
 							// Use the actual dots count from attributes for each unit
 							const dots_count =
 								unit === "days"
-									? advancedCountdownDaysTotalDots.Desktop || 12
+									? advancedCountdownDaysTotalDots?.Desktop || 12
 									: unit === "hours"
-									? advancedCountdownHoursTotalDots.Desktop || 24
-									: advancedCountdownMinutesTotalDots.Desktop || 30;
-							const user_gap = advancedCountdownDotsGap.Desktop || 1; // Use Desktop value for save
+									? advancedCountdownHoursTotalDots?.Desktop || 24
+									: advancedCountdownMinutesTotalDots?.Desktop || 30;
+							const user_gap = advancedCountdownDotsGap?.Desktop || 1; // Use Desktop value for save
 							const gap =
 								(c_unit / (dots_count > 0 ? dots_count : 1)) * user_gap;
 							const mask_id_unit = `countdown-mask-${unit}-${blockID}`;
@@ -305,7 +297,7 @@ export default function save({ attributes }) {
 															fill: "none", // No fill
 															stroke: "#fff", // White stroke for mask
 															strokeWidth: `${
-																(advancedCountdownDotsThickness.Desktop || 5) +
+																(advancedCountdownDotsThickness?.Desktop || 5) +
 																2
 															}px`, // Thickness + a little extra for mask
 															strokeDasharray: c_unit,
@@ -326,7 +318,7 @@ export default function save({ attributes }) {
 													fill: "none",
 													stroke: advancedCountdownInactiveDotColor, // Inactive color
 													strokeWidth: `${
-														advancedCountdownDotsThickness.Desktop || 5
+														advancedCountdownDotsThickness?.Desktop || 5
 													}px`, // Thickness
 													strokeLinecap: "round",
 												}}
@@ -343,7 +335,7 @@ export default function save({ attributes }) {
 													fill: "none",
 													stroke: advancedCountdownActiveDotColor, // Active color
 													strokeWidth: `${
-														advancedCountdownDotsThickness.Desktop || 5
+														advancedCountdownDotsThickness?.Desktop || 5
 													}px`, // Thickness
 													strokeLinecap: "round",
 												}}

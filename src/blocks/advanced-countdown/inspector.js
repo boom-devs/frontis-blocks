@@ -122,7 +122,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 		// Style Tab: Dots Configuration (Style 5)
 		advancedCountdownDaysTotalDots,
 		advancedCountdownHoursTotalDots,
-		advancedCountdownMinutesTotalDots,
+		minutes_total_dots,
 
 		// Style Tab: Progress & Indicator (Style 3)
 		advancedCountdownStyle3ContainerBg,
@@ -290,19 +290,19 @@ const Inspector = ({ attributes, setAttributes }) => {
 		countDownDesktopSwitcher,
 		countDownTabletSwitcher,
 		countDownMobileSwitcher,
-		countDownZIndex,
-		countDownOverflow,
-		countDownPositionType,
-		countDownHZOrientationType,
-		countDownVROrientationType,
-		countDownHZLeftOffset,
-		countDownHZLeftOffsetUnits,
-		countDownHZRightOffset,
-		countDownHZRightOffsetUnits,
-		countDownVRTopOffset,
-		countDownVRTopOffsetUnits,
-		countDownVRBottomOffset,
-		countDownVRBottomOffsetUnits,
+		advancedCountdownZIndex,
+		advancedCountdownOverflow,
+		advancedCountdownPositionType,
+		advancedCountdownHZOrientationType,
+		advancedCountdownVROrientationType,
+		advancedCountdownHZLeftOffset,
+		advancedCountdownHZLeftOffsetUnits,
+		advancedCountdownHZRightOffset,
+		advancedCountdownHZRightOffsetUnits,
+		advancedCountdownVRTopOffset,
+		advancedCountdownVRTopOffsetUnits,
+		advancedCountdownVRBottomOffset,
+		advancedCountdownVRBottomOffsetUnits,
 	} = attributes;
 
 	const deviceType = useDeviceType();
@@ -320,7 +320,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 		targetDate ? new Date(targetDate) : defaultDate,
 	);
 
-	// Sync date with attributes if not already set
 	useEffect(() => {
 		if (!targetDate) {
 			setAttributes({ targetDate: defaultDate.toISOString() });
@@ -330,12 +329,10 @@ const Inspector = ({ attributes, setAttributes }) => {
 		}
 	}, [targetDate, setAttributes, defaultDate, advancedCountdownStartDate]);
 
-	// Update target date when date changes
 	useEffect(() => {
 		setAttributes({ targetDate: date.toISOString() });
 	}, [date, setAttributes]);
 
-	// Update advancedCountdownStartDate when startDate changes
 	useEffect(() => {
 		setAttributes({ advancedCountdownStartDate: startDate.toISOString() });
 	}, [startDate, setAttributes]);
@@ -854,7 +851,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 					is12Hour={true}
 					dateFormat="Y-m-d H:i"
 					time_24hr={true}
-					label={__("Due Date & Time", "prime-elementor-addons-pro")}
+					label={__("Due Date & Time", "frontis-blocks")}
 				/>
 
 				<DateTimePicker
@@ -865,12 +862,12 @@ const Inspector = ({ attributes, setAttributes }) => {
 					is12Hour={true}
 					dateFormat="Y-m-d H:i"
 					time_24hr={true}
-					label={__("Start Date & Time", "prime-elementor-addons-pro")}
+					label={__("Start Date & Time", "frontis-blocks")}
 				/>
 
 				{["style-1", "style-2"].includes(countDownPresetStyle) && (
 					<TextControl
-						label={__("Footer Text", "prime-elementor-addons-pro")}
+						label={__("Footer Text", "frontis-blocks")}
 						value={until_text}
 						onChange={(value) => setAttributes({ until_text: value })}
 					/>
@@ -879,7 +876,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 				{countDownPresetStyle === "style-1" && (
 					<>
 						<ToggleControl
-							label={__("Show Icon", "prime-elementor-addons-pro")}
+							label={__("Show Icon", "frontis-blocks")}
 							checked={advancedCountdownShowSunIcon === "yes"}
 							onChange={(value) =>
 								setAttributes({
@@ -889,10 +886,15 @@ const Inspector = ({ attributes, setAttributes }) => {
 						/>
 						{advancedCountdownShowSunIcon === "yes" && (
 							<FB_IconPicker
-								label={__("Icon", "prime-elementor-addons-pro")}
-								value={advancedCountdownSunIcon}
+								label={__("Icon", "frontis-blocks")}
+								value={advancedCountdownSunIcon?.value}
 								setIconHandler={(value) =>
-									setAttributes({ advancedCountdownSunIcon: value })
+									setAttributes({
+										advancedCountdownSunIcon: {
+											...advancedCountdownSunIcon,
+											value,
+										},
+									})
 								}
 							/>
 						)}
@@ -907,13 +909,10 @@ const Inspector = ({ attributes, setAttributes }) => {
 	 */
 	const styleControls = (
 		<>
-			<PanelBody
-				title={__("Container", "prime-elementor-addons-pro")}
-				initialOpen={true}
-			>
+			<PanelBody title={__("Container", "frontis-blocks")} initialOpen={true}>
 				{["style-1", "style-2", "style-4"].includes(countDownPresetStyle) && (
 					<FB_Range
-						label={__("Size", "prime-elementor-addons-pro")}
+						label={__("Size", "frontis-blocks")}
 						min={200}
 						max={1200}
 						rangeValue={advancedCountdownContainerSize}
@@ -934,7 +933,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 							})
 						}
 						deviceType={deviceType}
-						units={advancedCountdownContainerSize.unit}
+						units={{
+							Desktop: advancedCountdownContainerSize.unit,
+							Tablet: advancedCountdownContainerSize.unit,
+							Mobile: advancedCountdownContainerSize.unit,
+						}}
 						setAttributes={setAttributes}
 						rangeStep={1}
 						resetFallbackValue={100}
@@ -942,7 +945,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 				)}
 				{countDownPresetStyle === "style-1" && (
 					<FB_Range
-						label={__("Progress Bar Size", "prime-elementor-addons-pro")}
+						label={__("Progress Bar Size", "frontis-blocks")}
 						min={414}
 						max={1000}
 						rangeValue={advancedCountdownSvgProgressSize}
@@ -971,7 +974,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 				)}
 				{countDownPresetStyle === "style-2" && (
 					<FB_Range
-						label={__("Progress Bar Size", "prime-elementor-addons-pro")}
+						label={__("Progress Bar Size", "frontis-blocks")}
 						min={200}
 						max={1000}
 						rangeValue={advancedCountdownStyle2ProgressBarSize}
@@ -1001,7 +1004,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 				{countDownPresetStyle === "style-3" && (
 					<>
 						<FB_Range
-							label={__("Size", "prime-elementor-addons-pro")}
+							label={__("Size", "frontis-blocks")}
 							min={400}
 							max={700}
 							rangeValue={advancedCountdownContainerSizeStyle3}
@@ -1028,7 +1031,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 							resetFallbackValue={570}
 						/>
 						<FB_Range
-							label={__("Container Size", "prime-elementor-addons-pro")}
+							label={__("Container Size", "frontis-blocks")}
 							min={0}
 							max={700}
 							rangeValue={advancedCountdownContainerSizeStyle3Container}
@@ -1058,7 +1061,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 				)}
 				{countDownPresetStyle === "style-5" && (
 					<FB_Range
-						label={__("Size", "prime-elementor-addons-pro")}
+						label={__("Size", "frontis-blocks")}
 						min={300}
 						max={1200}
 						rangeValue={advancedCountdownContainerSizeStyle5}
@@ -1087,7 +1090,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 				)}
 
 				<FB_BackgroundColorControl
-					label={__("Background", "prime-elementor-addons-pro")}
+					label={__("Background", "frontis-blocks")}
 					bgColorSwitcher={globalBgColorSwitcher}
 					setBgColorSwitcher={(value) =>
 						setAttributes({ globalBgColorSwitcher: value })
@@ -1199,7 +1202,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 				/>
 
 				<FB_Range
-					label={__("Transition Duration", "prime-elementor-addons-pro")}
+					label={__("Transition Duration", "frontis-blocks")}
 					min={0}
 					max={3}
 					rangeValue={advancedCountdownContainerHoverTransition}
@@ -1219,7 +1222,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 				/>
 
 				<SelectControl
-					label={__("Border Style", "prime-elementor-addons-pro")}
+					label={__("Border Style", "frontis-blocks")}
 					value={advancedCountdownItemWrapperBorder}
 					options={BORDER_STYLES}
 					onChange={(value) =>
@@ -1228,7 +1231,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 				/>
 
 				<FB_SwitcherControl
-					label={__("Border Color", "prime-elementor-addons-pro")}
+					label={__("Border Color", "frontis-blocks")}
 					globalSwitcher={advancedCountdownItemWrapperBorderColorSwitcher}
 					setGlobalSwitcher={(value) =>
 						setAttributes({
@@ -1239,7 +1242,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 				{advancedCountdownItemWrapperBorderColorSwitcher === "normal" && (
 					<FB_ColorControl
-						label={__("Normal Color", "prime-elementor-addons-pro")}
+						label={__("Normal Color", "frontis-blocks")}
 						globalColor={advancedCountdownItemWrapperBorderColor}
 						setGlobalColor={(value) =>
 							setAttributes({
@@ -1252,7 +1255,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 				{advancedCountdownItemWrapperBorderColorSwitcher === "hover" && (
 					<FB_ColorControl
-						label={__("Hover Color", "prime-elementor-addons-pro")}
+						label={__("Hover Color", "frontis-blocks")}
 						globalColor={advancedCountdownBorderHoverColor}
 						setGlobalColor={(value) =>
 							setAttributes({
@@ -1264,7 +1267,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 				)}
 
 				<FB_Range
-					label={__("Transition Duration", "prime-elementor-addons-pro")}
+					label={__("Transition Duration", "frontis-blocks")}
 					min={0}
 					max={3}
 					rangeValue={advancedCountdownBorderHoverTransition}
@@ -1284,7 +1287,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 				/>
 
 				<FB_Spacing
-					label={__("Border Radius", "prime-elementor-addons-pro")}
+					label={__("Border Radius", "frontis-blocks")}
 					deviceType={deviceType}
 					spacingUnitsHandler={
 						advancedCountdownItemWrapperBorderRadiusUnitsHandler
@@ -1305,7 +1308,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 				{countDownPresetStyle === "style-5" && (
 					<FB_Range
-						label={__("Gap", "prime-elementor-addons-pro")}
+						label={__("Gap", "frontis-blocks")}
 						min={0}
 						max={100}
 						rangeValue={advancedCountdownPreset5DashGap}
@@ -1326,7 +1329,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 							})
 						}
 						deviceType={deviceType}
-						units={advancedCountdownPreset5DashGap.unit}
+						units={{
+							Desktop: advancedCountdownPreset5DashGap.unit,
+							Tablet: advancedCountdownPreset5DashGap.unit,
+							Mobile: advancedCountdownPreset5DashGap.unit,
+						}}
 						setAttributes={setAttributes}
 						rangeStep={1}
 						resetFallbackValue={62}
@@ -1335,7 +1342,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 				{countDownPresetStyle === "style-4" && (
 					<FB_Range
-						label={__("Gap", "prime-elementor-addons-pro")}
+						label={__("Gap", "frontis-blocks")}
 						min={5}
 						max={100}
 						rangeValue={advancedCountdownPreset4DashGap}
@@ -1356,7 +1363,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 							})
 						}
 						deviceType={deviceType}
-						units={advancedCountdownPreset4DashGap.unit}
+						units={{
+							Desktop: advancedCountdownPreset4DashGap.unit,
+							Tablet: advancedCountdownPreset4DashGap.unit,
+							Mobile: advancedCountdownPreset4DashGap.unit,
+						}}
 						setAttributes={setAttributes}
 						rangeStep={1}
 						resetFallbackValue={10}
@@ -1364,7 +1375,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 				)}
 
 				<BaseControl
-					label={__("Alignment", "prime-elementor-addons-pro")}
+					label={__("Alignment", "frontis-blocks")}
 					id="fb-setting-text-alignment"
 					className="fb-setting-text-alignment"
 				>
@@ -1386,7 +1397,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 				</BaseControl>
 
 				<FB_Spacing
-					label={__("Margin", "prime-elementor-addons-pro")}
+					label={__("Margin", "frontis-blocks")}
 					deviceType={deviceType}
 					spacingUnitsHandler={
 						advancedCountdownItemWrapperMarginSpacingUnitsHandler
@@ -1406,7 +1417,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 				/>
 
 				<FB_Spacing
-					label={__("Padding", "prime-elementor-addons-pro")}
+					label={__("Padding", "frontis-blocks")}
 					deviceType={deviceType}
 					spacingUnitsHandler={
 						advancedCountdownItemWrapperPaddingSpacingUnitsHandler
@@ -1428,11 +1439,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 			{countDownPresetStyle === "style-2" && (
 				<PanelBody
-					title={__("Dashed Progress Bar", "prime-elementor-addons-pro")}
+					title={__("Dashed Progress Bar", "frontis-blocks")}
 					initialOpen={false}
 				>
 					<FB_ColorControl
-						label={__("Bar Color", "prime-elementor-addons-pro")}
+						label={__("Bar Color", "frontis-blocks")}
 						globalColor={advancedCountdownStyle2ProgressBarColor}
 						setGlobalColor={(value) =>
 							setAttributes({
@@ -1442,7 +1453,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 						}
 					/>
 					<FB_Range
-						label={__("Dash Spacing", "prime-elementor-addons-pro")}
+						label={__("Dash Spacing", "frontis-blocks")}
 						min={1}
 						max={20}
 						rangeValue={advancedCountdownStyle2DashCount}
@@ -1465,11 +1476,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 			{countDownPresetStyle === "style-5" && (
 				<PanelBody
-					title={__("Dots Configuration", "prime-elementor-addons-pro")}
+					title={__("Dots Configuration", "frontis-blocks")}
 					initialOpen={false}
 				>
 					<FB_Range
-						label={__("Days Dots", "prime-elementor-addons-pro")}
+						label={__("Days Dots", "frontis-blocks")}
 						min={12}
 						max={30}
 						rangeValue={advancedCountdownDaysTotalDots}
@@ -1487,8 +1498,9 @@ const Inspector = ({ attributes, setAttributes }) => {
 						rangeStep={1}
 						resetFallbackValue={12}
 					/>
+
 					<FB_Range
-						label={__("Hours Dots", "prime-elementor-addons-pro")}
+						label={__("Hours Dots", "frontis-blocks")}
 						min={12}
 						max={30}
 						rangeValue={advancedCountdownHoursTotalDots}
@@ -1507,14 +1519,14 @@ const Inspector = ({ attributes, setAttributes }) => {
 						resetFallbackValue={24}
 					/>
 					<FB_Range
-						label={__("Minutes Dots", "prime-elementor-addons-pro")}
+						label={__("Minutes Dots", "frontis-blocks")}
 						min={12}
 						max={30}
-						rangeValue={advancedCountdownMinutesTotalDots}
+						rangeValue={minutes_total_dots}
 						onChangeHandler={(value) =>
 							setAttributes({
-								advancedCountdownMinutesTotalDots: {
-									...advancedCountdownMinutesTotalDots,
+								minutes_total_dots: {
+									...minutes_total_dots,
 									[deviceType]: value,
 								},
 							})
@@ -1530,11 +1542,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 			{countDownPresetStyle === "style-3" && (
 				<PanelBody
-					title={__("Progress & Indicator", "prime-elementor-addons-pro")}
+					title={__("Progress & Indicator", "frontis-blocks")}
 					initialOpen={false}
 				>
 					<FB_ColorControl
-						label={__("Background", "prime-elementor-addons-pro")}
+						label={__("Background", "frontis-blocks")}
 						globalColor={advancedCountdownStyle3ContainerBg}
 						setGlobalColor={(value) =>
 							setAttributes({
@@ -1544,7 +1556,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 						}
 					/>
 					<FB_ColorControl
-						label={__("Time Box Background", "prime-elementor-addons-pro")}
+						label={__("Time Box Background", "frontis-blocks")}
 						globalColor={advancedCountdownStyle3TimeboxBg}
 						setGlobalColor={(value) =>
 							setAttributes({
@@ -1554,7 +1566,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 						}
 					/>
 					<FB_ColorControl
-						label={__("Indicator Color", "prime-elementor-addons-pro")}
+						label={__("Indicator Color", "frontis-blocks")}
 						globalColor={advancedCountdownStyle3IndicatorColor}
 						setGlobalColor={(value) =>
 							setAttributes({
@@ -1564,7 +1576,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 						}
 					/>
 					<FB_ColorControl
-						label={__("Text Color", "prime-elementor-addons-pro")}
+						label={__("Text Color", "frontis-blocks")}
 						globalColor={advancedCountdownStyle3IndicatorTextColor}
 						setGlobalColor={(value) =>
 							setAttributes({
@@ -1574,7 +1586,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 						}
 					/>
 					<FB_Range
-						label={__("Time Gap", "prime-elementor-addons-pro")}
+						label={__("Time Gap", "frontis-blocks")}
 						min={10}
 						max={50}
 						rangeValue={advancedCountdownStyle3TimeGap}
@@ -1595,13 +1607,17 @@ const Inspector = ({ attributes, setAttributes }) => {
 							})
 						}
 						deviceType={deviceType}
-						units={advancedCountdownStyle3TimeGap.unit}
+						units={{
+							Desktop: advancedCountdownStyle3TimeGap.unit,
+							Tablet: advancedCountdownStyle3TimeGap.unit,
+							Mobile: advancedCountdownStyle3TimeGap.unit,
+						}}
 						setAttributes={setAttributes}
 						rangeStep={1}
 						resetFallbackValue={10}
 					/>
 					<FB_ColorControl
-						label={__("Highlighted Dash Color", "prime-elementor-addons-pro")}
+						label={__("Highlighted Dash Color", "frontis-blocks")}
 						globalColor={advancedCountdownStyle3DashHighlight}
 						setGlobalColor={(value) =>
 							setAttributes({
@@ -1687,12 +1703,9 @@ const Inspector = ({ attributes, setAttributes }) => {
 			)}
 
 			{countDownPresetStyle === "style-5" && (
-				<PanelBody
-					title={__("Dots", "prime-elementor-addons-pro")}
-					initialOpen={false}
-				>
+				<PanelBody title={__("Dots", "frontis-blocks")} initialOpen={false}>
 					<FB_ColorControl
-						label={__("Active Dot Color", "prime-elementor-addons-pro")}
+						label={__("Active Dot Color", "frontis-blocks")}
 						globalColor={advancedCountdownActiveDotColor}
 						setGlobalColor={(value) =>
 							setAttributes({
@@ -1702,7 +1715,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 						}
 					/>
 					<FB_ColorControl
-						label={__("Inactive Dot Color", "prime-elementor-addons-pro")}
+						label={__("Inactive Dot Color", "frontis-blocks")}
 						globalColor={advancedCountdownInactiveDotColor}
 						setGlobalColor={(value) =>
 							setAttributes({
@@ -1712,7 +1725,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 						}
 					/>
 					<FB_Range
-						label={__("Dots Size", "prime-elementor-addons-pro")}
+						label={__("Dots Size", "frontis-blocks")}
 						min={1}
 						max={20}
 						rangeValue={advancedCountdownDotsThickness}
@@ -1731,7 +1744,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 						resetFallbackValue={5}
 					/>
 					<FB_Range
-						label={__("Dots Gap", "prime-elementor-addons-pro")}
+						label={__("Dots Gap", "frontis-blocks")}
 						min={1}
 						max={3}
 						rangeValue={advancedCountdownDotsGap}
@@ -1750,7 +1763,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 						resetFallbackValue={1}
 					/>
 					<ToggleControl
-						label={__("Dots Glow Effect", "prime-elementor-addons-pro")}
+						label={__("Dots Glow Effect", "frontis-blocks")}
 						checked={advancedCountdownDotsGlowEffect === "yes"}
 						onChange={(value) =>
 							setAttributes({
@@ -1761,7 +1774,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 					{advancedCountdownDotsGlowEffect === "yes" && (
 						<>
 							<FB_Range
-								label={__("Glow Intensity", "prime-elementor-addons-pro")}
+								label={__("Glow Intensity", "frontis-blocks")}
 								min={5}
 								max={40}
 								rangeValue={advancedCountdownGlowIntensity}
@@ -1780,7 +1793,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 								resetFallbackValue={12}
 							/>
 							<FB_ColorControl
-								label={__("Glow Color", "prime-elementor-addons-pro")}
+								label={__("Glow Color", "frontis-blocks")}
 								globalColor={advancedCountdownGlowColor}
 								setGlobalColor={(value) =>
 									setAttributes({
@@ -1796,11 +1809,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 			{countDownPresetStyle === "style-4" && (
 				<PanelBody
-					title={__("Dash Pattern", "prime-elementor-addons-pro")}
+					title={__("Dash Pattern", "frontis-blocks")}
 					initialOpen={false}
 				>
 					<FB_ColorControl
-						label={__("Dash Color", "prime-elementor-addons-pro")}
+						label={__("Dash Color", "frontis-blocks")}
 						globalColor={advancedCountdownDashColor}
 						setGlobalColor={(value) =>
 							setAttributes({
@@ -1809,7 +1822,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 						}
 					/>
 					<FB_Range
-						label={__("Dash Size", "prime-elementor-addons-pro")}
+						label={__("Dash Size", "frontis-blocks")}
 						min={1}
 						max={20}
 						rangeValue={advancedCountdownDashSize}
@@ -1832,11 +1845,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 			{countDownPresetStyle === "style-4" && (
 				<PanelBody
-					title={__("Label Alignment", "prime-elementor-addons-pro")}
+					title={__("Label Alignment", "frontis-blocks")}
 					initialOpen={false}
 				>
 					<BaseControl
-						label={__("Alignment", "prime-elementor-addons-pro")}
+						label={__("Alignment", "frontis-blocks")}
 						id="fb-setting-text-alignment"
 						className="fb-setting-text-alignment"
 					>
@@ -1984,7 +1997,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 						setAttributes={setAttributes}
 					/>
 					<FB_ColorControl
-						label={__("Label Color", "prime-elementor-addons-pro")}
+						label={__("Label Color", "frontis-blocks")}
 						globalColor={advancedCountdownLabelColorStyle4}
 						setGlobalColor={(value) =>
 							setAttributes({
@@ -1998,12 +2011,9 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 			{countDownPresetStyle === "style-1" &&
 				advancedCountdownShowSunIcon === "yes" && (
-					<PanelBody
-						title={__("Icon", "prime-elementor-addons-pro")}
-						initialOpen={false}
-					>
+					<PanelBody title={__("Icon", "frontis-blocks")} initialOpen={false}>
 						<FB_Range
-							label={__("Icon Size", "prime-elementor-addons-pro")}
+							label={__("Icon Size", "frontis-blocks")}
 							min={5}
 							max={200}
 							rangeValue={advancedCountdownIconSize}
@@ -2012,14 +2022,18 @@ const Inspector = ({ attributes, setAttributes }) => {
 							}
 							rangeUnitHandler={advancedCountdownIconSizeUnitsHandler}
 							deviceType={deviceType}
-							units={advancedCountdownIconSize.unit}
+							units={{
+								Desktop: advancedCountdownIconSize.unit,
+								Tablet: advancedCountdownIconSize.unit,
+								Mobile: advancedCountdownIconSize.unit,
+							}}
 							setAttributes={setAttributes}
 							rangeStep={1}
 							resetFallbackValue={60}
 						/>
 						<FB_SwitcherControl
-							label={__("Color", "prime-elementor-addons-pro")}
-							globalSwitcher={advancedCountdownItemWrapperBorderColorSwitcher} // Reusing switcher for simplicity, consider dedicated if needed
+							label={__("Color", "frontis-blocks")}
+							globalSwitcher={advancedCountdownItemWrapperBorderColorSwitcher}
 							setGlobalSwitcher={(value) =>
 								setAttributes({
 									advancedCountdownItemWrapperBorderColorSwitcher: value,
@@ -2029,7 +2043,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 						{advancedCountdownItemWrapperBorderColorSwitcher === "normal" && (
 							<>
 								<FB_ColorControl
-									label={__("Icon Color", "prime-elementor-addons-pro")}
+									label={__("Icon Color", "frontis-blocks")}
 									globalColor={advancedCountdownIconColorNormal}
 									setGlobalColor={(value) =>
 										setAttributes({
@@ -2039,7 +2053,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 									}
 								/>
 								<FB_ColorControl
-									label={__("Background Color", "prime-elementor-addons-pro")}
+									label={__("Background Color", "frontis-blocks")}
 									globalColor={advancedCountdownIconBgColorNormal}
 									setGlobalColor={(value) =>
 										setAttributes({
@@ -2053,7 +2067,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 						{advancedCountdownItemWrapperBorderColorSwitcher === "hover" && (
 							<>
 								<FB_ColorControl
-									label={__("Icon Color", "prime-elementor-addons-pro")}
+									label={__("Icon Color", "frontis-blocks")}
 									globalColor={advancedCountdownIconColorHover}
 									setGlobalColor={(value) =>
 										setAttributes({
@@ -2063,7 +2077,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 									}
 								/>
 								<FB_ColorControl
-									label={__("Background Color", "prime-elementor-addons-pro")}
+									label={__("Background Color", "frontis-blocks")}
 									globalColor={advancedCountdownIconBgColorHover}
 									setGlobalColor={(value) =>
 										setAttributes({
@@ -2078,27 +2092,27 @@ const Inspector = ({ attributes, setAttributes }) => {
 				)}
 
 			<PanelBody
-				title={__("Countdown Text", "prime-elementor-addons-pro")}
+				title={__("Countdown Text", "frontis-blocks")}
 				initialOpen={false}
 			>
 				{countDownPresetStyle === "style-5" && (
 					<>
 						<TextControl
-							label={__("Days Label", "prime-elementor-addons-pro")}
+							label={__("Days Label", "frontis-blocks")}
 							value={advancedCountdownLabelDays}
 							onChange={(value) =>
 								setAttributes({ advancedCountdownLabelDays: value })
 							}
 						/>
 						<TextControl
-							label={__("Hours Label", "prime-elementor-addons-pro")}
+							label={__("Hours Label", "frontis-blocks")}
 							value={advancedCountdownLabelHours}
 							onChange={(value) =>
 								setAttributes({ advancedCountdownLabelHours: value })
 							}
 						/>
 						<TextControl
-							label={__("Minutes Label", "prime-elementor-addons-pro")}
+							label={__("Minutes Label", "frontis-blocks")}
 							value={advancedCountdownLabelMinutes}
 							onChange={(value) =>
 								setAttributes({ advancedCountdownLabelMinutes: value })
@@ -2205,7 +2219,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 				{["style-1", "style-5"].includes(countDownPresetStyle) && (
 					<FB_ColorControl
-						label={__("Label Color", "prime-elementor-addons-pro")}
+						label={__("Label Color", "frontis-blocks")}
 						globalColor={advancedCountdownLabelColorStyleMultiple}
 						setGlobalColor={(value) =>
 							setAttributes({
@@ -2219,7 +2233,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 				{countDownPresetStyle === "style-5" && (
 					<>
 						<FB_TypographyControl
-							label={__("Typography", "prime-elementor-addons-pro")}
+							label={__("Typography", "frontis-blocks")}
 							globalTypoControlActive={true}
 							globalTypoSwitcher={
 								advancedCountdownTimeValTypographyGlobalTypoSwitcher
@@ -2317,7 +2331,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 							setAttributes={setAttributes}
 						/>
 						<FB_ColorControl
-							label={__("Color", "prime-elementor-addons-pro")}
+							label={__("Color", "frontis-blocks")}
 							globalColor={advancedCountdownTimeValLabelColor}
 							setGlobalColor={(value) =>
 								setAttributes({
@@ -2331,7 +2345,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 				{countDownPresetStyle === "style-4" && (
 					<FB_ColorControl
-						label={__("Label Color", "prime-elementor-addons-pro")}
+						label={__("Label Color", "frontis-blocks")}
 						globalColor={advancedCountdownLabelColorStyle4Digit}
 						setGlobalColor={(value) =>
 							setAttributes({
@@ -2344,7 +2358,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 				{countDownPresetStyle === "style-2" && (
 					<FB_ColorControl
-						label={__("Text Color", "prime-elementor-addons-pro")}
+						label={__("Text Color", "frontis-blocks")}
 						globalColor={advancedCountdownTextColorStyle2}
 						setGlobalColor={(value) =>
 							setAttributes({
@@ -2357,7 +2371,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 				{countDownPresetStyle === "style-3" && (
 					<FB_ColorControl
-						label={__("Text Color", "prime-elementor-addons-pro")}
+						label={__("Text Color", "frontis-blocks")}
 						globalColor={advancedCountdownTextColorStyle3}
 						setGlobalColor={(value) =>
 							setAttributes({
@@ -2371,7 +2385,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 			{["style-1", "style-2"].includes(countDownPresetStyle) && (
 				<PanelBody
-					title={__("Separator", "prime-elementor-addons-pro")}
+					title={__("Separator", "frontis-blocks")}
 					initialOpen={false}
 				>
 					<FB_TypographyControl
@@ -2472,7 +2486,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 						setAttributes={setAttributes}
 					/>
 					<FB_SwitcherControl
-						label={__("Color", "prime-elementor-addons-pro")}
+						label={__("Color", "frontis-blocks")}
 						globalSwitcher={advancedCountdownItemWrapperBorderColorSwitcher} // Reusing switcher
 						setGlobalSwitcher={(value) =>
 							setAttributes({
@@ -2482,7 +2496,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 					/>
 					{advancedCountdownItemWrapperBorderColorSwitcher === "normal" && (
 						<FB_ColorControl
-							label={__("Color", "prime-elementor-addons-pro")}
+							label={__("Color", "frontis-blocks")}
 							globalColor={advancedCountdownSeparatorColor}
 							setGlobalColor={(value) =>
 								setAttributes({
@@ -2494,7 +2508,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 					)}
 					{advancedCountdownItemWrapperBorderColorSwitcher === "hover" && (
 						<FB_ColorControl
-							label={__("Hover Color", "prime-elementor-addons-pro")}
+							label={__("Hover Color", "frontis-blocks")}
 							globalColor={advancedCountdownSeparatorHoverColor}
 							setGlobalColor={(value) =>
 								setAttributes({
@@ -2505,7 +2519,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 						/>
 					)}
 					<FB_Range
-						label={__("Gap", "prime-elementor-addons-pro")}
+						label={__("Gap", "frontis-blocks")}
 						min={0}
 						max={100}
 						rangeValue={advancedCountdownSeparatorSpacing}
@@ -2514,7 +2528,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 						}
 						rangeUnitHandler={advancedCountdownSeparatorSpacingUnitsHandler}
 						deviceType={deviceType}
-						units={advancedCountdownSeparatorSpacing.unit}
+						units={{
+							Desktop: advancedCountdownSeparatorSpacing.unit,
+							Tablet: advancedCountdownSeparatorSpacing.unit,
+							Mobile: advancedCountdownSeparatorSpacing.unit,
+						}}
 						setAttributes={setAttributes}
 						rangeStep={1}
 						resetFallbackValue={8}
@@ -2524,11 +2542,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 			{["style-1", "style-2"].includes(countDownPresetStyle) && (
 				<PanelBody
-					title={__("Overlay Bg", "prime-elementor-addons-pro")}
+					title={__("Overlay Bg", "frontis-blocks")}
 					initialOpen={false}
 				>
 					<FB_ColorControl
-						label={__("Background Color", "prime-elementor-addons-pro")}
+						label={__("Background Color", "frontis-blocks")}
 						globalColor={advancedCountdownSvgBgOverlayColor}
 						setGlobalColor={(value) =>
 							setAttributes({
@@ -2538,7 +2556,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 						}
 					/>
 					<FB_Range
-						label={__("Opacity", "prime-elementor-addons-pro")}
+						label={__("Opacity", "frontis-blocks")}
 						min={0}
 						max={1}
 						rangeValue={advancedCountdownSvgBgOverlayOpacity}
@@ -2561,11 +2579,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 			{countDownPresetStyle === "style-1" && (
 				<PanelBody
-					title={__("SVG Progress Bar", "prime-elementor-addons-pro")}
+					title={__("SVG Progress Bar", "frontis-blocks")}
 					initialOpen={false}
 				>
 					<FB_ColorControl
-						label={__("Active Color", "prime-elementor-addons-pro")}
+						label={__("Active Color", "frontis-blocks")}
 						globalColor={advancedCountdownProgressCircleActiveColor}
 						setGlobalColor={(value) =>
 							setAttributes({
@@ -2575,7 +2593,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 						}
 					/>
 					<FB_ColorControl
-						label={__("In Active Color", "prime-elementor-addons-pro")}
+						label={__("In Active Color", "frontis-blocks")}
 						globalColor={advancedCountdownProgressCircleInactiveColor}
 						setGlobalColor={(value) =>
 							setAttributes({
@@ -2585,7 +2603,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 						}
 					/>
 					<FB_Range
-						label={__("Stroke Width", "prime-elementor-addons-pro")}
+						label={__("Stroke Width", "frontis-blocks")}
 						min={0}
 						max={100}
 						rangeValue={advancedCountdownSvgStrokeWidth}
@@ -2608,11 +2626,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 			{countDownPresetStyle === "style-2" && (
 				<PanelBody
-					title={__("SVG Progress Bar", "prime-elementor-addons-pro")}
+					title={__("SVG Progress Bar", "frontis-blocks")}
 					initialOpen={false}
 				>
 					<FB_ColorControl
-						label={__("Progress Color", "prime-elementor-addons-pro")}
+						label={__("Progress Color", "frontis-blocks")}
 						globalColor={advancedCountdownProgressColorStyle2}
 						setGlobalColor={(value) =>
 							setAttributes({
@@ -2622,7 +2640,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 						}
 					/>
 					<FB_Range
-						label={__("Stroke Width", "prime-elementor-addons-pro")}
+						label={__("Stroke Width", "frontis-blocks")}
 						min={5}
 						max={20}
 						rangeValue={advancedCountdownSvgStrokeWidthStyle2}
@@ -2645,7 +2663,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 			{["style-1", "style-2"].includes(countDownPresetStyle) && (
 				<PanelBody
-					title={__("Footer Text", "prime-elementor-addons-pro")}
+					title={__("Footer Text", "frontis-blocks")}
 					initialOpen={false}
 				>
 					<FB_TypographyControl
@@ -2742,7 +2760,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 						setAttributes={setAttributes}
 					/>
 					<FB_SwitcherControl
-						label={__("Color", "prime-elementor-addons-pro")}
+						label={__("Color", "frontis-blocks")}
 						globalSwitcher={advancedCountdownItemWrapperBorderColorSwitcher} // Reusing switcher
 						setGlobalSwitcher={(value) =>
 							setAttributes({
@@ -2753,7 +2771,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 					{advancedCountdownItemWrapperBorderColorSwitcher === "normal" && (
 						<>
 							<FB_ColorControl
-								label={__("Text Color", "prime-elementor-addons-pro")}
+								label={__("Text Color", "frontis-blocks")}
 								globalColor={advancedCountdownFooterTextColor}
 								setGlobalColor={(value) =>
 									setAttributes({
@@ -2763,7 +2781,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 								}
 							/>
 							<FB_ColorControl
-								label={__("Background Color", "prime-elementor-addons-pro")}
+								label={__("Background Color", "frontis-blocks")}
 								globalColor={advancedCountdownFooterBgColor}
 								setGlobalColor={(value) =>
 									setAttributes({
@@ -2777,7 +2795,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 					{advancedCountdownItemWrapperBorderColorSwitcher === "hover" && (
 						<>
 							<FB_ColorControl
-								label={__("Text Color", "prime-elementor-addons-pro")}
+								label={__("Text Color", "frontis-blocks")}
 								globalColor={advancedCountdownFooterTextColorHover}
 								setGlobalColor={(value) =>
 									setAttributes({
@@ -2787,7 +2805,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 								}
 							/>
 							<FB_ColorControl
-								label={__("Background Color", "prime-elementor-addons-pro")}
+								label={__("Background Color", "frontis-blocks")}
 								globalColor={advancedCountdownFooterBgColorHover}
 								setGlobalColor={(value) =>
 									setAttributes({
@@ -2800,7 +2818,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 					)}
 					{countDownPresetStyle === "style-2" && (
 						<FB_ColorControl
-							label={__("Background Gradient", "prime-elementor-addons-pro")}
+							label={__("Background Gradient", "frontis-blocks")}
 							globalColor={advancedCountdownFooterBgCustomStyle2}
 							setGlobalColor={(value) =>
 								setAttributes({
@@ -2811,7 +2829,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 						/>
 					)}
 					<FB_Spacing
-						label={__("Padding", "prime-elementor-addons-pro")}
+						label={__("Padding", "frontis-blocks")}
 						deviceType={deviceType}
 						spacingUnitsHandler={
 							advancedCountdownFooterPaddingSpacingUnitsHandler
@@ -2828,7 +2846,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 						setAttributes={setAttributes}
 					/>
 					<FB_Spacing
-						label={__("Margin", "prime-elementor-addons-pro")}
+						label={__("Margin", "frontis-blocks")}
 						deviceType={deviceType}
 						spacingUnitsHandler={
 							advancedCountdownFooterMarginSpacingUnitsHandler
@@ -2859,9 +2877,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 					min={0}
 					max={10000000}
 					label={__("Z Index", "frontis-blocks")}
-					rangeValue={countDownZIndex}
+					rangeValue={advancedCountdownZIndex}
 					onChangeHandler={(value) =>
-						setAttributes({ countDownZIndex: value === 0 ? undefined : value })
+						setAttributes({
+							advancedCountdownZIndex: value === 0 ? undefined : value,
+						})
 					}
 					deviceType={deviceType}
 					setAttributes={setAttributes}
@@ -2872,58 +2892,60 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 				<SelectControl
 					label={__("Overflow", "frontis-blocks")}
-					value={countDownOverflow}
+					value={advancedCountdownOverflow}
 					options={["default", "auto", "hidden", "scroll", "clip"].map(
 						(val) => ({ label: val, value: val }),
 					)}
-					onChange={(value) => setAttributes({ countDownOverflow: value })}
+					onChange={(value) =>
+						setAttributes({ advancedCountdownOverflow: value })
+					}
 				/>
 
 				<FB_PositionControl
 					deviceType={deviceType}
-					positionType={countDownPositionType}
+					positionType={advancedCountdownPositionType}
 					setPositionType={(value) =>
-						setAttributes({ countDownPositionType: value })
+						setAttributes({ advancedCountdownPositionType: value })
 					}
-					HZOrientationType={countDownHZOrientationType}
+					HZOrientationType={advancedCountdownHZOrientationType}
 					setHZOrientationType={(value) =>
-						setAttributes({ countDownHZOrientationType: value })
+						setAttributes({ advancedCountdownHZOrientationType: value })
 					}
-					VROrientationType={countDownVROrientationType}
+					VROrientationType={advancedCountdownVROrientationType}
 					setVROrientationType={(value) =>
-						setAttributes({ countDownVROrientationType: value })
+						setAttributes({ advancedCountdownVROrientationType: value })
 					}
-					HZLeftOffset={countDownHZLeftOffset}
+					HZLeftOffset={advancedCountdownHZLeftOffset}
 					setHZLeftOffset={(value) =>
-						setAttributes({ countDownHZLeftOffset: value })
+						setAttributes({ advancedCountdownHZLeftOffset: value })
 					}
-					HZLeftOffsetUnits={countDownHZLeftOffsetUnits}
+					HZLeftOffsetUnits={advancedCountdownHZLeftOffsetUnits}
 					setHZLeftOffsetUnits={(value) =>
-						setAttributes({ countDownHZLeftOffsetUnits: value })
+						setAttributes({ advancedCountdownHZLeftOffsetUnits: value })
 					}
-					HZRightOffset={countDownHZRightOffset}
+					HZRightOffset={advancedCountdownHZRightOffset}
 					setHZRightOffset={(value) =>
-						setAttributes({ countDownHZRightOffset: value })
+						setAttributes({ advancedCountdownHZRightOffset: value })
 					}
-					HZRightOffsetUnits={countDownHZRightOffsetUnits}
+					HZRightOffsetUnits={advancedCountdownHZRightOffsetUnits}
 					setHZRightOffsetUnits={(value) =>
-						setAttributes({ countDownHZRightOffsetUnits: value })
+						setAttributes({ advancedCountdownHZRightOffsetUnits: value })
 					}
-					VRTopOffset={countDownVRTopOffset}
+					VRTopOffset={advancedCountdownVRTopOffset}
 					setVRTopOffset={(value) =>
-						setAttributes({ countDownVRTopOffset: value })
+						setAttributes({ advancedCountdownVRTopOffset: value })
 					}
-					VRTopOffsetUnits={countDownVRTopOffsetUnits}
+					VRTopOffsetUnits={advancedCountdownVRTopOffsetUnits}
 					setVRTopOffsetUnits={(value) =>
-						setAttributes({ countDownVRTopOffsetUnits: value })
+						setAttributes({ advancedCountdownVRTopOffsetUnits: value })
 					}
-					VRBottomOffset={countDownVRBottomOffset}
+					VRBottomOffset={advancedCountdownVRBottomOffset}
 					setVRBottomOffset={(value) =>
-						setAttributes({ countDownVRBottomOffset: value })
+						setAttributes({ advancedCountdownVRBottomOffset: value })
 					}
-					VRBottomOffsetUnits={countDownVRBottomOffsetUnits}
+					VRBottomOffsetUnits={advancedCountdownVRBottomOffsetUnits}
 					setVRBottomOffsetUnits={(value) =>
-						setAttributes({ countDownVRBottomOffsetUnits: value })
+						setAttributes({ advancedCountdownVRBottomOffsetUnits: value })
 					}
 					setAttributes={setAttributes}
 				/>
