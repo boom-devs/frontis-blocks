@@ -658,7 +658,7 @@ const generateCircleMenuStyle = (attributes) => {
             border-color: var(--fb-cm-main-border-color);
             border-width: ${mainMenuBorderDesktopWidth};
             border-radius: ${mainMenuBorderRadiusDesktopWidth};
-            box-shadow: ${mainMenuBoxShadowCssValue || 'none'};
+   	        box-shadow: ${mainMenuBoxShadowCssValue || 'none'};
         }
         
         .${blockID} .fb-circle-menu-center .fb-circle-menu-toggle svg,

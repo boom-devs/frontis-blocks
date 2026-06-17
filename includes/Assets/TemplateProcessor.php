@@ -231,15 +231,20 @@ class TemplateProcessor
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
         $template_part_content = $wpdb->get_var(
             $wpdb->prepare(
-                "SELECT post_content
-                FROM {$wpdb->posts}
-                WHERE post_type = 'wp_template_part'
-                AND post_status IN ('publish', 'draft', 'auto-draft')
-                AND (post_name = %s OR post_name = %s)
-                ORDER BY post_modified DESC
+                "SELECT DISTINCT p.post_content
+                FROM {$wpdb->posts} p
+                LEFT JOIN {$wpdb->term_relationships} tr ON p.ID = tr.object_id
+                LEFT JOIN {$wpdb->term_taxonomy} tt ON tr.term_taxonomy_id = tt.term_taxonomy_id AND tt.taxonomy = 'wp_theme'
+                LEFT JOIN {$wpdb->terms} t ON tt.term_id = t.term_id
+                WHERE p.post_type = 'wp_template_part'
+                AND p.post_status IN ('publish', 'draft', 'auto-draft')
+                AND (p.post_name = %s OR p.post_name = %s)
+                AND (t.slug = %s OR t.slug IS NULL)
+                ORDER BY p.post_modified DESC
                 LIMIT 1",
                 $slug,
-                $theme . '//' . $slug
+                $theme . '//' . $slug,
+                $theme
             )
         );
 
