@@ -510,10 +510,16 @@
 
 	.fb-setting-background-color-popup-wrapper {
 		.fb-setting-background-color-popup-inner-wrapper {
+			margin-bottom: 15px;
 			.components-base-control__field {
 				display: flex;
 				flex-direction: column;
 				gap: 15px;
+			}
+		}
+		.fb-gradient-color-setting-wrapper{
+			.fb-gradient-picker-wrapper{
+				margin-top: 15px;
 			}
 		}
 	}
