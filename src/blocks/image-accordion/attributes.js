@@ -1214,6 +1214,34 @@ const attributes = {
 		type: "string",
 		default: "default",
 	},
+	imageAccordionItemShadow: {
+		type: "string",
+		default: "0 20px 40px -10px rgba(0, 0, 0, 0.3), 0 15px 25px -5px rgba(67, 97, 238, 0.2)",
+	},
+	imageAccordionItemActiveZIndex: {
+		type: "object",
+		default: {
+			Desktop: 99,
+			Tablet: 99,
+			Mobile: 99,
+		},
+	},
+	imageAccordionItemTransitionDuration: {
+		type: "object",
+		default: {
+			Desktop: 0.4,
+			Tablet: 0.4,
+			Mobile: 0.4,
+		},
+	},
+	imageAccordionWrapperShadowPadding: {
+		type: "object",
+		default: {
+			Desktop: 20,
+			Tablet: 20,
+			Mobile: 20,
+		},
+	},
 };
 
 export default attributes;

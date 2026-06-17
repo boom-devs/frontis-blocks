@@ -236,6 +236,10 @@ const Inspector = ({ attributes, setAttributes }) => {
 		imageAccordionDesktopSwitcher,
 		imageAccordionTabletSwitcher,
 		imageAccordionMobileSwitcher,
+		imageAccordionItemShadow,
+		imageAccordionItemActiveZIndex,
+		imageAccordionItemTransitionDuration,
+		imageAccordionWrapperShadowPadding,
 	} = attributes;
 
 	const deviceType = useDeviceType();
@@ -1347,6 +1351,32 @@ const Inspector = ({ attributes, setAttributes }) => {
 					spacingCombineBtnHandler={imageAccordionItemBorderRadiusCombineBtnHandlerFn}
 					setAttributes={setAttributes}
 				/>
+				<FB_InputControl
+					label={__("Active Item Shadow", "frontis-blocks")}
+					value={imageAccordionItemShadow}
+					onChangeValue={(value) => setAttributes({ imageAccordionItemShadow: value })}
+				/>
+				<FB_Range
+					label={__("Active Item Z-Index", "frontis-blocks")}
+					min={1}
+					max={1000}
+					rangeValue={imageAccordionItemActiveZIndex}
+					onChangeHandler={(value) => setAttributes({ imageAccordionItemActiveZIndex: value })}
+					isRangeUnit={false}
+					deviceType={deviceType}
+					setAttributes={setAttributes}
+				/>
+				<FB_Range
+					label={__("Transition Duration (s)", "frontis-blocks")}
+					min={0}
+					max={2}
+					rangeStep={0.1}
+					rangeValue={imageAccordionItemTransitionDuration}
+					onChangeHandler={(value) => setAttributes({ imageAccordionItemTransitionDuration: value })}
+					isRangeUnit={false}
+					deviceType={deviceType}
+					setAttributes={setAttributes}
+				/>
 			</PanelBody>
 
 
@@ -1792,6 +1822,17 @@ const Inspector = ({ attributes, setAttributes }) => {
 							value={imageAccordionWraperClass}
 							onChangeValue={(value) => setAttributes({ imageAccordionWraperClass: value })}
 							helpText={__("Separate with spaces key.", "frontis-blocks")}
+						/>
+						<FB_Range
+							label={__("Shadow Offset Padding", "frontis-blocks")}
+							min={0}
+							max={100}
+							rangeValue={imageAccordionWrapperShadowPadding}
+							onChangeHandler={(value) => setAttributes({ imageAccordionWrapperShadowPadding: value })}
+							isRangeUnit={false}
+							deviceType={deviceType}
+							setAttributes={setAttributes}
+							helpText={__("Padding added to wrapper to prevent shadow clipping.", "frontis-blocks")}
 						/>
 					</PanelBody>
 

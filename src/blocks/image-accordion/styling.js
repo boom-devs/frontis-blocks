@@ -1,6 +1,6 @@
 import getCustomCss from '@Utils/getCustomCss';
 
-const generateImageAccordionStyle = (attributes) => {
+const imageAccordionStyle = (attributes) => {
     const {
         blockID,
         imageAccordionPreset,
@@ -162,130 +162,48 @@ const generateImageAccordionStyle = (attributes) => {
         imageAccordionVRBottomOffsetUnits,
         imageAccordionOverflow,
         imageAccordionCustomCSS,
+        imageAccordionItemShadow,
+        imageAccordionItemActiveZIndex,
+        imageAccordionItemTransitionDuration,
+        imageAccordionWrapperShadowPadding,
     } = attributes;
 
-    const itemBrGetDesktop = `${imageAccordionItemBorderRadiusDesktop?.top}${imageAccordionItemBorderRadiusUnits?.Desktop} ${imageAccordionItemBorderRadiusDesktop?.right}${imageAccordionItemBorderRadiusUnits?.Desktop} ${imageAccordionItemBorderRadiusDesktop?.bottom}${imageAccordionItemBorderRadiusUnits?.Desktop} ${imageAccordionItemBorderRadiusDesktop?.left}${imageAccordionItemBorderRadiusUnits?.Desktop}`;
-    const itemBrGetTablet = `${imageAccordionItemBorderRadiusTablet?.top}${imageAccordionItemBorderRadiusUnits?.Tablet} ${imageAccordionItemBorderRadiusTablet?.right}${imageAccordionItemBorderRadiusUnits?.Tablet} ${imageAccordionItemBorderRadiusTablet?.bottom}${imageAccordionItemBorderRadiusUnits?.Tablet} ${imageAccordionItemBorderRadiusTablet?.left}${imageAccordionItemBorderRadiusUnits?.Tablet}`;
-    const itemBrGetMobile = `${imageAccordionItemBorderRadiusMobile?.top}${imageAccordionItemBorderRadiusUnits?.Mobile} ${imageAccordionItemBorderRadiusMobile?.right}${imageAccordionItemBorderRadiusUnits?.Mobile} ${imageAccordionItemBorderRadiusMobile?.bottom}${imageAccordionItemBorderRadiusUnits?.Mobile} ${imageAccordionItemBorderRadiusMobile?.left}${imageAccordionItemBorderRadiusUnits?.Mobile}`;
+    const imageAccordionItemBorderRadiusDesktopWidth = `${imageAccordionItemBorderRadiusDesktop?.top}${imageAccordionItemBorderRadiusUnits?.Desktop} ${imageAccordionItemBorderRadiusDesktop?.right}${imageAccordionItemBorderRadiusUnits?.Desktop} ${imageAccordionItemBorderRadiusDesktop?.bottom}${imageAccordionItemBorderRadiusUnits?.Desktop} ${imageAccordionItemBorderRadiusDesktop?.left}${imageAccordionItemBorderRadiusUnits?.Desktop}`;
+    const imageAccordionItemBorderRadiusTabletWidth = `${imageAccordionItemBorderRadiusTablet?.top}${imageAccordionItemBorderRadiusUnits?.Tablet} ${imageAccordionItemBorderRadiusTablet?.right}${imageAccordionItemBorderRadiusUnits?.Tablet} ${imageAccordionItemBorderRadiusTablet?.bottom}${imageAccordionItemBorderRadiusUnits?.Tablet} ${imageAccordionItemBorderRadiusTablet?.left}${imageAccordionItemBorderRadiusUnits?.Tablet}`;
+    const imageAccordionItemBorderRadiusMobileWidth = `${imageAccordionItemBorderRadiusMobile?.top}${imageAccordionItemBorderRadiusUnits?.Mobile} ${imageAccordionItemBorderRadiusMobile?.right}${imageAccordionItemBorderRadiusUnits?.Mobile} ${imageAccordionItemBorderRadiusMobile?.bottom}${imageAccordionItemBorderRadiusUnits?.Mobile} ${imageAccordionItemBorderRadiusMobile?.left}${imageAccordionItemBorderRadiusUnits?.Mobile}`;
 
-    const itemPaddingGetDesktop = `${imageAccordionItemPaddingDesktop?.top}${imageAccordionItemPaddingUnits?.Desktop} ${imageAccordionItemPaddingDesktop?.right}${imageAccordionItemPaddingUnits?.Desktop} ${imageAccordionItemPaddingDesktop?.bottom}${imageAccordionItemPaddingUnits?.Desktop} ${imageAccordionItemPaddingDesktop?.left}${imageAccordionItemPaddingUnits?.Desktop}`;
-    const itemPaddingGetTablet = `${imageAccordionItemPaddingTablet?.top}${imageAccordionItemPaddingUnits?.Tablet} ${imageAccordionItemPaddingTablet?.right}${imageAccordionItemPaddingUnits?.Tablet} ${imageAccordionItemPaddingTablet?.bottom}${imageAccordionItemPaddingUnits?.Tablet} ${imageAccordionItemPaddingTablet?.left}${imageAccordionItemPaddingUnits?.Tablet}`;
-    const itemPaddingGetMobile = `${imageAccordionItemPaddingMobile?.top}${imageAccordionItemPaddingUnits?.Mobile} ${imageAccordionItemPaddingMobile?.right}${imageAccordionItemPaddingUnits?.Mobile} ${imageAccordionItemPaddingMobile?.bottom}${imageAccordionItemPaddingUnits?.Mobile} ${imageAccordionItemPaddingMobile?.left}${imageAccordionItemPaddingUnits?.Mobile}`;
+    const imageAccordionItemPaddingDesktopWidth = `${imageAccordionItemPaddingDesktop?.top}${imageAccordionItemPaddingUnits?.Desktop} ${imageAccordionItemPaddingDesktop?.right}${imageAccordionItemPaddingUnits?.Desktop} ${imageAccordionItemPaddingDesktop?.bottom}${imageAccordionItemPaddingUnits?.Desktop} ${imageAccordionItemPaddingDesktop?.left}${imageAccordionItemPaddingUnits?.Desktop}`;
+    const imageAccordionItemPaddingTabletWidth = `${imageAccordionItemPaddingTablet?.top}${imageAccordionItemPaddingUnits?.Tablet} ${imageAccordionItemPaddingTablet?.right}${imageAccordionItemPaddingUnits?.Tablet} ${imageAccordionItemPaddingTablet?.bottom}${imageAccordionItemPaddingUnits?.Tablet} ${imageAccordionItemPaddingTablet?.left}${imageAccordionItemPaddingUnits?.Tablet}`;
+    const imageAccordionItemPaddingMobileWidth = `${imageAccordionItemPaddingMobile?.top}${imageAccordionItemPaddingUnits?.Mobile} ${imageAccordionItemPaddingMobile?.right}${imageAccordionItemPaddingUnits?.Mobile} ${imageAccordionItemPaddingMobile?.bottom}${imageAccordionItemPaddingUnits?.Mobile} ${imageAccordionItemPaddingMobile?.left}${imageAccordionItemPaddingUnits?.Mobile}`;
 
-    const itemMarginGetDesktop = `${imageAccordionItemMarginDesktop?.top}${imageAccordionItemMarginUnits?.Desktop} ${imageAccordionItemMarginDesktop?.right}${imageAccordionItemMarginUnits?.Desktop} ${imageAccordionItemMarginDesktop?.bottom}${imageAccordionItemMarginUnits?.Desktop} ${imageAccordionItemMarginDesktop?.left}${imageAccordionItemMarginUnits?.Desktop}`;
-    const itemMarginGetTablet = `${imageAccordionItemMarginTablet?.top}${imageAccordionItemMarginUnits?.Tablet} ${imageAccordionItemMarginTablet?.right}${imageAccordionItemMarginUnits?.Tablet} ${imageAccordionItemMarginTablet?.bottom}${imageAccordionItemMarginUnits?.Tablet} ${imageAccordionItemMarginTablet?.left}${imageAccordionItemMarginUnits?.Tablet}`;
-    const itemMarginGetMobile = `${imageAccordionItemMarginMobile?.top}${imageAccordionItemMarginUnits?.Mobile} ${imageAccordionItemMarginMobile?.right}${imageAccordionItemMarginUnits?.Mobile} ${imageAccordionItemMarginMobile?.bottom}${imageAccordionItemMarginUnits?.Mobile} ${imageAccordionItemMarginMobile?.left}${imageAccordionItemMarginUnits?.Mobile}`;
+    const imageAccordionItemMarginDesktopWidth = `${imageAccordionItemMarginDesktop?.top}${imageAccordionItemMarginUnits?.Desktop} ${imageAccordionItemMarginDesktop?.right}${imageAccordionItemMarginUnits?.Desktop} ${imageAccordionItemMarginDesktop?.bottom}${imageAccordionItemMarginUnits?.Desktop} ${imageAccordionItemMarginDesktop?.left}${imageAccordionItemMarginUnits?.Desktop}`;
+    const imageAccordionItemMarginTabletWidth = `${imageAccordionItemMarginTablet?.top}${imageAccordionItemMarginUnits?.Tablet} ${imageAccordionItemMarginTablet?.right}${imageAccordionItemMarginUnits?.Tablet} ${imageAccordionItemMarginTablet?.bottom}${imageAccordionItemMarginUnits?.Tablet} ${imageAccordionItemMarginTablet?.left}${imageAccordionItemMarginUnits?.Tablet}`;
+    const imageAccordionItemMarginMobileWidth = `${imageAccordionItemMarginMobile?.top}${imageAccordionItemMarginUnits?.Mobile} ${imageAccordionItemMarginMobile?.right}${imageAccordionItemMarginUnits?.Mobile} ${imageAccordionItemMarginMobile?.bottom}${imageAccordionItemMarginUnits?.Mobile} ${imageAccordionItemMarginMobile?.left}${imageAccordionItemMarginUnits?.Mobile}`;
 
-    const itemActiveBrGetDesktop = `${imageAccordionItemActiveBorderRadiusDesktop?.top}${imageAccordionItemBorderRadiusUnits?.Desktop} ${imageAccordionItemActiveBorderRadiusDesktop?.right}${imageAccordionItemBorderRadiusUnits?.Desktop} ${imageAccordionItemActiveBorderRadiusDesktop?.bottom}${imageAccordionItemBorderRadiusUnits?.Desktop} ${imageAccordionItemActiveBorderRadiusDesktop?.left}${imageAccordionItemBorderRadiusUnits?.Desktop}`;
-    const itemActiveBrGetTablet = `${imageAccordionItemActiveBorderRadiusTablet?.top}${imageAccordionItemBorderRadiusUnits?.Tablet} ${imageAccordionItemActiveBorderRadiusTablet?.right}${imageAccordionItemBorderRadiusUnits?.Tablet} ${imageAccordionItemActiveBorderRadiusTablet?.bottom}${imageAccordionItemBorderRadiusUnits?.Tablet} ${imageAccordionItemActiveBorderRadiusTablet?.left}${imageAccordionItemBorderRadiusUnits?.Tablet}`;
-    const itemActiveBrGetMobile = `${imageAccordionItemActiveBorderRadiusMobile?.top}${imageAccordionItemBorderRadiusUnits?.Mobile} ${imageAccordionItemActiveBorderRadiusMobile?.right}${imageAccordionItemBorderRadiusUnits?.Mobile} ${imageAccordionItemActiveBorderRadiusMobile?.bottom}${imageAccordionItemBorderRadiusUnits?.Mobile} ${imageAccordionItemActiveBorderRadiusMobile?.left}${imageAccordionItemBorderRadiusUnits?.Mobile}`;
+    const imageAccordionItemActiveBorderRadiusDesktopWidth = `${imageAccordionItemActiveBorderRadiusDesktop?.top}${imageAccordionItemBorderRadiusUnits?.Desktop} ${imageAccordionItemActiveBorderRadiusDesktop?.right}${imageAccordionItemBorderRadiusUnits?.Desktop} ${imageAccordionItemActiveBorderRadiusDesktop?.bottom}${imageAccordionItemBorderRadiusUnits?.Desktop} ${imageAccordionItemActiveBorderRadiusDesktop?.left}${imageAccordionItemBorderRadiusUnits?.Desktop}`;
+    const imageAccordionItemActiveBorderRadiusTabletWidth = `${imageAccordionItemActiveBorderRadiusTablet?.top}${imageAccordionItemBorderRadiusUnits?.Tablet} ${imageAccordionItemActiveBorderRadiusTablet?.right}${imageAccordionItemBorderRadiusUnits?.Tablet} ${imageAccordionItemActiveBorderRadiusTablet?.bottom}${imageAccordionItemBorderRadiusUnits?.Tablet} ${imageAccordionItemActiveBorderRadiusTablet?.left}${imageAccordionItemBorderRadiusUnits?.Tablet}`;
+    const imageAccordionItemActiveBorderRadiusMobileWidth = `${imageAccordionItemActiveBorderRadiusMobile?.top}${imageAccordionItemBorderRadiusUnits?.Mobile} ${imageAccordionItemActiveBorderRadiusMobile?.right}${imageAccordionItemBorderRadiusUnits?.Mobile} ${imageAccordionItemActiveBorderRadiusMobile?.bottom}${imageAccordionItemBorderRadiusUnits?.Mobile} ${imageAccordionItemActiveBorderRadiusMobile?.left}${imageAccordionItemBorderRadiusUnits?.Mobile}`;
 
-    const paddingGetDesktop = `${imageAccordionPaddingDesktop?.top}${imageAccordionPaddingUnits?.Desktop} ${imageAccordionPaddingDesktop?.right}${imageAccordionPaddingUnits?.Desktop} ${imageAccordionPaddingDesktop?.bottom}${imageAccordionPaddingUnits?.Desktop} ${imageAccordionPaddingDesktop?.left}${imageAccordionPaddingUnits?.Desktop}`;
-    const paddingGetTablet = `${imageAccordionPaddingTablet?.top}${imageAccordionPaddingUnits?.Tablet} ${imageAccordionPaddingTablet?.right}${imageAccordionPaddingUnits?.Tablet} ${imageAccordionPaddingTablet?.bottom}${imageAccordionPaddingUnits?.Tablet} ${imageAccordionPaddingTablet?.left}${imageAccordionPaddingUnits?.Tablet}`;
-    const paddingGetMobile = `${imageAccordionPaddingMobile?.top}${imageAccordionPaddingUnits?.Mobile} ${imageAccordionPaddingMobile?.right}${imageAccordionPaddingUnits?.Mobile} ${imageAccordionPaddingMobile?.bottom}${imageAccordionPaddingUnits?.Mobile} ${imageAccordionPaddingMobile?.left}${imageAccordionPaddingUnits?.Mobile}`;
+    const imageAccordionPaddingDesktopWidth = `${imageAccordionPaddingDesktop?.top}${imageAccordionPaddingUnits?.Desktop} ${imageAccordionPaddingDesktop?.right}${imageAccordionPaddingUnits?.Desktop} ${imageAccordionPaddingDesktop?.bottom}${imageAccordionPaddingUnits?.Desktop} ${imageAccordionPaddingDesktop?.left}${imageAccordionPaddingUnits?.Desktop}`;
+    const imageAccordionPaddingTabletWidth = `${imageAccordionPaddingTablet?.top}${imageAccordionPaddingUnits?.Tablet} ${imageAccordionPaddingTablet?.right}${imageAccordionPaddingUnits?.Tablet} ${imageAccordionPaddingTablet?.bottom}${imageAccordionPaddingUnits?.Tablet} ${imageAccordionPaddingTablet?.left}${imageAccordionPaddingUnits?.Tablet}`;
+    const imageAccordionPaddingMobileWidth = `${imageAccordionPaddingMobile?.top}${imageAccordionPaddingUnits?.Mobile} ${imageAccordionPaddingMobile?.right}${imageAccordionPaddingUnits?.Mobile} ${imageAccordionPaddingMobile?.bottom}${imageAccordionPaddingUnits?.Mobile} ${imageAccordionPaddingMobile?.left}${imageAccordionPaddingUnits?.Mobile}`;
 
-    const marginGetDesktop = `${imageAccordionMarginDesktop?.top}${imageAccordionMarginUnits?.Desktop} ${imageAccordionMarginDesktop?.right}${imageAccordionMarginUnits?.Desktop} ${imageAccordionMarginDesktop?.bottom}${imageAccordionMarginUnits?.Desktop} ${imageAccordionMarginDesktop?.left}${imageAccordionMarginUnits?.Desktop}`;
-    const marginGetTablet = `${imageAccordionMarginTablet?.top}${imageAccordionMarginUnits?.Tablet} ${imageAccordionMarginTablet?.right}${imageAccordionMarginUnits?.Tablet} ${imageAccordionMarginTablet?.bottom}${imageAccordionMarginUnits?.Tablet} ${imageAccordionMarginTablet?.left}${imageAccordionMarginUnits?.Tablet}`;
-    const marginGetMobile = `${imageAccordionMarginMobile?.top}${imageAccordionMarginUnits?.Mobile} ${imageAccordionMarginMobile?.right}${imageAccordionMarginUnits?.Mobile} ${imageAccordionMarginMobile?.bottom}${imageAccordionMarginUnits?.Mobile} ${imageAccordionMarginMobile?.left}${imageAccordionMarginUnits?.Mobile}`;
+    const imageAccordionMarginDesktopWidth = `${imageAccordionMarginDesktop?.top}${imageAccordionMarginUnits?.Desktop} ${imageAccordionMarginDesktop?.right}${imageAccordionMarginUnits?.Desktop} ${imageAccordionMarginDesktop?.bottom}${imageAccordionMarginUnits?.Desktop} ${imageAccordionMarginDesktop?.left}${imageAccordionMarginUnits?.Desktop}`;
+    const imageAccordionMarginTabletWidth = `${imageAccordionMarginTablet?.top}${imageAccordionMarginUnits?.Tablet} ${imageAccordionMarginTablet?.right}${imageAccordionMarginUnits?.Tablet} ${imageAccordionMarginTablet?.bottom}${imageAccordionMarginUnits?.Tablet} ${imageAccordionMarginTablet?.left}${imageAccordionMarginUnits?.Tablet}`;
+    const imageAccordionMarginMobileWidth = `${imageAccordionMarginMobile?.top}${imageAccordionMarginUnits?.Mobile} ${imageAccordionMarginMobile?.right}${imageAccordionMarginUnits?.Mobile} ${imageAccordionMarginMobile?.bottom}${imageAccordionMarginUnits?.Mobile} ${imageAccordionMarginMobile?.left}${imageAccordionMarginUnits?.Mobile}`;
 
-    const wrapperBrGetDesktop = `${imageAccordionWrapperBorderRadiusDesktop?.top}${imageAccordionWrapperBorderRadiusUnits?.Desktop} ${imageAccordionWrapperBorderRadiusDesktop?.right}${imageAccordionWrapperBorderRadiusUnits?.Desktop} ${imageAccordionWrapperBorderRadiusDesktop?.bottom}${imageAccordionWrapperBorderRadiusUnits?.Desktop} ${imageAccordionWrapperBorderRadiusDesktop?.left}${imageAccordionWrapperBorderRadiusUnits?.Desktop}`;
-    const wrapperBrGetTablet = `${imageAccordionWrapperBorderRadiusTablet?.top}${imageAccordionWrapperBorderRadiusUnits?.Tablet} ${imageAccordionWrapperBorderRadiusTablet?.right}${imageAccordionWrapperBorderRadiusUnits?.Tablet} ${imageAccordionWrapperBorderRadiusTablet?.bottom}${imageAccordionWrapperBorderRadiusUnits?.Tablet} ${imageAccordionWrapperBorderRadiusTablet?.left}${imageAccordionWrapperBorderRadiusUnits?.Tablet}`;
-    const wrapperBrGetMobile = `${imageAccordionWrapperBorderRadiusMobile?.top}${imageAccordionWrapperBorderRadiusUnits?.Mobile} ${imageAccordionWrapperBorderRadiusMobile?.right}${imageAccordionWrapperBorderRadiusUnits?.Mobile} ${imageAccordionWrapperBorderRadiusMobile?.bottom}${imageAccordionWrapperBorderRadiusUnits?.Mobile} ${imageAccordionWrapperBorderRadiusMobile?.left}${imageAccordionWrapperBorderRadiusUnits?.Mobile}`;
+    const imageAccordionWrapperBorderRadiusDesktopWidth = `${imageAccordionWrapperBorderRadiusDesktop?.top}${imageAccordionWrapperBorderRadiusUnits?.Desktop} ${imageAccordionWrapperBorderRadiusDesktop?.right}${imageAccordionWrapperBorderRadiusUnits?.Desktop} ${imageAccordionWrapperBorderRadiusDesktop?.bottom}${imageAccordionWrapperBorderRadiusUnits?.Desktop} ${imageAccordionWrapperBorderRadiusDesktop?.left}${imageAccordionWrapperBorderRadiusUnits?.Desktop}`;
+    const imageAccordionWrapperBorderRadiusTabletWidth = `${imageAccordionWrapperBorderRadiusTablet?.top}${imageAccordionWrapperBorderRadiusUnits?.Tablet} ${imageAccordionWrapperBorderRadiusTablet?.right}${imageAccordionWrapperBorderRadiusUnits?.Tablet} ${imageAccordionWrapperBorderRadiusTablet?.bottom}${imageAccordionWrapperBorderRadiusUnits?.Tablet} ${imageAccordionWrapperBorderRadiusTablet?.left}${imageAccordionWrapperBorderRadiusUnits?.Tablet}`;
+    const imageAccordionWrapperBorderRadiusMobileWidth = `${imageAccordionWrapperBorderRadiusMobile?.top}${imageAccordionWrapperBorderRadiusUnits?.Mobile} ${imageAccordionWrapperBorderRadiusMobile?.right}${imageAccordionWrapperBorderRadiusUnits?.Mobile} ${imageAccordionWrapperBorderRadiusMobile?.bottom}${imageAccordionWrapperBorderRadiusUnits?.Mobile} ${imageAccordionWrapperBorderRadiusMobile?.left}${imageAccordionWrapperBorderRadiusUnits?.Mobile}`;
 
-    const wrapperBorderGetDesktop = `${imageAccordionWrapperBorderTypeDesktop?.top}${imageAccordionWrapperBorderTypeUnits?.Desktop} ${imageAccordionWrapperBorderTypeDesktop?.right}${imageAccordionWrapperBorderTypeUnits?.Desktop} ${imageAccordionWrapperBorderTypeDesktop?.bottom}${imageAccordionWrapperBorderTypeUnits?.Desktop} ${imageAccordionWrapperBorderTypeDesktop?.left}${imageAccordionWrapperBorderTypeUnits?.Desktop}`;
-    const wrapperBorderGetTablet = `${imageAccordionWrapperBorderTypeTablet?.top}${imageAccordionWrapperBorderTypeUnits?.Tablet} ${imageAccordionWrapperBorderTypeTablet?.right}${imageAccordionWrapperBorderTypeUnits?.Tablet} ${imageAccordionWrapperBorderTypeTablet?.bottom}${imageAccordionWrapperBorderTypeUnits?.Tablet} ${imageAccordionWrapperBorderTypeTablet?.left}${imageAccordionWrapperBorderTypeUnits?.Tablet}`;
-    const wrapperBorderGetMobile = `${imageAccordionWrapperBorderTypeMobile?.top}${imageAccordionWrapperBorderTypeUnits?.Mobile} ${imageAccordionWrapperBorderTypeMobile?.right}${imageAccordionWrapperBorderTypeUnits?.Mobile} ${imageAccordionWrapperBorderTypeMobile?.bottom}${imageAccordionWrapperBorderTypeUnits?.Mobile} ${imageAccordionWrapperBorderTypeMobile?.left}${imageAccordionWrapperBorderTypeUnits?.Mobile}`;
+    const imageAccordionWrapperBorderDesktopWidth = `${imageAccordionWrapperBorderTypeDesktop?.top}${imageAccordionWrapperBorderTypeUnits?.Desktop} ${imageAccordionWrapperBorderTypeDesktop?.right}${imageAccordionWrapperBorderTypeUnits?.Desktop} ${imageAccordionWrapperBorderTypeDesktop?.bottom}${imageAccordionWrapperBorderTypeUnits?.Desktop} ${imageAccordionWrapperBorderTypeDesktop?.left}${imageAccordionWrapperBorderTypeUnits?.Desktop}`;
+    const imageAccordionWrapperBorderTabletWidth = `${imageAccordionWrapperBorderTypeTablet?.top}${imageAccordionWrapperBorderTypeUnits?.Tablet} ${imageAccordionWrapperBorderTypeTablet?.right}${imageAccordionWrapperBorderTypeUnits?.Tablet} ${imageAccordionWrapperBorderTypeTablet?.bottom}${imageAccordionWrapperBorderTypeUnits?.Tablet} ${imageAccordionWrapperBorderTypeTablet?.left}${imageAccordionWrapperBorderTypeUnits?.Tablet}`;
+    const imageAccordionWrapperBorderMobileWidth = `${imageAccordionWrapperBorderTypeMobile?.top}${imageAccordionWrapperBorderTypeUnits?.Mobile} ${imageAccordionWrapperBorderTypeMobile?.right}${imageAccordionWrapperBorderTypeUnits?.Mobile} ${imageAccordionWrapperBorderTypeMobile?.bottom}${imageAccordionWrapperBorderTypeUnits?.Mobile} ${imageAccordionWrapperBorderTypeMobile?.left}${imageAccordionWrapperBorderTypeUnits?.Mobile}`;
 
-    const btnBrGetDesktop = `${imageAccordionBtnBorderRadiusDesktop?.top}${imageAccordionBtnBorderRadiusUnits?.Desktop} ${imageAccordionBtnBorderRadiusDesktop?.right}${imageAccordionBtnBorderRadiusUnits?.Desktop} ${imageAccordionBtnBorderRadiusDesktop?.bottom}${imageAccordionBtnBorderRadiusUnits?.Desktop} ${imageAccordionBtnBorderRadiusDesktop?.left}${imageAccordionBtnBorderRadiusUnits?.Desktop}`;
-    const btnPadGetDesktop = `${imageAccordionBtnPaddingDesktop?.top}${imageAccordionBtnPaddingUnits?.Desktop} ${imageAccordionBtnPaddingDesktop?.right}${imageAccordionBtnPaddingUnits?.Desktop} ${imageAccordionBtnPaddingDesktop?.bottom}${imageAccordionBtnPaddingUnits?.Desktop} ${imageAccordionBtnPaddingDesktop?.left}${imageAccordionBtnPaddingUnits?.Desktop}`;
+    const imageAccordionBtnBorderRadiusDesktopWidth = `${imageAccordionBtnBorderRadiusDesktop?.top}${imageAccordionBtnBorderRadiusUnits?.Desktop} ${imageAccordionBtnBorderRadiusDesktop?.right}${imageAccordionBtnBorderRadiusUnits?.Desktop} ${imageAccordionBtnBorderRadiusDesktop?.bottom}${imageAccordionBtnBorderRadiusUnits?.Desktop} ${imageAccordionBtnBorderRadiusDesktop?.left}${imageAccordionBtnBorderRadiusUnits?.Desktop}`;
+    const imageAccordionBtnPaddingDesktopWidth = `${imageAccordionBtnPaddingDesktop?.top}${imageAccordionBtnPaddingUnits?.Desktop} ${imageAccordionBtnPaddingDesktop?.right}${imageAccordionBtnPaddingUnits?.Desktop} ${imageAccordionBtnPaddingDesktop?.bottom}${imageAccordionBtnPaddingUnits?.Desktop} ${imageAccordionBtnPaddingDesktop?.left}${imageAccordionBtnPaddingUnits?.Desktop}`;
 
-    /**
-     * Get background normal styles
-     */
-    const getBackgroundNormalStyles = () => {
-        const bgType = imageAccordionBackgroundType;
-        const bgColor = imageAccordionClassicColor;
-        const bgGradient = imageAccordionGradientColor;
-        const customGradient = imageAccordionCustomGradientInputValue;
-        const customGradientEnabled = imageAccordionCustomGradientSwitcher;
-        const bgImageUrl = imageAccordionBackgroundImageUrl;
-        const bgImagePosition = imageAccordionBackgroundImagePosition;
-        const bgAttachment = imageAccordionBackgroundImageAttachment;
-        const bgRepeat = imageAccordionBackgroundImageRepeat;
-        const bgSize = imageAccordionBackgroundImageSize;
-
-        if (bgType === 'gradient') {
-            return {
-                background: customGradientEnabled && customGradient ? customGradient : bgGradient || bgColor
-            };
-        }
-
-        let styles = { background: bgColor };
-
-        if (bgType !== 'gradient' && bgImageUrl) {
-            styles = {
-                ...styles,
-                'background-image': `url(${bgImageUrl})`,
-                'background-position': bgImagePosition || undefined,
-                'background-attachment': bgAttachment || undefined,
-                'background-repeat': bgRepeat || undefined,
-                'background-size': bgSize || undefined,
-            };
-        }
-
-        return styles;
-    };
-
-    /**
-     * Get background hover styles
-     */
-    const getBackgroundHoverStyles = () => {
-        const bgType = imageAccordionHoverBackgroundType;
-        const bgColor = imageAccordionHoverClassicColor;
-        const bgGradient = imageAccordionHoverGradientColor;
-        const customGradient = imageAccordionHoverCustomGradientInputValue;
-        const customGradientEnabled = imageAccordionHoverCustomGradientSwitcher;
-        const bgImageUrl = imageAccordionHoverBackgroundImageUrl;
-        const bgImagePosition = imageAccordionHoverBackgroundImagePosition;
-        const bgAttachment = imageAccordionHoverBackgroundImageAttachment;
-        const bgRepeat = imageAccordionHoverBackgroundImageRepeat;
-        const bgSize = imageAccordionHoverBackgroundImageSize;
-
-        if (bgType === 'gradient') {
-            return {
-                background: customGradientEnabled && customGradient ? customGradient : bgGradient || bgColor
-            };
-        }
-
-        let styles = { background: bgColor };
-
-        if (bgType !== 'gradient' && bgImageUrl) {
-            styles = {
-                ...styles,
-                'background-image': `url(${bgImageUrl})`,
-                'background-position': bgImagePosition || undefined,
-                'background-attachment': bgAttachment || undefined,
-                'background-repeat': bgRepeat || undefined,
-                'background-size': bgSize || undefined,
-            };
-        }
-
-        return styles;
-    };
-
-    /**
-     * Convert object to string
-     */
-    const backgroundStyleObjectToString = (styleObj) =>
-        Object.entries(styleObj)
-            .map(([key, value]) => value ? `${key}: ${value};` : '')
-            .filter(Boolean)
-            .join(' ');
-
-    const backgroundNormalStyles = backgroundStyleObjectToString(getBackgroundNormalStyles());
-    const backgroundHoverStyles = backgroundStyleObjectToString(getBackgroundHoverStyles());
-
-    const blockStyle = `
+    const imageAccordionBlockStyle = `
 		.fb-image-accordion-main-wrapper.${blockID} {
 			${imageAccordionPositionType === 'default' ? `position: relative;` : ''}
 			${imageAccordionPositionType !== 'default' && imageAccordionPositionType !== 'relative' ? `width: 100%;` : ''}
@@ -301,41 +219,61 @@ const generateImageAccordionStyle = (attributes) => {
 		.fb-image-accordion-wrapper.${blockID} {
 			${imageAccordionWrapperBorder ? `border-style: ${imageAccordionWrapperBorder};` : 'border-style: none;'}
 			${imageAccordionWrapperBorderColor ? `border-color: ${imageAccordionWrapperBorderColor};` : ''}
-			${wrapperBorderGetDesktop && imageAccordionWrapperBorderTypeDesktop?.top ? `border-width: ${wrapperBorderGetDesktop};` : ''}
-			${wrapperBrGetDesktop && imageAccordionWrapperBorderRadiusDesktop?.top ? `border-radius: ${wrapperBrGetDesktop};` : ''}
-			${backgroundNormalStyles}
+			${imageAccordionWrapperBorderDesktopWidth && imageAccordionWrapperBorderTypeDesktop?.top ? `border-width: ${imageAccordionWrapperBorderDesktopWidth};` : ''}
+			${imageAccordionWrapperBorderRadiusDesktopWidth && imageAccordionWrapperBorderRadiusDesktop?.top ? `border-radius: ${imageAccordionWrapperBorderRadiusDesktopWidth};` : ''}
+            ${imageAccordionBackgroundType === 'gradient'
+                ? `background: ${imageAccordionCustomGradientSwitcher && imageAccordionCustomGradientInputValue ? imageAccordionCustomGradientInputValue : imageAccordionGradientColor || imageAccordionClassicColor};`
+                : `
+                    ${imageAccordionClassicColor ? `background: ${imageAccordionClassicColor};` : ''}
+                    ${imageAccordionBackgroundImageUrl ? `background-image: url(${imageAccordionBackgroundImageUrl});` : ''}
+                    ${imageAccordionBackgroundImagePosition ? `background-position: ${imageAccordionBackgroundImagePosition};` : ''}
+                    ${imageAccordionBackgroundImageAttachment ? `background-attachment: ${imageAccordionBackgroundImageAttachment};` : ''}
+                    ${imageAccordionBackgroundImageRepeat ? `background-repeat: ${imageAccordionBackgroundImageRepeat};` : ''}
+                    ${imageAccordionBackgroundImageSize ? `background-size: ${imageAccordionBackgroundImageSize};` : ''}
+                `
+            }
 			transition: all .3s ease-in-out;
 			overflow: visible !important;
-			padding-bottom: 20px; 
-			margin-bottom: -20px;
+			${imageAccordionWrapperShadowPadding?.Desktop ? `padding-bottom: ${imageAccordionWrapperShadowPadding.Desktop}px;` : ''}
+			${imageAccordionWrapperShadowPadding?.Desktop ? `margin-bottom: -${imageAccordionWrapperShadowPadding.Desktop}px;` : ''}
 		}
 
 		.fb-image-accordion-wrapper.${blockID}:hover {
 			${imageAccordionWrapperBorderHoverColor ? `border-color: ${imageAccordionWrapperBorderHoverColor};` : ''}
-			${backgroundHoverStyles}
+            ${imageAccordionHoverBackgroundType === 'gradient'
+                ? `background: ${imageAccordionHoverCustomGradientSwitcher && imageAccordionHoverCustomGradientInputValue ? imageAccordionHoverCustomGradientInputValue : imageAccordionHoverGradientColor || imageAccordionHoverClassicColor};`
+                : `
+                    ${imageAccordionHoverClassicColor ? `background: ${imageAccordionHoverClassicColor};` : ''}
+                    ${imageAccordionHoverBackgroundImageUrl ? `background-image: url(${imageAccordionHoverBackgroundImageUrl});` : ''}
+                    ${imageAccordionHoverBackgroundImagePosition ? `background-position: ${imageAccordionHoverBackgroundImagePosition};` : ''}
+                    ${imageAccordionHoverBackgroundImageAttachment ? `background-attachment: ${imageAccordionHoverBackgroundImageAttachment};` : ''}
+                    ${imageAccordionHoverBackgroundImageRepeat ? `background-repeat: ${imageAccordionHoverBackgroundImageRepeat};` : ''}
+                    ${imageAccordionHoverBackgroundImageSize ? `background-size: ${imageAccordionHoverBackgroundImageSize};` : ''}
+                `
+            }
 		}
 
 		.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-container {
 			${imageAccordionWidth?.Desktop ? `width: ${imageAccordionWidth.Desktop}${imageAccordionWidthUnits?.Desktop ?? '%'};` : ''}
 			${imageAccordionHeight?.Desktop ? `height: ${imageAccordionHeight.Desktop}${imageAccordionHeightUnits?.Desktop ?? 'px'};` : ''}
 			${imageAccordionPreset !== 'preset-2' && imageAccordionPreset !== 'preset-4' && imageAccordionGap?.Desktop ? `gap: ${imageAccordionGap.Desktop}${imageAccordionGapUnits?.Desktop ?? 'px'};` : ''}
-			${paddingGetDesktop && imageAccordionPaddingDesktop?.top ? `padding: ${paddingGetDesktop};` : ''}
-			${marginGetDesktop && imageAccordionMarginDesktop?.top ? `margin: ${marginGetDesktop};` : ''}
+			${imageAccordionPaddingDesktopWidth && imageAccordionPaddingDesktop?.top ? `padding: ${imageAccordionPaddingDesktopWidth};` : ''}
+			${imageAccordionMarginDesktopWidth && imageAccordionMarginDesktop?.top ? `margin: ${imageAccordionMarginDesktopWidth};` : ''}
 				overflow: visible !important;
 		}
 
 		.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-item {
-			${itemBrGetDesktop && imageAccordionItemBorderRadiusDesktop?.top ? `border-radius: ${itemBrGetDesktop};` : ''}
-			${itemPaddingGetDesktop && imageAccordionItemPaddingDesktop?.top ? `padding: ${itemPaddingGetDesktop};` : ''}
-			${itemMarginGetDesktop && imageAccordionItemMarginDesktop?.top ? `margin: ${itemMarginGetDesktop};` : ''}
-			transition: all 0.4s ease;
+			${imageAccordionItemBorderRadiusDesktopWidth && imageAccordionItemBorderRadiusDesktop?.top ? `border-radius: ${imageAccordionItemBorderRadiusDesktopWidth};` : ''}
+			${imageAccordionItemPaddingDesktopWidth && imageAccordionItemPaddingDesktop?.top ? `padding: ${imageAccordionItemPaddingDesktopWidth};` : ''}
+			${imageAccordionItemMarginDesktopWidth && imageAccordionItemMarginDesktop?.top ? `margin: ${imageAccordionItemMarginDesktopWidth};` : ''}
+			transition: all ${imageAccordionItemTransitionDuration?.Desktop || 0.4}s ease;
 		}
 		.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-item.is-active,
 		.fb-image-accordion-wrapper.${blockID}.fb-trigger-hover .fb-image-accordion-item:hover {
 			
-			box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3), 0 15px 25px -5px rgba(67, 97, 238, 0.2);
-			z-index: 99;
-			${itemActiveBrGetDesktop && imageAccordionItemActiveBorderRadiusDesktop?.top ? `border-radius: ${itemActiveBrGetDesktop};` : ''}
+			${imageAccordionItemShadow ? `box-shadow: ${imageAccordionItemShadow};` : ''}
+			z-index: ${imageAccordionItemActiveZIndex?.Desktop || 99};
+			${imageAccordionItemActiveBorderRadiusDesktopWidth && imageAccordionItemActiveBorderRadiusDesktop?.top ? `border-radius: ${imageAccordionItemActiveBorderRadiusDesktopWidth};` : ''}
 		}
 
 		.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-overlay {
@@ -416,8 +354,8 @@ const generateImageAccordionStyle = (attributes) => {
 			${imageAccordionBtnBgColor ? `background: ${imageAccordionBtnBgColor};` : ''}
 			${imageAccordionBtnBorder && imageAccordionBtnBorder !== 'none' ? `border-style: ${imageAccordionBtnBorder};` : ''}
 			${imageAccordionBtnBorderColor ? `border-color: ${imageAccordionBtnBorderColor};` : ''}
-			${btnBrGetDesktop && imageAccordionBtnBorderRadiusDesktop?.top ? `border-radius: ${btnBrGetDesktop};` : ''}
-			${btnPadGetDesktop && imageAccordionBtnPaddingDesktop?.top ? `padding: ${btnPadGetDesktop};` : ''}
+			${imageAccordionBtnBorderRadiusDesktopWidth && imageAccordionBtnBorderRadiusDesktop?.top ? `border-radius: ${imageAccordionBtnBorderRadiusDesktopWidth};` : ''}
+			${imageAccordionBtnPaddingDesktopWidth && imageAccordionBtnPaddingDesktop?.top ? `padding: ${imageAccordionBtnPaddingDesktopWidth};` : ''}
 			${imageAccordionBtnFontSize?.Desktop ? `font-size: ${imageAccordionBtnFontSize.Desktop}${imageAccordionBtnFontSizeUnits?.Desktop ?? 'px'};` : ''}
 			${imageAccordionBtnFontWeight ? `font-weight: ${imageAccordionBtnFontWeight};` : ''}
 			${imageAccordionBtnFontFamily && imageAccordionBtnFontFamily !== 'Default' && imageAccordionBtnFontFamily !== 'inherit' ? `font-family: ${imageAccordionBtnFontFamily};` : ''}
@@ -442,29 +380,32 @@ const generateImageAccordionStyle = (attributes) => {
 				${imageAccordionPositionType !== 'default' && imageAccordionPositionType !== 'relative' && imageAccordionVROrientationType === 'bottom' && imageAccordionVRBottomOffset?.Tablet ? `bottom: ${imageAccordionVRBottomOffset?.Tablet}${imageAccordionVRBottomOffsetUnits?.Tablet};` : ''}
 				${imageAccordionGlobalZIndex?.Tablet ? `z-index: ${imageAccordionGlobalZIndex?.Tablet};` : ''}
 				${imageAccordionOverflow !== 'default' ? `overflow: ${imageAccordionOverflow};` : ''}
+				${imageAccordionWrapperShadowPadding?.Tablet ? `padding-bottom: ${imageAccordionWrapperShadowPadding.Tablet}px;` : ''}
+				${imageAccordionWrapperShadowPadding?.Tablet ? `margin-bottom: -${imageAccordionWrapperShadowPadding.Tablet}px;` : ''}
 
-				${wrapperBorderGetTablet && imageAccordionWrapperBorderTypeTablet?.top ? `border-width: ${wrapperBorderGetTablet};` : ''}
-				${wrapperBrGetTablet && imageAccordionWrapperBorderRadiusTablet?.top ? `border-radius: ${wrapperBrGetTablet};` : ''}
+				${imageAccordionWrapperBorderTabletWidth && imageAccordionWrapperBorderTypeTablet?.top ? `border-width: ${imageAccordionWrapperBorderTabletWidth};` : ''}
+				${imageAccordionWrapperBorderRadiusTabletWidth && imageAccordionWrapperBorderRadiusTablet?.top ? `border-radius: ${imageAccordionWrapperBorderRadiusTabletWidth};` : ''}
 			}
 
 			.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-container {
 				${imageAccordionWidth?.Tablet ? `width: ${imageAccordionWidth.Tablet}${imageAccordionWidthUnits?.Tablet ?? '%'};` : ''}
 				${imageAccordionHeight?.Tablet ? `height: ${imageAccordionHeight.Tablet}${imageAccordionHeightUnits?.Tablet ?? 'px'};` : ''}
-				${paddingGetTablet && imageAccordionPaddingTablet?.top ? `padding: ${paddingGetTablet};` : ''}
-				${marginGetTablet && imageAccordionMarginTablet?.top ? `margin: ${marginGetTablet};` : ''}
+				${imageAccordionPaddingTabletWidth && imageAccordionPaddingTablet?.top ? `padding: ${imageAccordionPaddingTabletWidth};` : ''}
+				${imageAccordionMarginTabletWidth && imageAccordionMarginTablet?.top ? `margin: ${imageAccordionMarginTabletWidth};` : ''}
 				${imageAccordionPreset !== 'preset-2' && imageAccordionPreset !== 'preset-4' && imageAccordionGap?.Tablet ? `gap: ${imageAccordionGap.Tablet}${imageAccordionGapUnits?.Tablet ?? 'px'};` : ''}
 			}
 
 			.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-item {
-				${itemBrGetTablet && imageAccordionItemBorderRadiusTablet?.top ? `border-radius: ${itemBrGetTablet};` : ''}
-				${itemPaddingGetTablet && imageAccordionItemPaddingTablet?.top ? `padding: ${itemPaddingGetTablet};` : ''}
-				${itemMarginGetTablet && imageAccordionItemMarginTablet?.top ? `margin: ${itemMarginGetTablet};` : ''}
+				transition: all ${imageAccordionItemTransitionDuration?.Tablet || 0.4}s ease;
+				${imageAccordionItemBorderRadiusTabletWidth && imageAccordionItemBorderRadiusTablet?.top ? `border-radius: ${imageAccordionItemBorderRadiusTabletWidth};` : ''}
+				${imageAccordionItemPaddingTabletWidth && imageAccordionItemPaddingTablet?.top ? `padding: ${imageAccordionItemPaddingTabletWidth};` : ''}
+				${imageAccordionItemMarginTabletWidth && imageAccordionItemMarginTablet?.top ? `margin: ${imageAccordionItemMarginTabletWidth};` : ''}
 			}
 			.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-item.is-active,
 			.fb-image-accordion-wrapper.${blockID}.fb-trigger-hover .fb-image-accordion-item:hover {
-				box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3), 0 15px 25px -5px rgba(67, 97, 238, 0.2);
-				z-index: 99;
-				${itemActiveBrGetTablet && imageAccordionItemActiveBorderRadiusTablet?.top ? `border-radius: ${itemActiveBrGetTablet};` : ''}
+				${imageAccordionItemShadow ? `box-shadow: ${imageAccordionItemShadow};` : ''}
+				z-index: ${imageAccordionItemActiveZIndex?.Tablet || 99};
+				${imageAccordionItemActiveBorderRadiusTabletWidth && imageAccordionItemActiveBorderRadiusTablet?.top ? `border-radius: ${imageAccordionItemActiveBorderRadiusTabletWidth};` : ''}
 			}
 
 			.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-title {
@@ -492,29 +433,32 @@ const generateImageAccordionStyle = (attributes) => {
 				${imageAccordionPositionType !== 'default' && imageAccordionPositionType !== 'relative' && imageAccordionVROrientationType === 'bottom' && imageAccordionVRBottomOffset?.Mobile ? `bottom: ${imageAccordionVRBottomOffset?.Mobile}${imageAccordionVRBottomOffsetUnits?.Mobile};` : ''}
 				${imageAccordionGlobalZIndex?.Mobile ? `z-index: ${imageAccordionGlobalZIndex?.Mobile};` : ''}
 				${imageAccordionOverflow !== 'default' ? `overflow: ${imageAccordionOverflow};` : ''}
+				${imageAccordionWrapperShadowPadding?.Mobile ? `padding-bottom: ${imageAccordionWrapperShadowPadding.Mobile}px;` : ''}
+				${imageAccordionWrapperShadowPadding?.Mobile ? `margin-bottom: -${imageAccordionWrapperShadowPadding.Mobile}px;` : ''}
 
-				${wrapperBorderGetMobile && imageAccordionWrapperBorderTypeMobile?.top ? `border-width: ${wrapperBorderGetMobile};` : ''}
-				${wrapperBrGetMobile && imageAccordionWrapperBorderRadiusMobile?.top ? `border-radius: ${wrapperBrGetMobile};` : ''}
+				${imageAccordionWrapperBorderMobileWidth && imageAccordionWrapperBorderTypeMobile?.top ? `border-width: ${imageAccordionWrapperBorderMobileWidth};` : ''}
+				${imageAccordionWrapperBorderRadiusMobileWidth && imageAccordionWrapperBorderRadiusMobile?.top ? `border-radius: ${imageAccordionWrapperBorderRadiusMobileWidth};` : ''}
 			}
 
 			.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-container {
 				${imageAccordionWidth?.Mobile ? `width: ${imageAccordionWidth.Mobile}${imageAccordionWidthUnits?.Mobile ?? '%'};` : ''}
 				${imageAccordionHeight?.Mobile ? `height: ${imageAccordionHeight.Mobile}${imageAccordionHeightUnits?.Mobile ?? 'px'};` : ''}
-				${paddingGetMobile && imageAccordionPaddingMobile?.top ? `padding: ${paddingGetMobile};` : ''}
-				${marginGetMobile && imageAccordionMarginMobile?.top ? `margin: ${marginGetMobile};` : ''}
+				${imageAccordionPaddingMobileWidth && imageAccordionPaddingMobile?.top ? `padding: ${imageAccordionPaddingMobileWidth};` : ''}
+				${imageAccordionMarginMobileWidth && imageAccordionMarginMobile?.top ? `margin: ${imageAccordionMarginMobileWidth};` : ''}
 				${imageAccordionPreset !== 'preset-2' && imageAccordionPreset !== 'preset-4' && imageAccordionGap?.Mobile ? `gap: ${imageAccordionGap.Mobile}${imageAccordionGapUnits?.Mobile ?? 'px'};` : ''}
 			}
 
 			.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-item  {
-				${itemBrGetMobile && imageAccordionItemBorderRadiusMobile?.top ? `border-radius: ${itemBrGetMobile};` : ''}
-				${itemPaddingGetMobile && imageAccordionItemPaddingMobile?.top ? `padding: ${itemPaddingGetMobile};` : ''}
-				${itemMarginGetMobile && imageAccordionItemMarginMobile?.top ? `margin: ${itemMarginGetMobile};` : ''}
+				transition: all ${imageAccordionItemTransitionDuration?.Mobile || 0.4}s ease;
+				${imageAccordionItemBorderRadiusMobileWidth && imageAccordionItemBorderRadiusMobile?.top ? `border-radius: ${imageAccordionItemBorderRadiusMobileWidth};` : ''}
+				${imageAccordionItemPaddingMobileWidth && imageAccordionItemPaddingMobile?.top ? `padding: ${imageAccordionItemPaddingMobileWidth};` : ''}
+				${imageAccordionItemMarginMobileWidth && imageAccordionItemMarginMobile?.top ? `margin: ${imageAccordionItemMarginMobileWidth};` : ''}
 			}
 			.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-item.is-active,
 			.fb-image-accordion-wrapper.${blockID}.fb-trigger-hover .fb-image-accordion-item:hover {
-				box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3), 0 15px 25px -5px rgba(67, 97, 238, 0.2);
-				z-index: 99;
-				${itemActiveBrGetMobile && imageAccordionItemActiveBorderRadiusMobile?.top ? `border-radius: ${itemActiveBrGetMobile};` : ''}
+				${imageAccordionItemShadow ? `box-shadow: ${imageAccordionItemShadow};` : ''}
+				z-index: ${imageAccordionItemActiveZIndex?.Mobile || 99};
+				${imageAccordionItemActiveBorderRadiusMobileWidth && imageAccordionItemActiveBorderRadiusMobile?.top ? `border-radius: ${imageAccordionItemActiveBorderRadiusMobileWidth};` : ''}
 			}
 
 			.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-title {
