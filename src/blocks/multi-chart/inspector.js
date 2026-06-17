@@ -4,6 +4,7 @@ import {
 	SelectControl,
 	ToggleControl,
 	Button,
+	Panel,
 } from "@wordpress/components";
 import { Fragment } from "@wordpress/element";
 import { DndContext, closestCenter } from "@dnd-kit/core";
@@ -28,8 +29,6 @@ import FB_SwitcherControl from "@Components/switcher-control";
 
 import SortableItem from "./sortableItem";
 import { BORDER_STYLES, OVERFLOW_OP } from "@Constants/fbConstants";
-
-import { Panel } from "@wordpress/components";
 
 const Inspector = ({ attributes, setAttributes }) => {
 	const {
