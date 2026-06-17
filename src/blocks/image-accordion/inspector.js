@@ -8,7 +8,7 @@ import {
 import { DndContext, closestCenter } from "@dnd-kit/core";
 import { SortableContext, arrayMove } from "@dnd-kit/sortable";
 
-import { useState, memo } from "@wordpress/element";
+import { memo } from "@wordpress/element";
 import { useDeviceType } from "@Config/displayType";
 
 import FB_Spacing from "@Components/spacing";
@@ -119,7 +119,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 		imageAccordionBtnBorderColor,
 		imageAccordionBtnBorder,
 		imageAccordionBtnBorderRadiusUnits,
-		// btn units
+
 		imageAccordionBtnBorderRadiusDesktop,
 		imageAccordionBtnBorderRadiusTablet,
 		imageAccordionBtnBorderRadiusMobile,
@@ -239,9 +239,10 @@ const Inspector = ({ attributes, setAttributes }) => {
 	} = attributes;
 
 	const deviceType = useDeviceType();
-	const [openItemIndex, setOpenItemIndex] = useState(null);
 
-	/** Item handlers */
+	/**
+	 * Update an item inside the image accordion list.
+	 */
 	const updateItem = (id, keyOrUpdates, value) => {
 		const latestAttributes = wp.data
 			.select("core/block-editor")
@@ -266,6 +267,9 @@ const Inspector = ({ attributes, setAttributes }) => {
 		setAttributes({ imageAccordionItems: newItems });
 	};
 
+	/**
+	 * Duplicate an item inside the image accordion list.
+	 */
 	const duplicateItem = (id) => {
 		const itemToDuplicate = imageAccordionItems.find((i) => i.id === id);
 		if (!itemToDuplicate) return;
@@ -274,6 +278,9 @@ const Inspector = ({ attributes, setAttributes }) => {
 		setAttributes({ imageAccordionItems: newItems });
 	};
 
+	/**
+	 * Add a new item to the image accordion list.
+	 */
 	const addItem = () => {
 		const newItem = {
 			id: "item-" + Date.now(),
@@ -299,11 +306,17 @@ const Inspector = ({ attributes, setAttributes }) => {
 		setAttributes({ imageAccordionItems: [...imageAccordionItems, newItem] });
 	};
 
+	/**
+	 * Remove an item from the image accordion list.
+	 */
 	const removeItem = (id) => {
 		const newItems = imageAccordionItems.filter((i) => i.id !== id);
 		setAttributes({ imageAccordionItems: newItems });
 	};
 
+	/**
+	 * Handle drag and drop reordering of items.
+	 */
 	const handleDragEnd = (event) => {
 		const { active, over } = event;
 		if (active && over && active.id !== over.id) {
@@ -315,7 +328,13 @@ const Inspector = ({ attributes, setAttributes }) => {
 		}
 	};
 
-	/** Item Padding handlers */
+	/**
+	 * End Item Handlers
+	 */
+
+	/**
+	 * Start Item Padding Handlers
+	 */
 	const imageAccordionItemPaddingHandleSpacingUnitHandler = (event, position) => {
 		const value = event.target.value;
 		if (imageAccordionItemPaddingLink) {
@@ -400,7 +419,13 @@ const Inspector = ({ attributes, setAttributes }) => {
 		});
 	};
 
-	/** Item Margin handlers */
+	/**
+	 * End Item Padding Handlers
+	 */
+
+	/**
+	 * Start Item Margin Handlers
+	 */
 	const imageAccordionItemMarginHandleSpacingUnitHandler = (event, position) => {
 		const value = event.target.value;
 		if (imageAccordionItemMarginLink) {
@@ -485,7 +510,13 @@ const Inspector = ({ attributes, setAttributes }) => {
 		});
 	};
 
-	/** Wrapper Padding handlers */
+	/**
+	 * End Item Margin Handlers
+	 */
+
+	/**
+	 * Start Wrapper Padding Handlers
+	 */
 	const imageAccordionPaddingHandleSpacingUnitHandler = (event, position) => {
 		const value = event.target.value;
 		if (imageAccordionPaddingLink) {
@@ -568,7 +599,13 @@ const Inspector = ({ attributes, setAttributes }) => {
 		});
 	};
 
-	/** Wrapper Margin handlers */
+	/**
+	 * End Wrapper Padding Handlers
+	 */
+
+	/**
+	 * Start Wrapper Margin Handlers
+	 */
 	const imageAccordionMarginHandleSpacingUnitHandler = (event, position) => {
 		const value = event.target.value;
 		if (imageAccordionMarginLink) {
@@ -651,7 +688,13 @@ const Inspector = ({ attributes, setAttributes }) => {
 		});
 	};
 
-	/** Border Radius handlers */
+	/**
+	 * End Wrapper Margin Handlers
+	 */
+
+	/**
+	 * Start Item Border Radius Handlers
+	 */
 	const imageAccordionItemBorderRadiusHandleSpacingUnitHandler = (event, position) => {
 		const value = event.target.value;
 		if (imageAccordionItemBorderRadiusLink) {
@@ -736,7 +779,13 @@ const Inspector = ({ attributes, setAttributes }) => {
 		});
 	};
 
-	/** Wrapper Border Type handlers */
+	/**
+	 * End Item Border Radius Handlers
+	 */
+
+	/**
+	 * Start Wrapper Border Type Handlers
+	 */
 	const imageAccordionWrapperBorderTypeHandleSpacingUnitHandler = (event, position) => {
 		const value = event.target.value;
 		if (imageAccordionWrapperBorderTypeLink) {
@@ -821,7 +870,13 @@ const Inspector = ({ attributes, setAttributes }) => {
 		});
 	};
 
-	/** Wrapper Border Radius handlers */
+	/**
+	 * End Wrapper Border Type Handlers
+	 */
+
+	/**
+	 * Start Wrapper Border Radius Handlers
+	 */
 	const imageAccordionWrapperBorderRadiusHandleSpacingUnitHandler = (event, position) => {
 		const value = event.target.value;
 		if (imageAccordionWrapperBorderRadiusLink) {
@@ -907,7 +962,13 @@ const Inspector = ({ attributes, setAttributes }) => {
 		});
 	};
 
-	/**Button Border Radius handlers */
+	/**
+	 * End Wrapper Border Radius Handlers
+	 */
+
+	/**
+	 * Start Button Border Radius Handlers
+	 */
 	const imageAccordionBtnBorderRadiusUnitsHandler = (unit) => {
 		setAttributes({
 			imageAccordionBtnBorderRadiusUnits: {
@@ -990,7 +1051,13 @@ const Inspector = ({ attributes, setAttributes }) => {
 		});
 	};
 
-	/** Button Padding Handlers */
+	/**
+	 * End Button Border Radius Handlers
+	 */
+
+	/**
+	 * Start Button Padding Handlers
+	 */
 	const imageAccordionBtnPaddingSpacingUnitsHandler = (unit) => {
 		setAttributes({
 			imageAccordionBtnPaddingUnits: {
@@ -1073,6 +1140,13 @@ const Inspector = ({ attributes, setAttributes }) => {
 		});
 	};
 
+	/**
+	 * End Button Padding Handlers
+	 */
+
+	/**
+	 * Inspector General Controls
+	 */
 	const generalControls = (
 		<>
 			<PanelBody
@@ -1141,7 +1215,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 				/>
 			</PanelBody>
 
-			{/* Accordion Items */}
+
 			<PanelBody
 				title={__("Accordion Items", "frontis-blocks")}
 				initialOpen={true}
@@ -1181,12 +1255,12 @@ const Inspector = ({ attributes, setAttributes }) => {
 		</>
 	);
 
-	// ========================
-	// STYLE TAB
-	// ========================
+	/**
+	 * Inspector Style Controls
+	 */
 	const styleControls = (
 		<>
-			{/* General */}
+
 			<PanelBody title={__("General", "frontis-blocks")} initialOpen={true}>
 				<FB_Range
 					label={__("Width", "frontis-blocks")}
@@ -1214,7 +1288,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 					rangeStep={1}
 					resetFallbackValue={""}
 				/>
-				{/* Gap hide for preset-2 (seamless) */}
 				{imageAccordionPreset !== "preset-2" &&
 					imageAccordionPreset !== "preset-4" && (
 						<FB_Range
@@ -1259,7 +1332,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 					setAttributes={setAttributes}
 				/>
 			</PanelBody>
-			{/* Item Style */}
+
 			<PanelBody title={__("Item", "frontis-blocks")} initialOpen={false}>
 				<FB_Spacing
 					label={__("Border Radius", "frontis-blocks")}
@@ -1275,7 +1348,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 					setAttributes={setAttributes}
 				/>
 			</PanelBody>
-			{/* Overlay */}
+
+
 			<PanelBody title={__("Overlay", "frontis-blocks")} initialOpen={false}>
 				<FB_SwitcherControl
 					label={__("Overlay Color", "frontis-blocks")}
@@ -1297,7 +1371,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 					/>
 				)}
 			</PanelBody>
-			{/* Title */}
+
+
 			{imageAccordionShowTitle && (
 				<PanelBody title={__("Title", "frontis-blocks")} initialOpen={false}>
 					<FB_TypographyControl
@@ -1354,7 +1429,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 					)}
 				</PanelBody>
 			)}
-			{/* Subtitle */}
+
+
 			<PanelBody title={__("Subtitle", "frontis-blocks")} initialOpen={false}>
 				<FB_TypographyControl
 					label={__("Typography", "frontis-blocks")}
@@ -1396,7 +1472,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 				/>
 			</PanelBody>
 
-			{/* Icon — Preset 1 only */}
+
 			{imageAccordionPreset === "preset-1" && (
 				<PanelBody title={__("Icon", "frontis-blocks")} initialOpen={false}>
 					<FB_ColorControl
@@ -1451,7 +1527,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 					/>
 				</PanelBody>
 			)}
-			{/* Dots — Preset 2 only */}
+
+
 			{imageAccordionPreset === "preset-2" && (
 				<PanelBody
 					title={__("Overlay Dots", "frontis-blocks")}
@@ -1481,7 +1558,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 					)}
 				</PanelBody>
 			)}
-			{/* Number — Preset 2 & 4 */}
+
+
 			{(imageAccordionPreset === "preset-2" ||
 				imageAccordionPreset === "preset-4") && (
 				<PanelBody
@@ -1513,9 +1591,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 									{ label: "600", value: "600" },
 									{ label: "700", value: "700" },
 								]}
-								onChange={(value) =>
-									setAttributes({ imageAccordionNumberFontWeight: value })
-								}
+								onChange={(value) => setAttributes({ imageAccordionNumberFontWeight: value })}
 							/>
 							<FB_SwitcherControl
 								label={__("Number Color", "frontis-blocks")}
@@ -1540,7 +1616,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 					)}
 				</PanelBody>
 			)}
-			{/* Button — Preset 3 only */}
+
+
 			{imageAccordionPreset === "preset-3" && (
 				<PanelBody title={__("Button", "frontis-blocks")} initialOpen={false}>
 					<FB_TypographyControl
@@ -1611,9 +1688,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 						label={__("Border Style", "frontis-blocks")}
 						value={imageAccordionBtnBorder}
 						options={BORDER_STYLES}
-						onChange={(value) =>
-							setAttributes({ imageAccordionBtnBorder: value })
-						}
+						onChange={(value) => setAttributes({ imageAccordionBtnBorder: value })}
 					/>
 					{imageAccordionBtnBorder !== "none" && (
 						<FB_ColorControl
@@ -1653,9 +1728,9 @@ const Inspector = ({ attributes, setAttributes }) => {
 		</>
 	);
 
-	// ========================
-	// ADVANCED TAB
-	// ========================
+	/**
+	 * Inspector Advanced Controls
+	 */
 	const advancedControls = (
 		<>
 			<div className="fb-setting-advanced-tab-wrapper">
@@ -1719,6 +1794,39 @@ const Inspector = ({ attributes, setAttributes }) => {
 							helpText={__("Separate with spaces key.", "frontis-blocks")}
 						/>
 					</PanelBody>
+
+					<PanelBody
+						title={__("Padding and Margin", "frontis-blocks")}
+						initialOpen={false}
+					>
+						<FB_Spacing
+							label={"Padding"}
+							deviceType={deviceType}
+							spacingUnitsHandler={imageAccordionPaddingSpacingUnitsHandler}
+							spacingUnits={imageAccordionPaddingUnits}
+							spacingDesktop={imageAccordionPaddingDesktop}
+							spacingTablet={imageAccordionPaddingTablet}
+							spacingMobile={imageAccordionPaddingMobile}
+							handleSpacingUnitHandler={imageAccordionPaddingHandleSpacingUnitHandler}
+							spacingCombineBtn={imageAccordionPaddingLink}
+							spacingCombineBtnHandler={imageAccordionPaddingSpacingCombineBtnHandlerFn}
+							setAttributes={setAttributes}
+						/>
+						<FB_Spacing
+							label={"Margin"}
+							deviceType={deviceType}
+							spacingUnitsHandler={imageAccordionMarginSpacingUnitsHandler}
+							spacingUnits={imageAccordionMarginUnits}
+							spacingDesktop={imageAccordionMarginDesktop}
+							spacingTablet={imageAccordionMarginTablet}
+							spacingMobile={imageAccordionMarginMobile}
+							handleSpacingUnitHandler={imageAccordionMarginHandleSpacingUnitHandler}
+							spacingCombineBtn={imageAccordionMarginLink}
+							spacingCombineBtnHandler={imageAccordionMarginSpacingCombineBtnHandlerFn}
+							setAttributes={setAttributes}
+						/>
+					</PanelBody>
+
 					<PanelBody
 						title={__("Background", "frontis-blocks")}
 						initialOpen={false}
@@ -1776,14 +1884,13 @@ const Inspector = ({ attributes, setAttributes }) => {
 							setHoverBackgroundImageSize={(value) => setAttributes({ imageAccordionHoverBackgroundImageSize: value })}
 						/>
 					</PanelBody>
+
 					<PanelBody title={__("Border", "frontis-blocks")} initialOpen={false}>
 						<SelectControl
 							label={__("Border Style", "frontis-blocks")}
 							value={imageAccordionWrapperBorder}
 							options={BORDER_STYLES}
-							onChange={(value) =>
-								setAttributes({ imageAccordionWrapperBorder: value })
-							}
+							onChange={(value) => setAttributes({ imageAccordionWrapperBorder: value })}
 						/>
 						<FB_SwitcherControl
 							label={__("Border Color", "frontis-blocks")}
@@ -1830,37 +1937,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 							handleSpacingUnitHandler={imageAccordionWrapperBorderRadiusHandleSpacingUnitHandler}
 							spacingCombineBtn={imageAccordionWrapperBorderRadiusLink}
 							spacingCombineBtnHandler={imageAccordionWrapperBorderRadiusCombineBtnHandlerFn}
-							setAttributes={setAttributes}
-						/>
-					</PanelBody>
-					<PanelBody
-						title={__("Padding/Margin", "frontis-blocks")}
-						initialOpen={false}
-					>
-						<FB_Spacing
-							label={"Padding"}
-							deviceType={deviceType}
-							spacingUnitsHandler={imageAccordionPaddingSpacingUnitsHandler}
-							spacingUnits={imageAccordionPaddingUnits}
-							spacingDesktop={imageAccordionPaddingDesktop}
-							spacingTablet={imageAccordionPaddingTablet}
-							spacingMobile={imageAccordionPaddingMobile}
-							handleSpacingUnitHandler={imageAccordionPaddingHandleSpacingUnitHandler}
-							spacingCombineBtn={imageAccordionPaddingLink}
-							spacingCombineBtnHandler={imageAccordionPaddingSpacingCombineBtnHandlerFn}
-							setAttributes={setAttributes}
-						/>
-						<FB_Spacing
-							label={"Margin"}
-							deviceType={deviceType}
-							spacingUnitsHandler={imageAccordionMarginSpacingUnitsHandler}
-							spacingUnits={imageAccordionMarginUnits}
-							spacingDesktop={imageAccordionMarginDesktop}
-							spacingTablet={imageAccordionMarginTablet}
-							spacingMobile={imageAccordionMarginMobile}
-							handleSpacingUnitHandler={imageAccordionMarginHandleSpacingUnitHandler}
-							spacingCombineBtn={imageAccordionMarginLink}
-							spacingCombineBtnHandler={imageAccordionMarginSpacingCombineBtnHandlerFn}
 							setAttributes={setAttributes}
 						/>
 					</PanelBody>
