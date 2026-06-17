@@ -1,3 +1,8 @@
-.fb-tabs-wrap .fb-tabs-body-container {
-	display: none;
+.fb-tabs-item-wrapper {
+    display: none;
+    height: 100%;
+}
+
+.fb-tabs-item-wrapper.fb-tabs-panel-active {
+    display: block;
 }

@@ -3,7 +3,8 @@ import {
 	useBlockProps,
 } from '@wordpress/block-editor';
 import { useDeviceType } from '@Config/displayType';
-import { useRef, useEffect } from '@wordpress/element';
+import { useRef, useEffect, useMemo } from '@wordpress/element';
+import { useSelect } from '@wordpress/data';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import loadGoogleFont from '@Utils/loadGoogleFont';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
@@ -32,6 +33,14 @@ export default function Edit({ attributes, setAttributes, clientId, context, isS
 		megaMenuGlobalWraperID,
 		megaMenuIcon,
 		megaMenuFontFamily,
+		megaMenuMobileLogoUrl,
+		megaMenuMobileLogoAlt,
+		megaMenuMobileLogoID,
+		megaMenuMobileLogoWidth,
+		megaMenuMobileLogoWidthUnits,
+		megaMenuMobileLogoHeight,
+		megaMenuMobileLogoHeightUnits,
+		megaMenuMobileLogoObjectFit,
 	} = attributes;
 
 	// Handle block ID generation (handles duplication and initial ID)
@@ -69,6 +78,40 @@ export default function Edit({ attributes, setAttributes, clientId, context, isS
 	});
 
 	const deviceType = useDeviceType();
+
+	const currentPostId = useSelect(
+		(select) => select('core/editor')?.getCurrentPostId?.() || 0,
+		[]
+	);
+
+	const isCurrentMenuItem = useMemo(() => {
+		return (item) => {
+			if (!item) {
+				return false;
+			}
+
+			if (item.pageId && currentPostId && String(item.pageId) === String(currentPostId)) {
+				return true;
+			}
+
+			if (!item.url || typeof window === 'undefined') {
+				return false;
+			}
+
+			try {
+				const current = new URL(window.location.href);
+				const target = new URL(item.url, window.location.origin);
+				const normalize = (pathname) => pathname.replace(/\/+$/, '') || '/';
+
+				return (
+					current.origin === target.origin &&
+					normalize(current.pathname) === normalize(target.pathname)
+				);
+			} catch (error) {
+				return false;
+			}
+		};
+	}, [currentPostId]);
 	/**
 	 * Manages tab button settings and switches to block settings on click
 	 */
@@ -96,15 +139,23 @@ export default function Edit({ attributes, setAttributes, clientId, context, isS
 			<div {...blockProps}>
 				<div className={`fb-parent-wrapper fb-advanced-mega-menu-wrapper ${megaMenuGlobalWraperClass}`} id={megaMenuGlobalWraperID} ref={panelRef}>
 					<div className="fb-mega-menu-editor">
-						{menuItems.length > 0 ? (
+						{(menuItems.length > 0 || megaMenuMobileLogoUrl) ? (
 							<ul className={`fb-advanced-mega-menu-list fb-device-${deviceType}`}>
-								{menuItems.map((item, index) => (
+								{menuItems.map((item, index) => {
+									const isCurrent = isCurrentMenuItem(item);
+
+									return (
 									<li
 										key={index}
-										className={`fb-advanced-mega-menu-item ${item.patternSlug ? 'has-mega-menu' : ''}`}
+										className={`fb-advanced-mega-menu-item ${item.patternSlug ? 'has-mega-menu' : ''} ${isCurrent ? 'current-menu-item' : ''}`}
 									>
 										{item.url ? (
-											<a href='#' className="fb-advanced-mega-menu-link">
+											<a
+												href={item.url}
+												className="fb-advanced-mega-menu-link"
+												aria-current={isCurrent ? 'page' : undefined}
+												onClick={(event) => event.preventDefault()}
+											>
 												{item.label || __('Item 1', 'frontis-blocks')}
 												{item.patternSlug && (
 													<span className="fb-advanced-mega-menu-indicator">
@@ -123,7 +174,8 @@ export default function Edit({ attributes, setAttributes, clientId, context, isS
 											</span>
 										)}
 									</li>
-								))}
+								);
+								})}
 							</ul>
 						) : (
 							<p>{__('Use the sidebar to add menu items →', 'frontis-blocks')}</p>

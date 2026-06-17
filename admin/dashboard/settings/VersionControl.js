@@ -127,6 +127,7 @@ const VersionControl = () => {
     { label: 'Version 1.2.1', value: '1.2.1' },
     { label: 'Version 1.2.2', value: '1.2.2' },
     { label: 'Version 1.2.3', value: '1.2.3' },
+    { label: 'Version 1.2.4', value: '1.2.4' },
   ];
 
   return (

@@ -4,6 +4,7 @@ import { useSelect } from "@wordpress/data";
 import { store as coreStore } from "@wordpress/core-data";
 import { decodeEntities } from "@wordpress/html-entities";
 import { dateI18n, __experimentalGetSettings as getDateSettings } from "@wordpress/date";
+import { useDeviceType } from "@Config/displayType";
 
 export default function DynamicTextValue({
   textEnabled = false,
@@ -114,6 +115,50 @@ export default function DynamicTextValue({
     ((isPostBasedSource && CURRENT_POST_FIELDS.includes(textField)) ||
       isSiteField ||
       isArchiveField);
+
+  const useSelectHook = (typeof window !== "undefined" && window.wp?.data?.useSelect) || useSelect;
+
+  const isLoopOrQuery = useSelectHook((select) => {
+    const mainPostId = (typeof window !== "undefined" && window.wp?.data?.select("core/editor")?.getCurrentPostId?.()) || select("core/editor")?.getCurrentPostId?.();
+    return !!(ctxPostId && mainPostId && ctxPostId !== mainPostId);
+  }, [ctxPostId]);
+
+  const deviceType = useDeviceType();
+
+  const loopBuilderSettings = useSelectHook(
+    (select) => {
+      if (typeof select("core/block-editor")?.getBlocks === "function") {
+        const blocks = select("core/block-editor").getBlocks();
+        const findLoopBuilder = (blocksList) => {
+          for (const b of blocksList) {
+            if (b.name === "frontis-blocks/loop-builder") return b;
+            if (b.innerBlocks?.length) {
+              const found = findLoopBuilder(b.innerBlocks);
+              if (found) return found;
+            }
+          }
+          return null;
+        };
+        const loopBlock = findLoopBuilder(blocks);
+        if (loopBlock) {
+          const limitAttr = loopBlock.attributes?.excerptWordLimit;
+          const moreAttr = loopBlock.attributes?.excerptMoreText;
+          let limit = 20;
+          if (limitAttr && typeof limitAttr === "object") {
+            limit = Number(limitAttr[deviceType] || limitAttr.Desktop || limitAttr.Tablet || limitAttr.Mobile || 20);
+          } else if (limitAttr !== undefined) {
+            limit = Number(limitAttr || 20);
+          }
+          return {
+            excerptWordLimit: limit,
+            excerptMoreText: moreAttr !== undefined ? moreAttr : "...",
+          };
+        }
+      }
+      return { excerptWordLimit: 20, excerptMoreText: "..." };
+    },
+    [deviceType]
+  );
 
   /* ------ BOOLEANS for link dependencies ------ */
   const needsMediaForLink =
@@ -239,8 +284,21 @@ export default function DynamicTextValue({
       case "post_excerpt": {
         const supportsExcerpt = !!postTypeObj?.supports?.excerpt;
         if (!supportsExcerpt) return __("No Content", "frontis-blocks");
-        const rawExcerpt = postRecord.excerpt?.raw?.trim();
-        return rawExcerpt ? getPlainText(rawExcerpt) : __("No Content", "frontis-blocks");
+        const hasRaw = !!postRecord.excerpt?.raw?.trim();
+        const isLoop = !!(context.isLoopBuilder || isLoopOrQuery);
+        const rawExcerpt = isLoop
+          ? (postRecord.excerpt?.raw?.trim() || postRecord.excerpt?.rendered?.trim() || "")
+          : postRecord.excerpt?.raw?.trim();
+        let excerptVal = rawExcerpt ? getPlainText(rawExcerpt) : "";
+        if (isLoop && !hasRaw && excerptVal) {
+          const words = excerptVal.split(/\s+/);
+          const limit = loopBuilderSettings.excerptWordLimit;
+          const suffix = loopBuilderSettings.excerptMoreText;
+          if (words.length > limit) {
+            excerptVal = words.slice(0, limit).join(" ") + suffix;
+          }
+        }
+        return excerptVal || __("No Content", "frontis-blocks");
       }
 
       case "post_thumbnail": {

@@ -94,7 +94,7 @@ const backToTopStyle = (attributes) => {
 
     const backToTopBlockStyle = `
         .${blockID} .fb-back-to-top-wrapper {
-            ${backToTopGlobalZIndex?.Desktop ? `z-index: ${backToTopGlobalZIndex?.Desktop};` : ''}
+           ${backToTopGlobalZIndex?.Desktop ? `z-index: ${backToTopGlobalZIndex?.Desktop};` : ''}
            ${backToTopPaddingDesktopWidth && backToTopPaddingDesktop?.top ? `padding: ${backToTopPaddingDesktopWidth};` : ''}
            ${backToTopBorder ? `border: ${backToTopBorder};` : ''}
            ${backToTopBorderDesktopWidth && backToTopBorderDesktop?.top ? `border-width: ${backToTopBorderDesktopWidth};` : ''}
