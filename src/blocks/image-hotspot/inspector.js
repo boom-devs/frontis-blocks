@@ -229,10 +229,6 @@ export default function Inspector({ attributes, setAttributes }) {
     imageHotspotVRBottomOffsetUnits,
     imageHotspotGlobalWraperClass,
     imageHotspotGlobalWraperID,
-    imageHotspotBoxShadowSwitcher,
-    imageHotspotBoxShadowValues,
-
-    imageHotspotHoverBoxShadowValues,
 
     imageHotspotSocialLinksGap,
     imageHotspotSocialLinksGapUnits,
@@ -345,11 +341,6 @@ export default function Inspector({ attributes, setAttributes }) {
     markerBorderRadiusTablet,
     markerBorderRadiusMobile,
     markerBorderRadiusLink,
-    submenuBorderRadiusUnits,
-    submenuBorderRadiusDesktop,
-    submenuBorderRadiusTablet,
-    submenuBorderRadiusMobile,
-    submenuBorderRadiusLink,
     /** End Marker Border Radius */
 
     /** Start Marker Border */
@@ -357,12 +348,6 @@ export default function Inspector({ attributes, setAttributes }) {
     markerBorderColorSwitcher,
     markerBorderColor,
     markerBorderHoverColor,
-
-    markerBorderUnits,
-    markerBorderDesktop,
-    markerBorderTablet,
-    markerBorderMobile,
-    markerBorderLink,
     /** End Marker Border */
 
 
@@ -2393,7 +2378,6 @@ export default function Inspector({ attributes, setAttributes }) {
           setAttributes={setAttributes}
           rangeStep={1}
           resetFallbackValue={""}
-          isRangeUnit={true}
         />
 
         <FB_Range
@@ -2408,7 +2392,6 @@ export default function Inspector({ attributes, setAttributes }) {
           setAttributes={setAttributes}
           rangeStep={1}
           resetFallbackValue={""}
-          isRangeUnit={true}
         />
 
       </PanelBody>
