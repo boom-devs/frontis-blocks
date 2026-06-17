@@ -311,7 +311,7 @@ class BlockList
             'image-hotspot' => [
                 'slug' => 'image-hotspot',
                 'title' => 'Image Hotspot',
-                'package' => 'free',
+                'package' => 'pro',
                 'category' => 'content',
                 'badge' => 'pro',
                 'status' => 'true',
