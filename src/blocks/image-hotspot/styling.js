@@ -31,11 +31,6 @@ const generateImageHotspotStyle = (attributes) => {
         imageHotspotMarkerHoverSizeUnits,
         imageHotspotMarkerColor,
         imageHotspotMarkerHoverColor,
-        imageHotspotMarkerBorderWidth,
-        imageHotspotMarkerBorderWidthUnits,
-        imageHotspotMarkerBorderColor,
-        imageHotspotMarkerBorderRadius,
-        imageHotspotMarkerBorderRadiusUnits,
         imageHotspotContainerShadowCssValue,
         imageHotspotMarkerSvg,
 
@@ -235,7 +230,6 @@ const generateImageHotspotStyle = (attributes) => {
         globalPaddingDesktop,
         globalPaddingTablet,
         globalPaddingMobile,
-        globalPaddingLink,
         /**end global padding control */
 
         /**start global margin control */
@@ -243,19 +237,15 @@ const generateImageHotspotStyle = (attributes) => {
         globalMarginDesktop,
         globalMarginTablet,
         globalMarginMobile,
-        globalMarginLink,
         /**end global margin control */
 
         /**Start imageHotspotsGlobalBg Background */
-        imageHotspotsGlobalBgBgColorSwitcher,
         imageHotspotsGlobalBgBgType,
         imageHotspotsGlobalBgBgClassicColor,
         imageHotspotsGlobalBgBgGradientColor,
         imageHotspotsGlobalBgBgCustomGradientSwitcher,
         imageHotspotsGlobalBgBgCustomGradientInputValue,
         imageHotspotsGlobalBgBgImageUrl,
-        imageHotspotsGlobalBgBgImageAlt,
-        imageHotspotsGlobalBgBgImageID,
         imageHotspotsGlobalBgBgImagePosition,
         imageHotspotsGlobalBgBgImageAttachment,
         imageHotspotsGlobalBgBgImageRepeat,
@@ -266,8 +256,6 @@ const generateImageHotspotStyle = (attributes) => {
         imageHotspotsGlobalBgBgHoverCustomGradientSwitcher,
         imageHotspotsGlobalBgBgHoverCustomGradientInputValue,
         imageHotspotsGlobalBgBgHoverImageUrl,
-        imageHotspotsGlobalBgBgHoverImageAlt,
-        imageHotspotsGlobalBgBgHoverImageID,
         imageHotspotsGlobalBgBgHoverImagePosition,
         imageHotspotsGlobalBgBgHoverImageAttachment,
         imageHotspotsGlobalBgBgHoverImageRepeat,
@@ -276,7 +264,6 @@ const generateImageHotspotStyle = (attributes) => {
 
         /** Start imageHotspotsGlobal Border */
         imageHotspotsGlobalBorder,
-        imageHotspotsGlobalBorderColorSwitcher,
         imageHotspotsGlobalBorderColor,
         imageHotspotsGlobalBorderHoverColor,
         /** End imageHotspotsGlobal Border */
@@ -286,7 +273,6 @@ const generateImageHotspotStyle = (attributes) => {
         imageHotspotsGlobalBorderDesktop,
         imageHotspotsGlobalBorderTablet,
         imageHotspotsGlobalBorderMobile,
-        imageHotspotsGlobalBorderLink,
         /** End imageHotspotsGlobal Border Units */
 
         /** Start imageHotspotsGlobal Border Radius */
@@ -294,14 +280,10 @@ const generateImageHotspotStyle = (attributes) => {
         imageHotspotsGlobalBorderRadiusDesktop,
         imageHotspotsGlobalBorderRadiusTablet,
         imageHotspotsGlobalBorderRadiusMobile,
-        imageHotspotsGlobalBorderRadiusLink,
         /** End imageHotspotsGlobal Border Radius */
 
         /** Start imageHotspotsGlobal Box Shadow */
-        imageHotspotsGlobalBoxShadowSwitcher,
-        imageHotspotsGlobalBoxShadowValues,
         imageHotspotsGlobalBoxShadowCssValue,
-        imageHotspotsGlobalBoxShadowHoverValues,
         imageHotspotsGlobalBoxShadowHoverCssValue,
         /** End imageHotspotsGlobal Box Shadow */
 
@@ -325,11 +307,6 @@ const generateImageHotspotStyle = (attributes) => {
 
         /**end global style control */
     } = attributes;
-
-    // // Marker border width
-    const markerBorderWidthDesktop = `${imageHotspotMarkerBorderWidth?.top}${imageHotspotMarkerBorderWidthUnits?.Desktop} ${imageHotspotMarkerBorderWidth?.right}${imageHotspotMarkerBorderWidthUnits?.Desktop} ${imageHotspotMarkerBorderWidth?.bottom}${imageHotspotMarkerBorderWidthUnits?.Desktop} ${imageHotspotMarkerBorderWidth?.left}${imageHotspotMarkerBorderWidthUnits?.Desktop}`;
-    const markerBorderWidthTablet = `${imageHotspotMarkerBorderWidth?.top}${imageHotspotMarkerBorderWidthUnits?.Tablet} ${imageHotspotMarkerBorderWidth?.right}${imageHotspotMarkerBorderWidthUnits?.Tablet} ${imageHotspotMarkerBorderWidth?.bottom}${imageHotspotMarkerBorderWidthUnits?.Tablet} ${imageHotspotMarkerBorderWidth?.left}${imageHotspotMarkerBorderWidthUnits?.Tablet}`;
-    const markerBorderWidthMobile = `${imageHotspotMarkerBorderWidth?.top}${imageHotspotMarkerBorderWidthUnits?.Mobile} ${imageHotspotMarkerBorderWidth?.right}${imageHotspotMarkerBorderWidthUnits?.Mobile} ${imageHotspotMarkerBorderWidth?.bottom}${imageHotspotMarkerBorderWidthUnits?.Mobile} ${imageHotspotMarkerBorderWidth?.left}${imageHotspotMarkerBorderWidthUnits?.Mobile}`;
 
     // Title spacing
     const titlePaddingDesktop = `${imageHotspotTitlePaddingDesktop?.top}${imageHotspotTitlePaddingUnits?.Desktop} ${imageHotspotTitlePaddingDesktop?.right}${imageHotspotTitlePaddingUnits?.Desktop} ${imageHotspotTitlePaddingDesktop?.bottom}${imageHotspotTitlePaddingUnits?.Desktop} ${imageHotspotTitlePaddingDesktop?.left}${imageHotspotTitlePaddingUnits?.Desktop}`;
@@ -454,11 +431,6 @@ const generateImageHotspotStyle = (attributes) => {
     const markerBorderRadiusDesktopWidth = `${markerBorderRadiusDesktop?.top}${markerBorderRadiusUnits?.Desktop} ${markerBorderRadiusDesktop?.right}${markerBorderRadiusUnits?.Desktop} ${markerBorderRadiusDesktop?.bottom}${markerBorderRadiusUnits?.Desktop} ${markerBorderRadiusDesktop?.left}${markerBorderRadiusUnits?.Desktop}`;
     const markerBorderRadiusTabletWidth = `${markerBorderRadiusTablet?.top}${markerBorderRadiusUnits?.Tablet} ${markerBorderRadiusTablet?.right}${markerBorderRadiusUnits?.Tablet} ${markerBorderRadiusTablet?.bottom}${markerBorderRadiusUnits?.Tablet} ${markerBorderRadiusTablet?.left}${markerBorderRadiusUnits?.Tablet}`;
     const markerBorderRadiusMobileWidth = `${markerBorderRadiusMobile?.top}${markerBorderRadiusUnits?.Mobile} ${markerBorderRadiusMobile?.right}${markerBorderRadiusUnits?.Mobile} ${markerBorderRadiusMobile?.bottom}${markerBorderRadiusUnits?.Mobile} ${markerBorderRadiusMobile?.left}${markerBorderRadiusUnits?.Mobile}`;
-
-
-    console.log(imageHotspotSocialLinksGap);
-
-
 
     const hotspotBaseStyles = (imageHotspotHotspots || []).map((hotspot) => `
         .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"] .fb-hotspot-trigger {

@@ -14,12 +14,10 @@ function Edit({ attributes, setAttributes, clientId, isSelected }) {
   const {
     imageHotspotImageUrl,
     imageHotspotImageAlt,
-    imageHotspotImageSize,
     imageHotspotHotspots,
     imageHotspotSelectedHotspotId,
     imageHotspotMarkerSvg,
     imageHotspotMarkerColor,
-    imageHotspotMarkerHoverColor,
     blockID,
     blockStyle,
     imageHotspotGlobalWraperClass,
