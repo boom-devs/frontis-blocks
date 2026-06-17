@@ -6,10 +6,9 @@ import {
 	Button,
 	Panel,
 } from "@wordpress/components";
-import { Fragment } from "@wordpress/element";
+import { Fragment, memo, useState } from "@wordpress/element";
 import { DndContext, closestCenter } from "@dnd-kit/core";
 import { SortableContext, arrayMove } from "@dnd-kit/sortable";
-import { memo, useState } from "@wordpress/element";
 import { useDeviceType } from "@Config/displayType";
 
 import FB_Spacing from "@Components/spacing";
