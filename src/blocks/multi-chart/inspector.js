@@ -1644,16 +1644,16 @@ const Inspector = ({ attributes, setAttributes }) => {
 				<FB_Spacing
 					label={__("Border Radius", "frontis-blocks")}
 					deviceType={deviceType}
-					spacingUnitsHandler={handleChartBodyBorderRadiusUnits}
+					spacingUnitsHandler={chartBodyBorderRadiusSpacingUnitsHandler}
 					spacingUnits={chartBodyBorderRadiusUnits}
 					spacingDesktop={chartBodyBorderRadiusDesktop}
 					spacingTablet={chartBodyBorderRadiusTablet}
 					spacingMobile={chartBodyBorderRadiusMobile}
-					handleSpacingUnitHandler={handleChartBodyBorderRadiusValue}
-					spacingCombineBtn={chartBodyBorderRadiusLink}
-					spacingCombineBtnHandler={
-						handleChartBodyBorderRadiusCombineBtnHandlerFn
+					handleSpacingUnitHandler={
+						chartBodyBorderRadiusHandleSpacingUnitHandler
 					}
+					spacingCombineBtn={chartBodyBorderRadiusLink}
+					spacingCombineBtnHandler={chartBodyBorderRadiusCombineBtnHandlerFn}
 					setAttributes={setAttributes}
 				/>
 
@@ -2449,14 +2449,18 @@ const Inspector = ({ attributes, setAttributes }) => {
 				<FB_Spacing
 					label={__("Margin", "frontis-blocks")}
 					deviceType={deviceType}
-					spacingUnitsHandler={multiChartMarginSpacingUnitsHandler}
+					spacingUnitsHandler={multiChartItemWrapperMarginSpacingUnitsHandler}
 					spacingUnits={multiChartMarginUnits}
 					spacingDesktop={multiChartMarginDesktop}
 					spacingTablet={multiChartMarginTablet}
 					spacingMobile={multiChartMarginMobile}
-					handleSpacingUnitHandler={multiChartMarginHandleSpacingUnitHandler}
+					handleSpacingUnitHandler={
+						multiChartItemWrapperMarginHandleSpacingUnitHandler
+					}
 					spacingCombineBtn={multiChartMarginLink}
-					spacingCombineBtnHandler={multiChartMarginSpacingCombineBtnHandlerFn}
+					spacingCombineBtnHandler={
+						multiChartItemWrapperMarginSpacingCombineBtnHandlerFn
+					}
 					setAttributes={setAttributes}
 				/>
 			</PanelBody>
