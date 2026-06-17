@@ -1,14 +1,10 @@
-/* -------------
-   BASE CONTAINER
----------------- */
+/* Base Container */
 .fb-image-accordion-container {
 	display: flex;
 	align-items: stretch;
 }
 
-/* --------------
-   BASE ITEM 
-------------- */
+/* Base Item */
 .fb-image-accordion-item {
 	position: relative;
 	flex: 0 0 80px;
@@ -22,9 +18,7 @@
 	overflow: hidden;
 }
 
-/* -----------
-   OVERLAY
------------ */
+/* Overlay */
 .fb-image-accordion-overlay {
 	position: absolute;
 	inset: 0;
@@ -33,9 +27,7 @@
 	z-index: 1;
 }
 
-/* -------------
-   CONTENT WRAPPER 
--------------- */
+/* Content Wrapper */
 .fb-image-accordion-content-wrapper {
 	position: absolute;
 	left: 18px;
@@ -48,9 +40,7 @@
 	width: calc(100% - 36px);
 }
 
-/* -------------
-   ICON CIRCLE 
----------------- */
+/* Icon Circle */
 .fb-image-accordion-icon-circle {
 	border-radius: 50%;
 	display: flex;
@@ -72,9 +62,7 @@
 	}
 }
 
-/* ---------------
-   TEXT GROUP (Preset 1)
-------------------- */
+/* Text Group (Preset 1) */
 .preset-1 .fb-image-accordion-content-wrapper {
 	flex-direction: row;
 	align-items: center;
@@ -112,9 +100,7 @@
 	}
 }
 
-/* ------------
-   RESPONSIVE
------------------ */
+/* Responsive */
 @media screen and (max-width: 767px) {
 	.fb-image-accordion-container {
 		flex-direction: column;
@@ -136,9 +122,7 @@
 	}
 }
 
-/* ===============
-   PRESET 2 
-   =============== */
+/* Preset 2 */
 .preset-2 {
 	.fb-image-accordion-item {
 		flex: 0 0 90px;
@@ -200,9 +184,7 @@
 	}
 }
 
-/* =============
-   PRESET 3 
-   ============ */
+/* Preset 3 */
 .preset-3 {
 	.fb-image-accordion-container {
 		flex-direction: column;
@@ -250,9 +232,7 @@
 	}
 }
 
-/* ==============
-   PRESET 4 
-   ===========*/
+/* Preset 4 */
 .preset-4 {
 	.fb-image-accordion-container {
 		overflow: hidden;
@@ -368,9 +348,7 @@
 	}
 }
 
-/* =============
-   RESPONSIVE VISIBILITY
-   =============== */
+/* Responsive Visibility */
 @media screen and (min-width: 1025px) {
 	.fb-desktop-responsive {
 		display: none !important;
