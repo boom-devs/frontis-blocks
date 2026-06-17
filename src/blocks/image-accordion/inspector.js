@@ -1,20 +1,9 @@
 import { __ } from "@wordpress/i18n";
-import { InspectorControls } from "@wordpress/block-editor";
 import {
 	PanelBody,
 	SelectControl,
 	ToggleControl,
-	RangeControl,
-	__experimentalItemGroup as ItemGroup,
-	__experimentalItem as Item,
-	__experimentalHStack as HStack,
-	Flex,
-	FlexItem,
 	Button,
-	ButtonGroup,
-	BaseControl,
-	Dashicon,
-	TextControl,
 } from "@wordpress/components";
 import { DndContext, closestCenter } from "@dnd-kit/core";
 import { SortableContext, arrayMove } from "@dnd-kit/sortable";
@@ -27,7 +16,6 @@ import FB_Range from "@Components/range";
 import FB_ColorControl from "@Components/color-control";
 import FB_SwitcherControl from "@Components/switcher-control";
 import FB_InputControl from "@Components/input-control";
-import FB_IconPicker from "@Components/icon-picker";
 import FB_BackgroundColorControl from "@Components/background-color-control";
 import FB_CustomCSSEditor from "@Components/custom-css-editor";
 import FB_PositionControl from "@Components/position-control";
@@ -208,6 +196,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 		imageAccordionHoverBackgroundImageSize,
 
 		imageAccordionWrapperBorder,
+		imageAccordionOverlayColorSwitcher,
+		imageAccordionTitleColorSwitcher,
+		imageAccordionIconColorSwitcher,
+		imageAccordionNumberColorSwitcher,
+		imageAccordionBtnColorSwitcher,
 		imageAccordionWrapperBorderColorSwitcher,
 		imageAccordionWrapperBorderColor,
 		imageAccordionWrapperBorderHoverColor,
@@ -247,13 +240,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 	const deviceType = useDeviceType();
 	const [openItemIndex, setOpenItemIndex] = useState(null);
-	const [borderColorTab, setBorderColorTab] = useState("normal");
-	const [btnColorTab, setBtnColorTab] = useState("normal");
-	const [iconColorTab, setIconColorTab] = useState("normal");
-	const [titleColorTab, setTitleColorTab] = useState("normal");
-	const [overlayColorTab, setOverlayColorTab] = useState("normal");
-	const [numberColorTab, setNumberColorTab] = useState("normal");
-	const [subtitleColorTab, setSubtitleColorTab] = useState("normal");
 
 	/** Item handlers */
 	const updateItem = (id, keyOrUpdates, value) => {
@@ -1126,42 +1112,32 @@ const Inspector = ({ attributes, setAttributes }) => {
 				<ToggleControl
 					label={__("Show Title", "frontis-blocks")}
 					checked={imageAccordionShowTitle}
-					onChange={(value) =>
-						setAttributes({ imageAccordionShowTitle: value })
-					}
+					onChange={(value) => setAttributes({ imageAccordionShowTitle: value })}
 				/>
 				<ToggleControl
 					label={__("Show Subtitle", "frontis-blocks")}
 					checked={imageAccordionShowSubtitle}
-					onChange={(value) =>
-						setAttributes({ imageAccordionShowSubtitle: value })
-					}
+					onChange={(value) => setAttributes({ imageAccordionShowSubtitle: value })}
 				/>
 				{imageAccordionPreset === "preset-3" && (
 					<ToggleControl
 						label={__("Show Button", "frontis-blocks")}
 						checked={imageAccordionShowButton}
-						onChange={(value) =>
-							setAttributes({ imageAccordionShowButton: value })
-						}
+						onChange={(value) => setAttributes({ imageAccordionShowButton: value })}
 					/>
 				)}
 				{imageAccordionPreset === "preset-1" && (
 					<ToggleControl
 						label={__("Show Icon", "frontis-blocks")}
 						checked={imageAccordionShowIcon}
-						onChange={(value) =>
-							setAttributes({ imageAccordionShowIcon: value })
-						}
+						onChange={(value) => setAttributes({ imageAccordionShowIcon: value })}
 					/>
 				)}
 				{imageAccordionPreset === "preset-2" && (
 					<ToggleControl
 						label={__("Show Dots", "frontis-blocks")}
 						checked={imageAccordionShowDots}
-						onChange={(value) =>
-							setAttributes({ imageAccordionShowDots: value })
-						}
+						onChange={(value) => setAttributes({ imageAccordionShowDots: value })}
 					/>
 				)}
 				{(imageAccordionPreset === "preset-2" ||
@@ -1169,9 +1145,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 					<ToggleControl
 						label={__("Show Number", "frontis-blocks")}
 						checked={imageAccordionShowNumber}
-						onChange={(value) =>
-							setAttributes({ imageAccordionShowNumber: value })
-						}
+						onChange={(value) => setAttributes({ imageAccordionShowNumber: value })}
 					/>
 				)}
 			</PanelBody>
@@ -1240,12 +1214,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 					min={0}
 					max={imageAccordionWidthUnits[deviceType] === "%" ? 100 : 1600}
 					rangeValue={imageAccordionWidth}
-					onChangeHandler={(value) =>
-						setAttributes({ imageAccordionWidth: value })
-					}
-					rangeUnitHandler={(value) =>
-						setAttributes({ imageAccordionWidthUnits: value })
-					}
+					onChangeHandler={(value) => setAttributes({ imageAccordionWidth: value })}
+					rangeUnitHandler={(value) => setAttributes({ imageAccordionWidthUnits: value })}
 					deviceType={deviceType}
 					units={imageAccordionWidthUnits}
 					setAttributes={setAttributes}
@@ -1257,12 +1227,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 					min={0}
 					max={imageAccordionHeightUnits[deviceType] === "%" ? 100 : 1200}
 					rangeValue={imageAccordionHeight}
-					onChangeHandler={(value) =>
-						setAttributes({ imageAccordionHeight: value })
-					}
-					rangeUnitHandler={(value) =>
-						setAttributes({ imageAccordionHeightUnits: value })
-					}
+					onChangeHandler={(value) => setAttributes({ imageAccordionHeight: value })}
+					rangeUnitHandler={(value) => setAttributes({ imageAccordionHeightUnits: value })}
 					deviceType={deviceType}
 					units={imageAccordionHeightUnits}
 					setAttributes={setAttributes}
@@ -1277,12 +1243,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 							min={0}
 							max={100}
 							rangeValue={imageAccordionGap}
-							onChangeHandler={(value) =>
-								setAttributes({ imageAccordionGap: value })
-							}
-							rangeUnitHandler={(value) =>
-								setAttributes({ imageAccordionGapUnits: value })
-							}
+							onChangeHandler={(value) => setAttributes({ imageAccordionGap: value })}
+							rangeUnitHandler={(value) => setAttributes({ imageAccordionGapUnits: value })}
 							deviceType={deviceType}
 							units={imageAccordionGapUnits}
 							setAttributes={setAttributes}
@@ -1299,13 +1261,9 @@ const Inspector = ({ attributes, setAttributes }) => {
 					spacingDesktop={imageAccordionItemPaddingDesktop}
 					spacingTablet={imageAccordionItemPaddingTablet}
 					spacingMobile={imageAccordionItemPaddingMobile}
-					handleSpacingUnitHandler={
-						imageAccordionItemPaddingHandleSpacingUnitHandler
-					}
+					handleSpacingUnitHandler={imageAccordionItemPaddingHandleSpacingUnitHandler}
 					spacingCombineBtn={imageAccordionItemPaddingLink}
-					spacingCombineBtnHandler={
-						imageAccordionItemPaddingSpacingCombineBtnHandlerFn
-					}
+					spacingCombineBtnHandler={imageAccordionItemPaddingSpacingCombineBtnHandlerFn}
 					setAttributes={setAttributes}
 				/>
 				<FB_Spacing
@@ -1316,13 +1274,9 @@ const Inspector = ({ attributes, setAttributes }) => {
 					spacingDesktop={imageAccordionItemMarginDesktop}
 					spacingTablet={imageAccordionItemMarginTablet}
 					spacingMobile={imageAccordionItemMarginMobile}
-					handleSpacingUnitHandler={
-						imageAccordionItemMarginHandleSpacingUnitHandler
-					}
+					handleSpacingUnitHandler={imageAccordionItemMarginHandleSpacingUnitHandler}
 					spacingCombineBtn={imageAccordionItemMarginLink}
-					spacingCombineBtnHandler={
-						imageAccordionItemMarginSpacingCombineBtnHandlerFn
-					}
+					spacingCombineBtnHandler={imageAccordionItemMarginSpacingCombineBtnHandlerFn}
 					setAttributes={setAttributes}
 				/>
 			</PanelBody>
@@ -1336,13 +1290,9 @@ const Inspector = ({ attributes, setAttributes }) => {
 					spacingDesktop={imageAccordionItemBorderRadiusDesktop}
 					spacingTablet={imageAccordionItemBorderRadiusTablet}
 					spacingMobile={imageAccordionItemBorderRadiusMobile}
-					handleSpacingUnitHandler={
-						imageAccordionItemBorderRadiusHandleSpacingUnitHandler
-					}
+					handleSpacingUnitHandler={imageAccordionItemBorderRadiusHandleSpacingUnitHandler}
 					spacingCombineBtn={imageAccordionItemBorderRadiusLink}
-					spacingCombineBtnHandler={
-						imageAccordionItemBorderRadiusCombineBtnHandlerFn
-					}
+					spacingCombineBtnHandler={imageAccordionItemBorderRadiusCombineBtnHandlerFn}
 					setAttributes={setAttributes}
 				/>
 			</PanelBody>
@@ -1350,25 +1300,21 @@ const Inspector = ({ attributes, setAttributes }) => {
 			<PanelBody title={__("Overlay", "frontis-blocks")} initialOpen={false}>
 				<FB_SwitcherControl
 					label={__("Overlay Color", "frontis-blocks")}
-					globalSwitcher={overlayColorTab}
-					setGlobalSwitcher={setOverlayColorTab}
+					globalSwitcher={imageAccordionOverlayColorSwitcher}
+					setGlobalSwitcher={(value) => setAttributes({ imageAccordionOverlayColorSwitcher: value })}
 				/>
-				{overlayColorTab === "normal" && (
+				{imageAccordionOverlayColorSwitcher === "normal" && (
 					<FB_ColorControl
 						label={__("Normal Color", "frontis-blocks")}
 						globalColor={imageAccordionOverlayColor}
-						setGlobalColor={(value) =>
-							setAttributes({ imageAccordionOverlayColor: value ?? "" })
-						}
+						setGlobalColor={(value) => setAttributes({ imageAccordionOverlayColor: value ?? "" })}
 					/>
 				)}
-				{overlayColorTab === "hover" && (
+				{imageAccordionOverlayColorSwitcher === "hover" && (
 					<FB_ColorControl
 						label={__("Hover Color", "frontis-blocks")}
 						globalColor={imageAccordionOverlayHoverColor}
-						setGlobalColor={(value) =>
-							setAttributes({ imageAccordionOverlayHoverColor: value ?? "" })
-						}
+						setGlobalColor={(value) => setAttributes({ imageAccordionOverlayHoverColor: value ?? "" })}
 					/>
 				)}
 			</PanelBody>
@@ -1377,86 +1323,54 @@ const Inspector = ({ attributes, setAttributes }) => {
 				<PanelBody title={__("Title", "frontis-blocks")} initialOpen={false}>
 					<FB_TypographyControl
 						label={__("Typography", "frontis-blocks")}
-						fontFamily={imageAccordionTitleFontFamily}
-						onChangeFontFamily={(value) =>
-							setAttributes({ imageAccordionTitleFontFamily: value })
-						}
-						fontSize={imageAccordionTitleFontSize}
-						onChangeFontSize={(value) =>
-							setAttributes({ imageAccordionTitleFontSize: value })
-						}
-						fontSizeUnits={imageAccordionTitleFontSizeUnits}
-						onChangeFontSizeUnit={(value) =>
-							setAttributes({ imageAccordionTitleFontSizeUnits: value })
-						}
-						fontWeight={imageAccordionTitleFontWeight}
-						onChangeFontWeight={(value) =>
-							setAttributes({ imageAccordionTitleFontWeight: value })
-						}
-						fontStyle={imageAccordionTitleFontStyle}
-						onChangeFontStyle={(value) =>
-							setAttributes({ imageAccordionTitleFontStyle: value })
-						}
-						textTransform={imageAccordionTitleTransform}
-						onChangeTextTransform={(value) =>
-							setAttributes({ imageAccordionTitleTransform: value })
-						}
-						textDecoration={imageAccordionTitleDecoration}
-						onChangeTextDecoration={(value) =>
-							setAttributes({ imageAccordionTitleDecoration: value })
-						}
-						letterSpacing={imageAccordionTitleLetterSpacing}
-						onChangeLetterSpacing={(value) =>
-							setAttributes({ imageAccordionTitleLetterSpacing: value })
-						}
-						letterSpacingUnits={imageAccordionTitleLetterSpacingUnits}
-						onChangeLetterSpacingUnit={(value) =>
-							setAttributes({ imageAccordionTitleLetterSpacingUnits: value })
-						}
-						lineHeight={imageAccordionTitleLineHeight}
-						onChangeLineHeight={(value) =>
-							setAttributes({ imageAccordionTitleLineHeight: value })
-						}
-						lineHeightUnits={imageAccordionTitleLineHeightUnits}
-						onChangeLineHeightUnit={(value) =>
-							setAttributes({ imageAccordionTitleLineHeightUnits: value })
-						}
+						globalTypoControlActive={true}
+						storeGlobalTypographyData={(value) => setAttributes({ imageAccordionTitleGlobalTypographyData: value })}
 						globalTypoType={imageAccordionTitleTypoType}
-						onChangeGlobalTypoType={(value) =>
-							setAttributes({ imageAccordionTitleTypoType: value })
-						}
+						onChangeGlobalTypoType={(value) => setAttributes({ imageAccordionTitleTypoType: value })}
 						globalTypoOption={imageAccordionTitleTypoOption}
-						onChangeGlobalTypoOption={(value) =>
-							setAttributes({ imageAccordionTitleTypoOption: value })
-						}
+						onChangeGlobalTypoOption={(value) => setAttributes({ imageAccordionTitleTypoOption: value })}
+						fontFamily={imageAccordionTitleFontFamily}
+						onChangeFontFamily={(value) => setAttributes({ imageAccordionTitleFontFamily: value })}
+						fontSize={imageAccordionTitleFontSize}
+						onChangeFontSize={(value) => setAttributes({ imageAccordionTitleFontSize: value })}
+						fontSizeUnits={imageAccordionTitleFontSizeUnits}
+						onChangeFontSizeUnit={(value) => setAttributes({ imageAccordionTitleFontSizeUnits: value })}
+						fontWeight={imageAccordionTitleFontWeight}
+						onChangeFontWeight={(value) => setAttributes({ imageAccordionTitleFontWeight: value })}
+						fontStyle={imageAccordionTitleFontStyle}
+						onChangeFontStyle={(value) => setAttributes({ imageAccordionTitleFontStyle: value })}
+						textTransform={imageAccordionTitleTransform}
+						onChangeTextTransform={(value) => setAttributes({ imageAccordionTitleTransform: value })}
+						textDecoration={imageAccordionTitleDecoration}
+						onChangeTextDecoration={(value) => setAttributes({ imageAccordionTitleDecoration: value })}
+						letterSpacing={imageAccordionTitleLetterSpacing}
+						onChangeLetterSpacing={(value) => setAttributes({ imageAccordionTitleLetterSpacing: value })}
+						letterSpacingUnits={imageAccordionTitleLetterSpacingUnits}
+						onChangeLetterSpacingUnit={(value) => setAttributes({ imageAccordionTitleLetterSpacingUnits: value })}
+						lineHeight={imageAccordionTitleLineHeight}
+						onChangeLineHeight={(value) => setAttributes({ imageAccordionTitleLineHeight: value })}
+						lineHeightUnits={imageAccordionTitleLineHeightUnits}
+						onChangeLineHeightUnit={(value) => setAttributes({ imageAccordionTitleLineHeightUnits: value })}
 						deviceType={deviceType}
 						setAttributes={setAttributes}
-						globalTypoControlActive={true}
-						storeGlobalTypographyData={(value) =>
-							setAttributes({ imageAccordionTitleGlobalTypographyData: value })
-						}
 					/>
 					<FB_SwitcherControl
 						label={__("Color", "frontis-blocks")}
-						globalSwitcher={titleColorTab}
-						setGlobalSwitcher={setTitleColorTab}
+						globalSwitcher={imageAccordionTitleColorSwitcher}
+						setGlobalSwitcher={(value) => setAttributes({ imageAccordionTitleColorSwitcher: value })}
 					/>
-					{titleColorTab === "normal" && (
+					{imageAccordionTitleColorSwitcher === "normal" && (
 						<FB_ColorControl
 							label={__("Normal Color", "frontis-blocks")}
 							globalColor={imageAccordionTitleColor}
-							setGlobalColor={(value) =>
-								setAttributes({ imageAccordionTitleColor: value ?? "" })
-							}
+							setGlobalColor={(value) => setAttributes({ imageAccordionTitleColor: value ?? "" })}
 						/>
 					)}
-					{titleColorTab === "hover" && (
+					{imageAccordionTitleColorSwitcher === "hover" && (
 						<FB_ColorControl
 							label={__("Hover Color", "frontis-blocks")}
 							globalColor={imageAccordionTitleHoverColor}
-							setGlobalColor={(value) =>
-								setAttributes({ imageAccordionTitleHoverColor: value ?? "" })
-							}
+							setGlobalColor={(value) => setAttributes({ imageAccordionTitleHoverColor: value ?? "" })}
 						/>
 					)}
 				</PanelBody>
@@ -1465,71 +1379,41 @@ const Inspector = ({ attributes, setAttributes }) => {
 			<PanelBody title={__("Subtitle", "frontis-blocks")} initialOpen={false}>
 				<FB_TypographyControl
 					label={__("Typography", "frontis-blocks")}
-					fontFamily={imageAccordionSubtitleFontFamily}
-					onChangeFontFamily={(value) =>
-						setAttributes({ imageAccordionSubtitleFontFamily: value })
-					}
-					fontSize={imageAccordionSubtitleFontSize}
-					onChangeFontSize={(value) =>
-						setAttributes({ imageAccordionSubtitleFontSize: value })
-					}
-					fontSizeUnits={imageAccordionSubtitleFontSizeUnits}
-					onChangeFontSizeUnit={(value) =>
-						setAttributes({ imageAccordionSubtitleFontSizeUnits: value })
-					}
-					fontWeight={imageAccordionSubtitleFontWeight}
-					onChangeFontWeight={(value) =>
-						setAttributes({ imageAccordionSubtitleFontWeight: value })
-					}
-					fontStyle={imageAccordionSubtitleFontStyle}
-					onChangeFontStyle={(value) =>
-						setAttributes({ imageAccordionSubtitleFontStyle: value })
-					}
-					textTransform={imageAccordionSubtitleTransform}
-					onChangeTextTransform={(value) =>
-						setAttributes({ imageAccordionSubtitleTransform: value })
-					}
-					textDecoration={imageAccordionSubtitleDecoration}
-					onChangeTextDecoration={(value) =>
-						setAttributes({ imageAccordionSubtitleDecoration: value })
-					}
-					letterSpacing={imageAccordionSubtitleLetterSpacing}
-					onChangeLetterSpacing={(value) =>
-						setAttributes({ imageAccordionSubtitleLetterSpacing: value })
-					}
-					letterSpacingUnits={imageAccordionSubtitleLetterSpacingUnits}
-					onChangeLetterSpacingUnit={(value) =>
-						setAttributes({ imageAccordionSubtitleLetterSpacingUnits: value })
-					}
-					lineHeight={imageAccordionSubtitleLineHeight}
-					onChangeLineHeight={(value) =>
-						setAttributes({ imageAccordionSubtitleLineHeight: value })
-					}
-					lineHeightUnits={imageAccordionSubtitleLineHeightUnits}
-					onChangeLineHeightUnit={(value) =>
-						setAttributes({ imageAccordionSubtitleLineHeightUnits: value })
-					}
+					globalTypoControlActive={true}
+					storeGlobalTypographyData={(value) => setAttributes({ imageAccordionSubtitleGlobalTypographyData: value })}
 					globalTypoType={imageAccordionSubtitleTypoType}
-					onChangeGlobalTypoType={(value) =>
-						setAttributes({ imageAccordionSubtitleTypoType: value })
-					}
+					onChangeGlobalTypoType={(value) => setAttributes({ imageAccordionSubtitleTypoType: value })}
 					globalTypoOption={imageAccordionSubtitleTypoOption}
-					onChangeGlobalTypoOption={(value) =>
-						setAttributes({ imageAccordionSubtitleTypoOption: value })
-					}
+					onChangeGlobalTypoOption={(value) => setAttributes({ imageAccordionSubtitleTypoOption: value })}
+					fontFamily={imageAccordionSubtitleFontFamily}
+					onChangeFontFamily={(value) => setAttributes({ imageAccordionSubtitleFontFamily: value })}
+					fontSize={imageAccordionSubtitleFontSize}
+					onChangeFontSize={(value) => setAttributes({ imageAccordionSubtitleFontSize: value })}
+					fontSizeUnits={imageAccordionSubtitleFontSizeUnits}
+					onChangeFontSizeUnit={(value) => setAttributes({ imageAccordionSubtitleFontSizeUnits: value })}
+					fontWeight={imageAccordionSubtitleFontWeight}
+					onChangeFontWeight={(value) => setAttributes({ imageAccordionSubtitleFontWeight: value })}
+					fontStyle={imageAccordionSubtitleFontStyle}
+					onChangeFontStyle={(value) => setAttributes({ imageAccordionSubtitleFontStyle: value })}
+					textTransform={imageAccordionSubtitleTransform}
+					onChangeTextTransform={(value) => setAttributes({ imageAccordionSubtitleTransform: value })}
+					textDecoration={imageAccordionSubtitleDecoration}
+					onChangeTextDecoration={(value) => setAttributes({ imageAccordionSubtitleDecoration: value })}
+					letterSpacing={imageAccordionSubtitleLetterSpacing}
+					onChangeLetterSpacing={(value) => setAttributes({ imageAccordionSubtitleLetterSpacing: value })}
+					letterSpacingUnits={imageAccordionSubtitleLetterSpacingUnits}
+					onChangeLetterSpacingUnit={(value) => setAttributes({ imageAccordionSubtitleLetterSpacingUnits: value })}
+					lineHeight={imageAccordionSubtitleLineHeight}
+					onChangeLineHeight={(value) => setAttributes({ imageAccordionSubtitleLineHeight: value })}
+					lineHeightUnits={imageAccordionSubtitleLineHeightUnits}
+					onChangeLineHeightUnit={(value) => setAttributes({ imageAccordionSubtitleLineHeightUnits: value })}
 					deviceType={deviceType}
 					setAttributes={setAttributes}
-					globalTypoControlActive={true}
-					storeGlobalTypographyData={(value) =>
-						setAttributes({ imageAccordionSubtitleGlobalTypographyData: value })
-					}
 				/>
 				<FB_ColorControl
 					label={__("Subtitle Color", "frontis-blocks")}
 					globalColor={imageAccordionSubtitleColor}
-					setGlobalColor={(value) =>
-						setAttributes({ imageAccordionSubtitleColor: value ?? "" })
-					}
+					setGlobalColor={(value) => setAttributes({ imageAccordionSubtitleColor: value ?? "" })}
 				/>
 			</PanelBody>
 
@@ -1539,21 +1423,15 @@ const Inspector = ({ attributes, setAttributes }) => {
 					<FB_ColorControl
 						label={__("Circle Background", "frontis-blocks")}
 						globalColor={imageAccordionIconCircleBgColor}
-						setGlobalColor={(value) =>
-							setAttributes({ imageAccordionIconCircleBgColor: value ?? "" })
-						}
+						setGlobalColor={(value) => setAttributes({ imageAccordionIconCircleBgColor: value ?? "" })}
 					/>
 					<FB_Range
 						label={__("Circle Size", "frontis-blocks")}
 						min={20}
 						max={120}
 						rangeValue={imageAccordionIconCircleSize}
-						onChangeHandler={(value) =>
-							setAttributes({ imageAccordionIconCircleSize: value })
-						}
-						rangeUnitHandler={(value) =>
-							setAttributes({ imageAccordionIconCircleSizeUnits: value })
-						}
+						onChangeHandler={(value) => setAttributes({ imageAccordionIconCircleSize: value })}
+						rangeUnitHandler={(value) => setAttributes({ imageAccordionIconCircleSizeUnits: value })}
 						deviceType={deviceType}
 						units={imageAccordionIconCircleSizeUnits}
 						setAttributes={setAttributes}
@@ -1562,25 +1440,21 @@ const Inspector = ({ attributes, setAttributes }) => {
 					/>
 					<FB_SwitcherControl
 						label={__("Icon Color", "frontis-blocks")}
-						globalSwitcher={iconColorTab}
-						setGlobalSwitcher={setIconColorTab}
+						globalSwitcher={imageAccordionIconColorSwitcher}
+						setGlobalSwitcher={(value) => setAttributes({ imageAccordionIconColorSwitcher: value })}
 					/>
-					{iconColorTab === "normal" && (
+					{imageAccordionIconColorSwitcher === "normal" && (
 						<FB_ColorControl
 							label={__("Color", "frontis-blocks")}
 							globalColor={imageAccordionIconColor}
-							setGlobalColor={(value) =>
-								setAttributes({ imageAccordionIconColor: value ?? "" })
-							}
+							setGlobalColor={(value) => setAttributes({ imageAccordionIconColor: value ?? "" })}
 						/>
 					)}
-					{iconColorTab === "hover" && (
+					{imageAccordionIconColorSwitcher === "hover" && (
 						<FB_ColorControl
 							label={__("Hover Color", "frontis-blocks")}
 							globalColor={imageAccordionIconHoverColor}
-							setGlobalColor={(value) =>
-								setAttributes({ imageAccordionIconHoverColor: value ?? "" })
-							}
+							setGlobalColor={(value) => setAttributes({ imageAccordionIconHoverColor: value ?? "" })}
 						/>
 					)}
 					<FB_Range
@@ -1588,12 +1462,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 						min={10}
 						max={100}
 						rangeValue={imageAccordionIconSize}
-						onChangeHandler={(value) =>
-							setAttributes({ imageAccordionIconSize: value })
-						}
-						rangeUnitHandler={(value) =>
-							setAttributes({ imageAccordionIconSizeUnits: value })
-						}
+						onChangeHandler={(value) => setAttributes({ imageAccordionIconSize: value })}
+						rangeUnitHandler={(value) => setAttributes({ imageAccordionIconSizeUnits: value })}
 						deviceType={deviceType}
 						units={imageAccordionIconSizeUnits}
 						setAttributes={setAttributes}
@@ -1613,21 +1483,15 @@ const Inspector = ({ attributes, setAttributes }) => {
 							<FB_ColorControl
 								label={__("Dot Color", "frontis-blocks")}
 								globalColor={imageAccordionDotColor}
-								setGlobalColor={(value) =>
-									setAttributes({ imageAccordionDotColor: value ?? "" })
-								}
+								setGlobalColor={(value) => setAttributes({ imageAccordionDotColor: value ?? "" })}
 							/>
 							<FB_Range
 								label={__("Dot Size", "frontis-blocks")}
 								min={4}
 								max={50}
 								rangeValue={imageAccordionDotSize}
-								onChangeHandler={(value) =>
-									setAttributes({ imageAccordionDotSize: value })
-								}
-								rangeUnitHandler={(value) =>
-									setAttributes({ imageAccordionDotSizeUnits: value })
-								}
+								onChangeHandler={(value) => setAttributes({ imageAccordionDotSize: value })}
+								rangeUnitHandler={(value) => setAttributes({ imageAccordionDotSizeUnits: value })}
 								deviceType={deviceType}
 								units={imageAccordionDotSizeUnits}
 								setAttributes={setAttributes}
@@ -1652,12 +1516,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 								min={8}
 								max={72}
 								rangeValue={imageAccordionNumberFontSize}
-								onChangeHandler={(value) =>
-									setAttributes({ imageAccordionNumberFontSize: value })
-								}
-								rangeUnitHandler={(value) =>
-									setAttributes({ imageAccordionNumberFontSizeUnits: value })
-								}
+								onChangeHandler={(value) => setAttributes({ imageAccordionNumberFontSize: value })}
+								rangeUnitHandler={(value) => setAttributes({ imageAccordionNumberFontSizeUnits: value })}
 								deviceType={deviceType}
 								units={imageAccordionNumberFontSizeUnits}
 								setAttributes={setAttributes}
@@ -1680,27 +1540,21 @@ const Inspector = ({ attributes, setAttributes }) => {
 							/>
 							<FB_SwitcherControl
 								label={__("Number Color", "frontis-blocks")}
-								globalSwitcher={numberColorTab}
-								setGlobalSwitcher={setNumberColorTab}
+								globalSwitcher={imageAccordionNumberColorSwitcher}
+								setGlobalSwitcher={(value) => setAttributes({ imageAccordionNumberColorSwitcher: value })}
 							/>
-							{numberColorTab === "normal" && (
+							{imageAccordionNumberColorSwitcher === "normal" && (
 								<FB_ColorControl
 									label={__("Color", "frontis-blocks")}
 									globalColor={imageAccordionNumberColor}
-									setGlobalColor={(value) =>
-										setAttributes({ imageAccordionNumberColor: value ?? "" })
-									}
+									setGlobalColor={(value) => setAttributes({ imageAccordionNumberColor: value ?? "" })}
 								/>
 							)}
-							{numberColorTab === "hover" && (
+							{imageAccordionNumberColorSwitcher === "hover" && (
 								<FB_ColorControl
 									label={__("Hover Color", "frontis-blocks")}
 									globalColor={imageAccordionNumberHoverColor}
-									setGlobalColor={(value) =>
-										setAttributes({
-											imageAccordionNumberHoverColor: value ?? "",
-										})
-									}
+									setGlobalColor={(value) => setAttributes({ imageAccordionNumberHoverColor: value ?? "" })}
 								/>
 							)}
 						</>
@@ -1712,101 +1566,65 @@ const Inspector = ({ attributes, setAttributes }) => {
 				<PanelBody title={__("Button", "frontis-blocks")} initialOpen={false}>
 					<FB_TypographyControl
 						label={__("Button Typography", "frontis-blocks")}
-						fontFamily={imageAccordionBtnFontFamily}
-						onChangeFontFamily={(value) =>
-							setAttributes({ imageAccordionBtnFontFamily: value })
-						}
-						fontSize={imageAccordionBtnFontSize}
-						onChangeFontSize={(value) =>
-							setAttributes({ imageAccordionBtnFontSize: value })
-						}
-						fontSizeUnits={imageAccordionBtnFontSizeUnits}
-						onChangeFontSizeUnit={(value) =>
-							setAttributes({ imageAccordionBtnFontSizeUnits: value })
-						}
-						fontWeight={imageAccordionBtnFontWeight}
-						onChangeFontWeight={(value) =>
-							setAttributes({ imageAccordionBtnFontWeight: value })
-						}
-						fontStyle={imageAccordionBtnFontStyle}
-						onChangeFontStyle={(value) =>
-							setAttributes({ imageAccordionBtnFontStyle: value })
-						}
-						textTransform={imageAccordionBtnTransform}
-						onChangeTextTransform={(value) =>
-							setAttributes({ imageAccordionBtnTransform: value })
-						}
-						textDecoration={imageAccordionBtnDecoration}
-						onChangeTextDecoration={(value) =>
-							setAttributes({ imageAccordionBtnDecoration: value })
-						}
-						letterSpacing={imageAccordionBtnLetterSpacing}
-						onChangeLetterSpacing={(value) =>
-							setAttributes({ imageAccordionBtnLetterSpacing: value })
-						}
-						letterSpacingUnits={imageAccordionBtnLetterSpacingUnits}
-						onChangeLetterSpacingUnit={(value) =>
-							setAttributes({ imageAccordionBtnLetterSpacingUnits: value })
-						}
-						lineHeight={imageAccordionBtnLineHeight}
-						onChangeLineHeight={(value) =>
-							setAttributes({ imageAccordionBtnLineHeight: value })
-						}
+						globalTypoControlActive={true}
+						storeGlobalTypographyData={(value) => setAttributes({ imageAccordionBtnGlobalTypographyData: value })}
 						globalTypoType={imageAccordionBtnTypoType}
-						onChangeGlobalTypoType={(value) =>
-							setAttributes({ imageAccordionBtnTypoType: value })
-						}
+						onChangeGlobalTypoType={(value) => setAttributes({ imageAccordionBtnTypoType: value })}
 						globalTypoOption={imageAccordionBtnTypoOption}
-						onChangeGlobalTypoOption={(value) =>
-							setAttributes({ imageAccordionBtnTypoOption: value })
-						}
+						onChangeGlobalTypoOption={(value) => setAttributes({ imageAccordionBtnTypoOption: value })}
+						fontFamily={imageAccordionBtnFontFamily}
+						onChangeFontFamily={(value) => setAttributes({ imageAccordionBtnFontFamily: value })}
+						fontSize={imageAccordionBtnFontSize}
+						onChangeFontSize={(value) => setAttributes({ imageAccordionBtnFontSize: value })}
+						fontSizeUnits={imageAccordionBtnFontSizeUnits}
+						onChangeFontSizeUnit={(value) => setAttributes({ imageAccordionBtnFontSizeUnits: value })}
+						fontWeight={imageAccordionBtnFontWeight}
+						onChangeFontWeight={(value) => setAttributes({ imageAccordionBtnFontWeight: value })}
+						fontStyle={imageAccordionBtnFontStyle}
+						onChangeFontStyle={(value) => setAttributes({ imageAccordionBtnFontStyle: value })}
+						textTransform={imageAccordionBtnTransform}
+						onChangeTextTransform={(value) => setAttributes({ imageAccordionBtnTransform: value })}
+						textDecoration={imageAccordionBtnDecoration}
+						onChangeTextDecoration={(value) => setAttributes({ imageAccordionBtnDecoration: value })}
+						letterSpacing={imageAccordionBtnLetterSpacing}
+						onChangeLetterSpacing={(value) => setAttributes({ imageAccordionBtnLetterSpacing: value })}
+						letterSpacingUnits={imageAccordionBtnLetterSpacingUnits}
+						onChangeLetterSpacingUnit={(value) => setAttributes({ imageAccordionBtnLetterSpacingUnits: value })}
+						lineHeight={imageAccordionBtnLineHeight}
+						onChangeLineHeight={(value) => setAttributes({ imageAccordionBtnLineHeight: value })}
 						deviceType={deviceType}
 						setAttributes={setAttributes}
-						globalTypoControlActive={true}
-						storeGlobalTypographyData={(value) =>
-							setAttributes({ imageAccordionBtnGlobalTypographyData: value })
-						}
 					/>
 					<FB_SwitcherControl
 						label={__("Button Color", "frontis-blocks")}
-						globalSwitcher={btnColorTab}
-						setGlobalSwitcher={setBtnColorTab}
+						globalSwitcher={imageAccordionBtnColorSwitcher}
+						setGlobalSwitcher={(value) => setAttributes({ imageAccordionBtnColorSwitcher: value })}
 					/>
-					{btnColorTab === "normal" && (
+					{imageAccordionBtnColorSwitcher === "normal" && (
 						<>
 							<FB_ColorControl
 								label={__("Text Color", "frontis-blocks")}
 								globalColor={imageAccordionBtnTextColor}
-								setGlobalColor={(value) =>
-									setAttributes({ imageAccordionBtnTextColor: value ?? "" })
-								}
+								setGlobalColor={(value) => setAttributes({ imageAccordionBtnTextColor: value ?? "" })}
 							/>
 							<FB_ColorControl
 								label={__("Background Color", "frontis-blocks")}
 								globalColor={imageAccordionBtnBgColor}
-								setGlobalColor={(value) =>
-									setAttributes({ imageAccordionBtnBgColor: value ?? "" })
-								}
+								setGlobalColor={(value) => setAttributes({ imageAccordionBtnBgColor: value ?? "" })}
 							/>
 						</>
 					)}
-					{btnColorTab === "hover" && (
+					{imageAccordionBtnColorSwitcher === "hover" && (
 						<>
 							<FB_ColorControl
 								label={__("Text Hover Color", "frontis-blocks")}
 								globalColor={imageAccordionBtnHoverTextColor}
-								setGlobalColor={(value) =>
-									setAttributes({
-										imageAccordionBtnHoverTextColor: value ?? "",
-									})
-								}
+								setGlobalColor={(value) => setAttributes({ imageAccordionBtnHoverTextColor: value ?? "" })}
 							/>
 							<FB_ColorControl
 								label={__("Background Hover Color", "frontis-blocks")}
 								globalColor={imageAccordionBtnHoverBgColor}
-								setGlobalColor={(value) =>
-									setAttributes({ imageAccordionBtnHoverBgColor: value ?? "" })
-								}
+								setGlobalColor={(value) => setAttributes({ imageAccordionBtnHoverBgColor: value ?? "" })}
 							/>
 						</>
 					)}
@@ -1822,9 +1640,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 						<FB_ColorControl
 							label={__("Border Color", "frontis-blocks")}
 							globalColor={imageAccordionBtnBorderColor}
-							setGlobalColor={(value) =>
-								setAttributes({ imageAccordionBtnBorderColor: value ?? "" })
-							}
+							setGlobalColor={(value) => setAttributes({ imageAccordionBtnBorderColor: value ?? "" })}
 						/>
 					)}
 					<FB_Spacing
@@ -1835,13 +1651,9 @@ const Inspector = ({ attributes, setAttributes }) => {
 						spacingDesktop={imageAccordionBtnBorderRadiusDesktop}
 						spacingTablet={imageAccordionBtnBorderRadiusTablet}
 						spacingMobile={imageAccordionBtnBorderRadiusMobile}
-						handleSpacingUnitHandler={
-							imageAccordionButtonBorderRadiusHandleSpacingUnitHandler
-						}
+						handleSpacingUnitHandler={imageAccordionButtonBorderRadiusHandleSpacingUnitHandler}
 						spacingCombineBtn={imageAccordionBtnBorderRadiusLink}
-						spacingCombineBtnHandler={
-							imageAccordionBtnBorderRadiusCombineBtnHandlerFn
-						}
+						spacingCombineBtnHandler={imageAccordionBtnBorderRadiusCombineBtnHandlerFn}
 						setAttributes={setAttributes}
 					/>
 					<FB_Spacing
@@ -1852,13 +1664,9 @@ const Inspector = ({ attributes, setAttributes }) => {
 						spacingDesktop={imageAccordionBtnPaddingDesktop}
 						spacingTablet={imageAccordionBtnPaddingTablet}
 						spacingMobile={imageAccordionBtnPaddingMobile}
-						handleSpacingUnitHandler={
-							imageAccordionBtnPaddingHandleSpacingUnitHandler
-						}
+						handleSpacingUnitHandler={imageAccordionBtnPaddingHandleSpacingUnitHandler}
 						spacingCombineBtn={imageAccordionBtnPaddingLink}
-						spacingCombineBtnHandler={
-							imageAccordionBtnPaddingSpacingCombineBtnHandlerFn
-						}
+						spacingCombineBtnHandler={imageAccordionBtnPaddingSpacingCombineBtnHandlerFn}
 						setAttributes={setAttributes}
 					/>
 				</PanelBody>
@@ -1883,11 +1691,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 							max={10000000}
 							label={__("Z Index", "frontis-blocks")}
 							rangeValue={imageAccordionGlobalZIndex}
-							onChangeHandler={(value) =>
-								setAttributes({
-									imageAccordionGlobalZIndex: value === 0 ? undefined : value,
-								})
-							}
+							onChangeHandler={(value) => setAttributes({ imageAccordionGlobalZIndex: value === 0 ? undefined : value })}
 							deviceType={deviceType}
 							setAttributes={setAttributes}
 							rangeStep={1}
@@ -1895,79 +1699,44 @@ const Inspector = ({ attributes, setAttributes }) => {
 							isRangeUnit={false}
 						/>
 
-						{/* <SelectControl
-							label={__("Overflow", "frontis-blocks")}
-							value={imageAccordionOverflow}
-							options={OVERFLOW_OP}
-							onChange={(value) =>
-								setAttributes({ imageAccordionOverflow: value })
-							}
-						/> */}
-
 						<FB_PositionControl
 							deviceType={deviceType}
 							positionType={imageAccordionPositionType}
-							setPositionType={(value) =>
-								setAttributes({ imageAccordionPositionType: value })
-							}
+							setPositionType={(value) => setAttributes({ imageAccordionPositionType: value })}
 							HZOrientationType={imageAccordionHZOrientationType}
-							setHZOrientationType={(value) =>
-								setAttributes({ imageAccordionHZOrientationType: value })
-							}
+							setHZOrientationType={(value) => setAttributes({ imageAccordionHZOrientationType: value })}
 							VROrientationType={imageAccordionVROrientationType}
-							setVROrientationType={(value) =>
-								setAttributes({ imageAccordionVROrientationType: value })
-							}
+							setVROrientationType={(value) => setAttributes({ imageAccordionVROrientationType: value })}
 							HZLeftOffset={imageAccordionHZLeftOffset}
-							setHZLeftOffset={(value) =>
-								setAttributes({ imageAccordionHZLeftOffset: value })
-							}
+							setHZLeftOffset={(value) => setAttributes({ imageAccordionHZLeftOffset: value })}
 							HZLeftOffsetUnits={imageAccordionHZLeftOffsetUnits}
-							setHZLeftOffsetUnits={(value) =>
-								setAttributes({ imageAccordionHZLeftOffsetUnits: value })
-							}
+							setHZLeftOffsetUnits={(value) => setAttributes({ imageAccordionHZLeftOffsetUnits: value })}
 							HZRightOffset={imageAccordionHZRightOffset}
-							setHZRightOffset={(value) =>
-								setAttributes({ imageAccordionHZRightOffset: value })
-							}
+							setHZRightOffset={(value) => setAttributes({ imageAccordionHZRightOffset: value })}
 							HZRightOffsetUnits={imageAccordionHZRightOffsetUnits}
-							setHZRightOffsetUnits={(value) =>
-								setAttributes({ imageAccordionHZRightOffsetUnits: value })
-							}
+							setHZRightOffsetUnits={(value) => setAttributes({ imageAccordionHZRightOffsetUnits: value })}
 							VRTopOffset={imageAccordionVRTopOffset}
-							setVRTopOffset={(value) =>
-								setAttributes({ imageAccordionVRTopOffset: value })
-							}
+							setVRTopOffset={(value) => setAttributes({ imageAccordionVRTopOffset: value })}
 							VRTopOffsetUnits={imageAccordionVRTopOffsetUnits}
-							setVRTopOffsetUnits={(value) =>
-								setAttributes({ imageAccordionVRTopOffsetUnits: value })
-							}
+							setVRTopOffsetUnits={(value) => setAttributes({ imageAccordionVRTopOffsetUnits: value })}
 							VRBottomOffset={imageAccordionVRBottomOffset}
-							setVRBottomOffset={(value) =>
-								setAttributes({ imageAccordionVRBottomOffset: value })
-							}
+							setVRBottomOffset={(value) => setAttributes({ imageAccordionVRBottomOffset: value })}
 							VRBottomOffsetUnits={imageAccordionVRBottomOffsetUnits}
-							setVRBottomOffsetUnits={(value) =>
-								setAttributes({ imageAccordionVRBottomOffsetUnits: value })
-							}
+							setVRBottomOffsetUnits={(value) => setAttributes({ imageAccordionVRBottomOffsetUnits: value })}
 							setAttributes={setAttributes}
 						/>
 
 						<FB_InputControl
 							label={__("CSS ID", "frontis-blocks")}
 							value={imageAccordionWraperID}
-							onChangeValue={(value) =>
-								setAttributes({ imageAccordionWraperID: value })
-							}
+							onChangeValue={(value) =>setAttributes({ imageAccordionWraperID: value })}
 							helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
 						/>
 
 						<FB_InputControl
 							label={__("CSS Class", "frontis-blocks")}
 							value={imageAccordionWraperClass}
-							onChangeValue={(value) =>
-								setAttributes({ imageAccordionWraperClass: value })
-							}
+							onChangeValue={(value) => setAttributes({ imageAccordionWraperClass: value })}
 							helpText={__("Separate with spaces key.", "frontis-blocks")}
 						/>
 					</PanelBody>
@@ -1977,146 +1746,55 @@ const Inspector = ({ attributes, setAttributes }) => {
 					>
 						<FB_BackgroundColorControl
 							bgColorSwitcher={imageAccordionBgColorSwitcher}
-							setBgColorSwitcher={(value) =>
-								setAttributes({ imageAccordionBgColorSwitcher: value })
-							}
+							setBgColorSwitcher={(value) => setAttributes({ imageAccordionBgColorSwitcher: value })}
 							normalBackgroundType={imageAccordionBackgroundType}
-							setNormalBackgroundType={(value) =>
-								setAttributes({ imageAccordionBackgroundType: value })
-							}
+							setNormalBackgroundType={(value) => setAttributes({ imageAccordionBackgroundType: value })}
 							normalClassicColor={imageAccordionClassicColor}
-							setNormalClassicColor={(value) =>
-								setAttributes({
-									imageAccordionClassicColor: value === undefined ? "" : value,
-								})
-							}
+							setNormalClassicColor={(value) => setAttributes({ imageAccordionClassicColor: value === undefined ? "" : value })}
 							normalGradientColor={imageAccordionGradientColor}
-							setNormalGradientColor={(value) =>
-								setAttributes({
-									imageAccordionGradientColor:
-										value === undefined ? null : value,
-								})
-							}
-							normalCustomGradientSwitcher={
-								imageAccordionCustomGradientSwitcher
-							}
-							setNormalCustomGradientSwitcher={(value) =>
-								setAttributes({ imageAccordionCustomGradientSwitcher: value })
-							}
-							normalCustomGradientInputValue={
-								imageAccordionCustomGradientInputValue
-							}
-							setNormalCustomGradientInputValue={(value) =>
-								setAttributes({ imageAccordionCustomGradientInputValue: value })
-							}
+							setNormalGradientColor={(value) => setAttributes({ imageAccordionGradientColor: value === undefined ? null : value })}
+							normalCustomGradientSwitcher={imageAccordionCustomGradientSwitcher}
+							setNormalCustomGradientSwitcher={(value) => setAttributes({ imageAccordionCustomGradientSwitcher: value })}
+							normalCustomGradientInputValue={imageAccordionCustomGradientInputValue}
+							setNormalCustomGradientInputValue={(value) => setAttributes({ imageAccordionCustomGradientInputValue: value })}
 							normalBackgroundImageUrl={imageAccordionBackgroundImageUrl}
-							setNormalBackgroundImageUrl={(value) =>
-								setAttributes({ imageAccordionBackgroundImageUrl: value })
-							}
+							setNormalBackgroundImageUrl={(value) => setAttributes({ imageAccordionBackgroundImageUrl: value })}
 							normalBackgroundImageAlt={imageAccordionBackgroundImageAlt}
-							setNormalBackgroundImageAlt={(value) =>
-								setAttributes({ imageAccordionBackgroundImageAlt: value })
-							}
+							setNormalBackgroundImageAlt={(value) => setAttributes({ imageAccordionBackgroundImageAlt: value })}
 							normalBackgroundImageID={imageAccordionBackgroundImageID}
-							setNormalBackgroundImageID={(value) =>
-								setAttributes({ imageAccordionBackgroundImageID: value })
-							}
-							normalBackgroundImagePosition={
-								imageAccordionBackgroundImagePosition
-							}
-							setNormalBackgroundImagePosition={(value) =>
-								setAttributes({ imageAccordionBackgroundImagePosition: value })
-							}
-							normalBackgroundImageAttachment={
-								imageAccordionBackgroundImageAttachment
-							}
-							setNormalBackgroundImageAttachment={(value) =>
-								setAttributes({
-									imageAccordionBackgroundImageAttachment: value,
-								})
-							}
+							setNormalBackgroundImageID={(value) => setAttributes({ imageAccordionBackgroundImageID: value })}
+							normalBackgroundImagePosition={imageAccordionBackgroundImagePosition}
+							setNormalBackgroundImagePosition={(value) => setAttributes({ imageAccordionBackgroundImagePosition: value })}
+							normalBackgroundImageAttachment={imageAccordionBackgroundImageAttachment}
+							setNormalBackgroundImageAttachment={(value) => setAttributes({ imageAccordionBackgroundImageAttachment: value })}
 							normalBackgroundImageRepeat={imageAccordionBackgroundImageRepeat}
-							setNormalBackgroundImageRepeat={(value) =>
-								setAttributes({ imageAccordionBackgroundImageRepeat: value })
-							}
+							setNormalBackgroundImageRepeat={(value) => setAttributes({ imageAccordionBackgroundImageRepeat: value })}
 							normalBackgroundImageSize={imageAccordionBackgroundImageSize}
-							setNormalBackgroundImageSize={(value) =>
-								setAttributes({ imageAccordionBackgroundImageSize: value })
-							}
+							setNormalBackgroundImageSize={(value) => setAttributes({ imageAccordionBackgroundImageSize: value })}
 							hoverBackgroundType={imageAccordionHoverBackgroundType}
-							setHoverBackgroundType={(value) =>
-								setAttributes({ imageAccordionHoverBackgroundType: value })
-							}
+							setHoverBackgroundType={(value) => setAttributes({ imageAccordionHoverBackgroundType: value })}
 							hoverClassicColor={imageAccordionHoverClassicColor}
-							setHoverClassicColor={(value) =>
-								setAttributes({
-									imageAccordionHoverClassicColor:
-										value === undefined ? "" : value,
-								})
-							}
+							setHoverClassicColor={(value) => setAttributes({ imageAccordionHoverClassicColor: value === undefined ? "" : value })}
 							hoverGradientColor={imageAccordionHoverGradientColor}
-							setHoverGradientColor={(value) =>
-								setAttributes({
-									imageAccordionHoverGradientColor:
-										value === undefined ? null : value,
-								})
-							}
-							hoverCustomGradientSwitcher={
-								imageAccordionHoverCustomGradientSwitcher
-							}
-							setHoverCustomGradientSwitcher={(value) =>
-								setAttributes({
-									imageAccordionHoverCustomGradientSwitcher: value,
-								})
-							}
-							hoverCustomGradientInputValue={
-								imageAccordionHoverCustomGradientInputValue
-							}
-							setHoverCustomGradientInputValue={(value) =>
-								setAttributes({
-									imageAccordionHoverCustomGradientInputValue: value,
-								})
-							}
+							setHoverGradientColor={(value) => setAttributes({ imageAccordionHoverGradientColor: value === undefined ? null : value })}
+							hoverCustomGradientSwitcher={imageAccordionHoverCustomGradientSwitcher}
+							setHoverCustomGradientSwitcher={(value) => setAttributes({ imageAccordionHoverCustomGradientSwitcher: value })}
+							hoverCustomGradientInputValue={imageAccordionHoverCustomGradientInputValue}
+							setHoverCustomGradientInputValue={(value) => setAttributes({ imageAccordionHoverCustomGradientInputValue: value })}
 							hoverBackgroundImageUrl={imageAccordionHoverBackgroundImageUrl}
-							setHoverBackgroundImageUrl={(value) =>
-								setAttributes({ imageAccordionHoverBackgroundImageUrl: value })
-							}
+							setHoverBackgroundImageUrl={(value) => setAttributes({ imageAccordionHoverBackgroundImageUrl: value })}
 							hoverBackgroundImageAlt={imageAccordionHoverBackgroundImageAlt}
-							setHoverBackgroundImageAlt={(value) =>
-								setAttributes({ imageAccordionHoverBackgroundImageAlt: value })
-							}
+							setHoverBackgroundImageAlt={(value) => setAttributes({ imageAccordionHoverBackgroundImageAlt: value })}
 							hoverBackgroundImageID={imageAccordionHoverBackgroundImageID}
-							setHoverBackgroundImageID={(value) =>
-								setAttributes({ imageAccordionHoverBackgroundImageID: value })
-							}
-							hoverBackgroundImagePosition={
-								imageAccordionHoverBackgroundImagePosition
-							}
-							setHoverBackgroundImagePosition={(value) =>
-								setAttributes({
-									imageAccordionHoverBackgroundImagePosition: value,
-								})
-							}
-							hoverBackgroundImageAttachment={
-								imageAccordionHoverBackgroundImageAttachment
-							}
-							setHoverBackgroundImageAttachment={(value) =>
-								setAttributes({
-									imageAccordionHoverBackgroundImageAttachment: value,
-								})
-							}
-							hoverBackgroundImageRepeat={
-								imageAccordionHoverBackgroundImageRepeat
-							}
-							setHoverBackgroundImageRepeat={(value) =>
-								setAttributes({
-									imageAccordionHoverBackgroundImageRepeat: value,
-								})
-							}
+							setHoverBackgroundImageID={(value) => setAttributes({ imageAccordionHoverBackgroundImageID: value })}
+							hoverBackgroundImagePosition={imageAccordionHoverBackgroundImagePosition}
+							setHoverBackgroundImagePosition={(value) => setAttributes({ imageAccordionHoverBackgroundImagePosition: value })}
+							hoverBackgroundImageAttachment={imageAccordionHoverBackgroundImageAttachment}
+							setHoverBackgroundImageAttachment={(value) => setAttributes({ imageAccordionHoverBackgroundImageAttachment: value })}
+							hoverBackgroundImageRepeat={imageAccordionHoverBackgroundImageRepeat}
+							setHoverBackgroundImageRepeat={(value) => setAttributes({ imageAccordionHoverBackgroundImageRepeat: value })}
 							hoverBackgroundImageSize={imageAccordionHoverBackgroundImageSize}
-							setHoverBackgroundImageSize={(value) =>
-								setAttributes({ imageAccordionHoverBackgroundImageSize: value })
-							}
+							setHoverBackgroundImageSize={(value) => setAttributes({ imageAccordionHoverBackgroundImageSize: value })}
 						/>
 					</PanelBody>
 					<PanelBody title={__("Border", "frontis-blocks")} initialOpen={false}>
@@ -2131,23 +1809,14 @@ const Inspector = ({ attributes, setAttributes }) => {
 						<FB_SwitcherControl
 							label={__("Border Color", "frontis-blocks")}
 							globalSwitcher={imageAccordionWrapperBorderColorSwitcher}
-							setGlobalSwitcher={(value) =>
-								setAttributes({
-									imageAccordionWrapperBorderColorSwitcher: value,
-								})
-							}
+							setGlobalSwitcher={(value) => setAttributes({ imageAccordionWrapperBorderColorSwitcher: value })}
 						/>
 
 						{imageAccordionWrapperBorderColorSwitcher === "normal" && (
 							<FB_ColorControl
 								label={__("Normal Color", "frontis-blocks")}
 								globalColor={imageAccordionWrapperBorderColor}
-								setGlobalColor={(value) =>
-									setAttributes({
-										imageAccordionWrapperBorderColor:
-											value === undefined ? "" : value,
-									})
-								}
+								setGlobalColor={(value) => setAttributes({ imageAccordionWrapperBorderColor: value === undefined ? "" : value })}
 							/>
 						)}
 
@@ -2155,51 +1824,33 @@ const Inspector = ({ attributes, setAttributes }) => {
 							<FB_ColorControl
 								label={__("Hover Color", "frontis-blocks")}
 								globalColor={imageAccordionWrapperBorderHoverColor}
-								setGlobalColor={(value) =>
-									setAttributes({
-										imageAccordionWrapperBorderHoverColor:
-											value === undefined ? "" : value,
-									})
-								}
+								setGlobalColor={(value) => setAttributes({ imageAccordionWrapperBorderHoverColor: value === undefined ? "" : value })}
 							/>
 						)}
 						<FB_Spacing
 							label={"Border Width"}
 							deviceType={deviceType}
-							spacingUnitsHandler={
-								imageAccordionWrapperBorderTypeHandleSpacingUnitHandler
-							}
+							spacingUnitsHandler={imageAccordionWrapperBorderTypeUnitsHandler}
 							spacingUnits={imageAccordionWrapperBorderTypeUnits}
 							spacingDesktop={imageAccordionWrapperBorderTypeDesktop}
 							spacingTablet={imageAccordionWrapperBorderTypeTablet}
 							spacingMobile={imageAccordionWrapperBorderTypeMobile}
-							handleSpacingUnitHandler={
-								imageAccordionWrapperBorderTypeHandleSpacingUnitHandler
-							}
-							spacingUnitsHandler={imageAccordionWrapperBorderTypeUnitsHandler}
+							handleSpacingUnitHandler={imageAccordionWrapperBorderTypeHandleSpacingUnitHandler}
 							spacingCombineBtn={imageAccordionWrapperBorderTypeLink}
-							spacingCombineBtnHandler={
-								imageAccordionWrapperBorderTypeCombineBtnHandlerFn
-							}
+							spacingCombineBtnHandler={imageAccordionWrapperBorderTypeCombineBtnHandlerFn}
 							setAttributes={setAttributes}
 						/>
 						<FB_Spacing
 							label={"Border Radius"}
 							deviceType={deviceType}
-							spacingUnitsHandler={
-								imageAccordionWrapperBorderRadiusHandleSpacingUnitHandler
-							}
+							spacingUnitsHandler={imageAccordionWrapperBorderRadiusUnitsHandler}
 							spacingUnits={imageAccordionWrapperBorderRadiusUnits}
 							spacingDesktop={imageAccordionWrapperBorderRadiusDesktop}
 							spacingTablet={imageAccordionWrapperBorderRadiusTablet}
 							spacingMobile={imageAccordionWrapperBorderRadiusMobile}
-							handleSpacingUnitHandler={
-								imageAccordionWrapperBorderRadiusUnitsHandler
-							}
+							handleSpacingUnitHandler={imageAccordionWrapperBorderRadiusHandleSpacingUnitHandler}
 							spacingCombineBtn={imageAccordionWrapperBorderRadiusLink}
-							spacingCombineBtnHandler={
-								imageAccordionWrapperBorderRadiusCombineBtnHandlerFn
-							}
+							spacingCombineBtnHandler={imageAccordionWrapperBorderRadiusCombineBtnHandlerFn}
 							setAttributes={setAttributes}
 						/>
 					</PanelBody>
@@ -2215,13 +1866,9 @@ const Inspector = ({ attributes, setAttributes }) => {
 							spacingDesktop={imageAccordionPaddingDesktop}
 							spacingTablet={imageAccordionPaddingTablet}
 							spacingMobile={imageAccordionPaddingMobile}
-							handleSpacingUnitHandler={
-								imageAccordionPaddingHandleSpacingUnitHandler
-							}
+							handleSpacingUnitHandler={imageAccordionPaddingHandleSpacingUnitHandler}
 							spacingCombineBtn={imageAccordionPaddingLink}
-							spacingCombineBtnHandler={
-								imageAccordionPaddingSpacingCombineBtnHandlerFn
-							}
+							spacingCombineBtnHandler={imageAccordionPaddingSpacingCombineBtnHandlerFn}
 							setAttributes={setAttributes}
 						/>
 						<FB_Spacing
@@ -2232,13 +1879,9 @@ const Inspector = ({ attributes, setAttributes }) => {
 							spacingDesktop={imageAccordionMarginDesktop}
 							spacingTablet={imageAccordionMarginTablet}
 							spacingMobile={imageAccordionMarginMobile}
-							handleSpacingUnitHandler={
-								imageAccordionMarginHandleSpacingUnitHandler
-							}
+							handleSpacingUnitHandler={imageAccordionMarginHandleSpacingUnitHandler}
 							spacingCombineBtn={imageAccordionMarginLink}
-							spacingCombineBtnHandler={
-								imageAccordionMarginSpacingCombineBtnHandlerFn
-							}
+							spacingCombineBtnHandler={imageAccordionMarginSpacingCombineBtnHandlerFn}
 							setAttributes={setAttributes}
 						/>
 					</PanelBody>
@@ -2250,17 +1893,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 					>
 						<FB_VisibilityControl
 							desktopValue={imageAccordionDesktopSwitcher}
-							setDesktopValue={(value) =>
-								setAttributes({ imageAccordionDesktopSwitcher: value })
-							}
+							setDesktopValue={(value) => setAttributes({ imageAccordionDesktopSwitcher: value })}
 							tabletValue={imageAccordionTabletSwitcher}
-							setTabletValue={(value) =>
-								setAttributes({ imageAccordionTabletSwitcher: value })
-							}
+							setTabletValue={(value) => setAttributes({ imageAccordionTabletSwitcher: value })}
 							mobileValue={imageAccordionMobileSwitcher}
-							setMobileValue={(value) =>
-								setAttributes({ imageAccordionMobileSwitcher: value })
-							}
+							setMobileValue={(value) => setAttributes({ imageAccordionMobileSwitcher: value })}
 						/>
 					</PanelBody>
 
@@ -2270,9 +1907,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 					>
 						<FB_CustomCSSEditor
 							value={imageAccordionCustomCSS}
-							onChangeValue={(value) =>
-								setAttributes({ imageAccordionCustomCSS: value })
-							}
+							onChangeValue={(value) => setAttributes({ imageAccordionCustomCSS: value })}
 						/>
 					</PanelBody>
 				</div>

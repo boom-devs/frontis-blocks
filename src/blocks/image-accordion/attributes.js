@@ -1025,6 +1025,26 @@ const attributes = {
 		type: "string",
 		default: "none",
 	},
+	imageAccordionOverlayColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	imageAccordionTitleColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	imageAccordionIconColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	imageAccordionNumberColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	imageAccordionBtnColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
 	imageAccordionWrapperBorderColorSwitcher: {
 		type: "string",
 		default: "normal",
