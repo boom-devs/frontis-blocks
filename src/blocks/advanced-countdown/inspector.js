@@ -718,7 +718,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 		setAttributes({
 			advancedCountdownSeparatorSpacing: {
 				...advancedCountdownSeparatorSpacing,
-				unit: unit,
+				[deviceType]: unit,
 			},
 		});
 	};
@@ -742,7 +742,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 		setAttributes({
 			advancedCountdownIconSize: {
 				...advancedCountdownIconSize,
-				unit: unit,
+				[deviceType]: unit,
 			},
 		});
 	};
@@ -778,7 +778,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 		setAttributes({
 			advancedCountdownFooterPadding: {
 				...advancedCountdownFooterPadding,
-				unit: unit,
+				[deviceType]: unit,
 			},
 		});
 	};
@@ -820,7 +820,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 		setAttributes({
 			advancedCountdownFooterMargin: {
 				...advancedCountdownFooterMargin,
-				unit: unit,
+				[deviceType]: unit,
 			},
 		});
 	};
@@ -1017,7 +1017,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 								setAttributes({
 									advancedCountdownContainerSizeStyle3: {
 										...advancedCountdownContainerSizeStyle3,
-										unit: value,
+										[deviceType]: value,
 									},
 								})
 							}
@@ -1044,7 +1044,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 								setAttributes({
 									advancedCountdownContainerSizeStyle3Container: {
 										...advancedCountdownContainerSizeStyle3Container,
-										unit: value,
+										[deviceType]: value,
 									},
 								})
 							}
@@ -1074,7 +1074,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 							setAttributes({
 								advancedCountdownContainerSizeStyle5: {
 									...advancedCountdownContainerSizeStyle5,
-									unit: value,
+									[deviceType]: value,
 								},
 							})
 						}
@@ -1321,7 +1321,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 							setAttributes({
 								advancedCountdownPreset5DashGap: {
 									...advancedCountdownPreset5DashGap,
-									unit: value,
+									[deviceType]: value,
 								},
 							})
 						}
@@ -1351,7 +1351,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 							setAttributes({
 								advancedCountdownPreset4DashGap: {
 									...advancedCountdownPreset4DashGap,
-									unit: value,
+									[deviceType]: value,
 								},
 							})
 						}
@@ -1590,7 +1590,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 							setAttributes({
 								advancedCountdownStyle3TimeGap: {
 									...advancedCountdownStyle3TimeGap,
-									unit: value,
+									[deviceType]: value,
 								},
 							})
 						}
