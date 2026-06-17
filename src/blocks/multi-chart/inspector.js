@@ -280,111 +280,925 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 	const deviceType = useDeviceType();
 
-	// Helper Handlers
-	const handleSpacingUnits = (attr, unit) => {
-		setAttributes({ [attr]: { ...attributes[attr], [deviceType]: unit } });
-	};
-	const handleSpacingValue = (attrPrefix, event, position, isLinked) => {
+	// canvas padding
+
+	const multiChartItemWrapperPaddingHandleSpacingUnitHandler = (
+		event,
+		position,
+	) => {
 		const value = event.target.value;
-		const attrName = `${attrPrefix}${deviceType}`;
-		if (isLinked) {
-			setAttributes({
-				[attrName]: { top: value, right: value, bottom: value, left: value },
-			});
+		if (canvasPaddingLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						canvasPaddingDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						canvasPaddingTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						canvasPaddingMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
 		} else {
-			setAttributes({
-				[attrName]: { ...attributes[attrName], [position]: value },
-			});
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						canvasPaddingDesktop: {
+							...canvasPaddingDesktop,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						canvasPaddingTablet: { ...canvasPaddingTablet, [position]: value },
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						canvasPaddingMobile: { ...canvasPaddingMobile, [position]: value },
+					});
+					break;
+				default:
+					break;
+			}
 		}
 	};
 
-	// MultiChart Wrapper Handlers
-	const handleMultiChartBorderUnits = (value) =>
-		handleSpacingUnits("multiChartWrapperBorderTypeUnits", value);
-	const handleMultiChartBorderValue = (event, position) =>
-		handleSpacingValue(
-			"multiChartWrapperBorderType",
-			event,
-			position,
-			multiChartWrapperBorderTypeLink,
-		);
+	const multiChartItemWrapperPaddingSpacingCombineBtnHandlerFn = () => {
+		setAttributes({ canvasPaddingLink: !canvasPaddingLink });
+	};
 
-	const handleMultiChartBorderRadiusUnits = (value) =>
-		handleSpacingUnits("multiChartWrapperBorderRadiusUnits", value);
-	const handleMultiChartBorderRadiusValue = (event, position) =>
-		handleSpacingValue(
-			"multiChartWrapperBorderRadius",
-			event,
-			position,
-			multiChartWrapperBorderRadiusLink,
-		);
+	const multiChartItemWrapperPaddingSpacingUnitsHandler = (unit) => {
+		setAttributes({
+			canvasPaddingUnits: {
+				...canvasPaddingUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+	// canvas Margin
 
-	const handleMultiChartPaddingUnits = (value) =>
-		handleSpacingUnits("multiChartPaddingUnits", value);
-	const handleMultiChartPaddingValue = (event, position) =>
-		handleSpacingValue(
-			"multiChartPadding",
-			event,
-			position,
-			multiChartPaddingLink,
-		);
+	const multiChartItemWrapperMarginHandleSpacingUnitHandler = (
+		event,
+		position,
+	) => {
+		const value = event.target.value;
+		if (canvasMarginLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						canvasMarginDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						canvasMarginTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						canvasMarginMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						canvasMarginDesktop: { ...canvasMarginDesktop, [position]: value },
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						canvasMarginTablet: { ...canvasMarginTablet, [position]: value },
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						canvasMarginMobile: { ...canvasMarginMobile, [position]: value },
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
 
-	const handleMultiChartMarginUnits = (value) =>
-		handleSpacingUnits("multiChartMarginUnits", value);
-	const handleMultiChartMarginValue = (event, position) =>
-		handleSpacingValue(
-			"multiChartMargin",
-			event,
-			position,
-			multiChartMarginLink,
-		);
+	const multiChartItemWrapperMarginSpacingCombineBtnHandlerFn = () => {
+		setAttributes({ canvasMarginLink: !canvasMarginLink });
+	};
 
-	// Chart Body Handlers
-	const handleChartBodyPaddingUnits = (value) =>
-		handleSpacingUnits("chartBodyPaddingUnits", value);
-	const handleChartBodyPaddingValue = (event, position) =>
-		handleSpacingValue(
-			"chartBodyPadding",
-			event,
-			position,
-			chartBodyPaddingLink,
-		);
+	const multiChartItemWrapperMarginSpacingUnitsHandler = (unit) => {
+		setAttributes({
+			canvasMarginUnits: {
+				...canvasMarginUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
 
-	const handleChartBodyMarginUnits = (value) =>
-		handleSpacingUnits("chartBodyMarginUnits", value);
-	const handleChartBodyMarginValue = (event, position) =>
-		handleSpacingValue("chartBodyMargin", event, position, chartBodyMarginLink);
+	/** Start MultiChart Wrapper Border Width */
+	const handleMultiChartWrapperBorderUnitHandlerFn = (event, position) => {
+		const value = event.target.value;
+		if (multiChartWrapperBorderTypeLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						multiChartWrapperBorderTypeDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						multiChartWrapperBorderTypeTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						multiChartWrapperBorderTypeMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						multiChartWrapperBorderTypeDesktop: {
+							...multiChartWrapperBorderTypeDesktop,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						multiChartWrapperBorderTypeTablet: {
+							...multiChartWrapperBorderTypeTablet,
+							[position]: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						multiChartWrapperBorderTypeMobile: {
+							...multiChartWrapperBorderTypeMobile,
+							[position]: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
 
-	const handleChartBodyBorderRadiusUnits = (value) =>
-		handleSpacingUnits("chartBodyBorderRadiusUnits", value);
-	const handleChartBodyBorderRadiusValue = (event, position) =>
-		handleSpacingValue(
-			"chartBodyBorderRadius",
-			event,
-			position,
-			chartBodyBorderRadiusLink,
-		);
+	const multiChartWrapperBorderTypeUnitsHandler = (unit) => {
+		setAttributes({
+			multiChartWrapperBorderTypeUnits: {
+				...multiChartWrapperBorderTypeUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
 
-	// Toggle Button Handlers
-	const handleToggleBtnPaddingUnits = (value) =>
-		handleSpacingUnits("toggleBtnPaddingUnits", value);
-	const handleToggleBtnPaddingValue = (event, position) =>
-		handleSpacingValue(
-			"toggleBtnPadding",
-			event,
-			position,
-			toggleBtnPaddingLink,
-		);
+	const multiChartWrapperBorderCombineBtnHandlerFn = () => {
+		setAttributes({
+			multiChartWrapperBorderTypeLink: !multiChartWrapperBorderTypeLink,
+		});
+	};
+	/** End MultiChart Wrapper Border Width */
 
-	const handleToggleBtnBorderRadiusUnits = (value) =>
-		handleSpacingUnits("toggleBtnBorderRadiusUnits", value);
-	const handleToggleBtnBorderRadiusValue = (event, position) =>
-		handleSpacingValue(
-			"toggleBtnBorderRadius",
-			event,
-			position,
-			toggleBtnBorderRadiusLink,
-		);
+	/** Start MultiChart Wrapper Border Radius */
+	const multiChartWrapperHandleSpacingUnitHandlerFn = (event, position) => {
+		const value = event.target.value;
+		if (multiChartWrapperBorderRadiusLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						multiChartWrapperBorderRadiusDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						multiChartWrapperBorderRadiusTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						multiChartWrapperBorderRadiusMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						multiChartWrapperBorderRadiusDesktop: {
+							...multiChartWrapperBorderRadiusDesktop,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						multiChartWrapperBorderRadiusTablet: {
+							...multiChartWrapperBorderRadiusTablet,
+							[position]: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						multiChartWrapperBorderRadiusMobile: {
+							...multiChartWrapperBorderRadiusMobile,
+							[position]: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const multiChartWrapperBorderRadiusUnitsHandler = (unit) => {
+		setAttributes({
+			multiChartWrapperBorderRadiusUnits: {
+				...multiChartWrapperBorderRadiusUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+
+	const multiChartWrapperCombineBtnHandlerFn = () => {
+		setAttributes({
+			multiChartWrapperBorderRadiusLink: !multiChartWrapperBorderRadiusLink,
+		});
+	};
+	/** End MultiChart Wrapper Border Radius */
+
+	/** Start MultiChart Padding */
+	const multiChartPaddingHandleSpacingUnitHandler = (event, position) => {
+		const value = event.target.value;
+		if (multiChartPaddingLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						multiChartPaddingDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						multiChartPaddingTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						multiChartPaddingMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						multiChartPaddingDesktop: {
+							...multiChartPaddingDesktop,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						multiChartPaddingTablet: {
+							...multiChartPaddingTablet,
+							[position]: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						multiChartPaddingMobile: {
+							...multiChartPaddingMobile,
+							[position]: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const multiChartPaddingSpacingCombineBtnHandlerFn = () => {
+		setAttributes({ multiChartPaddingLink: !multiChartPaddingLink });
+	};
+
+	const multiChartPaddingSpacingUnitsHandler = (unit) => {
+		setAttributes({
+			multiChartPaddingUnits: {
+				...multiChartPaddingUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+	/** End MultiChart Padding */
+
+	/** Start MultiChart Margin */
+	const handleMultiChartMarginValue = (event, position) => {
+		const value = event.target.value;
+		if (multiChartMarginLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						multiChartMarginDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						multiChartMarginTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						multiChartMarginMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						multiChartMarginDesktop: {
+							...multiChartMarginDesktop,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						multiChartMarginTablet: {
+							...multiChartMarginTablet,
+							[position]: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						multiChartMarginMobile: {
+							...multiChartMarginMobile,
+							[position]: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const handleMultiChartMarginSpacingCombineBtnHandlerFn = () => {
+		setAttributes({ multiChartMarginLink: !multiChartMarginLink });
+	};
+
+	const handleMultiChartMarginUnits = (unit) => {
+		setAttributes({
+			multiChartMarginUnits: {
+				...multiChartMarginUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+	/** End MultiChart Margin */
+
+	/** Start Chart Body Padding */
+	const chartBodyPaddingHandleSpacingUnitHandler = (event, position) => {
+		const value = event.target.value;
+		if (chartBodyPaddingLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						chartBodyPaddingDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						chartBodyPaddingTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						chartBodyPaddingMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						chartBodyPaddingDesktop: {
+							...chartBodyPaddingDesktop,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						chartBodyPaddingTablet: {
+							...chartBodyPaddingTablet,
+							[position]: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						chartBodyPaddingMobile: {
+							...chartBodyPaddingMobile,
+							[position]: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const chartBodyPaddingSpacingUnitsHandler = (unit) => {
+		setAttributes({
+			chartBodyPaddingUnits: {
+				...chartBodyPaddingUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+
+	const chartBodyPaddingSpacingCombineBtnHandlerFn = () => {
+		setAttributes({ chartBodyPaddingLink: !chartBodyPaddingLink });
+	};
+	/** End Chart Body Padding */
+
+	/** Start Chart Body Margin */
+	const chartBodyMarginHandleSpacingUnitHandler = (event, position) => {
+		const value = event.target.value;
+		if (chartBodyMarginLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						chartBodyMarginDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						chartBodyMarginTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						chartBodyMarginMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						chartBodyMarginDesktop: {
+							...chartBodyMarginDesktop,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						chartBodyMarginTablet: {
+							...chartBodyMarginTablet,
+							[position]: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						chartBodyMarginMobile: {
+							...chartBodyMarginMobile,
+							[position]: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const chartBodyMarginSpacingUnitsHandler = (unit) => {
+		setAttributes({
+			chartBodyMarginUnits: {
+				...chartBodyMarginUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+
+	const chartBodyMarginSpacingCombineBtnHandlerFn = () => {
+		setAttributes({ chartBodyMarginLink: !chartBodyMarginLink });
+	};
+	/** End Chart Body Margin */
+
+	/** Start Chart Body Border Radius */
+	const chartBodyBorderRadiusHandleSpacingUnitHandler = (event, position) => {
+		const value = event.target.value;
+		if (chartBodyBorderRadiusLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						chartBodyBorderRadiusDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						chartBodyBorderRadiusTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						chartBodyBorderRadiusMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						chartBodyBorderRadiusDesktop: {
+							...chartBodyBorderRadiusDesktop,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						chartBodyBorderRadiusTablet: {
+							...chartBodyBorderRadiusTablet,
+							[position]: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						chartBodyBorderRadiusMobile: {
+							...chartBodyBorderRadiusMobile,
+							[position]: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const chartBodyBorderRadiusSpacingUnitsHandler = (unit) => {
+		setAttributes({
+			chartBodyBorderRadiusUnits: {
+				...chartBodyBorderRadiusUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+
+	const chartBodyBorderRadiusCombineBtnHandlerFn = () => {
+		setAttributes({
+			chartBodyBorderRadiusLink: !chartBodyBorderRadiusLink,
+		});
+	};
+	/** End Chart Body Border Radius */
+
+	/** Start Toggle Button Padding */
+	const toggleBtnPaddingHandleSpacingUnitHandler = (event, position) => {
+		const value = event.target.value;
+		if (toggleBtnPaddingLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						toggleBtnPaddingDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						toggleBtnPaddingTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						toggleBtnPaddingMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						toggleBtnPaddingDesktop: {
+							...toggleBtnPaddingDesktop,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						toggleBtnPaddingTablet: {
+							...toggleBtnPaddingTablet,
+							[position]: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						toggleBtnPaddingMobile: {
+							...toggleBtnPaddingMobile,
+							[position]: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const toggleBtnPaddingSpacingUnitsHandler = (unit) => {
+		setAttributes({
+			toggleBtnPaddingUnits: {
+				...toggleBtnPaddingUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+
+	const toggleBtnPaddingSpacingCombineBtnHandlerFn = () => {
+		setAttributes({ toggleBtnPaddingLink: !toggleBtnPaddingLink });
+	};
+	/** End Toggle Button Padding */
+
+	/** Start Toggle Button Border Radius */
+	const toggleBtnBorderRadiusHandleSpacingUnitHandler = (event, position) => {
+		const value = event.target.value;
+		if (toggleBtnBorderRadiusLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						toggleBtnBorderRadiusDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						toggleBtnBorderRadiusTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						toggleBtnBorderRadiusMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						toggleBtnBorderRadiusDesktop: {
+							...toggleBtnBorderRadiusDesktop,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						toggleBtnBorderRadiusTablet: {
+							...toggleBtnBorderRadiusTablet,
+							[position]: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						toggleBtnBorderRadiusMobile: {
+							...toggleBtnBorderRadiusMobile,
+							[position]: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const toggleBtnBorderRadiusSpacingUnitsHandler = (unit) => {
+		setAttributes({
+			toggleBtnBorderRadiusUnits: {
+				...toggleBtnBorderRadiusUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+
+	const toggleBtnBorderRadiusSpacingCombineBtnHandlerFn = () => {
+		setAttributes({ toggleBtnBorderRadiusLink: !toggleBtnBorderRadiusLink });
+	};
+	/** End Toggle Button Border Radius */
 
 	/* =================
        REPEATER HANDLERS
@@ -743,48 +1557,34 @@ const Inspector = ({ attributes, setAttributes }) => {
 				<FB_Spacing
 					label={__("Padding", "frontis-blocks")}
 					deviceType={deviceType}
+					spacingUnitsHandler={multiChartItemWrapperPaddingSpacingUnitsHandler}
 					spacingUnits={canvasPaddingUnits}
-					handleSpacingUnitHandler={(value) =>
-						setAttributes({ canvasPaddingUnits: value })
-					}
 					spacingDesktop={canvasPaddingDesktop}
 					spacingTablet={canvasPaddingTablet}
 					spacingMobile={canvasPaddingMobile}
-					handleSpacingUnitHandler={(event, position) =>
-						handleSpacingValue(
-							"canvasPadding",
-							event,
-							position,
-							canvasPaddingLink,
-						)
+					handleSpacingUnitHandler={
+						multiChartItemWrapperPaddingHandleSpacingUnitHandler
 					}
 					spacingCombineBtn={canvasPaddingLink}
-					spacingCombineBtnHandler={() =>
-						setAttributes({ canvasPaddingLink: !canvasPaddingLink })
+					spacingCombineBtnHandler={
+						multiChartItemWrapperPaddingSpacingCombineBtnHandlerFn
 					}
 					setAttributes={setAttributes}
 				/>
 				<FB_Spacing
 					label={__("Margin", "frontis-blocks")}
 					deviceType={deviceType}
+					spacingUnitsHandler={multiChartItemWrapperMarginSpacingUnitsHandler}
 					spacingUnits={canvasMarginUnits}
-					handleSpacingUnitHandler={(value) =>
-						setAttributes({ canvasMarginUnits: value })
-					}
 					spacingDesktop={canvasMarginDesktop}
 					spacingTablet={canvasMarginTablet}
 					spacingMobile={canvasMarginMobile}
-					handleSpacingUnitHandler={(event, position) =>
-						handleSpacingValue(
-							"canvasMargin",
-							event,
-							position,
-							canvasMarginLink,
-						)
+					handleSpacingUnitHandler={
+						multiChartItemWrapperMarginHandleSpacingUnitHandler
 					}
 					spacingCombineBtn={canvasMarginLink}
-					spacingCombineBtnHandler={() =>
-						setAttributes({ canvasMarginLink: !canvasMarginLink })
+					spacingCombineBtnHandler={
+						multiChartItemWrapperMarginSpacingCombineBtnHandlerFn
 					}
 					setAttributes={setAttributes}
 				/>
@@ -851,10 +1651,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 					spacingMobile={chartBodyBorderRadiusMobile}
 					handleSpacingUnitHandler={handleChartBodyBorderRadiusValue}
 					spacingCombineBtn={chartBodyBorderRadiusLink}
-					spacingCombineBtnHandler={() =>
-						setAttributes({
-							chartBodyBorderRadiusLink: !chartBodyBorderRadiusLink,
-						})
+					spacingCombineBtnHandler={
+						handleChartBodyBorderRadiusCombineBtnHandlerFn
 					}
 					setAttributes={setAttributes}
 				/>
@@ -863,32 +1661,28 @@ const Inspector = ({ attributes, setAttributes }) => {
 				<FB_Spacing
 					label={__("Padding", "frontis-blocks")}
 					deviceType={deviceType}
-					spacingUnitsHandler={handleChartBodyPaddingUnits}
+					spacingUnitsHandler={chartBodyPaddingSpacingUnitsHandler}
 					spacingUnits={chartBodyPaddingUnits}
 					spacingDesktop={chartBodyPaddingDesktop}
 					spacingTablet={chartBodyPaddingTablet}
 					spacingMobile={chartBodyPaddingMobile}
-					handleSpacingUnitHandler={handleChartBodyPaddingValue}
+					handleSpacingUnitHandler={chartBodyPaddingHandleSpacingUnitHandler}
 					spacingCombineBtn={chartBodyPaddingLink}
-					spacingCombineBtnHandler={() =>
-						setAttributes({ chartBodyPaddingLink: !chartBodyPaddingLink })
-					}
+					spacingCombineBtnHandler={chartBodyPaddingSpacingCombineBtnHandlerFn}
 					setAttributes={setAttributes}
 				/>
 
 				<FB_Spacing
 					label={__("Margin", "frontis-blocks")}
 					deviceType={deviceType}
-					spacingUnitsHandler={handleChartBodyMarginUnits}
+					spacingUnitsHandler={chartBodyMarginSpacingUnitsHandler}
 					spacingUnits={chartBodyMarginUnits}
 					spacingDesktop={chartBodyMarginDesktop}
 					spacingTablet={chartBodyMarginTablet}
 					spacingMobile={chartBodyMarginMobile}
-					handleSpacingUnitHandler={handleChartBodyMarginValue}
+					handleSpacingUnitHandler={chartBodyMarginHandleSpacingUnitHandler}
 					spacingCombineBtn={chartBodyMarginLink}
-					spacingCombineBtnHandler={() =>
-						setAttributes({ chartBodyMarginLink: !chartBodyMarginLink })
-					}
+					spacingCombineBtnHandler={chartBodyMarginSpacingCombineBtnHandlerFn}
 					setAttributes={setAttributes}
 				/>
 			</PanelBody>
@@ -942,32 +1736,30 @@ const Inspector = ({ attributes, setAttributes }) => {
 				<FB_Spacing
 					label={__("Padding", "frontis-blocks")}
 					deviceType={deviceType}
-					spacingUnitsHandler={handleToggleBtnPaddingUnits}
+					spacingUnitsHandler={toggleBtnPaddingSpacingUnitsHandler}
 					spacingUnits={toggleBtnPaddingUnits}
 					spacingDesktop={toggleBtnPaddingDesktop}
 					spacingTablet={toggleBtnPaddingTablet}
 					spacingMobile={toggleBtnPaddingMobile}
-					handleSpacingUnitHandler={handleToggleBtnPaddingValue}
+					handleSpacingUnitHandler={toggleBtnPaddingHandleSpacingUnitHandler}
 					spacingCombineBtn={toggleBtnPaddingLink}
-					spacingCombineBtnHandler={() =>
-						setAttributes({ toggleBtnPaddingLink: !toggleBtnPaddingLink })
-					}
+					spacingCombineBtnHandler={toggleBtnPaddingSpacingCombineBtnHandlerFn}
 					setAttributes={setAttributes}
 				/>
 				<FB_Spacing
 					label={__("Border Radius", "frontis-blocks")}
 					deviceType={deviceType}
-					spacingUnitsHandler={handleToggleBtnBorderRadiusUnits}
+					spacingUnitsHandler={toggleBtnBorderRadiusSpacingUnitsHandler}
 					spacingUnits={toggleBtnBorderRadiusUnits}
 					spacingDesktop={toggleBtnBorderRadiusDesktop}
 					spacingTablet={toggleBtnBorderRadiusTablet}
 					spacingMobile={toggleBtnBorderRadiusMobile}
-					handleSpacingUnitHandler={handleToggleBtnBorderRadiusValue}
+					handleSpacingUnitHandler={
+						toggleBtnBorderRadiusHandleSpacingUnitHandler
+					}
 					spacingCombineBtn={toggleBtnBorderRadiusLink}
-					spacingCombineBtnHandler={() =>
-						setAttributes({
-							toggleBtnBorderRadiusLink: !toggleBtnBorderRadiusLink,
-						})
+					spacingCombineBtnHandler={
+						toggleBtnBorderRadiusSpacingCombineBtnHandlerFn
 					}
 					setAttributes={setAttributes}
 				/>
@@ -1612,36 +2404,27 @@ const Inspector = ({ attributes, setAttributes }) => {
 				<FB_Spacing
 					label={__("Border Width", "frontis-blocks")}
 					deviceType={deviceType}
-					spacingUnitsHandler={handleMultiChartBorderUnits}
+					spacingUnitsHandler={multiChartWrapperBorderTypeUnitsHandler}
 					spacingUnits={multiChartWrapperBorderTypeUnits}
 					spacingDesktop={multiChartWrapperBorderTypeDesktop}
 					spacingTablet={multiChartWrapperBorderTypeTablet}
 					spacingMobile={multiChartWrapperBorderTypeMobile}
-					handleSpacingUnitHandler={handleMultiChartBorderValue}
+					handleSpacingUnitHandler={handleMultiChartWrapperBorderUnitHandlerFn}
 					spacingCombineBtn={multiChartWrapperBorderTypeLink}
-					spacingCombineBtnHandler={() =>
-						setAttributes({
-							multiChartWrapperBorderTypeLink: !multiChartWrapperBorderTypeLink,
-						})
-					}
+					spacingCombineBtnHandler={multiChartWrapperBorderCombineBtnHandlerFn}
 					setAttributes={setAttributes}
 				/>
 				<FB_Spacing
 					label={__("Border Radius", "frontis-blocks")}
 					deviceType={deviceType}
-					spacingUnitsHandler={handleMultiChartBorderRadiusUnits}
+					spacingUnitsHandler={multiChartWrapperBorderRadiusUnitsHandler}
 					spacingUnits={multiChartWrapperBorderRadiusUnits}
 					spacingDesktop={multiChartWrapperBorderRadiusDesktop}
 					spacingTablet={multiChartWrapperBorderRadiusTablet}
 					spacingMobile={multiChartWrapperBorderRadiusMobile}
-					handleSpacingUnitHandler={handleMultiChartBorderRadiusValue}
+					handleSpacingUnitHandler={multiChartWrapperHandleSpacingUnitHandlerFn}
 					spacingCombineBtn={multiChartWrapperBorderRadiusLink}
-					spacingCombineBtnHandler={() =>
-						setAttributes({
-							multiChartWrapperBorderRadiusLink:
-								!multiChartWrapperBorderRadiusLink,
-						})
-					}
+					spacingCombineBtnHandler={multiChartWrapperCombineBtnHandlerFn}
 					setAttributes={setAttributes}
 				/>
 			</PanelBody>
@@ -1653,31 +2436,27 @@ const Inspector = ({ attributes, setAttributes }) => {
 				<FB_Spacing
 					label={__("Padding", "frontis-blocks")}
 					deviceType={deviceType}
-					spacingUnitsHandler={handleMultiChartPaddingUnits}
+					spacingUnitsHandler={multiChartPaddingSpacingUnitsHandler}
 					spacingUnits={multiChartPaddingUnits}
 					spacingDesktop={multiChartPaddingDesktop}
 					spacingTablet={multiChartPaddingTablet}
 					spacingMobile={multiChartPaddingMobile}
-					handleSpacingUnitHandler={handleMultiChartPaddingValue}
+					handleSpacingUnitHandler={multiChartPaddingHandleSpacingUnitHandler}
 					spacingCombineBtn={multiChartPaddingLink}
-					spacingCombineBtnHandler={() =>
-						setAttributes({ multiChartPaddingLink: !multiChartPaddingLink })
-					}
+					spacingCombineBtnHandler={multiChartPaddingSpacingCombineBtnHandlerFn}
 					setAttributes={setAttributes}
 				/>
 				<FB_Spacing
 					label={__("Margin", "frontis-blocks")}
 					deviceType={deviceType}
-					spacingUnitsHandler={handleMultiChartMarginUnits}
+					spacingUnitsHandler={multiChartMarginSpacingUnitsHandler}
 					spacingUnits={multiChartMarginUnits}
 					spacingDesktop={multiChartMarginDesktop}
 					spacingTablet={multiChartMarginTablet}
 					spacingMobile={multiChartMarginMobile}
-					handleSpacingUnitHandler={handleMultiChartMarginValue}
+					handleSpacingUnitHandler={multiChartMarginHandleSpacingUnitHandler}
 					spacingCombineBtn={multiChartMarginLink}
-					spacingCombineBtnHandler={() =>
-						setAttributes({ multiChartMarginLink: !multiChartMarginLink })
-					}
+					spacingCombineBtnHandler={multiChartMarginSpacingCombineBtnHandlerFn}
 					setAttributes={setAttributes}
 				/>
 			</PanelBody>
