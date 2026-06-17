@@ -316,10 +316,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 	};
 
 	/** Item Padding handlers */
-	const imageAccordionItemPaddingHandleSpacingUnitHandler = (
-		event,
-		position,
-	) => {
+	const imageAccordionItemPaddingHandleSpacingUnitHandler = (event, position) => {
 		const value = event.target.value;
 		if (imageAccordionItemPaddingLink) {
 			switch (deviceType) {
@@ -404,10 +401,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 	};
 
 	/** Item Margin handlers */
-	const imageAccordionItemMarginHandleSpacingUnitHandler = (
-		event,
-		position,
-	) => {
+	const imageAccordionItemMarginHandleSpacingUnitHandler = (event, position) => {
 		const value = event.target.value;
 		if (imageAccordionItemMarginLink) {
 			switch (deviceType) {
@@ -658,10 +652,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 	};
 
 	/** Border Radius handlers */
-	const imageAccordionItemBorderRadiusHandleSpacingUnitHandler = (
-		event,
-		position,
-	) => {
+	const imageAccordionItemBorderRadiusHandleSpacingUnitHandler = (event, position) => {
 		const value = event.target.value;
 		if (imageAccordionItemBorderRadiusLink) {
 			switch (deviceType) {
@@ -746,10 +737,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 	};
 
 	/** Wrapper Border Type handlers */
-	const imageAccordionWrapperBorderTypeHandleSpacingUnitHandler = (
-		event,
-		position,
-	) => {
+	const imageAccordionWrapperBorderTypeHandleSpacingUnitHandler = (event, position) => {
 		const value = event.target.value;
 		if (imageAccordionWrapperBorderTypeLink) {
 			switch (deviceType) {
@@ -834,10 +822,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 	};
 
 	/** Wrapper Border Radius handlers */
-	const imageAccordionWrapperBorderRadiusHandleSpacingUnitHandler = (
-		event,
-		position,
-	) => {
+	const imageAccordionWrapperBorderRadiusHandleSpacingUnitHandler = (event, position) => {
 		const value = event.target.value;
 		if (imageAccordionWrapperBorderRadiusLink) {
 			switch (deviceType) {
@@ -931,10 +916,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 			},
 		});
 	};
-	const imageAccordionButtonBorderRadiusHandleSpacingUnitHandler = (
-		event,
-		position,
-	) => {
+	const imageAccordionButtonBorderRadiusHandleSpacingUnitHandler = (event, position) => {
 		const value = event.target.value;
 		if (imageAccordionBtnBorderRadiusLink) {
 			switch (deviceType) {
@@ -1017,10 +999,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 			},
 		});
 	};
-	const imageAccordionBtnPaddingHandleSpacingUnitHandler = (
-		event,
-		position,
-	) => {
+	const imageAccordionBtnPaddingHandleSpacingUnitHandler = (event, position) => {
 		const value = event.target.value;
 		if (imageAccordionBtnPaddingLink) {
 			switch (deviceType) {
