@@ -1,0 +1,129 @@
+.fb-hotspot-container {
+  position: relative;
+  display: block;
+  width: 100%;
+  line-height: 0;
+}
+
+.fb-hotspot-base-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.fb-hotspot-marker .fb-hotspot-popover {
+  display: block;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+}
+
+.fb-hotspot-marker:hover .fb-hotspot-popover,
+.fb-hotspot-marker.locked .fb-hotspot-popover {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.fb-hotspot-popover-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.fb-hotspot-popover-category {
+  margin-bottom: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  white-space: wrap;
+  line-height: 1.4;
+}
+
+.fb-hotspot-popover-title a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.fb-hotspot-social-links {
+  display: flex;
+  // gap: 5px;
+  justify-content: flex-start;
+  align-items: center;
+  .fb-hotspot-social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // width: 24px;
+    // height: 24px;
+  }
+}
+
+.fb-hotspot-popover-description {
+  line-height: 1.5;
+}
+
+.fb-hotspot-popover-price {
+  margin-top: 8px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.fb-hotspot-trigger {
+  transform-origin: center;
+  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+
+  .fb-hotspot-icon {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0;
+    width: 50%;
+    height: 50%;
+
+    svg {
+      width: 100%;
+      height: 100%;
+      fill: currentColor;
+      transition: 0.3s ease;
+    }
+  }
+
+  .fb-hotspot-marker-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+
+    svg {
+      width: 100%;
+      height: 100%;
+
+      rect,
+      circle,
+      path {
+        stroke: currentColor;
+        fill: currentColor;
+        transition: stroke 0.2s ease, fill 0.2s ease;
+      }
+
+      rect[fill="none"],
+      circle[fill="none"],
+      path[fill="none"] {
+        fill: none;
+      }
+    }
+  }
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+}

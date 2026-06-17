@@ -39,6 +39,13 @@ if ($mega_menu_mobile_switcher) {
 
 $class_attr = implode(' ', array_filter($classes));
 
+$queried_id = get_queried_object_id();
+global $wp;
+$request = isset($wp->request) ? (string) $wp->request : '';
+$current_path = untrailingslashit('/' . $request);
+$home_url = untrailingslashit(home_url('/'));
+$current_permalink = $queried_id ? get_permalink($queried_id) : '';
+$current_url = $current_permalink ? untrailingslashit(strtok((string) $current_permalink, '?')) : '';
 
 if (empty($items)) {
     echo '<div class="fb-advanced-mega-menu-empty">Add menu items in the block settings</div>';
@@ -67,6 +74,7 @@ if (empty($items)) {
                 </span>
 
             </button>
+            <div class="fb-advanced-mega-menu-overlay" aria-hidden="true"></div>
             <ul class="fb-advanced-mega-menu-list">
                 <?php if (!empty($mobile_logo_url)) : ?>
                     <li class="mobile-logo">
@@ -77,11 +85,50 @@ if (empty($items)) {
                 <?php endif; ?>
                 <?php foreach ($items as $item):
                     $item_icon = isset($item['megaMenuIconFrontend']) ? $item['megaMenuIconFrontend'] : '';
+                    $is_current_item = false;
+
+                    if (!empty($item) && is_array($item)) {
+                        if (!empty($item['pageId']) && (int) $item['pageId'] === (int) $queried_id) {
+                            $is_current_item = true;
+                        } elseif (!empty($item['url'])) {
+                            $item_url = untrailingslashit(strtok((string) $item['url'], '?'));
+
+                            if (
+                                is_front_page() && (
+                                    $item_url === $home_url ||
+                                    $item_url === untrailingslashit(home_url())
+                                )
+                            ) {
+                                $is_current_item = true;
+                            } elseif ($current_url && $item_url === $current_url) {
+                                $is_current_item = true;
+                            } else {
+                                $item_path = wp_parse_url($item['url'], PHP_URL_PATH);
+
+                                if ($item_path) {
+                                    $item_path = untrailingslashit($item_path);
+
+                                    if ($item_path === $current_path) {
+                                        $is_current_item = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    $item_classes = ['fb-advanced-mega-menu-item'];
+
+                    if (!empty($item['patternSlug'])) {
+                        $item_classes[] = 'has-mega-menu';
+                    }
+
+                    if ($is_current_item) {
+                        $item_classes[] = 'current-menu-item';
+                    }
                     ?>
-                    <li
-                        class="fb-advanced-mega-menu-item <?php echo !empty($item['patternSlug']) ? 'has-mega-menu' : ''; ?>">
+                    <li class="<?php echo esc_attr(implode(' ', $item_classes)); ?>">
                         <?php if (!empty($item['url'])): ?>
-                            <a href="<?php echo esc_url($item['url']); ?>" class="fb-advanced-mega-menu-link">
+                            <a href="<?php echo esc_url($item['url']); ?>" class="fb-advanced-mega-menu-link"<?php echo $is_current_item ? ' aria-current="page"' : ''; ?>>
                                 <?php echo esc_html($item['label']); ?>
                                 <?php if (!empty($item['patternSlug']) && !empty($item_icon)): ?>
                                     <span class="fb-advanced-mega-menu-indicator">

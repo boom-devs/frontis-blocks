@@ -548,7 +548,6 @@ const Inspector = ({ attributes, setAttributes}) => {
                     setHoverCustomGradientInputValue={(value) => setAttributes({ googleMapHoverCustomGradientInputValue: value })}
 
                     isBackgroundImage={false}
-
                 />
 
                 <SelectControl
