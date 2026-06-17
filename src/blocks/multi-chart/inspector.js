@@ -2358,7 +2358,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 					}
 					hoverBackgroundImageSize={multiChartHoverBackgroundImageSize}
 					setHoverBackgroundImageSize={(value) =>
-						setAttributes({ multiChartHoverBackgroundImageSize: v })
+						setAttributes({ multiChartHoverBackgroundImageSize: value })
 					}
 				/>
 			</PanelBody>
@@ -2375,17 +2375,17 @@ const Inspector = ({ attributes, setAttributes }) => {
 				<FB_SwitcherControl
 					label={__("Border Color", "frontis-blocks")}
 					globalSwitcher={multiChartWrapperBorderColorSwitcher}
-					setGlobalSwitcher={(v) =>
-						setAttributes({ multiChartWrapperBorderColorSwitcher: v })
+					setGlobalSwitcher={(value) =>
+						setAttributes({ multiChartWrapperBorderColorSwitcher: value })
 					}
 				/>
 				{multiChartWrapperBorderColorSwitcher === "normal" && (
 					<FB_ColorControl
 						label={__("Normal Color", "frontis-blocks")}
 						globalColor={multiChartWrapperBorderColor}
-						setGlobalColor={(v) =>
+						setGlobalColor={(value) =>
 							setAttributes({
-								multiChartWrapperBorderColor: v === undefined ? "" : v,
+								multiChartWrapperBorderColor: value === undefined ? "" : value,
 							})
 						}
 					/>
@@ -2394,9 +2394,10 @@ const Inspector = ({ attributes, setAttributes }) => {
 					<FB_ColorControl
 						label={__("Hover Color", "frontis-blocks")}
 						globalColor={multiChartWrapperBorderHoverColor}
-						setGlobalColor={(v) =>
+						setGlobalColor={(value) =>
 							setAttributes({
-								multiChartWrapperBorderHoverColor: v === undefined ? "" : v,
+								multiChartWrapperBorderHoverColor:
+									value === undefined ? "" : value,
 							})
 						}
 					/>
