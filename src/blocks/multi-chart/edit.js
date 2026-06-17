@@ -7,7 +7,7 @@ import SwitchToBlockSettings from "@Utils/SwitchToBlockSettings";
 import "./editor.scss";
 import Inspector from "./inspector";
 import useBlockIdGenerator from "@Utils/useBlockIdGenerator";
-import generateMultiChartStyle from "./styling";
+import multiChartStyle from "./styling";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 
 export default function Edit({
@@ -70,7 +70,7 @@ export default function Edit({
 
 	useEffect(() => {
 		if (blockID) {
-			const css = generateMultiChartStyle(attributes);
+			const css = multiChartStyle(attributes);
 			setAttributes({ blockStyle: css });
 		}
 	}, [attributes, blockID]);

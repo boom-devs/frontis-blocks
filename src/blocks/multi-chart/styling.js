@@ -1,6 +1,6 @@
 import getCustomCss from "@Utils/getCustomCss";
 
-const generateMultiChartStyle = (attributes) => {
+const multiChartStyle = (attributes) => {
 	const {
 		blockID,
 		chartHeight,
@@ -99,6 +99,7 @@ const generateMultiChartStyle = (attributes) => {
 		footerDescLetterSpacingUnits,
 		footerDescLineHeight,
 		footerDescLineHeightUnits,
+		footerDescColorSwitcher,
 		footerDescHoverColor,
 		footerPaddingDesktop,
 		footerPaddingUnits,
@@ -197,192 +198,79 @@ const generateMultiChartStyle = (attributes) => {
 	} = attributes;
 
 	// Canvas Padding
-	const canvasPaddingGetDesktop = `${canvasPaddingDesktop?.top}${canvasPaddingUnits?.Desktop} ${canvasPaddingDesktop?.right}${canvasPaddingUnits?.Desktop} ${canvasPaddingDesktop?.bottom}${canvasPaddingUnits?.Desktop} ${canvasPaddingDesktop?.left}${canvasPaddingUnits?.Desktop}`;
-	const canvasPaddingGetTablet = canvasPaddingTablet
-		? `${canvasPaddingTablet?.top}${canvasPaddingUnits?.Tablet} ${canvasPaddingTablet?.right}${canvasPaddingUnits?.Tablet} ${canvasPaddingTablet?.bottom}${canvasPaddingUnits?.Tablet} ${canvasPaddingTablet?.left}${canvasPaddingUnits?.Tablet}`
-		: "";
-	const canvasPaddingGetMobile = canvasPaddingMobile
-		? `${canvasPaddingMobile?.top}${canvasPaddingUnits?.Mobile} ${canvasPaddingMobile?.right}${canvasPaddingUnits?.Mobile} ${canvasPaddingMobile?.bottom}${canvasPaddingUnits?.Mobile} ${canvasPaddingMobile?.left}${canvasPaddingUnits?.Mobile}`
-		: "";
+	const canvasPaddingDesktopWidth = `${canvasPaddingDesktop?.top}${canvasPaddingUnits?.Desktop} ${canvasPaddingDesktop?.right}${canvasPaddingUnits?.Desktop} ${canvasPaddingDesktop?.bottom}${canvasPaddingUnits?.Desktop} ${canvasPaddingDesktop?.left}${canvasPaddingUnits?.Desktop}`;
+	const canvasPaddingTabletWidth = `${canvasPaddingTablet?.top}${canvasPaddingUnits?.Tablet} ${canvasPaddingTablet?.right}${canvasPaddingUnits?.Tablet} ${canvasPaddingTablet?.bottom}${canvasPaddingUnits?.Tablet} ${canvasPaddingTablet?.left}${canvasPaddingUnits?.Tablet}`;
+	const canvasPaddingMobileWidth = `${canvasPaddingMobile?.top}${canvasPaddingUnits?.Mobile} ${canvasPaddingMobile?.right}${canvasPaddingUnits?.Mobile} ${canvasPaddingMobile?.bottom}${canvasPaddingUnits?.Mobile} ${canvasPaddingMobile?.left}${canvasPaddingUnits?.Mobile}`;
 
 	// Canvas Margin
-	const canvasMarginGetDesktop = `${canvasMarginDesktop?.top}${canvasMarginUnits?.Desktop} ${canvasMarginDesktop?.right}${canvasMarginUnits?.Desktop} ${canvasMarginDesktop?.bottom}${canvasMarginUnits?.Desktop} ${canvasMarginDesktop?.left}${canvasMarginUnits?.Desktop}`;
-	const canvasMarginGetTablet = canvasMarginTablet
-		? `${canvasMarginTablet?.top}${canvasMarginUnits?.Tablet} ${canvasMarginTablet?.right}${canvasMarginUnits?.Tablet} ${canvasMarginTablet?.bottom}${canvasMarginUnits?.Tablet} ${canvasMarginTablet?.left}${canvasMarginUnits?.Tablet}`
-		: "";
-	const canvasMarginGetMobile = canvasMarginMobile
-		? `${canvasMarginMobile?.top}${canvasMarginUnits?.Mobile} ${canvasMarginMobile?.right}${canvasMarginUnits?.Mobile} ${canvasMarginMobile?.bottom}${canvasMarginUnits?.Mobile} ${canvasMarginMobile?.left}${canvasMarginUnits?.Mobile}`
-		: "";
+	const canvasMarginDesktopWidth = `${canvasMarginDesktop?.top}${canvasMarginUnits?.Desktop} ${canvasMarginDesktop?.right}${canvasMarginUnits?.Desktop} ${canvasMarginDesktop?.bottom}${canvasMarginUnits?.Desktop} ${canvasMarginDesktop?.left}${canvasMarginUnits?.Desktop}`;
+	const canvasMarginTabletWidth = `${canvasMarginTablet?.top}${canvasMarginUnits?.Tablet} ${canvasMarginTablet?.right}${canvasMarginUnits?.Tablet} ${canvasMarginTablet?.bottom}${canvasMarginUnits?.Tablet} ${canvasMarginTablet?.left}${canvasMarginUnits?.Tablet}`;
+	const canvasMarginMobileWidth = `${canvasMarginMobile?.top}${canvasMarginUnits?.Mobile} ${canvasMarginMobile?.right}${canvasMarginUnits?.Mobile} ${canvasMarginMobile?.bottom}${canvasMarginUnits?.Mobile} ${canvasMarginMobile?.left}${canvasMarginUnits?.Mobile}`;
 
 	// Canvas Border Radius
-	const canvasBorderRadiusGetDesktop = `${canvasBorderRadiusDesktop?.top}${canvasBorderRadiusUnits?.Desktop} ${canvasBorderRadiusDesktop?.right}${canvasBorderRadiusUnits?.Desktop} ${canvasBorderRadiusDesktop?.bottom}${canvasBorderRadiusUnits?.Desktop} ${canvasBorderRadiusDesktop?.left}${canvasBorderRadiusUnits?.Desktop}`;
-	const canvasBorderRadiusGetTablet = canvasBorderRadiusTablet
-		? `${canvasBorderRadiusTablet?.top}${canvasBorderRadiusUnits?.Tablet} ${canvasBorderRadiusTablet?.right}${canvasBorderRadiusUnits?.Tablet} ${canvasBorderRadiusTablet?.bottom}${canvasBorderRadiusUnits?.Tablet} ${canvasBorderRadiusTablet?.left}${canvasBorderRadiusUnits?.Tablet}`
-		: "";
-	const canvasBorderRadiusGetMobile = canvasBorderRadiusMobile
-		? `${canvasBorderRadiusMobile?.top}${canvasBorderRadiusUnits?.Mobile} ${canvasBorderRadiusMobile?.right}${canvasBorderRadiusUnits?.Mobile} ${canvasBorderRadiusMobile?.bottom}${canvasBorderRadiusUnits?.Mobile} ${canvasBorderRadiusMobile?.left}${canvasBorderRadiusUnits?.Mobile}`
-		: "";
+	const canvasBorderRadiusDesktopWidth = `${canvasBorderRadiusDesktop?.top}${canvasBorderRadiusUnits?.Desktop} ${canvasBorderRadiusDesktop?.right}${canvasBorderRadiusUnits?.Desktop} ${canvasBorderRadiusDesktop?.bottom}${canvasBorderRadiusUnits?.Desktop} ${canvasBorderRadiusDesktop?.left}${canvasBorderRadiusUnits?.Desktop}`;
+	const canvasBorderRadiusTabletWidth = `${canvasBorderRadiusTablet?.top}${canvasBorderRadiusUnits?.Tablet} ${canvasBorderRadiusTablet?.right}${canvasBorderRadiusUnits?.Tablet} ${canvasBorderRadiusTablet?.bottom}${canvasBorderRadiusUnits?.Tablet} ${canvasBorderRadiusTablet?.left}${canvasBorderRadiusUnits?.Tablet}`;
+	const canvasBorderRadiusMobileWidth = `${canvasBorderRadiusMobile?.top}${canvasBorderRadiusUnits?.Mobile} ${canvasBorderRadiusMobile?.right}${canvasBorderRadiusUnits?.Mobile} ${canvasBorderRadiusMobile?.bottom}${canvasBorderRadiusUnits?.Mobile} ${canvasBorderRadiusMobile?.left}${canvasBorderRadiusUnits?.Mobile}`;
 
 	// Chart Body Padding
-	const chartBodyPaddingGetDesktop = `${chartBodyPaddingDesktop?.top}${chartBodyPaddingUnits?.Desktop} ${chartBodyPaddingDesktop?.right}${chartBodyPaddingUnits?.Desktop} ${chartBodyPaddingDesktop?.bottom}${chartBodyPaddingUnits?.Desktop} ${chartBodyPaddingDesktop?.left}${chartBodyPaddingUnits?.Desktop}`;
-	const chartBodyPaddingGetTablet = chartBodyPaddingTablet
-		? `${chartBodyPaddingTablet?.top}${chartBodyPaddingUnits?.Tablet} ${chartBodyPaddingTablet?.right}${chartBodyPaddingUnits?.Tablet} ${chartBodyPaddingTablet?.bottom}${chartBodyPaddingUnits?.Tablet} ${chartBodyPaddingTablet?.left}${chartBodyPaddingUnits?.Tablet}`
-		: "";
-	const chartBodyPaddingGetMobile = chartBodyPaddingMobile
-		? `${chartBodyPaddingMobile?.top}${chartBodyPaddingUnits?.Mobile} ${chartBodyPaddingMobile?.right}${chartBodyPaddingUnits?.Mobile} ${chartBodyPaddingMobile?.bottom}${chartBodyPaddingUnits?.Mobile} ${chartBodyPaddingMobile?.left}${chartBodyPaddingUnits?.Mobile}`
-		: "";
+	const chartBodyPaddingDesktopWidth = `${chartBodyPaddingDesktop?.top}${chartBodyPaddingUnits?.Desktop} ${chartBodyPaddingDesktop?.right}${chartBodyPaddingUnits?.Desktop} ${chartBodyPaddingDesktop?.bottom}${chartBodyPaddingUnits?.Desktop} ${chartBodyPaddingDesktop?.left}${chartBodyPaddingUnits?.Desktop}`;
+	const chartBodyPaddingTabletWidth = `${chartBodyPaddingTablet?.top}${chartBodyPaddingUnits?.Tablet} ${chartBodyPaddingTablet?.right}${chartBodyPaddingUnits?.Tablet} ${chartBodyPaddingTablet?.bottom}${chartBodyPaddingUnits?.Tablet} ${chartBodyPaddingTablet?.left}${chartBodyPaddingUnits?.Tablet}`;
+	const chartBodyPaddingMobileWidth = `${chartBodyPaddingMobile?.top}${chartBodyPaddingUnits?.Mobile} ${chartBodyPaddingMobile?.right}${chartBodyPaddingUnits?.Mobile} ${chartBodyPaddingMobile?.bottom}${chartBodyPaddingUnits?.Mobile} ${chartBodyPaddingMobile?.left}${chartBodyPaddingUnits?.Mobile}`;
 
 	// Chart Body Margin
-	const chartBodyMarginGetDesktop = `${chartBodyMarginDesktop?.top}${chartBodyMarginUnits?.Desktop} ${chartBodyMarginDesktop?.right}${chartBodyMarginUnits?.Desktop} ${chartBodyMarginDesktop?.bottom}${chartBodyMarginUnits?.Desktop} ${chartBodyMarginDesktop?.left}${chartBodyMarginUnits?.Desktop}`;
-	const chartBodyMarginGetTablet = chartBodyMarginTablet
-		? `${chartBodyMarginTablet?.top}${chartBodyMarginUnits?.Tablet} ${chartBodyMarginTablet?.right}${chartBodyMarginUnits?.Tablet} ${chartBodyMarginTablet?.bottom}${chartBodyMarginUnits?.Tablet} ${chartBodyMarginTablet?.left}${chartBodyMarginUnits?.Tablet}`
-		: "";
-	const chartBodyMarginGetMobile = chartBodyMarginMobile
-		? `${chartBodyMarginMobile?.top}${chartBodyMarginUnits?.Mobile} ${chartBodyMarginMobile?.right}${chartBodyMarginUnits?.Mobile} ${chartBodyMarginMobile?.bottom}${chartBodyMarginUnits?.Mobile} ${chartBodyMarginMobile?.left}${chartBodyMarginUnits?.Mobile}`
-		: "";
+	const chartBodyMarginDesktopWidth = `${chartBodyMarginDesktop?.top}${chartBodyMarginUnits?.Desktop} ${chartBodyMarginDesktop?.right}${chartBodyMarginUnits?.Desktop} ${chartBodyMarginDesktop?.bottom}${chartBodyMarginUnits?.Desktop} ${chartBodyMarginDesktop?.left}${chartBodyMarginUnits?.Desktop}`;
+	const chartBodyMarginTabletWidth = `${chartBodyMarginTablet?.top}${chartBodyMarginUnits?.Tablet} ${chartBodyMarginTablet?.right}${chartBodyMarginUnits?.Tablet} ${chartBodyMarginTablet?.bottom}${chartBodyMarginUnits?.Tablet} ${chartBodyMarginTablet?.left}${chartBodyMarginUnits?.Tablet}`;
+	const chartBodyMarginMobileWidth = `${chartBodyMarginMobile?.top}${chartBodyMarginUnits?.Mobile} ${chartBodyMarginMobile?.right}${chartBodyMarginUnits?.Mobile} ${chartBodyMarginMobile?.bottom}${chartBodyMarginUnits?.Mobile} ${chartBodyMarginMobile?.left}${chartBodyMarginUnits?.Mobile}`;
 
 	// Chart Body Border Radius
-	const chartBodyBorderRadiusGetDesktop = `${chartBodyBorderRadiusDesktop?.top}${chartBodyBorderRadiusUnits?.Desktop} ${chartBodyBorderRadiusDesktop?.right}${chartBodyBorderRadiusUnits?.Desktop} ${chartBodyBorderRadiusDesktop?.bottom}${chartBodyBorderRadiusUnits?.Desktop} ${chartBodyBorderRadiusDesktop?.left}${chartBodyBorderRadiusUnits?.Desktop}`;
-	const chartBodyBorderRadiusGetTablet = chartBodyBorderRadiusTablet
-		? `${chartBodyBorderRadiusTablet?.top}${chartBodyBorderRadiusUnits?.Tablet} ${chartBodyBorderRadiusTablet?.right}${chartBodyBorderRadiusUnits?.Tablet} ${chartBodyBorderRadiusTablet?.bottom}${chartBodyBorderRadiusUnits?.Tablet} ${chartBodyBorderRadiusTablet?.left}${chartBodyBorderRadiusUnits?.Tablet}`
-		: "";
-	const chartBodyBorderRadiusGetMobile = chartBodyBorderRadiusMobile
-		? `${chartBodyBorderRadiusMobile?.top}${chartBodyBorderRadiusUnits?.Mobile} ${chartBodyBorderRadiusMobile?.right}${chartBodyBorderRadiusUnits?.Mobile} ${chartBodyBorderRadiusMobile?.bottom}${chartBodyBorderRadiusUnits?.Mobile} ${chartBodyBorderRadiusMobile?.left}${chartBodyBorderRadiusUnits?.Mobile}`
-		: "";
+	const chartBodyBorderRadiusDesktopWidth = `${chartBodyBorderRadiusDesktop?.top}${chartBodyBorderRadiusUnits?.Desktop} ${chartBodyBorderRadiusDesktop?.right}${chartBodyBorderRadiusUnits?.Desktop} ${chartBodyBorderRadiusDesktop?.bottom}${chartBodyBorderRadiusUnits?.Desktop} ${chartBodyBorderRadiusDesktop?.left}${chartBodyBorderRadiusUnits?.Desktop}`;
+	const chartBodyBorderRadiusTabletWidth = `${chartBodyBorderRadiusTablet?.top}${chartBodyBorderRadiusUnits?.Tablet} ${chartBodyBorderRadiusTablet?.right}${chartBodyBorderRadiusUnits?.Tablet} ${chartBodyBorderRadiusTablet?.bottom}${chartBodyBorderRadiusUnits?.Tablet} ${chartBodyBorderRadiusTablet?.left}${chartBodyBorderRadiusUnits?.Tablet}`;
+	const chartBodyBorderRadiusMobileWidth = `${chartBodyBorderRadiusMobile?.top}${chartBodyBorderRadiusUnits?.Mobile} ${chartBodyBorderRadiusMobile?.right}${chartBodyBorderRadiusUnits?.Mobile} ${chartBodyBorderRadiusMobile?.bottom}${chartBodyBorderRadiusUnits?.Mobile} ${chartBodyBorderRadiusMobile?.left}${chartBodyBorderRadiusUnits?.Mobile}`;
 
 	// Chart Header Padding
-	const chartHeaderPaddingGetDesktop = chartHeaderPaddingDesktop
-		? `${chartHeaderPaddingDesktop?.top}${chartHeaderPaddingUnits?.Desktop} ${chartHeaderPaddingDesktop?.right}${chartHeaderPaddingUnits?.Desktop} ${chartHeaderPaddingDesktop?.bottom}${chartHeaderPaddingUnits?.Desktop} ${chartHeaderPaddingDesktop?.left}${chartHeaderPaddingUnits?.Desktop}`
-		: "";
-	const chartHeaderPaddingGetTablet = chartHeaderPaddingTablet
-		? `${chartHeaderPaddingTablet?.top}${chartHeaderPaddingUnits?.Tablet} ${chartHeaderPaddingTablet?.right}${chartHeaderPaddingUnits?.Tablet} ${chartHeaderPaddingTablet?.bottom}${chartHeaderPaddingUnits?.Tablet} ${chartHeaderPaddingTablet?.left}${chartHeaderPaddingUnits?.Tablet}`
-		: "";
-	const chartHeaderPaddingGetMobile = chartHeaderPaddingMobile
-		? `${chartHeaderPaddingMobile?.top}${chartHeaderPaddingUnits?.Mobile} ${chartHeaderPaddingMobile?.right}${chartHeaderPaddingUnits?.Mobile} ${chartHeaderPaddingMobile?.bottom}${chartHeaderPaddingUnits?.Mobile} ${chartHeaderPaddingMobile?.left}${chartHeaderPaddingUnits?.Mobile}`
-		: "";
+	const chartHeaderPaddingDesktopWidth = `${chartHeaderPaddingDesktop?.top}${chartHeaderPaddingUnits?.Desktop} ${chartHeaderPaddingDesktop?.right}${chartHeaderPaddingUnits?.Desktop} ${chartHeaderPaddingDesktop?.bottom}${chartHeaderPaddingUnits?.Desktop} ${chartHeaderPaddingDesktop?.left}${chartHeaderPaddingUnits?.Desktop}`;
+	const chartHeaderPaddingTabletWidth = `${chartHeaderPaddingTablet?.top}${chartHeaderPaddingUnits?.Tablet} ${chartHeaderPaddingTablet?.right}${chartHeaderPaddingUnits?.Tablet} ${chartHeaderPaddingTablet?.bottom}${chartHeaderPaddingUnits?.Tablet} ${chartHeaderPaddingTablet?.left}${chartHeaderPaddingUnits?.Tablet}`;
+	const chartHeaderPaddingMobileWidth = `${chartHeaderPaddingMobile?.top}${chartHeaderPaddingUnits?.Mobile} ${chartHeaderPaddingMobile?.right}${chartHeaderPaddingUnits?.Mobile} ${chartHeaderPaddingMobile?.bottom}${chartHeaderPaddingUnits?.Mobile} ${chartHeaderPaddingMobile?.left}${chartHeaderPaddingUnits?.Mobile}`;
 
 	// Footer Padding
-	const footerPaddingGetDesktop = `${footerPaddingDesktop?.top}${footerPaddingUnits?.Desktop} ${footerPaddingDesktop?.right}${footerPaddingUnits?.Desktop} ${footerPaddingDesktop?.bottom}${footerPaddingUnits?.Desktop} ${footerPaddingDesktop?.left}${footerPaddingUnits?.Desktop}`;
-	const footerPaddingGetTablet = footerPaddingTablet
-		? `${footerPaddingTablet?.top}${footerPaddingUnits?.Tablet} ${footerPaddingTablet?.right}${footerPaddingUnits?.Tablet} ${footerPaddingTablet?.bottom}${footerPaddingUnits?.Tablet} ${footerPaddingTablet?.left}${footerPaddingUnits?.Tablet}`
-		: "";
-	const footerPaddingGetMobile = footerPaddingMobile
-		? `${footerPaddingMobile?.top}${footerPaddingUnits?.Mobile} ${footerPaddingMobile?.right}${footerPaddingUnits?.Mobile} ${footerPaddingMobile?.bottom}${footerPaddingUnits?.Mobile} ${footerPaddingMobile?.left}${footerPaddingUnits?.Mobile}`
-		: "";
+	const footerPaddingDesktopWidth = `${footerPaddingDesktop?.top}${footerPaddingUnits?.Desktop} ${footerPaddingDesktop?.right}${footerPaddingUnits?.Desktop} ${footerPaddingDesktop?.bottom}${footerPaddingUnits?.Desktop} ${footerPaddingDesktop?.left}${footerPaddingUnits?.Desktop}`;
+	const footerPaddingTabletWidth = `${footerPaddingTablet?.top}${footerPaddingUnits?.Tablet} ${footerPaddingTablet?.right}${footerPaddingUnits?.Tablet} ${footerPaddingTablet?.bottom}${footerPaddingUnits?.Tablet} ${footerPaddingTablet?.left}${footerPaddingUnits?.Tablet}`;
+	const footerPaddingMobileWidth = `${footerPaddingMobile?.top}${footerPaddingUnits?.Mobile} ${footerPaddingMobile?.right}${footerPaddingUnits?.Mobile} ${footerPaddingMobile?.bottom}${footerPaddingUnits?.Mobile} ${footerPaddingMobile?.left}${footerPaddingUnits?.Mobile}`;
 
 	// Footer Margin
-	const footerMarginGetDesktop = `${footerMarginDesktop?.top}${footerMarginUnits?.Desktop} ${footerMarginDesktop?.right}${footerMarginUnits?.Desktop} ${footerMarginDesktop?.bottom}${footerMarginUnits?.Desktop} ${footerMarginDesktop?.left}${footerMarginUnits?.Desktop}`;
-	const footerMarginGetTablet = footerMarginTablet
-		? `${footerMarginTablet?.top}${footerMarginUnits?.Tablet} ${footerMarginTablet?.right}${footerMarginUnits?.Tablet} ${footerMarginTablet?.bottom}${footerMarginUnits?.Tablet} ${footerMarginTablet?.left}${footerMarginUnits?.Tablet}`
-		: "";
-	const footerMarginGetMobile = footerMarginMobile
-		? `${footerMarginMobile?.top}${footerMarginUnits?.Mobile} ${footerMarginMobile?.right}${footerMarginUnits?.Mobile} ${footerMarginMobile?.bottom}${footerMarginUnits?.Mobile} ${footerMarginMobile?.left}${footerMarginUnits?.Mobile}`
-		: "";
+	const footerMarginDesktopWidth = `${footerMarginDesktop?.top}${footerMarginUnits?.Desktop} ${footerMarginDesktop?.right}${footerMarginUnits?.Desktop} ${footerMarginDesktop?.bottom}${footerMarginUnits?.Desktop} ${footerMarginDesktop?.left}${footerMarginUnits?.Desktop}`;
+	const footerMarginTabletWidth = `${footerMarginTablet?.top}${footerMarginUnits?.Tablet} ${footerMarginTablet?.right}${footerMarginUnits?.Tablet} ${footerMarginTablet?.bottom}${footerMarginUnits?.Tablet} ${footerMarginTablet?.left}${footerMarginUnits?.Tablet}`;
+	const footerMarginMobileWidth = `${footerMarginMobile?.top}${footerMarginUnits?.Mobile} ${footerMarginMobile?.right}${footerMarginUnits?.Mobile} ${footerMarginMobile?.bottom}${footerMarginUnits?.Mobile} ${footerMarginMobile?.left}${footerMarginUnits?.Mobile}`;
 
 	// MultiChart Wrapper Padding
-	const multiChartPaddingGetDesktop = `${multiChartPaddingDesktop?.top}${multiChartPaddingUnits?.Desktop} ${multiChartPaddingDesktop?.right}${multiChartPaddingUnits?.Desktop} ${multiChartPaddingDesktop?.bottom}${multiChartPaddingUnits?.Desktop} ${multiChartPaddingDesktop?.left}${multiChartPaddingUnits?.Desktop}`;
-	const multiChartPaddingGetTablet = multiChartPaddingTablet
-		? `${multiChartPaddingTablet?.top}${multiChartPaddingUnits?.Tablet} ${multiChartPaddingTablet?.right}${multiChartPaddingUnits?.Tablet} ${multiChartPaddingTablet?.bottom}${multiChartPaddingUnits?.Tablet} ${multiChartPaddingTablet?.left}${multiChartPaddingUnits?.Tablet}`
-		: "";
-	const multiChartPaddingGetMobile = multiChartPaddingMobile
-		? `${multiChartPaddingMobile?.top}${multiChartPaddingUnits?.Mobile} ${multiChartPaddingMobile?.right}${multiChartPaddingUnits?.Mobile} ${multiChartPaddingMobile?.bottom}${multiChartPaddingUnits?.Mobile} ${multiChartPaddingMobile?.left}${multiChartPaddingUnits?.Mobile}`
-		: "";
+	const multiChartPaddingDesktopWidth = `${multiChartPaddingDesktop?.top}${multiChartPaddingUnits?.Desktop} ${multiChartPaddingDesktop?.right}${multiChartPaddingUnits?.Desktop} ${multiChartPaddingDesktop?.bottom}${multiChartPaddingUnits?.Desktop} ${multiChartPaddingDesktop?.left}${multiChartPaddingUnits?.Desktop}`;
+	const multiChartPaddingTabletWidth = `${multiChartPaddingTablet?.top}${multiChartPaddingUnits?.Tablet} ${multiChartPaddingTablet?.right}${multiChartPaddingUnits?.Tablet} ${multiChartPaddingTablet?.bottom}${multiChartPaddingUnits?.Tablet} ${multiChartPaddingTablet?.left}${multiChartPaddingUnits?.Tablet}`;
+	const multiChartPaddingMobileWidth = `${multiChartPaddingMobile?.top}${multiChartPaddingUnits?.Mobile} ${multiChartPaddingMobile?.right}${multiChartPaddingUnits?.Mobile} ${multiChartPaddingMobile?.bottom}${multiChartPaddingUnits?.Mobile} ${multiChartPaddingMobile?.left}${multiChartPaddingUnits?.Mobile}`;
 
 	// MultiChart Wrapper Margin
-	const multiChartMarginGetDesktop = `${multiChartMarginDesktop?.top}${multiChartMarginUnits?.Desktop} ${multiChartMarginDesktop?.right}${multiChartMarginUnits?.Desktop} ${multiChartMarginDesktop?.bottom}${multiChartMarginUnits?.Desktop} ${multiChartMarginDesktop?.left}${multiChartMarginUnits?.Desktop}`;
-	const multiChartMarginGetTablet = multiChartMarginTablet
-		? `${multiChartMarginTablet?.top}${multiChartMarginUnits?.Tablet} ${multiChartMarginTablet?.right}${multiChartMarginUnits?.Tablet} ${multiChartMarginTablet?.bottom}${multiChartMarginUnits?.Tablet} ${multiChartMarginTablet?.left}${multiChartMarginUnits?.Tablet}`
-		: "";
-	const multiChartMarginGetMobile = multiChartMarginMobile
-		? `${multiChartMarginMobile?.top}${multiChartMarginUnits?.Mobile} ${multiChartMarginMobile?.right}${multiChartMarginUnits?.Mobile} ${multiChartMarginMobile?.bottom}${multiChartMarginUnits?.Mobile} ${multiChartMarginMobile?.left}${multiChartMarginUnits?.Mobile}`
-		: "";
+	const multiChartMarginDesktopWidth = `${multiChartMarginDesktop?.top}${multiChartMarginUnits?.Desktop} ${multiChartMarginDesktop?.right}${multiChartMarginUnits?.Desktop} ${multiChartMarginDesktop?.bottom}${multiChartMarginUnits?.Desktop} ${multiChartMarginDesktop?.left}${multiChartMarginUnits?.Desktop}`;
+	const multiChartMarginTabletWidth = `${multiChartMarginTablet?.top}${multiChartMarginUnits?.Tablet} ${multiChartMarginTablet?.right}${multiChartMarginUnits?.Tablet} ${multiChartMarginTablet?.bottom}${multiChartMarginUnits?.Tablet} ${multiChartMarginTablet?.left}${multiChartMarginUnits?.Tablet}`;
+	const multiChartMarginMobileWidth = `${multiChartMarginMobile?.top}${multiChartMarginUnits?.Mobile} ${multiChartMarginMobile?.right}${multiChartMarginUnits?.Mobile} ${multiChartMarginMobile?.bottom}${multiChartMarginUnits?.Mobile} ${multiChartMarginMobile?.left}${multiChartMarginUnits?.Mobile}`;
 
 	// MultiChart Wrapper Border Radius
-	const multiChartWrapperBorderRadiusGetDesktop = `${multiChartWrapperBorderRadiusDesktop?.top}${multiChartWrapperBorderRadiusUnits?.Desktop} ${multiChartWrapperBorderRadiusDesktop?.right}${multiChartWrapperBorderRadiusUnits?.Desktop} ${multiChartWrapperBorderRadiusDesktop?.bottom}${multiChartWrapperBorderRadiusUnits?.Desktop} ${multiChartWrapperBorderRadiusDesktop?.left}${multiChartWrapperBorderRadiusUnits?.Desktop}`;
-	const multiChartWrapperBorderRadiusGetTablet =
-		multiChartWrapperBorderRadiusTablet
-			? `${multiChartWrapperBorderRadiusTablet?.top}${multiChartWrapperBorderRadiusUnits?.Tablet} ${multiChartWrapperBorderRadiusTablet?.right}${multiChartWrapperBorderRadiusUnits?.Tablet} ${multiChartWrapperBorderRadiusTablet?.bottom}${multiChartWrapperBorderRadiusUnits?.Tablet} ${multiChartWrapperBorderRadiusTablet?.left}${multiChartWrapperBorderRadiusUnits?.Tablet}`
-			: "";
-	const multiChartWrapperBorderRadiusGetMobile =
-		multiChartWrapperBorderRadiusMobile
-			? `${multiChartWrapperBorderRadiusMobile?.top}${multiChartWrapperBorderRadiusUnits?.Mobile} ${multiChartWrapperBorderRadiusMobile?.right}${multiChartWrapperBorderRadiusUnits?.Mobile} ${multiChartWrapperBorderRadiusMobile?.bottom}${multiChartWrapperBorderRadiusUnits?.Mobile} ${multiChartWrapperBorderRadiusMobile?.left}${multiChartWrapperBorderRadiusUnits?.Mobile}`
-			: "";
+	const multiChartWrapperBorderRadiusDesktopWidth = `${multiChartWrapperBorderRadiusDesktop?.top}${multiChartWrapperBorderRadiusUnits?.Desktop} ${multiChartWrapperBorderRadiusDesktop?.right}${multiChartWrapperBorderRadiusUnits?.Desktop} ${multiChartWrapperBorderRadiusDesktop?.bottom}${multiChartWrapperBorderRadiusUnits?.Desktop} ${multiChartWrapperBorderRadiusDesktop?.left}${multiChartWrapperBorderRadiusUnits?.Desktop}`;
+	const multiChartWrapperBorderRadiusTabletWidth = `${multiChartWrapperBorderRadiusTablet?.top}${multiChartWrapperBorderRadiusUnits?.Tablet} ${multiChartWrapperBorderRadiusTablet?.right}${multiChartWrapperBorderRadiusUnits?.Tablet} ${multiChartWrapperBorderRadiusTablet?.bottom}${multiChartWrapperBorderRadiusUnits?.Tablet} ${multiChartWrapperBorderRadiusTablet?.left}${multiChartWrapperBorderRadiusUnits?.Tablet}`;
+	const multiChartWrapperBorderRadiusMobileWidth = `${multiChartWrapperBorderRadiusMobile?.top}${multiChartWrapperBorderRadiusUnits?.Mobile} ${multiChartWrapperBorderRadiusMobile?.right}${multiChartWrapperBorderRadiusUnits?.Mobile} ${multiChartWrapperBorderRadiusMobile?.bottom}${multiChartWrapperBorderRadiusUnits?.Mobile} ${multiChartWrapperBorderRadiusMobile?.left}${multiChartWrapperBorderRadiusUnits?.Mobile}`;
 
 	// MultiChart Wrapper Border Type
-	const multiChartWrapperBorderTypeGetDesktop = `${multiChartWrapperBorderTypeDesktop?.top}${multiChartWrapperBorderTypeUnits?.Desktop} ${multiChartWrapperBorderTypeDesktop?.right}${multiChartWrapperBorderTypeUnits?.Desktop} ${multiChartWrapperBorderTypeDesktop?.bottom}${multiChartWrapperBorderTypeUnits?.Desktop} ${multiChartWrapperBorderTypeDesktop?.left}${multiChartWrapperBorderTypeUnits?.Desktop}`;
-	const multiChartWrapperBorderTypeGetTablet = multiChartWrapperBorderTypeTablet
-		? `${multiChartWrapperBorderTypeTablet?.top}${multiChartWrapperBorderTypeUnits?.Tablet} ${multiChartWrapperBorderTypeTablet?.right}${multiChartWrapperBorderTypeUnits?.Tablet} ${multiChartWrapperBorderTypeTablet?.bottom}${multiChartWrapperBorderTypeUnits?.Tablet} ${multiChartWrapperBorderTypeTablet?.left}${multiChartWrapperBorderTypeUnits?.Tablet}`
-		: "";
-	const multiChartWrapperBorderTypeGetMobile = multiChartWrapperBorderTypeMobile
-		? `${multiChartWrapperBorderTypeMobile?.top}${multiChartWrapperBorderTypeUnits?.Mobile} ${multiChartWrapperBorderTypeMobile?.right}${multiChartWrapperBorderTypeUnits?.Mobile} ${multiChartWrapperBorderTypeMobile?.bottom}${multiChartWrapperBorderTypeUnits?.Mobile} ${multiChartWrapperBorderTypeMobile?.left}${multiChartWrapperBorderTypeUnits?.Mobile}`
-		: "";
+	const multiChartWrapperBorderTypeDesktopWidth = `${multiChartWrapperBorderTypeDesktop?.top}${multiChartWrapperBorderTypeUnits?.Desktop} ${multiChartWrapperBorderTypeDesktop?.right}${multiChartWrapperBorderTypeUnits?.Desktop} ${multiChartWrapperBorderTypeDesktop?.bottom}${multiChartWrapperBorderTypeUnits?.Desktop} ${multiChartWrapperBorderTypeDesktop?.left}${multiChartWrapperBorderTypeUnits?.Desktop}`;
+	const multiChartWrapperBorderTypeTabletWidth = `${multiChartWrapperBorderTypeTablet?.top}${multiChartWrapperBorderTypeUnits?.Tablet} ${multiChartWrapperBorderTypeTablet?.right}${multiChartWrapperBorderTypeUnits?.Tablet} ${multiChartWrapperBorderTypeTablet?.bottom}${multiChartWrapperBorderTypeUnits?.Tablet} ${multiChartWrapperBorderTypeTablet?.left}${multiChartWrapperBorderTypeUnits?.Tablet}`;
+	const multiChartWrapperBorderTypeMobileWidth = `${multiChartWrapperBorderTypeMobile?.top}${multiChartWrapperBorderTypeUnits?.Mobile} ${multiChartWrapperBorderTypeMobile?.right}${multiChartWrapperBorderTypeUnits?.Mobile} ${multiChartWrapperBorderTypeMobile?.bottom}${multiChartWrapperBorderTypeUnits?.Mobile} ${multiChartWrapperBorderTypeMobile?.left}${multiChartWrapperBorderTypeUnits?.Mobile}`;
 
 	// Toggle Button Padding
-	const toggleBtnPaddingGetDesktop = toggleBtnPaddingDesktop
-		? `${toggleBtnPaddingDesktop?.top}px ${toggleBtnPaddingDesktop?.right}px ${toggleBtnPaddingDesktop?.bottom}px ${toggleBtnPaddingDesktop?.left}px`
-		: "";
-	const toggleBtnPaddingGetTablet = toggleBtnPaddingTablet
-		? `${toggleBtnPaddingTablet?.top}px ${toggleBtnPaddingTablet?.right}px ${toggleBtnPaddingTablet?.bottom}px ${toggleBtnPaddingTablet?.left}px`
-		: "";
-	const toggleBtnPaddingGetMobile = toggleBtnPaddingMobile
-		? `${toggleBtnPaddingMobile?.top}px ${toggleBtnPaddingMobile?.right}px ${toggleBtnPaddingMobile?.bottom}px ${toggleBtnPaddingMobile?.left}px`
-		: "";
+	const toggleBtnPaddingDesktopWidth = `${toggleBtnPaddingDesktop?.top}px ${toggleBtnPaddingDesktop?.right}px ${toggleBtnPaddingDesktop?.bottom}px ${toggleBtnPaddingDesktop?.left}px`;
+	const toggleBtnPaddingTabletWidth = `${toggleBtnPaddingTablet?.top}px ${toggleBtnPaddingTablet?.right}px ${toggleBtnPaddingTablet?.bottom}px ${toggleBtnPaddingTablet?.left}px`;
+	const toggleBtnPaddingMobileWidth = `${toggleBtnPaddingMobile?.top}px ${toggleBtnPaddingMobile?.right}px ${toggleBtnPaddingMobile?.bottom}px ${toggleBtnPaddingMobile?.left}px`;
 
 	// Toggle Button Border Radius
-	const toggleBtnBorderRadiusGetDesktop = `${toggleBtnBorderRadiusDesktop?.top}px ${toggleBtnBorderRadiusDesktop?.right}px ${toggleBtnBorderRadiusDesktop?.bottom}px ${toggleBtnBorderRadiusDesktop?.left}px`;
-	const toggleBtnBorderRadiusGetTablet = toggleBtnBorderRadiusTablet
-		? `${toggleBtnBorderRadiusTablet?.top}px ${toggleBtnBorderRadiusTablet?.right}px ${toggleBtnBorderRadiusTablet?.bottom}px ${toggleBtnBorderRadiusTablet?.left}px`
-		: "";
-	const toggleBtnBorderRadiusGetMobile = toggleBtnBorderRadiusMobile
-		? `${toggleBtnBorderRadiusMobile?.top}px ${toggleBtnBorderRadiusMobile?.right}px ${toggleBtnBorderRadiusMobile?.bottom}px ${toggleBtnBorderRadiusMobile?.left}px`
-		: "";
-
-	const canvasBgNormal =
-		canvasNormalBackgroundType === "gradient"
-			? canvasNormalCustomGradientSwitcher &&
-			  canvasNormalCustomGradientInputValue
-				? `background: ${canvasNormalCustomGradientInputValue};`
-				: canvasNormalGradientColor
-				? `background: ${canvasNormalGradientColor};`
-				: ""
-			: canvasNormalColor
-			? `background-color: ${canvasNormalColor};`
-			: "";
-
-	const canvasBgHover =
-		canvasHoverBackgroundType === "gradient"
-			? canvasHoverCustomGradientSwitcher && canvasHoverCustomGradientInputValue
-				? `background: ${canvasHoverCustomGradientInputValue};`
-				: canvasHoverGradientColor
-				? `background: ${canvasHoverGradientColor};`
-				: ""
-			: canvasHoverColor
-			? `background-color: ${canvasHoverColor};`
-			: "";
-
-	const bodyBgNormal =
-		chartBodyNormalBackgroundType === "gradient"
-			? chartBodyNormalCustomGradientSwitcher &&
-			  chartBodyNormalCustomGradientInputValue
-				? `background: ${chartBodyNormalCustomGradientInputValue};`
-				: chartBodyNormalGradientColor
-				? `background: ${chartBodyNormalGradientColor};`
-				: ""
-			: chartBodyNormalColor
-			? `background-color: ${chartBodyNormalColor};`
-			: "";
-
-	const bodyBgHover =
-		chartBodyHoverBackgroundType === "gradient"
-			? chartBodyHoverCustomGradientSwitcher &&
-			  chartBodyHoverCustomGradientInputValue
-				? `background: ${chartBodyHoverCustomGradientInputValue};`
-				: chartBodyHoverGradientColor
-				? `background: ${chartBodyHoverGradientColor};`
-				: ""
-			: chartBodyHoverColor
-			? `background-color: ${chartBodyHoverColor};`
-			: "";
+	const toggleBtnBorderRadiusDesktopWidth = `${toggleBtnBorderRadiusDesktop?.top}px ${toggleBtnBorderRadiusDesktop?.right}px ${toggleBtnBorderRadiusDesktop?.bottom}px ${toggleBtnBorderRadiusDesktop?.left}px`;
+	const toggleBtnBorderRadiusTabletWidth = `${toggleBtnBorderRadiusTablet?.top}px ${toggleBtnBorderRadiusTablet?.right}px ${toggleBtnBorderRadiusTablet?.bottom}px ${toggleBtnBorderRadiusTablet?.left}px`;
+	const toggleBtnBorderRadiusMobileWidth = `${toggleBtnBorderRadiusMobile?.top}px ${toggleBtnBorderRadiusMobile?.right}px ${toggleBtnBorderRadiusMobile?.bottom}px ${toggleBtnBorderRadiusMobile?.left}px`;
 
 	const blockStyle = `
 		.fb-elegant-chart-block.${blockID} {
@@ -439,30 +327,29 @@ const generateMultiChartStyle = (attributes) => {
 
 			${multiChartWrapperBorder ? `border-style: ${multiChartWrapperBorder};` : ""}
 			${
-				multiChartWrapperBorderColor
-					? `border-color: ${multiChartWrapperBorderColor};`
-					: ""
+				multiChartWrapperBorderColorSwitcher === "normal" && multiChartWrapperBorderColor
+					? `border-color: ${multiChartWrapperBorderColor};` : ""
 			}
 			${
-				multiChartWrapperBorderTypeGetDesktop &&
+				multiChartWrapperBorderTypeDesktopWidth &&
 				multiChartWrapperBorderTypeDesktop?.top
-					? `border-width: ${multiChartWrapperBorderTypeGetDesktop};`
+					? `border-width: ${multiChartWrapperBorderTypeDesktopWidth};`
 					: ""
 			}
 			${
-				multiChartWrapperBorderRadiusGetDesktop &&
+				multiChartWrapperBorderRadiusDesktopWidth &&
 				multiChartWrapperBorderRadiusDesktop?.top
-					? `border-radius: ${multiChartWrapperBorderRadiusGetDesktop};`
+					? `border-radius: ${multiChartWrapperBorderRadiusDesktopWidth};`
 					: ""
 			}
 			${
-				multiChartPaddingGetDesktop && multiChartPaddingDesktop?.top
-					? `padding: ${multiChartPaddingGetDesktop};`
+				multiChartPaddingDesktopWidth && multiChartPaddingDesktop?.top
+					? `padding: ${multiChartPaddingDesktopWidth};`
 					: ""
 			}
 			${
-				multiChartMarginGetDesktop && multiChartMarginDesktop?.top
-					? `margin: ${multiChartMarginGetDesktop};`
+				multiChartMarginDesktopWidth && multiChartMarginDesktop?.top
+					? `margin: ${multiChartMarginDesktopWidth};`
 					: ""
 			}
 
@@ -486,12 +373,11 @@ const generateMultiChartStyle = (attributes) => {
 					? `background-color: ${multiChartClassicColor};`
 					: ""
 			}
-			transition: all .3s ease-in-out;
 		}
 
 		.fb-elegant-chart-block.${blockID}:hover {
 			${
-				multiChartWrapperBorderHoverColor
+				multiChartWrapperBorderColorSwitcher === "hover" && multiChartWrapperBorderHoverColor
 					? `border-color: ${multiChartWrapperBorderHoverColor};`
 					: ""
 			}
@@ -522,34 +408,51 @@ const generateMultiChartStyle = (attributes) => {
 					: ""
 			}
 			${
-				canvasBorderRadiusGetDesktop && canvasBorderRadiusDesktop?.top
-					? `border-radius: ${canvasBorderRadiusGetDesktop};`
+				canvasBorderRadiusDesktopWidth && canvasBorderRadiusDesktop?.top
+					? `border-radius: ${canvasBorderRadiusDesktopWidth};`
 					: ""
 			}
-			${canvasBgNormal}
+            ${canvasNormalBackgroundType === "gradient"
+                ? `background: ${canvasNormalCustomGradientSwitcher && canvasNormalCustomGradientInputValue ? canvasNormalCustomGradientInputValue : canvasNormalGradientColor || ""};`
+                : `background-color: ${canvasNormalColor || ""};`
+            }
 			${
-				canvasPaddingGetDesktop && canvasPaddingDesktop?.top
-					? `padding: ${canvasPaddingGetDesktop};`
+				canvasPaddingDesktopWidth && canvasPaddingDesktop?.top
+					? `padding: ${canvasPaddingDesktopWidth};`
 					: ""
 			}
 			${
-				canvasMarginGetDesktop && canvasMarginDesktop?.top
-					? `margin: ${canvasMarginGetDesktop};`
+				canvasMarginDesktopWidth && canvasMarginDesktop?.top
+					? `margin: ${canvasMarginDesktopWidth};`
 					: ""
 			}
-			transition: all 0.3s ease;
 		}
 
-
 		.fb-elegant-chart-block.${blockID} .fb-chart-card:hover {
-			${canvasBgHover}
+            ${canvasHoverBackgroundType === "gradient"
+                ? `background: ${canvasHoverCustomGradientSwitcher && canvasHoverCustomGradientInputValue ? canvasHoverCustomGradientInputValue : canvasHoverGradientColor || ""};`
+                : `background-color: ${canvasHoverColor || ""};`
+            }
 		}
 		.fb-elegant-chart-block.${blockID} .fb-chart-header {
 			${
-				chartHeaderPaddingGetDesktop && chartHeaderPaddingDesktop?.top
-					? `padding: ${chartHeaderPaddingGetDesktop};`
+				chartHeaderPaddingDesktopWidth && chartHeaderPaddingDesktop?.top
+					? `padding: ${chartHeaderPaddingDesktopWidth};`
 					: ""
 			}
+            ${
+                footerTitleFontFamily && footerTitleFontFamily !== "Default"
+                    ? `font-family: ${footerTitleFontFamily};`
+                    : ""
+            }
+            ${
+                footerTitleFontSize?.Desktop && footerTitleFontSizeUnits
+                    ? `font-size: ${footerTitleFontSize.Desktop}${footerTitleFontSizeUnits};`
+                    : ""
+            }
+            ${footerTitleFontWeight ? `font-weight: ${footerTitleFontWeight};` : ""}
+            ${footerTitleFontStyle ? `font-style: ${footerTitleFontStyle};` : ""}
+            ${footerTitleLineHeight?.Desktop ? `line-height: ${footerTitleLineHeight.Desktop}${footerTitleLineHeightUnits || 'px'};` : ""}
 		}
 		.fb-elegant-chart-block.${blockID} .fb-chart-label {
 			${
@@ -563,18 +466,15 @@ const generateMultiChartStyle = (attributes) => {
 			${toggleBtnColor ? `color: ${toggleBtnColor};` : ""}
 			${toggleBtnBgColor ? `background-color: ${toggleBtnBgColor};` : ""}
 			${
-				toggleBtnPaddingGetDesktop && toggleBtnPaddingDesktop?.top
-					? `padding: ${toggleBtnPaddingGetDesktop};`
+				toggleBtnPaddingDesktopWidth && toggleBtnPaddingDesktop?.top
+					? `padding: ${toggleBtnPaddingDesktopWidth};`
 					: ""
 			}
 			${
-				toggleBtnBorderRadiusGetDesktop && toggleBtnBorderRadiusDesktop?.top
-					? `border-radius: ${toggleBtnBorderRadiusGetDesktop};`
+				toggleBtnBorderRadiusDesktopWidth && toggleBtnBorderRadiusDesktop?.top
+					? `border-radius: ${toggleBtnBorderRadiusDesktopWidth};`
 					: ""
 			}
-			display: flex;
-			align-items: center;
-			gap: 8px;
 		}
 		.fb-elegant-chart-block.${blockID} .fb-chart-filter:hover {
 			${toggleBtnHoverColor ? `color: ${toggleBtnHoverColor};` : ""}
@@ -588,10 +488,9 @@ const generateMultiChartStyle = (attributes) => {
 					  }; height: ${filterIconSize.Desktop}${
 							filterIconSizeUnits?.Desktop || "px"
 					  };`
-					: "width: 14px; height: 14px;"
+					: ""
 			}
-			${filterIconColor ? `fill: ${filterIconColor};` : "fill: currentColor;"}
-			transition: all 0.3s ease;
+			${filterIconColor ? `fill: ${filterIconColor};` : ""}
 		}
 		.fb-elegant-chart-block.${blockID} .fb-chart-filter:hover .fb-filter-icon svg {
 			${filterIconHoverColor ? `fill: ${filterIconHoverColor};` : ""}
@@ -620,7 +519,10 @@ const generateMultiChartStyle = (attributes) => {
 			}
 		}
 		.fb-elegant-chart-block.${blockID} .fb-chart-card-body:hover {
-			${bodyBgHover}
+            ${chartBodyHoverBackgroundType === "gradient"
+                ? `background: ${chartBodyHoverCustomGradientSwitcher && chartBodyHoverCustomGradientInputValue ? chartBodyHoverCustomGradientInputValue : chartBodyHoverGradientColor || ""};`
+                : `background-color: ${chartBodyHoverColor || ""};`
+            }
 		}
 		.fb-elegant-chart-block.${blockID} .fb-canvas-wrapper {
 			${
@@ -642,7 +544,6 @@ const generateMultiChartStyle = (attributes) => {
 					? "flex-end"
 					: "center"
 			};
-			margin-top: 20px;
 		}
 		.fb-elegant-chart-block.${blockID} .fb-legend-item {
 			${legendTextColor ? `color: ${legendTextColor};` : ""}
@@ -657,13 +558,13 @@ const generateMultiChartStyle = (attributes) => {
 		}
 		.fb-elegant-chart-block.${blockID} .fb-chart-footer {
 			${
-				footerPaddingGetDesktop && footerPaddingDesktop?.top
-					? `padding: ${footerPaddingGetDesktop};`
+				footerPaddingDesktopWidth && footerPaddingDesktop?.top
+					? `padding: ${footerPaddingDesktopWidth};`
 					: ""
 			}
 			${
-				footerMarginGetDesktop && footerMarginDesktop?.top
-					? `margin: ${footerMarginGetDesktop};`
+				footerMarginDesktopWidth && footerMarginDesktop?.top
+					? `margin: ${footerMarginDesktopWidth};`
 					: ""
 			}
 			${
@@ -674,39 +575,65 @@ const generateMultiChartStyle = (attributes) => {
 		}
 		.fb-elegant-chart-block.${blockID} .fb-footer-title {
 			${footerTitleNormalColor ? `color: ${footerTitleNormalColor};` : ""}
+            ${
+                footerTitleFontFamily && footerTitleFontFamily !== "Default"
+                    ? `font-family: ${footerTitleFontFamily};`
+                    : ""
+            }
+            ${
+                footerTitleFontSize?.Desktop && footerTitleFontSizeUnits
+                    ? `font-size: ${footerTitleFontSize.Desktop}${footerTitleFontSizeUnits};`
+                    : ""
+            }
+            ${footerTitleFontWeight ? `font-weight: ${footerTitleFontWeight};` : ""}
+            ${footerTitleFontStyle ? `font-style: ${footerTitleFontStyle};` : ""}
+            ${footerTitleLineHeight?.Desktop ? `line-height: ${footerTitleLineHeight.Desktop}${footerTitleLineHeightUnits || 'px'};` : ""}
 		}
 		.fb-elegant-chart-block.${blockID} .fb-chart-footer:hover .fb-footer-title {
 			${footerTitleHoverColor ? `color: ${footerTitleHoverColor};` : ""}
 		}
 		.fb-elegant-chart-block.${blockID} .fb-chart-description {
 			${footerDescNormalColor ? `color: ${footerDescNormalColor};` : ""}
+            ${
+                footerDescFontFamily && footerDescFontFamily !== "Default"
+                    ? `font-family: ${footerDescFontFamily};`
+                    : ""
+            }
+            ${
+                footerDescFontSize?.Desktop && footerDescFontSizeUnits
+                    ? `font-size: ${footerDescFontSize.Desktop}${footerDescFontSizeUnits};`
+                    : ""
+            }
+            ${footerDescFontWeight ? `font-weight: ${footerDescFontWeight};` : ""}
+            ${footerDescFontStyle ? `font-style: ${footerDescFontStyle};` : ""}
+            ${footerDescLineHeight?.Desktop ? `line-height: ${footerDescLineHeight.Desktop}${footerDescLineHeightUnits || 'px'};` : ""}
 		}
 		.fb-elegant-chart-block.${blockID} .fb-chart-footer:hover .fb-chart-description {
-			${footerDescHoverColor ? `color: ${footerDescHoverColor};` : ""}
+			${footerDescColorSwitcher === "hover" && footerDescHoverColor ? `color: ${footerDescHoverColor};` : ""}
 		}
 		/* Responsive Media Queries */
 		@media only screen and (max-width: 1024px) {
 			.fb-elegant-chart-block.${blockID} {
 				${
-					multiChartWrapperBorderTypeGetTablet &&
+					multiChartWrapperBorderTypeTabletWidth &&
 					multiChartWrapperBorderTypeTablet?.top
-						? `border-width: ${multiChartWrapperBorderTypeGetTablet};`
+						? `border-width: ${multiChartWrapperBorderTypeTabletWidth};`
 						: ""
 				}
 				${
-					multiChartWrapperBorderRadiusGetTablet &&
+					multiChartWrapperBorderRadiusTabletWidth &&
 					multiChartWrapperBorderRadiusTablet?.top
-						? `border-radius: ${multiChartWrapperBorderRadiusGetTablet};`
+						? `border-radius: ${multiChartWrapperBorderRadiusTabletWidth};`
 						: ""
 				}
 				${
-					multiChartPaddingGetTablet && multiChartPaddingTablet?.top
-						? `padding: ${multiChartPaddingGetTablet};`
+					multiChartPaddingTabletWidth && multiChartPaddingTablet?.top
+						? `padding: ${multiChartPaddingTabletWidth};`
 						: ""
 				}
 				${
 					multiChartMarginGetTablet && multiChartMarginTablet?.top
-						? `margin: ${multiChartMarginGetTablet};`
+						? `margin: ${multiChartMarginTabletWidth};`
 						: ""
 				}
 			}
@@ -718,35 +645,38 @@ const generateMultiChartStyle = (attributes) => {
 				}
 			}
 			.fb-elegant-chart-block.${blockID} .fb-chart-card { ${
-				canvasBorderRadiusGetTablet && canvasBorderRadiusTablet?.top
-					? `border-radius: ${canvasBorderRadiusGetTablet};`
+				canvasBorderRadiusTabletWidth && canvasBorderRadiusTablet?.top
+					? `border-radius: ${canvasBorderRadiusTabletWidth};`
 					: ""
 			} ${
-				canvasPaddingGetTablet && canvasPaddingTablet?.top
-					? `padding: ${canvasPaddingGetTablet};`
+				canvasPaddingTabletWidth && canvasPaddingTablet?.top
+					? `padding: ${canvasPaddingTabletWidth};`
 					: ""
 			} ${
-				canvasMarginGetTablet && canvasMarginTablet?.top
-					? `margin: ${canvasMarginGetTablet};`
+				canvasMarginTabletWidth && canvasMarginTablet?.top
+					? `margin: ${canvasMarginTabletWidth};`
 					: ""
 			} }
 
 			.fb-elegant-chart-block.${blockID} .fb-chart-card-body { ${
-				showChartLegend && canvasHeight?.Tablet
+				showChartLegend && canvasHeight?.Tablet && canvasHeightUnits?.Tablet
 					? `height: ${canvasHeight.Tablet}${canvasHeightUnits?.Tablet};`
 					: ""
 			} ${
-				chartBodyPaddingGetTablet && chartBodyPaddingTablet?.top
-					? `padding: ${chartBodyPaddingGetTablet};`
+				chartBodyPaddingTabletWidth && chartBodyPaddingTablet?.top
+					? `padding: ${chartBodyPaddingTabletWidth};`
 					: ""
 			} ${
-				chartBodyMarginGetTablet && chartBodyMarginTablet?.top
-					? `margin: ${chartBodyMarginGetTablet};`
+				chartBodyMarginTabletWidth && chartBodyMarginTablet?.top
+					? `margin: ${chartBodyMarginTabletWidth};`
 					: ""
+			}
+            ${
+                footerTitleFontSize?.Tablet ? `font-size: ${footerTitleFontSize.Tablet}${footerTitleFontSizeUnits};` : ""
 			} }
 			.fb-elegant-chart-block.${blockID} .fb-chart-card-body { ${
-				chartBodyBorderRadiusGetTablet && chartBodyBorderRadiusTablet?.top
-					? `border-radius: ${chartBodyBorderRadiusGetTablet};`
+				chartBodyBorderRadiusTabletWidth && chartBodyBorderRadiusTablet?.top
+					? `border-radius: ${chartBodyBorderRadiusTabletWidth};`
 					: ""
 			} }
 			.fb-elegant-chart-block.${blockID} .fb-chart-footer {
@@ -756,18 +686,22 @@ const generateMultiChartStyle = (attributes) => {
 						: ""
 				}
 			}
-			.fb-elegant-chart-block.${blockID} .fb-chart-header { ${
-				chartHeaderPaddingGetTablet && chartHeaderPaddingTablet?.top
-					? `padding: ${chartHeaderPaddingGetTablet};`
-					: ""
-			} }
+			.fb-elegant-chart-block.${blockID} .fb-chart-header { 
+                ${
+                    chartHeaderPaddingTabletWidth && chartHeaderPaddingTablet?.top
+                        ? `padding: ${chartHeaderPaddingTabletWidth};`
+                        : ""
+                }
+                ${footerTitleFontSize?.Tablet ? `font-size: ${footerTitleFontSize.Tablet}${footerTitleFontSizeUnits};` : ""}
+                ${footerTitleLineHeight?.Tablet ? `line-height: ${footerTitleLineHeight.Tablet}${footerTitleLineHeightUnits || 'px'};` : ""}
+            }
 			.fb-elegant-chart-block.${blockID} .fb-chart-footer { ${
-				footerPaddingGetTablet && footerPaddingTablet?.top
-					? `padding: ${footerPaddingGetTablet};`
+				footerPaddingTabletWidth && footerPaddingTablet?.top
+					? `padding: ${footerPaddingTabletWidth};`
 					: ""
 			} ${
-				footerMarginGetTablet && footerMarginTablet?.top
-					? `margin: ${footerMarginGetTablet};`
+				footerMarginTabletWidth && footerMarginTablet?.top
+					? `margin: ${footerMarginTabletWidth};`
 					: ""
 			} }
 
@@ -784,11 +718,7 @@ const generateMultiChartStyle = (attributes) => {
 			.fb-elegant-chart-block.${blockID} .fb-chart-legend { justify-content: ${
 				legendTextAlignment?.Tablet === "left"
 					? "flex-start"
-					: legendTextAlignment?.Tablet === "right"
-					? "flex-end"
-					: legendTextAlignment?.Tablet === "center"
-					? "center"
-					: "center"
+					: legendTextAlignment?.Tablet === "right" ? "flex-end" : "center"
 			}; }
 
 			.fb-elegant-chart-block.${blockID} .fb-legend-dot { ${
@@ -848,67 +778,71 @@ const generateMultiChartStyle = (attributes) => {
 					multiChartGlobalZIndex?.Mobile
 						? `z-index: ${multiChartGlobalZIndex?.Mobile};`
 						: ""
-				}
+				} 
 				${multiChartOverflow !== "default" ? `overflow: ${multiChartOverflow};` : ""}
 
 				${
-					multiChartWrapperBorderTypeGetMobile &&
+					multiChartWrapperBorderTypeMobileWidth &&
 					multiChartWrapperBorderTypeMobile?.top
-						? `border-width: ${multiChartWrapperBorderTypeGetMobile};`
+						? `border-width: ${multiChartWrapperBorderTypeMobileWidth};`
 						: ""
 				}
 				${
-					multiChartWrapperBorderRadiusGetMobile &&
+					multiChartWrapperBorderRadiusMobileWidth &&
 					multiChartWrapperBorderRadiusMobile?.top
-						? `border-radius: ${multiChartWrapperBorderRadiusGetMobile};`
+						? `border-radius: ${multiChartWrapperBorderRadiusMobileWidth};`
 						: ""
 				}
 				${
-					multiChartPaddingGetMobile && multiChartPaddingMobile?.top
-						? `padding: ${multiChartPaddingGetMobile};`
+					multiChartPaddingMobileWidth && multiChartPaddingMobile?.top
+						? `padding: ${multiChartPaddingMobileWidth};`
 						: ""
 				}
 				${
-					multiChartMarginGetMobile && multiChartMarginMobile?.top
-						? `margin: ${multiChartMarginGetMobile};`
+					multiChartMarginMobileWidth && multiChartMarginMobile?.top
+						? `margin: ${multiChartMarginMobileWidth};`
 						: ""
 				}
 			}
 
 			.fb-elegant-chart-block.${blockID} .fb-chart-card { ${
-				canvasWidth?.Mobile
+				canvasWidth?.Mobile && canvasWidthUnits?.Mobile
 					? `width: ${canvasWidth.Mobile}${canvasWidthUnits?.Mobile};`
 					: ""
 			} ${
-				canvasBorderRadiusGetMobile && canvasBorderRadiusMobile?.top
-					? `border-radius: ${canvasBorderRadiusGetMobile};`
+				canvasBorderRadiusMobileWidth && canvasBorderRadiusMobile?.top
+					? `border-radius: ${canvasBorderRadiusMobileWidth};`
 					: ""
 			} ${
-				canvasPaddingGetMobile && canvasPaddingMobile?.top
-					? `padding: ${canvasPaddingGetMobile};`
+				canvasPaddingMobileWidth && canvasPaddingMobile?.top
+					? `padding: ${canvasPaddingMobileWidth};`
 					: ""
 			} ${
-				canvasMarginGetMobile && canvasMarginMobile?.top
-					? `margin: ${canvasMarginGetMobile};`
+				canvasPaddingMobileWidth && canvasPaddingMobile?.top
+					? `padding: ${canvasPaddingMobileWidth};`
+					: ""
+			} ${
+				canvasMarginMobileWidth && canvasMarginMobile?.top
+					? `margin: ${canvasMarginMobileWidth};`
 					: ""
 			} }
 
 			.fb-elegant-chart-block.${blockID} .fb-chart-card-body { ${
-				showChartLegend && canvasHeight?.Mobile
+				showChartLegend && canvasHeight?.Mobile && canvasHeightUnits?.Mobile
 					? `height: ${canvasHeight.Mobile}${canvasHeightUnits?.Mobile};`
 					: ""
 			} ${
-				chartBodyPaddingGetMobile && chartBodyPaddingMobile?.top
-					? `padding: ${chartBodyPaddingGetMobile};`
+				chartBodyPaddingMobileWidth && chartBodyPaddingMobile?.top
+					? `padding: ${chartBodyPaddingMobileWidth};`
 					: ""
 			} ${
-				chartBodyMarginGetMobile && chartBodyMarginMobile?.top
-					? `margin: ${chartBodyMarginGetMobile};`
+				chartBodyMarginMobileWidth && chartBodyMarginMobile?.top
+					? `margin: ${chartBodyMarginMobileWidth};`
 					: ""
 			} }
 			.fb-elegant-chart-block.${blockID} .fb-chart-card-body { ${
-				chartBodyBorderRadiusGetMobile && chartBodyBorderRadiusMobile?.top
-					? `border-radius: ${chartBodyBorderRadiusGetMobile};`
+				chartBodyBorderRadiusMobileWidth && chartBodyBorderRadiusMobile?.top
+					? `border-radius: ${chartBodyBorderRadiusMobileWidth};`
 					: ""
 			} }
 			.fb-elegant-chart-block.${blockID} .fb-canvas-wrapper {
@@ -955,11 +889,7 @@ const generateMultiChartStyle = (attributes) => {
 			.fb-elegant-chart-block.${blockID} .fb-chart-legend { justify-content: ${
 				legendTextAlignment?.Mobile === "left"
 					? "flex-start"
-					: legendTextAlignment?.Mobile === "right"
-					? "flex-end"
-					: legendTextAlignment?.Mobile === "center"
-					? "center"
-					: "center"
+					: legendTextAlignment?.Mobile === "right" ? "flex-end" : "center"
 			}; }
 
 			.fb-elegant-chart-block.${blockID} .fb-legend-dot { ${
@@ -974,4 +904,4 @@ const generateMultiChartStyle = (attributes) => {
 	return `${blockStyle} ${customCss}`.replace(/\s+/g, " ").trim();
 };
 
-export default generateMultiChartStyle;
+export default multiChartStyle;
