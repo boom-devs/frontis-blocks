@@ -3,7 +3,7 @@
 
 	const initCountdown = () => {
 		const wrappers = document.querySelectorAll(
-			".pea-countdown-wrapper, [data-target-date]",
+			".fb-count-down-wrapper, [data-target-date]",
 		);
 
 		wrappers.forEach(function (wrapper) {

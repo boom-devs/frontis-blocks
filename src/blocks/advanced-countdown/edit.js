@@ -34,7 +34,7 @@ export default function Edit({
 		// preet 1
 		advancedCountdownSunIcon,
 		advancedCountdownShowSunIcon,
-		until_text, 
+		until_text,
 
 		// preset 3
 		advancedCountdownStyle3TimeGap,
@@ -72,14 +72,12 @@ export default function Edit({
 		setAttributes,
 	});
 
-	
 	useEffect(() => {
 		if (blockID) {
 			const css = generateCountdownStyle(attributes);
 			setAttributes({ blockStyle: css });
 		}
 	}, [attributes, blockID]);
-	
 
 	const panelRef = useRef(null);
 	SwitchToBlockSettings(panelRef);
@@ -94,7 +92,6 @@ export default function Edit({
 		targetDate ? new Date(targetDate) : defaultDate,
 	);
 
-	
 	useEffect(() => {
 		if (!targetDate) {
 			setAttributes({ targetDate: defaultDate.toISOString() });
@@ -104,12 +101,11 @@ export default function Edit({
 		}
 	}, [targetDate, setAttributes, defaultDate]);
 
-	
 	useEffect(() => {
 		setAttributes({ targetDate: date.toISOString() });
 	}, [date, setAttributes]);
 
-	// Countdown Timer 
+	// Countdown Timer
 	useEffect(() => {
 		const formatTime = (time) => (time < 10 ? `0${time}` : time);
 
@@ -289,7 +285,7 @@ export default function Edit({
 					)}
 
 					{countDownPresetStyle === "style-2" && (
-						<div className="pea-countdown-items-container style-2-layout">
+						<div className="fb-countdown-items-container style-2-layout">
 							<div className="dotted-item seconds style_2_container">
 								<div className="svg-container">
 									<svg
@@ -381,7 +377,7 @@ export default function Edit({
 
 					{countDownPresetStyle === "style-4" && (
 						<div
-							className={`countdown-items pea-label-align-${advancedCountdownLabelAlignmentStyle4}`}
+							className={`countdown-items fb-label-align-${advancedCountdownLabelAlignmentStyle4}`}
 						>
 							<div className="count_tab">
 								<div className="item-box">
@@ -420,7 +416,7 @@ export default function Edit({
 
 					{countDownPresetStyle === "style-5" && (
 						<div
-							className={`pea-countdown-wrapper style-6 style-5-container ${glow_effect_class}`}
+							className={`fb-count-down-wrapper style-6 style-5-container ${glow_effect_class}`}
 							data-due={targetDate}
 							data-start={targetDate}
 						>

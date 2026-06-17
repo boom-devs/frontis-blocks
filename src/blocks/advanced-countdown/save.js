@@ -119,7 +119,7 @@ export default function save({ attributes }) {
 				)}
 
 				{countDownPresetStyle === "style-2" && (
-					<div className="pea-countdown-items-container style-2-layout">
+					<div className="fb-countdown-items-container style-2-layout">
 						{" "}
 						{/* Matches PHP's outer div */}
 						<div className="dotted-item seconds style_2_container">
@@ -214,7 +214,7 @@ export default function save({ attributes }) {
 
 				{countDownPresetStyle === "style-4" && (
 					<div
-						className={`countdown-items pea-label-align-${advancedCountdownLabelAlignmentStyle4}`}
+						className={`countdown-items fb-label-align-${advancedCountdownLabelAlignmentStyle4}`}
 					>
 						<div className="count_tab">
 							<div className="item-box">
@@ -245,7 +245,7 @@ export default function save({ attributes }) {
 
 				{countDownPresetStyle === "style-5" && (
 					<div
-						className={`pea-countdown-wrapper style-6 style-5-container ${
+						className={`fb-count-down-wrapper style-6 style-5-container ${
 							advancedCountdownDotsGlowEffect === "yes"
 								? `dots-glow-enabled dots-glow-intensity-${advancedCountdownGlowIntensity.Desktop}`
 								: ""

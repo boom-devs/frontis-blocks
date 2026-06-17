@@ -94,6 +94,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 		advancedCountdownItemWrapperBorderTypeMobile,
 		advancedCountdownItemWrapperBorderTypeLink,
 		advancedCountdownBorderRadius, // This is the main border radius
+		advancedCountdownItemWrapperBorderRadiusUnits,
+		advancedCountdownItemWrapperBorderRadiusDesktop,
+		advancedCountdownItemWrapperBorderRadiusTablet,
+		advancedCountdownItemWrapperBorderRadiusMobile,
+		advancedCountdownItemWrapperBorderRadiusLink,
 		advancedCountdownPreset5DashGap,
 		advancedCountdownPreset4DashGap,
 		countDownLayoutAlignment, // Renamed from container_alignment
@@ -102,6 +107,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 		advancedCountdownItemWrapperMarginTablet,
 		advancedCountdownItemWrapperMarginMobile,
 		advancedCountdownItemWrapperMarginLink,
+		advancedCountdownItemWrapperPaddingUnits,
+		advancedCountdownItemWrapperPaddingDesktop,
+		advancedCountdownItemWrapperPaddingTablet,
+		advancedCountdownItemWrapperPaddingMobile,
+		advancedCountdownItemWrapperPaddingLink,
 		advancedCountdownFooterPadding, // Renamed from container_padding
 		advancedCountdownFooterPaddingLink, // Renamed from container_padding_link
 
@@ -330,111 +340,497 @@ const Inspector = ({ attributes, setAttributes }) => {
 		setAttributes({ advancedCountdownStartDate: startDate.toISOString() });
 	}, [startDate, setAttributes]);
 
-	// Helper Handlers for Spacing/Border/Radius
-	const handleSpacingUnits = (attr, unit) => {
-		setAttributes({ [attr]: { ...attributes[attr], [deviceType]: unit } });
-	};
-	const handleSpacingValue = (attrPrefix, event, position, isLinked) => {
+	/** Start Item Wrapper Border Width */
+	const handleAdvancedCountdownItemWrapperBorderUnitHandlerFn = (
+		event,
+		position,
+	) => {
 		const value = event.target.value;
-		const attrName = `${attrPrefix}${deviceType}`;
-		if (isLinked) {
+		if (advancedCountdownItemWrapperBorderTypeLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						advancedCountdownItemWrapperBorderTypeDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						advancedCountdownItemWrapperBorderTypeTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						advancedCountdownItemWrapperBorderTypeMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						advancedCountdownItemWrapperBorderTypeDesktop: {
+							...advancedCountdownItemWrapperBorderTypeDesktop,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						advancedCountdownItemWrapperBorderTypeTablet: {
+							...advancedCountdownItemWrapperBorderTypeTablet,
+							[position]: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						advancedCountdownItemWrapperBorderTypeMobile: {
+							...advancedCountdownItemWrapperBorderTypeMobile,
+							[position]: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const advancedCountdownItemWrapperBorderTypeUnitsHandler = (unit) => {
+		setAttributes({
+			advancedCountdownItemWrapperBorderTypeUnits: {
+				...advancedCountdownItemWrapperBorderTypeUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+
+	const advancedCountdownItemWrapperBorderCombineBtnHandlerFn = () => {
+		setAttributes({
+			advancedCountdownItemWrapperBorderTypeLink:
+				!advancedCountdownItemWrapperBorderTypeLink,
+		});
+	};
+	/** End Item Wrapper Border Width */
+
+	/** Start Item Wrapper Border Radius */
+	const advancedCountdownItemWrapperHandleSpacingUnitHandlerFn = (
+		event,
+		position,
+	) => {
+		const value = event.target.value;
+		if (advancedCountdownItemWrapperBorderRadiusLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						advancedCountdownItemWrapperBorderRadiusDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						advancedCountdownItemWrapperBorderRadiusTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						advancedCountdownItemWrapperBorderRadiusMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						advancedCountdownItemWrapperBorderRadiusDesktop: {
+							...advancedCountdownItemWrapperBorderRadiusDesktop,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						advancedCountdownItemWrapperBorderRadiusTablet: {
+							...advancedCountdownItemWrapperBorderRadiusTablet,
+							[position]: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						advancedCountdownItemWrapperBorderRadiusMobile: {
+							...advancedCountdownItemWrapperBorderRadiusMobile,
+							[position]: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const advancedCountdownItemWrapperBorderRadiusUnitsHandler = (unit) => {
+		setAttributes({
+			advancedCountdownItemWrapperBorderRadiusUnits: {
+				...advancedCountdownItemWrapperBorderRadiusUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+
+	const advancedCountdownItemWrapperCombineBtnHandlerFn = () => {
+		setAttributes({
+			advancedCountdownItemWrapperBorderRadiusLink:
+				!advancedCountdownItemWrapperBorderRadiusLink,
+		});
+	};
+	/** End Item Wrapper Border Radius */
+
+	/** Start Item Wrapper Padding */
+	const advancedCountdownItemWrapperPaddingHandleSpacingUnitHandler = (
+		event,
+		position,
+	) => {
+		const value = event.target.value;
+		if (advancedCountdownItemWrapperPaddingLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						advancedCountdownItemWrapperPaddingDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						advancedCountdownItemWrapperPaddingTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						advancedCountdownItemWrapperPaddingMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						advancedCountdownItemWrapperPaddingDesktop: {
+							...advancedCountdownItemWrapperPaddingDesktop,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						advancedCountdownItemWrapperPaddingTablet: {
+							...advancedCountdownItemWrapperPaddingTablet,
+							[position]: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						advancedCountdownItemWrapperPaddingMobile: {
+							...advancedCountdownItemWrapperPaddingMobile,
+							[position]: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const advancedCountdownItemWrapperPaddingSpacingUnitsHandler = (unit) => {
+		setAttributes({
+			advancedCountdownItemWrapperPaddingUnits: {
+				...advancedCountdownItemWrapperPaddingUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+
+	const advancedCountdownItemWrapperPaddingSpacingCombineBtnHandlerFn = () => {
+		setAttributes({
+			advancedCountdownItemWrapperPaddingLink:
+				!advancedCountdownItemWrapperPaddingLink,
+		});
+	};
+	/** End Item Wrapper Padding */
+
+	/** Start Item Wrapper Margin */
+	const advancedCountdownItemWrapperMarginHandleSpacingUnitHandler = (
+		event,
+		position,
+	) => {
+		const value = event.target.value;
+		if (advancedCountdownItemWrapperMarginLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						advancedCountdownItemWrapperMarginDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						advancedCountdownItemWrapperMarginTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						advancedCountdownItemWrapperMarginMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						advancedCountdownItemWrapperMarginDesktop: {
+							...advancedCountdownItemWrapperMarginDesktop,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						advancedCountdownItemWrapperMarginTablet: {
+							...advancedCountdownItemWrapperMarginTablet,
+							[position]: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						advancedCountdownItemWrapperMarginMobile: {
+							...advancedCountdownItemWrapperMarginMobile,
+							[position]: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const advancedCountdownItemWrapperMarginSpacingUnitsHandler = (unit) => {
+		setAttributes({
+			advancedCountdownItemWrapperMarginUnits: {
+				...advancedCountdownItemWrapperMarginUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+
+	const advancedCountdownItemWrapperMarginSpacingCombineBtnHandlerFn = () => {
+		setAttributes({
+			advancedCountdownItemWrapperMarginLink:
+				!advancedCountdownItemWrapperMarginLink,
+		});
+	};
+	/** End Item Wrapper Margin */
+
+	/** Start Separator Spacing */
+	const advancedCountdownSeparatorSpacingHandleSpacingUnitHandler = (
+		event,
+		position,
+	) => {
+		const value = event.target.value;
+		setAttributes({
+			advancedCountdownSeparatorSpacing: {
+				...advancedCountdownSeparatorSpacing,
+				[deviceType]: value,
+			},
+		});
+	};
+
+	const advancedCountdownSeparatorSpacingUnitsHandler = (unit) => {
+		setAttributes({
+			advancedCountdownSeparatorSpacing: {
+				...advancedCountdownSeparatorSpacing,
+				unit: unit,
+			},
+		});
+	};
+	/** End Separator Spacing */
+
+	/** Start Icon Size */
+	const advancedCountdownIconSizeHandleSpacingUnitHandler = (
+		event,
+		position,
+	) => {
+		const value = event.target.value;
+		setAttributes({
+			advancedCountdownIconSize: {
+				...advancedCountdownIconSize,
+				[deviceType]: value,
+			},
+		});
+	};
+
+	const advancedCountdownIconSizeUnitsHandler = (unit) => {
+		setAttributes({
+			advancedCountdownIconSize: {
+				...advancedCountdownIconSize,
+				unit: unit,
+			},
+		});
+	};
+	/** End Icon Size */
+
+	/** Start Footer Padding */
+	const advancedCountdownFooterPaddingHandleSpacingUnitHandler = (
+		event,
+		position,
+	) => {
+		const value = event.target.value;
+		if (advancedCountdownFooterPaddingLink) {
 			setAttributes({
-				[attrName]: { top: value, right: value, bottom: value, left: value },
+				advancedCountdownFooterPadding: {
+					...advancedCountdownFooterPadding,
+					top: value,
+					right: value,
+					bottom: value,
+					left: value,
+				},
 			});
 		} else {
 			setAttributes({
-				[attrName]: { ...attributes[attrName], [position]: value },
+				advancedCountdownFooterPadding: {
+					...advancedCountdownFooterPadding,
+					[position]: value,
+				},
 			});
 		}
 	};
 
-	// Container Border
-	const handleContainerBorderUnits = (value) =>
-		handleSpacingUnits("advancedCountdownItemWrapperBorderTypeUnits", value);
-	const handleContainerBorderValue = (event, position) =>
-		handleSpacingValue(
-			"advancedCountdownItemWrapperBorderType",
-			event,
-			position,
-			advancedCountdownItemWrapperBorderTypeLink,
-		);
-
-	// Container Border Radius
-	const handleContainerBorderRadiusUnits = (value) =>
-		handleSpacingUnits("advancedCountdownItemWrapperBorderRadiusUnits", value);
-	const handleContainerBorderRadiusValue = (event, position) =>
-		handleSpacingValue(
-			"advancedCountdownItemWrapperBorderRadius",
-			event,
-			position,
-			advancedCountdownItemWrapperBorderRadiusLink,
-		);
-
-	// Container Padding
-	const handleContainerPaddingUnits = (value) =>
-		handleSpacingUnits("advancedCountdownFooterPaddingUnits", value);
-	const handleContainerPaddingValue = (event, position) =>
-		handleSpacingValue(
-			"advancedCountdownFooterPadding",
-			event,
-			position,
-			advancedCountdownFooterPaddingLink,
-		);
-
-	// Container Margin
-	const handleContainerMarginUnits = (value) =>
-		handleSpacingUnits("advancedCountdownItemWrapperMarginUnits", value);
-	const handleContainerMarginValue = (event, position) =>
-		handleSpacingValue(
-			"advancedCountdownItemWrapperMargin",
-			event,
-			position,
-			advancedCountdownItemWrapperMarginLink,
-		);
-
-	// Separator Spacing
-	const handleSeparatorSpacingUnits = (value) =>
-		handleSpacingUnits("advancedCountdownSeparatorSpacingUnits", value);
-	const handleSeparatorSpacingValue = (event, position) =>
-		handleSpacingValue(
-			"advancedCountdownSeparatorSpacing",
-			event,
-			position,
-			false,
-		); // Separator spacing is not linked
-
-	// Icon Size
-	const handleIconSizeUnits = (value) =>
-		handleSpacingUnits("advancedCountdownIconSizeUnits", value);
-	const handleIconSizeValue = (event, position) =>
+	const advancedCountdownFooterPaddingSpacingUnitsHandler = (unit) => {
 		setAttributes({
-			advancedCountdownIconSize: {
-				...advancedCountdownIconSize,
-				[deviceType]: event.target.value,
+			advancedCountdownFooterPadding: {
+				...advancedCountdownFooterPadding,
+				unit: unit,
 			},
 		});
+	};
 
-	// Footer Padding
-	const handleFooterPaddingUnits = (value) =>
-		handleSpacingUnits("advancedCountdownFooterPaddingUnits", value);
-	const handleFooterPaddingValue = (event, position) =>
-		handleSpacingValue(
-			"advancedCountdownFooterPadding",
-			event,
-			position,
-			advancedCountdownFooterPaddingLink,
-		);
+	const advancedCountdownFooterPaddingSpacingCombineBtnHandlerFn = () => {
+		setAttributes({
+			advancedCountdownFooterPaddingLink: !advancedCountdownFooterPaddingLink,
+		});
+	};
+	/** End Footer Padding */
 
-	// Footer Margin
-	const handleFooterMarginUnits = (value) =>
-		handleSpacingUnits("advancedCountdownFooterMarginUnits", value);
-	const handleFooterMarginValue = (event, position) =>
-		handleSpacingValue(
-			"advancedCountdownFooterMargin",
-			event,
-			position,
-			advancedCountdownFooterMarginLink,
-		);
+	/** Start Footer Margin */
+	const advancedCountdownFooterMarginHandleSpacingUnitHandler = (
+		event,
+		position,
+	) => {
+		const value = event.target.value;
+		if (advancedCountdownFooterMarginLink) {
+			setAttributes({
+				advancedCountdownFooterMargin: {
+					...advancedCountdownFooterMargin,
+					top: value,
+					right: value,
+					bottom: value,
+					left: value,
+				},
+			});
+		} else {
+			setAttributes({
+				advancedCountdownFooterMargin: {
+					...advancedCountdownFooterMargin,
+					[position]: value,
+				},
+			});
+		}
+	};
+
+	const advancedCountdownFooterMarginSpacingUnitsHandler = (unit) => {
+		setAttributes({
+			advancedCountdownFooterMargin: {
+				...advancedCountdownFooterMargin,
+				unit: unit,
+			},
+		});
+	};
+
+	const advancedCountdownFooterMarginSpacingCombineBtnHandlerFn = () => {
+		setAttributes({
+			advancedCountdownFooterMarginLink: !advancedCountdownFooterMarginLink,
+		});
+	};
+	/** End Footer Margin */
 
 	/**
 	 * Inspector General Controls
@@ -890,32 +1286,19 @@ const Inspector = ({ attributes, setAttributes }) => {
 				<FB_Spacing
 					label={__("Border Radius", "prime-elementor-addons-pro")}
 					deviceType={deviceType}
-					spacingUnitsHandler={(unit) =>
-						setAttributes({
-							advancedCountdownBorderRadius: {
-								...advancedCountdownBorderRadius,
-								unit: unit,
-							},
-						})
+					spacingUnitsHandler={
+						advancedCountdownItemWrapperBorderRadiusUnitsHandler
 					}
-					spacingUnits={advancedCountdownBorderRadius.unit}
-					spacingDesktop={advancedCountdownBorderRadius}
-					handleSpacingUnitHandler={(event, position) =>
-						setAttributes({
-							advancedCountdownBorderRadius: {
-								...advancedCountdownBorderRadius,
-								[position]: event.target.value,
-							},
-						})
+					spacingUnits={advancedCountdownItemWrapperBorderRadiusUnits}
+					spacingDesktop={advancedCountdownItemWrapperBorderRadiusDesktop}
+					spacingTablet={advancedCountdownItemWrapperBorderRadiusTablet}
+					spacingMobile={advancedCountdownItemWrapperBorderRadiusMobile}
+					handleSpacingUnitHandler={
+						advancedCountdownItemWrapperHandleSpacingUnitHandlerFn
 					}
-					spacingCombineBtn={advancedCountdownBorderRadius.isLinked}
-					spacingCombineBtnHandler={() =>
-						setAttributes({
-							advancedCountdownBorderRadius: {
-								...advancedCountdownBorderRadius,
-								isLinked: !advancedCountdownBorderRadius.isLinked,
-							},
-						})
+					spacingCombineBtn={advancedCountdownItemWrapperBorderRadiusLink}
+					spacingCombineBtnHandler={
+						advancedCountdownItemWrapperCombineBtnHandlerFn
 					}
 					setAttributes={setAttributes}
 				/>
@@ -1005,18 +1388,19 @@ const Inspector = ({ attributes, setAttributes }) => {
 				<FB_Spacing
 					label={__("Margin", "prime-elementor-addons-pro")}
 					deviceType={deviceType}
-					spacingUnitsHandler={handleContainerMarginUnits}
+					spacingUnitsHandler={
+						advancedCountdownItemWrapperMarginSpacingUnitsHandler
+					}
 					spacingUnits={advancedCountdownItemWrapperMarginUnits}
 					spacingDesktop={advancedCountdownItemWrapperMarginDesktop}
 					spacingTablet={advancedCountdownItemWrapperMarginTablet}
 					spacingMobile={advancedCountdownItemWrapperMarginMobile}
-					handleSpacingUnitHandler={handleContainerMarginValue}
+					handleSpacingUnitHandler={
+						advancedCountdownItemWrapperMarginHandleSpacingUnitHandler
+					}
 					spacingCombineBtn={advancedCountdownItemWrapperMarginLink}
-					spacingCombineBtnHandler={() =>
-						setAttributes({
-							advancedCountdownItemWrapperMarginLink:
-								!advancedCountdownItemWrapperMarginLink,
-						})
+					spacingCombineBtnHandler={
+						advancedCountdownItemWrapperMarginSpacingCombineBtnHandlerFn
 					}
 					setAttributes={setAttributes}
 				/>
@@ -1024,23 +1408,19 @@ const Inspector = ({ attributes, setAttributes }) => {
 				<FB_Spacing
 					label={__("Padding", "prime-elementor-addons-pro")}
 					deviceType={deviceType}
-					spacingUnitsHandler={handleContainerPaddingUnits}
-					spacingUnits={advancedCountdownFooterPadding.unit}
-					spacingDesktop={advancedCountdownFooterPadding}
-					handleSpacingUnitHandler={(event, position) =>
-						setAttributes({
-							advancedCountdownFooterPadding: {
-								...advancedCountdownFooterPadding,
-								[position]: event.target.value,
-							},
-						})
+					spacingUnitsHandler={
+						advancedCountdownItemWrapperPaddingSpacingUnitsHandler
 					}
-					spacingCombineBtn={advancedCountdownFooterPaddingLink}
-					spacingCombineBtnHandler={() =>
-						setAttributes({
-							advancedCountdownFooterPaddingLink:
-								!advancedCountdownFooterPaddingLink,
-						})
+					spacingUnits={advancedCountdownItemWrapperPaddingUnits}
+					spacingDesktop={advancedCountdownItemWrapperPaddingDesktop}
+					spacingTablet={advancedCountdownItemWrapperPaddingTablet}
+					spacingMobile={advancedCountdownItemWrapperPaddingMobile}
+					handleSpacingUnitHandler={
+						advancedCountdownItemWrapperPaddingHandleSpacingUnitHandler
+					}
+					spacingCombineBtn={advancedCountdownItemWrapperPaddingLink}
+					spacingCombineBtnHandler={
+						advancedCountdownItemWrapperPaddingSpacingCombineBtnHandlerFn
 					}
 					setAttributes={setAttributes}
 				/>
@@ -1627,14 +2007,10 @@ const Inspector = ({ attributes, setAttributes }) => {
 							min={5}
 							max={200}
 							rangeValue={advancedCountdownIconSize}
-							onChangeHandler={(value) =>
-								setAttributes({
-									advancedCountdownIconSize: {
-										...advancedCountdownIconSize,
-										[deviceType]: value,
-									},
-								})
+							onChangeHandler={
+								advancedCountdownIconSizeHandleSpacingUnitHandler
 							}
+							rangeUnitHandler={advancedCountdownIconSizeUnitsHandler}
 							deviceType={deviceType}
 							units={advancedCountdownIconSize.unit}
 							setAttributes={setAttributes}
@@ -2133,22 +2509,10 @@ const Inspector = ({ attributes, setAttributes }) => {
 						min={0}
 						max={100}
 						rangeValue={advancedCountdownSeparatorSpacing}
-						onChangeHandler={(value) =>
-							setAttributes({
-								advancedCountdownSeparatorSpacing: {
-									...advancedCountdownSeparatorSpacing,
-									[deviceType]: value,
-								},
-							})
+						onChangeHandler={
+							advancedCountdownSeparatorSpacingHandleSpacingUnitHandler
 						}
-						rangeUnitHandler={(value) =>
-							setAttributes({
-								advancedCountdownSeparatorSpacing: {
-									...advancedCountdownSeparatorSpacing,
-									unit: value,
-								},
-							})
-						}
+						rangeUnitHandler={advancedCountdownSeparatorSpacingUnitsHandler}
 						deviceType={deviceType}
 						units={advancedCountdownSeparatorSpacing.unit}
 						setAttributes={setAttributes}
@@ -2449,46 +2813,34 @@ const Inspector = ({ attributes, setAttributes }) => {
 					<FB_Spacing
 						label={__("Padding", "prime-elementor-addons-pro")}
 						deviceType={deviceType}
-						spacingUnitsHandler={handleFooterPaddingUnits}
+						spacingUnitsHandler={
+							advancedCountdownFooterPaddingSpacingUnitsHandler
+						}
 						spacingUnits={advancedCountdownFooterPadding.unit}
 						spacingDesktop={advancedCountdownFooterPadding}
-						handleSpacingUnitHandler={(event, position) =>
-							setAttributes({
-								advancedCountdownFooterPadding: {
-									...advancedCountdownFooterPadding,
-									[position]: event.target.value,
-								},
-							})
+						handleSpacingUnitHandler={
+							advancedCountdownFooterPaddingHandleSpacingUnitHandler
 						}
 						spacingCombineBtn={advancedCountdownFooterPaddingLink}
-						spacingCombineBtnHandler={() =>
-							setAttributes({
-								advancedCountdownFooterPaddingLink:
-									!advancedCountdownFooterPaddingLink,
-							})
+						spacingCombineBtnHandler={
+							advancedCountdownFooterPaddingSpacingCombineBtnHandlerFn
 						}
 						setAttributes={setAttributes}
 					/>
 					<FB_Spacing
 						label={__("Margin", "prime-elementor-addons-pro")}
 						deviceType={deviceType}
-						spacingUnitsHandler={handleFooterMarginUnits}
+						spacingUnitsHandler={
+							advancedCountdownFooterMarginSpacingUnitsHandler
+						}
 						spacingUnits={advancedCountdownFooterMargin.unit}
 						spacingDesktop={advancedCountdownFooterMargin}
-						handleSpacingUnitHandler={(event, position) =>
-							setAttributes({
-								advancedCountdownFooterMargin: {
-									...advancedCountdownFooterMargin,
-									[position]: event.target.value,
-								},
-							})
+						handleSpacingUnitHandler={
+							advancedCountdownFooterMarginHandleSpacingUnitHandler
 						}
 						spacingCombineBtn={advancedCountdownFooterMarginLink}
-						spacingCombineBtnHandler={() =>
-							setAttributes({
-								advancedCountdownFooterMarginLink:
-									!advancedCountdownFooterMarginLink,
-							})
+						spacingCombineBtnHandler={
+							advancedCountdownFooterMarginSpacingCombineBtnHandlerFn
 						}
 						setAttributes={setAttributes}
 					/>

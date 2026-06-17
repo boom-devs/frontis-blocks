@@ -525,453 +525,463 @@ const generateCountdownStyle = (attributes) => {
 
 	const countDownStyle = `
           .fb-count-down-main-wrapper.${blockID} {
-               ${countDownPositionType === "default" ? `position: relative;` : ""}
                ${
-			countDownPositionType !== "default" &&
-			countDownPositionType !== "relative"
-				? `width: 100%;`
-				: ""
-			}
+									countDownPositionType === "default"
+										? `position: relative;`
+										: ""
+								}
                ${
-			countDownPositionType !== "default"
-				? `position: ${countDownPositionType};`
-				: ""
-			}
+									countDownPositionType !== "default" &&
+									countDownPositionType !== "relative"
+										? `width: 100%;`
+										: ""
+								}
                ${
-			countDownPositionType !== "default" &&
-			countDownPositionType !== "relative" &&
-			countDownHZOrientationType === "left" &&
-			countDownHZLeftOffset?.Desktop
-				? `left: ${countDownHZLeftOffset?.Desktop}${countDownHZLeftOffsetUnits?.Desktop};`
-				: ""
-			}
+									countDownPositionType !== "default"
+										? `position: ${countDownPositionType};`
+										: ""
+								}
                ${
-			countDownPositionType !== "default" &&
-			countDownPositionType !== "relative" &&
-			countDownHZOrientationType === "right" &&
-			countDownHZRightOffset?.Desktop
-				? `right: ${countDownHZRightOffset?.Desktop}${countDownHZRightOffsetUnits?.Desktop};`
-				: ""
-			}
+									countDownPositionType !== "default" &&
+									countDownPositionType !== "relative" &&
+									countDownHZOrientationType === "left" &&
+									countDownHZLeftOffset?.Desktop
+										? `left: ${countDownHZLeftOffset?.Desktop}${countDownHZLeftOffsetUnits?.Desktop};`
+										: ""
+								}
                ${
-			countDownPositionType !== "default" &&
-			countDownPositionType !== "relative" &&
-			countDownVROrientationType === "top" &&
-			countDownVRTopOffset?.Desktop
-				? `top: ${countDownVRTopOffset?.Desktop}${countDownVRTopOffsetUnits?.Desktop};`
-				: ""
-			}
+									countDownPositionType !== "default" &&
+									countDownPositionType !== "relative" &&
+									countDownHZOrientationType === "right" &&
+									countDownHZRightOffset?.Desktop
+										? `right: ${countDownHZRightOffset?.Desktop}${countDownHZRightOffsetUnits?.Desktop};`
+										: ""
+								}
                ${
-			countDownPositionType !== "default" &&
-			countDownPositionType !== "relative" &&
-			countDownVROrientationType === "bottom" &&
-			countDownVRBottomOffset?.Desktop
-				? `bottom: ${countDownVRBottomOffset?.Desktop}${countDownVRBottomOffsetUnits?.Desktop};`
-				: ""
-			}
+									countDownPositionType !== "default" &&
+									countDownPositionType !== "relative" &&
+									countDownVROrientationType === "top" &&
+									countDownVRTopOffset?.Desktop
+										? `top: ${countDownVRTopOffset?.Desktop}${countDownVRTopOffsetUnits?.Desktop};`
+										: ""
+								}
                ${
-			countDownZIndex?.Desktop
-				? `z-index: ${countDownZIndex?.Desktop};`
-				: ""
-			}
+									countDownPositionType !== "default" &&
+									countDownPositionType !== "relative" &&
+									countDownVROrientationType === "bottom" &&
+									countDownVRBottomOffset?.Desktop
+										? `bottom: ${countDownVRBottomOffset?.Desktop}${countDownVRBottomOffsetUnits?.Desktop};`
+										: ""
+								}
                ${
-			countDownOverflow !== "default"
-				? `overflow: ${countDownOverflow};`
-				: ""
-			}
+									countDownZIndex?.Desktop
+										? `z-index: ${countDownZIndex?.Desktop};`
+										: ""
+								}
+               ${
+									countDownOverflow !== "default"
+										? `overflow: ${countDownOverflow};`
+										: ""
+								}
           }
 
           .fb-count-down-wrapper.${blockID} {
                ${countDownLayoutType === "flex" ? `display: flex;` : ""}
                ${
-			countDownLayoutType === "flex" && countDownFlexWrap === true
-				? `flex-wrap: wrap;`
-				: ""
-			}
+									countDownLayoutType === "flex" && countDownFlexWrap === true
+										? `flex-wrap: wrap;`
+										: ""
+								}
                ${countDownLayoutType === "grid" ? `display: grid;` : ""}
                ${
-			countDownLayoutType === "grid"
-				? `grid-template-columns: repeat(${countDownGrid?.Desktop}, 1fr);`
-				: ""
-			}
+									countDownLayoutType === "grid"
+										? `grid-template-columns: repeat(${countDownGrid?.Desktop}, 1fr);`
+										: ""
+								}
                ${
-			countDownItemGap?.Desktop
-				? `gap: ${countDownItemGap?.Desktop}${countDownItemGapUnits?.Desktop};`
-				: ""
-			}
+									countDownItemGap?.Desktop
+										? `gap: ${countDownItemGap?.Desktop}${countDownItemGapUnits?.Desktop};`
+										: ""
+								}
                ${
-			countDownLayoutAlignment
-				? `justify-content: ${countDownLayoutAlignment};`
-				: ""
-			}
+									countDownLayoutAlignment
+										? `justify-content: ${countDownLayoutAlignment};`
+										: ""
+								}
 
                ${
-			(countDownPresetStyle === "style-1" ||
-				countDownPresetStyle === "style-2" ||
-				countDownPresetStyle === "style-4") &&
-			advancedCountdownContainerSize?.Desktop
-				? `width: ${advancedCountdownContainerSize?.Desktop}${advancedCountdownContainerSize?.unit};`
-				: ""
-			}
+									(countDownPresetStyle === "style-1" ||
+										countDownPresetStyle === "style-2" ||
+										countDownPresetStyle === "style-4") &&
+									advancedCountdownContainerSize?.Desktop
+										? `width: ${advancedCountdownContainerSize?.Desktop}${advancedCountdownContainerSize?.unit};`
+										: ""
+								}
                ${
-			countDownPresetStyle === "style-3" &&
-			advancedCountdownContainerSizeStyle3?.Desktop
-				? `width: ${advancedCountdownContainerSizeStyle3?.Desktop}${advancedCountdownContainerSizeStyle3?.unit}; height: ${advancedCountdownContainerSizeStyle3?.Desktop}${advancedCountdownContainerSizeStyle3?.unit};`
-				: ""
-			}
+									countDownPresetStyle === "style-3" &&
+									advancedCountdownContainerSizeStyle3?.Desktop
+										? `width: ${advancedCountdownContainerSizeStyle3?.Desktop}${advancedCountdownContainerSizeStyle3?.unit}; height: ${advancedCountdownContainerSizeStyle3?.Desktop}${advancedCountdownContainerSizeStyle3?.unit};`
+										: ""
+								}
                ${
-			countDownPresetStyle === "style-5" &&
-			advancedCountdownContainerSizeStyle5?.Desktop
-				? `width: ${advancedCountdownContainerSizeStyle5?.Desktop}${advancedCountdownContainerSizeStyle5?.unit}; height: ${advancedCountdownContainerSizeStyle5?.Desktop}${advancedCountdownContainerSizeStyle5?.unit} !important;`
-				: ""
-			}
+									countDownPresetStyle === "style-5" &&
+									advancedCountdownContainerSizeStyle5?.Desktop
+										? `width: ${advancedCountdownContainerSizeStyle5?.Desktop}${advancedCountdownContainerSizeStyle5?.unit}; height: ${advancedCountdownContainerSizeStyle5?.Desktop}${advancedCountdownContainerSizeStyle5?.unit} !important;`
+										: ""
+								}
                ${
-				countDownItemWrapperBorder
-					? `border: ${countDownItemWrapperBorder};`
-					: ""
-			}
+									countDownItemWrapperBorder
+										? `border: ${countDownItemWrapperBorder};`
+										: ""
+								}
                ${
-				countDownItemWrapperBorderTypeGetDesktop &&
-				countDownItemWrapperBorderTypeDesktop?.top
-					? `border-width: ${countDownItemWrapperBorderTypeGetDesktop};`
-					: ""
-			}
+									countDownItemWrapperBorderTypeGetDesktop &&
+									countDownItemWrapperBorderTypeDesktop?.top
+										? `border-width: ${countDownItemWrapperBorderTypeGetDesktop};`
+										: ""
+								}
                ${
-				countDownItemWrapperBorderRadiusGetDesktop &&
-				countDownItemWrapperBorderRadiusDesktop?.top
-					? `border-radius: ${countDownItemWrapperBorderRadiusGetDesktop};`
-					: ""
-			}
+									countDownItemWrapperBorderRadiusGetDesktop &&
+									countDownItemWrapperBorderRadiusDesktop?.top
+										? `border-radius: ${countDownItemWrapperBorderRadiusGetDesktop};`
+										: ""
+								}
                ${
-				countDownItemWrapperBorderColor
-					? `border-color: ${countDownItemWrapperBorderColor};`
-					: ""
-			}
+									countDownItemWrapperBorderColor
+										? `border-color: ${countDownItemWrapperBorderColor};`
+										: ""
+								}
             
                ${
-				globalBackgroundType === "gradient"
-				? globalCustomGradientSwitcher && globalCustomGradientInputValue
-					? `background: ${globalCustomGradientInputValue};`
-					: globalGradientColor
-					? `background: ${globalGradientColor};`
-					: `background: ${globalClassicColor};`
-				: globalBackgroundImageUrl &&
-				  globalBackgroundImageUrl !== "null"
-				? `
+									globalBackgroundType === "gradient"
+										? globalCustomGradientSwitcher &&
+										  globalCustomGradientInputValue
+											? `background: ${globalCustomGradientInputValue};`
+											: globalGradientColor
+											? `background: ${globalGradientColor};`
+											: `background: ${globalClassicColor};`
+										: globalBackgroundImageUrl &&
+										  globalBackgroundImageUrl !== "null"
+										? `
                    ${
-					globalBackgroundImageUrl
-						? `background-image: url(${globalBackgroundImageUrl});`
-						: ""
-				}
+											globalBackgroundImageUrl
+												? `background-image: url(${globalBackgroundImageUrl});`
+												: ""
+										}
                    ${
-					globalBackgroundImagePosition
-						? `background-position: ${globalBackgroundImagePosition};`
-						: ""
-				}
+											globalBackgroundImagePosition
+												? `background-position: ${globalBackgroundImagePosition};`
+												: ""
+										}
                    ${
-					globalBackgroundImageAttachment
-						? `background-attachment: ${globalBackgroundImageAttachment};`
-						: ""
-				}
+											globalBackgroundImageAttachment
+												? `background-attachment: ${globalBackgroundImageAttachment};`
+												: ""
+										}
                    ${
-					globalBackgroundImageRepeat
-						? `background-repeat: ${globalBackgroundImageRepeat};`
-						: ""
-				}
+											globalBackgroundImageRepeat
+												? `background-repeat: ${globalBackgroundImageRepeat};`
+												: ""
+										}
                    ${
-					globalBackgroundImageSize
-						? `background-size: ${globalBackgroundImageSize};`
-						: ""
-				} 
+											globalBackgroundImageSize
+												? `background-size: ${globalBackgroundImageSize};`
+												: ""
+										} 
                     `
-					: globalClassicColor
-					? `background: ${globalClassicColor};`
-					: ""
-			}
+										: globalClassicColor
+										? `background: ${globalClassicColor};`
+										: ""
+								}
 
                ${
-			countDownItemWrapperPaddingGetDesktop &&
-			countDownItemWrapperPaddingDesktop?.top
-				? `padding: ${countDownItemWrapperPaddingGetDesktop};`
-				: ""
-			} 
+									countDownItemWrapperPaddingGetDesktop &&
+									countDownItemWrapperPaddingDesktop?.top
+										? `padding: ${countDownItemWrapperPaddingGetDesktop};`
+										: ""
+								} 
                ${
-			advancedCountdownFooterPadding?.Desktop
-				? `padding: ${advancedCountdownFooterPadding?.top}${advancedCountdownFooterPadding?.unit} ${advancedCountdownFooterPadding?.right}${advancedCountdownFooterPadding?.unit} ${advancedCountdownFooterPadding?.bottom}${advancedCountdownFooterPadding?.unit} ${advancedCountdownFooterPadding?.left}${advancedCountdownFooterPadding?.unit};`
-				: ""
-		}
+									advancedCountdownFooterPadding?.Desktop
+										? `padding: ${advancedCountdownFooterPadding?.top}${advancedCountdownFooterPadding?.unit} ${advancedCountdownFooterPadding?.right}${advancedCountdownFooterPadding?.unit} ${advancedCountdownFooterPadding?.bottom}${advancedCountdownFooterPadding?.unit} ${advancedCountdownFooterPadding?.left}${advancedCountdownFooterPadding?.unit};`
+										: ""
+								}
 ${
-			advancedCountdownFooterMargin?.Desktop
-				? `margin: ${advancedCountdownFooterMargin?.top}${advancedCountdownFooterMargin?.unit} ${advancedCountdownFooterMargin?.right}${advancedCountdownFooterMargin?.unit} ${advancedCountdownFooterMargin?.bottom}${advancedCountdownFooterMargin?.unit} ${advancedCountdownFooterMargin?.left}${advancedCountdownFooterMargin?.unit};`
-				: ""
-		}
+	advancedCountdownFooterMargin?.Desktop
+		? `margin: ${advancedCountdownFooterMargin?.top}${advancedCountdownFooterMargin?.unit} ${advancedCountdownFooterMargin?.right}${advancedCountdownFooterMargin?.unit} ${advancedCountdownFooterMargin?.bottom}${advancedCountdownFooterMargin?.unit} ${advancedCountdownFooterMargin?.left}${advancedCountdownFooterMargin?.unit};`
+		: ""
+}
 ${
-			countDownItemWrapperMarginGetDesktop &&
-			countDownItemWrapperMarginDesktop?.top
-				? `margin: ${countDownItemWrapperMarginGetDesktop};`
-				: ""
-			}
+	countDownItemWrapperMarginGetDesktop && countDownItemWrapperMarginDesktop?.top
+		? `margin: ${countDownItemWrapperMarginGetDesktop};`
+		: ""
+}
                transition: all .3s ease-in-out;
           }
 
           .fb-count-down-wrapper.${blockID}:hover{
                ${
-			hoverBackgroundType === "gradient"
-				? hoverCustomGradientSwitcher && hoverCustomGradientInputValue
-					? `background: ${hoverCustomGradientInputValue};`
-					: hoverGradientColor
-					? `background: ${hoverGradientColor};`
-					: `background: ${hoverClassicColor};`
-				: hoverBackgroundImageUrl && hoverBackgroundImageUrl !== "null"
-				? `
+									hoverBackgroundType === "gradient"
+										? hoverCustomGradientSwitcher &&
+										  hoverCustomGradientInputValue
+											? `background: ${hoverCustomGradientInputValue};`
+											: hoverGradientColor
+											? `background: ${hoverGradientColor};`
+											: `background: ${hoverClassicColor};`
+										: hoverBackgroundImageUrl &&
+										  hoverBackgroundImageUrl !== "null"
+										? `
                     ${
-					hoverBackgroundImageUrl
-						? `background-image: url(${hoverBackgroundImageUrl});`
-						: ""
-				}
+											hoverBackgroundImageUrl
+												? `background-image: url(${hoverBackgroundImageUrl});`
+												: ""
+										}
                     ${
-					hoverBackgroundImagePosition
-						? `background-position: ${hoverBackgroundImagePosition};`
-						: ""
-				}
+											hoverBackgroundImagePosition
+												? `background-position: ${hoverBackgroundImagePosition};`
+												: ""
+										}
                     ${
-					hoverBackgroundImageAttachment
-						? `background-attachment: ${hoverBackgroundImageAttachment};`
-						: ""
-				}
+											hoverBackgroundImageAttachment
+												? `background-attachment: ${hoverBackgroundImageAttachment};`
+												: ""
+										}
                     ${
-					hoverBackgroundImageRepeat
-						? `background-repeat: ${hoverBackgroundImageRepeat};`
-						: ""
-				}
+											hoverBackgroundImageRepeat
+												? `background-repeat: ${hoverBackgroundImageRepeat};`
+												: ""
+										}
                     ${
-					hoverBackgroundImageSize
-						? `background-size: ${hoverBackgroundImageSize};`
-						: ""
-				} 
+											hoverBackgroundImageSize
+												? `background-size: ${hoverBackgroundImageSize};`
+												: ""
+										} 
                     `
-					: hoverClassicColor
-					? `background: ${hoverClassicColor};`
-					: ""
-	          }
+										: hoverClassicColor
+										? `background: ${hoverClassicColor};`
+										: ""
+								}
                ${
-				countDownItemWrapperBorderHoverColor
-					? `border-color: ${countDownItemWrapperBorderHoverColor};`
-					: ""
-			} 
+									countDownItemWrapperBorderHoverColor
+										? `border-color: ${countDownItemWrapperBorderHoverColor};`
+										: ""
+								} 
                ${
-				advancedCountdownBorderHoverColor
-					? `border-color: ${advancedCountdownBorderHoverColor} !important;`
-					: ""
-			}
+									advancedCountdownBorderHoverColor
+										? `border-color: ${advancedCountdownBorderHoverColor} !important;`
+										: ""
+								}
                transition: all .3s ease-in-out;
           }
 
           .fb-count-down-wrapper.${blockID} .fb-count-down-item {
                ${
-				countDownItemBgColor ? `background: ${countDownItemBgColor};` : ""
-			}
+									countDownItemBgColor
+										? `background: ${countDownItemBgColor};`
+										: ""
+								}
                ${
-				countDownItemSize?.Desktop
-					? `width: ${countDownItemSize?.Desktop}${countDownItemSizeUnits?.Desktop};`
-					: ""
-			}
+									countDownItemSize?.Desktop
+										? `width: ${countDownItemSize?.Desktop}${countDownItemSizeUnits?.Desktop};`
+										: ""
+								}
                ${
-     			countDownItemSizeHeight === true && countDownItemSize?.Desktop
-     				? `height: ${countDownItemSize?.Desktop}${countDownItemSizeUnits?.Desktop};`
-     				: ""
-     		}
+									countDownItemSizeHeight === true && countDownItemSize?.Desktop
+										? `height: ${countDownItemSize?.Desktop}${countDownItemSizeUnits?.Desktop};`
+										: ""
+								}
                ${
-				countDownItemBorder ? `border-style: ${countDownItemBorder};` : ""
-			}
+									countDownItemBorder
+										? `border-style: ${countDownItemBorder};`
+										: ""
+								}
                ${
-				countDownItemBorderTypeGetDesktop &&
-				countDownItemBorderTypeDesktop?.top
-					? `border-width: ${countDownItemBorderTypeGetDesktop};`
-					: ""
-			}
+									countDownItemBorderTypeGetDesktop &&
+									countDownItemBorderTypeDesktop?.top
+										? `border-width: ${countDownItemBorderTypeGetDesktop};`
+										: ""
+								}
                ${
-				countDownItemBorderColor
-					? `border-color: ${countDownItemBorderColor};`
-					: ""
-			}
+									countDownItemBorderColor
+										? `border-color: ${countDownItemBorderColor};`
+										: ""
+								}
                ${
-				advancedCountdownBorderRadius?.Desktop
-					? `border-radius: ${advancedCountdownBorderRadius?.top}${advancedCountdownBorderRadius?.unit} ${advancedCountdownBorderRadius?.right}${advancedCountdownBorderRadius?.unit} ${advancedCountdownBorderRadius?.bottom}${advancedCountdownBorderRadius?.unit} ${advancedCountdownBorderRadius?.left}${advancedCountdownBorderRadius?.unit};`
-					: ""
-			}
+									advancedCountdownBorderRadius?.Desktop
+										? `border-radius: ${advancedCountdownBorderRadius?.top}${advancedCountdownBorderRadius?.unit} ${advancedCountdownBorderRadius?.right}${advancedCountdownBorderRadius?.unit} ${advancedCountdownBorderRadius?.bottom}${advancedCountdownBorderRadius?.unit} ${advancedCountdownBorderRadius?.left}${advancedCountdownBorderRadius?.unit};`
+										: ""
+								}
                ${
-				countDownItemBorderRadiusGetDesktop &&
-				countDownItemBorderRadiusDesktop?.top
-					? `border-radius: ${countDownItemBorderRadiusGetDesktop};`
-					: ""
-			}
+									countDownItemBorderRadiusGetDesktop &&
+									countDownItemBorderRadiusDesktop?.top
+										? `border-radius: ${countDownItemBorderRadiusGetDesktop};`
+										: ""
+								}
                transition: all .3s ease-in-out;
           }
           .fb-count-down-wrapper.${blockID} .fb-count-down-item:hover {
                ${
-				countDownItemBgHoverColor
-					? `background: ${countDownItemBgHoverColor};`
-					: ""
-			}
+									countDownItemBgHoverColor
+										? `background: ${countDownItemBgHoverColor};`
+										: ""
+								}
                ${
-				countDownItemBorderHoverColor
-					? `border-color: ${countDownItemBorderHoverColor};`
-					: ""
-			}
+									countDownItemBorderHoverColor
+										? `border-color: ${countDownItemBorderHoverColor};`
+										: ""
+								}
                transition: all .3s ease-in-out;
           }
           ${
-		countDownPresetStyle === "style-1" ||
-		countDownPresetStyle === "style-2"
-			? `
-               .pea-countdown-wrapper.${blockID} { transition: all ${advancedCountdownContainerHoverTransition?.Desktop}s ease; }
-               .pea-countdown-wrapper.${blockID} { transition: border-color ${advancedCountdownBorderHoverTransition?.Desktop}s ease, border-width ${advancedCountdownBorderHoverTransition?.Desktop}s ease; }
+						countDownPresetStyle === "style-1" ||
+						countDownPresetStyle === "style-2"
+							? `
+               .fb-count-down-wrapper.${blockID} { transition: all ${advancedCountdownContainerHoverTransition?.Desktop}s ease; }
+               .fb-count-down-wrapper.${blockID} { transition: border-color ${advancedCountdownBorderHoverTransition?.Desktop}s ease, border-width ${advancedCountdownBorderHoverTransition?.Desktop}s ease; }
                }:     `
-			: ""
-				}
+							: ""
+					}
           .fb-count-down-wrapper.${blockID} .fb-count-down-item::before {
             position: absolute;
             right: 0;
             top: 50%;
             transform: translateY(-50%);
             ${
-			countDownSeparatorEnabled
-			? `
+							countDownSeparatorEnabled
+								? `
                 ${countDownSeparatorType === "colon" ? `content: ':';` : ""}
                 ${countDownSeparatorType === "line" ? `content: '|';` : ""}
                 ${countDownSeparatorType === "slash" ? `content: '/';` : ""}
                 ${
-				countDownSeparatorType === "custom"
-					? `content: '${countDownSeparatorCustom}';`
-					: ""
-			}
+									countDownSeparatorType === "custom"
+										? `content: '${countDownSeparatorCustom}';`
+										: ""
+								}
                ${
-				countDownSeparatorVerticalGap?.Desktop
-					? `top: ${countDownSeparatorVerticalGap?.Desktop}${countDownSeparatorVerticalGapUnits?.Desktop};`
-					: ""
-			}
+									countDownSeparatorVerticalGap?.Desktop
+										? `top: ${countDownSeparatorVerticalGap?.Desktop}${countDownSeparatorVerticalGapUnits?.Desktop};`
+										: ""
+								}
                ${
-				countDownSeparatorHorizontalGap?.Desktop
-					? `right: -${countDownSeparatorHorizontalGap?.Desktop}${countDownSeparatorHorizontalGapUnits?.Desktop};`
-					: ""
-			}
+									countDownSeparatorHorizontalGap?.Desktop
+										? `right: -${countDownSeparatorHorizontalGap?.Desktop}${countDownSeparatorHorizontalGapUnits?.Desktop};`
+										: ""
+								}
                ${
-				countDownSeparatorFontColor
-					? `color: ${countDownSeparatorFontColor};`
-					: ""
-			}
+									countDownSeparatorFontColor
+										? `color: ${countDownSeparatorFontColor};`
+										: ""
+								}
 
                ${
-				countDownSeparatorGlobalTypoSwitcher?.fontFamily === true &&
-				countDownSeparatorGlobalTypographyData?.fontFamily
-					? `font-family: ${countDownSeparatorGlobalTypographyData?.fontFamily};`
-					: ""
-			}
+									countDownSeparatorGlobalTypoSwitcher?.fontFamily === true &&
+									countDownSeparatorGlobalTypographyData?.fontFamily
+										? `font-family: ${countDownSeparatorGlobalTypographyData?.fontFamily};`
+										: ""
+								}
                ${
-				countDownSeparatorGlobalTypoSwitcher?.fontSize === true &&
-				countDownSeparatorGlobalTypographyData?.fontSize
-					? `font-size: ${countDownSeparatorGlobalTypographyData?.fontSize};`
-					: ""
-			}
+									countDownSeparatorGlobalTypoSwitcher?.fontSize === true &&
+									countDownSeparatorGlobalTypographyData?.fontSize
+										? `font-size: ${countDownSeparatorGlobalTypographyData?.fontSize};`
+										: ""
+								}
                ${
-				countDownSeparatorGlobalTypoSwitcher?.fontWeight === true &&
-				countDownSeparatorGlobalTypographyData?.fontWeight
-					? `font-weight: ${countDownSeparatorGlobalTypographyData?.fontWeight};`
-					: ""
-			}
+									countDownSeparatorGlobalTypoSwitcher?.fontWeight === true &&
+									countDownSeparatorGlobalTypographyData?.fontWeight
+										? `font-weight: ${countDownSeparatorGlobalTypographyData?.fontWeight};`
+										: ""
+								}
                ${
-				countDownSeparatorGlobalTypoSwitcher?.fontStyle === true &&
-				countDownSeparatorGlobalTypographyData?.fontStyle
-					? `font-style: ${countDownSeparatorGlobalTypographyData?.fontStyle};`
-					: ""
-			}
+									countDownSeparatorGlobalTypoSwitcher?.fontStyle === true &&
+									countDownSeparatorGlobalTypographyData?.fontStyle
+										? `font-style: ${countDownSeparatorGlobalTypographyData?.fontStyle};`
+										: ""
+								}
                ${
-				countDownSeparatorGlobalTypoSwitcher?.textTransform ===
-					true &&
-				countDownSeparatorGlobalTypographyData?.textTransform
-					? `text-transform: ${countDownSeparatorGlobalTypographyData?.textTransform};`
-					: ""
-			}
+									countDownSeparatorGlobalTypoSwitcher?.textTransform ===
+										true &&
+									countDownSeparatorGlobalTypographyData?.textTransform
+										? `text-transform: ${countDownSeparatorGlobalTypographyData?.textTransform};`
+										: ""
+								}
                ${
-				countDownSeparatorGlobalTypoSwitcher?.textDecoration ===
-					true &&
-				countDownSeparatorGlobalTypographyData?.textDecoration
-					? `text-decoration: ${countDownSeparatorGlobalTypographyData?.textDecoration};`
-					: ""
-			}
+									countDownSeparatorGlobalTypoSwitcher?.textDecoration ===
+										true &&
+									countDownSeparatorGlobalTypographyData?.textDecoration
+										? `text-decoration: ${countDownSeparatorGlobalTypographyData?.textDecoration};`
+										: ""
+								}
                ${
-				countDownSeparatorGlobalTypoSwitcher?.letterSpacing ===
-					true &&
-				countDownSeparatorGlobalTypographyData?.letterSpacing
-					? `letter-spacing: ${countDownSeparatorGlobalTypographyData?.letterSpacing};`
-					: ""
-			}
+									countDownSeparatorGlobalTypoSwitcher?.letterSpacing ===
+										true &&
+									countDownSeparatorGlobalTypographyData?.letterSpacing
+										? `letter-spacing: ${countDownSeparatorGlobalTypographyData?.letterSpacing};`
+										: ""
+								}
                ${
-				countDownSeparatorGlobalTypoSwitcher?.lineHeight === true &&
-				countDownSeparatorGlobalTypographyData?.lineHeight
-					? `line-height: ${countDownSeparatorGlobalTypographyData?.lineHeight};`
-					: ""
-			}
+									countDownSeparatorGlobalTypoSwitcher?.lineHeight === true &&
+									countDownSeparatorGlobalTypographyData?.lineHeight
+										? `line-height: ${countDownSeparatorGlobalTypographyData?.lineHeight};`
+										: ""
+								}
 
                ${
-				countDownSeparatorGlobalTypoSwitcher?.fontFamily === false &&
-				countDownSeparatorFontFamily
-					? `font-family: ${countDownSeparatorFontFamily};`
-					: ""
-			}
+									countDownSeparatorGlobalTypoSwitcher?.fontFamily === false &&
+									countDownSeparatorFontFamily
+										? `font-family: ${countDownSeparatorFontFamily};`
+										: ""
+								}
                ${
-				countDownSeparatorGlobalTypoSwitcher?.fontSize === false &&
-				countDownSeparatorFontSize?.Desktop
-					? `font-size: ${countDownSeparatorFontSize?.Desktop}${countDownSeparatorFontSizeUnits?.Desktop};`
-					: ""
-			}
+									countDownSeparatorGlobalTypoSwitcher?.fontSize === false &&
+									countDownSeparatorFontSize?.Desktop
+										? `font-size: ${countDownSeparatorFontSize?.Desktop}${countDownSeparatorFontSizeUnits?.Desktop};`
+										: ""
+								}
                ${
-				countDownSeparatorGlobalTypoSwitcher?.fontWeight === false &&
-				countDownSeparatorFontWeight
-					? `font-weight: ${countDownSeparatorFontWeight};`
-					: ""
-			}
+									countDownSeparatorGlobalTypoSwitcher?.fontWeight === false &&
+									countDownSeparatorFontWeight
+										? `font-weight: ${countDownSeparatorFontWeight};`
+										: ""
+								}
                ${
-				countDownSeparatorGlobalTypoSwitcher?.fontStyle === false &&
-				countDownSeparatorFontStyle
-					? `font-style: ${countDownSeparatorFontStyle};`
-					: ""
-			}
+									countDownSeparatorGlobalTypoSwitcher?.fontStyle === false &&
+									countDownSeparatorFontStyle
+										? `font-style: ${countDownSeparatorFontStyle};`
+										: ""
+								}
                ${
-				countDownSeparatorGlobalTypoSwitcher?.textTransform ===
-					false && countDownSeparatorTextTransform
-					? `text-transform: ${countDownSeparatorTextTransform};`
-					: ""
-			}
+									countDownSeparatorGlobalTypoSwitcher?.textTransform ===
+										false && countDownSeparatorTextTransform
+										? `text-transform: ${countDownSeparatorTextTransform};`
+										: ""
+								}
                ${
-				countDownSeparatorGlobalTypoSwitcher?.textDecoration ===
-					false && countDownSeparatorTextDecoration
-					? `text-decoration: ${countDownSeparatorTextDecoration};`
-					: ""
-			}
+									countDownSeparatorGlobalTypoSwitcher?.textDecoration ===
+										false && countDownSeparatorTextDecoration
+										? `text-decoration: ${countDownSeparatorTextDecoration};`
+										: ""
+								}
                ${
-				countDownSeparatorGlobalTypoSwitcher?.letterSpacing ===
-					false && countDownSeparatorLetterSpacing?.Desktop
-					? `letter-spacing: ${countDownSeparatorLetterSpacing?.Desktop}${countDownSeparatorLetterSpacingUnits?.Desktop};`
-					: ""
-			}
+									countDownSeparatorGlobalTypoSwitcher?.letterSpacing ===
+										false && countDownSeparatorLetterSpacing?.Desktop
+										? `letter-spacing: ${countDownSeparatorLetterSpacing?.Desktop}${countDownSeparatorLetterSpacingUnits?.Desktop};`
+										: ""
+								}
                ${
-				countDownSeparatorGlobalTypoSwitcher?.lineHeight === false &&
-				countDownSeparatorLineHeight?.Desktop
-					? `line-height: ${countDownSeparatorLineHeight?.Desktop}${countDownSeparatorLineHeightUnits?.Desktop};`
-					: ""
-			}
+									countDownSeparatorGlobalTypoSwitcher?.lineHeight === false &&
+									countDownSeparatorLineHeight?.Desktop
+										? `line-height: ${countDownSeparatorLineHeight?.Desktop}${countDownSeparatorLineHeightUnits?.Desktop};`
+										: ""
+								}
                 `
-			: ""
-		}
+								: ""
+						}
           ${
-               (countDownPresetStyle === "style-1" ||
-                    countDownPresetStyle === "style-2") &&
-			advancedCountdownSeparatorColor
-				? `color: ${advancedCountdownSeparatorColor} !important;`
-				: ""
-		}
+						(countDownPresetStyle === "style-1" ||
+							countDownPresetStyle === "style-2") &&
+						advancedCountdownSeparatorColor
+							? `color: ${advancedCountdownSeparatorColor} !important;`
+							: ""
+					}
                transition: all .3s ease-in-out;
         }
         .fb-count-down-wrapper.${blockID} .fb-count-down-item:hover::before {
@@ -1398,630 +1408,624 @@ ${
           @media only screen and (max-width: 1024px) {
                .fb-count-down-main-wrapper.${blockID} {
                     ${
-					countDownPositionType !== "default"
-						? `position: ${countDownPositionType};`
-						: ""
-				}
+											countDownPositionType !== "default"
+												? `position: ${countDownPositionType};`
+												: ""
+										}
                     ${
-					countDownPositionType !== "default" &&
-					countDownPositionType !== "relative" &&
-					countDownHZOrientationType === "left" &&
-					countDownHZLeftOffset?.Tablet
-						? `left: ${countDownHZLeftOffset?.Tablet}${countDownHZLeftOffsetUnits?.Tablet};`
-						: ""
-				}
+											countDownPositionType !== "default" &&
+											countDownPositionType !== "relative" &&
+											countDownHZOrientationType === "left" &&
+											countDownHZLeftOffset?.Tablet
+												? `left: ${countDownHZLeftOffset?.Tablet}${countDownHZLeftOffsetUnits?.Tablet};`
+												: ""
+										}
                     ${
-					countDownPositionType !== "default" &&
-					countDownPositionType !== "relative" &&
-					countDownHZOrientationType === "right" &&
-					countDownHZRightOffset?.Tablet
-						? `right: ${countDownHZRightOffset?.Tablet}${countDownHZRightOffsetUnits?.Tablet};`
-						: ""
-				}
+											countDownPositionType !== "default" &&
+											countDownPositionType !== "relative" &&
+											countDownHZOrientationType === "right" &&
+											countDownHZRightOffset?.Tablet
+												? `right: ${countDownHZRightOffset?.Tablet}${countDownHZRightOffsetUnits?.Tablet};`
+												: ""
+										}
                     ${
-					countDownPositionType !== "default" &&
-					countDownPositionType !== "relative" &&
-					countDownVROrientationType === "top" &&
-					countDownVRTopOffset?.Tablet
-						? `top: ${countDownVRTopOffset?.Tablet}${countDownVRTopOffsetUnits?.Tablet};`
-						: ""
-				}
+											countDownPositionType !== "default" &&
+											countDownPositionType !== "relative" &&
+											countDownVROrientationType === "top" &&
+											countDownVRTopOffset?.Tablet
+												? `top: ${countDownVRTopOffset?.Tablet}${countDownVRTopOffsetUnits?.Tablet};`
+												: ""
+										}
                     ${
-					countDownPositionType !== "default" &&
-					countDownPositionType !== "relative" &&
-					countDownVROrientationType === "bottom" &&
-					countDownVRBottomOffset?.Tablet
-						? `bottom: ${countDownVRBottomOffset?.Tablet}${countDownVRBottomOffsetUnits?.Tablet};`
-						: ""
-				}
+											countDownPositionType !== "default" &&
+											countDownPositionType !== "relative" &&
+											countDownVROrientationType === "bottom" &&
+											countDownVRBottomOffset?.Tablet
+												? `bottom: ${countDownVRBottomOffset?.Tablet}${countDownVRBottomOffsetUnits?.Tablet};`
+												: ""
+										}
                     ${
-					countDownZIndex?.Tablet
-						? `z-index: ${countDownZIndex?.Tablet};`
-						: ""
-				}
+											countDownZIndex?.Tablet
+												? `z-index: ${countDownZIndex?.Tablet};`
+												: ""
+										}
                }
                .fb-count-down-wrapper.${blockID} {
                     ${
-					countDownLayoutType === "grid"
-						? `grid-template-columns: repeat(${countDownGrid?.Tablet}, 1fr);`
-						: ""
-				}
+											countDownLayoutType === "grid"
+												? `grid-template-columns: repeat(${countDownGrid?.Tablet}, 1fr);`
+												: ""
+										}
                     ${
-					countDownItemGap?.Tablet
-						? `gap: ${countDownItemGap?.Tablet}${countDownItemGapUnits?.Tablet};`
-						: ""
-				}
+											countDownItemGap?.Tablet
+												? `gap: ${countDownItemGap?.Tablet}${countDownItemGapUnits?.Tablet};`
+												: ""
+										}
                     ${
-					countDownItemWrapperBorderTypeGetTablet &&
-					countDownItemWrapperBorderTypeTablet?.top
-						? `border-width: ${countDownItemWrapperBorderTypeGetTablet};`
-						: ""
-				}
+											countDownItemWrapperBorderTypeGetTablet &&
+											countDownItemWrapperBorderTypeTablet?.top
+												? `border-width: ${countDownItemWrapperBorderTypeGetTablet};`
+												: ""
+										}
                     ${
-					(countDownPresetStyle === "style-1" ||
-						countDownPresetStyle === "style-2" ||
-						countDownPresetStyle === "style-4") &&
-					advancedCountdownContainerSize?.Tablet
-						? `width: ${advancedCountdownContainerSize?.Tablet}${advancedCountdownContainerSize?.unit};`
-						: ""
-				}
+											(countDownPresetStyle === "style-1" ||
+												countDownPresetStyle === "style-2" ||
+												countDownPresetStyle === "style-4") &&
+											advancedCountdownContainerSize?.Tablet
+												? `width: ${advancedCountdownContainerSize?.Tablet}${advancedCountdownContainerSize?.unit};`
+												: ""
+										}
                     ${
-					countDownPresetStyle === "style-3" &&
-					advancedCountdownContainerSizeStyle3?.Tablet
-						? `width: ${advancedCountdownContainerSizeStyle3?.Tablet}${advancedCountdownContainerSizeStyle3?.unit}; height: ${advancedCountdownContainerSizeStyle3?.Tablet}${advancedCountdownContainerSizeStyle3?.unit};`
-						: ""
-				}
+											countDownPresetStyle === "style-3" &&
+											advancedCountdownContainerSizeStyle3?.Tablet
+												? `width: ${advancedCountdownContainerSizeStyle3?.Tablet}${advancedCountdownContainerSizeStyle3?.unit}; height: ${advancedCountdownContainerSizeStyle3?.Tablet}${advancedCountdownContainerSizeStyle3?.unit};`
+												: ""
+										}
                     ${
-					countDownPresetStyle === "style-5" &&
-					advancedCountdownContainerSizeStyle5?.Tablet
-						? `width: ${advancedCountdownContainerSizeStyle5?.Tablet}${advancedCountdownContainerSizeStyle5?.unit}; height: ${advancedCountdownContainerSizeStyle5?.Tablet}${advancedCountdownContainerSizeStyle5?.unit} !important;`
-						: ""
-				}
+											countDownPresetStyle === "style-5" &&
+											advancedCountdownContainerSizeStyle5?.Tablet
+												? `width: ${advancedCountdownContainerSizeStyle5?.Tablet}${advancedCountdownContainerSizeStyle5?.unit}; height: ${advancedCountdownContainerSizeStyle5?.Tablet}${advancedCountdownContainerSizeStyle5?.unit} !important;`
+												: ""
+										}
                     ${
-					advancedCountdownBorderRadius?.Tablet
-						? `border-radius: ${advancedCountdownBorderRadius?.top}${advancedCountdownBorderRadius?.unit} ${advancedCountdownBorderRadius?.right}${advancedCountdownBorderRadius?.unit} ${advancedCountdownBorderRadius?.bottom}${advancedCountdownBorderRadius?.unit} ${advancedCountdownBorderRadius?.left}${advancedCountdownBorderRadius?.unit};`
-						: ""
-				}
+											advancedCountdownBorderRadius?.Tablet
+												? `border-radius: ${advancedCountdownBorderRadius?.top}${advancedCountdownBorderRadius?.unit} ${advancedCountdownBorderRadius?.right}${advancedCountdownBorderRadius?.unit} ${advancedCountdownBorderRadius?.bottom}${advancedCountdownBorderRadius?.unit} ${advancedCountdownBorderRadius?.left}${advancedCountdownBorderRadius?.unit};`
+												: ""
+										}
                     ${
-					countDownItemWrapperBorderRadiusGetTablet &&
-					countDownItemWrapperBorderRadiusTablet?.top
-						? `border-radius: ${countDownItemWrapperBorderRadiusGetTablet};`
-						: ""
-				}
+											countDownItemWrapperBorderRadiusGetTablet &&
+											countDownItemWrapperBorderRadiusTablet?.top
+												? `border-radius: ${countDownItemWrapperBorderRadiusGetTablet};`
+												: ""
+										}
                     ${
-					countDownItemWrapperPaddingGetTablet &&
-					countDownItemWrapperPaddingTablet?.top
-						? `padding: ${countDownItemWrapperPaddingGetTablet};`
-						: ""
-				}
+											countDownItemWrapperPaddingGetTablet &&
+											countDownItemWrapperPaddingTablet?.top
+												? `padding: ${countDownItemWrapperPaddingGetTablet};`
+												: ""
+										}
                     ${
-					countDownItemWrapperMarginGetTablet &&
-					countDownItemWrapperMarginTablet?.top
-						? `margin: ${countDownItemWrapperMarginGetTablet};`
-						: ""
-				}
+											countDownItemWrapperMarginGetTablet &&
+											countDownItemWrapperMarginTablet?.top
+												? `margin: ${countDownItemWrapperMarginGetTablet};`
+												: ""
+										}
                }
                .fb-count-down-wrapper.${blockID} .fb-count-down-item {
                     ${
-					countDownItemSize?.Tablet
-						? `width: ${countDownItemSize?.Tablet}${countDownItemSizeUnits?.Tablet};`
-						: ""
-				}
+											countDownItemSize?.Tablet
+												? `width: ${countDownItemSize?.Tablet}${countDownItemSizeUnits?.Tablet};`
+												: ""
+										}
                     ${
-					countDownItemSizeHeight === true &&
-					countDownItemSize?.Tablet
-						? `height: ${countDownItemSize?.Tablet}${countDownItemSizeUnits?.Tablet};`
-						: ""
-				}
+											countDownItemSizeHeight === true &&
+											countDownItemSize?.Tablet
+												? `height: ${countDownItemSize?.Tablet}${countDownItemSizeUnits?.Tablet};`
+												: ""
+										}
                     ${
-					countDownItemBorderTypeGetTablet &&
-					countDownItemBorderTypeTablet?.top
-						? `border-width: ${countDownItemBorderTypeGetTablet};`
-						: ""
-				}
+											countDownItemBorderTypeGetTablet &&
+											countDownItemBorderTypeTablet?.top
+												? `border-width: ${countDownItemBorderTypeGetTablet};`
+												: ""
+										}
                     ${
-					countDownPresetStyle === "style-1" &&
-					advancedCountdownSvgProgressSize?.Tablet
-						? `width: ${advancedCountdownSvgProgressSize?.Tablet}${advancedCountdownSvgProgressSize?.unit}; height: ${advancedCountdownSvgProgressSize?.Tablet}${advancedCountdownSvgProgressSize?.unit};`
-						: ""
-				}
+											countDownPresetStyle === "style-1" &&
+											advancedCountdownSvgProgressSize?.Tablet
+												? `width: ${advancedCountdownSvgProgressSize?.Tablet}${advancedCountdownSvgProgressSize?.unit}; height: ${advancedCountdownSvgProgressSize?.Tablet}${advancedCountdownSvgProgressSize?.unit};`
+												: ""
+										}
                     ${
-					countDownPresetStyle === "style-2" &&
-					advancedCountdownStyle2ProgressBarSize?.Tablet
-						? `width: ${advancedCountdownStyle2ProgressBarSize?.Tablet}${advancedCountdownStyle2ProgressBarSize?.unit}; height: ${advancedCountdownStyle2ProgressBarSize?.Tablet}${advancedCountdownStyle2ProgressBarSize?.unit};`
-						: ""
-				}
+											countDownPresetStyle === "style-2" &&
+											advancedCountdownStyle2ProgressBarSize?.Tablet
+												? `width: ${advancedCountdownStyle2ProgressBarSize?.Tablet}${advancedCountdownStyle2ProgressBarSize?.unit}; height: ${advancedCountdownStyle2ProgressBarSize?.Tablet}${advancedCountdownStyle2ProgressBarSize?.unit};`
+												: ""
+										}
                     ${
-					countDownPresetStyle === "style-3" &&
-					advancedCountdownContainerSizeStyle3Container?.Tablet
-						? `width: ${advancedCountdownContainerSizeStyle3Container?.Tablet}${advancedCountdownContainerSizeStyle3Container?.unit};`
-						: ""
-				}
+											countDownPresetStyle === "style-3" &&
+											advancedCountdownContainerSizeStyle3Container?.Tablet
+												? `width: ${advancedCountdownContainerSizeStyle3Container?.Tablet}${advancedCountdownContainerSizeStyle3Container?.unit};`
+												: ""
+										}
                     ${
-					countDownPresetStyle === "style-5" &&
-					advancedCountdownPreset5DashGap?.Tablet
-						? `gap: ${advancedCountdownPreset5DashGap?.Tablet}${advancedCountdownPreset5DashGap?.unit};`
-						: ""
-				}
+											countDownPresetStyle === "style-5" &&
+											advancedCountdownPreset5DashGap?.Tablet
+												? `gap: ${advancedCountdownPreset5DashGap?.Tablet}${advancedCountdownPreset5DashGap?.unit};`
+												: ""
+										}
                     ${
-					countDownItemBorderRadiusGetTablet &&
-					countDownItemBorderRadiusTablet?.top
-						? `border-radius: ${countDownItemBorderRadiusGetTablet};`
-						: ""
-				}
+											countDownItemBorderRadiusGetTablet &&
+											countDownItemBorderRadiusTablet?.top
+												? `border-radius: ${countDownItemBorderRadiusGetTablet};`
+												: ""
+										}
                }
                 
                .fb-count-down-wrapper.${blockID} .fb-count-down-item:before {
                     ${
-					countDownSeparatorEnabled &&
-					countDownSeparatorType &&
-					countDownSeparatorType !== "null"
-						? `
+											countDownSeparatorEnabled &&
+											countDownSeparatorType &&
+											countDownSeparatorType !== "null"
+												? `
                          ${
-						countDownSeparatorVerticalGap?.Tablet
-							? `top: ${countDownSeparatorVerticalGap?.Tablet}${countDownSeparatorVerticalGapUnits?.Tablet};`
-							: ""
-					}
+														countDownSeparatorVerticalGap?.Tablet
+															? `top: ${countDownSeparatorVerticalGap?.Tablet}${countDownSeparatorVerticalGapUnits?.Tablet};`
+															: ""
+													}
                          ${
-						countDownSeparatorHorizontalGap?.Tablet
-							? `right: -${countDownSeparatorHorizontalGap?.Tablet}${countDownSeparatorHorizontalGapUnits?.Tablet};`
-							: ""
-					}
+														countDownSeparatorHorizontalGap?.Tablet
+															? `right: -${countDownSeparatorHorizontalGap?.Tablet}${countDownSeparatorHorizontalGapUnits?.Tablet};`
+															: ""
+													}
                          ${
-						countDownSeparatorGlobalTypoSwitcher?.fontSize ===
-							false &&
-						countDownSeparatorFontSize?.Tablet
-							? `font-size: ${countDownSeparatorFontSize?.Tablet}${countDownSeparatorFontSizeUnits?.Tablet};`
-							: ""
-					}
+														countDownSeparatorGlobalTypoSwitcher?.fontSize ===
+															false && countDownSeparatorFontSize?.Tablet
+															? `font-size: ${countDownSeparatorFontSize?.Tablet}${countDownSeparatorFontSizeUnits?.Tablet};`
+															: ""
+													}
                          ${
-						advancedCountdownSeparatorTypographyFontSize?.Tablet
-							? `font-size: ${advancedCountdownSeparatorTypographyFontSize?.Tablet}${advancedCountdownSeparatorTypographyFontSizeUnits?.Tablet};`
-							: ""
-					}
+														advancedCountdownSeparatorTypographyFontSize?.Tablet
+															? `font-size: ${advancedCountdownSeparatorTypographyFontSize?.Tablet}${advancedCountdownSeparatorTypographyFontSizeUnits?.Tablet};`
+															: ""
+													}
                          ${
-						countDownSeparatorGlobalTypoSwitcher?.letterSpacing ===
-							false &&
-						countDownSeparatorLetterSpacing?.Tablet
-							? `letter-spacing: ${countDownSeparatorLetterSpacing?.Tablet}${countDownSeparatorLetterSpacingUnits?.Tablet};`
-							: ""
-					}
+														countDownSeparatorGlobalTypoSwitcher?.letterSpacing ===
+															false && countDownSeparatorLetterSpacing?.Tablet
+															? `letter-spacing: ${countDownSeparatorLetterSpacing?.Tablet}${countDownSeparatorLetterSpacingUnits?.Tablet};`
+															: ""
+													}
                          ${
-						countDownSeparatorGlobalTypoSwitcher?.lineHeight ===
-							false &&
-						countDownSeparatorLineHeight?.Tablet
-							? `line-height: ${countDownSeparatorLineHeight?.Tablet}${countDownSeparatorLineHeightUnits?.Tablet};`
-							: ""
-					}
+														countDownSeparatorGlobalTypoSwitcher?.lineHeight ===
+															false && countDownSeparatorLineHeight?.Tablet
+															? `line-height: ${countDownSeparatorLineHeight?.Tablet}${countDownSeparatorLineHeightUnits?.Tablet};`
+															: ""
+													}
                     `
-     			: ""
-				}
+												: ""
+										}
                }
                .fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-time {
                     ${
-					digitGlobalTypoSwitcher?.fontSize === false &&
-					digitFontSize?.Tablet
-						? `font-size: ${digitFontSize?.Tablet}${digitFontSizeUnits?.Tablet};`
-						: ""
-				}
+											digitGlobalTypoSwitcher?.fontSize === false &&
+											digitFontSize?.Tablet
+												? `font-size: ${digitFontSize?.Tablet}${digitFontSizeUnits?.Tablet};`
+												: ""
+										}
                     ${
-					digitGlobalTypoSwitcher?.letterSpacing === false &&
-					digitLetterSpacing?.Tablet
-						? `letter-spacing: ${digitLetterSpacing?.Tablet}${digitLetterSpacingUnits?.Tablet};`
-						: ""
-				}
+											digitGlobalTypoSwitcher?.letterSpacing === false &&
+											digitLetterSpacing?.Tablet
+												? `letter-spacing: ${digitLetterSpacing?.Tablet}${digitLetterSpacingUnits?.Tablet};`
+												: ""
+										}
                     ${
-					advancedCountdownCountdownTypographyFontSize?.Tablet
-						? `font-size: ${advancedCountdownCountdownTypographyFontSize?.Tablet}${advancedCountdownCountdownTypographyFontSizeUnits?.Tablet};`
-						: ""
-				}
+											advancedCountdownCountdownTypographyFontSize?.Tablet
+												? `font-size: ${advancedCountdownCountdownTypographyFontSize?.Tablet}${advancedCountdownCountdownTypographyFontSizeUnits?.Tablet};`
+												: ""
+										}
                     ${
-					digitGlobalTypoSwitcher?.lineHeight === false &&
-					digitLineHeight?.Tablet
-						? `line-height: ${digitLineHeight?.Tablet}${digitLineHeightUnits?.Tablet};`
-						: ""
-				}
+											digitGlobalTypoSwitcher?.lineHeight === false &&
+											digitLineHeight?.Tablet
+												? `line-height: ${digitLineHeight?.Tablet}${digitLineHeightUnits?.Tablet};`
+												: ""
+										}
                     ${
-					countDownDigitMarginGetTablet &&
-					countDownDigitMarginTablet?.top
-						? `margin: ${countDownDigitMarginGetTablet};`
-						: ""
-				}
+											countDownDigitMarginGetTablet &&
+											countDownDigitMarginTablet?.top
+												? `margin: ${countDownDigitMarginGetTablet};`
+												: ""
+										}
                     ${
-					countDownDigitBorderTypeGetTablet &&
-					countDownDigitBorderTypeTablet?.top
-						? `border-width: ${countDownDigitBorderTypeGetTablet};`
-						: ""
-				}
+											countDownDigitBorderTypeGetTablet &&
+											countDownDigitBorderTypeTablet?.top
+												? `border-width: ${countDownDigitBorderTypeGetTablet};`
+												: ""
+										}
                     ${
-					countDownDigitBorderRadiusGetTablet &&
-					countDownDigitBorderRadiusTablet?.top
-						? `border-radius: ${countDownDigitBorderRadiusGetTablet};`
-						: ""
-				}
+											countDownDigitBorderRadiusGetTablet &&
+											countDownDigitBorderRadiusTablet?.top
+												? `border-radius: ${countDownDigitBorderRadiusGetTablet};`
+												: ""
+										}
                     ${
-					countDownDigitWidth?.Tablet
-						? `width: ${countDownDigitWidth?.Tablet}${countDownDigitWidthUnits?.Tablet};`
-						: ""
-				}
+											countDownDigitWidth?.Tablet
+												? `width: ${countDownDigitWidth?.Tablet}${countDownDigitWidthUnits?.Tablet};`
+												: ""
+										}
                     ${
-					countDownDigitHeight?.Tablet
-						? `height: ${countDownDigitHeight?.Tablet}${countDownDigitHeightUnits?.Tablet};`
-						: ""
-				}
+											countDownDigitHeight?.Tablet
+												? `height: ${countDownDigitHeight?.Tablet}${countDownDigitHeightUnits?.Tablet};`
+												: ""
+										}
                }
 
                .fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-label {
                     ${
-					labelGlobalTypoSwitcher?.fontSize === false &&
-					labelFontSize?.Tablet
-						? `font-size: ${labelFontSize?.Tablet}${labelFontSizeUnits?.Tablet};`
-						: ""
-				}
+											labelGlobalTypoSwitcher?.fontSize === false &&
+											labelFontSize?.Tablet
+												? `font-size: ${labelFontSize?.Tablet}${labelFontSizeUnits?.Tablet};`
+												: ""
+										}
                     ${
-					labelGlobalTypoSwitcher?.letterSpacing === false &&
-					labelLetterSpacing?.Tablet
-						? `letter-spacing: ${labelLetterSpacing?.Tablet}${labelLetterSpacingUnits?.Tablet};`
-						: ""
-				}
+											labelGlobalTypoSwitcher?.letterSpacing === false &&
+											labelLetterSpacing?.Tablet
+												? `letter-spacing: ${labelLetterSpacing?.Tablet}${labelLetterSpacingUnits?.Tablet};`
+												: ""
+										}
                     ${
-					advancedCountdownLabelTypographyStyle4FontSize?.Tablet
-						? `font-size: ${advancedCountdownLabelTypographyStyle4FontSize?.Tablet}${advancedCountdownLabelTypographyStyle4FontSizeUnits?.Tablet};`
-						: ""
-				}
+											advancedCountdownLabelTypographyStyle4FontSize?.Tablet
+												? `font-size: ${advancedCountdownLabelTypographyStyle4FontSize?.Tablet}${advancedCountdownLabelTypographyStyle4FontSizeUnits?.Tablet};`
+												: ""
+										}
                     ${
-					labelGlobalTypoSwitcher?.lineHeight === false &&
-					labelLineHeight?.Tablet
-						? `line-height: ${labelLineHeight?.Tablet}${labelLineHeightUnits?.Tablet};`
-						: ""
-				}
+											labelGlobalTypoSwitcher?.lineHeight === false &&
+											labelLineHeight?.Tablet
+												? `line-height: ${labelLineHeight?.Tablet}${labelLineHeightUnits?.Tablet};`
+												: ""
+										}
                     ${
-					countDownLabelBorderTypeGetTablet &&
-					countDownLabelBorderTypeTablet?.top
-						? `border-width: ${countDownLabelBorderTypeGetTablet};`
-						: ""
-				}
+											countDownLabelBorderTypeGetTablet &&
+											countDownLabelBorderTypeTablet?.top
+												? `border-width: ${countDownLabelBorderTypeGetTablet};`
+												: ""
+										}
                     ${
-					countDownLabelBorderRadiusGetTablet &&
-					countDownLabelBorderRadiusTablet?.top
-						? `border-radius: ${countDownLabelBorderRadiusGetTablet};`
-						: ""
-				}
+											countDownLabelBorderRadiusGetTablet &&
+											countDownLabelBorderRadiusTablet?.top
+												? `border-radius: ${countDownLabelBorderRadiusGetTablet};`
+												: ""
+										}
                     ${
-					countDownLabelMarginGetTablet &&
-					countDownLabelMarginTablet?.top
-						? `margin: ${countDownLabelMarginGetTablet};`
-						: ""
-				}
+											countDownLabelMarginGetTablet &&
+											countDownLabelMarginTablet?.top
+												? `margin: ${countDownLabelMarginGetTablet};`
+												: ""
+										}
                     ${
-					countDownLabelWidth?.Tablet
-						? `width: ${countDownLabelWidth?.Tablet}${countDownLabelWidthUnits?.Tablet};`
-						: ""
-				}
+											countDownLabelWidth?.Tablet
+												? `width: ${countDownLabelWidth?.Tablet}${countDownLabelWidthUnits?.Tablet};`
+												: ""
+										}
                     ${
-					countDownLabelHeight?.Tablet
-						? `height: ${countDownLabelHeight?.Tablet}${countDownLabelHeightUnits?.Tablet};`
-						: ""
-				}
+											countDownLabelHeight?.Tablet
+												? `height: ${countDownLabelHeight?.Tablet}${countDownLabelHeightUnits?.Tablet};`
+												: ""
+										}
                }
           }
 
           @media only screen and (max-width: 767px) {
                .fb-count-down-main-wrapper.${blockID} {
                     ${
-					countDownPositionType !== "default"
-						? `position: ${countDownPositionType};`
-						: ""
-				}
+											countDownPositionType !== "default"
+												? `position: ${countDownPositionType};`
+												: ""
+										}
                     ${
-					countDownPositionType !== "default" &&
-					countDownPositionType !== "relative" &&
-					countDownHZOrientationType === "left" &&
-					countDownHZLeftOffset?.Mobile
-						? `left: ${countDownHZLeftOffset?.Mobile}${countDownHZLeftOffsetUnits?.Mobile};`
-						: ""
-				}
+											countDownPositionType !== "default" &&
+											countDownPositionType !== "relative" &&
+											countDownHZOrientationType === "left" &&
+											countDownHZLeftOffset?.Mobile
+												? `left: ${countDownHZLeftOffset?.Mobile}${countDownHZLeftOffsetUnits?.Mobile};`
+												: ""
+										}
                
                     ${
-					countDownPresetStyle === "style-1" &&
-					advancedCountdownIconSize?.Mobile
-						? `
-                         .pea-countdown-wrapper.${blockID} .countdown-icon i { font-size: ${advancedCountdownIconSize?.Mobile}${advancedCountdownIconSize?.unit}; }
-                         .pea-countdown-wrapper.${blockID} .countdown-icon svg { width: ${advancedCountdownIconSize?.Mobile}${advancedCountdownIconSize?.unit}; height: auto; }
+											countDownPresetStyle === "style-1" &&
+											advancedCountdownIconSize?.Mobile
+												? `
+                         .fb-count-down-wrapper.${blockID} .countdown-icon i { font-size: ${advancedCountdownIconSize?.Mobile}${advancedCountdownIconSize?.unit}; }
+                         .fb-count-down-wrapper.${blockID} .countdown-icon svg { width: ${advancedCountdownIconSize?.Mobile}${advancedCountdownIconSize?.unit}; height: auto; }
                          `
-					: ""
-				}
+												: ""
+										}
                     ${
-					countDownPositionType !== "default" &&
-					countDownPositionType !== "relative" &&
-					countDownHZOrientationType === "right" &&
-					countDownHZRightOffset?.Mobile
-						? `right: ${countDownHZRightOffset?.Mobile}${countDownHZRightOffsetUnits?.Mobile};`
-						: ""
-				}
+											countDownPositionType !== "default" &&
+											countDownPositionType !== "relative" &&
+											countDownHZOrientationType === "right" &&
+											countDownHZRightOffset?.Mobile
+												? `right: ${countDownHZRightOffset?.Mobile}${countDownHZRightOffsetUnits?.Mobile};`
+												: ""
+										}
                     ${
-					countDownPositionType !== "default" &&
-					countDownPositionType !== "relative" &&
-					countDownVROrientationType === "top" &&
-					countDownVRTopOffset?.Mobile
-						? `top: ${countDownVRTopOffset?.Mobile}${countDownVRTopOffsetUnits?.Mobile};`
-						: ""
-				}
+											countDownPositionType !== "default" &&
+											countDownPositionType !== "relative" &&
+											countDownVROrientationType === "top" &&
+											countDownVRTopOffset?.Mobile
+												? `top: ${countDownVRTopOffset?.Mobile}${countDownVRTopOffsetUnits?.Mobile};`
+												: ""
+										}
                     ${
-					countDownPositionType !== "default" &&
-					countDownPositionType !== "relative" &&
-					countDownVROrientationType === "bottom" &&
-					countDownVRBottomOffset?.Mobile
-						? `bottom: ${countDownVRBottomOffset?.Mobile}${countDownVRBottomOffsetUnits?.Mobile};`
-						: ""
-				}
+											countDownPositionType !== "default" &&
+											countDownPositionType !== "relative" &&
+											countDownVROrientationType === "bottom" &&
+											countDownVRBottomOffset?.Mobile
+												? `bottom: ${countDownVRBottomOffset?.Mobile}${countDownVRBottomOffsetUnits?.Mobile};`
+												: ""
+										}
                     ${
-					countDownZIndex?.Mobile
-						? `z-index: ${countDownZIndex?.Mobile};`
-						: ""
-				}
+											countDownZIndex?.Mobile
+												? `z-index: ${countDownZIndex?.Mobile};`
+												: ""
+										}
                }
                .fb-count-down-wrapper.${blockID} {
                     ${
-					countDownLayoutType === "grid"
-						? `grid-template-columns: repeat(${countDownGrid?.Mobile}, 1fr);`
-						: ""
-				}
+											countDownLayoutType === "grid"
+												? `grid-template-columns: repeat(${countDownGrid?.Mobile}, 1fr);`
+												: ""
+										}
                     ${
-					countDownItemGap?.Mobile
-						? `gap: ${countDownItemGap?.Mobile}${countDownItemGapUnits?.Mobile};`
-						: ""
-				}
+											countDownItemGap?.Mobile
+												? `gap: ${countDownItemGap?.Mobile}${countDownItemGapUnits?.Mobile};`
+												: ""
+										}
                     ${
-					countDownItemWrapperBorderTypeGetMobile &&
-					countDownItemWrapperBorderTypeMobile?.top
-						? `border-width: ${countDownItemWrapperBorderTypeGetMobile};`
-						: ""
-				}
+											countDownItemWrapperBorderTypeGetMobile &&
+											countDownItemWrapperBorderTypeMobile?.top
+												? `border-width: ${countDownItemWrapperBorderTypeGetMobile};`
+												: ""
+										}
                     ${
-					(countDownPresetStyle === "style-1" ||
-						countDownPresetStyle === "style-2" ||
-						countDownPresetStyle === "style-4") &&
-					advancedCountdownContainerSize?.Mobile
-						? `width: ${advancedCountdownContainerSize?.Mobile}${advancedCountdownContainerSize?.unit};`
-						: ""
-				}
+											(countDownPresetStyle === "style-1" ||
+												countDownPresetStyle === "style-2" ||
+												countDownPresetStyle === "style-4") &&
+											advancedCountdownContainerSize?.Mobile
+												? `width: ${advancedCountdownContainerSize?.Mobile}${advancedCountdownContainerSize?.unit};`
+												: ""
+										}
                     ${
-					countDownPresetStyle === "style-3" &&
-					advancedCountdownContainerSizeStyle3?.Mobile
-						? `width: ${advancedCountdownContainerSizeStyle3?.Mobile}${advancedCountdownContainerSizeStyle3?.unit}; height: ${advancedCountdownContainerSizeStyle3?.Mobile}${advancedCountdownContainerSizeStyle3?.unit};`
-						: ""
-				}
+											countDownPresetStyle === "style-3" &&
+											advancedCountdownContainerSizeStyle3?.Mobile
+												? `width: ${advancedCountdownContainerSizeStyle3?.Mobile}${advancedCountdownContainerSizeStyle3?.unit}; height: ${advancedCountdownContainerSizeStyle3?.Mobile}${advancedCountdownContainerSizeStyle3?.unit};`
+												: ""
+										}
                     ${
-					countDownPresetStyle === "style-5" &&
-					advancedCountdownContainerSizeStyle5?.Mobile
-						? `width: ${advancedCountdownContainerSizeStyle5?.Mobile}${advancedCountdownContainerSizeStyle5?.unit}; height: ${advancedCountdownContainerSizeStyle5?.Mobile}${advancedCountdownContainerSizeStyle5?.unit} !important;`
-						: ""
-				}
+											countDownPresetStyle === "style-5" &&
+											advancedCountdownContainerSizeStyle5?.Mobile
+												? `width: ${advancedCountdownContainerSizeStyle5?.Mobile}${advancedCountdownContainerSizeStyle5?.unit}; height: ${advancedCountdownContainerSizeStyle5?.Mobile}${advancedCountdownContainerSizeStyle5?.unit} !important;`
+												: ""
+										}
                     ${
-					advancedCountdownBorderRadius?.Mobile
-						? `border-radius: ${advancedCountdownBorderRadius?.top}${advancedCountdownBorderRadius?.unit} ${advancedCountdownBorderRadius?.right}${advancedCountdownBorderRadius?.unit} ${advancedCountdownBorderRadius?.bottom}${advancedCountdownBorderRadius?.unit} ${advancedCountdownBorderRadius?.left}${advancedCountdownBorderRadius?.unit};`
-						: ""
-				}
+											advancedCountdownBorderRadius?.Mobile
+												? `border-radius: ${advancedCountdownBorderRadius?.top}${advancedCountdownBorderRadius?.unit} ${advancedCountdownBorderRadius?.right}${advancedCountdownBorderRadius?.unit} ${advancedCountdownBorderRadius?.bottom}${advancedCountdownBorderRadius?.unit} ${advancedCountdownBorderRadius?.left}${advancedCountdownBorderRadius?.unit};`
+												: ""
+										}
                     ${
-					countDownItemWrapperBorderRadiusGetMobile &&
-					countDownItemWrapperBorderRadiusMobile?.top
-						? `border-radius: ${countDownItemWrapperBorderRadiusGetMobile};`
-						: ""
-				}
+											countDownItemWrapperBorderRadiusGetMobile &&
+											countDownItemWrapperBorderRadiusMobile?.top
+												? `border-radius: ${countDownItemWrapperBorderRadiusGetMobile};`
+												: ""
+										}
                     ${
-					countDownItemWrapperPaddingGetMobile &&
-					countDownItemWrapperPaddingMobile?.top
-						? `padding: ${countDownItemWrapperPaddingGetMobile};`
-						: ""
-				}
+											countDownItemWrapperPaddingGetMobile &&
+											countDownItemWrapperPaddingMobile?.top
+												? `padding: ${countDownItemWrapperPaddingGetMobile};`
+												: ""
+										}
                     ${
-					countDownItemWrapperMarginGetMobile &&
-					countDownItemWrapperMarginMobile?.top
-						? `margin: ${countDownItemWrapperMarginGetMobile};`
-						: ""
-				}
+											countDownItemWrapperMarginGetMobile &&
+											countDownItemWrapperMarginMobile?.top
+												? `margin: ${countDownItemWrapperMarginGetMobile};`
+												: ""
+										}
                }
                .fb-count-down-wrapper.${blockID} .fb-count-down-item {
                     ${
-					countDownItemSize?.Mobile
-						? `width: ${countDownItemSize?.Mobile}${countDownItemSizeUnits?.Mobile};`
-						: ""
-				}
+											countDownItemSize?.Mobile
+												? `width: ${countDownItemSize?.Mobile}${countDownItemSizeUnits?.Mobile};`
+												: ""
+										}
                     ${
-					countDownItemSizeHeight === true &&
-					countDownItemSize?.Mobile
-						? `height: ${countDownItemSize?.Mobile}${countDownItemSizeUnits?.Mobile};`
-						: ""
-				}
+											countDownItemSizeHeight === true &&
+											countDownItemSize?.Mobile
+												? `height: ${countDownItemSize?.Mobile}${countDownItemSizeUnits?.Mobile};`
+												: ""
+										}
                     ${
-					countDownItemBorderTypeGetMobile &&
-					countDownItemBorderTypeMobile?.top
-						? `border-width: ${countDownItemBorderTypeGetMobile};`
-						: ""
-				}
+											countDownItemBorderTypeGetMobile &&
+											countDownItemBorderTypeMobile?.top
+												? `border-width: ${countDownItemBorderTypeGetMobile};`
+												: ""
+										}
                     ${
-					countDownPresetStyle === "style-1" &&
-					advancedCountdownSvgProgressSize?.Mobile
-						? `width: ${advancedCountdownSvgProgressSize?.Mobile}${advancedCountdownSvgProgressSize?.unit}; height: ${advancedCountdownSvgProgressSize?.Mobile}${advancedCountdownSvgProgressSize?.unit};`
-						: ""
-				}
+											countDownPresetStyle === "style-1" &&
+											advancedCountdownSvgProgressSize?.Mobile
+												? `width: ${advancedCountdownSvgProgressSize?.Mobile}${advancedCountdownSvgProgressSize?.unit}; height: ${advancedCountdownSvgProgressSize?.Mobile}${advancedCountdownSvgProgressSize?.unit};`
+												: ""
+										}
                     ${
-					countDownPresetStyle === "style-2" &&
-					advancedCountdownStyle2ProgressBarSize?.Mobile
-						? `width: ${advancedCountdownStyle2ProgressBarSize?.Mobile}${advancedCountdownStyle2ProgressBarSize?.unit}; height: ${advancedCountdownStyle2ProgressBarSize?.Mobile}${advancedCountdownStyle2ProgressBarSize?.unit};`
-						: ""
-				}
+											countDownPresetStyle === "style-2" &&
+											advancedCountdownStyle2ProgressBarSize?.Mobile
+												? `width: ${advancedCountdownStyle2ProgressBarSize?.Mobile}${advancedCountdownStyle2ProgressBarSize?.unit}; height: ${advancedCountdownStyle2ProgressBarSize?.Mobile}${advancedCountdownStyle2ProgressBarSize?.unit};`
+												: ""
+										}
                     ${
-					countDownPresetStyle === "style-3" &&
-					advancedCountdownContainerSizeStyle3Container?.Mobile
-						? `width: ${advancedCountdownContainerSizeStyle3Container?.Mobile}${advancedCountdownContainerSizeStyle3Container?.unit};`
-						: ""
-				}
+											countDownPresetStyle === "style-3" &&
+											advancedCountdownContainerSizeStyle3Container?.Mobile
+												? `width: ${advancedCountdownContainerSizeStyle3Container?.Mobile}${advancedCountdownContainerSizeStyle3Container?.unit};`
+												: ""
+										}
                     ${
-					countDownPresetStyle === "style-5" &&
-					advancedCountdownPreset5DashGap?.Mobile
-						? `gap: ${advancedCountdownPreset5DashGap?.Mobile}${advancedCountdownPreset5DashGap?.unit};`
-						: ""
-				}
+											countDownPresetStyle === "style-5" &&
+											advancedCountdownPreset5DashGap?.Mobile
+												? `gap: ${advancedCountdownPreset5DashGap?.Mobile}${advancedCountdownPreset5DashGap?.unit};`
+												: ""
+										}
                     ${
-					countDownItemBorderRadiusGetMobile &&
-					countDownItemBorderRadiusMobile?.top
-						? `border-radius: ${countDownItemBorderRadiusGetMobile};`
-						: ""
-				}
+											countDownItemBorderRadiusGetMobile &&
+											countDownItemBorderRadiusMobile?.top
+												? `border-radius: ${countDownItemBorderRadiusGetMobile};`
+												: ""
+										}
                }
                .fb-count-down-wrapper.${blockID} .fb-count-down-item:before {
                     ${
-					countDownSeparatorEnabled &&
-					countDownSeparatorType &&
-					countDownSeparatorType !== "null"
-						? `
+											countDownSeparatorEnabled &&
+											countDownSeparatorType &&
+											countDownSeparatorType !== "null"
+												? `
                          ${
-						countDownSeparatorVerticalGap?.Mobile
-							? `top: ${countDownSeparatorVerticalGap?.Mobile}${countDownSeparatorVerticalGapUnits?.Mobile};`
-							: ""
-					}
+														countDownSeparatorVerticalGap?.Mobile
+															? `top: ${countDownSeparatorVerticalGap?.Mobile}${countDownSeparatorVerticalGapUnits?.Mobile};`
+															: ""
+													}
                          ${
-						countDownSeparatorHorizontalGap?.Mobile
-							? `right: -${countDownSeparatorHorizontalGap?.Mobile}${countDownSeparatorHorizontalGapUnits?.Mobile};`
-							: ""
-					}
+														countDownSeparatorHorizontalGap?.Mobile
+															? `right: -${countDownSeparatorHorizontalGap?.Mobile}${countDownSeparatorHorizontalGapUnits?.Mobile};`
+															: ""
+													}
                          ${
-						countDownSeparatorGlobalTypoSwitcher?.fontSize ===
-							false &&
-						countDownSeparatorFontSize?.Mobile
-							? `font-size: ${countDownSeparatorFontSize?.Mobile}${countDownSeparatorFontSizeUnits?.Mobile};`
-							: ""
-					}
+														countDownSeparatorGlobalTypoSwitcher?.fontSize ===
+															false && countDownSeparatorFontSize?.Mobile
+															? `font-size: ${countDownSeparatorFontSize?.Mobile}${countDownSeparatorFontSizeUnits?.Mobile};`
+															: ""
+													}
                          ${
-						advancedCountdownSeparatorTypographyFontSize?.Mobile
-							? `font-size: ${advancedCountdownSeparatorTypographyFontSize?.Mobile}${advancedCountdownSeparatorTypographyFontSizeUnits?.Mobile};`
-							: ""
-					}
+														advancedCountdownSeparatorTypographyFontSize?.Mobile
+															? `font-size: ${advancedCountdownSeparatorTypographyFontSize?.Mobile}${advancedCountdownSeparatorTypographyFontSizeUnits?.Mobile};`
+															: ""
+													}
                          ${
-						countDownSeparatorGlobalTypoSwitcher?.letterSpacing ===
-							false &&
-						countDownSeparatorLetterSpacing?.Mobile
-							? `letter-spacing: ${countDownSeparatorLetterSpacing?.Mobile}${countDownSeparatorLetterSpacingUnits?.Mobile};`
-							: ""
-					}
+														countDownSeparatorGlobalTypoSwitcher?.letterSpacing ===
+															false && countDownSeparatorLetterSpacing?.Mobile
+															? `letter-spacing: ${countDownSeparatorLetterSpacing?.Mobile}${countDownSeparatorLetterSpacingUnits?.Mobile};`
+															: ""
+													}
                          ${
-						countDownSeparatorGlobalTypoSwitcher?.lineHeight ===
-							false &&
-						countDownSeparatorLineHeight?.Mobile
-							? `line-height: ${countDownSeparatorLineHeight?.Mobile}${countDownSeparatorLineHeightUnits?.Mobile};`
-							: ""
-					}
+														countDownSeparatorGlobalTypoSwitcher?.lineHeight ===
+															false && countDownSeparatorLineHeight?.Mobile
+															? `line-height: ${countDownSeparatorLineHeight?.Mobile}${countDownSeparatorLineHeightUnits?.Mobile};`
+															: ""
+													}
                          `
-					: ""
-				}
+												: ""
+										}
                }
                .fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-time {
                     ${
-					digitGlobalTypoSwitcher?.fontSize === false &&
-					digitFontSize?.Mobile
-						? `font-size: ${digitFontSize?.Mobile}${digitFontSizeUnits?.Mobile};`
-						: ""
-				}
+											digitGlobalTypoSwitcher?.fontSize === false &&
+											digitFontSize?.Mobile
+												? `font-size: ${digitFontSize?.Mobile}${digitFontSizeUnits?.Mobile};`
+												: ""
+										}
                     ${
-					digitGlobalTypoSwitcher?.letterSpacing === false &&
-					digitLetterSpacing?.Mobile
-						? `letter-spacing: ${digitLetterSpacing?.Mobile}${digitLetterSpacingUnits?.Mobile};`
-						: ""
-				}
+											digitGlobalTypoSwitcher?.letterSpacing === false &&
+											digitLetterSpacing?.Mobile
+												? `letter-spacing: ${digitLetterSpacing?.Mobile}${digitLetterSpacingUnits?.Mobile};`
+												: ""
+										}
                     ${
-					advancedCountdownCountdownTypographyFontSize?.Mobile
-						? `font-size: ${advancedCountdownCountdownTypographyFontSize?.Mobile}${advancedCountdownCountdownTypographyFontSizeUnits?.Mobile};`
-						: ""
-				}
+											advancedCountdownCountdownTypographyFontSize?.Mobile
+												? `font-size: ${advancedCountdownCountdownTypographyFontSize?.Mobile}${advancedCountdownCountdownTypographyFontSizeUnits?.Mobile};`
+												: ""
+										}
                     ${
-					digitGlobalTypoSwitcher?.lineHeight === false &&
-					digitLineHeight?.Mobile
-						? `line-height: ${digitLineHeight?.Mobile}${digitLineHeightUnits?.Mobile};`
-						: ""
-				}
+											digitGlobalTypoSwitcher?.lineHeight === false &&
+											digitLineHeight?.Mobile
+												? `line-height: ${digitLineHeight?.Mobile}${digitLineHeightUnits?.Mobile};`
+												: ""
+										}
                     ${
-					countDownDigitMarginGetMobile &&
-					countDownDigitMarginMobile?.top
-						? `margin: ${countDownDigitMarginGetMobile};`
-						: ""
-				}
+											countDownDigitMarginGetMobile &&
+											countDownDigitMarginMobile?.top
+												? `margin: ${countDownDigitMarginGetMobile};`
+												: ""
+										}
                     ${
-					countDownDigitBorderTypeGetMobile &&
-					countDownDigitBorderTypeMobile?.top
-						? `border-width: ${countDownDigitBorderTypeGetMobile};`
-						: ""
-				}
+											countDownDigitBorderTypeGetMobile &&
+											countDownDigitBorderTypeMobile?.top
+												? `border-width: ${countDownDigitBorderTypeGetMobile};`
+												: ""
+										}
                     ${
-					countDownDigitBorderRadiusGetMobile &&
-					countDownDigitBorderRadiusMobile?.top
-						? `border-radius: ${countDownDigitBorderRadiusGetMobile};`
-						: ""
-				}
+											countDownDigitBorderRadiusGetMobile &&
+											countDownDigitBorderRadiusMobile?.top
+												? `border-radius: ${countDownDigitBorderRadiusGetMobile};`
+												: ""
+										}
                     ${
-					countDownDigitWidth?.Mobile
-						? `width: ${countDownDigitWidth?.Mobile}${countDownDigitWidthUnits?.Mobile};`
-						: ""
-				}
+											countDownDigitWidth?.Mobile
+												? `width: ${countDownDigitWidth?.Mobile}${countDownDigitWidthUnits?.Mobile};`
+												: ""
+										}
                     ${
-					countDownDigitHeight?.Mobile
-						? `height: ${countDownDigitHeight?.Mobile}${countDownDigitHeightUnits?.Mobile};`
-						: ""
-				}
+											countDownDigitHeight?.Mobile
+												? `height: ${countDownDigitHeight?.Mobile}${countDownDigitHeightUnits?.Mobile};`
+												: ""
+										}
                }
                .fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-label {
                     ${
-					labelGlobalTypoSwitcher?.fontSize === false &&
-					labelFontSize?.Mobile
-						? `font-size: ${labelFontSize?.Mobile}${labelFontSizeUnits?.Mobile};`
-						: ""
-				}
+											labelGlobalTypoSwitcher?.fontSize === false &&
+											labelFontSize?.Mobile
+												? `font-size: ${labelFontSize?.Mobile}${labelFontSizeUnits?.Mobile};`
+												: ""
+										}
                     ${
-					labelGlobalTypoSwitcher?.letterSpacing === false &&
-					labelLetterSpacing?.Mobile
-						? `letter-spacing: ${labelLetterSpacing?.Mobile}${labelLetterSpacingUnits?.Mobile};`
-						: ""
-				}
+											labelGlobalTypoSwitcher?.letterSpacing === false &&
+											labelLetterSpacing?.Mobile
+												? `letter-spacing: ${labelLetterSpacing?.Mobile}${labelLetterSpacingUnits?.Mobile};`
+												: ""
+										}
                     ${
-					advancedCountdownLabelTypographyStyle4FontSize?.Mobile
-						? `font-size: ${advancedCountdownLabelTypographyStyle4FontSize?.Mobile}${advancedCountdownLabelTypographyStyle4FontSizeUnits?.Mobile};`
-						: ""
-				}
+											advancedCountdownLabelTypographyStyle4FontSize?.Mobile
+												? `font-size: ${advancedCountdownLabelTypographyStyle4FontSize?.Mobile}${advancedCountdownLabelTypographyStyle4FontSizeUnits?.Mobile};`
+												: ""
+										}
                     ${
-					labelGlobalTypoSwitcher?.lineHeight === false &&
-					labelLineHeight?.Mobile
-						? `line-height: ${labelLineHeight?.Mobile}${labelLineHeightUnits?.Mobile};`
-						: ""
-				}
+											labelGlobalTypoSwitcher?.lineHeight === false &&
+											labelLineHeight?.Mobile
+												? `line-height: ${labelLineHeight?.Mobile}${labelLineHeightUnits?.Mobile};`
+												: ""
+										}
                     ${
-					countDownLabelBorderTypeGetMobile &&
-					countDownLabelBorderTypeMobile?.top
-						? `border-width: ${countDownLabelBorderTypeGetMobile};`
-						: ""
-				}
+											countDownLabelBorderTypeGetMobile &&
+											countDownLabelBorderTypeMobile?.top
+												? `border-width: ${countDownLabelBorderTypeGetMobile};`
+												: ""
+										}
                     ${
-					countDownLabelBorderRadiusGetMobile &&
-					countDownLabelBorderRadiusMobile?.top
-						? `border-radius: ${countDownLabelBorderRadiusGetMobile};`
-						: ""
-				}
+											countDownLabelBorderRadiusGetMobile &&
+											countDownLabelBorderRadiusMobile?.top
+												? `border-radius: ${countDownLabelBorderRadiusGetMobile};`
+												: ""
+										}
                     ${
-						countDownLabelMarginGetMobile &&
-						countDownLabelMarginMobile?.top
-							? `margin: ${countDownLabelMarginGetMobile};`
-							: ""
-					}
+											countDownLabelMarginGetMobile &&
+											countDownLabelMarginMobile?.top
+												? `margin: ${countDownLabelMarginGetMobile};`
+												: ""
+										}
                     ${
-						countDownLabelWidth?.Mobile
-							? `width: ${countDownLabelWidth?.Mobile}${countDownLabelWidthUnits?.Mobile};`
-							: ""
-					}
+											countDownLabelWidth?.Mobile
+												? `width: ${countDownLabelWidth?.Mobile}${countDownLabelWidthUnits?.Mobile};`
+												: ""
+										}
                     ${
-						countDownLabelHeight?.Mobile
-							? `height: ${countDownLabelHeight?.Mobile}${countDownLabelHeightUnits?.Mobile};`
-							: ""
-					}
+											countDownLabelHeight?.Mobile
+												? `height: ${countDownLabelHeight?.Mobile}${countDownLabelHeightUnits?.Mobile};`
+												: ""
+										}
                }
           }
      }`;
