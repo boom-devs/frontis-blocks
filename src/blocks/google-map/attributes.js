@@ -13,7 +13,7 @@ const attributes = {
 	},
 	googleMapLocation: {
 		type: "string",
-		default: "BoomDevs"
+		default: "Bogura"
 	},
 	googleMapWidth: {
 		type: 'object',
