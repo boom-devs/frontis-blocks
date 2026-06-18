@@ -275,54 +275,13 @@ const multiChartStyle = (attributes) => {
 	const blockStyle = `
 		.fb-elegant-chart-block.${blockID} {
 			${multiChartPositionType === "default" ? `position: relative;` : ""}
-			${
-				multiChartPositionType !== "default" &&
-				multiChartPositionType !== "relative"
-					? `width: 100%;`
-					: ""
-			}
-			${
-				multiChartPositionType !== "default"
-					? `position: ${multiChartPositionType};`
-					: ""
-			}
-			${
-				multiChartPositionType !== "default" &&
-				multiChartPositionType !== "relative" &&
-				multiChartHZOrientationType === "left" &&
-				multiChartHZLeftOffset?.Desktop
-					? `left: ${multiChartHZLeftOffset?.Desktop}${multiChartHZLeftOffsetUnits?.Desktop};`
-					: ""
-			}
-			${
-				multiChartPositionType !== "default" &&
-				multiChartPositionType !== "relative" &&
-				multiChartHZOrientationType === "right" &&
-				multiChartHZRightOffset?.Desktop
-					? `right: ${multiChartHZRightOffset?.Desktop}${multiChartHZRightOffsetUnits?.Desktop};`
-					: ""
-			}
-			${
-				multiChartPositionType !== "default" &&
-				multiChartPositionType !== "relative" &&
-				multiChartVROrientationType === "top" &&
-				multiChartVRTopOffset?.Desktop
-					? `top: ${multiChartVRTopOffset?.Desktop}${multiChartVRTopOffsetUnits?.Desktop};`
-					: ""
-			}
-			${
-				multiChartPositionType !== "default" &&
-				multiChartPositionType !== "relative" &&
-				multiChartVROrientationType === "bottom" &&
-				multiChartVRBottomOffset?.Desktop
-					? `bottom: ${multiChartVRBottomOffset?.Desktop}${multiChartVRBottomOffsetUnits?.Desktop};`
-					: ""
-			}
-			${
-				multiChartGlobalZIndex?.Desktop
-					? `z-index: ${multiChartGlobalZIndex?.Desktop};`
-					: ""
-			}
+			${multiChartPositionType !== "default" && multiChartPositionType !== "relative" ? `width: 100%;` : ""}
+			${multiChartPositionType !== "default" ? `position: ${multiChartPositionType};` : ""}
+			${multiChartPositionType !== "default" && multiChartPositionType !== "relative" && multiChartHZOrientationType === "left" && multiChartHZLeftOffset?.Desktop ? `left: ${multiChartHZLeftOffset?.Desktop}${multiChartHZLeftOffsetUnits?.Desktop};` : ""}
+			${multiChartPositionType !== "default" && multiChartPositionType !== "relative" && multiChartHZOrientationType === "right" && multiChartHZRightOffset?.Desktop ? `right: ${multiChartHZRightOffset?.Desktop}${multiChartHZRightOffsetUnits?.Desktop};` : ""}
+			${multiChartPositionType !== "default" && multiChartPositionType !== "relative" && multiChartVROrientationType === "top" && multiChartVRTopOffset?.Desktop ? `top: ${multiChartVRTopOffset?.Desktop}${multiChartVRTopOffsetUnits?.Desktop};` : ""}
+			${multiChartPositionType !== "default" && multiChartPositionType !== "relative" && multiChartVROrientationType === "bottom" && multiChartVRBottomOffset?.Desktop ? `bottom: ${multiChartVRBottomOffset?.Desktop}${multiChartVRBottomOffsetUnits?.Desktop};` : ""}
+			${multiChartGlobalZIndex?.Desktop ? `z-index: ${multiChartGlobalZIndex?.Desktop};` : ""}
 			${multiChartOverflow !== "default" ? `overflow: ${multiChartOverflow};` : ""}
 
 			${multiChartWrapperBorder ? `border-style: ${multiChartWrapperBorder};` : ""}
@@ -731,54 +690,13 @@ const multiChartStyle = (attributes) => {
 		@media only screen and (max-width: 767px) {
 			.fb-elegant-chart-block.${blockID} {
 				${multiChartPositionType === "default" ? `position: relative;` : ""}
-				${
-					multiChartPositionType !== "default" &&
-					multiChartPositionType !== "relative"
-						? `width: 100%;`
-						: ""
-				}
-				${
-					multiChartPositionType !== "default"
-						? `position: ${multiChartPositionType};`
-						: ""
-				}
-				${
-					multiChartPositionType !== "default" &&
-					multiChartPositionType !== "relative" &&
-					multiChartHZOrientationType === "left" &&
-					multiChartHZLeftOffset?.Mobile
-						? `left: ${multiChartHZLeftOffset?.Mobile}${multiChartHZLeftOffsetUnits?.Mobile};`
-						: ""
-				}
-				${
-					multiChartPositionType !== "default" &&
-					multiChartPositionType !== "relative" &&
-					multiChartHZOrientationType === "right" &&
-					multiChartHZRightOffset?.Mobile
-						? `right: ${multiChartHZRightOffset?.Mobile}${multiChartHZRightOffsetUnits?.Mobile};`
-						: ""
-				}
-				${
-					multiChartPositionType !== "default" &&
-					multiChartPositionType !== "relative" &&
-					multiChartVROrientationType === "top" &&
-					multiChartVRTopOffset?.Mobile
-						? `top: ${multiChartVRTopOffset?.Mobile}${multiChartVRTopOffsetUnits?.Mobile};`
-						: ""
-				}
-				${
-					multiChartPositionType !== "default" &&
-					multiChartPositionType !== "relative" &&
-					multiChartVROrientationType === "bottom" &&
-					multiChartVRBottomOffset?.Mobile
-						? `bottom: ${multiChartVRBottomOffset?.Mobile}${multiChartVRBottomOffsetUnits?.Mobile};`
-						: ""
-				}
-				${
-					multiChartGlobalZIndex?.Mobile
-						? `z-index: ${multiChartGlobalZIndex?.Mobile};`
-						: ""
-				} 
+				${multiChartPositionType !== "default" && multiChartPositionType !== "relative" ? `width: 100%;` : ""}
+				${multiChartPositionType !== "default" ? `position: ${multiChartPositionType};` : ""}
+				${multiChartPositionType !== "default" && multiChartPositionType !== "relative" && multiChartHZOrientationType === "left" && multiChartHZLeftOffset?.Mobile ? `left: ${multiChartHZLeftOffset?.Mobile}${multiChartHZLeftOffsetUnits?.Mobile};` : ""}
+				${multiChartPositionType !== "default" && multiChartPositionType !== "relative" && multiChartHZOrientationType === "right" && multiChartHZRightOffset?.Mobile ? `right: ${multiChartHZRightOffset?.Mobile}${multiChartHZRightOffsetUnits?.Mobile};` : ""}
+				${multiChartPositionType !== "default" && multiChartPositionType !== "relative" && multiChartVROrientationType === "top" && multiChartVRTopOffset?.Mobile ? `top: ${multiChartVRTopOffset?.Mobile}${multiChartVRTopOffsetUnits?.Mobile};` : ""}
+				${multiChartPositionType !== "default" && multiChartPositionType !== "relative" && multiChartVROrientationType === "bottom" && multiChartVRBottomOffset?.Mobile ? `bottom: ${multiChartVRBottomOffset?.Mobile}${multiChartVRBottomOffsetUnits?.Mobile};` : ""}
+				${multiChartGlobalZIndex?.Mobile ? `z-index: ${multiChartGlobalZIndex?.Mobile};` : ""} 
 				${multiChartOverflow !== "default" ? `overflow: ${multiChartOverflow};` : ""}
 
 				${

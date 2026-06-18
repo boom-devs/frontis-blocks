@@ -1327,9 +1327,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 						{ label: __("Radar", "frontis-blocks"), value: "radar" },
 						{ label: __("Polar Area", "frontis-blocks"), value: "polarArea" },
 					]}
-					onChange={(value) => {
-						setAttributes({ chartType: value });
-					}}
+					onChange={(value) => setAttributes({ chartType: value })}
 				/>
 				{chartType === "bar" && (
 					<SelectControl
@@ -1503,9 +1501,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 					units={canvasWidthUnits}
 					deviceType={deviceType}
 					onChangeHandler={(value) => setAttributes({ canvasWidth: value })}
-					rangeUnitHandler={(value) =>
-						setAttributes({ canvasWidthUnits: value })
-					}
+					rangeUnitHandler={(value) => setAttributes({ canvasWidthUnits: value })}
 					setAttributes={setAttributes}
 					min={0}
 					max={2000}
@@ -1518,9 +1514,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 						units={canvasHeightUnits}
 						deviceType={deviceType}
 						onChangeHandler={(value) => setAttributes({ canvasHeight: value })}
-						rangeUnitHandler={(value) =>
-							setAttributes({ canvasHeightUnits: value })
-						}
+						rangeUnitHandler={(value) => setAttributes({ canvasHeightUnits: value })}
 						setAttributes={setAttributes}
 						min={0}
 						max={2000}
@@ -1530,45 +1524,25 @@ const Inspector = ({ attributes, setAttributes }) => {
 				<FB_BackgroundColorControl
 					label={__("Background", "frontis-blocks")}
 					bgColorSwitcher={canvasBgColorSwitcher}
-					setBgColorSwitcher={(value) =>
-						setAttributes({ canvasBgColorSwitcher: value })
-					}
+					setBgColorSwitcher={(value) => setAttributes({ canvasBgColorSwitcher: value })}
 					normalBackgroundType={canvasNormalBackgroundType}
-					setNormalBackgroundType={(value) =>
-						setAttributes({ canvasNormalBackgroundType: value })
-					}
+					setNormalBackgroundType={(value) => setAttributes({ canvasNormalBackgroundType: value })}
 					normalClassicColor={canvasNormalColor}
-					setNormalClassicColor={(value) =>
-						setAttributes({ canvasNormalColor: value })
-					}
+					setNormalClassicColor={(value) => setAttributes({ canvasNormalColor: value })}
 					normalGradientColor={canvasNormalGradientColor}
-					setNormalGradientColor={(value) =>
-						setAttributes({ canvasNormalGradientColor: value })
-					}
+					setNormalGradientColor={(value) => setAttributes({ canvasNormalGradientColor: value })}
 					normalCustomGradientSwitcher={canvasNormalCustomGradientSwitcher}
-					setNormalCustomGradientSwitcher={(value) =>
-						setAttributes({ canvasNormalCustomGradientSwitcher: value })
-					}
+					setNormalCustomGradientSwitcher={(value) => setAttributes({ canvasNormalCustomGradientSwitcher: value })}
 					normalCustomGradientInputValue={canvasNormalCustomGradientInputValue}
-					setNormalCustomGradientInputValue={(value) =>
-						setAttributes({ canvasNormalCustomGradientInputValue: value })
-					}
+					setNormalCustomGradientInputValue={(value) => setAttributes({ canvasNormalCustomGradientInputValue: value })}
 					hoverBackgroundType={canvasHoverBackgroundType}
-					setHoverBackgroundType={(value) =>
-						setAttributes({ canvasHoverBackgroundType: value })
-					}
+					setHoverBackgroundType={(value) => setAttributes({ canvasHoverBackgroundType: value })}
 					hoverClassicColor={canvasHoverColor}
-					setHoverClassicColor={(value) =>
-						setAttributes({ canvasHoverColor: value })
-					}
+					setHoverClassicColor={(value) => setAttributes({ canvasHoverColor: value })}
 					hoverGradientColor={canvasHoverGradientColor}
-					setHoverGradientColor={(value) =>
-						setAttributes({ canvasHoverGradientColor: value })
-					}
+					setHoverGradientColor={(value) => setAttributes({ canvasHoverGradientColor: value })}
 					hoverCustomGradientSwitcher={canvasHoverCustomGradientSwitcher}
-					setHoverCustomGradientSwitcher={(value) =>
-						setAttributes({ canvasHoverCustomGradientSwitcher: value })
-					}
+					setHoverCustomGradientSwitcher={(value) => setAttributes({ canvasHoverCustomGradientSwitcher: value })}
 					isBackgroundImage={false}
 				/>
 				<FB_Spacing
@@ -1602,51 +1576,29 @@ const Inspector = ({ attributes, setAttributes }) => {
 				<FB_BackgroundColorControl
 					label={__("Background", "frontis-blocks")}
 					bgColorSwitcher={chartBodyBgColorSwitcher}
-					setBgColorSwitcher={(value) =>
-						setAttributes({ chartBodyBgColorSwitcher: value })
-					}
+					setBgColorSwitcher={(value) => setAttributes({ chartBodyBgColorSwitcher: value })}
 					normalBackgroundType={chartBodyNormalBackgroundType}
-					setNormalBackgroundType={(value) =>
-						setAttributes({ chartBodyNormalBackgroundType: value })
-					}
+					setNormalBackgroundType={(value) => setAttributes({ chartBodyNormalBackgroundType: value })}
 					normalClassicColor={chartBodyNormalColor}
-					setNormalClassicColor={(value) =>
-						setAttributes({ chartBodyNormalColor: value })
-					}
+					setNormalClassicColor={(value) => setAttributes({ chartBodyNormalColor: value })}
 					normalGradientColor={chartBodyNormalGradientColor}
-					setNormalGradientColor={(value) =>
-						setAttributes({ chartBodyNormalGradientColor: value })
-					}
+					setNormalGradientColor={(value) => setAttributes({ chartBodyNormalGradientColor: value })}
 					normalCustomGradientSwitcher={chartBodyNormalCustomGradientSwitcher}
-					setNormalCustomGradientSwitcher={(value) =>
-						setAttributes({ chartBodyNormalCustomGradientSwitcher: value })
-					}
+					setNormalCustomGradientSwitcher={(value) => setAttributes({ chartBodyNormalCustomGradientSwitcher: value })}
 					normalCustomGradientInputValue={
 						chartBodyNormalCustomGradientInputValue
 					}
-					setNormalCustomGradientInputValue={(value) =>
-						setAttributes({ chartBodyNormalCustomGradientInputValue: value })
-					}
+					setNormalCustomGradientInputValue={(value) => setAttributes({ chartBodyNormalCustomGradientInputValue: value })}
 					hoverBackgroundType={chartBodyHoverBackgroundType}
-					setHoverBackgroundType={(value) =>
-						setAttributes({ chartBodyHoverBackgroundType: value })
-					}
+					setHoverBackgroundType={(value) => setAttributes({ chartBodyHoverBackgroundType: value })}
 					hoverClassicColor={chartBodyHoverColor}
-					setHoverClassicColor={(value) =>
-						setAttributes({ chartBodyHoverColor: value })
-					}
+					setHoverClassicColor={(value) => setAttributes({ chartBodyHoverColor: value })}
 					hoverGradientColor={chartBodyHoverGradientColor}
-					setHoverGradientColor={(value) =>
-						setAttributes({ chartBodyHoverGradientColor: value })
-					}
+					setHoverGradientColor={(value) => setAttributes({ chartBodyHoverGradientColor: value })}
 					hoverCustomGradientSwitcher={chartBodyHoverCustomGradientSwitcher}
-					setHoverCustomGradientSwitcher={(value) =>
-						setAttributes({ chartBodyHoverCustomGradientSwitcher: value })
-					}
+					setHoverCustomGradientSwitcher={(value) => setAttributes({ chartBodyHoverCustomGradientSwitcher: value })}
 					hoverCustomGradientInputValue={chartBodyHoverCustomGradientInputValue}
-					setHoverCustomGradientInputValue={(value) =>
-						setAttributes({ chartBodyHoverCustomGradientInputValue: value })
-					}
+					setHoverCustomGradientInputValue={(value) => setAttributes({ chartBodyHoverCustomGradientInputValue: value })}
 					isBackgroundImage={false}
 				/>
 
@@ -2170,11 +2122,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 					max={10000000}
 					label={__("Z Index", "frontis-blocks")}
 					rangeValue={multiChartGlobalZIndex}
-					onChangeHandler={(value) =>
-						setAttributes({
-							multiChartGlobalZIndex: value === 0 ? undefined : value,
-						})
-					}
+					onChangeHandler={(value) => setAttributes({ multiChartGlobalZIndex: value === 0 ? undefined : value })}
 					deviceType={deviceType}
 					setAttributes={setAttributes}
 					rangeStep={1}
@@ -2190,65 +2138,39 @@ const Inspector = ({ attributes, setAttributes }) => {
 				<FB_PositionControl
 					deviceType={deviceType}
 					positionType={multiChartPositionType}
-					setPositionType={(value) =>
-						setAttributes({ multiChartPositionType: value })
-					}
+					setPositionType={(value) => setAttributes({ multiChartPositionType: value })}
 					HZOrientationType={multiChartHZOrientationType}
-					setHZOrientationType={(value) =>
-						setAttributes({ multiChartHZOrientationType: value })
-					}
+					setHZOrientationType={(value) => setAttributes({ multiChartHZOrientationType: value })}
 					VROrientationType={multiChartVROrientationType}
-					setVROrientationType={(value) =>
-						setAttributes({ multiChartVROrientationType: value })
-					}
+					setVROrientationType={(value) => setAttributes({ multiChartVROrientationType: value })}
 					HZLeftOffset={multiChartHZLeftOffset}
-					setHZLeftOffset={(value) =>
-						setAttributes({ multiChartHZLeftOffset: value })
-					}
+					setHZLeftOffset={(value) => setAttributes({ multiChartHZLeftOffset: value })}
 					HZLeftOffsetUnits={multiChartHZLeftOffsetUnits}
-					setHZLeftOffsetUnits={(value) =>
-						setAttributes({ multiChartHZLeftOffsetUnits: value })
-					}
+					setHZLeftOffsetUnits={(value) => setAttributes({ multiChartHZLeftOffsetUnits: value })}
 					HZRightOffset={multiChartHZRightOffset}
-					setHZRightOffset={(value) =>
-						setAttributes({ multiChartHZRightOffset: value })
-					}
+					setHZRightOffset={(value) => setAttributes({ multiChartHZRightOffset: value })}
 					HZRightOffsetUnits={multiChartHZRightOffsetUnits}
-					setHZRightOffsetUnits={(value) =>
-						setAttributes({ multiChartHZRightOffsetUnits: value })
-					}
+					setHZRightOffsetUnits={(value) => setAttributes({ multiChartHZRightOffsetUnits: value })}
 					VRTopOffset={multiChartVRTopOffset}
-					setVRTopOffset={(value) =>
-						setAttributes({ multiChartVRTopOffset: value })
-					}
+					setVRTopOffset={(value) => setAttributes({ multiChartVRTopOffset: value })}
 					VRTopOffsetUnits={multiChartVRTopOffsetUnits}
-					setVRTopOffsetUnits={(value) =>
-						setAttributes({ multiChartVRTopOffsetUnits: value })
-					}
+					setVRTopOffsetUnits={(value) => setAttributes({ multiChartVRTopOffsetUnits: value })}
 					VRBottomOffset={multiChartVRBottomOffset}
-					setVRBottomOffset={(value) =>
-						setAttributes({ multiChartVRBottomOffset: value })
-					}
+					setVRBottomOffset={(value) => setAttributes({ multiChartVRBottomOffset: value })}
 					VRBottomOffsetUnits={multiChartVRBottomOffsetUnits}
-					setVRBottomOffsetUnits={(value) =>
-						setAttributes({ multiChartVRBottomOffsetUnits: value })
-					}
+					setVRBottomOffsetUnits={(value) => setAttributes({ multiChartVRBottomOffsetUnits: value })}
 					setAttributes={setAttributes}
 				/>
 				<FB_InputControl
 					label={__("CSS ID", "frontis-blocks")}
 					value={multiChartWrapperID}
-					onChangeValue={(value) =>
-						setAttributes({ multiChartWrapperID: value })
-					}
+					onChangeValue={(value) => setAttributes({ multiChartWrapperID: value })}
 					helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
 				/>
 				<FB_InputControl
 					label={__("CSS Class", "frontis-blocks")}
 					value={multiChartWrapperClass}
-					onChangeValue={(value) =>
-						setAttributes({ multiChartWrapperClass: value })
-					}
+					onChangeValue={(value) => setAttributes({ multiChartWrapperClass: value })}
 					helpText={__("Separate with spaces key.", "frontis-blocks")}
 				/>
 			</PanelBody>
@@ -2256,117 +2178,59 @@ const Inspector = ({ attributes, setAttributes }) => {
 			<PanelBody title={__("Background", "frontis-blocks")} initialOpen={false}>
 				<FB_BackgroundColorControl
 					bgColorSwitcher={multiChartBgColorSwitcher}
-					setBgColorSwitcher={(value) =>
-						setAttributes({ multiChartBgColorSwitcher: value })
-					}
+					setBgColorSwitcher={(value) => setAttributes({ multiChartBgColorSwitcher: value })}
 					normalBackgroundType={multiChartBackgroundType}
-					setNormalBackgroundType={(value) =>
-						setAttributes({ multiChartBackgroundType: value })
-					}
+					setNormalBackgroundType={(value) => setAttributes({ multiChartBackgroundType: value })}
 					normalClassicColor={multiChartClassicColor}
-					setNormalClassicColor={(value) =>
-						setAttributes({
-							multiChartClassicColor: value === undefined ? "" : value,
-						})
-					}
+					setNormalClassicColor={(value) => setAttributes({ multiChartClassicColor: value === undefined ? "" : value })}
 					normalGradientColor={multiChartGradientColor}
-					setNormalGradientColor={(value) =>
-						setAttributes({
-							multiChartGradientColor: value === undefined ? null : value,
-						})
-					}
+					setNormalGradientColor={(value) => setAttributes({ multiChartGradientColor: value === undefined ? null : value })}
 					normalCustomGradientSwitcher={multiChartCustomGradientSwitcher}
-					setNormalCustomGradientSwitcher={(value) =>
-						setAttributes({ multiChartCustomGradientSwitcher: value })
-					}
+					setNormalCustomGradientSwitcher={(value) => setAttributes({ multiChartCustomGradientSwitcher: value })}
 					normalCustomGradientInputValue={multiChartCustomGradientInputValue}
-					setNormalCustomGradientInputValue={(value) =>
-						setAttributes({ multiChartCustomGradientInputValue: value })
-					}
+					setNormalCustomGradientInputValue={(value) => setAttributes({ multiChartCustomGradientInputValue: value })}
 					normalBackgroundImageUrl={multiChartBackgroundImageUrl}
-					setNormalBackgroundImageUrl={(value) =>
-						setAttributes({ multiChartBackgroundImageUrl: value })
-					}
+					setNormalBackgroundImageUrl={(value) => setAttributes({ multiChartBackgroundImageUrl: value })}
 					normalBackgroundImageAlt={multiChartBackgroundImageAlt}
-					setNormalBackgroundImageAlt={(value) =>
-						setAttributes({ multiChartBackgroundImageAlt: value })
-					}
+					setNormalBackgroundImageAlt={(value) => setAttributes({ multiChartBackgroundImageAlt: value })}
 					normalBackgroundImageID={multiChartBackgroundImageID}
-					setNormalBackgroundImageID={(value) =>
-						setAttributes({ multiChartBackgroundImageID: value })
-					}
+					setNormalBackgroundImageID={(value) => setAttributes({ multiChartBackgroundImageID: value })}
 					normalBackgroundImagePosition={multiChartBackgroundImagePosition}
-					setNormalBackgroundImagePosition={(value) =>
-						setAttributes({ multiChartBackgroundImagePosition: value })
-					}
+					setNormalBackgroundImagePosition={(value) => setAttributes({ multiChartBackgroundImagePosition: value })}
 					normalBackgroundImageAttachment={multiChartBackgroundImageAttachment}
-					setNormalBackgroundImageAttachment={(value) =>
-						setAttributes({ multiChartBackgroundImageAttachment: value })
-					}
+					setNormalBackgroundImageAttachment={(value) => setAttributes({ multiChartBackgroundImageAttachment: value })}
 					normalBackgroundImageRepeat={multiChartBackgroundImageRepeat}
-					setNormalBackgroundImageRepeat={(value) =>
-						setAttributes({ multiChartBackgroundImageRepeat: value })
-					}
+					setNormalBackgroundImageRepeat={(value) => setAttributes({ multiChartBackgroundImageRepeat: value })}
 					normalBackgroundImageSize={multiChartBackgroundImageSize}
-					setNormalBackgroundImageSize={(value) =>
-						setAttributes({ multiChartBackgroundImageSize: value })
-					}
+					setNormalBackgroundImageSize={(value) => setAttributes({ multiChartBackgroundImageSize: value })}
 					hoverBackgroundType={multiChartHoverBackgroundType}
-					setHoverBackgroundType={(value) =>
-						setAttributes({ multiChartHoverBackgroundType: value })
-					}
+					setHoverBackgroundType={(value) => setAttributes({ multiChartHoverBackgroundType: value })}
 					hoverClassicColor={multiChartHoverClassicColor}
-					setHoverClassicColor={(value) =>
-						setAttributes({
-							multiChartHoverClassicColor: value === undefined ? "" : value,
-						})
-					}
+					setHoverClassicColor={(value) => setAttributes({ multiChartHoverClassicColor: value === undefined ? "" : value })}
 					hoverGradientColor={multiChartHoverGradientColor}
-					setHoverGradientColor={(value) =>
-						setAttributes({
-							multiChartHoverGradientColor: value === undefined ? null : value,
-						})
-					}
+					setHoverGradientColor={(value) => setAttributes({ multiChartHoverGradientColor: value === undefined ? null : value })}
 					hoverCustomGradientSwitcher={multiChartHoverCustomGradientSwitcher}
-					setHoverCustomGradientSwitcher={(value) =>
-						setAttributes({ multiChartHoverCustomGradientSwitcher: value })
-					}
+					setHoverCustomGradientSwitcher={(value) => setAttributes({ multiChartHoverCustomGradientSwitcher: value })}
 					hoverCustomGradientInputValue={
 						multiChartHoverCustomGradientInputValue
 					}
-					setHoverCustomGradientInputValue={(value) =>
-						setAttributes({ multiChartHoverCustomGradientInputValue: value })
-					}
+					setHoverCustomGradientInputValue={(value) => setAttributes({ multiChartHoverCustomGradientInputValue: value })}
 					hoverBackgroundImageUrl={multiChartHoverBackgroundImageUrl}
-					setHoverBackgroundImageUrl={(value) =>
-						setAttributes({ multiChartHoverBackgroundImageUrl: value })
-					}
+					setHoverBackgroundImageUrl={(value) => setAttributes({ multiChartHoverBackgroundImageUrl: value })}
 					hoverBackgroundImageAlt={multiChartHoverBackgroundImageAlt}
-					setHoverBackgroundImageAlt={(value) =>
-						setAttributes({ multiChartHoverBackgroundImageAlt: value })
-					}
+					setHoverBackgroundImageAlt={(value) => setAttributes({ multiChartHoverBackgroundImageAlt: value })}
 					hoverBackgroundImageID={multiChartHoverBackgroundImageID}
-					setHoverBackgroundImageID={(value) =>
-						setAttributes({ multiChartHoverBackgroundImageID: value })
-					}
+					setHoverBackgroundImageID={(value) => setAttributes({ multiChartHoverBackgroundImageID: value })}
 					hoverBackgroundImagePosition={multiChartHoverBackgroundImagePosition}
-					setHoverBackgroundImagePosition={(value) =>
-						setAttributes({ multiChartHoverBackgroundImagePosition: value })
-					}
+					setHoverBackgroundImagePosition={(value) => setAttributes({ multiChartHoverBackgroundImagePosition: value })}
 					hoverBackgroundImageAttachment={
 						multiChartHoverBackgroundImageAttachment
 					}
-					setHoverBackgroundImageAttachment={(value) =>
-						setAttributes({ multiChartHoverBackgroundImageAttachment: value })
-					}
+					setHoverBackgroundImageAttachment={(value) => setAttributes({ multiChartHoverBackgroundImageAttachment: value })}
 					hoverBackgroundImageRepeat={multiChartHoverBackgroundImageRepeat}
-					setHoverBackgroundImageRepeat={(value) =>
-						setAttributes({ multiChartHoverBackgroundImageRepeat: value })
-					}
+					setHoverBackgroundImageRepeat={(value) => setAttributes({ multiChartHoverBackgroundImageRepeat: value })}
 					hoverBackgroundImageSize={multiChartHoverBackgroundImageSize}
-					setHoverBackgroundImageSize={(value) =>
-						setAttributes({ multiChartHoverBackgroundImageSize: value })
-					}
+					setHoverBackgroundImageSize={(value) => setAttributes({ multiChartHoverBackgroundImageSize: value })}
 				/>
 			</PanelBody>
 
@@ -2375,16 +2239,12 @@ const Inspector = ({ attributes, setAttributes }) => {
 					label={__("Border Style", "frontis-blocks")}
 					value={multiChartWrapperBorder}
 					options={BORDER_STYLES}
-					onChange={(value) =>
-						setAttributes({ multiChartWrapperBorder: value })
-					}
+					onChange={(value) => setAttributes({ multiChartWrapperBorder: value })}
 				/>
 				<FB_SwitcherControl
 					label={__("Border Color", "frontis-blocks")}
 					globalSwitcher={multiChartWrapperBorderColorSwitcher}
-					setGlobalSwitcher={(value) =>
-						setAttributes({ multiChartWrapperBorderColorSwitcher: value })
-					}
+					setGlobalSwitcher={(value) => setAttributes({ multiChartWrapperBorderColorSwitcher: value })}
 				/>
 				{multiChartWrapperBorderColorSwitcher === "normal" && (
 					<FB_ColorControl
@@ -2476,26 +2336,18 @@ const Inspector = ({ attributes, setAttributes }) => {
 			>
 				<FB_VisibilityControl
 					desktopValue={multiChartDesktopSwitcher}
-					setDesktopValue={(value) =>
-						setAttributes({ multiChartDesktopSwitcher: value })
-					}
+					setDesktopValue={(value) => setAttributes({ multiChartDesktopSwitcher: value })}
 					tabletValue={multiChartTabletSwitcher}
-					setTabletValue={(value) =>
-						setAttributes({ multiChartTabletSwitcher: value })
-					}
+					setTabletValue={(value) => setAttributes({ multiChartTabletSwitcher: value })}
 					mobileValue={multiChartMobileSwitcher}
-					setMobileValue={(value) =>
-						setAttributes({ multiChartMobileSwitcher: value })
-					}
+					setMobileValue={(value) => setAttributes({ multiChartMobileSwitcher: value })}
 				/>
 			</PanelBody>
 
 			<PanelBody title={__("Custom CSS", "frontis-blocks")} initialOpen={false}>
 				<FB_CustomCSSEditor
 					value={multiChartCustomCSS}
-					onChangeValue={(value) =>
-						setAttributes({ multiChartCustomCSS: value })
-					}
+					onChangeValue={(value) => setAttributes({ multiChartCustomCSS: value })}
 				/>
 			</PanelBody>
 		</>
