@@ -1,6 +1,6 @@
 import getCustomCss from '@Utils/getCustomCss';
 
-const imageAccordionStyle = (attributes) => {
+const generateImageAccordionStyle = (attributes) => {
     const {
         blockID,
         imageAccordionPreset,
@@ -477,7 +477,7 @@ const imageAccordionStyle = (attributes) => {
 	`;
 
     const customCss = getCustomCss(imageAccordionCustomCSS, `.${blockID}`);
-    return `${blockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
+    return `${imageAccordionBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 };
 
 export default generateImageAccordionStyle;
