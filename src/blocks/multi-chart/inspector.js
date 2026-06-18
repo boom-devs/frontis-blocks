@@ -1338,7 +1338,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 					value={chartLabels}
 					onChangeValue={(value) => setAttributes({ chartLabels: value })}
 					helpText={__(
-						"Comma-separated labels (e.g., Jan, Feb, Mar)",
+						"Comma-separated labels (e.g., Jan, Feb, Mar, April, May, Jun,)",
 						"frontis-blocks",
 					)}
 				/>
@@ -1940,29 +1940,29 @@ const Inspector = ({ attributes, setAttributes }) => {
 						setAttributes({
 							footerDescGlobalTypoType: value,
 							footerDescGlobalTypoSwitcher:
-								value === "default"
-									? {
-									...footerDescGlobalTypoSwitcher,
-									fontFamily: false,
-									fontSize: false,
-									fontWeight: false,
-									fontStyle: false,
-									textTransform: false,
-									textDecoration: false,
-									letterSpacing: false,
-									lineHeight: false,
-									  }
-									: {
-									...footerDescGlobalTypoSwitcher,
-									fontFamily: true,
-									fontSize: true,
-									fontWeight: true,
-									fontStyle: true,
-									textTransform: true,
-									textDecoration: true,
-									letterSpacing: true,
-									lineHeight: true,
-									  },
+     						value === "default"
+     							? {
+     							...footerDescGlobalTypoSwitcher,
+     							fontFamily: false,
+     							fontSize: false,
+     							fontWeight: false,
+     							fontStyle: false,
+     							textTransform: false,
+     							textDecoration: false,
+     							letterSpacing: false,
+     							lineHeight: false,
+     							  }
+     							: {
+     							...footerDescGlobalTypoSwitcher,
+     							fontFamily: true,
+     							fontSize: true,
+     							fontWeight: true,
+     							fontStyle: true,
+     							textTransform: true,
+     							textDecoration: true,
+     							letterSpacing: true,
+     							lineHeight: true,
+     							  },
 						});
 					}}
 					globalTypoOption={footerDescGlobalTypoOption}
@@ -2176,9 +2176,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 					setHoverGradientColor={(value) => setAttributes({ multiChartHoverGradientColor: value === undefined ? null : value })}
 					hoverCustomGradientSwitcher={multiChartHoverCustomGradientSwitcher}
 					setHoverCustomGradientSwitcher={(value) => setAttributes({ multiChartHoverCustomGradientSwitcher: value })}
-					hoverCustomGradientInputValue={
-						multiChartHoverCustomGradientInputValue
-					}
+					hoverCustomGradientInputValue={multiChartHoverCustomGradientInputValue}
 					setHoverCustomGradientInputValue={(value) => setAttributes({ multiChartHoverCustomGradientInputValue: value })}
 					hoverBackgroundImageUrl={multiChartHoverBackgroundImageUrl}
 					setHoverBackgroundImageUrl={(value) => setAttributes({ multiChartHoverBackgroundImageUrl: value })}
@@ -2188,9 +2186,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 					setHoverBackgroundImageID={(value) => setAttributes({ multiChartHoverBackgroundImageID: value })}
 					hoverBackgroundImagePosition={multiChartHoverBackgroundImagePosition}
 					setHoverBackgroundImagePosition={(value) => setAttributes({ multiChartHoverBackgroundImagePosition: value })}
-					hoverBackgroundImageAttachment={
-						multiChartHoverBackgroundImageAttachment
-					}
+					hoverBackgroundImageAttachment={multiChartHoverBackgroundImageAttachment}
 					setHoverBackgroundImageAttachment={(value) => setAttributes({ multiChartHoverBackgroundImageAttachment: value })}
 					hoverBackgroundImageRepeat={multiChartHoverBackgroundImageRepeat}
 					setHoverBackgroundImageRepeat={(value) => setAttributes({ multiChartHoverBackgroundImageRepeat: value })}
@@ -2215,21 +2211,14 @@ const Inspector = ({ attributes, setAttributes }) => {
 					<FB_ColorControl
 						label={__("Normal Color", "frontis-blocks")}
 						globalColor={multiChartWrapperBorderColor}
-						setGlobalColor={(value) =>
-							setAttributes({ multiChartWrapperBorderColor: value === undefined ? "" : value,})
-						}
+						setGlobalColor={(value) => setAttributes({ multiChartWrapperBorderColor: value === undefined ? "" : value,})}
 					/>
 				)}
 				{multiChartWrapperBorderColorSwitcher === "hover" && (
 					<FB_ColorControl
 						label={__("Hover Color", "frontis-blocks")}
 						globalColor={multiChartWrapperBorderHoverColor}
-						setGlobalColor={(value) =>
-							setAttributes({
-								multiChartWrapperBorderHoverColor:
-									value === undefined ? "" : value,
-							})
-						}
+						setGlobalColor={(value) => setAttributes({ multiChartWrapperBorderHoverColor:value === undefined ? "" : value,})}
 					/>
 				)}
 				<FB_Spacing
