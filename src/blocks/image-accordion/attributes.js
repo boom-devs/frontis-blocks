@@ -161,7 +161,7 @@ const attributes = {
 		default: {
 			Desktop: "500",
 			Tablet: "400",
-			Mobile: "300",
+			Mobile: "700",
 		},
 	},
 	imageAccordionHeightUnits: {
@@ -219,10 +219,10 @@ const attributes = {
 	imageAccordionItemBorderRadiusMobile: {
 		type: "object",
 		default: {
-			top: "16",
-			bottom: "16",
-			left: "16",
-			right: "16",
+			top: "px",
+			bottom: "px",
+			left: "px",
+			right: "px",
 		},
 	},
 	imageAccordionItemBorderRadiusLink: {
@@ -233,28 +233,28 @@ const attributes = {
 	imageAccordionItemActiveBorderRadiusDesktop: {
 		type: "object",
 		default: {
-			top: "25",
-			bottom: "25",
-			left: "25",
-			right: "25",
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
 		},
 	},
 	imageAccordionItemActiveBorderRadiusTablet: {
 		type: "object",
 		default: {
-			top: "16",
-			bottom: "16",
-			left: "16",
-			right: "16",
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
 		},
 	},
 	imageAccordionItemActiveBorderRadiusMobile: {
 		type: "object",
 		default: {
-			top: "16",
-			bottom: "16",
-			left: "16",
-			right: "16",
+			top: "px",
+			bottom: "px",
+			left: "px",
+			right: "px",
 		},
 	},
 	imageAccordionItemActiveBorderRadiusLink: {
