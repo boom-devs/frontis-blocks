@@ -404,18 +404,15 @@ const Inspector = ({ attributes, setAttributes }) => {
 		} else {
 			switch (deviceType) {
 				case "Desktop":
-					setAttributes({
-						canvasMarginDesktop: { ...canvasMarginDesktop, [position]: value },
+					setAttributes({canvasMarginDesktop: { ...canvasMarginDesktop, [position]: value },
 					});
 					break;
 				case "Tablet":
-					setAttributes({
-						canvasMarginTablet: { ...canvasMarginTablet, [position]: value },
+					setAttributes({canvasMarginTablet: { ...canvasMarginTablet, [position]: value },
 					});
 					break;
 				case "Mobile":
-					setAttributes({
-						canvasMarginMobile: { ...canvasMarginMobile, [position]: value },
+					setAttributes({canvasMarginMobile: { ...canvasMarginMobile, [position]: value },
 					});
 					break;
 				default:
@@ -424,9 +421,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 		}
 	};
 
-	const canvasMarginSpacingCombineBtnHandlerFn = () => {
-		setAttributes({ canvasMarginLink: !canvasMarginLink });
-	};
+	const canvasMarginSpacingCombineBtnHandlerFn = () => {setAttributes({ canvasMarginLink: !canvasMarginLink });};
 
 	const canvasMarginSpacingUnitsHandler = (unit) => {
 		setAttributes({
@@ -1256,9 +1251,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 			const newIndex = chartDatasets.findIndex(
 				(i, index) => (i.id || index) === over.id,
 			);
-			setAttributes({
-				chartDatasets: arrayMove(chartDatasets, oldIndex, newIndex),
-			});
+			setAttributes({chartDatasets: arrayMove(chartDatasets, oldIndex, newIndex),});
 		}
 	};
 
@@ -1800,33 +1793,31 @@ const Inspector = ({ attributes, setAttributes }) => {
 							footerTitleGlobalTypoSwitcher:
 								value === "default"
 									? {
-											...footerTitleGlobalTypoSwitcher,
-											fontFamily: false,
-											fontSize: false,
-											fontWeight: false,
-											fontStyle: false,
-											textTransform: false,
-											textDecoration: false,
-											letterSpacing: false,
-											lineHeight: false,
+										...footerTitleGlobalTypoSwitcher,
+										fontFamily: false,
+										fontSize: false,
+										fontWeight: false,
+										fontStyle: false,
+										textTransform: false,
+										textDecoration: false,
+										letterSpacing: false,
+										lineHeight: false,
 									  }
 									: {
-											...footerTitleGlobalTypoSwitcher,
-											fontFamily: true,
-											fontSize: true,
-											fontWeight: true,
-											fontStyle: true,
-											textTransform: true,
-											textDecoration: true,
-											letterSpacing: true,
-											lineHeight: true,
+										...footerTitleGlobalTypoSwitcher,
+										fontFamily: true,
+										fontSize: true,
+										fontWeight: true,
+										fontStyle: true,
+										textTransform: true,
+										textDecoration: true,
+										letterSpacing: true,
+										lineHeight: true,
 									  },
 						});
 					}}
 					globalTypoOption={footerTitleGlobalTypoOption}
-					onChangeGlobalTypoOption={(value) =>
-						setAttributes({ footerTitleGlobalTypoOption: value })
-					}
+					onChangeGlobalTypoOption={(value) => setAttributes({ footerTitleGlobalTypoOption: value })}
 					fontFamily={footerTitleFontFamily}
 					onChangeFontFamily={(value) =>
 						setAttributes({
@@ -1902,9 +1893,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 						})
 					}
 					letterSpacingUnits={footerTitleLetterSpacingUnits}
-					onChangeLetterSpacingUnit={(value) =>
-						setAttributes({ footerTitleLetterSpacingUnits: value })
-					}
+					onChangeLetterSpacingUnit={(value) => setAttributes({ footerTitleLetterSpacingUnits: value })}
 					lineHeight={footerTitleLineHeight}
 					onChangeLineHeight={(value) =>
 						setAttributes({
@@ -1916,35 +1905,27 @@ const Inspector = ({ attributes, setAttributes }) => {
 						})
 					}
 					lineHeightUnits={footerTitleLineHeightUnits}
-					onChangeLineHeightUnit={(value) =>
-						setAttributes({ footerTitleLineHeightUnits: value })
-					}
+					onChangeLineHeightUnit={(value) => setAttributes({ footerTitleLineHeightUnits: value })}
 					deviceType={deviceType}
 					setAttributes={setAttributes}
 				/>
 				<FB_SwitcherControl
-					label={__("Color", "frontis-blocks")}
-					globalSwitcher={footerTitleColorSwitcher}
-					setGlobalSwitcher={(value) =>
-						setAttributes({ footerTitleColorSwitcher: value })
-					}
+                         label={__("Color", "frontis-blocks")}
+                         globalSwitcher={footerTitleColorSwitcher}
+                         setGlobalSwitcher={(value) => setAttributes({ footerTitleColorSwitcher: value })}
 				/>
 				{footerTitleColorSwitcher === "normal" && (
 					<FB_ColorControl
 						label={__("Normal Color", "frontis-blocks")}
 						globalColor={footerTitleNormalColor}
-						setGlobalColor={(value) =>
-							setAttributes({ footerTitleNormalColor: value })
-						}
+						setGlobalColor={(value) => setAttributes({ footerTitleNormalColor: value })}
 					/>
 				)}
 				{footerTitleColorSwitcher === "hover" && (
 					<FB_ColorControl
 						label={__("Hover Color", "frontis-blocks")}
 						globalColor={footerTitleHoverColor}
-						setGlobalColor={(value) =>
-							setAttributes({ footerTitleHoverColor: value })
-						}
+						setGlobalColor={(value) => setAttributes({ footerTitleHoverColor: value })}
 					/>
 				)}
 			</PanelBody>
@@ -1953,9 +1934,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 				<FB_TypographyControl
 					globalTypoControlActive={true}
 					globalTypoSwitcher={footerDescGlobalTypoSwitcher}
-					storeGlobalTypographyData={(value) =>
-						setAttributes({ footerDescGlobalTypographyData: value })
-					}
+					storeGlobalTypographyData={(value) => setAttributes({ footerDescGlobalTypographyData: value })}
 					globalTypoType={footerDescGlobalTypoType}
 					onChangeGlobalTypoType={(value) => {
 						setAttributes({
@@ -1963,33 +1942,31 @@ const Inspector = ({ attributes, setAttributes }) => {
 							footerDescGlobalTypoSwitcher:
 								value === "default"
 									? {
-											...footerDescGlobalTypoSwitcher,
-											fontFamily: false,
-											fontSize: false,
-											fontWeight: false,
-											fontStyle: false,
-											textTransform: false,
-											textDecoration: false,
-											letterSpacing: false,
-											lineHeight: false,
+									...footerDescGlobalTypoSwitcher,
+									fontFamily: false,
+									fontSize: false,
+									fontWeight: false,
+									fontStyle: false,
+									textTransform: false,
+									textDecoration: false,
+									letterSpacing: false,
+									lineHeight: false,
 									  }
 									: {
-											...footerDescGlobalTypoSwitcher,
-											fontFamily: true,
-											fontSize: true,
-											fontWeight: true,
-											fontStyle: true,
-											textTransform: true,
-											textDecoration: true,
-											letterSpacing: true,
-											lineHeight: true,
+									...footerDescGlobalTypoSwitcher,
+									fontFamily: true,
+									fontSize: true,
+									fontWeight: true,
+									fontStyle: true,
+									textTransform: true,
+									textDecoration: true,
+									letterSpacing: true,
+									lineHeight: true,
 									  },
 						});
 					}}
 					globalTypoOption={footerDescGlobalTypoOption}
-					onChangeGlobalTypoOption={(value) =>
-						setAttributes({ footerDescGlobalTypoOption: value })
-					}
+					onChangeGlobalTypoOption={(value) => setAttributes({ footerDescGlobalTypoOption: value })}
 					fontFamily={footerDescFontFamily}
 					onChangeFontFamily={(value) =>
 						setAttributes({
@@ -2011,9 +1988,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 						})
 					}
 					fontSizeUnits={footerDescFontSizeUnits}
-					onChangeFontSizeUnit={(value) =>
-						setAttributes({ footerDescFontSizeUnits: value })
-					}
+					onChangeFontSizeUnit={(value) =>setAttributes({ footerDescFontSizeUnits: value })}
 					fontWeight={footerDescFontWeight}
 					onChangeFontWeight={(value) =>
 						setAttributes({
@@ -2065,9 +2040,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 						})
 					}
 					letterSpacingUnits={footerDescLetterSpacingUnits}
-					onChangeLetterSpacingUnit={(value) =>
-						setAttributes({ footerDescLetterSpacingUnits: value })
-					}
+					onChangeLetterSpacingUnit={(value) => setAttributes({ footerDescLetterSpacingUnits: value })}
 					lineHeight={footerDescLineHeight}
 					onChangeLineHeight={(value) =>
 						setAttributes({
@@ -2079,35 +2052,27 @@ const Inspector = ({ attributes, setAttributes }) => {
 						})
 					}
 					lineHeightUnits={footerDescLineHeightUnits}
-					onChangeLineHeightUnit={(value) =>
-						setAttributes({ footerDescLineHeightUnits: value })
-					}
+					onChangeLineHeightUnit={(value) => setAttributes({ footerDescLineHeightUnits: value })}
 					deviceType={deviceType}
 					setAttributes={setAttributes}
 				/>
 				<FB_SwitcherControl
 					label={__("Color", "frontis-blocks")}
 					globalSwitcher={footerDescColorSwitcher}
-					setGlobalSwitcher={(value) =>
-						setAttributes({ footerDescColorSwitcher: value })
-					}
+					setGlobalSwitcher={(value) => setAttributes({ footerDescColorSwitcher: value })}
 				/>
 				{footerDescColorSwitcher === "normal" && (
 					<FB_ColorControl
 						label={__("Normal Color", "frontis-blocks")}
 						globalColor={footerDescNormalColor}
-						setGlobalColor={(value) =>
-							setAttributes({ footerDescNormalColor: value })
-						}
+						setGlobalColor={(value) => setAttributes({ footerDescNormalColor: value })}
 					/>
 				)}
 				{footerDescColorSwitcher === "hover" && (
 					<FB_ColorControl
 						label={__("Hover Color", "frontis-blocks")}
 						globalColor={footerDescHoverColor}
-						setGlobalColor={(value) =>
-							setAttributes({ footerDescHoverColor: value })
-						}
+						setGlobalColor={(value) => setAttributes({ footerDescHoverColor: value })}
 					/>
 				)}
 			</PanelBody>
@@ -2251,9 +2216,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 						label={__("Normal Color", "frontis-blocks")}
 						globalColor={multiChartWrapperBorderColor}
 						setGlobalColor={(value) =>
-							setAttributes({
-								multiChartWrapperBorderColor: value === undefined ? "" : value,
-							})
+							setAttributes({ multiChartWrapperBorderColor: value === undefined ? "" : value,})
 						}
 					/>
 				)}

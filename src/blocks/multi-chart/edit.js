@@ -63,7 +63,7 @@ export default function Edit({
 	});
 
 	/**
-	 * Manages tab button settings and switches to block settings on click
+	 * Manages tab button settings on click
 	 */
 	const panelRef = useRef(null);
 	SwitchToBlockSettings(panelRef);
@@ -94,7 +94,6 @@ export default function Edit({
 				? ds.values.split(",").map((v) => parseFloat(v))
 				: [];
 
-			// Handle dynamic data update based on filter index (rotation logic like view.js)
 			if (activeFilterIndex > 0 && data.length > 0) {
 				data = data
 					.slice(activeFilterIndex)
@@ -151,18 +150,18 @@ export default function Edit({
 						legend: { display: false },
 					},
 					scales: isRadar
-						? { r: { angleLines: { display: true } } }
-						: isCircular
-						? { x: { display: false }, y: { display: false } }
-						: {
-								y: {
-									beginAtZero: true,
-									stacked: barVariant === "stacked",
-								},
-								x: {
-									stacked: barVariant === "stacked",
-								},
-						  },
+					? { r: { angleLines: { display: true } } }
+					: isCircular
+					? { x: { display: false }, y: { display: false } }
+					: {
+						y: {
+							beginAtZero: true,
+							stacked: barVariant === "stacked",
+						},
+						x: {
+							stacked: barVariant === "stacked",
+						},
+					},
 				},
 			});
 		} catch (e) {
@@ -189,7 +188,6 @@ export default function Edit({
 		activeFilterIndex,
 	]);
 
-	// Dynamic Title Logic from PHP
 	const typeMap = {
 		line: __("Line Chart", "frontis-blocks"),
 		bar: __("Bar Chart", "frontis-blocks"),

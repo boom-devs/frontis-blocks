@@ -1121,7 +1121,11 @@ const attributes = {
 	},
 	footerDescLetterSpacing: {
 		type: "object",
-		default: { Desktop: "", Tablet: "", Mobile: "" },
+          default: {
+               Desktop: "",
+               Tablet: "",
+               Mobile: ""
+          },
 	},
 	footerDescLetterSpacingUnits: {
 		type: "string",
@@ -1129,7 +1133,11 @@ const attributes = {
 	},
 	footerDescLineHeight: {
 		type: "object",
-		default: { Desktop: "", Tablet: "", Mobile: "" },
+          default: {
+               Desktop: "",
+               Tablet: "",
+               Mobile: ""
+          },
 	},
 	footerDescLineHeightUnits: {
 		type: "string",
