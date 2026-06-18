@@ -51,7 +51,7 @@ const multiChartStyle = (attributes) => {
 		chartTitleColor,
 		chartTitleHoverColor,
 		chartHeaderPaddingUnits,
-		chartHeaderPaddingDesktop,
+          chartHeaderPaddingDesktop,
 
 		toggleBtnColor,
 		toggleBtnBgColor,
@@ -185,16 +185,15 @@ const multiChartStyle = (attributes) => {
 		chartBodyBorderRadiusMobile,
 		chartHeaderPaddingTablet,
           chartHeaderPaddingMobile,
-          multiChartMarginGetTablet,
 		footerPaddingTablet,
-		footerPaddingMobile,
+          footerPaddingMobile,
 		footerMarginTablet,
 		footerMarginMobile,
 		toggleBtnPaddingTablet,
 		toggleBtnPaddingMobile,
 		toggleBtnBorderRadiusTablet,
 		toggleBtnBorderRadiusMobile,
-		legendDotSizeUnits,
+          legendDotSizeUnits,
 	} = attributes;
 
 	const bodyBgNormal = chartBodyNormalBackgroundType === "gradient" ? `background: ${chartBodyNormalCustomGradientSwitcher && chartBodyNormalCustomGradientInputValue ? chartBodyNormalCustomGradientInputValue : canvasNormalGradientColor || ""};` : `background-color: ${chartBodyNormalColor || ""};`;
@@ -386,7 +385,6 @@ const multiChartStyle = (attributes) => {
 				${multiChartWrapperBorderTypeTabletWidth && multiChartWrapperBorderTypeTablet?.top ? `border-width: ${multiChartWrapperBorderTypeTabletWidth};`: ""}
 				${multiChartWrapperBorderRadiusTabletWidth && multiChartWrapperBorderRadiusTablet?.top ? `border-radius: ${multiChartWrapperBorderRadiusTabletWidth};`: ""}
 				${multiChartPaddingTabletWidth && multiChartPaddingTablet?.top ? `padding: ${multiChartPaddingTabletWidth};`: ""}
-				${multiChartMarginGetTablet && multiChartMarginTablet?.top ? `margin: ${multiChartMarginTabletWidth};`: ""}
 				${multiChartWrapperBorderTypeTabletWidth && multiChartWrapperBorderTypeTablet?.top ? `border-width: ${multiChartWrapperBorderTypeTabletWidth};` : ""} 
                     ${multiChartWrapperBorderRadiusTabletWidth && multiChartWrapperBorderRadiusTablet?.top ? `border-radius: ${multiChartWrapperBorderRadiusTabletWidth};` : ""}
                     ${multiChartPaddingTabletWidth && multiChartPaddingTablet?.top ? `padding: ${multiChartPaddingTabletWidth};` : ""} 
@@ -514,13 +512,12 @@ const multiChartStyle = (attributes) => {
 				${footerTextAlignment?.Mobile ? `text-align: ${footerTextAlignment.Mobile};`: ""}
 			}
 			.fb-elegant-chart-block.${blockID} .fb-chart-header { 
-                    ${chartHeaderPaddingGetMobile && chartHeaderPaddingMobile?.top ? `padding: ${chartHeaderPaddingGetMobile};`: ""} 
+                    ${chartHeaderPaddingMobile && chartHeaderPaddingMobile?.top ? `padding: ${chartHeaderPaddingGetMobile};`: ""} 
                }
 			.fb-elegant-chart-block.${blockID} .fb-chart-footer { 
-                    ${footerPaddingGetMobile && footerPaddingMobile?.top ? `padding: ${footerPaddingGetMobile};`: ""} 
-                    ${footerMarginGetMobile && footerMarginMobile?.top ? `margin: ${footerMarginGetMobile};`: ""} 
+                    ${footerPaddingMobile && footerPaddingMobile?.top ? `padding: ${footerPaddingGetMobile};`: ""} 
+                    ${footerMarginMobile && footerMarginMobile?.top ? `margin: ${footerMarginGetMobile};`: ""} 
                }
-
 			.fb-elegant-chart-block.${blockID} .fb-filter-icon svg { 
                     ${filterIconSize?.Mobile ? `width: ${filterIconSize.Mobile}
                          ${filterIconSizeUnits?.Mobile || "px"}; height: ${filterIconSize.Mobile}
