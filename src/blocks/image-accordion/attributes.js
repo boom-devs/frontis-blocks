@@ -1213,7 +1213,29 @@ const attributes = {
 	imageAccordionOverflow: {
 		type: "string",
 		default: "default",
+     },
+     // item box-shadow
+     imageAccordionBoxShadowSwitcher: {
+		type: "string",
+		default: "normal",
 	},
+	imageAccordionBoxShadowValues: {
+		type: "array",
+		default: [],
+	},
+	imageAccordionBoxShadowCssValue: {
+		type: "string",
+		default: "",
+     },
+	imageAccordionBoxShadowHoverValues: {
+		type: "array",
+		default: [],
+	},
+	imageAccordionBoxShadowHoverCssValue: {
+		type: "string",
+		default: "",
+     },
+     // end item box-shadow
 	imageAccordionItemShadow: {
 		type: "string",
 		default: "0 20px 40px -10px rgba(0, 0, 0, 0.3), 0 15px 25px -5px rgba(67, 97, 238, 0.2)",

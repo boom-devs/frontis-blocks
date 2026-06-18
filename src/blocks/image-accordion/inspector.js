@@ -17,6 +17,7 @@ import FB_ColorControl from "@Components/color-control";
 import FB_SwitcherControl from "@Components/switcher-control";
 import FB_InputControl from "@Components/input-control";
 import FB_BackgroundColorControl from "@Components/background-color-control";
+import FB_BoxShadowControl from "@Components/box-shadow";
 import FB_CustomCSSEditor from "@Components/custom-css-editor";
 import FB_PositionControl from "@Components/position-control";
 import FB_VisibilityControl from "@Components/visibility-control";
@@ -235,7 +236,14 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 		imageAccordionDesktopSwitcher,
 		imageAccordionTabletSwitcher,
-		imageAccordionMobileSwitcher,
+          imageAccordionMobileSwitcher,
+          // item box-shadow start
+		imageAccordionBoxShadowSwitcher,
+		imageAccordionBoxShadowValues,
+		imageAccordionBoxShadowCssValue,
+		imageAccordionBoxShadowHoverValues,
+		imageAccordionBoxShadowHoverCssValue,
+          // item box-shadow end
 		imageAccordionItemShadow,
 		imageAccordionItemActiveZIndex,
 		imageAccordionItemTransitionDuration,
@@ -1351,11 +1359,47 @@ const Inspector = ({ attributes, setAttributes }) => {
 					spacingCombineBtnHandler={imageAccordionItemBorderRadiusCombineBtnHandlerFn}
 					setAttributes={setAttributes}
 				/>
-				<FB_InputControl
+				{/* <FB_InputControl
 					label={__("Active Item Shadow", "frontis-blocks")}
 					value={imageAccordionItemShadow}
 					onChangeValue={(value) => setAttributes({ imageAccordionItemShadow: value })}
-				/>
+                    /> */}
+                    {/* active item box-shadow */}
+                    <FB_SwitcherControl
+                         label={__("Active Item Shadow", "frontis-blocks")}
+                         globalSwitcher={imageAccordionBoxShadowSwitcher}
+                         setGlobalSwitcher={(value) =>
+                              setAttributes({ imageAccordionBoxShadowSwitcher: value })
+                         }
+                    />
+                    
+                    {imageAccordionBoxShadowSwitcher === "normal" && (
+                         <FB_BoxShadowControl
+                              label={__("Normal Shadow", "frontis-blocks")}
+                              onBoxShadowChange={(value) =>
+                                   setAttributes({ imageAccordionBoxShadowValues: value })
+                              }
+                              initialShadowValue={imageAccordionBoxShadowValues}
+                              onBoxShadowStyleChange={(value) =>
+                                   setAttributes({ imageAccordionBoxShadowValues: value })
+                              }
+                         />
+                    )}
+                    
+                    {imageAccordionBoxShadowSwitcher === "hover" && (
+                         <FB_BoxShadowControl
+                              label={__("Hover Shadow", "frontis-blocks")}
+                              onBoxShadowChange={(value) =>
+                                   setAttributes({ imageAccordionBoxShadowValues: value })
+                              }
+                              initialShadowValue={imageAccordionBoxShadowValues}
+                              onBoxShadowStyleChange={(value) =>
+                                   setAttributes({ imageAccordionBoxShadowCssValue: value })
+                              }
+                         />
+                    )}
+                    {/* active item box-shadow end */}
+                    
 				<FB_Range
 					label={__("Active Item Z-Index", "frontis-blocks")}
 					min={1}
@@ -1367,7 +1411,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 					setAttributes={setAttributes}
 				/>
 				<FB_Range
-					label={__("Transition Duration (s)", "frontis-blocks")}
+					label={__("Transition Duration", "frontis-blocks")}
 					min={0}
 					max={5}
 					rangeStep={0.1}
@@ -1824,7 +1868,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 							helpText={__("Separate with spaces key.", "frontis-blocks")}
 						/>
 						<FB_Range
-							label={__("Shadow Offset Padding", "frontis-blocks")}
+							label={__("Box Shadow", "frontis-blocks")}
 							min={0}
 							max={100}
 							rangeValue={imageAccordionWrapperShadowPadding}
@@ -1837,7 +1881,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 					</PanelBody>
 
 					<PanelBody
-						title={__("Padding and Margin", "frontis-blocks")}
+						title={__("Padding/Margin", "frontis-blocks")}
 						initialOpen={false}
 					>
 						<FB_Spacing

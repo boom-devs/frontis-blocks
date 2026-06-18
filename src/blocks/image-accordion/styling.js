@@ -163,6 +163,15 @@ const generateImageAccordionStyle = (attributes) => {
         imageAccordionOverflow,
         imageAccordionCustomCSS,
         imageAccordionItemShadow,
+        
+         // item box-shadow start
+        imageAccordionBoxShadowSwitcher,
+	   imageAccordionBoxShadowValues,
+	   imageAccordionBoxShadowCssValue,
+	   imageAccordionBoxShadowHoverValues,
+        imageAccordionBoxShadowHoverCssValue,
+         // item box-shadow end
+        
         imageAccordionItemActiveZIndex,
         imageAccordionItemTransitionDuration,
         imageAccordionWrapperShadowPadding,
@@ -278,13 +287,16 @@ const generateImageAccordionStyle = (attributes) => {
 			${imageAccordionItemMarginDesktopWidth && imageAccordionItemMarginDesktop?.top ? `margin: ${imageAccordionItemMarginDesktopWidth};` : ''}
 			transition: all ${imageAccordionItemTransitionDuration?.Desktop || 0.4}s ease;
 		}
-		.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-item.is-active,
-		.fb-image-accordion-wrapper.${blockID}.fb-trigger-hover .fb-image-accordion-item:hover {
+           
+		.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-item.is-active{
 			
-			${imageAccordionItemShadow ? `box-shadow: ${imageAccordionItemShadow};` : ''}
+			${imageAccordionBoxShadowCssValue ? `box-shadow: ${imageAccordionBoxShadowCssValue};` : ''}
 			z-index: ${imageAccordionItemActiveZIndex?.Desktop || 99};
 			${imageAccordionItemActiveBorderRadiusDesktopWidth && imageAccordionItemActiveBorderRadiusDesktop?.top ? `border-radius: ${imageAccordionItemActiveBorderRadiusDesktopWidth};` : ''}
 		}
+          .fb-image-accordion-wrapper.${blockID}.fb-trigger-hover .fb-image-accordion-item:hover {
+            ${imageAccordionBoxShadowHoverCssValue ? `box-shadow: ${imageAccordionBoxShadowHoverCssValue};` : ''}
+          }
 
 		.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-overlay {
 			${imageAccordionOverlayColor ? `background: ${imageAccordionOverlayColor};` : ''}
@@ -413,7 +425,7 @@ const generateImageAccordionStyle = (attributes) => {
 			}
 			.fb-image-accordion-wrapper.${blockID} .fb-image-accordion-item.is-active,
 			.fb-image-accordion-wrapper.${blockID}.fb-trigger-hover .fb-image-accordion-item:hover {
-				${imageAccordionItemShadow ? `box-shadow: ${imageAccordionItemShadow};` : ''}
+				${imageAccordionBoxShadowSwitcher ? `box-shadow: ${imageAccordionBoxShadowSwitcher};` : ''}
 				z-index: ${imageAccordionItemActiveZIndex?.Tablet || 99};
 				${imageAccordionItemActiveBorderRadiusTabletWidth && imageAccordionItemActiveBorderRadiusTablet?.top ? `border-radius: ${imageAccordionItemActiveBorderRadiusTabletWidth};` : ''}
 			}
