@@ -1359,7 +1359,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 				<FB_Range
 					label={__("Active Item Z-Index", "frontis-blocks")}
 					min={1}
-					max={1000}
+					max={99999999}
 					rangeValue={imageAccordionItemActiveZIndex}
 					onChangeHandler={(value) => setAttributes({ imageAccordionItemActiveZIndex: value })}
 					isRangeUnit={false}
@@ -1369,7 +1369,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 				<FB_Range
 					label={__("Transition Duration (s)", "frontis-blocks")}
 					min={0}
-					max={2}
+					max={5}
 					rangeStep={0.1}
 					rangeValue={imageAccordionItemTransitionDuration}
 					onChangeHandler={(value) => setAttributes({ imageAccordionItemTransitionDuration: value })}

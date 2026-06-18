@@ -1221,25 +1221,25 @@ const attributes = {
 	imageAccordionItemActiveZIndex: {
 		type: "object",
 		default: {
-			Desktop: 99,
-			Tablet: 99,
-			Mobile: 99,
+			Desktop: "99",
+			Tablet: "99",
+			Mobile: "99",
 		},
 	},
 	imageAccordionItemTransitionDuration: {
 		type: "object",
 		default: {
-			Desktop: 0.4,
-			Tablet: 0.4,
-			Mobile: 0.4,
+			Desktop: "0.4",
+			Tablet: "0.4",
+			Mobile: "0.4",
 		},
 	},
 	imageAccordionWrapperShadowPadding: {
 		type: "object",
 		default: {
-			Desktop: 20,
-			Tablet: 20,
-			Mobile: 20,
+			Desktop: "20",
+			Tablet: "20",
+			Mobile: "20",
 		},
 	},
 };
