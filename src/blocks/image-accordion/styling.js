@@ -222,15 +222,20 @@ const generateImageAccordionStyle = (attributes) => {
 			${imageAccordionWrapperBorderDesktopWidth && imageAccordionWrapperBorderTypeDesktop?.top ? `border-width: ${imageAccordionWrapperBorderDesktopWidth};` : ''}
 			${imageAccordionWrapperBorderRadiusDesktopWidth && imageAccordionWrapperBorderRadiusDesktop?.top ? `border-radius: ${imageAccordionWrapperBorderRadiusDesktopWidth};` : ''}
             ${imageAccordionBackgroundType === 'gradient'
-                ? `background: ${imageAccordionCustomGradientSwitcher && imageAccordionCustomGradientInputValue ? imageAccordionCustomGradientInputValue : imageAccordionGradientColor || imageAccordionClassicColor};`
-                : `
-                    ${imageAccordionClassicColor ? `background: ${imageAccordionClassicColor};` : ''}
-                    ${imageAccordionBackgroundImageUrl ? `background-image: url(${imageAccordionBackgroundImageUrl});` : ''}
-                    ${imageAccordionBackgroundImagePosition ? `background-position: ${imageAccordionBackgroundImagePosition};` : ''}
-                    ${imageAccordionBackgroundImageAttachment ? `background-attachment: ${imageAccordionBackgroundImageAttachment};` : ''}
-                    ${imageAccordionBackgroundImageRepeat ? `background-repeat: ${imageAccordionBackgroundImageRepeat};` : ''}
-                    ${imageAccordionBackgroundImageSize ? `background-size: ${imageAccordionBackgroundImageSize};` : ''}
-                `
+                ? (imageAccordionCustomGradientSwitcher && imageAccordionCustomGradientInputValue
+                    ? `background: ${imageAccordionCustomGradientInputValue};`
+                    : (imageAccordionGradientColor
+                        ? `background: ${imageAccordionGradientColor};`
+                        : (imageAccordionClassicColor ? `background: ${imageAccordionClassicColor};` : '')))
+                : (imageAccordionBackgroundImageUrl
+                    ? `
+                        background-image: url(${imageAccordionBackgroundImageUrl});
+                        ${imageAccordionBackgroundImagePosition ? `background-position: ${imageAccordionBackgroundImagePosition};` : ''}
+                        ${imageAccordionBackgroundImageAttachment ? `background-attachment: ${imageAccordionBackgroundImageAttachment};` : ''}
+                        ${imageAccordionBackgroundImageRepeat ? `background-repeat: ${imageAccordionBackgroundImageRepeat};` : ''}
+                        ${imageAccordionBackgroundImageSize ? `background-size: ${imageAccordionBackgroundImageSize};` : ''}
+                    `
+                    : (imageAccordionClassicColor ? `background: ${imageAccordionClassicColor};` : ''))
             }
 			transition: all .3s ease-in-out;
 			overflow: visible !important;
@@ -241,15 +246,20 @@ const generateImageAccordionStyle = (attributes) => {
 		.fb-image-accordion-wrapper.${blockID}:hover {
 			${imageAccordionWrapperBorderHoverColor ? `border-color: ${imageAccordionWrapperBorderHoverColor};` : ''}
             ${imageAccordionHoverBackgroundType === 'gradient'
-                ? `background: ${imageAccordionHoverCustomGradientSwitcher && imageAccordionHoverCustomGradientInputValue ? imageAccordionHoverCustomGradientInputValue : imageAccordionHoverGradientColor || imageAccordionHoverClassicColor};`
-                : `
-                    ${imageAccordionHoverClassicColor ? `background: ${imageAccordionHoverClassicColor};` : ''}
-                    ${imageAccordionHoverBackgroundImageUrl ? `background-image: url(${imageAccordionHoverBackgroundImageUrl});` : ''}
-                    ${imageAccordionHoverBackgroundImagePosition ? `background-position: ${imageAccordionHoverBackgroundImagePosition};` : ''}
-                    ${imageAccordionHoverBackgroundImageAttachment ? `background-attachment: ${imageAccordionHoverBackgroundImageAttachment};` : ''}
-                    ${imageAccordionHoverBackgroundImageRepeat ? `background-repeat: ${imageAccordionHoverBackgroundImageRepeat};` : ''}
-                    ${imageAccordionHoverBackgroundImageSize ? `background-size: ${imageAccordionHoverBackgroundImageSize};` : ''}
-                `
+                ? (imageAccordionHoverCustomGradientSwitcher && imageAccordionHoverCustomGradientInputValue
+                    ? `background: ${imageAccordionHoverCustomGradientInputValue};`
+                    : (imageAccordionHoverGradientColor
+                        ? `background: ${imageAccordionHoverGradientColor};`
+                        : (imageAccordionHoverClassicColor ? `background: ${imageAccordionHoverClassicColor};` : '')))
+                : (imageAccordionHoverBackgroundImageUrl
+                    ? `
+                        background-image: url(${imageAccordionHoverBackgroundImageUrl});
+                        ${imageAccordionHoverBackgroundImagePosition ? `background-position: ${imageAccordionHoverBackgroundImagePosition};` : ''}
+                        ${imageAccordionHoverBackgroundImageAttachment ? `background-attachment: ${imageAccordionHoverBackgroundImageAttachment};` : ''}
+                        ${imageAccordionHoverBackgroundImageRepeat ? `background-repeat: ${imageAccordionHoverBackgroundImageRepeat};` : ''}
+                        ${imageAccordionHoverBackgroundImageSize ? `background-size: ${imageAccordionHoverBackgroundImageSize};` : ''}
+                    `
+                    : (imageAccordionHoverClassicColor ? `background: ${imageAccordionHoverClassicColor};` : ''))
             }
 		}
 
