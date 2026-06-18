@@ -300,31 +300,24 @@
 
 	@media screen and (max-width: 767px) {
 		.fb-image-accordion-container {
-			flex-direction: row !important;
+			flex-direction: row;
 		}
           
-
 		.fb-image-accordion-title,
 		.fb-image-accordion-desc {
 			white-space: normal;
 		}
 	}
-	 @media screen and (max-width: 580px) {
-		.fb-image-accordion-container {
-			flex-direction: column !important;
-               height: 500px !important;
-               .fb-image-accordion-item {
-                   .fb-image-accordion-content-wrapper{
-                        bottom: 9px !important;
-                   }
-                    &.active .fb-image-accordion-content-wrapper {
-                         bottom : 24px !important;
-                    }
-                    
+	 
+     @media screen and (max-width: 580px) {
+     	.fb-image-accordion-container {
+     		.fb-image-accordion-container {
+                   flex-direction: column;
+                   min-height: 500px;
                }
-		}
-          .fb-image-accordion-item {
-              flex: 0 0 85px;
-          }
-	}
+               .fb-image-accordion-item {
+                    flex: 0 0 80px;
+               }
+     	}
+     }
 }
