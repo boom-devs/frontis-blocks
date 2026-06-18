@@ -122,6 +122,25 @@
 	}
 }
 
+     @media screen and (max-width: 580px) {
+		.fb-image-accordion-container {
+			flex-direction: column !important;
+               height: 500px !important;
+               .fb-image-accordion-item {
+                   .fb-image-accordion-content-wrapper{
+                        bottom: 9px !important;
+                   }
+                    &.active .fb-image-accordion-content-wrapper {
+                         bottom : 24px !important;
+                    }
+                    
+               }
+		}
+          .fb-image-accordion-item {
+              flex: 0 0 85px;
+          }
+	}
+
 /* Preset 2 */
 .preset-2 {
 	.fb-image-accordion-item {
