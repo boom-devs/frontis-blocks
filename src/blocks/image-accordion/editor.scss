@@ -74,7 +74,7 @@
      @media screen and (max-width: 580px) {
 		.fb-image-accordion-container {
 			flex-direction: column;
-			min-height: 700px;
+			min-height: 500px;
 			overflow: hidden;
 		}
 
@@ -215,7 +215,7 @@
 }
 
 /* =====================
-   Preset 3 — Vertical Stack
+   Preset 3  Vertical Stack
    ===================== */
 .preset-3 {
 	.fb-image-accordion-container {
@@ -264,7 +264,7 @@
 		margin: 0;
 	}
 
-	@media screen and (max-width: 767px) {
+	@media screen and (max-width: 580px) {
 		.fb-image-accordion-container {
 			min-height: 400px;
 		}
@@ -272,7 +272,7 @@
 }
 
 /* =====================
-   Preset 4 — Skewed Panels
+   Preset 4  Skewed Panels
    ===================== */
 .preset-4 {
 	.fb-image-accordion-container {
@@ -380,7 +380,7 @@
 		.fb-image-accordion-item {
 			transform: none;
 			margin: 0;
-			flex: 0 0 60px;
+			flex: 0 0 80px;
  
 			&:first-child {
 				margin-left: 0;
