@@ -16,18 +16,18 @@ import { useEffect } from '@wordpress/element';
 
 const ALLOWED_BLOCKS = [
     "frontis-blocks/container",
-    "frontis-blocks/field-text",
-    "frontis-blocks/field-textarea",
-    "frontis-blocks/field-radio",
-    "frontis-blocks/field-select",
-    "frontis-blocks/field-checkbox"
+    "frontis-blocks/text-field",
+    "frontis-blocks/textarea-field",
+    "frontis-blocks/radio-field",
+    "frontis-blocks/select-field",
+    "frontis-blocks/checkbox-field"
 ];
 
 export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
 
-    const { 
+    const {
         blockID,
-        
+
         classHook,
         formType,
 
@@ -160,7 +160,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
                     {/* Submit Button */}
                     <div className="fb-field-item fb-form-builder-submit-wrapper">
-                        <button isPrimary className="fb-submit-button" onClick={(e) => e.preventDefault()}>
+                        <button className="fb-submit-button" onClick={(e) => e.preventDefault()}>
                             <RichText
                                 tagName="span"
                                 className="fb-submit-button-label"

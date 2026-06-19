@@ -29,10 +29,15 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		showTitle,
 		showDescription,
 		tabLayoutSwitcher,
-
 		tabGlobalWraperID,
 		tabGlobalWraperClass,
+		tabSwitchMode,
+		tabAutoSwitchInterval,
+		tabAutoSwitchPauseOnHover,
 	} = attributes;
+
+	const [isHovered, setIsHovered] = useState(false);
+
 
   	// Handle block ID generation (handles duplication and initial ID)
 	useBlockIdGenerator({
@@ -57,10 +62,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 	const beDispatch = dispatch('core/block-editor');
 	const getChildren = () => beSelect.getBlockOrder(clientId) || [];
 
-	const [tabsItemList, setTabsItemList] = useState(tabItems);
-
 	const updateTabItems = (updatedItems) => {
-		setTabsItemList(updatedItems);
 		setAttributes({ tabItems: updatedItems });
 	};
 
@@ -75,7 +77,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 	};
 
 	const handleAddItem = () => {
-		const newIndex = tabsItemList.length;
+		const newIndex = tabItems.length;
 
 		// use numeric ids so they always match the block order
 		const newItem = {
@@ -93,7 +95,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		insertChildBlock(newIndex);
 
 		// 2) update the items state/attributes
-		updateTabItems([...tabsItemList, newItem]);
+		updateTabItems([...tabItems, newItem]);
 
 		// 3) make the new tab active immediately
 		updateActiveTab(newIndex);
@@ -104,12 +106,12 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		if (!active || !over || active.id === over.id) return;
 
 		// 1) get the old and new indexes
-		const oldIndex = tabsItemList.findIndex((item) => item.id === active.id);
-		const newIndex = tabsItemList.findIndex((item) => item.id === over.id);
+		const oldIndex = tabItems.findIndex((item) => item.id === active.id);
+		const newIndex = tabItems.findIndex((item) => item.id === over.id);
 		if (oldIndex === -1 || newIndex === -1) return;
 
 		// 2) parent attributes/state reorder
-		const updatedItems = arrayMove(tabsItemList, oldIndex, newIndex);
+		const updatedItems = arrayMove(tabItems, oldIndex, newIndex);
 		updateTabItems(updatedItems);
 
 		const childIds = getChildren(); // array of child clientIds
@@ -124,7 +126,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 	};
 
 	const handleChangeItem = (id, key, value) => {
-		const updatedItems = tabsItemList.map(item => {
+		const updatedItems = tabItems.map(item => {
 			if (item.id === id) {
 				if (key === 'tabIconImageID') {
 					// Get the full image data from WordPress media library
@@ -141,13 +143,12 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 			return item;
 		});
 		updateTabItems(updatedItems);
-		setAttributes({ tabItems: updatedItems });
 	};
 
 	const handleDeleteItem = (idOrIndex) => {
 		const index = typeof idOrIndex === 'number'
 			? idOrIndex
-			: tabsItemList.findIndex((it) => it.id === idOrIndex);
+			: tabItems.findIndex((it) => it.id === idOrIndex);
 		if (index < 0) return;
 
 		const childIds = getChildren();
@@ -157,17 +158,17 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		}
 
 		// 2) parent list reindex
-		const nextItems = tabsItemList.filter((_, i) => i !== index);
+		const nextItems = tabItems.filter((_, i) => i !== index);
 		const reindexedItems = nextItems.map((it, i) => ({ ...it, id: i }));
 		updateTabItems(reindexedItems);
 
-		// 3) child-দের id-ও reindex
+		// update child block ids
 		const childIdsAfter = getChildren();
 		childIdsAfter.forEach((cid, i) => {
 			beDispatch.updateBlockAttributes(cid, { id: i });
 		});
 
-		// 4) active tab ঠিক করো
+		// update active tab
 		if (reindexedItems.length === 0) {
 			updateActiveTab(0);
 		} else {
@@ -184,7 +185,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 	const handleDuplicateItem = (idOrIndex) => {
 		const index = typeof idOrIndex === 'number'
 			? idOrIndex
-			: tabsItemList.findIndex((it) => it.id === idOrIndex);
+			: tabItems.findIndex((it) => it.id === idOrIndex);
 		if (index < 0) return;
 
 		const childIds = getChildren();
@@ -204,9 +205,9 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		beDispatch.insertBlock(cloned, index + 1, clientId, false);
 
 		const newItems = [
-			...tabsItemList.slice(0, index + 1),
-			{ ...tabsItemList[index] },
-			...tabsItemList.slice(index + 1),
+			...tabItems.slice(0, index + 1),
+			{ ...tabItems[index] },
+			...tabItems.slice(index + 1),
 		];
 
 		const reindexedItems = newItems.map((it, idx) => ({ ...it, id: idx }));
@@ -220,9 +221,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		updateActiveTab(index + 1);
 	};
 
-	useEffect(() => {
-		setAttributes({ tabItems: tabsItemList });
-	}, [tabsItemList, setAttributes]);
+
 
 
 
@@ -234,7 +233,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 	};
 
 	const updateActiveTab = (nextIndex) => {
-		setAttributes({ tabActive: nextIndex, tabActiveFrontend: nextIndex });
+		setAttributes({ tabActive: nextIndex });
 		const childIds = getChildren();
 		childIds.forEach((childId) => {
 			beDispatch.updateBlockAttributes(childId, { tabActive: nextIndex });
@@ -242,9 +241,36 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		updateTabOrder();
 	};
 
+	// Auto switch in the editor backend
+	useEffect(() => {
+		if (tabSwitchMode !== 'auto' || !tabItems || tabItems.length <= 1) return;
+
+		// If hover pausing is enabled and mouse is over the block, do not transition
+		if (tabAutoSwitchPauseOnHover && isHovered) return;
+
+		let timer = null;
+
+		const getIntervalValue = () => {
+			const desktopVal = parseInt(tabAutoSwitchInterval?.Desktop || '3000', 10);
+			return isNaN(desktopVal) ? 3000 : desktopVal;
+		};
+
+		const tick = () => {
+			const nextIndex = (tabActive + 1) % tabItems.length;
+			updateActiveTab(nextIndex);
+		};
+
+		const interval = getIntervalValue();
+		timer = setTimeout(tick, interval);
+
+		return () => {
+			if (timer) clearTimeout(timer);
+		};
+	}, [tabSwitchMode, tabActive, tabAutoSwitchInterval, tabItems, isHovered, tabAutoSwitchPauseOnHover]);
+
 	useEffect(() => {
 		updateTabOrder();
-		updateActiveTab(tabActive);
+		updateActiveTab(0);
 	}, []);
 
 
@@ -272,7 +298,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 			});
 
 			if (needsFix) {
-				setAttributes({ tabActiveFrontend: attributes.tabActive ?? 0 });
+				setAttributes({ tabActiveFrontend: 0 });
 			}
 			if (kids.length) unSub();
 		});
@@ -319,7 +345,11 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
 	return (
 		<>
-			<div {...blockProps} >
+			<div 
+				{...blockProps} 
+				onMouseEnter={() => setIsHovered(true)}
+				onMouseLeave={() => setIsHovered(false)}
+			>
 
 				{isSelected && (
 					<Inspector
@@ -330,7 +360,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 						handleChangeItem={handleChangeItem}
 						handleDeleteItem={handleDeleteItem}
 						handleDuplicateItem={handleDuplicateItem}
-						tabsItemList={tabsItemList}
+						tabsItemList={tabItems}
 					/>
 				)}
 
@@ -382,6 +412,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 											next[index] = { ...next[index], title: val };
 											setAttributes({ tabItems: next });
 										}}
+										placeholder={__('title...', 'frontis-blocks')}
 										className="fb-tab-title"
 										allowedFormats={['core/bold', 'core/italic']}
 									/>
@@ -395,6 +426,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 											next[index] = { ...next[index], description: val };
 											setAttributes({ tabItems: next });
 										}}
+										placeholder={__('description...', 'frontis-blocks')}
 										className="fb-tab-description"
 										allowedFormats={['core/bold', 'core/italic']}
 									/>

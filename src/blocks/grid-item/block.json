@@ -11,7 +11,8 @@
     "supports": {
       "anchor": false,
       "align": [ "wide", "full" ],
-      "customClassName": false
+      "customClassName": false,
+      "customCSS": false
     },
     "editorScript": "file:./index.js",
     "editorStyle": "file:./index.css",

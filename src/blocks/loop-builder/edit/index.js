@@ -6,6 +6,7 @@ import { useEffect, useState } from '@wordpress/element';
 import { store as blockEditorStore } from '@wordpress/block-editor';
 import { applyFilters } from '@wordpress/hooks';
 import UpgradeToProPopup from '@Utils/upgradeToProPopup';
+import getProActive from '@Utils/getProActive';
 
 /**
  * Internal dependencies
@@ -14,16 +15,10 @@ import QueryContent from './query-content';
 import QueryPlaceholder from './query-placeholder';
 
 const QueryEdit = ( props ) => {
-
+	const { clientId, attributes } = props;
+	const isProActive = getProActive();
 	const loopBuilderAvailable = applyFilters('frontisblocks-loop-builder-available', false);
 
-	if(!loopBuilderAvailable) {
-		return (
-			<UpgradeToProPopup />
-		)
-	}
-	
-	const { clientId, attributes } = props;
 	const [ isPatternSelectionModalOpen, setIsPatternSelectionModalOpen ] =
 		useState( false );
 	const hasInnerBlocks = useSelect(
@@ -31,6 +26,12 @@ const QueryEdit = ( props ) => {
 			!! select( blockEditorStore ).getBlocks( clientId ).length,
 		[ clientId ]
 	);
+
+	if(!loopBuilderAvailable || !isProActive) {
+		return (
+			<UpgradeToProPopup />
+		)
+	}
 
 	const Component = hasInnerBlocks ? QueryContent : QueryPlaceholder;
 	return (

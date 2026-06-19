@@ -34,12 +34,13 @@ import Select2 from "react-select";
 import FB_IncludeExcludeSwitcherControl from '@Components/switcher-include-exclude-control';
 import {useDeviceType} from "@Config/displayType";
 import FB_InspectorControls from '@Components/InspectorControls';
+import FB_Range from '@Components/range';
 
 import './editor.scss';
 
 const Inspector = ({ attributes, setAttributes, clientId }) => {
 	const {
-        blockId,
+        blockID,
 		// deviceType,
 		blockStyle,
 		postType,
@@ -64,17 +65,13 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 		listRowGap,
 		listImageSpacing,
 		postSwitcher,
+		excerptWordLimit,
+		excerptMoreText,
 	} = attributes;
 
     const deviceType= useDeviceType();
     
-    useEffect(() => {
-        if (clientId && typeof clientId === 'string') {
-            setAttributes({
-                blockId: "fb-loop-builder-" + clientId.slice(0, 8),
-            });
-        }
-    }, [clientId]);
+
 
 
     useEffect(() => {
@@ -266,6 +263,24 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                         step={1}
                         resetFallbackValue={0}
                     />
+                    <FB_Range
+                        label={__("Excerpt word limit", "frontis-blocks")}
+                        rangeValue={excerptWordLimit}
+                        onChangeHandler={(value) => setAttributes({ excerptWordLimit: value })}
+                        deviceType={deviceType}
+                        min={0}
+                        max={100}
+                        rangeStep={1}
+                        resetFallbackValue={20}
+                        isRangeUnit={false}
+                    />
+                    <div className="components-base-control">
+                        <TextControl
+                            label={__("Excerpt more text", "frontis-blocks")}
+                            value={excerptMoreText}
+                            onChange={(value) => setAttributes({ excerptMoreText: value })}
+                        />
+                    </div>
                     <BaseControl
                         label={__("Sort Order", "frontis-blocks")}
                         id="fb-setting-sort-order"

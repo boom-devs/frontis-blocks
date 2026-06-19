@@ -1,0 +1,176 @@
+.fb-stack-cards-main-wrapper {
+    width: 100%;
+}
+
+.fb-stack-cards-main-wrapper .fb-stack-cards-frame {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.fb-stack-cards-main-wrapper.fb-stack-cards-main-wrapper--active .fb-stack-cards-frame {
+    border-color: #007cba;
+    box-shadow: 0 0 0 1px #007cba;
+}
+
+.fb-stack-cards-main-wrapper .fb-stack-cards-frame > .block-editor-inner-blocks {
+    width: 100%;
+    min-height: 60px;
+}
+
+.fb-stack-cards-main-wrapper .fb-stack-cards-frame > .block-editor-inner-blocks > .block-editor-block-list__layout {
+    display: flex;
+    flex-direction: column;
+    gap: inherit;
+}
+
+.fb-stack-cards-main-wrapper .fb-stack-cards-frame > .block-editor-inner-blocks > .block-editor-block-list__layout:empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fb-stack-cards-main-wrapper .fb-stack-cards-frame > .block-editor-inner-blocks > .block-editor-block-list__layout:empty::before {
+    content: '';
+    position: absolute;
+}
+
+.fb-stack-cards-main-wrapper .fb-stack-cards-frame .block-list-appender {
+    display: flex;
+    justify-content: center;
+}
+
+.fb-stack-card-item {
+    position: sticky !important;
+    top: 100px;
+}
+
+.fb-stack-card-item__content {
+    min-height: 120px;
+}
+
+.fb-stack-card-item__content > .block-editor-inner-blocks > .block-editor-block-list__layout {
+    min-height: 120px;
+}
+
+.fb-stack-card-item__content > .block-editor-inner-blocks > .block-editor-block-list__layout:empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed #cbd5e1;
+    border-radius: 8px;
+    padding: 18px;
+    background: #fff;
+}
+
+.fb-stack-card-item__content--empty {
+    display: flex;
+    border: 1px dashed #cbd5e1;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 12px;
+}
+
+.fb-stack-card-item__content--empty > .block-editor-inner-blocks,
+.fb-stack-card-item__content--empty > .block-editor-inner-blocks > .block-editor-block-list__layout {
+    min-height: 120px;
+}
+
+.fb-stack-card-item__content--empty > .block-editor-inner-blocks > .block-editor-block-list__layout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed #d8dee5;
+    border-radius: 6px;
+    background: rgba(248, 250, 252, 0.9);
+}
+
+.fb-stack-card-item__content--empty .block-list-appender {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.fb-stack-cards-inspector-note {
+    margin: 12px 0 0;
+    font-size: 12px;
+    color: #5b6472;
+}
+
+.fb-stack-cards-add-item-button.components-button {
+    width: 100%;
+    justify-content: center;
+    margin-top: 12px;
+}
+
+.fb-stack-card-inspector-items {
+    .dnd-items-wrapper {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 4px;
+    }
+
+    li.sortable-item {
+        margin-bottom: 10px;
+        margin-top: 10px;
+
+        .sortable-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            gap: 4px;
+        }
+
+        .sortable-title--button {
+            flex: 1;
+            min-width: 0;
+            margin: 0;
+            padding: 6px 8px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            text-align: left;
+            font-size: 13px;
+            font-weight: 600;
+            color: #1d2327;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+
+            &:hover {
+                color: #007cba;
+            }
+
+            &:focus {
+                outline: 1px solid #007cba;
+                outline-offset: 1px;
+            }
+        }
+
+        .sortable-sort button {
+            &:focus {
+                box-shadow: none;
+                outline: none;
+            }
+        }
+
+        .sortable-delete button {
+            color: #d63638;
+
+            &:focus {
+                box-shadow: none;
+                outline: none;
+            }
+
+            &:disabled {
+                opacity: 0.45;
+            }
+        }
+    }
+}

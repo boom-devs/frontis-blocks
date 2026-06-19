@@ -30,7 +30,7 @@ final class Plugin
 	 *
 	 * @var string
 	 */
-	const VERSION = '1.2.2';
+	const VERSION = '1.2.4';
 
 	/**
 	 * Plugin slug

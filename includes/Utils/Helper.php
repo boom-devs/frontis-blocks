@@ -75,6 +75,31 @@ class Helper
      */
     public static function get_post_id_by_slug($post_name, $post_type = 'post')
     {
+        if (in_array($post_type, ['wp_template', 'wp_template_part'], true)) {
+            global $wpdb;
+            $theme = function_exists('get_stylesheet') ? get_stylesheet() : '';
+            if ($theme) {
+                $query = $wpdb->prepare(
+                    "SELECT DISTINCT p.ID
+                    FROM {$wpdb->posts} p
+                    LEFT JOIN {$wpdb->term_relationships} tr ON p.ID = tr.object_id
+                    LEFT JOIN {$wpdb->term_taxonomy} tt ON tr.term_taxonomy_id = tt.term_taxonomy_id AND tt.taxonomy = 'wp_theme'
+                    LEFT JOIN {$wpdb->terms} t ON tt.term_id = t.term_id
+                    WHERE p.post_type = %s
+                    AND p.post_name = %s
+                    AND t.slug = %s
+                    LIMIT 1",
+                    $post_type,
+                    $post_name,
+                    $theme
+                );
+                $id = $wpdb->get_var($query);
+                if ($id) {
+                    return (int) $id;
+                }
+            }
+        }
+
         $post = get_page_by_path($post_name, OBJECT, $post_type);
         return $post ? $post->ID : 0;
     }
@@ -290,12 +315,12 @@ class Helper
                     // Switch statement to determine the template based on various conditions.
                     switch (true) {
                         // Case when the current page is a product taxonomy and the taxonomy is 'product_tag'.
-                        case (is_product_taxonomy() && is_tax('product_tag')) && $object instanceof WP_Term && !in_array('taxonomy-' . $object->taxonomy . '-' . $object->slug, $template_type_slug):
+                        case (is_product_taxonomy() && is_tax('product_tag')) && $object instanceof \WP_Term && !in_array('taxonomy-' . $object->taxonomy . '-' . $object->slug, $template_type_slug):
                             // Return the appropriate template based on the search condition.
                             return $searchCondition ? 'product-search-results' : 'archive-product';
 
                         // Case when the current page is a product taxonomy and the object is a term.
-                        case is_product_taxonomy() && $object instanceof WP_Term:
+                        case is_product_taxonomy() && $object instanceof \WP_Term:
                             // Check if the taxonomy is a product attribute.
                             if (taxonomy_is_product_attribute($object->taxonomy)) {
                                 // Return the 'product-search-results' or 'taxonomy-product_attribute' template based on the search condition.
@@ -316,7 +341,7 @@ class Helper
 
                         default:
                             // Return the appropriate template based on the search condition and the type of the queried object.
-                            return $searchCondition ? 'product-search-results' : (($object instanceof WP_Post || $object instanceof WP_Post_Type || $object instanceof WP_Term || $object instanceof WP_User) ? self::get_archive_page_template($object, $template_type_slug) : 'archive-product');
+                            return $searchCondition ? 'product-search-results' : (($object instanceof \WP_Post || $object instanceof \WP_Post_Type || $object instanceof \WP_Term || $object instanceof \WP_User) ? self::get_archive_page_template($object, $template_type_slug) : 'archive-product');
                     }
                     break;
 
@@ -967,11 +992,19 @@ class Helper
         $post_ids = wp_cache_get($cache_key, 'frontis_blocks');
 
         if (false === $post_ids) {
-            $query = "SELECT ID
-              FROM {$wpdb->posts}
-              WHERE post_status = 'publish'
-              AND post_type NOT IN ('wp_font_family', 'acf-field', 'acf-field-group', 'wp_navigation', 'wp_global_styles', 'wp_font_face', 'attachment', 'mc4wp-form', 'acf-post-type', 'wp_template_part', 'acf-taxonomy', 'wphb_minify_group', 'wp_block')
-              ORDER BY post_date DESC";
+            $current_theme = function_exists('get_stylesheet') ? get_stylesheet() : '';
+            $query = $wpdb->prepare(
+                "SELECT DISTINCT p.ID
+                FROM {$wpdb->posts} p
+                LEFT JOIN {$wpdb->term_relationships} tr ON p.ID = tr.object_id
+                LEFT JOIN {$wpdb->term_taxonomy} tt ON tr.term_taxonomy_id = tt.term_taxonomy_id AND tt.taxonomy = 'wp_theme'
+                LEFT JOIN {$wpdb->terms} t ON tt.term_id = t.term_id
+                WHERE p.post_status = 'publish'
+                AND p.post_type NOT IN ('wp_font_family', 'acf-field', 'acf-field-group', 'wp_navigation', 'wp_global_styles', 'wp_font_face', 'attachment', 'mc4wp-form', 'acf-post-type', 'wp_template_part', 'acf-taxonomy', 'wphb_minify_group', 'wp_block')
+                AND (p.post_type != 'wp_template' OR t.slug = %s)
+                ORDER BY p.post_date DESC",
+                $current_theme
+            );
 
             $results = $wpdb->get_results($query); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
 
@@ -1200,18 +1233,88 @@ class Helper
         }
     }
 
+    public static function resolve_template_slug($post_id)
+    {
+        if (empty($post_id)) {
+            return 'single';
+        }
+
+        $post = get_post($post_id);
+        if (!$post) {
+            return 'single';
+        }
+
+        $post_type = $post->post_type;
+
+        // 1. Check custom page template assigned to the post/page
+        $assigned_template = get_post_meta($post_id, '_wp_page_template', true);
+        if ($assigned_template && $assigned_template !== 'default') {
+            return $assigned_template;
+        }
+
+        // 2. Check WooCommerce templates based on post type
+        if (class_exists('WooCommerce')) {
+            if ($post_type === 'product') {
+                $template_types = function_exists('get_block_templates') ? get_block_templates() : [];
+                $template_type_slug = !empty($template_types) ? array_column($template_types, 'slug') : [];
+                $specific_slug = 'single-product-' . $post->post_name;
+                if (in_array($specific_slug, $template_type_slug, true)) {
+                    return $specific_slug;
+                }
+                return 'single-product';
+            }
+
+            if (function_exists('wc_get_page_id')) {
+                $cart_page_id = (int) wc_get_page_id('cart');
+                $checkout_page_id = (int) wc_get_page_id('checkout');
+                $shop_page_id = (int) wc_get_page_id('shop');
+
+                if ($cart_page_id > 0 && (int) $post_id === $cart_page_id) {
+                    return 'page-cart';
+                }
+                if ($checkout_page_id > 0 && (int) $post_id === $checkout_page_id) {
+                    if (function_exists('is_order_received_page') && is_order_received_page()) {
+                        return 'order-confirmation';
+                    }
+                    return 'page-checkout';
+                }
+                if ($shop_page_id > 0 && (int) $post_id === $shop_page_id) {
+                    return 'archive-product';
+                }
+            }
+        }
+
+        // 3. Check for custom post types
+        if (self::is_custom_post_type($post_id)) {
+            $template_types = function_exists('get_block_templates') ? get_block_templates() : [];
+            $template_type_slug = !empty($template_types) ? array_column($template_types, 'slug') : [];
+            
+            $slugs = [
+                'single-' . $post_type . '-' . $post->post_name,
+                'single-' . $post_type,
+                'single'
+            ];
+            foreach ($slugs as $slug) {
+                if (in_array($slug, $template_type_slug, true)) {
+                    return $slug;
+                }
+            }
+            return 'single';
+        }
+
+        // 4. Default WordPress types
+        if ($post_type === 'page') {
+            return 'page';
+        }
+
+        return 'single';
+    }
+
     public static function get_template_content($post_id)
     {
         global $wpdb;
 
-        $post_name = Helper::is_custom_post_type($post_id) || get_post_type($post_id) === 'post' ? 'single' : get_post_type($post_id);
-        $assigned_template = get_post_meta($post_id, '_wp_page_template', true);
-
-        if ($assigned_template !== '') {
-            if ($assigned_template !== 'default') {
-                $post_name = $assigned_template;
-            }
-        }
+        $post_name = Helper::resolve_template_slug($post_id);
 
         $cache_key = 'fb_template_content_' . md5($post_name);
         $template_contents = wp_cache_get($cache_key, 'frontis_blocks');
@@ -1233,24 +1336,29 @@ class Helper
                 }
             }
 
-            $query = $wpdb->prepare(
-                "SELECT
-                    ID,
-                    post_type,
-                    post_name,
-                    post_content
-                FROM
-                    {$wpdb->posts}
-                WHERE
-                    post_type = 'wp_template'
-                    AND post_status = 'publish'
-                    AND post_name = %s
-                ORDER BY
-                    post_modified DESC",
-                $post_name
-            );
+            if (empty($template_contents) && $stylesheet) {
+                $query = $wpdb->prepare(
+                    "SELECT DISTINCT
+                        p.ID,
+                        p.post_type,
+                        p.post_name,
+                        p.post_content
+                    FROM
+                        {$wpdb->posts} p
+                    LEFT JOIN {$wpdb->term_relationships} tr ON p.ID = tr.object_id
+                    LEFT JOIN {$wpdb->term_taxonomy} tt ON tr.term_taxonomy_id = tt.term_taxonomy_id AND tt.taxonomy = 'wp_theme'
+                    LEFT JOIN {$wpdb->terms} t ON tt.term_id = t.term_id
+                    WHERE
+                        p.post_type = 'wp_template'
+                        AND p.post_status = 'publish'
+                        AND p.post_name = %s
+                        AND t.slug = %s
+                    ORDER BY
+                        p.post_modified DESC",
+                    $post_name,
+                    $stylesheet
+                );
 
-            if (empty($template_contents)) {
                 // Execute the query
                 $template_contents = $wpdb->get_results($query); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
             }
@@ -1265,31 +1373,27 @@ class Helper
     {
         global $wpdb;
 
-        $post_name = Helper::is_custom_post_type($post_id) || get_post_type($post_id) === 'post' ? 'single' : get_post_type($post_id);
-        $assigned_template = get_post_meta($post_id, '_wp_page_template', true);
-
-        if ($assigned_template !== '') {
-            if ($assigned_template !== 'default') {
-                $post_name = $assigned_template;
-            }
-        }
+        $post_name = Helper::resolve_template_slug($post_id);
 
         $cache_key = 'fb_template_id_' . md5($post_name);
         $template_id = wp_cache_get($cache_key, 'frontis_blocks');
 
         if (false === $template_id) {
+            $current_theme = function_exists('get_stylesheet') ? get_stylesheet() : '';
             $query = $wpdb->prepare(
-                "SELECT
-                    ID
-                FROM
-                    {$wpdb->posts}
-                WHERE
-                    post_type = 'wp_template'
-                    AND post_status = 'publish'
-                    AND post_name = %s
-                ORDER BY
-                    post_modified DESC",
-                $post_name
+                "SELECT DISTINCT p.ID
+                FROM {$wpdb->posts} p
+                LEFT JOIN {$wpdb->term_relationships} tr ON p.ID = tr.object_id
+                LEFT JOIN {$wpdb->term_taxonomy} tt ON tr.term_taxonomy_id = tt.term_taxonomy_id AND tt.taxonomy = 'wp_theme'
+                LEFT JOIN {$wpdb->terms} t ON tt.term_id = t.term_id
+                WHERE p.post_type = 'wp_template'
+                AND p.post_status = 'publish'
+                AND p.post_name = %s
+                AND t.slug = %s
+                ORDER BY p.post_modified DESC
+                LIMIT 1",
+                $post_name,
+                $current_theme
             );
 
             // Execute the query

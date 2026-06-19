@@ -49,6 +49,11 @@ export const TABS_LAYOUT = [
 	{ label: __('Vertical', 'frontis-blocks'), value: 'vertical' },
 ];
 
+export const TAB_SWITCH_MODE = [
+	{ label: __('On Click', 'frontis-blocks'), value: 'click' },
+	{ label: __('Auto Switch', 'frontis-blocks'), value: 'auto' },
+];
+
 export const ICON_POSITION = [
 	{ label: __("Left", "frontis-block"), value: "left" },
 	{ label: __("Right", "frontis-block"), value: "right" },
@@ -1087,3 +1092,26 @@ export const PRICING_TABLE_PRESETS = [
 	{ label: __("Preset 3", "frontis-blocks"), value: "preset-3" },
 	{ label: __("Preset 4", "frontis-blocks"), value: "preset-4" },
 ];
+
+export const STACKED_CARD_PRESETS = [
+	{ label: __("Stack Top", "frontis-blocks"), value: "stack-top" },
+	{ label: __("Stack Left", "frontis-blocks"), value: "stack-left" },
+	{ label: __("Stack Right", "frontis-blocks"), value: "stack-right" },
+	{ label: __("Stack Over", "frontis-blocks"), value: "stack-over" },
+];
+
+export const CAROUSEL_ITEM_TRANSLATE = [
+	{ label: __("Horizontal", "frontis-blocks"), value: "X" },
+	{ label: __("Vertical", "frontis-blocks"), value: "Y" },
+	{ label: __("Depth", "frontis-blocks"), value: "Z" },
+];
+export const CAROUSEL_ITEM_ROTATE = [
+	{ label: __("Horizontal", "frontis-blocks"), value: "X" },
+	{ label: __("Vertical", "frontis-blocks"), value: "Y" },
+	{ label: __("Depth", "frontis-blocks"), value: "Z" },
+];
+export const STACKED_CARD_SCALE = [
+	{ label: __("Horizontal", "frontis-blocks"), value: "horizontal" },
+	{ label: __("Vertical", "frontis-blocks"), value: "vertical" },
+];
+

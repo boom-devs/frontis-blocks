@@ -43,10 +43,6 @@ class AssetsGenerator
 
 	private function reset()
 	{
-		if (!empty($this->post_id)) {
-			update_post_meta($this->post_id, 'fb_page_assets_generation', 'compiling');
-		}
-
 		$this->post_id = null;
 		$this->post = null;
 		$this->used_blocks = [];
@@ -88,6 +84,8 @@ class AssetsGenerator
 				$this->post->post_content = $this->get_page_content_with_template_parts();
 			}
 
+			// var_dump($this->post->post_content);
+			// die();
 			$frontis_blocks_used = preg_match('/frontis-blocks/i', $this->post->post_content) > 0;
 			$critical_css_used = preg_match('/frontis-blocks\/critical-css/i', $this->post->post_content) > 0;
 
@@ -100,6 +98,10 @@ class AssetsGenerator
 			$this->combine_static_assets();
 
 			$page_name = $this->post->post_name;
+			$template_name = Helper::resolve_template_slug($post_id);
+			if (in_array($template_name, ['page-cart', 'page-checkout', 'order-confirmation', 'archive-product'], true)) {
+				$page_name = $template_name;
+			}
 			$this->combine_and_save_css_file($page_name);
 			$this->persist_page_google_fonts_url($this->block_fonts);
 
@@ -226,6 +228,8 @@ class AssetsGenerator
 	{
 		$template_contents = Helper::get_template_content($this->post->ID);
 
+		
+
 		if (empty($template_contents)) {
 			$template_contents = $this->post;
 		}
@@ -244,6 +248,8 @@ class AssetsGenerator
 						);
 					}
 				}
+			} else {
+				$template_contents .= "\n" . $this->post->post_content;
 			}
 
 			$megamenu_block_exists = preg_match_all(
@@ -647,6 +653,10 @@ class AssetsGenerator
 
 		// Combine and save CSS files
 		$page_name = $this->post->post_name;
+		$template_name = Helper::resolve_template_slug($this->post->ID);
+		if (in_array($template_name, ['page-cart', 'page-checkout', 'order-confirmation', 'archive-product'], true)) {
+			$page_name = $template_name;
+		}
 
 		// Check if post or custom post then its should be post type instead of page name
 		if (Helper::is_custom_post_type($this->post->ID) || get_post_type($this->post->ID) === 'post') {
@@ -1111,41 +1121,7 @@ class AssetsGenerator
 
 	public function get_template_css()
 	{
-		global $wpdb;
-
-		$post_name = Helper::is_custom_post_type($this->post->ID) || get_post_type($this->post->ID) === 'post' ? 'single' : 'page';
-
-		$assigned_template = get_post_meta($this->post->ID, '_wp_page_template', true);
-
-		if ($assigned_template !== '') {
-			$post_name = $assigned_template;
-		}
-
-		$query = $wpdb->prepare(
-			"SELECT
-                ID,
-                post_type,
-                post_content
-            FROM
-                {$wpdb->posts}
-            WHERE
-                post_type = 'wp_template'
-                AND post_status = 'publish'
-                AND post_name = %s
-            ORDER BY
-                post_modified DESC",
-			$post_name
-		);
-
-		// Execute the query
-		$cache_key_tpl = 'fb_assets_wp_tpl_' . md5($post_name);
-		$template_contents = wp_cache_get($cache_key_tpl, 'frontis_blocks');
-
-		if (false === $template_contents) {
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
-			$template_contents = $wpdb->get_results($query);
-			wp_cache_set($cache_key_tpl, $template_contents, 'frontis_blocks', 300);
-		}
+		$template_contents = Helper::get_template_content($this->post->ID);
 
 		if ($template_contents) {
 			foreach ($template_contents as $template) {

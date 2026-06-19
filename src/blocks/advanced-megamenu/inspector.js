@@ -18,9 +18,12 @@ import {
     BORDER_STYLES,
     OVERFLOW_OP,
     BACKGROUND_TYPES,
+    MEGA_MENU_TRIGGERS,
+    IMAGE_OBJECT_FIT,
+    NORMAL_HOVER,
 } from '@Constants/fbConstants';
 
-import { MEGA_MENU_TRIGGERS } from '@Constants/fbConstants';
+import FB_ImageControl from '@Components/image-control';
 import FB_InspectorControls from '@Components/InspectorControls';
 import FB_ColorControl from '@Components/color-control';
 import FB_TypographyControl from '@Components/typography-control';
@@ -248,12 +251,19 @@ const Inspector = ({ attributes, setAttributes }) => {
         megaMenuOpenIconSizeUnits,
         megaMenuOpenIconRotateSwitcher,
         megaMenuOpenIconRotation,
-        megaMenuOpenIconRotateHover
+        megaMenuOpenIconRotateHover,
+        megaMenuMobileLogoUrl,
+        megaMenuMobileLogoAlt,
+        megaMenuMobileLogoID,
+        megaMenuMobileLogoWidth,
+        megaMenuMobileLogoWidthUnits,
+        megaMenuMobileLogoHeight,
+        megaMenuMobileLogoHeightUnits,
+        megaMenuMobileLogoObjectFit,
     } = attributes;
 
     const deviceType = useDeviceType();
 
-    const [MenuItemList, setMenuItemList] = useState(menuItems);
     const [patterns, setPatterns] = useState([]);
 
     const patternData = useSelect((select) => {
@@ -304,68 +314,59 @@ const Inspector = ({ attributes, setAttributes }) => {
     const handleDragEnd = (event) => {
         const { active, over } = event;
         if (active && over && active.id !== over.id) {
-            const oldIndex = MenuItemList.findIndex((item) => item.id === active.id);
-            const newIndex = MenuItemList.findIndex((item) => item.id === over.id);
-            const updated = arrayMove(MenuItemList, oldIndex, newIndex);
-            setMenuItemList(updated);
+            const oldIndex = menuItems.findIndex((item) => item.id === active.id);
+            const newIndex = menuItems.findIndex((item) => item.id === over.id);
+            const updated = arrayMove(menuItems, oldIndex, newIndex);
             setAttributes({ menuItems: updated });
         }
     };
 
     const handleAddItem = () => {
         const newItem = {
-            id: `item-${MenuItemList.length + 1}`,
-            label: `Item ${MenuItemList.length + 1}`,
+            id: `item-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
+            label: `Item ${menuItems.length + 1}`,
             url: '',
             patternSlug: '',
             megaMenuIcon: 'angle-down',
             pageId: '',
         };
-        const updated = [...MenuItemList, newItem];
-        setMenuItemList(updated);
+        const updated = [...menuItems, newItem];
         setAttributes({ menuItems: updated });
     };
 
     const handleChangeItem = (id, key, value) => {
-        const updated = MenuItemList.map((item) =>
+        const updated = menuItems.map((item) =>
             item.id === id ? { ...item, [key]: value } : item
         );
-        setMenuItemList(updated);
         setAttributes({ menuItems: updated });
     };
 
     const handleChangeMultipleFields = (id, fieldsToUpdate) => {
-        const updated = MenuItemList.map((item) =>
+        const updated = menuItems.map((item) =>
             item.id === id ? { ...item, ...fieldsToUpdate } : item
         );
-        setMenuItemList(updated);
         setAttributes({ menuItems: updated });
     };
 
     const handleDeleteItem = (id) => {
-        const updated = MenuItemList.filter((item) => item.id !== id);
-        setMenuItemList(updated);
+        const updated = menuItems.filter((item) => item.id !== id);
         setAttributes({ menuItems: updated });
     };
 
     const handleDuplicateItem = (id) => {
-        const itemToDuplicate = MenuItemList.find((item) => item.id === id);
+        const itemToDuplicate = menuItems.find((item) => item.id === id);
         if (itemToDuplicate) {
             const newItem = {
                 ...itemToDuplicate,
-                id: `item-${MenuItemList.length + 1}`,
+                id: `item-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
                 label: itemToDuplicate.label + ' (Copy)',
             };
-            const updated = [...MenuItemList, newItem];
-            setMenuItemList(updated);
+            const updated = [...menuItems, newItem];
             setAttributes({ menuItems: updated });
         }
     };
 
-    /** Sync back when MenuItemList changes */
-    useEffect(() => {
-        setAttributes({ menuItems: MenuItemList });
-    }, [MenuItemList]);
+
 
 
     /** Start MegaMenu Padding */
@@ -979,6 +980,19 @@ const Inspector = ({ attributes, setAttributes }) => {
                     </DndContext>
                 </div>
             </PanelBody>
+
+            <PanelBody title={__('Mobile Menu', 'frontis-blocks')} initialOpen={false}>
+                <FB_ImageControl
+                    label={__('Mobile Logo', 'frontis-blocks')}
+                    globalImageUrl={megaMenuMobileLogoUrl}
+                    setglobalImageUrl={(value) => setAttributes({ megaMenuMobileLogoUrl: value || '' })}
+                    globalImageAlt={megaMenuMobileLogoAlt}
+                    setglobalImageAlt={(value) => setAttributes({ megaMenuMobileLogoAlt: value || '' })}
+                    globalImageID={megaMenuMobileLogoID}
+                    setglobalImageID={(value) => setAttributes({ megaMenuMobileLogoID: value || 0 })}
+                    isImageSize={false}
+                />
+            </PanelBody>
         </>
     );
 
@@ -1045,6 +1059,41 @@ const Inspector = ({ attributes, setAttributes }) => {
 
                 )}
 
+            </PanelBody>
+            <PanelBody title={__("Mobile Menu", "frontis-blocks")} initialOpen={false}>
+                <FB_Range
+                    min={1}
+                    max={megaMenuMobileLogoWidthUnits[deviceType] === '%' ? 100 : 500}
+                    label={__("Image Width", "frontis-blocks")}
+                    rangeValue={megaMenuMobileLogoWidth}
+                    onChangeHandler={(value) => setAttributes({ megaMenuMobileLogoWidth: value })}
+                    rangeUnitHandler={(value) => setAttributes({ megaMenuMobileLogoWidthUnits: value })}
+                    deviceType={deviceType}
+                    units={megaMenuMobileLogoWidthUnits}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={''}
+                />
+                <FB_Range
+                    min={1}
+                    max={megaMenuMobileLogoHeightUnits[deviceType] === '%' ? 100 : 500}
+                    label={__("Image Height", "frontis-blocks")}
+                    rangeValue={megaMenuMobileLogoHeight}
+                    onChangeHandler={(value) => setAttributes({ megaMenuMobileLogoHeight: value })}
+                    rangeUnitHandler={(value) => setAttributes({ megaMenuMobileLogoHeightUnits: value })}
+                    deviceType={deviceType}
+                    units={megaMenuMobileLogoHeightUnits}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={''}
+                />
+                <SelectControl
+                    label={__("Object Fit", "frontis-blocks")}
+                    value={megaMenuMobileLogoObjectFit}
+                    options={IMAGE_OBJECT_FIT}
+                    onChange={(value) => setAttributes({ megaMenuMobileLogoObjectFit: value })}
+                    __nextHasNoMarginBottom
+                />
             </PanelBody>
             <PanelBody title={__("Menu Item", "frontis-blocks")} initialOpen={false}>
                 <FB_TypographyControl
@@ -1225,6 +1274,29 @@ const Inspector = ({ attributes, setAttributes }) => {
 
                     isBackgroundImage={false}
                 />
+
+                <FB_SwitcherControl
+                    label={__("Active Menu Item", "frontis-blocks")}
+                    options={NORMAL_HOVER}
+                    globalSwitcher={megaMenuHighlightColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ megaMenuHighlightColorSwitcher: value })}
+                />
+
+                {megaMenuHighlightColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Active Color", "frontis-blocks")}
+                        globalColor={megaMenuHighlightColor}
+                        setGlobalColor={(value) => setAttributes({ megaMenuHighlightColor: value === undefined ? '' : value })}
+                    />
+                )}
+
+                {megaMenuHighlightColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={megaMenuHighlightHoverColor}
+                        setGlobalColor={(value) => setAttributes({ megaMenuHighlightHoverColor: value === undefined ? '' : value })}
+                    />
+                )}
 
                 <SelectControl
                     label={__("Border Style", "frontis-blocks")}
