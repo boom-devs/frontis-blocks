@@ -87,35 +87,38 @@ const v1_1_8 = {
     save({ attributes }) {
         const {
             blockID,
-            countDownLabelDay,
-            countDownLabelHour,
-            countDownLabelMinute,
-            countDownLabelSecond,
-            targetDate,
+            advancedCountdownPresetStyle,
+            advancedCountdownLabelDays,
+            advancedCountdownLabelHours,
+            advancedCountdownLabelMinutes,
+            advancedCountdownTargetDate,
             showDays,
             showHours,
             showMinutes,
             showSeconds,
-            countDownGlobalWraperID,
-            countDownGlobalWraperClass,
-            countDownDesktopSwitcher,
-            countDownTabletSwitcher,
-            countDownMobileSwitcher,
+            advancedCountdownCustomID,
+            advancedCountdownCustomClass,
+            advancedCountdownDesktopSwitcher,
+            advancedCountdownTabletSwitcher,
+            advancedCountdownMobileSwitcher,
         } = attributes;
 
         const blockProps = useBlockProps.save({
-            className: `fb-count-down-main-wrapper ${blockID} ${countDownDesktopSwitcher && 'fb-desktop-responsive'} ${countDownTabletSwitcher && 'fb-tablet-responsive'} ${countDownMobileSwitcher && 'fb-mobile-responsive'}`,
+            className: `fb-advanced-countdown-main-wrapper ${blockID} ${advancedCountdownDesktopSwitcher && 'fb-desktop-responsive'} ${advancedCountdownTabletSwitcher && 'fb-tablet-responsive'} ${advancedCountdownMobileSwitcher && 'fb-mobile-responsive'}`,
         });
 
         return (
             <>
-                <div {...blockProps} data-target-date={targetDate}>
-                    <div className={`fb-parent-wrapper fb-count-down-wrapper ${blockID} ${countDownGlobalWraperClass}`} id={countDownGlobalWraperID}>
+                <div {...blockProps} data-target-date={advancedCountdownTargetDate}>
+                    <div 
+                        className={`fb-advanced-countdown-wrapper ${blockID} ${advancedCountdownCustomClass}`} 
+                        id={advancedCountdownCustomID}
+                    >
                         {showDays && (
                             <div className={`fb-count-down-item`}>
                                 <span className={`fb-count-down-time days`}>00</span>
                                 <span className={`fb-count-down-label`}>
-                                    {countDownLabelDay || __('Days', 'frontis-blocks')}
+                                    {advancedCountdownLabelDays || __('Days', 'frontis-blocks')}
                                 </span>
                             </div>
                         )}
@@ -123,7 +126,7 @@ const v1_1_8 = {
                             <div className={`fb-count-down-item`}>
                                 <span className={`fb-count-down-time hours`}>00</span>
                                 <span className={`fb-count-down-label`}>
-                                    {countDownLabelHour || __('Hours', 'frontis-blocks')}
+                                    {advancedCountdownLabelHours || __('Hours', 'frontis-blocks')}
                                 </span>
                             </div>
                         )}
@@ -131,7 +134,7 @@ const v1_1_8 = {
                             <div className={`fb-count-down-item`}>
                                 <span className={`fb-count-down-time minutes`}>00</span>
                                 <span className={`fb-count-down-label`}>
-                                    {countDownLabelMinute || __('Minutes', 'frontis-blocks')}
+                                    {advancedCountdownLabelMinutes || __('Minutes', 'frontis-blocks')}
                                 </span>
                             </div>
                         )}

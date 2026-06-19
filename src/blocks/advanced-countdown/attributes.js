@@ -3,7 +3,9 @@ const attributes = {
 		type: "string",
 		default: "",
 	},
-	countDownPresetStyle: {
+
+	//  Preset & Basic Settings
+	advancedCountdownPresetStyle: {
 		type: "string",
 		default: "style-1",
 	},
@@ -11,7 +13,7 @@ const attributes = {
 		type: "string",
 		default: "",
 	},
-	until_text: {
+	advancedCountdownUntilText: {
 		type: "string",
 		default: "Until Morning Digest",
 	},
@@ -23,28 +25,33 @@ const attributes = {
 		type: "object",
 		default: { value: "far fa-sun", library: "fa-regular" },
 	},
-
-	// Show Hide Label Attributes
-	showDays: {
-		type: "boolean",
-		default: true,
-	},
-	showHours: {
-		type: "boolean",
-		default: true,
-	},
-	showMinutes: {
-		type: "boolean",
-		default: true,
-	},
-	showSeconds: {
-		type: "boolean",
-		default: true,
-	},
-
-	targetDate: {
+	advancedCountdownTargetDate: {
 		type: "string",
 	},
+	advancedCountdownDeviceType: {
+		type: "string",
+		default: "Desktop",
+	},
+
+	// Show/Hide Unit Labels 
+	advancedCountdownShowDays: {
+		type: "boolean",
+		default: true,
+	},
+	advancedCountdownShowHours: {
+		type: "boolean",
+		default: true,
+	},
+	advancedCountdownShowMinutes: {
+		type: "boolean",
+		default: true,
+	},
+	advancedCountdownShowSeconds: {
+		type: "boolean",
+		default: true,
+	},
+
+	//  Layout & Sizing 
 	advancedCountdownContainerSize: {
 		type: "object",
 		default: { unit: "%", Desktop: 100 },
@@ -61,7 +68,7 @@ const attributes = {
 		type: "object",
 		default: { unit: "px", Desktop: 570 },
 	},
-	advancedCountdownContainerSizeStyle3Container: {
+	advancedCountdownContainerSizeStyle3Inner: {
 		type: "object",
 		default: { unit: "px", Desktop: 530 },
 	},
@@ -69,6 +76,80 @@ const attributes = {
 		type: "object",
 		default: { unit: "px", Desktop: 771 },
 	},
+	advancedCountdownLayoutType: {
+		type: "string",
+		default: "flex",
+	},
+	advancedCountdownLayoutAlignment: {
+		type: "string",
+		default: "center",
+	},
+	advancedCountdownFlexWrap: {
+		type: "boolean",
+		default: true,
+	},
+	advancedCountdownGrid: {
+		type: "object",
+		default: {
+			Desktop: "4",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	advancedCountdownOverflow: {
+		type: "string",
+		default: "default",
+	},
+	advancedCountdownZIndex: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+
+	//  Item Gap 
+	advancedCountdownItemGap: {
+		type: "object",
+		default: {
+			Desktop: "72",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	advancedCountdownItemGapUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+
+	//  Item Size 
+	advancedCountdownItemSizeHeightAuto: {
+		type: "boolean",
+		default: true,
+	},
+	advancedCountdownItemSize: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	advancedCountdownItemSizeUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+
+	//  Hover / Transition 
 	advancedCountdownContainerHoverTransition: {
 		type: "object",
 		default: { Desktop: 0.4 },
@@ -81,8 +162,9 @@ const attributes = {
 		type: "object",
 		default: { Desktop: 0.35 },
 	},
+
+	//  Main Container Border Radius 
 	advancedCountdownBorderRadius: {
-		// This is for the main container
 		type: "object",
 		default: {
 			top: "12",
@@ -93,664 +175,127 @@ const attributes = {
 			isLinked: true,
 		},
 	},
-	advancedCountdownPreset4DashGap: {
-		type: "object",
-		default: { unit: "px", Desktop: 10 },
-	},
-	countDownLayoutAlignment: {
-		type: "string",
-		default: "center",
-	},
-	advancedCountdownStyle2ProgressBarColor: {
-		type: "string",
-		default: "rgb(180, 176, 167)",
-	},
-	advancedCountdownStyle2DashCount: {
-		type: "object",
-		default: { Desktop: "5" },
-	},
-	advancedCountdownDaysTotalDots: {
-		type: "object",
-		default: { Desktop: 12 },
-	},
-	advancedCountdownHoursTotalDots: {
-		type: "object",
-		default: { Desktop: 24 },
-	},
-	minutes_total_dots: {
-		type: "object",
-		default: { Desktop: 30 },
-	},
-	advancedCountdownStyle3ContainerBg: {
-		type: "string",
-		default: "#f3f3f3",
-	},
-	advancedCountdownStyle3TimeboxBg: {
-		type: "string",
-		default: "#ffffff",
-	},
-	advancedCountdownStyle3IndicatorColor: {
-		type: "string",
-		default: "#ff9800",
-	},
-	advancedCountdownStyle3IndicatorTextColor: {
-		type: "string",
-		default: "#fff",
-	},
-	advancedCountdownStyle3TimeGap: {
-		type: "object",
-		default: { unit: "px", Desktop: 10 },
-	},
-	advancedCountdownStyle3DashHighlight: {
-		type: "string",
-		default: "#888888",
-	},
-	advancedCountdownStyle3TextGlobalTypoSwitcher: {
-		type: "object",
-		default: {
-			fontFamily: false,
-			fontSize: false,
-			fontWeight: false,
-			fontStyle: false,
-			textTransform: false,
-			textDecoration: false,
-			letterSpacing: false,
-			lineHeight: false,
-		},
-	},
-	advancedCountdownStyle3TextGlobalTypographyData: {
-		type: "object",
-		default: {},
-	},
-	advancedCountdownStyle3TextGlobalTypoType: {
-		type: "string",
-		default: "default",
-	},
-	advancedCountdownStyle3TextGlobalTypoOption: {
-		type: "object",
-		default: { label: "Default", value: "default" },
-	},
-	advancedCountdownStyle3TextFontFamily: {
-		type: "string",
-		default: "inherit",
-	},
-	advancedCountdownStyle3TextFontSize: {
-		type: "object",
-		default: { Desktop: "" },
-	},
-	advancedCountdownStyle3TextFontSizeUnits: {
-		type: "object",
-		default: { Desktop: "px" },
-	},
-	advancedCountdownStyle3TextFontWeight: { type: "string", default: "" },
-	advancedCountdownStyle3TextFontStyle: { type: "string", default: "" },
-	advancedCountdownStyle3TextTextTransform: { type: "string", default: "" },
-	advancedCountdownStyle3TextTextDecoration: { type: "string", default: "" },
-	advancedCountdownStyle3TextLetterSpacing: {
-		type: "object",
-		default: { Desktop: "" },
-	},
-	advancedCountdownStyle3TextLetterSpacingUnits: {
-		type: "object",
-		default: { Desktop: "px" },
-	},
-	advancedCountdownStyle3TextLineHeight: {
-		type: "object",
-		default: { Desktop: "" },
-	},
-	advancedCountdownStyle3TextLineHeightUnits: {
-		type: "object",
-		default: { Desktop: "px" },
-	},
-	advancedCountdownActiveDotColor: {
-		type: "string",
-		default: "#ffffff",
-	},
-	advancedCountdownInactiveDotColor: {
-		type: "string",
-		default: "rgba(255, 255, 255, 0.18)",
-	},
-	advancedCountdownDotsThickness: {
-		type: "object",
-		default: { Desktop: 5 },
-	},
-	advancedCountdownDotsGap: {
-		type: "object",
-		default: { unit: "px", Desktop: 1 },
-	},
-	advancedCountdownDotsGlowEffect: {
-		type: "string",
-		default: "yes",
-	},
-	advancedCountdownGlowIntensity: {
-		type: "object",
-		default: { Desktop: 12 },
-	},
-	advancedCountdownGlowColor: {
-		type: "string",
-		default: "#ffffff",
-	},
-	advancedCountdownDashColor: {
-		type: "string",
-		default: "rgba(0,0,0,0.05)",
-	},
-	advancedCountdownDashSize: {
-		type: "object",
-		default: { unit: "px", Desktop: 4 },
-	},
-	advancedCountdownLabelAlignmentStyle4: {
-		type: "string",
-		default: "right_bottom",
-	},
-	advancedCountdownLabelTypographyStyle4GlobalTypoSwitcher: {
-		type: "object",
-		default: {
-			fontFamily: false,
-			fontSize: false,
-			fontWeight: false,
-			fontStyle: false,
-			textTransform: false,
-			textDecoration: false,
-			letterSpacing: false,
-			lineHeight: false,
-		},
-	},
-	advancedCountdownLabelTypographyStyle4GlobalTypographyData: {
-		type: "object",
-		default: {},
-	},
-	advancedCountdownLabelTypographyStyle4GlobalTypoType: {
-		type: "string",
-		default: "default",
-	},
-	advancedCountdownLabelTypographyStyle4GlobalTypoOption: {
-		type: "object",
-		default: { label: "Default", value: "default" },
-	},
-	advancedCountdownLabelTypographyStyle4FontFamily: {
-		type: "string",
-		default: "inherit",
-	},
-	advancedCountdownLabelTypographyStyle4FontSize: {
-		type: "object",
-		default: { Desktop: "" },
-	},
-	advancedCountdownLabelTypographyStyle4FontSizeUnits: {
-		type: "object",
-		default: { Desktop: "px" },
-	},
-	advancedCountdownLabelTypographyStyle4FontWeight: {
-		type: "string",
-		default: "",
-	},
-	advancedCountdownLabelTypographyStyle4FontStyle: {
-		type: "string",
-		default: "",
-	},
-	advancedCountdownLabelTypographyStyle4TextTransform: {
-		type: "string",
-		default: "",
-	},
-	advancedCountdownLabelTypographyStyle4TextDecoration: {
-		type: "string",
-		default: "",
-	},
-	advancedCountdownLabelTypographyStyle4LetterSpacing: {
-		type: "object",
-		default: { Desktop: "" },
-	},
-	advancedCountdownLabelTypographyStyle4LetterSpacingUnits: {
-		type: "object",
-		default: { Desktop: "px" },
-	},
-	advancedCountdownLabelTypographyStyle4LineHeight: {
-		type: "object",
-		default: { Desktop: "" },
-	},
-	advancedCountdownLabelTypographyStyle4LineHeightUnits: {
-		type: "object",
-		default: { Desktop: "px" },
-	},
-	advancedCountdownSvgBgOverlayColor: {
-		// Renamed from advancedCountdownSvgBgOverlayColor
-		type: "string",
-		default: "rgba(0, 0, 0, 0.9)",
-	},
-	advancedCountdownIconSize: {
-		type: "object",
-		default: { unit: "px", Desktop: 60 },
-	},
-	advancedCountdownIconColorNormal: {
-		type: "string",
-		default: "#ffffff",
-	},
-	advancedCountdownIconBgColorNormal: {
-		type: "string",
-		default: "",
-	},
-	advancedCountdownIconColorHover: {
-		type: "string",
-		default: "",
-	},
-	advancedCountdownIconBgColorHover: {
-		type: "string",
-		default: "",
-	},
-	advancedCountdownLabelDays: {
-		type: "string",
-		default: "Days",
-	},
-	advancedCountdownLabelHours: {
-		type: "string",
-		default: "Hours",
-	},
-	advancedCountdownLabelMinutes: {
-		type: "string",
-		default: "Minutes",
-	},
-	advancedCountdownCountdownTypographyGlobalTypoSwitcher: {
-		type: "object",
-		default: {
-			fontFamily: false,
-			fontSize: false,
-			fontWeight: false,
-			fontStyle: false,
-			textTransform: false,
-			textDecoration: false,
-			letterSpacing: false,
-			lineHeight: false,
-		},
-	},
-	advancedCountdownCountdownTypographyGlobalTypographyData: {
-		type: "object",
-		default: {},
-	},
-	advancedCountdownCountdownTypographyGlobalTypoType: {
-		type: "string",
-		default: "default",
-	},
-	advancedCountdownCountdownTypographyGlobalTypoOption: {
-		type: "object",
-		default: { label: "Default", value: "default" },
-	},
-	advancedCountdownCountdownTypographyFontFamily: {
-		type: "string",
-		default: "inherit",
-	},
-	advancedCountdownCountdownTypographyFontSize: {
-		type: "object",
-		default: { Desktop: "" },
-	},
-	advancedCountdownCountdownTypographyFontSizeUnits: {
-		type: "object",
-		default: { Desktop: "px" },
-	},
-	advancedCountdownCountdownTypographyFontWeight: {
+
+	//  Global Background 
+	advancedCountdownGlobalBgColorSwitcher: {
 		type: "string",
-		default: "",
+		default: "normal",
 	},
-	advancedCountdownCountdownTypographyFontStyle: {
+	advancedCountdownGlobalBackgroundType: {
 		type: "string",
-		default: "",
+		default: "classic",
 	},
-	advancedCountdownCountdownTypographyTextTransform: {
+	advancedCountdownGlobalClassicColor: {
 		type: "string",
-		default: "",
+		default: "#399CFF",
 	},
-	advancedCountdownCountdownTypographyTextDecoration: {
+	advancedCountdownGlobalGradientColor: {
 		type: "string",
-		default: "",
-	},
-	advancedCountdownCountdownTypographyLetterSpacing: {
-		type: "object",
-		default: { Desktop: "" },
-	},
-	advancedCountdownCountdownTypographyLetterSpacingUnits: {
-		type: "object",
-		default: { Desktop: "px" },
-	},
-	advancedCountdownCountdownTypographyLineHeight: {
-		type: "object",
-		default: { Desktop: "" },
-	},
-	advancedCountdownCountdownTypographyLineHeightUnits: {
-		type: "object",
-		default: { Desktop: "px" },
-	},
-	advancedCountdownLabelColorStyleMultiple: {
-		type: "string",
-		default: "#fff",
-	},
-	advancedCountdownTimeValTypographyGlobalTypoSwitcher: {
-		type: "object",
-		default: {
-			fontFamily: false,
-			fontSize: false,
-			fontWeight: false,
-			fontStyle: false,
-			textTransform: false,
-			textDecoration: false,
-			letterSpacing: false,
-			lineHeight: false,
-		},
-	},
-	advancedCountdownTimeValTypographyGlobalTypographyData: {
-		type: "object",
-		default: {},
-	},
-	advancedCountdownTimeValTypographyGlobalTypoType: {
-		type: "string",
-		default: "default",
-	},
-	advancedCountdownTimeValTypographyGlobalTypoOption: {
-		type: "object",
-		default: { label: "Default", value: "default" },
-	},
-	advancedCountdownTimeValTypographyFontFamily: {
-		type: "string",
-		default: "inherit",
-	},
-	advancedCountdownTimeValTypographyFontSize: {
-		type: "object",
-		default: { Desktop: "" },
-	},
-	advancedCountdownTimeValTypographyFontSizeUnits: {
-		type: "object",
-		default: { Desktop: "px" },
-	},
-	advancedCountdownTimeValTypographyFontWeight: { type: "string", default: "" },
-	advancedCountdownTimeValTypographyFontStyle: { type: "string", default: "" },
-	advancedCountdownTimeValTypographyTextTransform: {
-		type: "string",
-		default: "",
-	},
-	advancedCountdownTimeValTypographyTextDecoration: {
-		type: "string",
-		default: "",
-	},
-	advancedCountdownTimeValTypographyLetterSpacing: {
-		type: "object",
-		default: { Desktop: "" },
-	},
-	advancedCountdownTimeValTypographyLetterSpacingUnits: {
-		type: "object",
-		default: { Desktop: "px" },
-	},
-	advancedCountdownTimeValTypographyLineHeight: {
-		type: "object",
-		default: { Desktop: "" },
-	},
-	advancedCountdownTimeValTypographyLineHeightUnits: {
-		type: "object",
-		default: { Desktop: "px" },
-	},
-	advancedCountdownTimeValLabelColor: {
-		type: "string",
-		default: "#fff",
-	},
-	advancedCountdownLabelColorStyle4Digit: {
-		type: "string",
-		default: "#000",
-	},
-	advancedCountdownTextColorStyle2: {
-		type: "string",
-		default: "#0B0C0E",
-	},
-	advancedCountdownTextColorStyle3: {
-		type: "string",
-		default: "#000",
-	},
-	advancedCountdownSeparatorTypographyGlobalTypoSwitcher: {
-		type: "object",
-		default: {
-			fontFamily: false,
-			fontSize: false,
-			fontWeight: false,
-			fontStyle: false,
-			textTransform: false,
-			textDecoration: false,
-			letterSpacing: false,
-			lineHeight: false,
-		},
-	},
-	advancedCountdownSeparatorTypographyGlobalTypographyData: {
-		type: "object",
-		default: {},
-	},
-	advancedCountdownSeparatorTypographyGlobalTypoType: {
-		type: "string",
-		default: "default",
-	},
-	advancedCountdownSeparatorTypographyGlobalTypoOption: {
-		type: "object",
-		default: { label: "Default", value: "default" },
-	},
-	advancedCountdownSeparatorTypographyFontFamily: {
-		type: "string",
-		default: "inherit",
-	},
-	advancedCountdownSeparatorTypographyFontSize: {
-		type: "object",
-		default: { Desktop: 3 },
-	},
-	advancedCountdownSeparatorTypographyFontSizeUnits: {
-		type: "object",
-		default: { Desktop: "px" },
-	},
-	advancedCountdownSeparatorTypographyFontWeight: {
-		type: "string",
-		default: "400",
-	},
-	advancedCountdownSeparatorTypographyFontStyle: {
-		type: "string",
-		default: "",
-	},
-	advancedCountdownSeparatorTypographyTextTransform: {
-		type: "string",
-		default: "",
-	},
-	advancedCountdownSeparatorTypographyTextDecoration: {
-		type: "string",
-		default: "",
-	},
-	advancedCountdownSeparatorTypographyLetterSpacing: {
-		type: "object",
-		default: { Desktop: "" },
-	},
-	advancedCountdownSeparatorTypographyLetterSpacingUnits: {
-		type: "object",
-		default: { Desktop: "px" },
-	},
-	advancedCountdownSeparatorTypographyLineHeight: {
-		type: "object",
-		default: { Desktop: "" },
-	},
-	advancedCountdownSeparatorTypographyLineHeightUnits: {
-		type: "object",
-		default: { Desktop: "px" },
-	},
-	advancedCountdownSeparatorColor: {
-		type: "string",
-		default: "#ffffff",
-	},
-	advancedCountdownSeparatorHoverColor: {
-		type: "string",
-		default: "",
-	},
-	advancedCountdownSeparatorSpacing: {
-		type: "object",
-		default: { unit: "px", Desktop: 8 },
-	},
-	advancedCountdownSvgBgOverlayColor: {
-		// Renamed from advancedCountdownSvgBgOverlayColor
-		type: "string",
-		default: "rgba(0,0,0,0.9)",
-	},
-	advancedCountdownSvgBgOverlayOpacity: {
-		type: "object",
-		default: { unit: "px", Desktop: 0.4 },
-	},
-	advancedCountdownProgressCircleActiveColor: {
-		type: "string",
-		default: "#FF8C00",
-	},
-	advancedCountdownProgressCircleInactiveColor: {
-		// Renamed from advancedCountdownProgressCircleInactiveColor
-		type: "string",
-		default: "rgba(255, 255, 255, 0.1)",
-	},
-	advancedCountdownSvgStrokeWidth: {
-		type: "object",
-		default: { Desktop: "" },
-	},
-	advancedCountdownProgressColorStyle2: {
-		type: "string",
-		default: "#ff8c00",
-	},
-	advancedCountdownSvgStrokeWidthStyle2: {
-		// Renamed from advancedCountdownSvgStrokeWidthStyle2
-		type: "object",
-		default: { unit: "px", Desktop: 15 },
-	},
-	advancedCountdownFooterTypographyGlobalTypoSwitcher: {
-		type: "object",
-		default: {
-			fontFamily: false,
-			fontSize: false,
-			fontWeight: false,
-			fontStyle: false,
-			textTransform: false,
-			textDecoration: false,
-			letterSpacing: false,
-			lineHeight: false,
-		},
-	},
-	advancedCountdownFooterTypographyGlobalTypographyData: {
-		type: "object",
-		default: {},
-	},
-	advancedCountdownFooterTypographyGlobalTypoType: {
-		type: "string",
-		default: "default",
-	},
-	advancedCountdownFooterTypographyGlobalTypoOption: {
-		type: "object",
-		default: { label: "Default", value: "default" },
-	},
-	advancedCountdownFooterTypographyFontFamily: {
-		type: "string",
-		default: "inherit",
-	},
-	advancedCountdownFooterTypographyFontSize: {
-		type: "object",
-		default: { Desktop: "" },
-	},
-	advancedCountdownFooterTypographyFontSizeUnits: {
-		type: "object",
-		default: { Desktop: "px" },
-	},
-	advancedCountdownFooterTypographyFontWeight: { type: "string", default: "" },
-	advancedCountdownFooterTypographyFontStyle: { type: "string", default: "" },
-	advancedCountdownFooterTypographyTextTransform: {
-		type: "string",
-		default: "",
-	},
-	advancedCountdownFooterTypographyTextDecoration: {
-		type: "string",
-		default: "",
-	},
-	advancedCountdownFooterTypographyLetterSpacing: {
-		type: "object",
-		default: { Desktop: "" },
-	},
-	advancedCountdownFooterTypographyLetterSpacingUnits: {
-		type: "object",
-		default: { Desktop: "px" },
-	},
-	advancedCountdownFooterTypographyLineHeight: {
-		type: "object",
-		default: { Desktop: "" },
-	},
-	advancedCountdownFooterTypographyLineHeightUnits: {
-		type: "object",
-		default: { Desktop: "px" },
-	},
-	advancedCountdownFooterTextColor: {
-		type: "string",
-		default: "#ffffff",
-	},
-	advancedCountdownFooterBgColor: {
-		// Renamed from advancedCountdownFooterBgColor
-		type: "string",
-		default: "",
-	},
-	advancedCountdownFooterTextColorHover: {
-		type: "string",
-		default: "",
-	},
-	advancedCountdownFooterBgColorHover: {
-		type: "string",
-		default: "",
-	},
-	advancedCountdownFooterBgCustomStyle2: {
-		// Renamed from advancedCountdownFooterBgCustomStyle2
-		type: "string",
-		default: "rgba(255, 135, 1, 0.2)",
-	},
-	advancedCountdownFooterPadding: {
-		type: "object",
-		default: {
-			top: "8",
-			right: "0",
-			bottom: "8",
-			left: "0",
-			unit: "px",
-			isLinked: false,
-		},
 	},
-	advancedCountdownFooterPaddingLink: {
-		// Renamed from advancedCountdownFooterPaddingLink
+	advancedCountdownGlobalCustomGradientSwitcher: {
 		type: "boolean",
 		default: false,
 	},
-	advancedCountdownFooterMargin: {
-		type: "object",
-		default: {
-			top: "25",
-			right: "0",
-			bottom: "25",
-			left: "0",
-			unit: "px",
-			isLinked: false,
-		},
-	},
-	advancedCountdownFooterMarginLink: {
-		// Renamed from advancedCountdownFooterMarginLink
-		type: "boolean",
-		default: false,
-	},
-	// Device Type
-	deviceType: {
+	advancedCountdownGlobalCustomGradientInputValue: {
 		type: "string",
-		default: "Desktop",
+		default: "",
+	},
+	advancedCountdownGlobalBackgroundColorStyle: {
+		type: "string",
+		default: "",
+	},
+	advancedCountdownGlobalBackgroundImageUrl: {
+		type: "string",
+		default: "",
+	},
+	advancedCountdownGlobalBackgroundImageAlt: {
+		type: "string",
+		default: "",
+	},
+	advancedCountdownGlobalBackgroundImageID: {
+		type: "string",
+		default: "",
+	},
+	advancedCountdownGlobalBackgroundImagePosition: {
+		type: "string",
+		default: "",
+	},
+	advancedCountdownGlobalBackgroundImageAttachment: {
+		type: "string",
+		default: "",
+	},
+	advancedCountdownGlobalBackgroundImageSize: {
+		type: "string",
+		default: "",
+	},
+	advancedCountdownGlobalBackgroundImageRepeat: {
+		type: "string",
+		default: "",
 	},
 
-	//Item Bg Color
+	//  Hover Background 
+	advancedCountdownHoverBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	advancedCountdownHoverClassicColor: {
+		type: "string",
+	},
+	advancedCountdownHoverGradientColor: {
+		type: "string",
+	},
+	advancedCountdownHoverCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	advancedCountdownHoverCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+	advancedCountdownHoverBackgroundImageUrl: {
+		type: "string",
+		default: "",
+	},
+	advancedCountdownHoverBackgroundImageAlt: {
+		type: "string",
+		default: "",
+	},
+	advancedCountdownHoverBackgroundImageID: {
+		type: "string",
+		default: "",
+	},
+	advancedCountdownHoverBackgroundImagePosition: {
+		type: "string",
+		default: "",
+	},
+	advancedCountdownHoverBackgroundImageAttachment: {
+		type: "string",
+		default: "",
+	},
+	advancedCountdownHoverBackgroundImageSize: {
+		type: "string",
+		default: "",
+	},
+	advancedCountdownHoverBackgroundImageRepeat: {
+		type: "string",
+		default: "",
+	},
+
+	// Item Background 
 	advancedCountdownItemBgColorSwitcher: {
 		type: "string",
 		default: "normal",
 	},
 	advancedCountdownItemBgColor: {
-		// Renamed from advancedCountdownItemBgColor
 		type: "string",
-		default: "#399CFF",
+		default: "",
 	},
 	advancedCountdownItemBgHoverColor: {
 		type: "string",
 		default: "",
 	},
 
-	/** Start Background Image */
+	// Item Background Image 
 	advancedCountdownItemBgImageEnabled: {
 		type: "boolean",
 		default: false,
@@ -780,200 +325,92 @@ const attributes = {
 		type: "string",
 		default: "auto",
 	},
-	// Border Radius
-	advancedCountdownItemBorderRadiusUnits: {
-		type: "object",
-		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
-		},
-	},
-	advancedCountdownItemBorderRadiusDesktop: {
-		type: "object",
-		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
-		},
-	},
-	advancedCountdownItemBorderRadiusTablet: {
-		type: "object",
-		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
-		},
-	},
-	advancedCountdownItemBorderRadiusMobile: {
-		type: "object",
-		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
-		},
-	},
-	advancedCountdownItemBorderRadiusLink: {
-		type: "boolean",
-		default: true,
-	},
 
-	// Border Type
+	//  Item Border 
 	advancedCountdownItemBorderColorSwitcher: {
 		type: "string",
 		default: "normal",
 	},
-
 	advancedCountdownItemBorder: {
 		type: "string",
 		default: "none",
 	},
 	advancedCountdownItemBorderColor: {
-		// Renamed from advancedCountdownItemBorderColor
 		type: "string",
+	},
+	advancedCountdownItemBorderHoverColor: {
+		type: "string",
+		default: "",
 	},
 	advancedCountdownItemBorderTypeUnits: {
 		type: "object",
-		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
-		},
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
 	},
 	advancedCountdownItemBorderTypeDesktop: {
 		type: "object",
-		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
-		},
+		default: { top: "", bottom: "", left: "", right: "" },
 	},
 	advancedCountdownItemBorderTypeTablet: {
 		type: "object",
-		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
-		},
+		default: { top: "", bottom: "", left: "", right: "" },
 	},
 	advancedCountdownItemBorderTypeMobile: {
 		type: "object",
-		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
-		},
+		default: { top: "", bottom: "", left: "", right: "" },
 	},
 	advancedCountdownItemBorderTypeLink: {
 		type: "boolean",
 		default: true,
 	},
 
-	advancedCountdownFlexWrap: {
+	//  Item Border Radius 
+	advancedCountdownItemBorderRadiusUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+	advancedCountdownItemBorderRadiusDesktop: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	advancedCountdownItemBorderRadiusTablet: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	advancedCountdownItemBorderRadiusMobile: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	advancedCountdownItemBorderRadiusLink: {
 		type: "boolean",
 		default: true,
 	},
-	advancedCountdownLayoutType: {
-		type: "string",
-		default: "flex",
-	},
-	advancedCountdownLayoutAlignment: {
-		type: "string",
-		default: "center",
-	},
-	advancedCountdownGrid: {
-		type: "object",
-		default: {
-			Desktop: "4",
-			Tablet: "",
-			Mobile: "",
-		},
-	},
 
-	advancedCountdownItemGap: {
-		type: "object",
-		default: {
-			Desktop: "72",
-			Tablet: "",
-			Mobile: "",
-		},
-	},
-	advancedCountdownItemGapUnits: {
-		type: "object",
-		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
-		},
-	},
-	advancedCountdownItemBgColorSwitcher: {
+	//  Item Wrapper Background 
+	advancedCountdownItemWrapperBgColorSwitcher: {
 		type: "string",
 		default: "normal",
 	},
-	advancedCountdownItemBgColor: {
-		// Renamed from advancedCountdownItemBgColor
+	advancedCountdownItemWrapperBgColor: {
 		type: "string",
 		default: "",
 	},
-	advancedCountdownItemBgHoverColor: {
+	advancedCountdownItemWrapperBgHoverColor: {
 		type: "string",
 		default: "",
 	},
 
-	advancedCountdownItemSizeHeight: {
-		type: "boolean",
-		default: true,
-	},
-	advancedCountdownItemSize: {
-		type: "object",
-		default: {
-			Desktop: "",
-			Tablet: "",
-			Mobile: "",
-		},
-	},
-	advancedCountdownItemSizeUnits: {
-		type: "object",
-		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
-		},
-	},
-	/** Start BG Color */
-	advancedCountdownItemWrapperBgFontColorSwitcher: {
-		type: "string",
-		default: "normal",
-	},
-	advancedCountdownItemWrapperBgFontColor: {
-		// Renamed from advancedCountdownItemWrapperBgFontColor
-		type: "string",
-		default: "",
-	},
-	advancedCountdownItemWrapperBgFontHoverColor: {
-		type: "string",
-		default: "",
-	},
-	/** End BG Color */
-
-	/** Start Background Image */
-	advancedCountdownItemWrapperBackgroundImageEnabled: {
+	//  Item Wrapper Background Image
+	advancedCountdownItemWrapperBgImageEnabled: {
 		type: "boolean",
 		default: false,
 	},
-	advancedCountdownItemWrapperBackgroundImageUrl: {
+	advancedCountdownItemWrapperBgImageUrl: {
 		type: "string",
 	},
-	advancedCountdownItemWrapperBackgroundImageAlt: {
+	advancedCountdownItemWrapperBgImageAlt: {
 		type: "string",
 	},
-	advancedCountdownItemWrapperBackgroundImageID: {
+	advancedCountdownItemWrapperBgImageID: {
 		type: "number",
 	},
 	advancedCountdownItemWrapperBgImagePositionType: {
@@ -993,15 +430,12 @@ const attributes = {
 		default: "auto",
 	},
 
-	/** End Background Image */
-
-	/** Start Border Type */
+	//  Item Wrapper Border 
 	advancedCountdownItemWrapperBorderColorSwitcher: {
 		type: "string",
 		default: "normal",
 	},
 	advancedCountdownItemWrapperBorderColor: {
-		// Renamed from advancedCountdownItemWrapperBorderColor
 		type: "string",
 		default: "",
 	},
@@ -1014,88 +448,48 @@ const attributes = {
 	},
 	advancedCountdownItemWrapperBorderTypeUnits: {
 		type: "object",
-		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
-		},
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
 	},
 	advancedCountdownItemWrapperBorderTypeDesktop: {
 		type: "object",
-		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
-		},
+		default: { top: "", bottom: "", left: "", right: "" },
 	},
 	advancedCountdownItemWrapperBorderTypeTablet: {
 		type: "object",
-		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
-		},
+		default: { top: "", bottom: "", left: "", right: "" },
 	},
 	advancedCountdownItemWrapperBorderTypeMobile: {
 		type: "object",
-		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
-		},
+		default: { top: "", bottom: "", left: "", right: "" },
 	},
 	advancedCountdownItemWrapperBorderTypeLink: {
 		type: "boolean",
 		default: true,
 	},
-	/** End Border Type */
 
-	/** Start Border Radius */
+	// Item Wrapper Border Radius 
 	advancedCountdownItemWrapperBorderRadiusUnits: {
 		type: "object",
-		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
-		},
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
 	},
 	advancedCountdownItemWrapperBorderRadiusDesktop: {
 		type: "object",
-		default: {
-			top: "14",
-			bottom: "14",
-			left: "14",
-			right: "14",
-		},
+		default: { top: "14", bottom: "14", left: "14", right: "14" },
 	},
 	advancedCountdownItemWrapperBorderRadiusTablet: {
 		type: "object",
-		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
-		},
+		default: { top: "", bottom: "", left: "", right: "" },
 	},
 	advancedCountdownItemWrapperBorderRadiusMobile: {
 		type: "object",
-		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
-		},
+		default: { top: "", bottom: "", left: "", right: "" },
 	},
 	advancedCountdownItemWrapperBorderRadiusLink: {
 		type: "boolean",
 		default: true,
 	},
-	/** End Border Radius */
 
-	/** Start Box Shadow */
+	// Item Wrapper Box Shadow
 	advancedCountdownItemWrapperBoxShadowValues: {
 		type: "array",
 		default: [],
@@ -1104,172 +498,69 @@ const attributes = {
 		type: "string",
 		default: "",
 	},
-	/** End Box Shadow */
 
-	/** Start Padding */
+	// Item Wrapper Padding 
 	advancedCountdownItemWrapperPaddingUnits: {
 		type: "object",
-		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
-		},
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
 	},
 	advancedCountdownItemWrapperPaddingDesktop: {
 		type: "object",
-		default: {
-			top: "24",
-			bottom: "24",
-			left: "42",
-			right: "42",
-		},
+		default: { top: "24", bottom: "24", left: "42", right: "42" },
 	},
 	advancedCountdownItemWrapperPaddingTablet: {
 		type: "object",
-		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
-		},
+		default: { top: "", bottom: "", left: "", right: "" },
 	},
 	advancedCountdownItemWrapperPaddingMobile: {
 		type: "object",
-		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
-		},
+		default: { top: "", bottom: "", left: "", right: "" },
 	},
 	advancedCountdownItemWrapperPaddingLink: {
 		type: "boolean",
 		default: true,
 	},
-	/** End Padding */
 
-	/** Start Margin */
+	// Item Wrapper Margin
 	advancedCountdownItemWrapperMarginUnits: {
 		type: "object",
-		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
-		},
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
 	},
 	advancedCountdownItemWrapperMarginDesktop: {
 		type: "object",
-		default: {
-			top: "0",
-			bottom: "",
-			left: "",
-			right: "",
-		},
+		default: { top: "0", bottom: "", left: "", right: "" },
 	},
 	advancedCountdownItemWrapperMarginTablet: {
 		type: "object",
-		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
-		},
+		default: { top: "", bottom: "", left: "", right: "" },
 	},
 	advancedCountdownItemWrapperMarginMobile: {
 		type: "object",
-		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
-		},
+		default: { top: "", bottom: "", left: "", right: "" },
 	},
 	advancedCountdownItemWrapperMarginLink: {
 		type: "boolean",
 		default: true,
 	},
-	/** End Margin */
 
-	singleDigitFontColorSwitcher: {
-		type: "boolean",
-		default: false,
-	},
-
-	daysDigitFontColorSwitcher: {
+	// Digit Typography & Color 
+	advancedCountdownDigitFontColorSwitcher: {
 		type: "string",
 		default: "normal",
 	},
-	daysDigitFontColor: {
-		// Renamed from daysDigitFontColor
-		type: "string",
-		default: "",
-	},
-	daysDigitFontHoverColor: {
-		type: "string",
-		default: "",
-	},
-
-	hoursDigitFontColorSwitcher: {
-		type: "string",
-		default: "normal",
-	},
-	hoursDigitFontColor: {
-		// Renamed from hoursDigitFontColor
-		type: "string",
-		default: "",
-	},
-	hoursDigitFontHoverColor: {
-		type: "string",
-		default: "",
-	},
-
-	minutesDigitFontColorSwitcher: {
-		type: "string",
-		default: "normal",
-	},
-	minutesDigitFontColor: {
-		// Renamed from minutesDigitFontColor
-		type: "string",
-		default: "",
-	},
-	minutesDigitFontHoverColor: {
-		type: "string",
-		default: "",
-	},
-
-	secondsDigitFontColorSwitcher: {
-		type: "string",
-		default: "normal",
-	},
-	secondsDigitFontColor: {
-		// Renamed from secondsDigitFontColor
-		type: "string",
-		default: "",
-	},
-	secondsDigitFontHoverColor: {
-		type: "string",
-		default: "",
-	},
-
-	digitFontColorSwitcher: {
-		type: "string",
-		default: "normal",
-	},
-	digitFontColor: {
-		// Renamed from digitFontColor
+	advancedCountdownDigitFontColor: {
 		type: "string",
 		default: "#FFFFFF",
 	},
-	digitFontHoverColor: {
+	advancedCountdownDigitFontHoverColor: {
 		type: "string",
 		default: "",
 	},
-
-	digitGlobalTypographyData: {
+	advancedCountdownDigitGlobalTypographyData: {
 		type: "object",
 		default: {},
 	},
-	digitGlobalTypoSwitcher: {
+	advancedCountdownDigitGlobalTypoSwitcher: {
 		type: "object",
 		default: {
 			fontFamily: false,
@@ -1282,113 +573,256 @@ const attributes = {
 			lineHeight: false,
 		},
 	},
-	digitGlobalTypoType: {
+	advancedCountdownDigitGlobalTypoType: {
 		type: "string",
 		default: "default",
 	},
-	digitGlobalTypoOption: {
+	advancedCountdownDigitGlobalTypoOption: {
 		type: "object",
 		default: { label: "Default", value: "default" },
 	},
-	digitFontFamily: {
+	advancedCountdownDigitFontFamily: {
 		type: "string",
 		default: "inherit",
 	},
-	digitFontSize: {
+	advancedCountdownDigitFontSize: {
 		type: "object",
-		default: {
-			Desktop: "62",
-			Tablet: "",
-			Mobile: "",
-		},
+		default: { Desktop: "62", Tablet: "", Mobile: "" },
 	},
-	digitFontSizeUnits: {
+	advancedCountdownDigitFontSizeUnits: {
 		type: "object",
-		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
-		},
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
 	},
-	digitFontWeight: {
+	advancedCountdownDigitFontWeight: {
 		type: "string",
 		default: "500",
 	},
-	digitFontStyle: {
+	advancedCountdownDigitFontStyle: {
 		type: "string",
 		default: "",
 	},
-	digitTextTransform: {
+	advancedCountdownDigitTextTransform: {
 		type: "string",
 		default: "",
 	},
-	digitTextDecoration: {
+	advancedCountdownDigitTextDecoration: {
 		type: "string",
 		default: "",
 	},
-	digitLetterSpacing: {
+	advancedCountdownDigitLetterSpacing: {
 		type: "object",
-		default: {
-			Desktop: "",
-			Tablet: "",
-			Mobile: "",
-		},
+		default: { Desktop: "", Tablet: "", Mobile: "" },
 	},
-	digitLetterSpacingUnits: {
+	advancedCountdownDigitLetterSpacingUnits: {
 		type: "object",
-		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
-		},
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
 	},
-	digitLineHeight: {
+	advancedCountdownDigitLineHeight: {
 		type: "object",
-		default: {
-			Desktop: "80",
-			Tablet: "",
-			Mobile: "",
-		},
+		default: { Desktop: "80", Tablet: "", Mobile: "" },
 	},
-	digitLineHeightUnits: {
+	advancedCountdownDigitLineHeightUnits: {
 		type: "object",
-		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
-		},
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
 	},
-	labelFontColorSwitcher: {
+
+	// Per-Unit Digit Colors 
+	advancedCountdownSingleDigitFontColorSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	advancedCountdownDaysDigitFontColorSwitcher: {
 		type: "string",
 		default: "normal",
 	},
-	labelFontColor: {
-		// Renamed from labelFontColor
+	advancedCountdownDaysDigitFontColor: {
+		type: "string",
+		default: "",
+	},
+	advancedCountdownDaysDigitFontHoverColor: {
+		type: "string",
+		default: "",
+	},
+	advancedCountdownHoursDigitFontColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	advancedCountdownHoursDigitFontColor: {
+		type: "string",
+		default: "",
+	},
+	advancedCountdownHoursDigitFontHoverColor: {
+		type: "string",
+		default: "",
+	},
+	advancedCountdownMinutesDigitFontColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	advancedCountdownMinutesDigitFontColor: {
+		type: "string",
+		default: "",
+	},
+	advancedCountdownMinutesDigitFontHoverColor: {
+		type: "string",
+		default: "",
+	},
+	advancedCountdownSecondsDigitFontColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	advancedCountdownSecondsDigitFontColor: {
+		type: "string",
+		default: "",
+	},
+	advancedCountdownSecondsDigitFontHoverColor: {
+		type: "string",
+		default: "",
+	},
+
+	//  Digit Box
+	advancedCountdownDigitBgColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	advancedCountdownDigitBgColor: {
+		type: "string",
+		default: "",
+	},
+	advancedCountdownDigitBgHoverColor: {
+		type: "string",
+		default: "",
+	},
+	advancedCountdownDigitBorderColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	advancedCountdownDigitBorderColor: {
+		type: "string",
+		default: "",
+	},
+	advancedCountdownDigitBorderHoverColor: {
+		type: "string",
+	},
+	advancedCountdownDigitBorder: {
+		type: "string",
+		default: "none",
+	},
+	advancedCountdownDigitBorderTypeUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+	advancedCountdownDigitBorderTypeDesktop: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	advancedCountdownDigitBorderTypeTablet: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	advancedCountdownDigitBorderTypeMobile: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	advancedCountdownDigitBorderTypeLink: {
+		type: "boolean",
+		default: true,
+	},
+	advancedCountdownDigitBorderRadiusUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+	advancedCountdownDigitBorderRadiusDesktop: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	advancedCountdownDigitBorderRadiusTablet: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	advancedCountdownDigitBorderRadiusMobile: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	advancedCountdownDigitBorderRadiusLink: {
+		type: "boolean",
+		default: true,
+	},
+	advancedCountdownDigitMarginUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+	advancedCountdownDigitMarginDesktop: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	advancedCountdownDigitMarginTablet: {
+		type: "object",
+		default: { top: "", bottom: "0", left: "", right: "" },
+	},
+	advancedCountdownDigitMarginMobile: {
+		type: "object",
+		default: { top: "", bottom: "0", left: "", right: "" },
+	},
+	advancedCountdownDigitMarginLink: {
+		type: "boolean",
+		default: true,
+	},
+	advancedCountdownDigitWidth: {
+		type: "object",
+		default: { Desktop: "100", Tablet: "", Mobile: "" },
+	},
+	advancedCountdownDigitWidthUnits: {
+		type: "object",
+		default: { Desktop: "%", Tablet: "%", Mobile: "%" },
+	},
+	advancedCountdownDigitHeight: {
+		type: "object",
+		default: { Desktop: "", Tablet: "", Mobile: "" },
+	},
+	advancedCountdownDigitHeightUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+	advancedCountdownDigitAlignmentHz: {
+		type: "string",
+		default: "center",
+	},
+	advancedCountdownDigitAlignmentVr: {
+		type: "string",
+		default: "center",
+	},
+
+	//  Label Typography & Color 
+	advancedCountdownLabelFontColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	advancedCountdownLabelFontColor: {
 		type: "string",
 		default: "#FFFFFF",
 	},
-	labelFontHoverColor: {
+	advancedCountdownLabelFontHoverColor: {
 		type: "string",
 		default: "",
 	},
-	labelBgColorSwitcher: {
+	advancedCountdownLabelBgColorSwitcher: {
 		type: "string",
 		default: "normal",
 	},
-	labelBgColor: {
-		// Renamed from labelBgColor
+	advancedCountdownLabelBgColor: {
 		type: "string",
 		default: "",
 	},
-	labelBgHoverColor: {
+	advancedCountdownLabelBgHoverColor: {
 		type: "string",
 		default: "",
 	},
-	labelGlobalTypographyData: {
+	advancedCountdownLabelGlobalTypographyData: {
 		type: "object",
 		default: {},
 	},
-	labelGlobalTypoSwitcher: {
+	advancedCountdownLabelGlobalTypoSwitcher: {
 		type: "object",
 		default: {
 			fontFamily: false,
@@ -1401,88 +835,180 @@ const attributes = {
 			lineHeight: false,
 		},
 	},
-	labelGlobalTypoType: {
+	advancedCountdownLabelGlobalTypoType: {
 		type: "string",
 		default: "default",
 	},
-	labelGlobalTypoOption: {
+	advancedCountdownLabelGlobalTypoOption: {
 		type: "object",
 		default: { label: "Default", value: "default" },
 	},
-	labelFontFamily: {
+	advancedCountdownLabelFontFamily: {
 		type: "string",
 		default: "inherit",
 	},
-	labelFontSize: {
+	advancedCountdownLabelFontSize: {
 		type: "object",
-		default: {
-			Desktop: "18",
-			Tablet: "",
-			Mobile: "",
-		},
+		default: { Desktop: "18", Tablet: "", Mobile: "" },
 	},
-	labelFontSizeUnits: {
+	advancedCountdownLabelFontSizeUnits: {
 		type: "object",
-		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
-		},
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
 	},
-	labelFontWeight: {
+	advancedCountdownLabelFontWeight: {
 		type: "string",
 		default: "",
 	},
-	labelFontStyle: {
+	advancedCountdownLabelFontStyle: {
 		type: "string",
 		default: "",
 	},
-	labelTextTransform: {
+	advancedCountdownLabelTextTransform: {
 		type: "string",
 		default: "",
 	},
-	labelTextDecoration: {
+	advancedCountdownLabelTextDecoration: {
 		type: "string",
 		default: "",
 	},
-	labelLetterSpacing: {
+	advancedCountdownLabelLetterSpacing: {
 		type: "object",
-		default: {
-			Desktop: "",
-			Tablet: "",
-			Mobile: "",
-		},
+		default: { Desktop: "", Tablet: "", Mobile: "" },
 	},
-	labelLetterSpacingUnits: {
+	advancedCountdownLabelLetterSpacingUnits: {
 		type: "object",
-		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
-		},
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
 	},
-	labelLineHeight: {
+	advancedCountdownLabelLineHeight: {
 		type: "object",
-		default: {
-			Desktop: "24",
-			Tablet: "",
-			Mobile: "",
-		},
+		default: { Desktop: "24", Tablet: "", Mobile: "" },
 	},
-	labelLineHeightUnits: {
+	advancedCountdownLabelLineHeightUnits: {
 		type: "object",
-		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
-		},
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
 	},
+
+	// Label Box 
+	advancedCountdownLabelBorderColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	advancedCountdownLabelBorderColor: {
+		type: "string",
+		default: "",
+	},
+	advancedCountdownLabelBorderHoverColor: {
+		type: "string",
+	},
+	advancedCountdownLabelBorder: {
+		type: "string",
+		default: "none",
+	},
+	advancedCountdownLabelBorderTypeUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+	advancedCountdownLabelBorderTypeDesktop: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	advancedCountdownLabelBorderTypeTablet: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	advancedCountdownLabelBorderTypeMobile: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	advancedCountdownLabelBorderTypeLink: {
+		type: "boolean",
+		default: true,
+	},
+	advancedCountdownLabelBorderRadiusUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+	advancedCountdownLabelBorderRadiusDesktop: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	advancedCountdownLabelBorderRadiusTablet: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	advancedCountdownLabelBorderRadiusMobile: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	advancedCountdownLabelBorderRadiusLink: {
+		type: "boolean",
+		default: true,
+	},
+	advancedCountdownLabelMarginUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+	advancedCountdownLabelMarginDesktop: {
+		type: "object",
+		default: { top: "10", bottom: "0", left: "0", right: "0" },
+	},
+	advancedCountdownLabelMarginTablet: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	advancedCountdownLabelMarginMobile: {
+		type: "object",
+		default: { top: "", bottom: "", left: "", right: "" },
+	},
+	advancedCountdownLabelMarginLink: {
+		type: "boolean",
+		default: true,
+	},
+	advancedCountdownLabelWidth: {
+		type: "object",
+		default: { Desktop: "100", Tablet: "", Mobile: "" },
+	},
+	advancedCountdownLabelWidthUnits: {
+		type: "object",
+		default: { Desktop: "%", Tablet: "%", Mobile: "%" },
+	},
+	advancedCountdownLabelHeight: {
+		type: "object",
+		default: { Desktop: "", Tablet: "", Mobile: "" },
+	},
+	advancedCountdownLabelHeightUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+	advancedCountdownLabelAlignmentHz: {
+		type: "string",
+		default: "center",
+	},
+	advancedCountdownLabelAlignmentVr: {
+		type: "string",
+		default: "center",
+	},
+
+	// Custom Label Text
+	advancedCountdownLabelDays: {
+		type: "string",
+		default: "Days",
+	},
+	advancedCountdownLabelHours: {
+		type: "string",
+		default: "Hours",
+	},
+	advancedCountdownLabelMinutes: {
+		type: "string",
+		default: "Minutes",
+	},
+
+	//  Separator
 	advancedCountdownSeparatorEnabled: {
 		type: "boolean",
 		default: true,
 	},
 	advancedCountdownSeparatorType: {
-		// Renamed from advancedCountdownSeparatorType
 		type: "string",
 		default: "colon",
 	},
@@ -1495,7 +1021,6 @@ const attributes = {
 		default: "normal",
 	},
 	advancedCountdownSeparatorFontColor: {
-		// Renamed from advancedCountdownSeparatorFontColor
 		type: "string",
 		default: "#ffffff",
 	},
@@ -1534,19 +1059,11 @@ const attributes = {
 	},
 	advancedCountdownSeparatorFontSize: {
 		type: "object",
-		default: {
-			Desktop: "48",
-			Tablet: "",
-			Mobile: "",
-		},
+		default: { Desktop: "48", Tablet: "", Mobile: "" },
 	},
 	advancedCountdownSeparatorFontSizeUnits: {
 		type: "object",
-		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
-		},
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
 	},
 	advancedCountdownSeparatorFontWeight: {
 		type: "string",
@@ -1566,562 +1083,639 @@ const attributes = {
 	},
 	advancedCountdownSeparatorLetterSpacing: {
 		type: "object",
-		default: {
-			Desktop: "",
-			Tablet: "",
-			Mobile: "",
-		},
+		default: { Desktop: "", Tablet: "", Mobile: "" },
 	},
 	advancedCountdownSeparatorLetterSpacingUnits: {
 		type: "object",
-		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
-		},
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
 	},
 	advancedCountdownSeparatorLineHeight: {
 		type: "object",
-		default: {
-			Desktop: "",
-			Tablet: "",
-			Mobile: "",
-		},
+		default: { Desktop: "", Tablet: "", Mobile: "" },
 	},
 	advancedCountdownSeparatorLineHeightUnits: {
 		type: "object",
-		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
-		},
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
 	},
-
-	/** Start Horizontal Spacing */
 	advancedCountdownSeparatorHorizontalGap: {
 		type: "object",
-		default: {
-			Desktop: "40",
-			Tablet: "",
-			Mobile: "",
-		},
+		default: { Desktop: "40", Tablet: "", Mobile: "" },
 	},
 	advancedCountdownSeparatorHorizontalGapUnits: {
 		type: "object",
-		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
-		},
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
 	},
-	/** End Horizontal Spacing */
-
-	/** Start Vertical Spacing */
 	advancedCountdownSeparatorVerticalGap: {
 		type: "object",
-		default: {
-			Desktop: "40",
-			Tablet: "",
-			Mobile: "",
-		},
+		default: { Desktop: "40", Tablet: "", Mobile: "" },
 	},
 	advancedCountdownSeparatorVerticalGapUnits: {
 		type: "object",
-		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
-		},
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
 	},
-	/** End Vertical Spacing */
-	advancedCountdownZIndex: {
+
+	// Style 1 
+	advancedCountdownStyle1SvgBgOverlayColor: {
+		type: "string",
+		default: "rgba(0, 0, 0, 0.9)",
+	},
+	advancedCountdownStyle1SvgBgOverlayOpacity: {
+		type: "object",
+		default: { unit: "px", Desktop: 0.4 },
+	},
+	advancedCountdownStyle1ProgressCircleActiveColor: {
+		type: "string",
+		default: "#FF8C00",
+	},
+	advancedCountdownStyle1ProgressCircleInactiveColor: {
+		type: "string",
+		default: "rgba(255, 255, 255, 0.1)",
+	},
+	advancedCountdownStyle1SvgStrokeWidth: {
+		type: "object",
+		default: { Desktop: "" },
+	},
+
+	// Style 2 
+	advancedCountdownStyle2ProgressBarColor: {
+		type: "string",
+		default: "rgb(180, 176, 167)",
+	},
+	advancedCountdownStyle2DashCount: {
+		type: "object",
+		default: { Desktop: "5" },
+	},
+	advancedCountdownStyle2ProgressColor: {
+		type: "string",
+		default: "#ff8c00",
+	},
+	advancedCountdownStyle2SvgStrokeWidth: {
+		type: "object",
+		default: { unit: "px", Desktop: 15 },
+	},
+	advancedCountdownStyle2TextColor: {
+		type: "string",
+		default: "#0B0C0E",
+	},
+
+	//  Style 3 
+	advancedCountdownStyle3ContainerBg: {
+		type: "string",
+		default: "#f3f3f3",
+	},
+	advancedCountdownStyle3TimeboxBg: {
+		type: "string",
+		default: "#ffffff",
+	},
+	advancedCountdownStyle3IndicatorColor: {
+		type: "string",
+		default: "#ff9800",
+	},
+	advancedCountdownStyle3IndicatorTextColor: {
+		type: "string",
+		default: "#fff",
+	},
+	advancedCountdownStyle3TimeGap: {
+		type: "object",
+		default: { unit: "px", Desktop: 10 },
+	},
+	advancedCountdownStyle3DashHighlight: {
+		type: "string",
+		default: "#888888",
+	},
+	advancedCountdownStyle3TextColor: {
+		type: "string",
+		default: "#000",
+	},
+	advancedCountdownStyle3TextGlobalTypoSwitcher: {
 		type: "object",
 		default: {
-			Desktop: "",
-			Tablet: "",
-			Mobile: "",
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
 		},
 	},
-	advancedCountdownOverflow: {
+	advancedCountdownStyle3TextGlobalTypographyData: {
+		type: "object",
+		default: {},
+	},
+	advancedCountdownStyle3TextGlobalTypoType: {
 		type: "string",
 		default: "default",
 	},
-	globalBgColorSwitcher: {
+	advancedCountdownStyle3TextGlobalTypoOption: {
+		type: "object",
+		default: { 
+               label: "Default",
+               value: "default" },
+	},
+	advancedCountdownStyle3TextFontFamily: {
 		type: "string",
-		default: "normal",
+		default: "inherit",
 	},
-	globalBackgroundType: {
+	advancedCountdownStyle3TextFontSize: {
+		type: "object",
+		default: { Desktop: "" },
+	},
+	advancedCountdownStyle3TextFontSizeUnits: {
+		type: "object",
+		default: { Desktop: "px" },
+	},
+	advancedCountdownStyle3TextFontWeight: { 
+          type: "string",
+          default: "" },
+	advancedCountdownStyle3TextFontStyle: { 
+          type: "string",
+          default: "" },
+	advancedCountdownStyle3TextTextTransform: { 
+          type: "string",
+          default: "" },
+	advancedCountdownStyle3TextTextDecoration: { 
+          type: "string", 
+          default: "" },
+	advancedCountdownStyle3TextLetterSpacing: {
+		type: "object",
+		default: { Desktop: "" },
+	},
+	advancedCountdownStyle3TextLetterSpacingUnits: {
+		type: "object",
+		default: { Desktop: "px" },
+	},
+	advancedCountdownStyle3TextLineHeight: {
+		type: "object",
+		default: { Desktop: "" },
+	},
+	advancedCountdownStyle3TextLineHeightUnits: {
+		type: "object",
+		default: { Desktop: "px" },
+	},
+
+	// Style 4 
+	advancedCountdownStyle4LabelAlignment: {
 		type: "string",
-		default: "classic",
+		default: "right_bottom",
 	},
-	globalClassicColor: {
+	advancedCountdownStyle4LabelDigitColor: {
 		type: "string",
-		default: "#399CFF",
+		default: "#000",
 	},
-	globalGradientColor: {
+	advancedCountdownStyle4LabelTypoGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	advancedCountdownStyle4LabelTypoGlobalTypographyData: {
+		type: "object",
+		default: {},
+	},
+	advancedCountdownStyle4LabelTypoGlobalTypoType: {
 		type: "string",
+		default: "default",
 	},
-	globalCustomGradientSwitcher: {
-		type: "boolean",
-		default: false,
+	advancedCountdownStyle4LabelTypoGlobalTypoOption: {
+		type: "object",
+		default: { 
+               label: "Default",
+               value: "default" },
 	},
-	globalCustomGradientInputValue: {
+	advancedCountdownStyle4LabelTypoFontFamily: {
+		type: "string",
+		default: "inherit",
+	},
+	advancedCountdownStyle4LabelTypoFontSize: {
+		type: "object",
+		default: { Desktop: "" },
+	},
+	advancedCountdownStyle4LabelTypoFontSizeUnits: {
+		type: "object",
+		default: { Desktop: "px" },
+	},
+     advancedCountdownStyle4LabelTypoFontWeight: {
+          type: "string",
+          default: ""
+     },
+     advancedCountdownStyle4LabelTypoFontStyle: {
+          type: "string",
+          default: ""
+     },
+	advancedCountdownStyle4LabelTypoTextTransform: { 
+          type: "string",
+          default: "" },
+	advancedCountdownStyle4LabelTypoTextDecoration: { 
+          type: "string",
+          default: "" },
+	advancedCountdownStyle4LabelTypoLetterSpacing: {
+		type: "object",
+		default: { Desktop: "" },
+	},
+	advancedCountdownStyle4LabelTypoLetterSpacingUnits: {
+		type: "object",
+		default: { Desktop: "px" },
+	},
+	advancedCountdownStyle4LabelTypoLineHeight: {
+		type: "object",
+		default: { Desktop: "" },
+	},
+	advancedCountdownStyle4LabelTypoLineHeightUnits: {
+		type: "object",
+		default: { Desktop: "px" },
+	},
+	advancedCountdownStyle4DashGap: {
+		type: "object",
+		default: { unit: "px", Desktop: 10 },
+	},
+	advancedCountdownStyle4DaysTotalDots: {
+		type: "object",
+		default: { Desktop: 12 },
+	},
+	advancedCountdownStyle4HoursTotalDots: {
+		type: "object",
+		default: { Desktop: 24 },
+	},
+	advancedCountdownStyle4MinutesTotalDots: {
+		type: "object",
+		default: { Desktop: 30 },
+	},
+	advancedCountdownStyle4ActiveDotColor: {
+		type: "string",
+		default: "#ffffff",
+	},
+	advancedCountdownStyle4InactiveDotColor: {
+		type: "string",
+		default: "rgba(255, 255, 255, 0.18)",
+	},
+	advancedCountdownStyle4DotsThickness: {
+		type: "object",
+		default: { Desktop: 5 },
+	},
+	advancedCountdownStyle4DotsGap: {
+		type: "object",
+		default: { unit: "px", Desktop: 1 },
+	},
+	advancedCountdownStyle4DotsGlowEffect: {
+		type: "string",
+		default: "yes",
+	},
+	advancedCountdownStyle4GlowIntensity: {
+		type: "object",
+		default: { Desktop: 12 },
+	},
+	advancedCountdownStyle4GlowColor: {
+		type: "string",
+		default: "#ffffff",
+	},
+	advancedCountdownStyle4DashColor: {
+		type: "string",
+		default: "rgba(0,0,0,0.05)",
+	},
+	advancedCountdownStyle4DashSize: {
+		type: "object",
+		default: { unit: "px", Desktop: 4 },
+	},
+
+	// Style 5 
+	advancedCountdownStyle5LabelColorMultiple: {
+		type: "string",
+		default: "#fff",
+	},
+	advancedCountdownStyle5TimeValLabelColor: {
+		type: "string",
+		default: "#fff",
+	},
+	advancedCountdownStyle5CountdownTypoGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	advancedCountdownStyle5CountdownTypoGlobalTypographyData: {
+		type: "object",
+		default: {},
+	},
+	advancedCountdownStyle5CountdownTypoGlobalTypoType: {
+		type: "string",
+		default: "default",
+	},
+	advancedCountdownStyle5CountdownTypoGlobalTypoOption: {
+		type: "object",
+		default: { label: "Default", value: "default" },
+	},
+	advancedCountdownStyle5CountdownTypoFontFamily: {
+		type: "string",
+		default: "inherit",
+	},
+	advancedCountdownStyle5CountdownTypoFontSize: {
+		type: "object",
+		default: { Desktop: "" },
+	},
+	advancedCountdownStyle5CountdownTypoFontSizeUnits: {
+		type: "object",
+		default: { Desktop: "px" },
+	},
+	advancedCountdownStyle5CountdownTypoFontWeight: { type: "string", default: "" },
+	advancedCountdownStyle5CountdownTypoFontStyle: { type: "string", default: "" },
+	advancedCountdownStyle5CountdownTypoTextTransform: { type: "string", default: "" },
+	advancedCountdownStyle5CountdownTypoTextDecoration: { type: "string", default: "" },
+	advancedCountdownStyle5CountdownTypoLetterSpacing: {
+		type: "object",
+		default: { Desktop: "" },
+	},
+	advancedCountdownStyle5CountdownTypoLetterSpacingUnits: {
+		type: "object",
+		default: { Desktop: "px" },
+	},
+	advancedCountdownStyle5CountdownTypoLineHeight: {
+		type: "object",
+		default: { Desktop: "" },
+	},
+	advancedCountdownStyle5CountdownTypoLineHeightUnits: {
+		type: "object",
+		default: { Desktop: "px" },
+	},
+	advancedCountdownStyle5TimeValTypoGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	advancedCountdownStyle5TimeValTypoGlobalTypographyData: {
+		type: "object",
+		default: {},
+	},
+	advancedCountdownStyle5TimeValTypoGlobalTypoType: {
+		type: "string",
+		default: "default",
+	},
+	advancedCountdownStyle5TimeValTypoGlobalTypoOption: {
+		type: "object",
+		default: { label: "Default", value: "default" },
+	},
+	advancedCountdownStyle5TimeValTypoFontFamily: {
+		type: "string",
+		default: "inherit",
+	},
+	advancedCountdownStyle5TimeValTypoFontSize: {
+		type: "object",
+		default: { Desktop: "" },
+	},
+	advancedCountdownStyle5TimeValTypoFontSizeUnits: {
+		type: "object",
+		default: { Desktop: "px" },
+	},
+	advancedCountdownStyle5TimeValTypoFontWeight: { type: "string", default: "" },
+	advancedCountdownStyle5TimeValTypoFontStyle: { type: "string", default: "" },
+	advancedCountdownStyle5TimeValTypoTextTransform: { type: "string", default: "" },
+	advancedCountdownStyle5TimeValTypoTextDecoration: { type: "string", default: "" },
+	advancedCountdownStyle5TimeValTypoLetterSpacing: {
+		type: "object",
+		default: { Desktop: "" },
+	},
+	advancedCountdownStyle5TimeValTypoLetterSpacingUnits: {
+		type: "object",
+		default: { Desktop: "px" },
+	},
+	advancedCountdownStyle5TimeValTypoLineHeight: {
+		type: "object",
+		default: { Desktop: "" },
+	},
+	advancedCountdownStyle5TimeValTypoLineHeightUnits: {
+		type: "object",
+		default: { Desktop: "px" },
+	},
+
+	//  Separator Typography 
+	advancedCountdownSeparatorTypoGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	advancedCountdownSeparatorTypoGlobalTypographyData: {
+		type: "object",
+		default: {},
+	},
+	advancedCountdownSeparatorTypoGlobalTypoType: {
+		type: "string",
+		default: "default",
+	},
+	advancedCountdownSeparatorTypoGlobalTypoOption: {
+		type: "object",
+		default: { label: "Default", value: "default" },
+	},
+	advancedCountdownSeparatorTypoFontFamily: {
+		type: "string",
+		default: "inherit",
+	},
+	advancedCountdownSeparatorTypoFontSize: {
+		type: "object",
+		default: { Desktop: 3 },
+	},
+	advancedCountdownSeparatorTypoFontSizeUnits: {
+		type: "object",
+		default: { Desktop: "px" },
+	},
+	advancedCountdownSeparatorTypoFontWeight: {
+		type: "string",
+		default: "400",
+	},
+	advancedCountdownSeparatorTypoFontStyle: { type: "string", default: "" },
+	advancedCountdownSeparatorTypoTextTransform: { type: "string", default: "" },
+	advancedCountdownSeparatorTypoTextDecoration: { type: "string", default: "" },
+	advancedCountdownSeparatorTypoLetterSpacing: {
+		type: "object",
+		default: { Desktop: "" },
+	},
+	advancedCountdownSeparatorTypoLetterSpacingUnits: {
+		type: "object",
+		default: { Desktop: "px" },
+	},
+	advancedCountdownSeparatorTypoLineHeight: {
+		type: "object",
+		default: { Desktop: "" },
+	},
+	advancedCountdownSeparatorTypoLineHeightUnits: {
+		type: "object",
+		default: { Desktop: "px" },
+	},
+	advancedCountdownSeparatorColor: {
+		type: "string",
+		default: "#ffffff",
+	},
+	advancedCountdownSeparatorHoverColor: {
 		type: "string",
 		default: "",
 	},
-	globalBackgroundColorStyle: {
+	advancedCountdownSeparatorSpacing: {
+		type: "object",
+		default: { unit: "px", Desktop: 8 },
+	},
+
+	// Icon 
+	advancedCountdownIconSize: {
+		type: "object",
+		default: { unit: "px", Desktop: 60 },
+	},
+	advancedCountdownIconColorNormal: {
+		type: "string",
+		default: "#ffffff",
+	},
+	advancedCountdownIconBgColorNormal: {
 		type: "string",
 		default: "",
 	},
-	globalBackgroundImageUrl: {
+	advancedCountdownIconColorHover: {
 		type: "string",
 		default: "",
 	},
-	globalBackgroundImageAlt: {
-		type: "string",
-		default: "",
-	},
-	globalBackgroundImageID: {
-		type: "string",
-		default: "",
-	},
-	globalBackgroundImagePosition: {
-		type: "string",
-		default: "",
-	},
-	globalBackgroundImageAttachment: {
-		type: "string",
-		default: "",
-	},
-	globalBackgroundImageSize: {
-		type: "string",
-		default: "",
-	},
-	globalBackgroundImageRepeat: {
-		type: "string",
-		default: "",
-	},
-	hoverBackgroundType: {
-		type: "string",
-		default: "classic",
-	},
-	hoverClassicColor: {
-		type: "string",
-	},
-	hoverGradientColor: {
-		type: "string",
-	},
-	hoverCustomGradientSwitcher: {
-		type: "boolean",
-		default: false,
-	},
-	hoverCustomGradientInputValue: {
-		type: "string",
-		default: "",
-	},
-	hoverBackgroundImageUrl: {
-		type: "string",
-		default: "",
-	},
-	hoverBackgroundImageAlt: {
-		type: "string",
-		default: "",
-	},
-	hoverBackgroundImageID: {
-		type: "string",
-		default: "",
-	},
-	hoverBackgroundImagePosition: {
-		type: "string",
-		default: "",
-	},
-	hoverBackgroundImageAttachment: {
-		type: "string",
-		default: "",
-	},
-	hoverBackgroundImageSize: {
-		type: "string",
-		default: "",
-	},
-	hoverBackgroundImageRepeat: {
+	advancedCountdownIconBgColorHover: {
 		type: "string",
 		default: "",
 	},
 
-	/** Label Start Border Type */
-	advancedCountdownLabelBorderColorSwitcher: {
-		type: "string",
-		default: "normal",
+	// Footer 
+	advancedCountdownFooterTypoGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
 	},
-	advancedCountdownLabelBorderColor: {
+	advancedCountdownFooterTypoGlobalTypographyData: {
+		type: "object",
+		default: {},
+	},
+	advancedCountdownFooterTypoGlobalTypoType: {
+		type: "string",
+		default: "default",
+	},
+	advancedCountdownFooterTypoGlobalTypoOption: {
+		type: "object",
+		default: { label: "Default", value: "default" },
+	},
+	advancedCountdownFooterTypoFontFamily: {
+		type: "string",
+		default: "inherit",
+	},
+	advancedCountdownFooterTypoFontSize: {
+		type: "object",
+		default: { Desktop: "" },
+	},
+	advancedCountdownFooterTypoFontSizeUnits: {
+		type: "object",
+		default: { Desktop: "px" },
+	},
+	advancedCountdownFooterTypoFontWeight: { type: "string", default: "" },
+	advancedCountdownFooterTypoFontStyle: { type: "string", default: "" },
+	advancedCountdownFooterTypoTextTransform: { type: "string", default: "" },
+	advancedCountdownFooterTypoTextDecoration: { type: "string", default: "" },
+	advancedCountdownFooterTypoLetterSpacing: {
+		type: "object",
+		default: { Desktop: "" },
+	},
+	advancedCountdownFooterTypoLetterSpacingUnits: {
+		type: "object",
+		default: { Desktop: "px" },
+	},
+	advancedCountdownFooterTypoLineHeight: {
+		type: "object",
+		default: { Desktop: "" },
+	},
+	advancedCountdownFooterTypoLineHeightUnits: {
+		type: "object",
+		default: { Desktop: "px" },
+	},
+	advancedCountdownFooterTextColor: {
+		type: "string",
+		default: "#ffffff",
+	},
+	advancedCountdownFooterBgColor: {
 		type: "string",
 		default: "",
 	},
-	advancedCountdownLabelBorderHoverColor: {
+	advancedCountdownFooterTextColorHover: {
 		type: "string",
+		default: "",
 	},
-	advancedCountdownLabelBorder: {
+	advancedCountdownFooterBgColorHover: {
 		type: "string",
-		default: "none",
+		default: "",
 	},
-	advancedCountdownLabelBorderTypeUnits: {
+	advancedCountdownFooterBgCustomStyle2: {
+		type: "string",
+		default: "rgba(255, 135, 1, 0.2)",
+	},
+	advancedCountdownFooterPadding: {
 		type: "object",
 		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
-		},
-	},
-	advancedCountdownLabelBorderTypeDesktop: {
-		type: "object",
-		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
-		},
-	},
-	advancedCountdownLabelBorderTypeTablet: {
-		type: "object",
-		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
-		},
-	},
-	advancedCountdownLabelBorderTypeMobile: {
-		type: "object",
-		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
-		},
-	},
-	advancedCountdownLabelBorderTypeLink: {
-		type: "boolean",
-		default: true,
-	},
-	/** Label End Border Type */
-
-	/** Label Start Border Radius */
-	advancedCountdownLabelBorderRadiusUnits: {
-		type: "object",
-		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
-		},
-	},
-	advancedCountdownLabelBorderRadiusDesktop: {
-		type: "object",
-		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
-		},
-	},
-	advancedCountdownLabelBorderRadiusTablet: {
-		type: "object",
-		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
-		},
-	},
-	advancedCountdownLabelBorderRadiusMobile: {
-		type: "object",
-		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
-		},
-	},
-	advancedCountdownLabelBorderRadiusLink: {
-		type: "boolean",
-		default: true,
-	},
-	/** Label End Border Radius */
-
-	advancedCountdownLabelMarginUnits: {
-		type: "object",
-		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
-		},
-	},
-	advancedCountdownLabelMarginDesktop: {
-		type: "object",
-		default: {
-			top: "10",
-			bottom: "0",
-			left: "0",
+			top: "8",
 			right: "0",
+			bottom: "8",
+			left: "0",
+			unit: "px",
+			isLinked: false,
 		},
 	},
-	advancedCountdownLabelMarginTablet: {
-		type: "object",
-		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
-		},
-	},
-	advancedCountdownLabelMarginMobile: {
-		type: "object",
-		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
-		},
-	},
-	advancedCountdownLabelMarginLink: {
+	advancedCountdownFooterPaddingLink: {
 		type: "boolean",
-		default: true,
+		default: false,
 	},
-
-	advancedCountdownLabelWidth: {
+	advancedCountdownFooterMargin: {
 		type: "object",
 		default: {
-			Desktop: "100",
-			Tablet: "",
-			Mobile: "",
+			top: "25",
+			right: "0",
+			bottom: "25",
+			left: "0",
+			unit: "px",
+			isLinked: false,
 		},
 	},
-	advancedCountdownLabelWidthUnits: {
-		type: "object",
-		default: {
-			Desktop: "%",
-			Tablet: "%",
-			Mobile: "%",
-		},
-	},
-	advancedCountdownLabelHeight: {
-		type: "object",
-		default: {
-			Desktop: "",
-			Tablet: "",
-			Mobile: "",
-		},
-	},
-	advancedCountdownLabelHeightUnits: {
-		type: "object",
-		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
-		},
-	},
-	advancedCountdownLabelAlignmentHz: {
-		type: "string",
-		default: "center",
-	},
-	advancedCountdownLabelAlignmentVr: {
-		type: "string",
-		default: "center",
-	},
-	/** Label End */
-
-	/** Digit Start Border Type */
-	advancedCountdownDigitBgColorSwitcher: {
-		type: "string",
-		default: "normal",
-	},
-	advancedCountdownDigitBgColor: {
-		type: "string",
-		default: "",
-	},
-	advancedCountdownDigitBgHoverColor: {
-		type: "string",
-		default: "",
-	},
-	advancedCountdownDigitBorderColorSwitcher: {
-		type: "string",
-		default: "normal",
-	},
-	advancedCountdownDigitBorderColor: {
-		type: "string",
-		default: "",
-	},
-	advancedCountdownDigitBorderHoverColor: {
-		type: "string",
-	},
-	advancedCountdownDigitBorder: {
-		type: "string",
-		default: "none",
-	},
-	advancedCountdownDigitBorderTypeUnits: {
-		type: "object",
-		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
-		},
-	},
-	advancedCountdownDigitBorderTypeDesktop: {
-		type: "object",
-		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
-		},
-	},
-	advancedCountdownDigitBorderTypeTablet: {
-		type: "object",
-		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
-		},
-	},
-	advancedCountdownDigitBorderTypeMobile: {
-		type: "object",
-		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
-		},
-	},
-	advancedCountdownDigitBorderTypeLink: {
+	advancedCountdownFooterMarginLink: {
 		type: "boolean",
-		default: true,
-	},
-	/** Digit End Border Type */
-
-	/** Digit Start Border Radius */
-	advancedCountdownDigitBorderRadiusUnits: {
-		type: "object",
-		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
-		},
-	},
-	advancedCountdownDigitBorderRadiusDesktop: {
-		type: "object",
-		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
-		},
-	},
-	advancedCountdownDigitBorderRadiusTablet: {
-		type: "object",
-		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
-		},
-	},
-	advancedCountdownDigitBorderRadiusMobile: {
-		type: "object",
-		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
-		},
-	},
-	advancedCountdownDigitBorderRadiusLink: {
-		type: "boolean",
-		default: true,
-	},
-	/** Digit End Border Radius */
-
-	advancedCountdownDigitMarginUnits: {
-		type: "object",
-		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
-		},
-	},
-	advancedCountdownDigitMarginDesktop: {
-		type: "object",
-		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
-		},
-	},
-	advancedCountdownDigitMarginTablet: {
-		type: "object",
-		default: {
-			top: "",
-			bottom: "0",
-			left: "",
-			right: "",
-		},
-	},
-	advancedCountdownDigitMarginMobile: {
-		type: "object",
-		default: {
-			top: "",
-			bottom: "0",
-			left: "",
-			right: "",
-		},
-	},
-	advancedCountdownDigitMarginLink: {
-		type: "boolean",
-		default: true,
+		default: false,
 	},
 
-	advancedCountdownDigitWidth: {
-		type: "object",
-		default: {
-			Desktop: "100",
-			Tablet: "",
-			Mobile: "",
-		},
-	},
-	advancedCountdownDigitWidthUnits: {
-		type: "object",
-		default: {
-			Desktop: "%",
-			Tablet: "%",
-			Mobile: "%",
-		},
-	},
-	advancedCountdownDigitHeight: {
-		type: "object",
-		default: {
-			Desktop: "",
-			Tablet: "",
-			Mobile: "",
-		},
-	},
-	advancedCountdownDigitHeightUnits: {
-		type: "object",
-		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
-		},
-	},
-	advancedCountdownDigitAlignmentHz: {
-		type: "string",
-		default: "center",
-	},
-	advancedCountdownDigitAlignmentVr: {
-		type: "string",
-		default: "center",
-	},
-	/** Digit End */
-
+	// Responsive Visibility
 	advancedCountdownDesktopSwitcher: {
 		type: "boolean",
 		default: false,
@@ -2135,21 +1729,7 @@ const attributes = {
 		default: false,
 	},
 
-	/** Start Class & ID Setting */
-	advancedCountdownGlobalWraperCustomCSS: {
-		type: "string",
-		default: "",
-	},
-	advancedCountdownGlobalWraperID: {
-		type: "string",
-		default: "",
-	},
-	advancedCountdownGlobalWraperClass: {
-		type: "string",
-		default: "",
-	},
-	/** End Class & ID Setting */
-
+	// Advanced: Position
 	advancedCountdownPositionType: {
 		type: "string",
 		default: "default",
@@ -2164,67 +1744,49 @@ const attributes = {
 	},
 	advancedCountdownHZLeftOffset: {
 		type: "object",
-		default: {
-			Desktop: "",
-			Tablet: "",
-			Mobile: "",
-		},
+		default: { Desktop: "", Tablet: "", Mobile: "" },
 	},
 	advancedCountdownHZLeftOffsetUnits: {
 		type: "object",
-		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
-		},
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
 	},
 	advancedCountdownHZRightOffset: {
 		type: "object",
-		default: {
-			Desktop: "",
-			Tablet: "",
-			Mobile: "",
-		},
+		default: { Desktop: "", Tablet: "", Mobile: "" },
 	},
 	advancedCountdownHZRightOffsetUnits: {
 		type: "object",
-		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
-		},
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
 	},
 	advancedCountdownVRTopOffset: {
 		type: "object",
-		default: {
-			Desktop: "",
-			Tablet: "",
-			Mobile: "",
-		},
+		default: { Desktop: "", Tablet: "", Mobile: "" },
 	},
 	advancedCountdownVRTopOffsetUnits: {
 		type: "object",
-		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
-		},
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
 	},
 	advancedCountdownVRBottomOffset: {
 		type: "object",
-		default: {
-			Desktop: "",
-			Tablet: "",
-			Mobile: "",
-		},
+		default: { Desktop: "", Tablet: "", Mobile: "" },
 	},
 	advancedCountdownVRBottomOffsetUnits: {
 		type: "object",
-		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
-		},
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+
+	// Advanced
+	advancedCountdownCustomCSS: {
+		type: "string",
+		default: "",
+	},
+	advancedCountdownCustomID: {
+		type: "string",
+		default: "",
+	},
+	advancedCountdownCustomClass: {
+		type: "string",
+		default: "",
 	},
 };
 

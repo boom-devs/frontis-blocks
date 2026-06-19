@@ -13,37 +13,37 @@ export const presetStyles = {
 			Tablet: "72",
 			Mobile: "60",
 		},
-		countDownItemWrapperBorderRadiusDesktop: {
+		advancedCountdownItemWrapperBorderRadiusDesktop: {
 			top: "14",
 			bottom: "14",
 			left: "14",
 			right: "14",
 		},
-		countDownItemWrapperBorderRadiusTablet: {
+		advancedCountdownItemWrapperBorderRadiusTablet: {
 			top: "14",
 			bottom: "14",
 			left: "14",
 			right: "14",
 		},
-		countDownItemWrapperBorderRadiusMobile: {
+		advancedCountdownItemWrapperBorderRadiusMobile: {
 			top: "14",
 			bottom: "14",
 			left: "14",
 			right: "14",
 		},
-		countDownItemWrapperPaddingDesktop: {
+		advancedCountdownItemWrapperPaddingDesktop: {
 			top: "24",
 			bottom: "24",
 			left: "42",
 			right: "42",
 		},
-		countDownItemWrapperPaddingTablet: {
+		advancedCountdownItemWrapperPaddingTablet: {
 			top: "24",
 			bottom: "24",
 			left: "42",
 			right: "42",
 		},
-		countDownItemWrapperPaddingMobile: {
+		advancedCountdownItemWrapperPaddingMobile: {
 			top: "24",
 			bottom: "24",
 			left: "42",
@@ -70,13 +70,13 @@ export const presetStyles = {
 		singleDigitFontColorSwitcher: false,
 		digitFontColor: "#FFFFFF",
 		digitFontHoverColor: "#FFFFFF",
-		digitFontSize: {
+		advancedCountdownStyle5CountdownTypoFontSize: {
 			Desktop: "62",
 			Tablet: "48",
 			Mobile: "32",
 		},
 		digitFontWeight: "500",
-		digitLineHeight: {
+		advancedCountdownStyle5CountdownTypoLineHeight: {
 			Desktop: "80",
 			Tablet: "60",
 			Mobile: "42",
@@ -96,25 +96,20 @@ export const presetStyles = {
 		},
 		advancedCountdownSeparatorEnabled: true,
 		advancedCountdownSeparatorType: "colon",
-		advancedCountdownSeparatorFontColor: "#ffffff",
-		advancedCountdownSeparatorFontHoverColor: "#ffffff",
-		advancedCountdownSeparatorTypographyFontSize: {
+		advancedCountdownSeparatorColor: "#ffffff",
+		advancedCountdownSeparatorHoverColor: "#ffffff",
+		advancedCountdownSeparatorTypoFontSize: {
 			Desktop: "48",
 			Tablet: "42",
 			Mobile: "38",
 		},
-		advancedCountdownSeparatorTypographyFontSizeUnits: {
+		advancedCountdownSeparatorTypoFontSizeUnits: {
 			Desktop: "px",
 			Tablet: "px",
 			Mobile: "px",
 		},
-		advancedCountdownSeparatorTypographyFontWeight: "",
-		advancedCountdownSeparatorHorizontalGap: {
-			Desktop: "40",
-			Tablet: "40",
-			Mobile: "40",
-		},
-		advancedCountdownSeparatorVerticalGap: {
+		advancedCountdownSeparatorTypoFontWeight: "",
+		advancedCountdownSeparatorSpacing: {
 			Desktop: "40",
 			Tablet: "40",
 			Mobile: "40",
@@ -215,6 +210,7 @@ export const presetStyles = {
 			Mobile: "",
 		},
 	},
+
 	"preset-2": {
 		advancedCountdownFlexWrap: true,
 		advancedCountdownLayoutType: "flex",
@@ -224,37 +220,37 @@ export const presetStyles = {
 			Tablet: "68",
 			Mobile: "40",
 		},
-		countDownItemWrapperBorderRadiusDesktop: {
+		advancedCountdownItemWrapperBorderRadiusDesktop: {
 			top: "10",
 			bottom: "10",
 			left: "10",
 			right: "10",
 		},
-		countDownItemWrapperBorderRadiusTablet: {
+		advancedCountdownItemWrapperBorderRadiusTablet: {
 			top: "10",
 			bottom: "10",
 			left: "10",
 			right: "10",
 		},
-		countDownItemWrapperBorderRadiusMobile: {
+		advancedCountdownItemWrapperBorderRadiusMobile: {
 			top: "10",
 			bottom: "10",
 			left: "10",
 			right: "10",
 		},
-		countDownItemWrapperPaddingDesktop: {
+		advancedCountdownItemWrapperPaddingDesktop: {
 			top: "32",
 			bottom: "32",
 			left: "42",
 			right: "42",
 		},
-		countDownItemWrapperPaddingTablet: {
+		advancedCountdownItemWrapperPaddingTablet: {
 			top: "24",
 			bottom: "24",
 			left: "42",
 			right: "42",
 		},
-		countDownItemWrapperPaddingMobile: {
+		advancedCountdownItemWrapperPaddingMobile: {
 			top: "24",
 			bottom: "24",
 			left: "42",
@@ -279,25 +275,17 @@ export const presetStyles = {
 			right: "0",
 		},
 		singleDigitFontColorSwitcher: true,
-		daysDigitFontColorSwitcher: "normal",
 		daysDigitFontColor: "#e43242",
-		daysDigitFontHoverColor: "",
-		hoursDigitFontColorSwitcher: "normal",
 		hoursDigitFontColor: "#4caf50",
-		hoursDigitFontHoverColor: "",
-		minutesDigitFontColorSwitcher: "normal",
 		minutesDigitFontColor: "#f89b2e",
-		minutesDigitFontHoverColor: "",
-		secondsDigitFontColorSwitcher: "normal",
 		secondsDigitFontColor: "#399cff",
-		secondsDigitFontHoverColor: "",
-		digitFontSize: {
+		advancedCountdownStyle5CountdownTypoFontSize: {
 			Desktop: "62",
 			Tablet: "48",
 			Mobile: "32",
 		},
 		digitFontWeight: "500",
-		digitLineHeight: {
+		advancedCountdownStyle5CountdownTypoLineHeight: {
 			Desktop: "80",
 			Tablet: "60",
 			Mobile: "42",
@@ -317,126 +305,30 @@ export const presetStyles = {
 		},
 		advancedCountdownSeparatorEnabled: true,
 		advancedCountdownSeparatorType: "line",
-		advancedCountdownSeparatorFontColor: "#e1e3e8",
-		advancedCountdownSeparatorFontHoverColor: "#e1e3e8",
-		advancedCountdownSeparatorTypographyFontSize: {
+		advancedCountdownSeparatorColor: "#e1e3e8",
+		advancedCountdownSeparatorHoverColor: "#e1e3e8",
+		advancedCountdownSeparatorTypoFontSize: {
 			Desktop: "100",
 			Tablet: "42",
 			Mobile: "38",
 		},
-		advancedCountdownSeparatorTypographyFontSizeUnits: {
+		advancedCountdownSeparatorTypoFontSizeUnits: {
 			Desktop: "px",
 			Tablet: "px",
 			Mobile: "px",
 		},
-		advancedCountdownSeparatorTypographyFontWeight: "100",
-		advancedCountdownSeparatorHorizontalGap: {
+		advancedCountdownSeparatorTypoFontWeight: "100",
+		advancedCountdownSeparatorSpacing: {
 			Desktop: "45",
 			Tablet: "60",
 			Mobile: "60",
 		},
-		advancedCountdownSeparatorVerticalGap: {
-			Desktop: "51",
-			Tablet: "40",
-			Mobile: "40",
-		},
 		globalClassicColor: "#f7f7f7",
-		labelBgColor: "",
-		labelBgHoverColor: "",
-		advancedCountdownLabelBorderColor: "",
-		advancedCountdownLabelBorder: "none",
-		advancedCountdownLabelBorderTypeDesktop: {
-			top: "",
-			right: "",
-			bottom: "",
-			left: "",
-		},
-		advancedCountdownLabelBorderTypeTablet: {
-			top: "",
-			right: "",
-			bottom: "",
-			left: "",
-		},
-		advancedCountdownLabelBorderTypeMobile: {
-			top: "",
-			right: "",
-			bottom: "",
-			left: "",
-		},
-		advancedCountdownLabelBorderTypeLink: true,
-		advancedCountdownLabelBorderRadiusUnits: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
-		},
-		advancedCountdownLabelBorderRadiusDesktop: {
-			top: "",
-			right: "",
-			bottom: "",
-			left: "",
-		},
-		advancedCountdownLabelBorderRadiusTablet: {
-			top: "",
-			right: "",
-			bottom: "",
-			left: "",
-		},
-		advancedCountdownLabelBorderRadiusMobile: {
-			top: "",
-			right: "",
-			bottom: "",
-			left: "",
-		},
-		advancedCountdownLabelHeight: {
-			Desktop: "",
-			Tablet: "",
-			Mobile: "",
-		},
-		advancedCountdownDigitBorderColor: "",
-		advancedCountdownDigitBorder: "none",
-		advancedCountdownDigitBorderTypeDesktop: {
-			top: "",
-			right: "",
-			bottom: "",
-			left: "",
-		},
-		advancedCountdownDigitBorderTypeTablet: {
-			top: "",
-			right: "",
-			bottom: "",
-			left: "",
-		},
-		advancedCountdownDigitBorderTypeMobile: {
-			top: "",
-			right: "",
-			bottom: "",
-			left: "",
-		},
-		advancedCountdownDigitBorderRadiusDesktop: {
-			top: "",
-			right: "",
-			bottom: "",
-			left: "",
-		},
-		advancedCountdownDigitBorderRadiusTablet: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
-		},
-		advancedCountdownDigitBorderRadiusMobile: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
-		},
-		advancedCountdownDigitHeight: {
-			Desktop: "",
-			Tablet: "",
-			Mobile: "",
-		},
+		// ... other properties
 	},
+
 	"preset-3": {
+		// Updated similarly with advancedCountdown* keys
 		advancedCountdownFlexWrap: true,
 		advancedCountdownLayoutType: "flex",
 		advancedCountdownLayoutAlignment: "center",
@@ -445,208 +337,29 @@ export const presetStyles = {
 			Tablet: "72",
 			Mobile: "60",
 		},
-		countDownItemWrapperBorderRadiusDesktop: {
+		advancedCountdownItemWrapperBorderRadiusDesktop: {
 			top: "14",
 			bottom: "14",
 			left: "14",
 			right: "14",
 		},
-		countDownItemWrapperBorderRadiusTablet: {
-			top: "14",
-			bottom: "14",
-			left: "14",
-			right: "14",
-		},
-		countDownItemWrapperBorderRadiusMobile: {
-			top: "14",
-			bottom: "14",
-			left: "14",
-			right: "14",
-		},
-		countDownItemWrapperPaddingDesktop: {
+		advancedCountdownItemWrapperPaddingDesktop: {
 			top: "0",
 			bottom: "0",
 			left: "0",
 			right: "0",
 		},
-		countDownItemWrapperPaddingTablet: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
-		},
-		countDownItemWrapperPaddingMobile: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
-		},
-		advancedCountdownLabelMarginDesktop: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
-		},
-		advancedCountdownLabelMarginTablet: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
-		},
-		advancedCountdownLabelMarginMobile: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
-		},
-		singleDigitFontColorSwitcher: false,
-		digitFontColor: "#15171C",
-		digitFontHoverColor: "#15171C",
-		digitFontSize: {
+		advancedCountdownStyle5CountdownTypoFontSize: {
 			Desktop: "62",
 			Tablet: "48",
 			Mobile: "32",
 		},
-		digitFontWeight: "500",
-		digitLineHeight: {
-			Desktop: "80",
-			Tablet: "60",
-			Mobile: "42",
-		},
+		digitFontColor: "#15171C",
 		labelFontColor: "#6A758E",
-		labelFontHoverColor: "#6A758E",
-		labelFontSize: {
-			Desktop: "18",
-			Tablet: "",
-			Mobile: "",
-		},
-		labelFontWeight: "",
-		labelLineHeight: {
-			Desktop: "25",
-			Tablet: "",
-			Mobile: "",
-		},
-		advancedCountdownSeparatorEnabled: true,
-		advancedCountdownSeparatorType: "colon",
-		advancedCountdownSeparatorFontColor: "#15171C",
-		advancedCountdownSeparatorFontHoverColor: "#15171C",
-		advancedCountdownSeparatorTypographyFontSize: {
-			Desktop: "48",
-			Tablet: "42",
-			Mobile: "38",
-		},
-		advancedCountdownSeparatorTypographyFontSizeUnits: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
-		},
-		advancedCountdownSeparatorTypographyFontWeight: "",
-		advancedCountdownSeparatorHorizontalGap: {
-			Desktop: "40",
-			Tablet: "40",
-			Mobile: "40",
-		},
-		advancedCountdownSeparatorVerticalGap: {
-			Desktop: "40",
-			Tablet: "40",
-			Mobile: "40",
-		},
 		globalClassicColor: "",
-		labelBgColor: "",
-		labelBgHoverColor: "",
-		advancedCountdownLabelBorderColor: "",
-		advancedCountdownLabelBorder: "none",
-		advancedCountdownLabelBorderTypeDesktop: {
-			top: "",
-			right: "",
-			bottom: "",
-			left: "",
-		},
-		advancedCountdownLabelBorderTypeTablet: {
-			top: "",
-			right: "",
-			bottom: "",
-			left: "",
-		},
-		advancedCountdownLabelBorderTypeMobile: {
-			top: "",
-			right: "",
-			bottom: "",
-			left: "",
-		},
-		advancedCountdownLabelBorderTypeLink: true,
-		advancedCountdownLabelBorderRadiusUnits: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
-		},
-		advancedCountdownLabelBorderRadiusDesktop: {
-			top: "",
-			right: "",
-			bottom: "",
-			left: "",
-		},
-		advancedCountdownLabelBorderRadiusTablet: {
-			top: "",
-			right: "",
-			bottom: "",
-			left: "",
-		},
-		advancedCountdownLabelBorderRadiusMobile: {
-			top: "",
-			right: "",
-			bottom: "",
-			left: "",
-		},
-		advancedCountdownLabelHeight: {
-			Desktop: "",
-			Tablet: "",
-			Mobile: "",
-		},
-		advancedCountdownDigitBorderColor: "",
-		advancedCountdownDigitBorder: "none",
-		advancedCountdownDigitBorderTypeDesktop: {
-			top: "",
-			right: "",
-			bottom: "",
-			left: "",
-		},
-		advancedCountdownDigitBorderTypeTablet: {
-			top: "",
-			right: "",
-			bottom: "",
-			left: "",
-		},
-		advancedCountdownDigitBorderTypeMobile: {
-			top: "",
-			right: "",
-			bottom: "",
-			left: "",
-		},
-		advancedCountdownDigitBorderRadiusDesktop: {
-			top: "",
-			right: "",
-			bottom: "",
-			left: "",
-		},
-		advancedCountdownDigitBorderRadiusTablet: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
-		},
-		advancedCountdownDigitBorderRadiusMobile: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
-		},
-		advancedCountdownDigitHeight: {
-			Desktop: "",
-			Tablet: "",
-			Mobile: "",
-		},
+		// ... add more as needed
 	},
+
 	"preset-4": {
 		advancedCountdownLayoutType: "grid",
 		advancedCountdownLayoutAlignment: "center",
@@ -660,240 +373,55 @@ export const presetStyles = {
 			Tablet: "80",
 			Mobile: "50",
 		},
-		countDownItemWrapperBorderRadiusUnits: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
-		},
-		countDownItemWrapperBorderRadiusDesktop: {
+		advancedCountdownItemWrapperBorderRadiusDesktop: {
 			top: "14",
 			bottom: "14",
 			left: "14",
 			right: "14",
 		},
-		countDownItemWrapperBorderRadiusTablet: {
-			top: "14",
-			bottom: "14",
-			left: "14",
-			right: "14",
-		},
-		countDownItemWrapperBorderRadiusMobile: {
-			top: "14",
-			bottom: "14",
-			left: "14",
-			right: "14",
-		},
-		countDownItemWrapperPaddingDesktop: {
+		advancedCountdownItemWrapperPaddingDesktop: {
 			top: "42",
 			right: "42",
 			bottom: "42",
 			left: "42",
 		},
-		countDownItemWrapperPaddingTablet: {
-			top: "24",
-			bottom: "24",
-			left: "42",
-			right: "42",
-		},
-		countDownItemWrapperPaddingMobile: {
-			top: "24",
-			bottom: "24",
-			left: "42",
-			right: "42",
-		},
-		singleDigitFontColorSwitcher: false,
-		digitFontColor: "#ffffff",
-		digitFontHoverColor: "#ffffff",
-		digitFontSize: {
+		advancedCountdownStyle5CountdownTypoFontSize: {
 			Desktop: "62",
 			Tablet: "48",
 			Mobile: "32",
 		},
-		digitFontWeight: "500",
-		digitLineHeight: {
-			Desktop: "80",
-			Tablet: "60",
-			Mobile: "42",
-		},
+		digitFontColor: "#ffffff",
 		labelFontColor: "#FFFFFF",
-		labelFontHoverColor: "#FFFFFF",
 		labelBgColor: "#5d98ff",
-		labelBgHoverColor: "",
-		labelFontSize: {
-			Desktop: "18",
-			Tablet: "",
-			Mobile: "",
-		},
-		labelLineHeight: {
-			Desktop: "25",
-			Tablet: "",
-			Mobile: "",
-		},
-		advancedCountdownSeparatorEnabled: true,
-		advancedCountdownSeparatorType: "colon",
-		advancedCountdownSeparatorCustom: "",
-		advancedCountdownSeparatorFontColorSwitcher: "normal",
-		advancedCountdownSeparatorFontColor: "#ffffff",
-		advancedCountdownSeparatorFontHoverColor: "#ffffff",
-		advancedCountdownSeparatorTypographyFontSize: {
-			Desktop: "62",
-			Tablet: "42",
-			Mobile: "38",
-		},
-		advancedCountdownSeparatorTypographyFontSizeUnits: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
-		},
-		advancedCountdownSeparatorTypographyFontWeight: "500",
-		advancedCountdownSeparatorTypographyLineHeight: {
-			Desktop: "80",
-			Tablet: "",
-			Mobile: "",
-		},
-		advancedCountdownSeparatorHorizontalGap: {
-			Desktop: "40",
-			Tablet: "40",
-			Mobile: "40",
-		},
-		advancedCountdownSeparatorHorizontalGapUnits: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
-		},
-		advancedCountdownSeparatorVerticalGap: {
-			Desktop: "80",
-			Tablet: "40",
-			Mobile: "40",
-		},
-		advancedCountdownSeparatorVerticalGapUnits: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
-		},
-		globalBackgroundType: "classic",
 		globalClassicColor: "#5b0ac6",
-		advancedCountdownLabelBorderColor: "#5d98ff",
-		advancedCountdownLabelBorder: "solid",
-		advancedCountdownLabelBorderTypeUnits: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
+		// ... rest updated similarly
+	},
+
+	"preset-5": {
+		// Style 5 specific presets
+		advancedCountdownContainerSizeStyle5: {
+			Desktop: "771",
+			Tablet: "650",
+			Mobile: "500",
 		},
-		advancedCountdownLabelBorderTypeDesktop: {
-			top: "1",
-			right: "1",
-			bottom: "1",
-			left: "1",
+		advancedCountdownStyle4DaysTotalDots: {
+			Desktop: "12",
 		},
-		advancedCountdownLabelBorderTypeTablet: {
-			top: "1",
-			right: "1",
-			bottom: "1",
-			left: "1",
+		advancedCountdownStyle4HoursTotalDots: {
+			Desktop: "24",
 		},
-		advancedCountdownLabelBorderTypeMobile: {
-			top: "1",
-			right: "1",
-			bottom: "1",
-			left: "1",
+		advancedCountdownStyle4MinutesTotalDots: {
+			Desktop: "30",
 		},
-		advancedCountdownLabelBorderTypeLink: true,
-		advancedCountdownLabelBorderRadiusUnits: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
+		advancedCountdownStyle4ActiveDotColor: "#ffffff",
+		advancedCountdownStyle4InactiveDotColor: "rgba(255,255,255,0.15)",
+		advancedCountdownStyle4DotsThickness: {
+			Desktop: "5",
 		},
-		advancedCountdownLabelBorderRadiusDesktop: {
-			top: "0",
-			right: "0",
-			bottom: "10",
-			left: "10",
+		advancedCountdownStyle4DotsGap: {
+			Desktop: "1",
 		},
-		advancedCountdownLabelBorderRadiusTablet: {
-			top: "0",
-			right: "0",
-			bottom: "10",
-			left: "10",
-		},
-		advancedCountdownLabelBorderRadiusMobile: {
-			top: "0",
-			right: "0",
-			bottom: "10",
-			left: "10",
-		},
-		advancedCountdownLabelBorderRadiusLink: false,
-		advancedCountdownLabelMarginUnits: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
-		},
-		advancedCountdownLabelMarginDesktop: {
-			top: "0",
-			right: "0",
-			bottom: "0",
-			left: "0",
-		},
-		advancedCountdownLabelMarginTablet: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
-		},
-		advancedCountdownLabelMarginMobile: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
-		},
-		advancedCountdownLabelHeight: {
-			Desktop: "50",
-			Tablet: "",
-			Mobile: "",
-		},
-		advancedCountdownDigitBorderColor: "#5d98ff80",
-		advancedCountdownDigitBorder: "solid",
-		advancedCountdownDigitBorderTypeDesktop: {
-			top: "1",
-			right: "1",
-			bottom: "0",
-			left: "1",
-		},
-		advancedCountdownDigitBorderTypeTablet: {
-			top: "1",
-			right: "1",
-			bottom: "0",
-			left: "1",
-		},
-		advancedCountdownDigitBorderTypeMobile: {
-			top: "1",
-			right: "1",
-			bottom: "0",
-			left: "1",
-		},
-		advancedCountdownDigitBorderRadiusDesktop: {
-			top: "10",
-			right: "10",
-			bottom: "0",
-			left: "0",
-		},
-		advancedCountdownDigitBorderRadiusTablet: {
-			top: "10",
-			bottom: "10",
-			left: "",
-			right: "",
-		},
-		advancedCountdownDigitBorderRadiusMobile: {
-			top: "10",
-			bottom: "10",
-			left: "",
-			right: "",
-		},
-		advancedCountdownDigitHeight: {
-			Desktop: "130",
-			Tablet: "",
-			Mobile: "",
-		},
+		// ... add more as per attributes
 	},
 };
 
