@@ -48,8 +48,6 @@ export default function Edit({
 		legendGap,
 	} = attributes;
 
-	const [isFilterOpen, setIsFilterOpen] = useState(false);
-	const [activeFilterIndex, setActiveFilterIndex] = useState(0);
 	const canvasRef = useRef(null);
 	const chartInstance = useRef(null);
 
@@ -231,7 +229,6 @@ export default function Edit({
 										className={`fb-chart-period fb-chart-filter ${
 											isFilterOpen ? "fb-active" : ""
 										}`}
-										onClick={() => setIsFilterOpen(!isFilterOpen)}
 									>
 										<span className="fb-current-filter">
 											{filterList[activeFilterIndex]?.filter_label ||
@@ -249,12 +246,13 @@ export default function Edit({
 															activeFilterIndex === index
 																? "fb-item-active"
 																: ""
-														}`}
-														onClick={(e) => {
-															e.stopPropagation();
-															setActiveFilterIndex(index);
-															setIsFilterOpen(false);
-														}}
+                                                                           }`}
+                                                                      
+														// onClick={(e) => {
+														// 	e.stopPropagation();
+														// 	setActiveFilterIndex(index);
+														// 	setIsFilterOpen(false);
+														// }}
 													>
 														{item.filter_label || __("Item", "frontis-blocks")}
 													</li>
