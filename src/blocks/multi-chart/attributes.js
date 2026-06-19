@@ -1176,9 +1176,9 @@ const attributes = {
 	multiChartGlobalZIndex: {
 		type: "object",
 		default: {
-			Desktop: "",
-			Tablet: "",
-			Mobile: "",
+			Desktop: "999999",
+			Tablet: "999999",
+			Mobile: "999999",
 		},
 	},
 	multiChartCustomCSS: {
