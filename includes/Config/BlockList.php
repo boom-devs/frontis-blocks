@@ -94,7 +94,7 @@ class BlockList
                 'category' => 'media',
                 'badge' => 'pro',
                 'status' => 'true',
-                'icon' => FB_PLUGIN_URL . 'assets/icons/image-hotspot.svg',
+                'icon' => FB_PLUGIN_URL . 'assets/icons/image-accordion.svg',
                 'doc' => 'https://wpmessiah.com/',
                 'demo' => 'https://wpmessiah.com/',
                 'complete' => 'true',
