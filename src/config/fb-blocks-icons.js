@@ -1298,59 +1298,22 @@ const FB_Block_Icons = {
      ),
      // image-accordion block icon
 	image_accordion: fb(
-	'svg',
-	{
-		xmlns: 'http://www.w3.org/2000/svg',
-		width: '24',
-		height: '24',
-		viewBox: '0 0 24 24',
-		fill: 'none',
-		className: 'frontis-blocks-editor-icons',
-	},
-
-	// Background
-	fb('path', {
-		d: 'M0 12C0 5.37 5.37 0 12 0H336C342.63 0 348 5.37 348 12V264C348 270.63 342.63 276 336 276H12C5.37 276 0 270.63 0 264V12Z',
-		fill: '#8891A5',
-	}),
-
-	// Large Card
-	fb('rect', {
-		x: '24',
-		y: '24',
-		width: '24',
-		height: '24',
-		rx: '14',
-		fill: '#0B0C0E',
-	}),
-
-	// Small Cards
-	[114, 162.668, 211.332].map((y) =>
-		fb('rect', {
-			x: '24',
-			y: String(y),
-			width: '24',
-			height: '24',
-			rx: '14',
-			fill: '#0B0C0E',
-		})
-	),
-
-	// Left Side Elements
-	fb('path', {
-		d: 'M24 126C24 120.477 28.477 116 34 116H137C142.523 116 147 120.477 147 126C147 131.523 142.523 136 137 136H34C28.477 136 24 131.523 24 126Z',
-		fill: '#0B0C0E',
-	}),
-
-	fb('rect', {
-		x: '24',
-		y: '24',
-		width: '24',
-		height: '24',
-		rx: '6',
-		fill: '#0B0C0E',
-	}),
-)
+     	'svg',
+     	{
+     		xmlns: 'http://www.w3.org/2000/svg',
+     		width: '24',
+     		height: '24',
+     		viewBox: '0 0 24 24',
+     		fill: 'none',
+     		className: 'frontis-blocks-editor-icons',
+     	},
+     	fb('path', {
+     		d: 'M3 17V5C3 3.89543 3.89543 3 5 3H11C12.1046 3 13 3.89543 13 5V9V13M3 17V19C3 20.1046 3.89543 21 5 21H11C12.1046 21 13 20.1046 13 19V13M3 17L8.58579 11.4142C9.36684 10.6332 10.6332 10.6332 11.4142 11.4142L13 13M18.5 18V16M16 19V5C16 3.89543 16.8954 3 18 3H19C20.1046 3 21 3.89543 21 5V19C21 20.1046 20.1046 21 19 21H18C16.8954 21 16 20.1046 16 19ZM6 7C6 6.44772 6.44772 6 7 6C7.55228 6 8 6.44772 8 7C8 7.55228 7.55228 8 7 8C6.44772 8 6 7.55228 6 7Z',
+     		stroke: '#0B0C0E',
+     		strokeWidth: '1.4',
+     		strokeLinecap: 'round',
+     	}),
+     )
 };
 
 export const renderFbBlockIcon = (blockName) => (
