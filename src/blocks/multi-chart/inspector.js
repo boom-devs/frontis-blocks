@@ -1706,13 +1706,9 @@ const Inspector = ({ attributes, setAttributes }) => {
 					spacingDesktop={toggleBtnBorderRadiusDesktop}
 					spacingTablet={toggleBtnBorderRadiusTablet}
 					spacingMobile={toggleBtnBorderRadiusMobile}
-					handleSpacingUnitHandler={
-						toggleBtnBorderRadiusHandleSpacingUnitHandler
-					}
+					handleSpacingUnitHandler={toggleBtnBorderRadiusHandleSpacingUnitHandler}
 					spacingCombineBtn={toggleBtnBorderRadiusLink}
-					spacingCombineBtnHandler={
-						toggleBtnBorderRadiusSpacingCombineBtnHandlerFn
-					}
+					spacingCombineBtnHandler={toggleBtnBorderRadiusSpacingCombineBtnHandlerFn}
 					setAttributes={setAttributes}
 				/>
 			</PanelBody>
@@ -1757,17 +1753,13 @@ const Inspector = ({ attributes, setAttributes }) => {
 					deviceType={deviceType}
 					setAttributes={setAttributes}
 					globalAlignment={legendTextAlignment}
-					setGlobalAlignment={(value) =>
-						setAttributes({ legendTextAlignment: value })
-					}
+					setGlobalAlignment={(value) => setAttributes({ legendTextAlignment: value })}
 				/>
 				<FB_Range
 					label={__("Dot Size", "frontis-blocks")}
 					rangeValue={legendDotSize}
 					units={legendDotSizeUnits}
-					rangeUnitHandler={(value) =>
-						setAttributes({ legendDotSizeUnits: value })
-					}
+					rangeUnitHandler={(value) => setAttributes({ legendDotSizeUnits: value })}
 					deviceType={deviceType}
 					onChangeHandler={(value) => setAttributes({ legendDotSize: value })}
 					setAttributes={setAttributes}
@@ -1783,9 +1775,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 				<FB_TypographyControl
 					globalTypoControlActive={true}
 					globalTypoSwitcher={footerTitleGlobalTypoSwitcher}
-					storeGlobalTypographyData={(value) =>
-						setAttributes({ footerTitleGlobalTypographyData: value })
-					}
+					storeGlobalTypographyData={(value) => setAttributes({ footerTitleGlobalTypographyData: value })}
 					globalTypoType={footerTitleGlobalTypoType}
 					onChangeGlobalTypoType={(value) => {
 						setAttributes({
