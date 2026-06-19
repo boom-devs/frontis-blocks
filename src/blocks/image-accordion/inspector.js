@@ -1227,7 +1227,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 				/>
 			</PanelBody>
 
-
 			<PanelBody
 				title={__("Accordion Items", "frontis-blocks")}
 				initialOpen={true}
@@ -1272,7 +1271,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 	 */
 	const styleControls = (
 		<>
-
 			<PanelBody title={__("General", "frontis-blocks")} initialOpen={true}>
 				<FB_Range
 					label={__("Width", "frontis-blocks")}
@@ -1423,7 +1421,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 				/>
 			</PanelBody>
 
-
 			<PanelBody title={__("Overlay", "frontis-blocks")} initialOpen={false}>
 				<FB_SwitcherControl
 					label={__("Overlay Color", "frontis-blocks")}
@@ -1445,7 +1442,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 					/>
 				)}
 			</PanelBody>
-
 
 			{imageAccordionShowTitle && (
 				<PanelBody title={__("Title", "frontis-blocks")} initialOpen={false}>
@@ -1504,7 +1500,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 				</PanelBody>
 			)}
 
-
 			<PanelBody title={__("Subtitle", "frontis-blocks")} initialOpen={false}>
 				<FB_TypographyControl
 					label={__("Typography", "frontis-blocks")}
@@ -1545,7 +1540,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 					setGlobalColor={(value) => setAttributes({ imageAccordionSubtitleColor: value ?? "" })}
 				/>
 			</PanelBody>
-
 
 			{imageAccordionPreset === "preset-1" && (
 				<PanelBody title={__("Icon", "frontis-blocks")} initialOpen={false}>
@@ -1602,7 +1596,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 				</PanelBody>
 			)}
 
-
 			{imageAccordionPreset === "preset-2" && (
 				<PanelBody
 					title={__("Overlay Dots", "frontis-blocks")}
@@ -1632,7 +1625,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 					)}
 				</PanelBody>
 			)}
-
 
 			{(imageAccordionPreset === "preset-2" ||
 				imageAccordionPreset === "preset-4") && (
@@ -1690,7 +1682,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 					)}
 				</PanelBody>
 			)}
-
 
 			{imageAccordionPreset === "preset-3" && (
 				<PanelBody title={__("Button", "frontis-blocks")} initialOpen={false}>
