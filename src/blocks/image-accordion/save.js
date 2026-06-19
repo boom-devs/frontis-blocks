@@ -5,7 +5,6 @@ import renderSVG from "../../components/icon-picker/components/icon-picker/contr
 export default function save({ attributes }) {
 	const {
 		blockID,
-		blockStyle,
 		imageAccordionPreset,
 		imageAccordionTrigger,
 		imageAccordionItems,
@@ -47,11 +46,11 @@ export default function save({ attributes }) {
 				style={
 					imageAccordionPreset !== "preset-4" && item.image?.url
 						? {
-								backgroundImage: `url('${item.image.url}')`,
-								backgroundPosition: item.image?.position,
-								backgroundAttachment: item.image?.attachment,
-								backgroundRepeat: item.image?.repeat,
-								backgroundSize: item.image?.size,
+							backgroundImage: `url('${item.image.url}')`,
+							backgroundPosition: item.image?.position,
+							backgroundAttachment: item.image?.attachment,
+							backgroundRepeat: item.image?.repeat,
+							backgroundSize: item.image?.size,
 						  }
 						: {}
 				}
@@ -175,7 +174,6 @@ export default function save({ attributes }) {
 					</div>
 				</div>
 			</div>
-			{blockStyle && <style>{blockStyle}</style>}
 		</>
 	);
 }

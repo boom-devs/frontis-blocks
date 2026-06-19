@@ -1357,46 +1357,39 @@ const Inspector = ({ attributes, setAttributes }) => {
 					spacingCombineBtnHandler={imageAccordionItemBorderRadiusCombineBtnHandlerFn}
 					setAttributes={setAttributes}
 				/>
-				{/* <FB_InputControl
-					label={__("Active Item Shadow", "frontis-blocks")}
-					value={imageAccordionItemShadow}
-					onChangeValue={(value) => setAttributes({ imageAccordionItemShadow: value })}
-                    /> */}
-                    {/* active item box-shadow */}
-                    <FB_SwitcherControl
-                         label={__("Active Item Shadow", "frontis-blocks")}
-                         globalSwitcher={imageAccordionBoxShadowSwitcher}
-                         setGlobalSwitcher={(value) =>
-                              setAttributes({ imageAccordionBoxShadowSwitcher: value })
-                         }
-                    />
-                    
-                    {imageAccordionBoxShadowSwitcher === "normal" && (
-                         <FB_BoxShadowControl
-                              label={__("Normal Shadow", "frontis-blocks")}
-                              onBoxShadowChange={(value) =>
-                                   setAttributes({ imageAccordionBoxShadowValues: value })
-                              }
-                              initialShadowValue={imageAccordionBoxShadowValues}
-                              onBoxShadowStyleChange={(value) =>
-                                   setAttributes({ imageAccordionBoxShadowValues: value })
-                              }
-                         />
-                    )}
-                    
-                    {imageAccordionBoxShadowSwitcher === "hover" && (
-                         <FB_BoxShadowControl
-                              label={__("Hover Shadow", "frontis-blocks")}
-                              onBoxShadowChange={(value) =>
-                                   setAttributes({ imageAccordionBoxShadowValues: value })
-                              }
-                              initialShadowValue={imageAccordionBoxShadowValues}
-                              onBoxShadowStyleChange={(value) =>
-                                   setAttributes({ imageAccordionBoxShadowCssValue: value })
-                              }
-                         />
-                    )}
-                    {/* active item box-shadow end */}
+				<FB_SwitcherControl
+						label={__("Active Item Shadow", "frontis-blocks")}
+						globalSwitcher={imageAccordionBoxShadowSwitcher}
+						setGlobalSwitcher={(value) =>
+							setAttributes({ imageAccordionBoxShadowSwitcher: value })
+						}
+				/>
+				
+				{imageAccordionBoxShadowSwitcher === "normal" && (
+						<FB_BoxShadowControl
+							label={__("Normal Shadow", "frontis-blocks")}
+							onBoxShadowChange={(value) =>
+								setAttributes({ imageAccordionBoxShadowValues: value })
+							}
+							initialShadowValue={imageAccordionBoxShadowValues}
+							onBoxShadowStyleChange={(value) =>
+								setAttributes({ imageAccordionBoxShadowValues: value })
+							}
+						/>
+				)}
+				
+				{imageAccordionBoxShadowSwitcher === "hover" && (
+						<FB_BoxShadowControl
+							label={__("Hover Shadow", "frontis-blocks")}
+							onBoxShadowChange={(value) =>
+								setAttributes({ imageAccordionBoxShadowValues: value })
+							}
+							initialShadowValue={imageAccordionBoxShadowValues}
+							onBoxShadowStyleChange={(value) =>
+								setAttributes({ imageAccordionBoxShadowCssValue: value })
+							}
+						/>
+				)}
                     
 				<FB_Range
 					label={__("Active Item Z-Index", "frontis-blocks")}
