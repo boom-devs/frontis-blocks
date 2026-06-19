@@ -1295,7 +1295,62 @@ const FB_Block_Icons = {
 			strokeLinecap: "round",
 			strokeLinejoin: "round",
 		}),
+     ),
+     // image-accordion block icon
+	image_accordion: fb(
+	'svg',
+	{
+		xmlns: 'http://www.w3.org/2000/svg',
+		width: '24',
+		height: '24',
+		viewBox: '0 0 24 24',
+		fill: 'none',
+		className: 'frontis-blocks-editor-icons',
+	},
+
+	// Background
+	fb('path', {
+		d: 'M0 12C0 5.37 5.37 0 12 0H336C342.63 0 348 5.37 348 12V264C348 270.63 342.63 276 336 276H12C5.37 276 0 270.63 0 264V12Z',
+		fill: '#8891A5',
+	}),
+
+	// Large Card
+	fb('rect', {
+		x: '24',
+		y: '24',
+		width: '24',
+		height: '24',
+		rx: '14',
+		fill: '#0B0C0E',
+	}),
+
+	// Small Cards
+	[114, 162.668, 211.332].map((y) =>
+		fb('rect', {
+			x: '24',
+			y: String(y),
+			width: '24',
+			height: '24',
+			rx: '14',
+			fill: '#0B0C0E',
+		})
 	),
+
+	// Left Side Elements
+	fb('path', {
+		d: 'M24 126C24 120.477 28.477 116 34 116H137C142.523 116 147 120.477 147 126C147 131.523 142.523 136 137 136H34C28.477 136 24 131.523 24 126Z',
+		fill: '#0B0C0E',
+	}),
+
+	fb('rect', {
+		x: '24',
+		y: '24',
+		width: '24',
+		height: '24',
+		rx: '6',
+		fill: '#0B0C0E',
+	}),
+)
 };
 
 export const renderFbBlockIcon = (blockName) => (
