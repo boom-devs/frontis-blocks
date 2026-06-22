@@ -576,9 +576,9 @@ const generateFormBuilderStyle = (attributes) => {
         .fb-form-builder-main-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input input:focus::placeholder {
             ${inputFieldPlaceholderFocusColor ? `color: ${inputFieldPlaceholderFocusColor};` : ''}
         }
-        .fb-form-builder-main-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input textarea,
-        .fb-form-builder-main-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input select,
-        .fb-form-builder-main-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input input {
+        .fb-form-builder-main-wrapper.${blockID} .fb-form-input textarea,
+        .fb-form-builder-main-wrapper.${blockID} .fb-form-input select,
+        .fb-form-builder-main-wrapper.${blockID} .fb-form-input input {
             width: 100%;
             
             ${inputFieldGlobalTypoSwitcher?.fontFamily === true && inputFieldGlobalTypographyData?.fontFamily ? `font-family: ${inputFieldGlobalTypographyData?.fontFamily};` : ''}
