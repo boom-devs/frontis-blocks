@@ -6,10 +6,8 @@ export default function save({ attributes }) {
 
     const { 
         blockID,
-        blockStyle,
         
         classHook,
-        formType,
         formTitle,
 
         formToEmail,

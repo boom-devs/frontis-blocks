@@ -14,6 +14,8 @@ const generateTextFieldStyle = (attributes) => {
     const {
         blockID,
 
+        formColumnGap,
+        formColumnGapUnits,
         inputFieldMaxWidth,
         inputFieldMaxWidthUnits,
         inputFieldHeight,
@@ -58,6 +60,9 @@ const generateTextFieldStyle = (attributes) => {
         inputFieldFocusColor,
         inputFieldPlaceholderColor,
         inputFieldPlaceholderFocusColor,
+
+        inputFieldIconColor,
+        inputFieldIconFocusColor,
 
         labelMarginUnits,
         labelMarginDesktop,
@@ -123,6 +128,9 @@ const generateTextFieldStyle = (attributes) => {
         inputFieldIconSizeUnits,
         inputFieldIconGap,
         inputFieldIconGapUnits,
+
+        selectFieldIconSize,
+        selectFieldIconSizeUnits,
 
         fieldCustomCSS,
         fieldGlobalWraperID,
@@ -227,7 +235,11 @@ const generateTextFieldStyle = (attributes) => {
         .fb-text-field-wrapper.${blockID} {
             position: relative;
             width: 100%;
-            ${inputFieldMaxWidth?.Desktop ? `max-width: ${inputFieldMaxWidth?.Desktop}${inputFieldMaxWidthUnits?.Desktop};` : ''}
+            ${inputFieldMaxWidthUnits?.Desktop === '%' && inputFieldMaxWidth?.Desktop < 100 ? (
+                `max-width: calc(${inputFieldMaxWidth?.Desktop}${inputFieldMaxWidthUnits?.Desktop} - (${formColumnGap?.Desktop}${formColumnGapUnits?.Desktop} / 2));` 
+            ) : (
+                inputFieldMaxWidth?.Desktop ? `max-width: ${inputFieldMaxWidth?.Desktop}${inputFieldMaxWidthUnits?.Desktop};` : ''
+            )}
             ${fieldZIndex?.Desktop ? `z-index: ${fieldZIndex?.Desktop};` : ''}
             ${fieldOverflow !== 'default' ? `overflow: ${fieldOverflow};` : ''}
         }
@@ -418,18 +430,29 @@ const generateTextFieldStyle = (attributes) => {
         }
         .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input .fb-select-field-arrow {
             display: flex;
-            width: 12px;
+            ${selectFieldIconSize?.Desktop ? `width: ${selectFieldIconSize?.Desktop}${selectFieldIconSizeUnits?.Desktop};` : ''}
             position: absolute;
             right: 15px;
             top: 50%;
             transform: translateY(-50%);
+        }
+        .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input .fb-select-field-arrow svg {
+            width: 100%;
+            ${inputFieldIconColor ? `fill: ${inputFieldIconColor};` : ''}
+        }
+        .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input select:focus ~ .fb-select-field-arrow svg {
+            ${inputFieldIconFocusColor ? `fill: ${inputFieldIconFocusColor};` : ''}
         }
     
         @media only screen and (max-width: 1024px) {
             .fb-text-field-wrapper.${blockID} {
                 position: relative;
                 ${fieldZIndex?.Tablet ? `z-index: ${fieldZIndex?.Tablet};` : ''}
-                ${inputFieldMaxWidth?.Tablet ? `max-width: ${inputFieldMaxWidth?.Tablet}${inputFieldMaxWidthUnits?.Tablet};` : ''}
+                ${inputFieldMaxWidthUnits?.Tablet === '%' && inputFieldMaxWidth?.Tablet < 100 ? (
+                    `max-width: calc(${inputFieldMaxWidth?.Tablet}${inputFieldMaxWidthUnits?.Tablet} - (${formColumnGap?.Tablet}${formColumnGapUnits?.Tablet} / 2));` 
+                ) : (
+                    inputFieldMaxWidth?.Tablet ? `max-width: ${inputFieldMaxWidth?.Tablet}${inputFieldMaxWidthUnits?.Tablet};` : ''
+                )}
             }
             
             .fb-text-field-wrapper.${blockID} .fb-field-group-wrapper {
@@ -471,13 +494,20 @@ const generateTextFieldStyle = (attributes) => {
 
                 ${inputFieldPaddingTabletWidth && inputFieldPaddingTablet?.top ? `padding: ${inputFieldPaddingTabletWidth};` : ''}
             }
+            .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input .fb-select-field-arrow {
+                ${selectFieldIconSize?.Tablet ? `width: ${selectFieldIconSize?.Tablet}${selectFieldIconSizeUnits?.Tablet};` : ''}
+            }
         }
     
         @media only screen and (max-width: 767px) {
             .fb-text-field-wrapper.${blockID} {
                 position: relative;
                 ${fieldZIndex?.Mobile ? `z-index: ${fieldZIndex?.Mobile};` : ''}
-                ${inputFieldMaxWidth?.Mobile ? `max-width: ${inputFieldMaxWidth?.Mobile}${inputFieldMaxWidthUnits?.Mobile};` : ''}
+                ${inputFieldMaxWidthUnits?.Mobile === '%' && inputFieldMaxWidth?.Mobile < 100 ? (
+                    `max-width: calc(${inputFieldMaxWidth?.Mobile}${inputFieldMaxWidthUnits?.Mobile} - (${formColumnGap?.Mobile}${formColumnGapUnits?.Mobile} / 2));` 
+                ) : (
+                    inputFieldMaxWidth?.Mobile ? `max-width: ${inputFieldMaxWidth?.Mobile}${inputFieldMaxWidthUnits?.Mobile};` : ''
+                )}
             }
             
             .fb-text-field-wrapper.${blockID} .fb-field-group-wrapper {
@@ -518,6 +548,9 @@ const generateTextFieldStyle = (attributes) => {
                 ${inputFieldBorderRadiusMobileWidth && inputFieldBorderRadiusMobile?.top ? `border-radius: ${inputFieldBorderRadiusMobileWidth};` : ''}
 
                 ${inputFieldPaddingMobileWidth && inputFieldPaddingMobile?.top ? `padding: ${inputFieldPaddingMobileWidth};` : ''}
+            }
+            .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input .fb-select-field-arrow {
+                ${selectFieldIconSize?.Mobile ? `width: ${selectFieldIconSize?.Mobile}${selectFieldIconSizeUnits?.Mobile};` : ''}
             }
         }
     `;

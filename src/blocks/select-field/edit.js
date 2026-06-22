@@ -24,7 +24,6 @@ const Edit = (props) => {
         fieldLabel,
         fieldIconSwitcher,
         fieldIcon,
-        fieldPlaceholderSwitcher,
         fieldPlaceholder,
         fieldRequiredSwitcher,
         fieldRequiredSymbolSwitcher,
@@ -70,6 +69,8 @@ const Edit = (props) => {
             inheritedFieldRequiredSwitcher: context["fb/formInheritedRequiredFieldSwitcher"],
             inheritedFieldRequiredSymbolSwitcher: context["fb/formInheritedRequiredSymbolSwitcher"],
             formColumnGap: context["fb/formColumnGap"],
+            formColumnGap: context["fb/formColumnGap"],
+            formColumnGapUnits: context["fb/formColumnGapUnits"],
         })
     }, [
         context["fb/formBuilderParentBlockID"],
@@ -77,6 +78,8 @@ const Edit = (props) => {
         context["fb/formInheritedLabelSwitcher"],
         context["fb/formInheritedRequiredFieldSwitcher"],
         context["fb/formInheritedRequiredSymbolSwitcher"],
+        context["fb/formColumnGap"],
+        context["fb/formColumnGapUnits"],
     ])
 
     const blockProps = useBlockProps({

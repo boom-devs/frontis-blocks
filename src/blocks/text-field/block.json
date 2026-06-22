@@ -27,6 +27,8 @@
       "fb/formInheritedIconSwitcher",
       "fb/formInheritedLabelSwitcher",
       "fb/formInheritedRequiredFieldSwitcher",
-      "fb/formInheritedRequiredSymbolSwitcher"
+      "fb/formInheritedRequiredSymbolSwitcher",
+      "fb/formColumnGap",
+      "fb/formColumnGapUnits"
     ]
   }

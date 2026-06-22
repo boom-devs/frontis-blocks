@@ -2049,7 +2049,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             >
                 <FB_Range
                     min={1}
-                    max={fieldColumnGapUnits[deviceType] !== 'px' ? 100 : 2000}
+                    max={200}
                     label={__("Column", "frontis-forms")}
                     rangeValue={fieldColumnGap}
                     onChangeHandler={(value) => setAttributes({ fieldColumnGap: value })}
@@ -2062,7 +2062,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                 <FB_Range
                     min={1}
-                    max={fieldRowGapUnits[deviceType] !== 'px' ? 100 : 2000}
+                    max={200}
                     label={__("Row", "frontis-forms")}
                     rangeValue={fieldRowGap}
                     onChangeHandler={(value) => setAttributes({ fieldRowGap: value })}

@@ -7,7 +7,6 @@ const save = ({ attributes }) => {
 
     const {
         blockID,
-        blockStyle,
 
         // general
         fieldType,
@@ -15,7 +14,6 @@ const save = ({ attributes }) => {
         fieldLabel,
         fieldIconSwitcher,
         fieldIcon,
-        fieldPlaceholderSwitcher,
         fieldPlaceholder,
         fieldRequiredSwitcher,
         fieldRequiredSymbolSwitcher,

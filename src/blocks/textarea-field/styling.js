@@ -14,6 +14,8 @@ const generateTextareaFieldStyle = (attributes) => {
     const {
         blockID,
 
+        formColumnGap,
+        formColumnGapUnits,
         inputFieldMaxWidth,
         inputFieldMaxWidthUnits,
         inputFieldHeight,
@@ -228,7 +230,11 @@ const generateTextareaFieldStyle = (attributes) => {
         .fb-textarea-field-wrapper.${blockID} {
             position: relative;
             width: 100%;
-            ${inputFieldMaxWidth?.Desktop ? `max-width: ${inputFieldMaxWidth?.Desktop}${inputFieldMaxWidthUnits?.Desktop};` : ''}
+            ${inputFieldMaxWidthUnits?.Desktop === '%' && inputFieldMaxWidth?.Desktop < 100 ? (
+                `max-width: calc(${inputFieldMaxWidth?.Desktop}${inputFieldMaxWidthUnits?.Desktop} - (${formColumnGap?.Desktop}${formColumnGapUnits?.Desktop} / 2));` 
+            ) : (
+                inputFieldMaxWidth?.Desktop ? `max-width: ${inputFieldMaxWidth?.Desktop}${inputFieldMaxWidthUnits?.Desktop};` : ''
+            )}
             ${fieldZIndex?.Desktop ? `z-index: ${fieldZIndex?.Desktop};` : ''}
             ${fieldOverflow !== 'default' ? `overflow: ${fieldOverflow};` : ''}
         }
@@ -417,7 +423,11 @@ const generateTextareaFieldStyle = (attributes) => {
             .fb-textarea-field-wrapper.${blockID} {
                 position: relative;
                 ${fieldZIndex?.Tablet ? `z-index: ${fieldZIndex?.Tablet};` : ''}
-                ${inputFieldMaxWidth?.Tablet ? `max-width: ${inputFieldMaxWidth?.Tablet}${inputFieldMaxWidthUnits?.Tablet};` : ''}
+                ${inputFieldMaxWidthUnits?.Tablet === '%' && inputFieldMaxWidth?.Tablet < 100 ? (
+                    `max-width: calc(${inputFieldMaxWidth?.Tablet}${inputFieldMaxWidthUnits?.Tablet} - (${formColumnGap?.Tablet}${formColumnGapUnits?.Tablet} / 2));` 
+                ) : (
+                    inputFieldMaxWidth?.Tablet ? `max-width: ${inputFieldMaxWidth?.Tablet}${inputFieldMaxWidthUnits?.Tablet};` : ''
+                )}
             }
             
             .fb-textarea-field-wrapper.${blockID} .fb-field-group-wrapper {
@@ -465,7 +475,11 @@ const generateTextareaFieldStyle = (attributes) => {
             .fb-textarea-field-wrapper.${blockID} {
                 position: relative;
                 ${fieldZIndex?.Mobile ? `z-index: ${fieldZIndex?.Mobile};` : ''}
-                ${inputFieldMaxWidth?.Mobile ? `max-width: ${inputFieldMaxWidth?.Mobile}${inputFieldMaxWidthUnits?.Mobile};` : ''}
+                ${inputFieldMaxWidthUnits?.Mobile === '%' && inputFieldMaxWidth?.Mobile < 100 ? (
+                    `max-width: calc(${inputFieldMaxWidth?.Mobile}${inputFieldMaxWidthUnits?.Mobile} - (${formColumnGap?.Mobile}${formColumnGapUnits?.Mobile} / 2));` 
+                ) : (
+                    inputFieldMaxWidth?.Mobile ? `max-width: ${inputFieldMaxWidth?.Mobile}${inputFieldMaxWidthUnits?.Mobile};` : ''
+                )}
             }
             
             .fb-textarea-field-wrapper.${blockID} .fb-field-group-wrapper {
