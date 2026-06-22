@@ -15,7 +15,6 @@ const save = ({ attributes }) => {
         fieldLabel,
         fieldIconSwitcher,
         fieldIcon,
-        fieldPlaceholderSwitcher,
         fieldPlaceholder,
         fieldRequiredSwitcher,
         fieldRequiredSymbolSwitcher,

@@ -17,6 +17,12 @@ const attributes = {
         type: 'string',
         default: 'frontis_block',
     },
+    formColumnGap: {
+        type: 'object',
+    },
+    formColumnGapUnits: {
+        type: 'object',
+    },
 
     fieldOptions: {
         type: 'array',
