@@ -98,6 +98,10 @@ class AssetsGenerator
 			$this->combine_static_assets();
 
 			$page_name = $this->post->post_name;
+			$template_name = Helper::resolve_template_slug($post_id);
+			if (in_array($template_name, ['page-cart', 'page-checkout', 'order-confirmation', 'archive-product'], true)) {
+				$page_name = $template_name;
+			}
 			$this->combine_and_save_css_file($page_name);
 			$this->persist_page_google_fonts_url($this->block_fonts);
 
@@ -649,6 +653,10 @@ class AssetsGenerator
 
 		// Combine and save CSS files
 		$page_name = $this->post->post_name;
+		$template_name = Helper::resolve_template_slug($this->post->ID);
+		if (in_array($template_name, ['page-cart', 'page-checkout', 'order-confirmation', 'archive-product'], true)) {
+			$page_name = $template_name;
+		}
 
 		// Check if post or custom post then its should be post type instead of page name
 		if (Helper::is_custom_post_type($this->post->ID) || get_post_type($this->post->ID) === 'post') {

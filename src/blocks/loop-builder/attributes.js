@@ -232,6 +232,18 @@ const attributes = {
 			Mobile: "0"
 		}
 	},
+	excerptWordLimit: {
+		type: "object",
+		default: {
+			Desktop: "20",
+			Tablet: "20",
+			Mobile: "20"
+		}
+	},
+	excerptMoreText: {
+		type: "string",
+		default: "..."
+	},
 };
 
 export default attributes;

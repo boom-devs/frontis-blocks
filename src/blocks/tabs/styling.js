@@ -672,6 +672,16 @@ const generateTabsStyle = (attributes) => {
 
             ${tabListActiveBorderColor ? `border-color: ${tabListActiveBorderColor} !important;` : ''}
         }
+        .${blockID} .fb-tabs-wrap ul.fb-tabs-panel li.fb-tabs-active:hover {
+            ${tabListActiveBgHoverColorType === "gradient"
+                ? `background: ${
+                    tabListActiveBgHoverCustomGradientColorSwitcher && tabListActiveBgHoverCustomGradientColor
+                    ? tabListActiveBgHoverCustomGradientColor
+                    : tabListActiveBgHoverGradientColor
+                };`
+                : tabListActiveBgHoverColor ? `background: ${tabListActiveBgHoverColor};` : ''
+            }
+        }
 
         .${blockID} .fb-tabs-wrap ul.fb-tabs-panel li.fb-tabs-active .fb-tab-icon svg{
             ${tabIconActiveColor ? `fill: ${tabIconActiveColor};` : ''}
@@ -682,6 +692,14 @@ const generateTabsStyle = (attributes) => {
                 ${tabIconActiveNormalCustomGradientSwitcher && tabIconActiveNormalCustomGradientInputValue ? `background: ${tabIconActiveNormalCustomGradientInputValue};` : `background: ${tabIconActiveNormalGradientColor};`}
             `: `
                 ${tabIconBgActiveColor ? `background: ${tabIconBgActiveColor};` : ''}
+            `}
+        }
+        .${blockID} .fb-tabs-wrap ul.fb-tabs-panel li.fb-tabs-active .fb-tab-icon:hover,
+        .${blockID} .fb-tabs-wrap ul.fb-tabs-panel li.fb-tabs-active:hover .fb-tab-icon {
+            ${tabIconActiveHoverBackgroundType === 'gradient' ? `   	
+                ${tabIconActiveHoverCustomGradientSwitcher && tabIconActiveHoverCustomGradientInputValue ? `background: ${tabIconActiveHoverCustomGradientInputValue};` : `background: ${tabIconActiveHoverGradientColor};`}
+            `: `
+                ${tabIconBgActiveHoverColor ? `background: ${tabIconBgActiveHoverColor};` : ''}
             `}
         }
         .${blockID} .fb-tabs-wrap ul.fb-tabs-panel li.fb-tabs-active .fb-tab-title{
