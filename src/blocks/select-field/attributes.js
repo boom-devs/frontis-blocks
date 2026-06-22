@@ -391,6 +391,19 @@ const attributes = {
         default: '',
     },
 
+    inputFieldIconColorSwitcher: {
+        type: 'string',
+        default: 'normal'
+    },
+    inputFieldIconColor: {
+        type: 'string',
+        default: '',
+    },
+    inputFieldIconFocusColor: {
+        type: 'string',
+        default: '',
+    },
+
     labelMarginUnits: {
         type: 'object',
         default: {
@@ -742,10 +755,27 @@ const attributes = {
         default: '',
     },
 
+    selectFieldIconSize: {
+        type: 'object',
+        default: {
+            Desktop: '12',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    selectFieldIconSizeUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    
     inputFieldIconSize: {
         type: 'object',
         default: {
-            Desktop: '24',
+            Desktop: '12',
             Tablet: '',
             Mobile: ''
         }

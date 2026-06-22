@@ -59,6 +59,9 @@ const generateTextFieldStyle = (attributes) => {
         inputFieldPlaceholderColor,
         inputFieldPlaceholderFocusColor,
 
+        inputFieldIconColor,
+        inputFieldIconFocusColor,
+
         labelMarginUnits,
         labelMarginDesktop,
         labelMarginTablet,
@@ -123,6 +126,9 @@ const generateTextFieldStyle = (attributes) => {
         inputFieldIconSizeUnits,
         inputFieldIconGap,
         inputFieldIconGapUnits,
+
+        selectFieldIconSize,
+        selectFieldIconSizeUnits,
 
         fieldCustomCSS,
         fieldGlobalWraperID,
@@ -418,11 +424,18 @@ const generateTextFieldStyle = (attributes) => {
         }
         .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input .fb-select-field-arrow {
             display: flex;
-            width: 12px;
+            ${selectFieldIconSize?.Desktop ? `width: ${selectFieldIconSize?.Desktop}${selectFieldIconSizeUnits?.Desktop};` : ''}
             position: absolute;
             right: 15px;
             top: 50%;
             transform: translateY(-50%);
+        }
+        .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input .fb-select-field-arrow svg {
+            width: 100%;
+            ${inputFieldIconColor ? `fill: ${inputFieldIconColor};` : ''}
+        }
+        .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input select:focus ~ .fb-select-field-arrow svg {
+            ${inputFieldIconFocusColor ? `fill: ${inputFieldIconFocusColor};` : ''}
         }
     
         @media only screen and (max-width: 1024px) {
@@ -471,6 +484,9 @@ const generateTextFieldStyle = (attributes) => {
 
                 ${inputFieldPaddingTabletWidth && inputFieldPaddingTablet?.top ? `padding: ${inputFieldPaddingTabletWidth};` : ''}
             }
+            .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input .fb-select-field-arrow {
+                ${selectFieldIconSize?.Tablet ? `width: ${selectFieldIconSize?.Tablet}${selectFieldIconSizeUnits?.Tablet};` : ''}
+            }
         }
     
         @media only screen and (max-width: 767px) {
@@ -518,6 +534,9 @@ const generateTextFieldStyle = (attributes) => {
                 ${inputFieldBorderRadiusMobileWidth && inputFieldBorderRadiusMobile?.top ? `border-radius: ${inputFieldBorderRadiusMobileWidth};` : ''}
 
                 ${inputFieldPaddingMobileWidth && inputFieldPaddingMobile?.top ? `padding: ${inputFieldPaddingMobileWidth};` : ''}
+            }
+            .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input .fb-select-field-arrow {
+                ${selectFieldIconSize?.Mobile ? `width: ${selectFieldIconSize?.Mobile}${selectFieldIconSizeUnits?.Mobile};` : ''}
             }
         }
     `;
