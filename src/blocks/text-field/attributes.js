@@ -20,6 +20,9 @@ const attributes = {
     formColumnGap: {
         type: 'object',
     },
+    formColumnGapUnits: {
+        type: 'object',
+    },
 
     fieldType: {
         type: 'string',

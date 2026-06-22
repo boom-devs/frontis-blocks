@@ -29,7 +29,6 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         blockID,
 
         classHook,
-        formType,
 
         formSuccessMessage,
         formFailMessage,

@@ -110,6 +110,13 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         inputFieldColorSwitcher,
         inputFieldPlaceholderColorSwitcher,
 
+        inputFieldIconColorSwitcher,
+        inputFieldIconColor,
+        inputFieldIconFocusColor,
+
+        selectFieldIconSize,
+        selectFieldIconSizeUnits,
+
         labelMarginUnits,
         labelMarginDesktop,
         labelMarginTablet,
@@ -1421,6 +1428,19 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                         { label: __('Normal', 'frontis-forms'), value: 'normal' },
                         { label: __('Focus', 'frontis-forms'), value: 'focus' },
                     ]}
+                />
+
+                <FrontisForms_Range
+                    min={1}
+                    max={100}
+                    label={__("Icon Size", "frontis-forms")}
+                    rangeValue={selectFieldIconSize}
+                    onChangeHandler={(value) => setAttributes({ selectFieldIconSize: value })}
+                    rangeUnitHandler={(value) => setAttributes({ selectFieldIconSizeUnits: value })}
+                    deviceType={deviceType}
+                    units={selectFieldIconSizeUnits}
+                    rangeStep={1}
+                    resetFallbackValue={'12'}
                 />
 
                 <FrontisForms_SwitcherControl
