@@ -9,7 +9,7 @@
 		if (root.hasAttribute('data-tabs-initialized')) return;
 		root.setAttribute('data-tabs-initialized', 'true');
 
-		// এখানে li elements নিচ্ছি কারণ save.js এ li তেই role="tab" দেওয়া
+		// Select li elements because role="tab" is defined on the li in save.js
 		const tabItems = [...tablist.querySelectorAll('.fb-tab')]; // li elements
 		
 		// find child panels by class 'fb-tabs-body-container fb-inner-tab-{i}'
@@ -52,7 +52,7 @@
 			// update dataset for persistence
 			root.dataset.tabActive = String(i);
 
-			// update tab states - li elements এর জন্য
+			// update tab states - for li elements
 			tabItems.forEach((li, idx) => {
 				const isActive = idx === i;
 				
@@ -147,7 +147,7 @@
 			});
 		}
 
-		// click handlers - li element এ
+		// click handlers - on li element
 		tabItems.forEach((li, idx) => {
 			li.addEventListener('click', function (e) {
 				// prevent default scroll jump
@@ -195,7 +195,7 @@
 	}
 
 	function initAll() {
-		const roots = document.querySelectorAll('.fb-tabs-wrapper'); // save.js অনুযায়ী wrapper class
+		const roots = document.querySelectorAll('.fb-tabs-wrapper'); // wrapper class according to save.js
 		roots.forEach(root => {
 			const tabsWrap = root.querySelector('.fb-tabs-wrap');
 			if (tabsWrap) {
