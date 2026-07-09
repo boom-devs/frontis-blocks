@@ -5,6 +5,10 @@
 		const tablist = root.querySelector('.fb-tabs-panel');
 		if (!tablist) return;
 
+		// Prevent multiple initializations
+		if (root.hasAttribute('data-tabs-initialized')) return;
+		root.setAttribute('data-tabs-initialized', 'true');
+
 		// এখানে li elements নিচ্ছি কারণ save.js এ li তেই role="tab" দেওয়া
 		const tabItems = [...tablist.querySelectorAll('.fb-tab')]; // li elements
 		
@@ -200,12 +204,33 @@
 		});
 	}
 
-	// Initialize when DOM is ready
-	if (document.readyState === 'loading') {
-		document.addEventListener('DOMContentLoaded', initAll);
-	} else {
-		initAll();
+	function setupTabs() {
+		// Initialize when DOM is ready
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', initAll);
+		} else {
+			initAll();
+		}
+
+		// Handle dynamic content changes (crucial for Next.js / SPA route transitions)
+		if (typeof MutationObserver !== 'undefined') {
+			const observer = new MutationObserver((mutations) => {
+				mutations.forEach((mutation) => {
+					if (mutation.addedNodes.length || mutation.removedNodes.length) {
+						initAll();
+					}
+				});
+			});
+
+			observer.observe(document.body, {
+				childList: true,
+				subtree: true
+			});
+		}
 	}
+
+	// Start setup
+	setupTabs();
 
 	// Re-initialize for dynamic content (if needed)
 	window.fbTabsReinit = initAll;
