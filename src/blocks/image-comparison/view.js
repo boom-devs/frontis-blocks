@@ -192,4 +192,20 @@ jQuery(document).ready(function ($) {
         });
     }
     initImageComparison();
+
+    // Handle dynamic content changes (crucial for Next.js / SPA route transitions)
+    if (typeof MutationObserver !== "undefined") {
+        var domObserver = new MutationObserver(function (mutations) {
+            mutations.forEach(function (mutation) {
+                if (mutation.addedNodes.length || mutation.removedNodes.length) {
+                    initImageComparison();
+                }
+            });
+        });
+
+        domObserver.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+    }
 });

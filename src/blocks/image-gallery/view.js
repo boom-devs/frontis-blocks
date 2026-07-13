@@ -4,6 +4,10 @@
         
         galleryWrappers.forEach(function(galleryWrapper) {
             var blockID = galleryWrapper.getAttribute('data-id');
+
+            // Prevent multiple initializations
+            if (galleryWrapper.hasAttribute('data-gallery-initialized')) return;
+            galleryWrapper.setAttribute('data-gallery-initialized', 'true');
             var lightboxLinks = galleryWrapper.querySelectorAll(`.fb-image-gallery-item`);
             var galleryImages = Array.from(lightboxLinks);
             var currentIndex = 0;
@@ -116,6 +120,22 @@
             });
             
             urlObserver.observe(document.body, { childList: true, subtree: true });
+        }
+
+        // Handle dynamic content changes (crucial for Next.js / SPA route transitions)
+        if (typeof MutationObserver !== "undefined") {
+            var domObserver = new MutationObserver(function (mutations) {
+                mutations.forEach(function (mutation) {
+                    if (mutation.addedNodes.length || mutation.removedNodes.length) {
+                        initImageGallery();
+                    }
+                });
+            });
+
+            domObserver.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
         }
     }
     
