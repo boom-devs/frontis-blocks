@@ -221,6 +221,22 @@
 
 			urlObserver.observe(document.body, { childList: true, subtree: true });
 		}
+
+		// Handle dynamic content changes (crucial for Next.js / SPA route transitions)
+		if (typeof MutationObserver !== "undefined") {
+			var domObserver = new MutationObserver(function (mutations) {
+				mutations.forEach(function (mutation) {
+					if (mutation.addedNodes.length || mutation.removedNodes.length) {
+						initCounterAnimation();
+					}
+				});
+			});
+
+			domObserver.observe(document.body, {
+				childList: true,
+				subtree: true
+			});
+		}
 	}
 
 	setupInitialization();
