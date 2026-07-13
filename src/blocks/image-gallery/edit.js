@@ -2,7 +2,7 @@ import { __ } from '@wordpress/i18n';
 import { useBlockProps, RichText, MediaPlaceholder } from '@wordpress/block-editor';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import './editor.scss';
-import { useRef, useEffect } from '@wordpress/element';
+import { useRef, useEffect, Fragment } from '@wordpress/element';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import loadGoogleFont from '@Utils/loadGoogleFont';
 
@@ -101,7 +101,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                     <div className="fb-image-gallery-items">
                         {GalleryItems.map(item =>
                             item?.image?.url ? (
-                                <>
+                                <Fragment key={item.id}>
                                     {GalleryType === 'mesonry' && <style>
                                         {`
                                             .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item.${item.id} {
@@ -123,8 +123,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                                             `}
                                     </style>}
 
-                                    <a key={item.id}
-                                        className={`fb-image-gallery-item ${item.id}`}
+                                    <a className={`fb-image-gallery-item ${item.id}`}
                                         aria-label={item.image.alt || __("Image", "frontis-blocks")}
                                     >
                                         <img className="fb-image-gallery-image" src={item.image.url} alt={item.image.alt} aria-hidden="true"></img>
@@ -135,9 +134,10 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                                             </div>
                                         }
                                     </a>
-                                </>
+                                </Fragment>
                             ) : (
                                 <MediaPlaceholder
+                                    key={item.id}
                                     onSelect={(media) => handleChangeItem(item.id, 'image', { id: media.id, url: media.url, alt: media.alt, width: media.width, height: media.height })}
                                     allowedTypes={['image']}
                                     multiple={false}

@@ -5,6 +5,10 @@
         containers.forEach((container) => {
             const animationType = container.getAttribute('data-animation-type');
 
+            // Prevent multiple initializations
+            if (container.hasAttribute('data-heading-initialized')) return;
+            container.setAttribute('data-heading-initialized', 'true');
+
             // Handle Typing Animation
             if (animationType === 'typing') {
                 const typingContainer = container.querySelector('.fb-animated-headings');

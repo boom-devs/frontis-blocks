@@ -7,6 +7,10 @@
 				const blockId = sliderContainer.dataset.blockId;
 				if (!blockId) return;
 
+				// Prevent multiple initializations
+				if (sliderContainer.hasAttribute('data-initialized')) return;
+				sliderContainer.setAttribute('data-initialized', 'true');
+
 				const swiperSettings = sliderContainer.dataset.swiperSettings;
 				if (!swiperSettings) return;
 
@@ -93,6 +97,22 @@
 			});
 
 			urlObserver.observe(document.body, { childList: true, subtree: true });
+		}
+
+		// Handle dynamic content changes (crucial for Next.js / SPA route transitions)
+		if (typeof MutationObserver !== "undefined") {
+			var domObserver = new MutationObserver(function (mutations) {
+				mutations.forEach(function (mutation) {
+					if (mutation.addedNodes.length || mutation.removedNodes.length) {
+						initSliders();
+					}
+				});
+			});
+
+			domObserver.observe(document.body, {
+				childList: true,
+				subtree: true
+			});
 		}
 	}
 

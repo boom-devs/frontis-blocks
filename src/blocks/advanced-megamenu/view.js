@@ -284,4 +284,23 @@
 		initMegaMenu();
 		window.addEventListener("popstate", handleNavigationChange);
 	}
+
+	// Handle dynamic content changes (crucial for Next.js / SPA route transitions)
+	if (typeof MutationObserver !== "undefined") {
+		const domObserver = new MutationObserver((mutations) => {
+			mutations.forEach((mutation) => {
+				if (mutation.addedNodes.length || mutation.removedNodes.length) {
+					initMegaMenu();
+				}
+			});
+		});
+
+		domObserver.observe(document.body, {
+			childList: true,
+			subtree: true
+		});
+	}
+
+	// Expose re-initialization function
+	window.reinitMegaMenu = initMegaMenu;
 })();
