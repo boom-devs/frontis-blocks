@@ -370,15 +370,48 @@
     }
 
     // Initialize all timezone blocks
-    document.addEventListener('DOMContentLoaded', function() {
+    function initTimezoneBlocks() {
         const timezoneBlocks = document.querySelectorAll('.fb-timezone-main-wrapper');
         timezoneBlocks.forEach(block => {
+            // Prevent multiple initializations
+            if (block.hasAttribute('data-timezone-initialized')) return;
+            block.setAttribute('data-timezone-initialized', 'true');
+
             try {
                 new TimezoneBlock(block);
             } catch (error) {
                 console.error('Error initializing timezone block:', error);
             }
         });
-    });
+    }
+
+    function setupTimezoneBlocks() {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initTimezoneBlocks);
+        } else {
+            initTimezoneBlocks();
+        }
+
+        // Handle dynamic content changes (crucial for Next.js / SPA route transitions)
+        if (typeof MutationObserver !== 'undefined') {
+            var domObserver = new MutationObserver(function (mutations) {
+                mutations.forEach(function (mutation) {
+                    if (mutation.addedNodes.length || mutation.removedNodes.length) {
+                        initTimezoneBlocks();
+                    }
+                });
+            });
+
+            domObserver.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+        }
+    }
+
+    // Expose re-initialization function
+    window.reinitTimezoneBlocks = initTimezoneBlocks;
+
+    setupTimezoneBlocks();
 
 })();
