@@ -30,4 +30,23 @@ import { initStackCardPresetLeftScript } from './behaviors/preset-two';
 	} else {
 		initializeStackCards();
 	}
+
+	// Handle dynamic content changes (crucial for Next.js / SPA route transitions)
+	if (typeof MutationObserver !== 'undefined') {
+		var domObserver = new MutationObserver(function (mutations) {
+			mutations.forEach(function (mutation) {
+				if (mutation.addedNodes.length || mutation.removedNodes.length) {
+					initializeStackCards();
+				}
+			});
+		});
+
+		domObserver.observe(document.body, {
+			childList: true,
+			subtree: true
+		});
+	}
+
+	// Expose re-initialization function
+	window.reinitStackCards = initializeStackCards;
 })();

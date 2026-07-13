@@ -1,8 +1,11 @@
 (function () {
-    document.addEventListener('DOMContentLoaded', function () {
+    function initAdvancedSearch() {
         const searchContainers = document.querySelectorAll('.fb-search-block');
 
         searchContainers.forEach(function (block) {
+            // Prevent multiple initializations
+            if (block.hasAttribute('data-search-initialized')) return;
+            block.setAttribute('data-search-initialized', 'true');
             const buttonWrapper = block.querySelector('.fb-search-container.button-and-search .fb-search-button-wrapper');
             const overlay = block.querySelector('.fb-search-block-wrapper-overlay');
             const inputField = block.querySelector('.fb-search-block-wrapper-inner-input-field');
@@ -238,5 +241,34 @@
             if (buttonWrapper) buttonWrapper.style.visibility = 'visible';
         }
 
-    });
+    }
+
+    function setupAdvancedSearch() {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initAdvancedSearch);
+        } else {
+            initAdvancedSearch();
+        }
+
+        // Handle dynamic content changes (crucial for Next.js / SPA route transitions)
+        if (typeof MutationObserver !== 'undefined') {
+            var domObserver = new MutationObserver(function (mutations) {
+                mutations.forEach(function (mutation) {
+                    if (mutation.addedNodes.length || mutation.removedNodes.length) {
+                        initAdvancedSearch();
+                    }
+                });
+            });
+
+            domObserver.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+        }
+    }
+
+    // Expose re-initialization function
+    window.reinitAdvancedSearch = initAdvancedSearch;
+
+    setupAdvancedSearch();
 })();
