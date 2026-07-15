@@ -4,6 +4,10 @@
             var targetDate = block.getAttribute("data-target-date");
             
             if (!targetDate) return;
+
+            // Prevent multiple initializations
+            if (block.hasAttribute('data-countdown-initialized')) return;
+            block.setAttribute('data-countdown-initialized', 'true');
             
             var daysElem = block.querySelector(".fb-count-down-time.days");
             var hoursElem = block.querySelector(".fb-count-down-time.hours");
@@ -68,6 +72,22 @@
             });
             
             urlObserver.observe(document.body, { childList: true, subtree: true });
+        }
+
+        // Handle dynamic content changes (crucial for Next.js / SPA route transitions)
+        if (typeof MutationObserver !== "undefined") {
+            var domObserver = new MutationObserver(function (mutations) {
+                mutations.forEach(function (mutation) {
+                    if (mutation.addedNodes.length || mutation.removedNodes.length) {
+                        initCountdown();
+                    }
+                });
+            });
+
+            domObserver.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
         }
     }
     

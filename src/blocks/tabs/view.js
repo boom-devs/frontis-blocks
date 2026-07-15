@@ -5,7 +5,11 @@
 		const tablist = root.querySelector('.fb-tabs-panel');
 		if (!tablist) return;
 
-		// এখানে li elements নিচ্ছি কারণ save.js এ li তেই role="tab" দেওয়া
+		// Prevent multiple initializations
+		if (root.hasAttribute('data-tabs-initialized')) return;
+		root.setAttribute('data-tabs-initialized', 'true');
+
+		// Select li elements because role="tab" is defined on the li in save.js
 		const tabItems = [...tablist.querySelectorAll('.fb-tab')]; // li elements
 		
 		// find child panels by class 'fb-tabs-body-container fb-inner-tab-{i}'
@@ -48,7 +52,7 @@
 			// update dataset for persistence
 			root.dataset.tabActive = String(i);
 
-			// update tab states - li elements এর জন্য
+			// update tab states - for li elements
 			tabItems.forEach((li, idx) => {
 				const isActive = idx === i;
 				
@@ -143,7 +147,7 @@
 			});
 		}
 
-		// click handlers - li element এ
+		// click handlers - on li element
 		tabItems.forEach((li, idx) => {
 			li.addEventListener('click', function (e) {
 				// prevent default scroll jump
@@ -191,7 +195,7 @@
 	}
 
 	function initAll() {
-		const roots = document.querySelectorAll('.fb-tabs-wrapper'); // save.js অনুযায়ী wrapper class
+		const roots = document.querySelectorAll('.fb-tabs-wrapper'); // wrapper class according to save.js
 		roots.forEach(root => {
 			const tabsWrap = root.querySelector('.fb-tabs-wrap');
 			if (tabsWrap) {
@@ -200,12 +204,33 @@
 		});
 	}
 
-	// Initialize when DOM is ready
-	if (document.readyState === 'loading') {
-		document.addEventListener('DOMContentLoaded', initAll);
-	} else {
-		initAll();
+	function setupTabs() {
+		// Initialize when DOM is ready
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', initAll);
+		} else {
+			initAll();
+		}
+
+		// Handle dynamic content changes (crucial for Next.js / SPA route transitions)
+		if (typeof MutationObserver !== 'undefined') {
+			const observer = new MutationObserver((mutations) => {
+				mutations.forEach((mutation) => {
+					if (mutation.addedNodes.length || mutation.removedNodes.length) {
+						initAll();
+					}
+				});
+			});
+
+			observer.observe(document.body, {
+				childList: true,
+				subtree: true
+			});
+		}
 	}
+
+	// Start setup
+	setupTabs();
 
 	// Re-initialize for dynamic content (if needed)
 	window.fbTabsReinit = initAll;

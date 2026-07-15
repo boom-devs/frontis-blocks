@@ -4,8 +4,9 @@ import {
 	useInnerBlocksProps,
 	InnerBlocks,
 	InspectorControls,
+	store as blockEditorStore,
 } from '@wordpress/block-editor';
-import { useSelect, store as blockEditorStore } from '@wordpress/data';
+import { useSelect } from '@wordpress/data';
 import { useEffect } from '@wordpress/element';
 import StackCardItemInspector from './inspector';
 
