@@ -22,7 +22,8 @@
 		"fb/formInheritedLabelSwitcher": "fieldLabelSwitcher",
 		"fb/formInheritedRequiredFieldSwitcher": "fieldRequiredSwitcher",
 		"fb/formInheritedRequiredSymbolSwitcher": "fieldRequiredSymbolSwitcher",
-		"fb/formColumnGap": "formColumnGap",
+		"fb/formColumnGap": "fieldColumnGap",
+		"fb/formColumnGapUnits": "fieldColumnGapUnits",
 		"fb/formContainerSwitcher": "formContainerSwitcher"
 	},
 	"editorScript": "file:./index.js",

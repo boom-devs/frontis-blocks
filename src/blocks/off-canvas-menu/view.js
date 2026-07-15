@@ -1,8 +1,12 @@
 (function () {
-    document.addEventListener('DOMContentLoaded', function () {
+    function initOffCanvasMenu() {
         const menuBlocks = document.querySelectorAll('.fb-off-canvas-menu-block');
 
         menuBlocks.forEach(menuBlock => {
+            // Prevent multiple initializations
+            if (menuBlock.hasAttribute('data-offcanvas-initialized')) return;
+            menuBlock.setAttribute('data-offcanvas-initialized', 'true');
+
             const toggleBtn = menuBlock.querySelector('.fb-menu-toggle-btn');
             const closeBtn = menuBlock.querySelector('.fb-close-menu');
             const menu = menuBlock.querySelector('.fb-off-canvas-menu');
@@ -79,5 +83,34 @@
                 }
             });
         });
-    });
+    }
+
+    function setupOffCanvasMenu() {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initOffCanvasMenu);
+        } else {
+            initOffCanvasMenu();
+        }
+
+        // Handle dynamic content changes (crucial for Next.js / SPA route transitions)
+        if (typeof MutationObserver !== 'undefined') {
+            var domObserver = new MutationObserver(function (mutations) {
+                mutations.forEach(function (mutation) {
+                    if (mutation.addedNodes.length || mutation.removedNodes.length) {
+                        initOffCanvasMenu();
+                    }
+                });
+            });
+
+            domObserver.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+        }
+    }
+
+    // Expose re-initialization function
+    window.reinitOffCanvasMenu = initOffCanvasMenu;
+
+    setupOffCanvasMenu();
 })();

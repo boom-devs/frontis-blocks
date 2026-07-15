@@ -40,6 +40,7 @@ class Enqueues
         add_action('wp_footer', [$this, 'enqueue_assets_footer']);
         add_filter('wp_resource_hints', [$this, 'add_google_font_resource_hints'], 10, 2);
         add_filter('style_loader_tag', [$this, 'filter_google_font_style_tag'], 10, 4);
+        add_action('after_switch_theme', [$this, 'clear_compiled_assets_on_theme_switch']);
     }
 
     public function get_page_template_name()
@@ -603,5 +604,33 @@ class Enqueues
             esc_url($href),
             esc_attr($media)
         );
+    }
+
+    public function clear_compiled_assets_on_theme_switch()
+    {
+        $upload_dir = wp_upload_dir();
+        $frontis_dir = trailingslashit($upload_dir['basedir']) . 'frontis-blocks';
+        if (is_dir($frontis_dir)) {
+            $this->recursive_delete_folder($frontis_dir);
+        }
+    }
+
+    private function recursive_delete_folder($folder_path)
+    {
+        if (!is_dir($folder_path)) {
+            return false;
+        }
+
+        $files = array_diff(scandir($folder_path), ['.', '..']);
+        foreach ($files as $file) {
+            $file_path = $folder_path . DIRECTORY_SEPARATOR . $file;
+            if (is_dir($file_path)) {
+                $this->recursive_delete_folder($file_path);
+            } else {
+                @unlink($file_path);
+            }
+        }
+
+        return @rmdir($folder_path);
     }
 }
