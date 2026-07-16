@@ -12,6 +12,11 @@ const attributes = {
         default: 'Desktop'
     },
 
+    accordionPresetStyle: {
+        type: 'string',
+        default: 'preset-1',
+    }, 
+
     highlightColor: {
         type: 'string',
         default: '',
@@ -470,9 +475,19 @@ const attributes = {
         default: 'right',
     },
 
+    titleActiveColor: {
+        type: 'string',
+        default: '',
+    },
     activeBgColor: {
         type: 'string',
         default: '',
+    },
+    accordionItemsBorderActiveColor: {
+        type: 'string',
+    },
+    accordionItemsContentBorderActiveColor: {
+        type: 'string',
     },
 
     titleColorSwitcher: {
@@ -999,6 +1014,16 @@ const attributes = {
         default: '',
     },
 
+    titleBgActiveColor: {
+        type: 'string',
+        default: ''
+    },
+
+    contentBgActiveColor: {
+        type: 'string',
+        default: ''
+    },
+
     titleBgColorSwitcher: {
         type: 'string',
         default: 'normal'
@@ -1281,6 +1306,47 @@ const attributes = {
         type : 'boolean',
         default: true
     },
+
+    contentActiveBorderRadiusUnits : {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    contentDesktopActiveBorderRadiusWidth: {
+        type: 'object', 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    contentTabActiveBorderRadiusWidth: {
+        type: 'object', 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    contentMobileActiveBorderRadiusWidth: {
+        type: 'object', 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    contentActiveBorderRadiusLink : {
+        type : 'boolean',
+        default: true
+    },
+
     contentDesktopSwitcher: {
         type: 'boolean',
         default: false,

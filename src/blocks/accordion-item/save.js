@@ -10,6 +10,7 @@ const save = ({ attributes }) => {
         blockID,
         clickable,
         parentBlockID,
+        toggleClick,
 
         inheritedTagName,
         inheritedDisplayIcon,
@@ -40,7 +41,7 @@ const save = ({ attributes }) => {
     } = attributes;
 
     const blockProps = useBlockProps.save({
-        className: `fb-accordion-item-main-wrapper ${parentBlockID} ${blockID}`,
+        className: `fb-accordion-item-main-wrapper ${parentBlockID} ${blockID} ${clickable ? 'current-tab' : ''}`,
     });
 
     return (

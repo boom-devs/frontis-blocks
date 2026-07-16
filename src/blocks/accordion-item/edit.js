@@ -10,7 +10,7 @@ import './editor.scss';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
 import generateAccordionItemStyle from './styling';
-
+import { select, dispatch } from '@wordpress/data';
 
 export default function Edit(props) {
     const { attributes, setAttributes, isSelected, clientId, context } = props;
@@ -100,22 +100,50 @@ export default function Edit(props) {
         context["fb/accordionFaqSchema"]
     ])
 
+    useEffect(() => {
+        if (clickable && !toggleClick) {
+            setAttributes({ toggleClick: true });
+        }
+    }, []);
+
     const blockProps = useBlockProps({
-        className: `fb-accordion-item-main-wrapper ${parentBlockID} ${blockID}`,
+        className: `fb-accordion-item-main-wrapper ${parentBlockID} ${blockID} ${toggleClick ? 'current-tab' : ''}`,
     });
 
     const accordionTitle = useRef(null);
 
     const handleSlidingOfAccordion = () => {
         let contentWrapper = accordionTitle.current.parentNode.querySelector(`.fb-accordion-content-wrapper.${blockID}`);
+        
+        const isOpening = contentWrapper.style.display !== "block";
 
-        if (contentWrapper.style.display === "block") {
-            contentWrapper.style.display = "none";
-            setAttributes({ toggleClick: false });
-        } else {
+        if (isOpening) {
             contentWrapper.style.display = "block";
             contentWrapper.style.opacity = "1";
             setAttributes({ toggleClick: true });
+
+            // Close ALL siblings to mimic frontend accordion behavior
+            const parentBlockIdArr = select('core/block-editor').getBlockParents(clientId);
+            if (parentBlockIdArr && parentBlockIdArr.length > 0) {
+                const parentClientId = parentBlockIdArr[parentBlockIdArr.length - 1];
+                const siblings = select('core/block-editor').getBlocks(parentClientId);
+                
+                siblings.forEach(sibling => {
+                    if (sibling.clientId !== clientId) {
+                        // Reset toggleClick for ALL siblings (including clickable:true ones)
+                        dispatch('core/block-editor').updateBlockAttributes(sibling.clientId, { toggleClick: false });
+                        
+                        // Also close sibling's DOM content element
+                        const siblingElement = document.querySelector(`.fb-accordion-content-wrapper.${sibling.attributes.blockID}`);
+                        if(siblingElement) {
+                            siblingElement.style.display = "none";
+                        }
+                    }
+                });
+            }
+        } else {
+            contentWrapper.style.display = "none";
+            setAttributes({ toggleClick: false });
         }
     };
 
@@ -125,7 +153,7 @@ export default function Edit(props) {
 
             <div {...blockProps}>
                 <div className={`fb-accordion-item-wrapper for_edit_page ${accordionItemGlobalWraperClass}`} id={accordionItemGlobalWraperID} ref={accordionTitle} data-id={parentBlockID}>
-                    <div className={`fb-accordion-item-title-wrapper ${parentBlockID} ${clickable === true ? 'active' : ''}`} onClick={handleSlidingOfAccordion}>
+                    <div className={`fb-accordion-item-title-wrapper ${parentBlockID} ${toggleClick ? 'active' : ''} ${clickable === true ? 'active': ''}`} onClick={handleSlidingOfAccordion}>
                         <div className={`fb-accordion-title-inner`}>
                             {titlePrefixType !== 'none' && (
                                 <div className="fb-accordion-title-prefix">
@@ -223,7 +251,7 @@ export default function Edit(props) {
                         </div>
                     </div>
                     <div
-                        className={`fb-accordion-content-wrapper ${blockID} ${parentBlockID} ${clickable === true ? 'active' : ''}`}
+                        className={`fb-accordion-content-wrapper ${blockID} ${parentBlockID} ${toggleClick ? 'active' : ''} ${clickable === true ? 'active': ''}`}
                         style={{ display: "none" }}
                     >
                         <div className="fb-accordion-content">

@@ -34,26 +34,32 @@
                     if (sibling !== itemWrapper) {
                         const siblingTitle = sibling.querySelector(".fb-accordion-item-title-wrapper");
                         const siblingContent = sibling.querySelector(".fb-accordion-content-wrapper");
+                        const siblingMainWrapper = sibling.closest('.fb-accordion-item-main-wrapper');
                         
                         if (siblingTitle) siblingTitle.classList.remove("active");
                         if (siblingContent) {
                             siblingContent.classList.remove("active");
                             siblingContent.style.maxHeight = "0px";
                         }
+                        if (siblingMainWrapper) siblingMainWrapper.classList.remove("current-tab");
                     }
                 });
   
+                const mainWrapper = itemWrapper.closest('.fb-accordion-item-main-wrapper');
+
                 // Toggle current accordion based on current state
                 if (currentlyActive) {
                     // Currently open, so close it
                     titleWrapper.classList.remove("active");
                     contentWrapper.classList.remove("active");
                     contentWrapper.style.maxHeight = "0px";
+                    if (mainWrapper) mainWrapper.classList.remove("current-tab");
                 } else {
                     // Currently closed, so open it
                     titleWrapper.classList.add("active");
                     contentWrapper.classList.add("active");
                     contentWrapper.style.maxHeight = `${contentWrapper.scrollHeight}px`;
+                    if (mainWrapper) mainWrapper.classList.add("current-tab");
                 }
             });
         });
