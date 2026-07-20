@@ -23,6 +23,12 @@ const attributes = {
 	p_block_id: {
 		type: 'string',
 	},
+	fiBlock: {
+		type: 'string',
+		source: 'attribute',
+		selector: '.wp-block-frontis-blocks-container',
+		attribute: 'fi-block',
+	},
 	blockStyle: {
 		type: 'string',
 	},

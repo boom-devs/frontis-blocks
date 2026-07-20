@@ -9,6 +9,7 @@ import shapes from './shapes';
 export default function save( props ) {
 	const {
 		p_block_id,
+		fiBlock,
 		htmlTag,
 		htmlTagLink,
 		isBlockRootParent,
@@ -102,6 +103,7 @@ export default function save( props ) {
 		<>
 			<CustomTag
 				{ ...blockProps }
+				fi-block={ fiBlock || undefined }
 				className={ classnames(
 					blockProps.className,
 					p_block_id ? `frontis-blocks-${ p_block_id }` : '', // Add class only if p_block_id exists
