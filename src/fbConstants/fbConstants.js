@@ -18,6 +18,7 @@ export const NORMAL_HOVER = [
 export const ANIMATION_TYPE = [
 	{ label: __("Typing", "frontis-blocks"), value: "typing" },
 	{ label: __("Swirl", "frontis-blocks"), value: "swirl" },
+	{ label: __("Reveal", "frontis-blocks"), value: "reveal" },
 ];
 
 export const OVERFLOW_OP = [

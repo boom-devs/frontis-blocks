@@ -159,7 +159,8 @@ const generateAnimatedHeadingStyle = (attributes) => {
             ${animatedHeadingGlobalBorderHoverColor ? `border-color: ${animatedHeadingGlobalBorderHoverColor};` : ''}
         }
 
-        .${blockID} .fb-animated-heading-wrapper.animated-type-typing {
+        .${blockID} .fb-animated-heading-wrapper.animated-type-typing,
+        .${blockID} .fb-animated-heading-wrapper.animated-type-reveal {
             display: flex;
             align-items: center;
             ${animatedHeadingGap.Desktop &&animatedHeadingGapUnits.Desktop ? `gap: ${animatedHeadingGap.Desktop}${animatedHeadingGapUnits.Desktop};` : ''}
@@ -255,7 +256,8 @@ const generateAnimatedHeadingStyle = (attributes) => {
                 ${animatedHeadingGlobalTabletBorderRadiusWidth && animatedHeadingGlobalTabletBorderRadius?.top ? `border-radius: ${animatedHeadingGlobalTabletBorderRadiusWidth};` : ''}
             }
 
-            .${blockID} .fb-animated-heading-wrapper.animated-type-typing {
+            .${blockID} .fb-animated-heading-wrapper.animated-type-typing,
+            .${blockID} .fb-animated-heading-wrapper.animated-type-reveal {
                 ${animatedHeadingGap.Tablet &&animatedHeadingGapUnits.Tablet ? `gap: ${animatedHeadingGap.Tablet}${animatedHeadingGapUnits.Tablet};` : ''}
                 ${animatedHeadingAlignment.Tablet ? `justify-content: ${animatedHeadingAlignment.Tablet};` : ''}
             }
@@ -295,7 +297,8 @@ const generateAnimatedHeadingStyle = (attributes) => {
                 ${animatedHeadingGlobalMobileBorderRadiusWidth && animatedHeadingGlobalMobileBorderRadius?.top ? `border-radius: ${animatedHeadingGlobalMobileBorderRadiusWidth};` : ''}
             }
 
-            .${blockID} .fb-animated-heading-wrapper.animated-type-typing {
+            .${blockID} .fb-animated-heading-wrapper.animated-type-typing,
+            .${blockID} .fb-animated-heading-wrapper.animated-type-reveal {
                 ${animatedHeadingGap.Mobile &&animatedHeadingGapUnits.Mobile ? `gap: ${animatedHeadingGap.Mobile}${animatedHeadingGapUnits.Mobile};` : ''}
                 ${animatedHeadingAlignment.Mobile ? `justify-content: ${animatedHeadingAlignment.Mobile};` : ''}
             }

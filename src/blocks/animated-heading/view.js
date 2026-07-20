@@ -132,6 +132,77 @@
                 currentIndex = (currentIndex + 1) % texts.length;
                 setInterval(showNextWord, 3000);
             }
+
+            if (animationType === 'reveal') {
+                const itemElements = container.querySelectorAll('.fb-animated-heading-item');
+                const texts = Array.from(itemElements).map(el => el.textContent.trim()).filter(Boolean);
+                if (!texts.length) return;
+
+                itemElements.forEach(el => el.style.display = 'none');
+
+                const wrapper = container.querySelector('.fb-animated-heading-reveal-wrapper');
+                if (!wrapper) return;
+
+                const CHAR_DELAY = 200;
+                const APPEAR_DURATION = 800;
+                const HIDE_DURATION = 700;
+                const VISIBLE_HOLD = 2000;
+                const RESET_DELAY = 300;
+
+                let currentIndex = 0;
+
+                function createCharSpans(text) {
+                    const fragment = document.createDocumentFragment();
+                    const spans = [];
+                    text.split('').forEach((char) => {
+                        const span = document.createElement('span');
+                        span.className = 'fb-animated-heading-char';
+                        if (char === ' ') {
+                            span.classList.add('fb-animated-heading-char-space');
+                            span.innerHTML = '&nbsp;';
+                        } else {
+                            span.textContent = char;
+                        }
+                        fragment.appendChild(span);
+                        spans.push(span);
+                    });
+                    return { fragment, spans };
+                }
+
+                function animateWord() {
+                    wrapper.innerHTML = '';
+                    const text = texts[currentIndex];
+                    const { fragment, spans } = createCharSpans(text);
+                    wrapper.appendChild(fragment);
+
+                    spans.forEach((span, i) => {
+                        setTimeout(() => {
+                            span.classList.add('fb-animated-heading-char-appear');
+                        }, i * CHAR_DELAY);
+                    });
+
+                    const visibleTime = (spans.length - 1) * CHAR_DELAY + APPEAR_DURATION;
+                    const hideStart = visibleTime + VISIBLE_HOLD;
+
+                    setTimeout(() => {
+                        spans.forEach((span, i) => {
+                            setTimeout(() => {
+                                span.classList.remove('fb-animated-heading-char-appear');
+                                span.classList.add('fb-animated-heading-char-hide');
+                            }, i * CHAR_DELAY);
+                        });
+                    }, hideStart);
+
+                    const resetTime = hideStart + (spans.length - 1) * CHAR_DELAY + HIDE_DURATION + RESET_DELAY;
+
+                    setTimeout(() => {
+                        currentIndex = (currentIndex + 1) % texts.length;
+                        animateWord();
+                    }, resetTime);
+                }
+
+                animateWord();
+            }
         });
     }
 

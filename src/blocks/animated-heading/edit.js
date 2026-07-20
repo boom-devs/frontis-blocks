@@ -87,6 +87,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
     // Ref for the dynamic typed text span
     const typedTextRef = useRef(null);
     const swirlWrapperRef = useRef(null);
+    const revealWrapperRef = useRef(null);
 
     useEffect(() => {
         if (!animatedHeadingItems || animatedHeadingItems.length === 0) {
@@ -239,6 +240,83 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                     }
                 };
             }
+        }else if (animationType === "reveal") {
+            const texts = animatedHeadingItems?.map(item => item.animatedHeadingTitle).filter(Boolean) || [];
+            if (texts.length === 0) return;
+
+            const container = revealWrapperRef.current;
+            if (!container) return;
+
+            container.innerHTML = "";
+
+            const CHAR_DELAY = 200;
+            const APPEAR_DURATION = 800;
+            const HIDE_DURATION = 700;
+            const VISIBLE_HOLD = 2000;
+            const RESET_DELAY = 300;
+
+            let currentIndex = 0;
+            let timeoutIds = [];
+
+            function createCharSpans(text) {
+                const fragment = document.createDocumentFragment();
+                const spans = [];
+                text.split('').forEach((char) => {
+                    const span = document.createElement('span');
+                    span.className = 'fb-animated-heading-char';
+                    if (char === ' ') {
+                        span.classList.add('fb-animated-heading-char-space');
+                        span.innerHTML = '&nbsp;';
+                    } else {
+                        span.textContent = char;
+                    }
+                    fragment.appendChild(span);
+                    spans.push(span);
+                });
+                return { fragment, spans };
+            }
+
+            function animateWord() {
+                container.innerHTML = "";
+                const text = texts[currentIndex];
+                const { fragment, spans } = createCharSpans(text);
+                container.appendChild(fragment);
+
+                // Phase 1: appear one by one
+                spans.forEach((span, i) => {
+                    timeoutIds.push(setTimeout(() => {
+                        span.classList.add('fb-animated-heading-char-appear');
+                    }, i * CHAR_DELAY));
+                });
+
+                const visibleTime = (spans.length - 1) * CHAR_DELAY + APPEAR_DURATION;
+                const hideStart = visibleTime + VISIBLE_HOLD;
+
+                // Phase 2: hide one by one
+                timeoutIds.push(setTimeout(() => {
+                    spans.forEach((span, i) => {
+                        timeoutIds.push(setTimeout(() => {
+                            span.classList.remove('fb-animated-heading-char-appear');
+                            span.classList.add('fb-animated-heading-char-hide');
+                        }, i * CHAR_DELAY));
+                    });
+                }, hideStart));
+
+                const resetTime = hideStart + (spans.length - 1) * CHAR_DELAY + HIDE_DURATION + RESET_DELAY;
+
+                // Phase 3: next word, repeat
+                timeoutIds.push(setTimeout(() => {
+                    currentIndex = (currentIndex + 1) % texts.length;
+                    animateWord();
+                }, resetTime));
+            }
+
+            animateWord();
+
+            return () => {
+                timeoutIds.forEach(id => clearTimeout(id));
+                container.innerHTML = '';
+            };
         }
     }, [animatedHeadingItems, animationType, animatedHeadingMainTag]);
 
@@ -297,6 +375,10 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                                 </span>
                                 {'\u00A0'}
                             </>
+                        )}
+
+                        {animationType === "reveal" && (
+                            <span className="fb-animated-heading-reveal-wrapper" ref={revealWrapperRef}></span>
                         )}
 
                         {animatedHeadingSuffix && (
