@@ -368,7 +368,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         accordionVRBottomOffsetUnits,
 
     } = attributes;
-    console.log(attributes);
 
     const deviceType = useDeviceType();
 
