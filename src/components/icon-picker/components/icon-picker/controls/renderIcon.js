@@ -6,28 +6,36 @@
  */
 
 import parseSVG from './parseIcon';
-const { ajaxUrl, nonce, site_url } = window.FrontisBlocksData;
 
-// Assets er vitore fontawesome icon ache icons.php file a oita fetch korbo using rest api
-const url = `${site_url}/wp-json/wp/v2/frontis-blocks/icons`;
-const token = 'b9e9d7516943744aed44d0be39217694a92784ce737e07c9e12397eca99fded0';
-
-// Cache for the fetch Promise to avoid multiple simultaneous fetches
+// Cache for memory and active fetch Promise
 let fetchPromise = null;
+let memoryCache = null;
 
-// Function to check if data exists in localStorage
+// Function to check if data exists in memory or localStorage
 const getDataFromLocalStorage = () => {
-    let data = localStorage.getItem('iconData');
-    data = data ? JSON.parse(data) : null;
-    return data;
+    if (memoryCache) {
+        return memoryCache;
+    }
+    try {
+        let data = localStorage.getItem('iconData');
+        if (data) {
+            memoryCache = JSON.parse(data);
+            return memoryCache;
+        }
+    } catch (e) {
+        console.error('Error reading iconData from localStorage', e);
+    }
+    return null;
 };
 
 // Fetch SVG icons from the API
 const fetchFromApi = () => {
+    const siteUrl = window.FrontisBlocksData?.site_url || (typeof window !== 'undefined' ? window.location.origin : '');
+    const url = `${siteUrl}/wp-json/wp/v2/frontis-blocks/icons`;
+
     return fetch(url, {
         method: 'GET',
         headers: {
-            'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',
         },
     })
@@ -38,6 +46,14 @@ const fetchFromApi = () => {
             return response.json();
         })
         .then(data => {
+            if (data) {
+                memoryCache = data;
+                try {
+                    localStorage.setItem('iconData', JSON.stringify(data));
+                } catch (e) {
+                    console.error('Error saving iconData to localStorage', e);
+                }
+            }
             return data;
         })
         .catch(error => {
@@ -95,11 +111,14 @@ function processSvgData(data, svg, setAttributes, extraProps) {
     let fontAwesome = svgIcon[svg];
 
     if (!fontAwesome) {
-        console.log('No fontAwesome data for svg:', svg);
+        // console.log('No fontAwesome data for svg:', svg);
         return null;
     }
 
-    const fontAwesomeSvg = fontAwesome.svg?.brands ? fontAwesome.svg.brands : fontAwesome.svg.solid;
+    const fontAwesomeSvg = fontAwesome.svg?.brands || fontAwesome.svg?.solid || fontAwesome.svg?.regular;
+    if (!fontAwesomeSvg) {
+        return null;
+    }
 
     const viewBox = `0 0 ${fontAwesomeSvg.width} ${fontAwesomeSvg.height}`;
     const path = fontAwesomeSvg.path;
@@ -159,21 +178,11 @@ function renderSVG(svg, setAttributes = false, extraProps = {}) {
 
     // If no data and no ongoing fetch, start a new fetch
     if (!fetchPromise) {
-        fetchPromise = fetchFromApi().then(fetchedData => {
-            console.log('Fetched Data:', fetchedData);
-            if (fetchedData) {
-                localStorage.setItem('iconData', JSON.stringify(fetchedData));
-            }
-            fetchPromise = null; // Reset after completion
-            return fetchedData;
-        }).catch(error => {
-            console.error('Error fetching SVG icons:', error);
-            fetchPromise = null; // Reset on error
-            return null;
+        fetchPromise = fetchFromApi().finally(() => {
+            fetchPromise = null;
         });
     }
 
-    // console.log('Fetch in progress, returning null');
     return null; // Return null while fetching
 }
 
