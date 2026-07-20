@@ -70,6 +70,18 @@ export default function save({ attributes }) {
                         </>
                     )}
 
+                    {animationType === 'reveal' && (
+                        <span className="fb-animated-heading-reveal-wrapper" id="animated-heading-reveal-wrapper">
+                            {animatedHeadingItems && animatedHeadingItems.length > 0 &&
+                                animatedHeadingItems.map((item, index) => (
+                                    <span key={index} className="fb-animated-heading-item">
+                                        {item.animatedHeadingTitle}
+                                    </span>
+                                ))
+                            }
+                        </span>
+                    )}
+
                     {animatedHeadingSuffix && (
                         <RichText.Content
                             tagName="span"

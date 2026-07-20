@@ -566,7 +566,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                     help={__("Keep empty to hide.", "frontis-blocks")}
                 />
 
-                {animationType === "typing" && (
+                {(animationType === "typing" || animationType === "reveal") && (
                     <FB_Range
                         min={0}
                         max={100}
