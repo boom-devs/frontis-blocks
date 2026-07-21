@@ -115,7 +115,9 @@ const Edit = (props) => {
     useEffect(() => {
         if (blockID) {
             const css = generateSliderStyle(attributes);
-            setAttributes({ blockStyle: css });
+            if (blockStyle !== css) {
+                setAttributes({ blockStyle: css });
+            }
         }
     }, [attributes, blockID]);
     /** End Generate Block Style */
