@@ -13,6 +13,7 @@ import backgroundCss from './backgroundCss';
 function styling( attributes, clientId, name, deviceType, gbsSelector = false ) {
 	const blockName = name.replace( 'frotins-blocks/', '' );
 	const previewType = deviceType.toLowerCase();
+	const containerBlockId = attributes.p_block_id || clientId;
 	let {
 		directionDesktop,
 		directionTablet,
@@ -1046,6 +1047,10 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		'min-height': generateCSSUnit( minHeight['Desktop'], minHeightUnits['Desktop'] ),
 	}
 
+	const childrenWidthVal = containerChildrenWidth === 'full' ? '100% !important' : containerChildrenWidth === 'auto' ? 'auto !important' : '';
+	const childrenHeightVal = containerEqualHeight === true ? '100%' : '';
+	const editorChildrenSel = `.frontis-blocks-block-${containerBlockId} .frontis-blocks-container-inner-blocks-wrap > .block-editor-inner-blocks > .block-editor-block-list__layout > *, .frontis-blocks-block-${clientId} .frontis-blocks-container-inner-blocks-wrap > .block-editor-inner-blocks > .block-editor-block-list__layout > *, #block-${clientId} .frontis-blocks-container-inner-blocks-wrap > .block-editor-inner-blocks > .block-editor-block-list__layout > *, .frontis-blocks-block-${containerBlockId}.child > .block-editor-inner-blocks > .block-editor-block-list__layout > *, .frontis-blocks-block-${clientId}.child > .block-editor-inner-blocks > .block-editor-block-list__layout > *`;
+
 	if( containerLayout === 'flex' ){
 		selectors[ containerFlexSelector ] = {
 			'display': 'flex',
@@ -1058,14 +1063,11 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			'column-gap': generateCSSUnit( columnGapDesktopFallback, columnGapUnits['Desktop'] ),
 			...selectors[ containerFlexSelector ],
 		};
-		widthSelectorsDesktop[`.wp-block-frontis-blocks-container.frontis-blocks-block-block-${clientId} .frontis-blocks-container-inner-blocks-wrap > .block-editor-inner-blocks > .block-editor-block-list__layout > div`] = {
-			'width': containerChildrenWidth === 'full' ? '100%' : containerChildrenWidth === 'auto' ? 'auto !important' : '',
-			'height': containerEqualHeight === true ? '100%' : '',
-		}
-		widthSelectorsDesktop[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-block-${clientId} > .block-editor-inner-blocks > .block-editor-block-list__layout > div`] = {
-			'width': containerChildrenWidth === 'full' ? '100%' : containerChildrenWidth === 'auto' ? 'auto !important' : '',
-			'height': containerEqualHeight === true ? '100%' : '',
-		}
+
+		widthSelectorsDesktop[editorChildrenSel] = {
+			'width': childrenWidthVal,
+			'height': childrenHeightVal,
+		};
 	}
 	if( containerLayout === 'grid' ){
 		selectors[ containerFlexSelector ] = {
@@ -1078,14 +1080,10 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			'column-gap': generateCSSUnit( columnGapDesktopFallback, columnGapUnits['Desktop'] ),
 			...selectors[ containerFlexSelector ],
 		};
-		widthSelectorsDesktop[`.wp-block-frontis-blocks-container.frontis-blocks-block-block-${clientId} .frontis-blocks-container-inner-blocks-wrap > .block-editor-inner-blocks > .block-editor-block-list__layout > div`] = {
+		widthSelectorsDesktop[editorChildrenSel] = {
 			'max-width': 'unset !important',
 			'height': containerEqualHeight === true ? '100%' : '',
-		}
-		widthSelectorsDesktop[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-block-${clientId} > .block-editor-inner-blocks > .block-editor-block-list__layout > div`] = {
-			'max-width': 'unset !important',
-			'height': containerEqualHeight === true ? '100%' : '',
-		}
+		};
 	}
 
 	widthSelectorsDesktop[ `.is-root-container > .block-editor-block-list__block .block-editor-block-list__block${ gbsWidthSelector } ` ] = {
@@ -1206,12 +1204,9 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			'column-gap': generateCSSUnit( columnGapTabletFallback, columnGapUnits['Tablet'] ),
 			...tablet_selectors[ containerFlexSelector ],
 		};
-		widthSelectorsTablet[`.wp-block-frontis-blocks-container.frontis-blocks-block-block-${clientId} .frontis-blocks-container-inner-blocks-wrap > .block-editor-inner-blocks > .block-editor-block-list__layout > div`] = {
+		widthSelectorsTablet[editorChildrenSel] = {
 			'height': containerEqualHeight === true ? '100%' : '',
-		}
-		widthSelectorsTablet[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-block-${clientId} > .block-editor-inner-blocks > .block-editor-block-list__layout > div`] = {
-			'height': containerEqualHeight === true ? '100%' : '',
-		}
+		};
 	}
 	if( containerLayout === 'grid' ){
 		tablet_selectors[ containerFlexSelector ] = {
@@ -1223,12 +1218,9 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			'column-gap': generateCSSUnit( columnGapTabletFallback, columnGapUnits['Tablet'] ),
 			...tablet_selectors[ containerFlexSelector ],
 		};
-		widthSelectorsTablet[`.wp-block-frontis-blocks-container.frontis-blocks-block-block-${clientId} .frontis-blocks-container-inner-blocks-wrap > .block-editor-inner-blocks > .block-editor-block-list__layout > div`] = {
+		widthSelectorsTablet[editorChildrenSel] = {
 			'height': containerEqualHeight === true ? '100%' : '',
-		}
-		widthSelectorsTablet[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-block-${clientId} > .block-editor-inner-blocks > .block-editor-block-list__layout > div`] = {
-			'height': containerEqualHeight === true ? '100%' : '',
-		}
+		};
 	}
 
 	if( containerLayout === 'flex' ){
@@ -1242,12 +1234,9 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			'column-gap': generateCSSUnit( columnGapMobileFallback, columnGapUnits['Mobile'] ),
 			...mobile_selectors[ containerFlexSelector ],
 		};
-		widthSelectorsMobile[`.wp-block-frontis-blocks-container.frontis-blocks-block-block-${clientId} .frontis-blocks-container-inner-blocks-wrap > .block-editor-inner-blocks > .block-editor-block-list__layout > div`] = {
+		widthSelectorsMobile[editorChildrenSel] = {
 			'height': containerEqualHeight === true ? '100%' : '',
-		}
-		widthSelectorsMobile[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-block-${clientId} > .block-editor-inner-blocks > .block-editor-block-list__layout > div`] = {
-			'height': containerEqualHeight === true ? '100%' : '',
-		}
+		};
 	}
 	if( containerLayout === 'grid' ){
 		mobile_selectors[ containerFlexSelector ] = {
@@ -1259,12 +1248,9 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			'column-gap': generateCSSUnit( columnGapMobileFallback, columnGapUnits['Mobile'] ),
 			...mobile_selectors[ containerFlexSelector ],
 		};
-		widthSelectorsMobile[`.wp-block-frontis-blocks-container.frontis-blocks-block-block-${clientId} .frontis-blocks-container-inner-blocks-wrap > .block-editor-inner-blocks > .block-editor-block-list__layout > div`] = {
+		widthSelectorsMobile[editorChildrenSel] = {
 			'height': containerEqualHeight === true ? '100%' : '',
-		}
-		widthSelectorsMobile[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-block-${clientId} > .block-editor-inner-blocks > .block-editor-block-list__layout > div`] = {
-			'height': containerEqualHeight === true ? '100%' : '',
-		}
+		};
 	}
 
 	// Display grid css.

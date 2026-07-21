@@ -19,6 +19,7 @@ const Edit = (props) => {
 		attributes: {
 			p_block_id,
 			block_id,
+			blockStyle,
 			borderStyle,
 			borderWidth,
 			borderColor,
@@ -39,7 +40,6 @@ const Edit = (props) => {
 		clientId,
 		setAttributes,
 		name,
-		blockStyle,
 		context,
 		hasDynamicContent,
 	} = props;
@@ -185,12 +185,12 @@ const Edit = (props) => {
     // const customCss = getCustomCss(advancedHeadingCustomCSS, `.${blockId}`);
 
     useEffect(() => {
-        const newStyle = `${blockFrontEndStyle}`.replace(/\s+/g, ' ').trim();
-        // Only update if the style actually changed - prevents double render loop
-        if (attributes.blockStyle !== newStyle) {
-            setAttributes({blockStyle: newStyle});
+        const currentStyle = `${blockStyle || ''}`.replace(/\s+/g, ' ').trim();
+        const newStyle = `${blockFrontEndStyle || ''}`.replace(/\s+/g, ' ').trim();
+        if (currentStyle !== newStyle) {
+            setAttributes({ blockStyle: newStyle });
         }
-    }, [blockFrontEndStyle]);
+    }, [blockFrontEndStyle, blockStyle]);
 
 	// Handle variation picker - show picker when no variation selected and block is root
 	const shouldShowVariationPicker = ! variationSelected && 0 === getBlockParents?.length;
@@ -253,17 +253,6 @@ const Edit = (props) => {
 			setAttributes(attributesToUpdate);
 		}
 	}, []);
-
-	// Set p_block_id when showing variation picker - must be in useEffect, not render
-	useEffect(() => {
-		if (shouldShowVariationPicker) {
-			const coreBlockEditord = select( 'core/block-editor' );
-			const parentBlockId = coreBlockEditord.getBlockRootClientId( props.clientId );
-			if (parentBlockId !== attributes.p_block_id) {
-				setAttributes({p_block_id: parentBlockId});
-			}
-		}
-	}, [shouldShowVariationPicker, props.clientId, attributes.p_block_id]);
 
 	if ( shouldShowVariationPicker ) {
 		return <ColumnsPicker { ...{ ...props, variations, defaultVariation } } />

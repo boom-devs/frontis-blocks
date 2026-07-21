@@ -11,6 +11,7 @@ import gridCssObject from '@Config/gridCssCreator';
 import backgroundCss from './backgroundCss';
 function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = false) {
 	const blockName = name.replace('frotins-blocks/', '');
+	const containerId = attributes.p_block_id || clientId;
 	let {
 		directionDesktop,
 		directionTablet,
@@ -1297,14 +1298,25 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 			'column-gap': generateCSSUnit(columnGapMobileFallback, columnGapUnits['Mobile']),
 		};
 
-		widthSelectorsDesktop[`.wp-block-frontis-blocks-container.frontis-blocks-block-${clientId} > .frontis-blocks-container-inner-blocks-wrap > div`] = {
-			'width': containerChildrenWidth === 'full' ? '100%' : containerChildrenWidth === 'auto' ? 'auto' : '',
-			'height': containerEqualHeight === true ? '100%' : '',
-		}
-		widthSelectorsDesktop[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-${clientId} > div`] = {
-			'width': containerChildrenWidth === 'full' ? '100%' : containerChildrenWidth === 'auto' ? 'auto' : '',
-			'height': containerEqualHeight === true ? '100%' : '',
-		}
+		const childrenWidthVal = containerChildrenWidth === 'full' ? '100% !important' : containerChildrenWidth === 'auto' ? 'auto !important' : '';
+		const childrenHeightVal = containerEqualHeight === true ? '100%' : '';
+
+		const rootChildrenSel = `.frontis-blocks-${containerId} > .frontis-blocks-container-inner-blocks-wrap > *, .frontis-blocks-block-${containerId} > .frontis-blocks-container-inner-blocks-wrap > *, .frontis-blocks-${clientId} > .frontis-blocks-container-inner-blocks-wrap > *, .frontis-blocks-block-${clientId} > .frontis-blocks-container-inner-blocks-wrap > *, #block-${clientId} > .frontis-blocks-container-inner-blocks-wrap > *`;
+		const childChildrenSel = `.frontis-blocks-${containerId}.child > *, .frontis-blocks-block-${containerId}.child > *, .frontis-blocks-${clientId}.child > *, .frontis-blocks-block-${clientId}.child > *, #block-${clientId}.child > *`;
+		const editorInnerChildrenSel = `.frontis-blocks-block-${containerId} .frontis-blocks-container-inner-blocks-wrap > .block-editor-inner-blocks > .block-editor-block-list__layout > *, .frontis-blocks-block-${clientId} .frontis-blocks-container-inner-blocks-wrap > .block-editor-inner-blocks > .block-editor-block-list__layout > *, #block-${clientId} .frontis-blocks-container-inner-blocks-wrap > .block-editor-inner-blocks > .block-editor-block-list__layout > *, .frontis-blocks-block-${containerId}.child > .block-editor-inner-blocks > .block-editor-block-list__layout > *, .frontis-blocks-block-${clientId}.child > .block-editor-inner-blocks > .block-editor-block-list__layout > *`;
+
+		widthSelectorsDesktop[rootChildrenSel] = {
+			'width': childrenWidthVal,
+			'height': childrenHeightVal,
+		};
+		widthSelectorsDesktop[childChildrenSel] = {
+			'width': childrenWidthVal,
+			'height': childrenHeightVal,
+		};
+		widthSelectorsDesktop[editorInnerChildrenSel] = {
+			'width': childrenWidthVal,
+			'height': childrenHeightVal,
+		};
 		widthSelectorsDesktop[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-${clientId}`] = {
 			'display': 'flex',
 			'flex-direction': containerDirection['Desktop'],
@@ -1730,14 +1742,12 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 			gridChildrenCSSMobile['justify-self'] = gridJustifyItemsMobile;
 		}
 
-		const containerId = attributes.p_block_id || clientId;
 		const containerSelectors = `.frontis-blocks-${containerId}, .frontis-blocks-block-${containerId}, .frontis-blocks-${clientId}, .frontis-blocks-block-${clientId}, #block-${clientId}`;
 		widthSelectorsDesktop[containerSelectors] = gridChildrenCSS;
 		widthSelectorsTablet[containerSelectors] = gridChildrenCSSTablet;
 		widthSelectorsMobile[containerSelectors] = gridChildrenCSSMobile;
 	}
 
-	const containerId = attributes.p_block_id || clientId;
 	const base_selector = gbsSelector ? gbsSelector : `.frontis-blocks-${containerId}, .frontis-blocks-block-${containerId}, .frontis-blocks-${clientId}, .frontis-blocks-block-${clientId}, #block-${clientId}`;
 
 	let styling_css = generateCSS(selectors, base_selector);
