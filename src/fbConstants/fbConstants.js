@@ -21,6 +21,14 @@ export const ANIMATION_TYPE = [
 	{ label: __("Reveal", "frontis-blocks"), value: "reveal" },
 ];
 
+export const REVEAL_DIRECTION = [
+	{ label: __('Up', 'frontis-blocks'), value: 'up' },	
+	{ label: __('Down', 'frontis-blocks'), value: 'down' },
+	{ label: __('Left', 'frontis-blocks'), value: 'left' },
+	{ label: __('Right', 'frontis-blocks'), value: 'right' },
+	{ label: __('None (Fade Only)', 'frontis-blocks'), value: 'none' },
+];
+
 export const OVERFLOW_OP = [
 	{ label: __('Default', 'frontis-blocks'), value: 'default' },
 	{ label: __('Auto', 'frontis-blocks'), value: 'auto' },

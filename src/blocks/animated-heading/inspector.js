@@ -22,6 +22,7 @@ import {
 import {
     BORDER_STYLES,
     ANIMATION_TYPE,
+    REVEAL_DIRECTION,
 } from "@Constants/fbConstants";
 import SortableItem from './sortableItem';
 import FB_Spacing from '@Components/spacing';
@@ -104,6 +105,14 @@ const Inspector = ({ attributes, setAttributes }) => {
         animatedHeadingAnimationTextBgColorSwitcher,
         animatedHeadingAnimationTextBgColor,
         animatedHeadingAnimationTextBgColorHover,
+
+        //reaval animation
+        animatedHeadingRevealCharDelay,
+        animatedHeadingRevealAppearDuration,
+        animatedHeadingRevealHideDuration,
+        animatedHeadingRevealVisibleHold,
+        animatedHeadingRevealResetDelay,
+        animatedHeadingRevealDirection,
 
         // Global Z-Index Attributes
         animatedHeadingGlobalZIndex,
@@ -580,6 +589,63 @@ const Inspector = ({ attributes, setAttributes }) => {
                         rangeStep={1}
                         resetFallbackValue={"8"}
                     />
+                )}
+
+                {animationType === "reveal" && (
+                    <>  
+                        <SelectControl
+                            label={__('Reveal Direction', 'frontis-blocks')}
+                            value={animatedHeadingRevealDirection}
+                            options={REVEAL_DIRECTION}
+                            onChange={(value) => setAttributes({ animatedHeadingRevealDirection: value })}
+                        />
+
+                        <RangeControl
+                            label={__('Character Delay(ms)', 'frontis-blocks')}
+                            value={animatedHeadingRevealCharDelay}
+                            onChange={(value) => setAttributes({ animatedHeadingRevealCharDelay: value })}
+                            min={50}
+                            max={500}
+                            step={10}
+                        />
+
+                        <RangeControl
+                            label={__('Appear Duration(ms)', 'frontis-blocks')}
+                            value={animatedHeadingRevealAppearDuration}
+                            onChange={(value) => setAttributes({ animatedHeadingRevealAppearDuration: value })}
+                            min={200}
+                            max={2000}
+                            step={50}
+                        />
+
+                        <RangeControl
+                            label={__('Hide Duration(ms)', 'frontis-blocks')}
+                            value={animatedHeadingRevealHideDuration}
+                            onChange={(value) => setAttributes({ animatedHeadingRevealHideDuration: value })}
+                            min={200}
+                            max={2000}
+                            step={50}
+                        />
+
+                        <RangeControl
+                            label={__('Visible Hold Time(ms)', 'frontis-blocks')}
+                            value={animatedHeadingRevealVisibleHold}
+                            onChange={(value) => setAttributes({ animatedHeadingRevealVisibleHold: value })}
+                            min={500}
+                            max={5000}
+                            step={100}
+                        />
+
+                        <RangeControl
+                            label={__('Reset Delay(ms)', 'frontis-blocks')}
+                            value={animatedHeadingRevealResetDelay}
+                            onChange={(value) => setAttributes({ animatedHeadingRevealResetDelay: value })}
+                            min={0}
+                            max={1000}
+                            step={50}
+                        />
+                    
+                    </>
                 )}
             </PanelBody>
 
