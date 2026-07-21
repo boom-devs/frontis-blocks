@@ -347,6 +347,33 @@ const attributes = {
     },
     /** End Typing Text Style */
 
+    /** Start reaval animation */
+    animatedHeadingRevealCharDelay: {
+        type: 'number',
+        default: 200
+    },
+    animatedHeadingRevealAppearDuration: {
+        type: 'number',
+        default: 800
+    },
+    animatedHeadingRevealHideDuration: {
+        type: 'number',
+        default: 700
+    },
+    animatedHeadingRevealVisibleHold: {
+        type: 'number',
+        default: 2000
+    },
+    animatedHeadingRevealResetDelay: {
+        type: 'number',
+        default: 300
+    },
+    animatedHeadingRevealDirection: {
+        type: 'string',
+        default: 'up'
+    }, 
+    /** End reaval animation */
+
 
     /** Start Global Z-Index */
     animatedHeadingGlobalZIndex : {

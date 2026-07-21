@@ -133,6 +133,7 @@
                 setInterval(showNextWord, 3000);
             }
 
+            // Handle Reveal Animation
             if (animationType === 'reveal') {
                 const itemElements = container.querySelectorAll('.fb-animated-heading-item');
                 const texts = Array.from(itemElements).map(el => el.textContent.trim()).filter(Boolean);
@@ -142,12 +143,12 @@
 
                 const wrapper = container.querySelector('.fb-animated-heading-reveal-wrapper');
                 if (!wrapper) return;
-
-                const CHAR_DELAY = 200;
-                const APPEAR_DURATION = 800;
-                const HIDE_DURATION = 700;
-                const VISIBLE_HOLD = 2000;
-                const RESET_DELAY = 300;
+                
+                const CHAR_DELAY = parseInt(wrapper.dataset.charDelay) || 200;
+                const APPEAR_DURATION = parseInt(wrapper.dataset.appearDuration) || 800;
+                const HIDE_DURATION = parseInt(wrapper.dataset.hideDuration) || 700;
+                const VISIBLE_HOLD = parseInt(wrapper.dataset.visibleHold) || 2000;
+                const RESET_DELAY = parseInt(wrapper.dataset.resetDelay) || 300;
 
                 let currentIndex = 0;
 

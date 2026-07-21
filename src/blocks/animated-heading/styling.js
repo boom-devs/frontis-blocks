@@ -72,6 +72,8 @@ const generateAnimatedHeadingStyle = (attributes) => {
         animatedHeadingAnimationTextBgColor,
         animatedHeadingAnimationTextBgColorHover,
 
+        animatedHeadingRevealDirection,
+
         // Global Z-Index Attributes
         animatedHeadingGlobalZIndex,
 
@@ -137,6 +139,23 @@ const generateAnimatedHeadingStyle = (attributes) => {
     const animatedHeadingGlobalTabletBorderRadiusWidth = `${animatedHeadingGlobalTabletBorderRadius.top}${animatedHeadingGlobalBorderRadiusUnits.Tablet} ${animatedHeadingGlobalTabletBorderRadius.right}${animatedHeadingGlobalBorderRadiusUnits.Tablet} ${animatedHeadingGlobalTabletBorderRadius.bottom}${animatedHeadingGlobalBorderRadiusUnits.Tablet} ${animatedHeadingGlobalTabletBorderRadius.left}${animatedHeadingGlobalBorderRadiusUnits.Tablet}`;
     const animatedHeadingGlobalMobileBorderRadiusWidth = `${animatedHeadingGlobalMobileBorderRadius.top}${animatedHeadingGlobalBorderRadiusUnits.Mobile} ${animatedHeadingGlobalMobileBorderRadius.right}${animatedHeadingGlobalBorderRadiusUnits.Mobile} ${animatedHeadingGlobalMobileBorderRadius.bottom}${animatedHeadingGlobalBorderRadiusUnits.Mobile} ${animatedHeadingGlobalMobileBorderRadius.left}${animatedHeadingGlobalBorderRadiusUnits.Mobile}`;
 
+    function getRevealTransform(direction) {
+        switch (direction) {
+            case 'up':    return 'translateY(60px)';
+            case 'down':  return 'translateY(-60px)';
+            case 'left':  return 'translateX(60px)';
+            case 'right': return 'translateX(-60px)';
+            case 'none':  return 'none';
+            default:      return 'translateY(60px)';
+        }
+    }
+    
+    let initialTransform = 'none';
+    if (animationType === 'reveal') {
+        const revealTransform = getRevealTransform(animatedHeadingRevealDirection);
+        initialTransform = revealTransform === 'none' ? 'scale(0.5) rotateX(30deg)' : `${revealTransform} scale(0.5) rotateX(30deg)`;
+    }
+
     const animatedHeadingBlockStyle = `
     
         .${blockID}.fb-animated-heading-main-wrapper {
@@ -166,6 +185,15 @@ const generateAnimatedHeadingStyle = (attributes) => {
             ${animatedHeadingGap.Desktop &&animatedHeadingGapUnits.Desktop ? `gap: ${animatedHeadingGap.Desktop}${animatedHeadingGapUnits.Desktop};` : ''}
             ${animatedHeadingAlignment.Desktop ? `justify-content: ${animatedHeadingAlignment.Desktop};` : ''}
         }
+
+        //reveal animation transform style
+        .${blockID} .fb-animated-heading-wrapper .fb-animated-heading-char {
+            transform: ${initialTransform};
+        }
+        .${blockID} .fb-animated-heading-wrapper .fb-animated-heading-char.fb-animated-heading-char-appear {
+            transform: translateY(0) scale(1) rotateX(0);
+        }
+
         .${blockID} .fb-animated-heading-wrapper.animated-type-swirl {
             display: block;
             ${animatedHeadingAlignment.Desktop ? `text-align: ${animatedHeadingAlignment.Desktop};` : ''}
@@ -174,7 +202,6 @@ const generateAnimatedHeadingStyle = (attributes) => {
         .${blockID} .fb-animated-heading-wrapper .fb-animated-headings:empty {
             display: none;
         }
-
 
         .${blockID} .fb-animated-heading-wrapper .fb-animated-heading-prefix,
         .${blockID} .fb-animated-heading-wrapper .fb-animated-heading-suffix {

@@ -26,6 +26,14 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         animatedHeadingCursor,
         animatedHeadingSuffix,
 
+        //reaval animation
+        animatedHeadingRevealCharDelay,
+        animatedHeadingRevealAppearDuration,
+        animatedHeadingRevealHideDuration,
+        animatedHeadingRevealVisibleHold,
+        animatedHeadingRevealResetDelay,
+        animatedHeadingRevealDirection,
+
         animatedHeadingGlobalWraperID,
         animatedHeadingGlobalWraperClass,
 
@@ -141,7 +149,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
             const container = dynamicWrapperRef.current;
             const swirlWrapper = swirlWrapperRef.current;
 
-            // 🧹 Clean up previous children if any
+            // Clean up previous children if any
             if (container) {
                 container.innerHTML = "";
             }
@@ -232,7 +240,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                 currentIndex = (currentIndex + 1) % texts.length;
                 const intervalId = setInterval(showNextWord, 3000);
 
-                // ✅ Return Cleanup
+                // Return Cleanup
                 return () => {
                     clearInterval(intervalId);
                     if (container) {
@@ -242,18 +250,18 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
             }
         }else if (animationType === "reveal") {
             const texts = animatedHeadingItems?.map(item => item.animatedHeadingTitle).filter(Boolean) || [];
-            if (texts.length === 0) return;
+            if(texts.length === 0) return;
 
             const container = revealWrapperRef.current;
             if (!container) return;
 
             container.innerHTML = "";
 
-            const CHAR_DELAY = 200;
-            const APPEAR_DURATION = 800;
-            const HIDE_DURATION = 700;
-            const VISIBLE_HOLD = 2000;
-            const RESET_DELAY = 300;
+            const CHAR_DELAY = animatedHeadingRevealCharDelay;
+            const APPEAR_DURATION = animatedHeadingRevealAppearDuration;
+            const HIDE_DURATION = animatedHeadingRevealHideDuration;
+            const VISIBLE_HOLD = animatedHeadingRevealVisibleHold;
+            const RESET_DELAY = animatedHeadingRevealResetDelay;
 
             let currentIndex = 0;
             let timeoutIds = [];
@@ -261,15 +269,18 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
             function createCharSpans(text) {
                 const fragment = document.createDocumentFragment();
                 const spans = [];
+
                 text.split('').forEach((char) => {
                     const span = document.createElement('span');
                     span.className = 'fb-animated-heading-char';
+
                     if (char === ' ') {
                         span.classList.add('fb-animated-heading-char-space');
                         span.innerHTML = '&nbsp;';
                     } else {
                         span.textContent = char;
                     }
+
                     fragment.appendChild(span);
                     spans.push(span);
                 });
@@ -282,7 +293,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                 const { fragment, spans } = createCharSpans(text);
                 container.appendChild(fragment);
 
-                // Phase 1: appear one by one
+                // appear one by one
                 spans.forEach((span, i) => {
                     timeoutIds.push(setTimeout(() => {
                         span.classList.add('fb-animated-heading-char-appear');
@@ -292,7 +303,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                 const visibleTime = (spans.length - 1) * CHAR_DELAY + APPEAR_DURATION;
                 const hideStart = visibleTime + VISIBLE_HOLD;
 
-                // Phase 2: hide one by one
+                // hide one by one
                 timeoutIds.push(setTimeout(() => {
                     spans.forEach((span, i) => {
                         timeoutIds.push(setTimeout(() => {
@@ -304,7 +315,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
                 const resetTime = hideStart + (spans.length - 1) * CHAR_DELAY + HIDE_DURATION + RESET_DELAY;
 
-                // Phase 3: next word, repeat
+                // next word, repeat
                 timeoutIds.push(setTimeout(() => {
                     currentIndex = (currentIndex + 1) % texts.length;
                     animateWord();
@@ -318,7 +329,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                 container.innerHTML = '';
             };
         }
-    }, [animatedHeadingItems, animationType, animatedHeadingMainTag]);
+    }, [animatedHeadingItems, animationType, animatedHeadingMainTag, animatedHeadingRevealCharDelay, animatedHeadingRevealAppearDuration, animatedHeadingRevealHideDuration, animatedHeadingRevealVisibleHold, animatedHeadingRevealResetDelay, animatedHeadingRevealDirection]);
 
     const Tag = animatedHeadingMainTag ? animatedHeadingMainTag : "div";
 

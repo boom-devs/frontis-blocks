@@ -12,6 +12,14 @@ export default function save({ attributes }) {
         animatedHeadingSuffix,
         animatedHeadingGlobalWraperID,
         animatedHeadingGlobalWraperClass,
+
+        //reaval animation
+        animatedHeadingRevealCharDelay,
+        animatedHeadingRevealAppearDuration,
+        animatedHeadingRevealHideDuration,
+        animatedHeadingRevealVisibleHold,
+        animatedHeadingRevealResetDelay,
+        animatedHeadingRevealDirection,
     } = attributes;
 
     const blockProps = useBlockProps.save({
@@ -71,14 +79,21 @@ export default function save({ attributes }) {
                     )}
 
                     {animationType === 'reveal' && (
-                        <span className="fb-animated-heading-reveal-wrapper" id="animated-heading-reveal-wrapper">
-                            {animatedHeadingItems && animatedHeadingItems.length > 0 &&
-                                animatedHeadingItems.map((item, index) => (
-                                    <span key={index} className="fb-animated-heading-item">
-                                        {item.animatedHeadingTitle}
-                                    </span>
-                                ))
-                            }
+                        <span 
+                            className="fb-animated-heading-reveal-wrapper" 
+                            id="animated-heading-reveal-wrapper"
+                            data-char-delay={animatedHeadingRevealCharDelay}
+                            data-appear-duration={animatedHeadingRevealAppearDuration}
+                            data-hide-duration={animatedHeadingRevealHideDuration}
+                            data-visible-hold={animatedHeadingRevealVisibleHold}
+                            data-reset-delay={animatedHeadingRevealResetDelay}>
+                                {animatedHeadingItems && animatedHeadingItems.length > 0 &&
+                                    animatedHeadingItems.map((item, index) => (
+                                        <span key={index} className="fb-animated-heading-item">
+                                            {item.animatedHeadingTitle}
+                                        </span>
+                                    ))
+                                }
                         </span>
                     )}
 
