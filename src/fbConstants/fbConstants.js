@@ -299,6 +299,16 @@ export const PRESETS = [
 	{ label: __("Preset 2", "frontis-blocks"), value: "preset-2" },
 ];
 
+export const ACCORDIOAN_PRESETS = [
+	{ label: __("Default", "frontis-blocks"), value: "preset-0" },
+	{ label: __("Preset 1", "frontis-blocks"), value: "preset-1" },
+	{ label: __("Preset 2", "frontis-blocks"), value: "preset-2" },
+	{ label: __("Preset 3", "frontis-blocks"), value: "preset-3" },
+	{ label: __("Preset 4", "frontis-blocks"), value: "preset-4" },
+	{ label: __("Preset 5", "frontis-blocks"), value: "preset-5" },
+	{ label: __("Preset 6", "frontis-blocks"), value: "preset-6" },
+];
+
 export const ADVANCED_HEADING_PRESETS = [
 	{ label: __("Default", "frontis-blocks"), value: "preset-0" },
 	{ label: __("Preset 1", "frontis-blocks"), value: "preset-1" },
@@ -687,9 +697,21 @@ export const ANIMATION = [
     { value: 'top', label: __('Slide Top', 'frontis-blocks') },
     { value: 'bottom', label: __('Slide Bottom', 'frontis-blocks') },
     { value: 'zoom', label: __('Zoom', 'frontis-blocks') },
-    { value: 'flip', label: __('Flip', 'frontis-blocks') },
     { value: 'fade', label: __('Fade', 'frontis-blocks') },
 ];
+
+export const TOGGLE_TYPES = [
+	{ label: __('Button', 'frontis-blocks'), value: 'button' },
+	{ label: __('Image', 'frontis-blocks'), value: 'image' },
+	{ label: __('Scroll', 'frontis-blocks'), value: 'scroll' },
+	{ label: __('Page Load', 'frontis-blocks'), value: 'page-load' },
+];
+
+export const CONTENT_TYPES = [
+	{ label: __('Pattern', 'frontis-blocks'), value: 'pattern' },
+	{ label: __('Manually', 'frontis-blocks'), value: 'custom' },
+];
+
 
 export const MENU_TYPE = [
     { value: 'icon', label: __('Icon', 'frontis-blocks') },
@@ -1114,4 +1136,7 @@ export const STACKED_CARD_SCALE = [
 	{ label: __("Horizontal", "frontis-blocks"), value: "horizontal" },
 	{ label: __("Vertical", "frontis-blocks"), value: "vertical" },
 ];
-
+export const TOGGLE_BUTTON_ICON_ALIGN = [
+	{ label: __(<Dashicon icon={"remove"} />), value: "none" },
+	{ label: __(<Dashicon icon={"admin-generic"} />), value: "icon" },
+];
