@@ -217,7 +217,9 @@ export default function Edit({ attributes, setAttributes, clientId, context, isS
     useEffect(() => {
         if (blockID) {
             const css = generateTestimonialStyle(attributes);
-            setAttributes({ blockStyle: css });
+            if (blockStyle !== css) {
+                setAttributes({ blockStyle: css });
+            }
         }
     }, [attributes, blockID]);
     /** End Generate Block Style */
