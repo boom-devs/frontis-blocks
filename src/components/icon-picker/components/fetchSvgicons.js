@@ -1,15 +1,15 @@
 const fetchSvgIcons = async () => {
-	const { ajaxUrl, nonce, site_url } = window.FrontisBlocksData;
-
-	// Assets er vitore fontawesome icon ache icons.php file a oita fetch korbo using rest api
-	const url = `${site_url}/wp-json/wp/v2/frontis-blocks/icons`;
-	const token = 'b9e9d7516943744aed44d0be39217694a92784ce737e07c9e12397eca99fded0';
+	const siteUrl = window.FrontisBlocksData?.site_url || (typeof window !== 'undefined' ? window.location.origin : '');
+	const url = `${siteUrl}/wp-json/wp/v2/frontis-blocks/icons`;
 
 	// Function to check if data exists in localStorage
 	const getDataFromLocalStorage = () => {
-		let data = localStorage.getItem('iconData');
-		data = data ? JSON.parse(data) : null;
-		return data;
+		try {
+			let data = localStorage.getItem('iconData');
+			return data ? JSON.parse(data) : null;
+		} catch (e) {
+			return null;
+		}
 	};
 
 	// Fetch SVG icons from the API
@@ -18,7 +18,6 @@ const fetchSvgIcons = async () => {
 			const response = await fetch(url, {
 				method: 'GET',
 				headers: {
-					'Authorization': `Bearer ${token}`,
 					'Content-Type': 'application/json',
 				},
 			});
@@ -28,7 +27,11 @@ const fetchSvgIcons = async () => {
 			}
 
 			const data = await response.json();
-			localStorage.setItem('iconData', JSON.stringify(data)); // Store data in localStorage
+			try {
+				localStorage.setItem('iconData', JSON.stringify(data));
+			} catch (e) {
+				console.error('Error saving iconData to localStorage:', e);
+			}
 			return data;
 		} catch (error) {
 			console.error('Error fetching SVG icons:', error);
