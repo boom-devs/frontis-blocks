@@ -46,7 +46,9 @@ export default function Edit({ attributes, setAttributes, isSelected, clientId, 
     useEffect(() => {
         if (blockID) {
             const css = generateVerticalTimelineItemStyle(attributes);
-            setAttributes({ blockStyle: css });
+            if (blockStyle !== css) {
+                setAttributes({ blockStyle: css });
+            }
         }
     }, [attributes, blockID]);
 

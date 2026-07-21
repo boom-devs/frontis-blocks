@@ -63,7 +63,9 @@ export default function Edit(props) {
     useEffect(() => {
         if (blockID) {
             const css = generateAccordionItemStyle(attributes);
-            setAttributes({ blockStyle: css });
+            if (blockStyle !== css) {
+                setAttributes({ blockStyle: css });
+            }
         }
     }, [attributes, blockID]);
     /** End Generate Block Style */

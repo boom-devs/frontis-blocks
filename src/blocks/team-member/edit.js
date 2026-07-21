@@ -181,11 +181,13 @@ export default function Edit({ attributes, setAttributes, clientId, context, isS
 	}, [teamMemberBadgeFontFamily]);
 	/** End Load Google Font */
 
-	 /** Start Generate Block Style */
+	/** Start Generate Block Style */
 	useEffect(() => {
 		if (blockID) {
 			const css = generateTeamMemberStyle(attributes);
-			setAttributes({ blockStyle: css });
+			if (blockStyle !== css) {
+				setAttributes({ blockStyle: css });
+			}
 		}
 	}, [attributes, blockID]);
 	/** End Generate Block Style */
