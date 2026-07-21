@@ -21,6 +21,7 @@ import {
     ICON_POSITIONS,
     ICON_SWITCHER,
     OVERFLOW_OP,
+    ACCORDIOAN_PRESETS
 } from "@Constants/fbConstants";
 
 import FB_Spacing from '@Components/spacing';
@@ -42,6 +43,8 @@ import { useDeviceType } from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
 import FB_InspectorControls from '@Components/InspectorControls';
+import FB_Presets from '@Components/presets';
+import { accordionPresets } from './preset';
 
 const Inspector = ({ attributes, setAttributes, clientId }) => {
     const {
@@ -50,6 +53,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         accordionAlignment,
         accordionIconZIndex,
         accordionItems,
+        accordionPresetStyle,
 
         accordionIconSize,
         accordionIconSizeUnits,
@@ -133,6 +137,12 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         titleColorSwitcher,
         titleColor,
         titleHoverColor,
+
+        titleBgActiveColor,
+        contentBgActiveColor,
+        titleActiveColor,
+        accordionItemsBorderActiveColor,
+        accordionItemsContentBorderActiveColor,
 
         accordionItemGap,
         accordionItemGapUnits,
@@ -295,6 +305,13 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         contentTabBorderRadiusWidth,
         contentMobileBorderRadiusWidth,
         contentBorderRadiusLink,
+
+        contentActiveBorderRadiusUnits,
+        contentDesktopActiveBorderRadiusWidth,
+        contentTabActiveBorderRadiusWidth,
+        contentMobileActiveBorderRadiusWidth,
+        contentActiveBorderRadiusLink,
+
         contentDesktopSwitcher,
         contentTabletSwitcher,
         contentMobileSwitcher,
@@ -441,6 +458,15 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
     const titleExpandedIconHandler = (value) => {
         setAttributes({ expandedIcon: value })
     }
+
+    /**
+     * selected preset option
+     */
+    const selectedPresetOption = useMemo(
+        () => ACCORDIOAN_PRESETS.find(o => o.value === accordionPresetStyle) || null,
+        [accordionPresetStyle]
+    );
+    /** End Preset Style */
 
     // accordionItems Padding Functionb
     const handleAccordionItemsPaddingUnitChange = (event, position) => {
@@ -1064,12 +1090,91 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         })
     }
 
+    // content Active BorderRadiusWidth Function
+    const handleContentActiveBorderRadiusUnitChange = (event, position) => {
+        const value = event.target.value;
+        if (contentActiveBorderRadiusLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        contentDesktopActiveBorderRadiusWidth: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        contentTabActiveBorderRadiusWidth: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        contentMobileActiveBorderRadiusWidth: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ contentDesktopActiveBorderRadiusWidth: { ...contentDesktopActiveBorderRadiusWidth, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ contentTabActiveBorderRadiusWidth: { ...contentTabActiveBorderRadiusWidth, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ contentMobileActiveBorderRadiusWidth: { ...contentMobileActiveBorderRadiusWidth, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleContentActiveBorderRadiusCombineBtn = () => {
+        setAttributes({ contentActiveBorderRadiusLink: !contentActiveBorderRadiusLink });
+    }
+
+    const handleContentActiveBorderRadiusUnitsHandler = (unit) => {
+        setAttributes({
+            contentActiveBorderRadiusUnits: {
+                ...contentActiveBorderRadiusUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+
     /**
      * Inspector General Controls
      */
     const generalControls = (
         <>
             <PanelBody initialOpen={true}>
+                <BaseControl label={__("Preset Style", "frontis-blocks")}>
+                    <FB_Presets
+                        label={__('Select Preset', 'frontis-blocks')}
+                        presets={accordionPresets}
+                        value={accordionPresetStyle}
+                        onChangeValue='accordionPresetStyle'
+                        defaultPresetValue="preset-1"
+                        setAttributes={setAttributes}
+                    />
+                </BaseControl>
                 <FB_HtmlTagControl
                     label={__("Accordion Items Title Tag", "frontis-blocks")}
                     globalHtmlTag={tagName}
@@ -1938,6 +2043,51 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                         }
                     />
                 )}
+            </PanelBody>
+
+            <PanelBody title="Active Items" initialOpen={false} >
+               <FB_ColorControl
+                    label={__("Title Color", "frontis-blocks")}
+                    globalColor={titleActiveColor}
+                    setGlobalColor={(value) => setAttributes({ titleActiveColor: value === undefined ? '' : value })}
+                />
+
+               <FB_ColorControl
+                    label={__("Title Background", "frontis-blocks")}
+                    globalColor={titleBgActiveColor}
+                    setGlobalColor={(value) => setAttributes({ titleBgActiveColor: value === undefined ? '' : value })}
+                />
+
+                <FB_ColorControl
+                    label={__("Title Border Color", "frontis-blocks")}
+                    globalColor={accordionItemsBorderActiveColor}
+                    setGlobalColor={(value) => setAttributes({ accordionItemsBorderActiveColor: value === undefined ? '' : value })}
+                />
+
+                <FB_ColorControl
+                    label={__("Content Background", "frontis-blocks")}
+                    globalColor={contentBgActiveColor}
+                    setGlobalColor={(value) => setAttributes({ contentBgActiveColor: value === undefined ? '' : value })}
+                />
+
+                <FB_ColorControl
+                    label={__("Content Border Color", "frontis-blocks")}
+                    globalColor={accordionItemsContentBorderActiveColor}
+                    setGlobalColor={(value) => setAttributes({ accordionItemsContentBorderActiveColor: value === undefined ? '' : value })}
+                />
+                <FB_Spacing
+                    label={__("Content Border Radius", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleContentActiveBorderRadiusUnitsHandler}
+                    spacingUnits={contentActiveBorderRadiusUnits}
+                    spacingDesktop={contentDesktopActiveBorderRadiusWidth}
+                    spacingTablet={contentTabActiveBorderRadiusWidth}
+                    spacingMobile={contentMobileActiveBorderRadiusWidth}
+                    handleSpacingUnitHandler={handleContentActiveBorderRadiusUnitChange}
+                    spacingCombineBtn={contentActiveBorderRadiusLink}
+                    spacingCombineBtnHandler={handleContentActiveBorderRadiusCombineBtn}
+                    setAttributes={setAttributes}
+                />
             </PanelBody>
         </>
     );
