@@ -84,8 +84,6 @@ class AssetsGenerator
 				$this->post->post_content = $this->get_page_content_with_template_parts();
 			}
 
-			// var_dump($this->post->post_content);
-			// die();
 			$frontis_blocks_used = preg_match('/frontis-blocks/i', $this->post->post_content) > 0;
 			$critical_css_used = preg_match('/frontis-blocks\/critical-css/i', $this->post->post_content) > 0;
 
@@ -428,12 +426,50 @@ class AssetsGenerator
 		return $template_content;
 	}
 
+	/**
+	 * Walk every block in the current post and collect CSS / JS assets.
+	 *
+	 * Container block styles are loaded in two compatible ways:
+	 *
+	 * 1. Post meta `_frontis_container_block_styles` (preferred for new / re-saved posts)
+	 *    - Gutenberg marks container `blockStyle` as `role: local`, so huge CSS strings
+	 *      are NOT written into each nested block comment in post_content.
+	 *    - Deep nesting (500+) previously serialized those strings into an O(n²) WeakMap
+	 *      cache in the editor and caused Chrome OOM (Aw, Snap / error code 5).
+	 *    - The block editor syncs combined container CSS into this meta key on save
+	 *      (see `src/blocks/container/blockStylePersistence.js`).
+	 *    - Meta is registered in `FrontisBlocks\Core\Blocks::register_container_block_style_meta()`.
+	 *
+	 * 2. Per-block `attrs.blockStyle` inside post_content (legacy / not yet re-saved)
+	 *    - Older pages still store CSS in each container's block comment JSON.
+	 *    - `generate_block_assets()` / `get_critical_css_content()` continue to read those
+	 *      attributes, so existing sites keep working until an editor save migrates them.
+	 *
+	 * Critical CSS: when `$this->genrating_critical_css` is true, meta CSS is appended to
+	 * `$this->critical_css_content`; otherwise it goes to `$this->css_content`.
+	 *
+	 * @return void
+	 */
 	public function generate_all_blocks_assets()
 	{
 		$post_content = $this->post->post_content;
 
-		// Container CSS may live in post meta (editor no longer serializes huge blockStyle
-		// strings into nested block comments — that caused OOM with deep nesting).
+		/**
+		 * Inject combined container CSS from post meta before parsing block comments.
+		 *
+		 * Why first: meta holds styles that are no longer present on block attrs after
+		 * `role: local`. Reading meta here ensures frontend output matches the editor
+		 * even when post_content has empty/missing `blockStyle` on containers.
+		 *
+		 * Timing note: Gutenberg REST writes meta AFTER `save_post`. Core\Blocks therefore
+		 * also regenerates assets on `updated_post_meta` / `rest_after_insert_*` so this
+		 * meta is present when compiled CSS files are rewritten. See
+		 * `migrate_container_styles_to_meta_before_save()` for first-save legacy migration.
+		 *
+		 * Why clean_CSS(): same minify / invalid-rule cleanup used for attribute-based CSS.
+		 *
+		 * Empty / non-string meta: skip — legacy pages rely solely on block attrs below.
+		 */
 		$meta_css = get_post_meta($this->post_id, '_frontis_container_block_styles', true);
 		if (is_string($meta_css) && $meta_css !== '') {
 			$cleaned_meta_css = $this->clean_CSS($meta_css) . "\n";

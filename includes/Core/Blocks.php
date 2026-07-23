@@ -33,6 +33,15 @@ class Blocks
 		add_filter('render_block', [$this, 'render_block'], 10, 3);
 		add_action('save_post', [$this, 'get_blocks_on_save'], 10, 3);
 
+		// Before content is replaced: migrate legacy container blockStyle CSS into post meta.
+		add_filter('wp_insert_post_data', [$this, 'migrate_container_styles_to_meta_before_save'], 10, 2);
+
+		// REST saves meta AFTER wp_update_post/save_post. Regenerate assets once meta is ready
+		// so frontend CSS is not built from content that no longer embeds blockStyle.
+		add_action('added_post_meta', [$this, 'maybe_regenerate_assets_for_container_style_meta'], 10, 4);
+		add_action('updated_post_meta', [$this, 'maybe_regenerate_assets_for_container_style_meta'], 10, 4);
+		add_action('init', [$this, 'register_rest_after_insert_asset_hooks'], 20);
+
 		// Cache invalidation hooks - clear caches when content changes
 		add_action('save_post', [Helper::class, 'clear_frontis_caches'], 20);
 		add_action('created_term', [Helper::class, 'clear_frontis_caches']);
@@ -43,14 +52,51 @@ class Blocks
 	}
 
 	/**
-	 * Store container CSS outside block comments so deep nesting does not OOM the editor.
-	 * Frontend AssetsGenerator reads this meta when block attributes no longer embed blockStyle.
+	 * Meta key for combined container CSS (must match blockStylePersistence.js).
+	 */
+	const CONTAINER_BLOCK_STYLE_META_KEY = '_frontis_container_block_styles';
+
+	/**
+	 * Register post meta used to persist container frontend CSS outside block comments.
+	 *
+	 * Meta key: `_frontis_container_block_styles`
+	 *
+	 * Why this exists
+	 * ---------------
+	 * Container `blockStyle` holds a large generated CSS string. When hundreds of
+	 * containers are nested, Gutenberg serializes those strings into every ancestor
+	 * block comment. That caused O(n²) memory growth in the editor serialize cache
+	 * and Chrome OOM crashes (~600+ nests).
+	 *
+	 * Fix: mark `blockStyle` as `role: local` in `src/blocks/container/attributes.js`
+	 * so it is NOT saved into post_content. Combined CSS is written to this meta on
+	 * save instead (see `src/blocks/container/blockStylePersistence.js`).
+	 *
+	 * Who reads it
+	 * ------------
+	 * `FrontisBlocks\Assets\AssetsGenerator::generate_all_blocks_assets()` prepends
+	 * this meta CSS into the page stylesheet / critical CSS. Legacy posts that still
+	 * have `attrs.blockStyle` in content continue to work via the normal per-block path.
+	 *
+	 * Registration details
+	 * --------------------
+	 * - Registered for every post type with `show_in_rest` so the block editor
+	 *   (posts, pages, templates, CPTs, etc.) can edit/save the meta via REST.
+	 * - `show_in_rest => true` is required for `editPost({ meta })` / entity edits
+	 *   in the editor to include this key in the save payload.
+	 * - Leading underscore marks it as protected meta; `auth_callback` still allows
+	 *   users who can `edit_posts` to read/write through REST.
+	 * - `type` string, `single` true: one combined CSS blob per post (not per block).
+	 *
+	 * Hooked on `init` from the constructor.
+	 *
+	 * @return void
 	 */
 	public function register_container_block_style_meta()
 	{
 		$post_types = get_post_types(['show_in_rest' => true], 'names');
 		foreach ($post_types as $post_type) {
-			register_post_meta($post_type, '_frontis_container_block_styles', [
+			register_post_meta($post_type, self::CONTAINER_BLOCK_STYLE_META_KEY, [
 				'type'              => 'string',
 				'single'            => true,
 				'show_in_rest'      => true,
@@ -60,6 +106,179 @@ class Blocks
 				'default'           => '',
 			]);
 		}
+	}
+
+	/**
+	 * Hook rest_after_insert_{post_type} so assets regenerate after REST meta is written.
+	 *
+	 * Gutenberg REST order: wp_update_post (save_post / asset gen) → then meta update.
+	 * Without this, the first asset pass after role:local saves can miss container CSS.
+	 *
+	 * @return void
+	 */
+	public function register_rest_after_insert_asset_hooks()
+	{
+		$post_types = get_post_types(['show_in_rest' => true], 'names');
+		foreach ($post_types as $post_type) {
+			add_action("rest_after_insert_{$post_type}", [$this, 'regenerate_assets_after_rest_save'], 20, 3);
+		}
+	}
+
+	/**
+	 * Re-run page asset generation at the end of a REST create/update.
+	 *
+	 * @param \WP_Post         $post     Inserted or updated post.
+	 * @param \WP_REST_Request $request  Request object.
+	 * @param bool             $creating True when creating a post.
+	 * @return void
+	 */
+	public function regenerate_assets_after_rest_save($post, $request, $creating)
+	{
+		if (!$post instanceof \WP_Post || empty($post->ID)) {
+			return;
+		}
+		if (wp_is_post_autosave($post->ID) || wp_is_post_revision($post->ID)) {
+			return;
+		}
+		if (!is_string($post->post_content) || stripos($post->post_content, 'frontis-blocks') === false) {
+			return;
+		}
+
+		$critical_css_used = Helper::post_content_has_blocks_critical($post, $post->ID);
+		AssetsGenerator::generate_global_assets();
+		AssetsGenerator::get_instance()->generate_page_assets($post->ID, $post, $critical_css_used);
+	}
+
+	/**
+	 * When container style meta is added/updated, regenerate compiled frontend CSS.
+	 *
+	 * @param int    $meta_id    Meta ID.
+	 * @param int    $post_id    Post ID.
+	 * @param string $meta_key   Meta key.
+	 * @param mixed  $meta_value Meta value.
+	 * @return void
+	 */
+	public function maybe_regenerate_assets_for_container_style_meta($meta_id, $post_id, $meta_key, $meta_value)
+	{
+		if ($meta_key !== self::CONTAINER_BLOCK_STYLE_META_KEY) {
+			return;
+		}
+		if (wp_is_post_autosave($post_id) || wp_is_post_revision($post_id)) {
+			return;
+		}
+
+		$post = get_post($post_id);
+		if (!$post instanceof \WP_Post) {
+			return;
+		}
+		if (!is_string($post->post_content) || stripos($post->post_content, 'frontis-blocks') === false) {
+			return;
+		}
+
+		$critical_css_used = Helper::post_content_has_blocks_critical($post, $post_id);
+		AssetsGenerator::get_instance()->generate_page_assets($post_id, $post, $critical_css_used);
+	}
+
+	/**
+	 * Before post_content is replaced, ensure container CSS lands in meta.
+	 *
+	 * First save after upgrading (role:local): new content has no blockStyle, but the
+	 * previous DB content still does. Copy those strings into meta so save_post asset
+	 * generation and the frontend do not lose styles.
+	 *
+	 * @param array $data    Sanitized post data to be inserted/updated.
+	 * @param array $postarr Raw post data.
+	 * @return array
+	 */
+	public function migrate_container_styles_to_meta_before_save($data, $postarr)
+	{
+		$post_id = isset($postarr['ID']) ? (int) $postarr['ID'] : 0;
+		if ($post_id <= 0) {
+			return $data;
+		}
+		if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+			return $data;
+		}
+		if (wp_is_post_revision($post_id)) {
+			return $data;
+		}
+
+		$new_content = isset($data['post_content']) ? $data['post_content'] : '';
+		if (!is_string($new_content) || stripos($new_content, 'frontis-blocks/container') === false) {
+			return $data;
+		}
+
+		$styles_in_new = $this->extract_container_block_styles_from_content($new_content);
+		$existing_meta = get_post_meta($post_id, self::CONTAINER_BLOCK_STYLE_META_KEY, true);
+		$has_meta = is_string($existing_meta) && $existing_meta !== '';
+
+		// Legacy content still embeds blockStyle — seed meta for the next role:local save.
+		if ($styles_in_new !== '') {
+			if (!$has_meta) {
+				update_post_meta($post_id, self::CONTAINER_BLOCK_STYLE_META_KEY, $styles_in_new);
+			}
+			return $data;
+		}
+
+		// role:local save: no blockStyle in new content. Keep existing meta, or migrate from old content.
+		if ($has_meta) {
+			return $data;
+		}
+
+		$old_content = get_post_field('post_content', $post_id);
+		$styles_from_old = $this->extract_container_block_styles_from_content($old_content);
+		if ($styles_from_old !== '') {
+			update_post_meta($post_id, self::CONTAINER_BLOCK_STYLE_META_KEY, $styles_from_old);
+		}
+
+		return $data;
+	}
+
+	/**
+	 * Collect all frontis-blocks/container blockStyle strings from serialized content.
+	 *
+	 * @param string $content Post content.
+	 * @return string Combined CSS (may be empty).
+	 */
+	private function extract_container_block_styles_from_content($content)
+	{
+		if (!is_string($content) || $content === '') {
+			return '';
+		}
+
+		$blocks = parse_blocks($content);
+		return $this->collect_container_block_styles_from_blocks($blocks);
+	}
+
+	/**
+	 * @param array $blocks Parsed blocks.
+	 * @return string
+	 */
+	private function collect_container_block_styles_from_blocks($blocks)
+	{
+		$css = '';
+		if (!is_array($blocks)) {
+			return $css;
+		}
+
+		foreach ($blocks as $block) {
+			if (!is_array($block)) {
+				continue;
+			}
+			if (
+				!empty($block['blockName'])
+				&& $block['blockName'] === 'frontis-blocks/container'
+				&& !empty($block['attrs']['blockStyle'])
+				&& is_string($block['attrs']['blockStyle'])
+			) {
+				$css .= $block['attrs']['blockStyle'] . "\n";
+			}
+			if (!empty($block['innerBlocks']) && is_array($block['innerBlocks'])) {
+				$css .= $this->collect_container_block_styles_from_blocks($block['innerBlocks']);
+			}
+		}
+
+		return $css;
 	}
 
 	/**

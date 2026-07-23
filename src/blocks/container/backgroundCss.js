@@ -1,13 +1,38 @@
 import generateBackgroundCSS from '@Config/generateBackgroundCSS';
 import { select } from '@wordpress/data';
 
-/** clientId -> { parentKey, hasLoopBuilder } */
+/**
+ * Module-level cache for loop-builder ancestry lookups.
+ *
+ * Shape: clientId -> { parentKey: string, hasLoopBuilder: boolean }
+ * - parentKey: joined parent client IDs; invalidated automatically when ancestry changes
+ * - LOOP_CACHE_MAX: soft cap so long editing sessions cannot grow the Map unboundedly
+ *
+ * Why cache
+ * ---------
+ * `backgroundCss()` is called from three hot paths per container:
+ *   1. `render.js` (inline background style in the editor canvas)
+ *   2. `styling.js` (editor DynamicCSSLoader stylesheet)
+ *   3. `frontend-style.js` (saved / meta frontend CSS)
+ *
+ * Previously each call did `getBlockParents()` + `getBlockName()` for every ancestor.
+ * On a deep nest of N containers that is roughly O(N²) store work per style pass and
+ * contributed to editor jank / memory pressure alongside the blockStyle serialize issue.
+ *
+ * Behavior is unchanged: still only checks whether any ancestor is
+ * `frontis-blocks/loop-builder` (placeholder image for loop context).
+ */
 const loopBuilderParentCache = new Map();
 const LOOP_CACHE_MAX = 2500;
 
 /**
- * Cached ancestry check — backgroundCss runs from render + styling + frontend-style,
- * so uncached parent walks are O(n²) on deep container trees.
+ * Return whether `clientId` has a Loop Builder ancestor.
+ *
+ * Uses `loopBuilderParentCache` keyed by clientId + parent chain. Cache hit skips
+ * repeated `getBlockName` walks when the parent list has not changed.
+ *
+ * @param {string} clientId Block client ID from the block editor.
+ * @return {boolean} True if a `frontis-blocks/loop-builder` parent exists.
  */
 const hasLoopBuilderParent = ( clientId ) => {
 	if ( ! clientId ) {
@@ -44,6 +69,20 @@ const hasLoopBuilderParent = ( clientId ) => {
 	return hasLoopBuilder;
 };
 
+/**
+ * Build camelCased inline / stylesheet background CSS for a container.
+ *
+ * Performance note (deep nesting)
+ * -------------------------------
+ * Loop-builder parent detection goes through `hasLoopBuilderParent()` (cached).
+ * Visual output and attribute handling are unchanged for existing sites.
+ *
+ * @param {Object} attributes            Block attributes.
+ * @param {string} deviceType            Desktop | Tablet | Mobile.
+ * @param {string} clientId              Block client ID (for ancestry / loop check).
+ * @param {Object} [pseudoElementOverlay] Overlay options for stylesheet generation.
+ * @return {Object} Camel-cased CSS property map.
+ */
 const backgroundCss = ( attributes, deviceType, clientId, pseudoElementOverlay = {} ) => {
 	const isLoopBuilderPresent = hasLoopBuilderParent( clientId );
 
