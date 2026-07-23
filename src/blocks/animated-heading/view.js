@@ -9,8 +9,8 @@
             if (container.hasAttribute('data-heading-initialized')) return;
             container.setAttribute('data-heading-initialized', 'true');
 
-            // Handle Typing Animation
-            if (animationType === 'typing') {
+            // Handle Typing & Highlight Animation
+            if (animationType === 'typing' || animationType === 'highlight') {
                 const typingContainer = container.querySelector('.fb-animated-headings');
                 if (!typingContainer) return;
 
@@ -56,7 +56,7 @@
 
                 const texts = Array.from(container.querySelectorAll('.fb-animated-heading-item'))
                     .map(item => item.textContent).filter(Boolean);
-                
+
                 if (texts.length === 0) return;
 
                 let currentIndex = 0;
@@ -88,9 +88,9 @@
                     const newLetters = newWord.querySelectorAll('.fb-animated-heading-dynamic-letter');
 
                     const totalWidthSubPixel = Array.from(newLetters)
-                    .reduce((sum, letter) => sum + letter.getBoundingClientRect().width, 0);
+                        .reduce((sum, letter) => sum + letter.getBoundingClientRect().width, 0);
 
-                    const swirlWrapper = document.querySelector('.fb-animated-heading-swirl-wrapper');
+                    const swirlWrapper = container.querySelector('.fb-animated-heading-swirl-wrapper');
 
                     if (swirlWrapper) {
                         swirlWrapper.style.width = `${totalWidthSubPixel}px`;
@@ -143,7 +143,7 @@
 
                 const wrapper = container.querySelector('.fb-animated-heading-reveal-wrapper');
                 if (!wrapper) return;
-                
+
                 const CHAR_DELAY = parseInt(wrapper.dataset.charDelay) || 200;
                 const APPEAR_DURATION = parseInt(wrapper.dataset.appearDuration) || 800;
                 const HIDE_DURATION = parseInt(wrapper.dataset.hideDuration) || 700;
@@ -203,6 +203,128 @@
                 }
 
                 animateWord();
+            }
+
+            // Handle Zoom & Flip Animation
+            if (animationType === 'zoom' || animationType === 'flip') {
+                const itemElements = container.querySelectorAll('.fb-animated-heading-item');
+                const texts = Array.from(itemElements).map(el => el.textContent.trim()).filter(Boolean);
+                if (!texts.length) return;
+
+                const wrapper = container.querySelector('.fb-animated-heading-swap-wrapper');
+                if (!wrapper) return;
+
+                const HOLD = 2500;
+                const DURATION = 500;
+
+                let wordEl = wrapper.querySelector('.fb-animated-heading-swap-word');
+                if (!wordEl) {
+                    wordEl = document.createElement('span');
+                    wordEl.className = 'fb-animated-heading-swap-word';
+                    wrapper.appendChild(wordEl);
+                }
+
+                let currentIndex = 0;
+                wordEl.textContent = texts[0];
+
+                Object.assign(wordEl.style, {
+                    display: 'inline-block',
+                    opacity: '1',
+                    transform: 'none',
+                    transition: `all ${DURATION}ms ease-in-out`,
+                    whiteSpace: 'nowrap'
+                });
+
+                function step() {
+                    wordEl.style.opacity = '0';
+                    wordEl.style.transform = animationType === 'zoom' ? 'scale(1.1)' : 'rotateX(90deg)';
+
+                    setTimeout(() => {
+                        currentIndex = (currentIndex + 1) % texts.length;
+                        wordEl.textContent = texts[currentIndex];
+
+                        wordEl.style.transform = animationType === 'zoom' ? 'scale(0.5)' : 'rotateX(-90deg)';
+
+                        wordEl.getBoundingClientRect(); // Force reflow
+
+                        wordEl.style.opacity = '1';
+                        wordEl.style.transform = 'none';
+
+                        setTimeout(step, HOLD);
+                    }, DURATION);
+                }
+
+                setTimeout(step, HOLD);
+            }
+
+            // Handle Progress Animation
+            if (animationType === 'progress') {
+                const itemElements = container.querySelectorAll('.fb-animated-heading-item');
+                const texts = Array.from(itemElements).map(el => el.textContent.trim()).filter(Boolean);
+                if (!texts.length) return;
+
+                const wrapper = container.querySelector('.fb-animated-heading-progress-wrapper');
+                if (!wrapper) return;
+
+                const DURATION = 4200;
+                const TRANS = 500;
+
+                wrapper.style.setProperty('--progress-duration', `${DURATION}ms`);
+                wrapper.style.setProperty('--progress-transition', `${TRANS}ms`);
+
+                let wordEl = wrapper.querySelector('.fb-animated-heading-progress-word');
+                if (!wordEl) {
+                    wordEl = document.createElement('span');
+                    wordEl.className = 'fb-animated-heading-progress-word';
+                    wrapper.appendChild(wordEl);
+                }
+
+                let track = wrapper.querySelector('.fb-animated-heading-progress-track');
+                let fill = track ? track.querySelector('.fb-animated-heading-progress-fill') : null;
+
+                if (!track) {
+                    track = document.createElement('span');
+                    track.className = 'fb-animated-heading-progress-track';
+                    fill = document.createElement('span');
+                    fill.className = 'fb-animated-heading-progress-fill';
+                    track.appendChild(fill);
+                    wrapper.appendChild(track);
+                }
+
+                let idx = 0;
+                wordEl.textContent = texts[0];
+
+                Object.assign(wordEl.style, {
+                    display: 'inline-block',
+                    opacity: '1',
+                    transition: `opacity ${TRANS}ms ease-in-out`,
+                    whiteSpace: 'nowrap'
+                });
+
+                function fillBar() {
+                    fill.style.transition = 'none';
+                    fill.style.width = '0%';
+                    fill.getBoundingClientRect(); // Force reflow
+                    fill.style.transition = `width ${DURATION}ms linear`;
+                    fill.style.width = '100%';
+                }
+
+                fillBar();
+
+                function progressStep() {
+                    wordEl.style.opacity = '0';
+
+                    setTimeout(() => {
+                        idx = (idx + 1) % texts.length;
+                        wordEl.textContent = texts[idx];
+                        wordEl.style.opacity = '1';
+                        fillBar();
+
+                        setTimeout(progressStep, DURATION);
+                    }, TRANS);
+                }
+
+                setTimeout(progressStep, DURATION);
             }
         });
     }

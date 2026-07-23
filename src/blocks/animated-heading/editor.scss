@@ -12,6 +12,7 @@ $white_color: #ffffff;
 .fb-setting-color-panel-btn {
     display: flex !important;
     width: 100%;
+
     .fb-setting-color-panel-btn-switchr {
         width: 100%;
         justify-content: center;
@@ -23,6 +24,7 @@ $white_color: #ffffff;
         font-weight: 400;
         color: $secondary_color !important;
         box-shadow: inset 0 0 0 1px $background_color;
+
         &.active {
             background-color: $background_color;
         }
@@ -70,6 +72,7 @@ $white_color: #ffffff;
             .sortable-delete {
                 button {
                     color: #d63638;
+
                     &:focus {
                         box-shadow: none;
                         outline: none;
@@ -97,11 +100,13 @@ button {
             box-shadow: inset 0 0 0 1px #dcdcde;
             color: #5f5f5f;
             margin-bottom: 10px;
+
             &.active {
                 background-color: #dcdcde !important;
                 color: #5f5f5f !important;
             }
         }
+
         &:focus {
             outline: none !important;
             box-shadow: none !important;
@@ -137,55 +142,78 @@ button {
     transition: all .5s ease-in-out;
     vertical-align: bottom;
 }
+
 .fb-animated-heading-dynamic-wrapper {
-  display: inline-block;
-  position: relative;
-  perspective: 300px;
-  overflow: hidden;
-  vertical-align: bottom;
+    display: inline-block;
+    position: relative;
+    perspective: 300px;
+    overflow: hidden;
+    vertical-align: bottom;
 }
 
 .fb-animated-heading-dynamic-text {
-  transform: scaleX(1.0005);
-  white-space: nowrap;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
+    transform: scaleX(1.0005);
+    white-space: nowrap;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
 }
 
 .fb-animated-heading-dynamic-text.fb-animated-heading-text-active {
-  position: relative;
-  opacity: 1;
+    position: relative;
+    opacity: 1;
 }
 
 .fb-animated-heading-dynamic-letter {
-  backface-visibility: hidden;
-  display: inline-block;
-  transform-style: preserve-3d;
-  opacity: 0;
-  transform: translateZ(-20px) rotateX(90deg);
-  transition: transform 0.5s ease, opacity 0.5s ease;
+    backface-visibility: hidden;
+    display: inline-block;
+    transform-style: preserve-3d;
+    opacity: 0;
+    transform: translateZ(-20px) rotateX(90deg);
+    transition: transform 0.5s ease, opacity 0.5s ease;
 }
 
 .fb-animated-heading-dynamic-letter.fb-animated-heading-animation-in {
-  animation: fb-animated-heading-swirl-in 0.4s forwards;
+    animation: fb-animated-heading-swirl-in 0.4s forwards;
 }
 
 .fb-animated-heading-dynamic-letter.fb-animated-heading-animation-out {
-  animation: fb-animated-heading-swirl-out 0.4s forwards;
+    animation: fb-animated-heading-swirl-out 0.4s forwards;
 }
 
 @keyframes fb-animated-heading-swirl-in {
-  0% { opacity: 0; transform: translateZ(-20px) rotateX(90deg); }
-  60% { opacity: 1; transform: translateZ(-20px) rotateX(-10deg); }
-  100% { opacity: 1; transform: translateZ(-20px) rotateX(0deg); }
+    0% {
+        opacity: 0;
+        transform: translateZ(-20px) rotateX(90deg);
+    }
+
+    60% {
+        opacity: 1;
+        transform: translateZ(-20px) rotateX(-10deg);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateZ(-20px) rotateX(0deg);
+    }
 }
 
 @keyframes fb-animated-heading-swirl-out {
-  0% { opacity: 1; transform: translateZ(-20px) rotateX(0); }
-  60% { opacity: 0; transform: translateZ(-20px) rotateX(-100deg); }
-  100% { opacity: 0; transform: translateZ(-20px) rotateX(-90deg); }
+    0% {
+        opacity: 1;
+        transform: translateZ(-20px) rotateX(0);
+    }
+
+    60% {
+        opacity: 0;
+        transform: translateZ(-20px) rotateX(-100deg);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateZ(-20px) rotateX(-90deg);
+    }
 }
 
 
@@ -202,8 +230,8 @@ button {
     transform-origin: bottom center;
     will-change: transform, opacity;
     transition: opacity 0.7s cubic-bezier(0.6, 0.04, 0.98, 0.34),
-                transform 0.7s cubic-bezier(0.6, 0.04, 0.98, 0.34),
-                filter 0.7s cubic-bezier(0.6, 0.04, 0.98, 0.34);
+        transform 0.7s cubic-bezier(0.6, 0.04, 0.98, 0.34),
+        filter 0.7s cubic-bezier(0.6, 0.04, 0.98, 0.34);
 }
 
 .fb-animated-heading-char-space {
@@ -216,12 +244,32 @@ button {
     transform: translateY(0) scale(1) rotateX(0);
     filter: blur(0);
     transition: opacity 0.8s cubic-bezier(0.34, 1.56, 0.64, 1),
-                transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1),
-                filter 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1),
+        filter 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .fb-animated-heading-char.fb-animated-heading-char-hide {
     opacity: 0;
     transform: translateY(-40px) scale(0.3) rotateX(20deg);
     filter: blur(6px);
+}
+
+/* Progress Bar Container Track */
+.fb-animated-heading-progress-track {
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.fb-animated-heading-progress-fill {
+    display: block;
+    height: 100%;
+    width: 0%;
+    background-color: currentColor;
+    border-radius: inherit;
+    will-change: width;
 }

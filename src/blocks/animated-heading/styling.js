@@ -10,7 +10,7 @@ import getCustomCss from '@Utils/getCustomCss';
  * @returns {string} CSS string
  */
 const generateAnimatedHeadingStyle = (attributes) => {
-     const {
+    const {
         blockID,
         blockStyle,
         animationType,
@@ -141,19 +141,32 @@ const generateAnimatedHeadingStyle = (attributes) => {
 
     function getRevealTransform(direction) {
         switch (direction) {
-            case 'up':    return 'translateY(60px)';
-            case 'down':  return 'translateY(-60px)';
-            case 'left':  return 'translateX(60px)';
+            case 'up': return 'translateY(60px)';
+            case 'down': return 'translateY(-60px)';
+            case 'left': return 'translateX(60px)';
             case 'right': return 'translateX(-60px)';
-            case 'none':  return 'none';
-            default:      return 'translateY(60px)';
+            case 'none': return 'none';
+            default: return 'translateY(60px)';
         }
     }
-    
+
+    function getHideTransform(direction) {
+        switch (direction) {
+            case 'up': return 'translateY(-60px) scale(0.3) rotateX(20deg)';
+            case 'down': return 'translateY(60px) scale(0.3) rotateX(20deg)';
+            case 'left': return 'translateX(-60px) scale(0.3) rotateX(20deg)';
+            case 'right': return 'translateX(60px) scale(0.3) rotateX(20deg)';
+            case 'none': return 'scale(0.3) rotateX(20deg)';
+            default: return 'translateY(-40px) scale(0.3) rotateX(20deg)';
+        }
+    }
+
     let initialTransform = 'none';
+    let hideTransform = 'translateY(-40px) scale(0.3) rotateX(20deg)';
     if (animationType === 'reveal') {
         const revealTransform = getRevealTransform(animatedHeadingRevealDirection);
         initialTransform = revealTransform === 'none' ? 'scale(0.5) rotateX(30deg)' : `${revealTransform} scale(0.5) rotateX(30deg)`;
+        hideTransform = getHideTransform(animatedHeadingRevealDirection);
     }
 
     const animatedHeadingBlockStyle = `
@@ -178,21 +191,32 @@ const generateAnimatedHeadingStyle = (attributes) => {
             ${animatedHeadingGlobalBorderHoverColor ? `border-color: ${animatedHeadingGlobalBorderHoverColor};` : ''}
         }
 
+        .${blockID} .fb-animated-heading-wrapper.animated-type-progress,
+        .${blockID} .fb-animated-heading-wrapper.animated-type-flip,
+        .${blockID} .fb-animated-heading-wrapper.animated-type-zoom,
         .${blockID} .fb-animated-heading-wrapper.animated-type-typing,
         .${blockID} .fb-animated-heading-wrapper.animated-type-reveal {
             display: flex;
             align-items: center;
-            ${animatedHeadingGap.Desktop &&animatedHeadingGapUnits.Desktop ? `gap: ${animatedHeadingGap.Desktop}${animatedHeadingGapUnits.Desktop};` : ''}
+            ${animatedHeadingGap.Desktop && animatedHeadingGapUnits.Desktop ? `gap: ${animatedHeadingGap.Desktop}${animatedHeadingGapUnits.Desktop};` : ''}
             ${animatedHeadingAlignment.Desktop ? `justify-content: ${animatedHeadingAlignment.Desktop};` : ''}
         }
+        
+        .${blockID} .fb-animated-heading-wrapper.animated-type-progress {
+            align-items: flex-start;
+        }
 
-        //reveal animation transform style
-        .${blockID} .fb-animated-heading-wrapper .fb-animated-heading-char {
-            transform: ${initialTransform};
-        }
-        .${blockID} .fb-animated-heading-wrapper .fb-animated-heading-char.fb-animated-heading-char-appear {
-            transform: translateY(0) scale(1) rotateX(0);
-        }
+        ${animationType === 'reveal' ? `
+            .${blockID} .fb-animated-heading-wrapper .fb-animated-heading-char {
+                transform: ${initialTransform};
+            }
+            .${blockID} .fb-animated-heading-wrapper .fb-animated-heading-char.fb-animated-heading-char-appear {
+                transform: translateY(0) scale(1) rotateX(0);
+            }
+            .${blockID} .fb-animated-heading-wrapper .fb-animated-heading-char.fb-animated-heading-char-hide {
+                transform: ${hideTransform};
+            }
+        ` : ''}
 
         .${blockID} .fb-animated-heading-wrapper.animated-type-swirl {
             display: block;
@@ -236,32 +260,38 @@ const generateAnimatedHeadingStyle = (attributes) => {
 
         .${blockID} .fb-animated-heading-wrapper .fb-animated-headings,
         .${blockID} .fb-animated-heading-wrapper .fb-animated-heading-cursor,
+        .${blockID} .fb-animated-heading-wrapper .fb-animated-heading-reveal-wrapper,
+        .${blockID} .fb-animated-heading-wrapper .fb-animated-heading-swap-wrapper .fb-animated-heading-swap-word,
+        .${blockID} .fb-animated-heading-wrapper .fb-animated-heading-progress-wrapper .fb-animated-heading-progress-word,
         .${blockID} .fb-animated-heading-dynamic-wrapper .fb-animated-heading-dynamic-text {
             ${animatedHeadingAnimationTextColor ? `color: ${animatedHeadingAnimationTextColor};` : ''}
             ${animatedHeadingAnimationTextBgColor ? `background-color: ${animatedHeadingAnimationTextBgColor};` : ''} 
 
-            ${animatedHeadingAnimationTextGlobalTypoSwitcher.fontFamily === true &&animatedHeadingAnimationTextGlobalTypographyData.fontFamily ? `font-family: ${animatedHeadingAnimationTextGlobalTypographyData.fontFamily};` : ''}
-            ${animatedHeadingAnimationTextGlobalTypoSwitcher.fontSize === true &&animatedHeadingAnimationTextGlobalTypographyData.fontSize ? `font-size: ${animatedHeadingAnimationTextGlobalTypographyData.fontSize};` : ''}
-            ${animatedHeadingAnimationTextGlobalTypoSwitcher.fontWeight === true &&animatedHeadingAnimationTextGlobalTypographyData.fontWeight ? `font-weight: ${animatedHeadingAnimationTextGlobalTypographyData.fontWeight};` : ''}
-            ${animatedHeadingAnimationTextGlobalTypoSwitcher.fontStyle === true &&animatedHeadingAnimationTextGlobalTypographyData.fontStyle ? `font-style: ${animatedHeadingAnimationTextGlobalTypographyData.fontStyle};` : ''}
-            ${animatedHeadingAnimationTextGlobalTypoSwitcher.textTransform === true &&animatedHeadingAnimationTextGlobalTypographyData.textTransform ? `text-transform: ${animatedHeadingAnimationTextGlobalTypographyData.textTransform};` : ''}
-            ${animatedHeadingAnimationTextGlobalTypoSwitcher.textDecoration === true &&animatedHeadingAnimationTextGlobalTypographyData.textDecoration ? `text-decoration: ${animatedHeadingAnimationTextGlobalTypographyData.textDecoration};` : ''}
-            ${animatedHeadingAnimationTextGlobalTypoSwitcher.letterSpacing === true &&animatedHeadingAnimationTextGlobalTypographyData.letterSpacing ? `letter-spacing: ${animatedHeadingAnimationTextGlobalTypographyData.letterSpacing};` : ''}
-            ${animatedHeadingAnimationTextGlobalTypoSwitcher.lineHeight === true &&animatedHeadingAnimationTextGlobalTypographyData.lineHeight ? `line-height: ${animatedHeadingAnimationTextGlobalTypographyData.lineHeight};` : ''}
+            ${animatedHeadingAnimationTextGlobalTypoSwitcher.fontFamily === true && animatedHeadingAnimationTextGlobalTypographyData.fontFamily ? `font-family: ${animatedHeadingAnimationTextGlobalTypographyData.fontFamily};` : ''}
+            ${animatedHeadingAnimationTextGlobalTypoSwitcher.fontSize === true && animatedHeadingAnimationTextGlobalTypographyData.fontSize ? `font-size: ${animatedHeadingAnimationTextGlobalTypographyData.fontSize};` : ''}
+            ${animatedHeadingAnimationTextGlobalTypoSwitcher.fontWeight === true && animatedHeadingAnimationTextGlobalTypographyData.fontWeight ? `font-weight: ${animatedHeadingAnimationTextGlobalTypographyData.fontWeight};` : ''}
+            ${animatedHeadingAnimationTextGlobalTypoSwitcher.fontStyle === true && animatedHeadingAnimationTextGlobalTypographyData.fontStyle ? `font-style: ${animatedHeadingAnimationTextGlobalTypographyData.fontStyle};` : ''}
+            ${animatedHeadingAnimationTextGlobalTypoSwitcher.textTransform === true && animatedHeadingAnimationTextGlobalTypographyData.textTransform ? `text-transform: ${animatedHeadingAnimationTextGlobalTypographyData.textTransform};` : ''}
+            ${animatedHeadingAnimationTextGlobalTypoSwitcher.textDecoration === true && animatedHeadingAnimationTextGlobalTypographyData.textDecoration ? `text-decoration: ${animatedHeadingAnimationTextGlobalTypographyData.textDecoration};` : ''}
+            ${animatedHeadingAnimationTextGlobalTypoSwitcher.letterSpacing === true && animatedHeadingAnimationTextGlobalTypographyData.letterSpacing ? `letter-spacing: ${animatedHeadingAnimationTextGlobalTypographyData.letterSpacing};` : ''}
+            ${animatedHeadingAnimationTextGlobalTypoSwitcher.lineHeight === true && animatedHeadingAnimationTextGlobalTypographyData.lineHeight ? `line-height: ${animatedHeadingAnimationTextGlobalTypographyData.lineHeight};` : ''}
                 
-            ${animatedHeadingAnimationTextGlobalTypoSwitcher.fontFamily === false &&animatedHeadingAnimationTextFontFamily &&animatedHeadingAnimationTextFontFamily !== 'Default' ? `font-family: ${animatedHeadingAnimationTextFontFamily};` : ''}
-            ${animatedHeadingAnimationTextGlobalTypoSwitcher.fontSize === false &&animatedHeadingAnimationTextFontSize.Desktop &&animatedHeadingAnimationTextFontSizeUnits.Desktop ? `font-size: ${animatedHeadingAnimationTextFontSize.Desktop}${animatedHeadingAnimationTextFontSizeUnits.Desktop};` : ''}
-            ${animatedHeadingAnimationTextGlobalTypoSwitcher.fontWeight === false &&animatedHeadingAnimationTextFontWeight ? `font-weight: ${animatedHeadingAnimationTextFontWeight};` : ''}
-            ${animatedHeadingAnimationTextGlobalTypoSwitcher.fontStyle === false &&animatedHeadingAnimationTextFontStyle ? `font-style: ${animatedHeadingAnimationTextFontStyle};` : ''}
-            ${animatedHeadingAnimationTextGlobalTypoSwitcher.textTransform === false &&animatedHeadingAnimationTextTransform ? `text-transform: ${animatedHeadingAnimationTextTransform};` : ''}
-            ${animatedHeadingAnimationTextGlobalTypoSwitcher.textDecoration === false &&animatedHeadingAnimationTextDecoration ? `text-decoration: ${animatedHeadingAnimationTextDecoration};` : ''}
-            ${animatedHeadingAnimationTextGlobalTypoSwitcher.letterSpacing === false &&animatedHeadingAnimationTextLetterSpacing.Desktop &&animatedHeadingAnimationTextLetterSpacingUnits.Desktop ? `letter-spacing: ${animatedHeadingAnimationTextLetterSpacing.Desktop}${animatedHeadingAnimationTextLetterSpacingUnits.Desktop};` : ''}
-            ${animatedHeadingAnimationTextGlobalTypoSwitcher.lineHeight === false &&animatedHeadingAnimationTextLineHeight.Desktop &&animatedHeadingAnimationTextLineHeightUnits.Desktop ? `line-height: ${animatedHeadingAnimationTextLineHeight.Desktop}${animatedHeadingAnimationTextLineHeightUnits.Desktop};` : ''}
+            ${animatedHeadingAnimationTextGlobalTypoSwitcher.fontFamily === false && animatedHeadingAnimationTextFontFamily && animatedHeadingAnimationTextFontFamily !== 'Default' ? `font-family: ${animatedHeadingAnimationTextFontFamily};` : ''}
+            ${animatedHeadingAnimationTextGlobalTypoSwitcher.fontSize === false && animatedHeadingAnimationTextFontSize.Desktop && animatedHeadingAnimationTextFontSizeUnits.Desktop ? `font-size: ${animatedHeadingAnimationTextFontSize.Desktop}${animatedHeadingAnimationTextFontSizeUnits.Desktop};` : ''}
+            ${animatedHeadingAnimationTextGlobalTypoSwitcher.fontWeight === false && animatedHeadingAnimationTextFontWeight ? `font-weight: ${animatedHeadingAnimationTextFontWeight};` : ''}
+            ${animatedHeadingAnimationTextGlobalTypoSwitcher.fontStyle === false && animatedHeadingAnimationTextFontStyle ? `font-style: ${animatedHeadingAnimationTextFontStyle};` : ''}
+            ${animatedHeadingAnimationTextGlobalTypoSwitcher.textTransform === false && animatedHeadingAnimationTextTransform ? `text-transform: ${animatedHeadingAnimationTextTransform};` : ''}
+            ${animatedHeadingAnimationTextGlobalTypoSwitcher.textDecoration === false && animatedHeadingAnimationTextDecoration ? `text-decoration: ${animatedHeadingAnimationTextDecoration};` : ''}
+            ${animatedHeadingAnimationTextGlobalTypoSwitcher.letterSpacing === false && animatedHeadingAnimationTextLetterSpacing.Desktop && animatedHeadingAnimationTextLetterSpacingUnits.Desktop ? `letter-spacing: ${animatedHeadingAnimationTextLetterSpacing.Desktop}${animatedHeadingAnimationTextLetterSpacingUnits.Desktop};` : ''}
+            ${animatedHeadingAnimationTextGlobalTypoSwitcher.lineHeight === false && animatedHeadingAnimationTextLineHeight.Desktop && animatedHeadingAnimationTextLineHeightUnits.Desktop ? `line-height: ${animatedHeadingAnimationTextLineHeight.Desktop}${animatedHeadingAnimationTextLineHeightUnits.Desktop};` : ''}
             transition: all .3s ease-in-out;
         }
 
         .${blockID} .fb-animated-heading-wrapper .fb-animated-headings:hover,
         .${blockID} .fb-animated-heading-wrapper .fb-animated-heading-cursor:hover,
+        .${blockID} .fb-animated-heading-wrapper .fb-animated-heading-reveal-wrapper:hover,
+        .${blockID} .fb-animated-heading-wrapper .fb-animated-heading-swap-wrapper .fb-animated-heading-swap-word:hover,
+        .${blockID} .fb-animated-heading-wrapper .fb-animated-heading-progress-wrapper .fb-animated-heading-progress-word:hover,
         .${blockID} .fb-animated-heading-dynamic-wrapper .fb-animated-heading-dynamic-text:hover {
             ${animatedHeadingAnimationTextHoverColor ? `color: ${animatedHeadingAnimationTextHoverColor};` : ''}
             ${animatedHeadingAnimationTextBgColorHover ? `background-color: ${animatedHeadingAnimationTextBgColorHover};` : ''}
@@ -275,7 +305,7 @@ const generateAnimatedHeadingStyle = (attributes) => {
             }
 
             .${blockID} .fb-animated-heading-wrapper {
-                ${animatedHeadingGap.Tablet &&animatedHeadingGapUnits.Tablet ? `gap: ${animatedHeadingGap.Tablet}${animatedHeadingGapUnits.Tablet};` : ''}
+                ${animatedHeadingGap.Tablet && animatedHeadingGapUnits.Tablet ? `gap: ${animatedHeadingGap.Tablet}${animatedHeadingGapUnits.Tablet};` : ''}
                 ${animatedHeadingAlignment.Tablet ? `text-align: ${animatedHeadingAlignment.Tablet};` : ''}
                 ${animatedHeadingGlobalTabletPaddingWidth && animatedHeadingGlobalTabletPadding?.top ? `padding: ${animatedHeadingGlobalTabletPaddingWidth};` : ''}
                 ${animatedHeadingGlobalTabletMarginWidth && animatedHeadingGlobalTabletMargin?.top ? `margin: ${animatedHeadingGlobalTabletMarginWidth};` : ''}
@@ -283,9 +313,12 @@ const generateAnimatedHeadingStyle = (attributes) => {
                 ${animatedHeadingGlobalTabletBorderRadiusWidth && animatedHeadingGlobalTabletBorderRadius?.top ? `border-radius: ${animatedHeadingGlobalTabletBorderRadiusWidth};` : ''}
             }
 
+            .${blockID} .fb-animated-heading-wrapper.animated-type-progress,
+            .${blockID} .fb-animated-heading-wrapper.animated-type-flip,
+            .${blockID} .fb-animated-heading-wrapper.animated-type-zoom,
             .${blockID} .fb-animated-heading-wrapper.animated-type-typing,
             .${blockID} .fb-animated-heading-wrapper.animated-type-reveal {
-                ${animatedHeadingGap.Tablet &&animatedHeadingGapUnits.Tablet ? `gap: ${animatedHeadingGap.Tablet}${animatedHeadingGapUnits.Tablet};` : ''}
+                ${animatedHeadingGap.Tablet && animatedHeadingGapUnits.Tablet ? `gap: ${animatedHeadingGap.Tablet}${animatedHeadingGapUnits.Tablet};` : ''}
                 ${animatedHeadingAlignment.Tablet ? `justify-content: ${animatedHeadingAlignment.Tablet};` : ''}
             }
             .${blockID} .fb-animated-heading-wrapper.animated-type-swirl {
@@ -301,10 +334,13 @@ const generateAnimatedHeadingStyle = (attributes) => {
 
             .${blockID} .fb-animated-heading-wrapper .fb-animated-headings,
             .${blockID} .fb-animated-heading-wrapper .fb-animated-heading-cursor,
+            .${blockID} .fb-animated-heading-wrapper .fb-animated-heading-reveal-wrapper,
+            .${blockID} .fb-animated-heading-wrapper .fb-animated-heading-swap-wrapper .fb-animated-heading-swap-word,
+            .${blockID} .fb-animated-heading-wrapper .fb-animated-heading-progress-wrapper .fb-animated-heading-progress-word,
             .${blockID} .fb-animated-heading-dynamic-wrapper .fb-animated-heading-dynamic-text {  
-                ${animatedHeadingAnimationTextGlobalTypoSwitcher.fontSize === false &&animatedHeadingAnimationTextFontSize.Tablet &&animatedHeadingAnimationTextFontSizeUnits.Tablet ? `font-size: ${animatedHeadingAnimationTextFontSize.Tablet}${animatedHeadingAnimationTextFontSizeUnits.Tablet};` : ''}
-                ${animatedHeadingAnimationTextGlobalTypoSwitcher.letterSpacing === false &&animatedHeadingAnimationTextLetterSpacing.Tablet &&animatedHeadingAnimationTextLetterSpacingUnits.Tablet ? `letter-spacing: ${animatedHeadingAnimationTextLetterSpacing.Tablet}${animatedHeadingAnimationTextLetterSpacingUnits.Tablet};` : ''}
-                ${animatedHeadingAnimationTextGlobalTypoSwitcher.lineHeight === false &&animatedHeadingAnimationTextLineHeight.Tablet &&animatedHeadingAnimationTextLineHeightUnits.Tablet ? `line-height: ${animatedHeadingAnimationTextLineHeight.Tablet}${animatedHeadingAnimationTextLineHeightUnits.Tablet};` : ''}
+                ${animatedHeadingAnimationTextGlobalTypoSwitcher.fontSize === false && animatedHeadingAnimationTextFontSize.Tablet && animatedHeadingAnimationTextFontSizeUnits.Tablet ? `font-size: ${animatedHeadingAnimationTextFontSize.Tablet}${animatedHeadingAnimationTextFontSizeUnits.Tablet};` : ''}
+                ${animatedHeadingAnimationTextGlobalTypoSwitcher.letterSpacing === false && animatedHeadingAnimationTextLetterSpacing.Tablet && animatedHeadingAnimationTextLetterSpacingUnits.Tablet ? `letter-spacing: ${animatedHeadingAnimationTextLetterSpacing.Tablet}${animatedHeadingAnimationTextLetterSpacingUnits.Tablet};` : ''}
+                ${animatedHeadingAnimationTextGlobalTypoSwitcher.lineHeight === false && animatedHeadingAnimationTextLineHeight.Tablet && animatedHeadingAnimationTextLineHeightUnits.Tablet ? `line-height: ${animatedHeadingAnimationTextLineHeight.Tablet}${animatedHeadingAnimationTextLineHeightUnits.Tablet};` : ''}
             }
 
         }
@@ -316,7 +352,7 @@ const generateAnimatedHeadingStyle = (attributes) => {
             }
 
             .${blockID} .fb-animated-heading-wrapper {
-                ${animatedHeadingGap.Mobile &&animatedHeadingGapUnits.Mobile ? `gap: ${animatedHeadingGap.Mobile}${animatedHeadingGapUnits.Mobile};` : ''}
+                ${animatedHeadingGap.Mobile && animatedHeadingGapUnits.Mobile ? `gap: ${animatedHeadingGap.Mobile}${animatedHeadingGapUnits.Mobile};` : ''}
                 ${animatedHeadingAlignment.Mobile ? `text-align: ${animatedHeadingAlignment.Mobile};` : ''}
                 ${animatedHeadingGlobalMobilePaddingWidth && animatedHeadingGlobalMobilePadding?.top ? `padding: ${animatedHeadingGlobalMobilePaddingWidth};` : ''}
                 ${animatedHeadingGlobalMobileMarginWidth && animatedHeadingGlobalMobileMargin?.top ? `margin: ${animatedHeadingGlobalMobileMarginWidth};` : ''}
@@ -324,9 +360,12 @@ const generateAnimatedHeadingStyle = (attributes) => {
                 ${animatedHeadingGlobalMobileBorderRadiusWidth && animatedHeadingGlobalMobileBorderRadius?.top ? `border-radius: ${animatedHeadingGlobalMobileBorderRadiusWidth};` : ''}
             }
 
+            .${blockID} .fb-animated-heading-wrapper.animated-type-progress,
+            .${blockID} .fb-animated-heading-wrapper.animated-type-flip,
+            .${blockID} .fb-animated-heading-wrapper.animated-type-zoom,
             .${blockID} .fb-animated-heading-wrapper.animated-type-typing,
             .${blockID} .fb-animated-heading-wrapper.animated-type-reveal {
-                ${animatedHeadingGap.Mobile &&animatedHeadingGapUnits.Mobile ? `gap: ${animatedHeadingGap.Mobile}${animatedHeadingGapUnits.Mobile};` : ''}
+                ${animatedHeadingGap.Mobile && animatedHeadingGapUnits.Mobile ? `gap: ${animatedHeadingGap.Mobile}${animatedHeadingGapUnits.Mobile};` : ''}
                 ${animatedHeadingAlignment.Mobile ? `justify-content: ${animatedHeadingAlignment.Mobile};` : ''}
             }
 
@@ -343,10 +382,13 @@ const generateAnimatedHeadingStyle = (attributes) => {
 
             .${blockID} .fb-animated-heading-wrapper .fb-animated-headings,
             .${blockID} .fb-animated-heading-wrapper .fb-animated-heading-cursor,
+            .${blockID} .fb-animated-heading-wrapper .fb-animated-heading-reveal-wrapper,
+            .${blockID} .fb-animated-heading-wrapper .fb-animated-heading-swap-wrapper .fb-animated-heading-swap-word,
+            .${blockID} .fb-animated-heading-wrapper .fb-animated-heading-progress-wrapper .fb-animated-heading-progress-word,
             .${blockID} .fb-animated-heading-dynamic-wrapper .fb-animated-heading-dynamic-text {  
-                ${animatedHeadingAnimationTextGlobalTypoSwitcher.fontSize === false &&animatedHeadingAnimationTextFontSize.Mobile &&animatedHeadingAnimationTextFontSizeUnits.Mobile ? `font-size: ${animatedHeadingAnimationTextFontSize.Mobile}${animatedHeadingAnimationTextFontSizeUnits.Mobile};` : ''}
-                ${animatedHeadingAnimationTextGlobalTypoSwitcher.letterSpacing === false &&animatedHeadingAnimationTextLetterSpacing.Mobile &&animatedHeadingAnimationTextLetterSpacingUnits.Mobile ? `letter-spacing: ${animatedHeadingAnimationTextLetterSpacing.Mobile}${animatedHeadingAnimationTextLetterSpacingUnits.Mobile};` : ''}
-                ${animatedHeadingAnimationTextGlobalTypoSwitcher.lineHeight === false &&animatedHeadingAnimationTextLineHeight.Mobile &&animatedHeadingAnimationTextLineHeightUnits.Mobile ? `line-height: ${animatedHeadingAnimationTextLineHeight.Mobile}${animatedHeadingAnimationTextLineHeightUnits.Mobile};` : ''}
+                ${animatedHeadingAnimationTextGlobalTypoSwitcher.fontSize === false && animatedHeadingAnimationTextFontSize.Mobile && animatedHeadingAnimationTextFontSizeUnits.Mobile ? `font-size: ${animatedHeadingAnimationTextFontSize.Mobile}${animatedHeadingAnimationTextFontSizeUnits.Mobile};` : ''}
+                ${animatedHeadingAnimationTextGlobalTypoSwitcher.letterSpacing === false && animatedHeadingAnimationTextLetterSpacing.Mobile && animatedHeadingAnimationTextLetterSpacingUnits.Mobile ? `letter-spacing: ${animatedHeadingAnimationTextLetterSpacing.Mobile}${animatedHeadingAnimationTextLetterSpacingUnits.Mobile};` : ''}
+                ${animatedHeadingAnimationTextGlobalTypoSwitcher.lineHeight === false && animatedHeadingAnimationTextLineHeight.Mobile && animatedHeadingAnimationTextLineHeightUnits.Mobile ? `line-height: ${animatedHeadingAnimationTextLineHeight.Mobile}${animatedHeadingAnimationTextLineHeightUnits.Mobile};` : ''}
             }
         }
     `;

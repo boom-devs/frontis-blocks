@@ -69,16 +69,16 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
     /** End Load Google Font */
 
     /** Start Generate Block Style */
-	useEffect(() => {
-		if (blockID) {
-			const css = generateAnimatedHeadingStyle(attributes);
-			if (blockStyle !== css) {
-				setAttributes({ blockStyle: css });
-			}
-		}
-	}, [attributes, blockID]);
-	/** End Generate Block Style */
-    
+    useEffect(() => {
+        if (blockID) {
+            const css = generateAnimatedHeadingStyle(attributes);
+            if (blockStyle !== css) {
+                setAttributes({ blockStyle: css });
+            }
+        }
+    }, [attributes, blockID]);
+    /** End Generate Block Style */
+
     const blockProps = useBlockProps({
         className: `fb-animated-heading-main-wrapper ${blockID}`,
     });
@@ -98,6 +98,8 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
     const typedTextRef = useRef(null);
     const swirlWrapperRef = useRef(null);
     const revealWrapperRef = useRef(null);
+    const swapWrapperRef = useRef(null);
+    const progressWrapperRef = useRef(null);
 
     useEffect(() => {
         if (!animatedHeadingItems || animatedHeadingItems.length === 0) {
@@ -220,7 +222,6 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
             }
 
             const firstWord = createWordSpan(texts[currentIndex], true);
-            console.log(firstWord);
             if (container) {
                 container.appendChild(firstWord);
                 const firstLetters = firstWord.querySelectorAll('.fb-animated-heading-dynamic-letter');
@@ -250,9 +251,9 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                     }
                 };
             }
-        }else if (animationType === "reveal") {
+        } else if (animationType === "reveal") {
             const texts = animatedHeadingItems?.map(item => item.animatedHeadingTitle).filter(Boolean) || [];
-            if(texts.length === 0) return;
+            if (texts.length === 0) return;
 
             const container = revealWrapperRef.current;
             if (!container) return;
@@ -330,6 +331,137 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                 timeoutIds.forEach(id => clearTimeout(id));
                 container.innerHTML = '';
             };
+        } else if (animationType === "zoom" || animationType === "flip") {
+            const texts = animatedHeadingItems?.map(item => item.animatedHeadingTitle).filter(Boolean) || [];
+            if (texts.length === 0) return;
+
+            const wrapper = swapWrapperRef.current;
+            if (!wrapper) return;
+
+            const HOLD = 2500;
+            const DURATION = 500;
+
+            let wordEl = wrapper.querySelector(".fb-animated-heading-swap-word");
+            if (!wordEl) {
+                wordEl = document.createElement("span");
+                wordEl.className = "fb-animated-heading-swap-word";
+                wrapper.appendChild(wordEl);
+            }
+
+            let currentIndex = 0;
+            wordEl.textContent = texts[0];
+
+            Object.assign(wordEl.style, {
+                display: "inline-block",
+                opacity: "1",
+                transform: "none",
+                transition: `all ${DURATION}ms ease-in-out`,
+                whiteSpace: "nowrap"
+            });
+
+            let timeoutId;
+            let animTimeoutId;
+
+            function step() {
+                wordEl.style.opacity = "0";
+                wordEl.style.transform = animationType === "zoom" ? "scale(1.1)" : "rotateX(90deg)";
+
+                animTimeoutId = setTimeout(() => {
+                    currentIndex = (currentIndex + 1) % texts.length;
+                    wordEl.textContent = texts[currentIndex];
+
+                    wordEl.style.transform = animationType === "zoom" ? "scale(0.5)" : "rotateX(-90deg)";
+
+                    wordEl.getBoundingClientRect();
+
+                    wordEl.style.opacity = "1";
+                    wordEl.style.transform = "none";
+
+                    timeoutId = setTimeout(step, HOLD);
+                }, DURATION);
+            }
+
+            timeoutId = setTimeout(step, HOLD);
+
+            return () => {
+                clearTimeout(timeoutId);
+                clearTimeout(animTimeoutId);
+            };
+        } else if (animationType === "progress") {
+            const texts = animatedHeadingItems?.map(item => item.animatedHeadingTitle).filter(Boolean) || [];
+            if (texts.length === 0) return;
+
+            const wrapper = progressWrapperRef.current;
+            if (!wrapper) return;
+
+            const DURATION = 4200;
+            const TRANS = 500;
+
+            wrapper.style.setProperty("--progress-duration", `${DURATION}ms`);
+            wrapper.style.setProperty("--progress-transition", `${TRANS}ms`);
+
+            let wordEl = wrapper.querySelector(".fb-animated-heading-progress-word");
+            if (!wordEl) {
+                wordEl = document.createElement("span");
+                wordEl.className = "fb-animated-heading-progress-word";
+                wrapper.appendChild(wordEl);
+            }
+
+            let track = wrapper.querySelector(".fb-animated-heading-progress-track");
+            let fill = wrapper.querySelector(".fb-animated-heading-progress-fill");
+
+            if (!track) {
+                track = document.createElement("span");
+                track.className = "fb-animated-heading-progress-track";
+                fill = document.createElement("span");
+                fill.className = "fb-animated-heading-progress-fill";
+                track.appendChild(fill);
+                wrapper.appendChild(track);
+            }
+
+            let idx = 0;
+            wordEl.textContent = texts[0];
+
+            Object.assign(wordEl.style, {
+                display: "inline-block",
+                opacity: "1",
+                transition: `opacity ${TRANS}ms ease-in-out`,
+                whiteSpace: "nowrap"
+            });
+
+            function fillBar() {
+                fill.style.transition = "none";
+                fill.style.width = "0%";
+                fill.getBoundingClientRect(); // Force Reflow
+                fill.style.transition = `width ${DURATION}ms linear`;
+                fill.style.width = "100%";
+            }
+
+            fillBar();
+
+            let mainTimerId;
+            let animTimerId;
+
+            function step() {
+                wordEl.style.opacity = "0";
+
+                animTimerId = setTimeout(() => {
+                    idx = (idx + 1) % texts.length;
+                    wordEl.textContent = texts[idx];
+
+                    wordEl.style.opacity = "1";
+                    fillBar();
+
+                    mainTimerId = setTimeout(step, DURATION);
+                }, TRANS);
+            }
+
+            mainTimerId = setTimeout(step, DURATION);
+
+            return () => {
+                clearTimeout(mainTimerId);
+                clearTimeout(animTimerId);
+            };
         }
     }, [animatedHeadingItems, animationType, animatedHeadingMainTag, animatedHeadingRevealCharDelay, animatedHeadingRevealAppearDuration, animatedHeadingRevealHideDuration, animatedHeadingRevealVisibleHold, animatedHeadingRevealResetDelay, animatedHeadingRevealDirection]);
 
@@ -364,18 +496,19 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                             />
                         )}
 
-                        {animationType === "typing" && (
+                        {(animationType === "typing" || animationType === "highlight") && (
                             <>
                                 {animatedHeadingItems && animatedHeadingItems.length > 0 && (
                                     <span className="fb-animated-headings" ref={typedTextRef}></span>
                                 )}
-                                {animatedHeadingCursorSwitch && animatedHeadingCursor && (
+                                {animationType === "typing" && animatedHeadingCursorSwitch && animatedHeadingCursor && (
                                     <span className="fb-animated-heading-cursor">
                                         {animatedHeadingCursor}
                                     </span>
                                 )}
                             </>
                         )}
+
                         {animationType === "swirl" && (
                             <>
                                 {'\u00A0'}
@@ -392,6 +525,14 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
                         {animationType === "reveal" && (
                             <span className="fb-animated-heading-reveal-wrapper" ref={revealWrapperRef}></span>
+                        )}
+
+                        {(animationType === "zoom" || animationType === "flip") && (
+                            <span className="fb-animated-heading-swap-wrapper" ref={swapWrapperRef}></span>
+                        )}
+
+                        {animationType === "progress" && (
+                            <span className="fb-animated-heading-progress-wrapper" ref={progressWrapperRef}></span>
                         )}
 
                         {animatedHeadingSuffix && (
