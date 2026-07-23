@@ -131,7 +131,7 @@ const Render = ( props ) => {
 	}, [clientId, blockProps.id]);
 
 	const rotateContainer = () => {
-		console.log("working on click ?");
+
 		const rotateContainer = document.querySelector('.frontis-blocks-container-inner-blocks-wrap');
 		const currentRotation = rotateContainer.style.transform || 'rotate(0deg)';
 		const newRotation = currentRotation === 'rotate(0deg)' ? 'rotate(180deg)' : 'rotate(0deg)';
