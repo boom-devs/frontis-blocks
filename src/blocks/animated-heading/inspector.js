@@ -34,7 +34,7 @@ import FB_ColorControl from '@Components/color-control';
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
-import {useDeviceType} from "@Config/displayType";
+import { useDeviceType } from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
@@ -158,52 +158,52 @@ const Inspector = ({ attributes, setAttributes }) => {
         animatedHeadingGlobalBorderRadiusLink,
 
     } = attributes;
-	
-    const deviceType= useDeviceType();
+
+    const deviceType = useDeviceType();
 
     const handleDragEnd = (event) => {
         const { active, over } = event;
         if (active && over && active.id !== over.id) {
-            const oldIndex =animatedHeadingItems.findIndex(item => item.id === active.id);
-            const newIndex =animatedHeadingItems.findIndex(item => item.id === over.id);
+            const oldIndex = animatedHeadingItems.findIndex(item => item.id === active.id);
+            const newIndex = animatedHeadingItems.findIndex(item => item.id === over.id);
             const updatedItems = arrayMove(animatedHeadingItems, oldIndex, newIndex);
-            setAttributes({animatedHeadingItems: updatedItems });
+            setAttributes({ animatedHeadingItems: updatedItems });
         }
     };
 
-	const handleAddItem = () => {
-		const newItem = {
-			id: `item-${animatedHeadingItems.length + 1}`,
-			animatedHeadingTitle: 'Text ' + (animatedHeadingItems.length + 1),
-		};
-	
-		setAttributes({animatedHeadingItems: [...animatedHeadingItems, newItem] });
-	};
+    const handleAddItem = () => {
+        const newItem = {
+            id: `item-${animatedHeadingItems.length + 1}`,
+            animatedHeadingTitle: 'Text ' + (animatedHeadingItems.length + 1),
+        };
+
+        setAttributes({ animatedHeadingItems: [...animatedHeadingItems, newItem] });
+    };
 
     const handleChangeItem = (id, key, value) => {
-        const updatedItems =animatedHeadingItems.map(item => 
+        const updatedItems = animatedHeadingItems.map(item =>
             item.id === id ? { ...item, [key]: value } : item
         );
-        setAttributes({animatedHeadingItems: updatedItems });
+        setAttributes({ animatedHeadingItems: updatedItems });
     };
 
     const handleDeleteItem = (id) => {
-        const updatedItems =animatedHeadingItems.filter(item => item.id !== id);
-        setAttributes({animatedHeadingItems: updatedItems });
+        const updatedItems = animatedHeadingItems.filter(item => item.id !== id);
+        setAttributes({ animatedHeadingItems: updatedItems });
     };
 
     const handleDuplicateItem = (id) => {
-        const itemToDuplicate =animatedHeadingItems.find(item => item.id === id);
+        const itemToDuplicate = animatedHeadingItems.find(item => item.id === id);
         if (itemToDuplicate) {
             const newItem = { ...itemToDuplicate, id: `item-${animatedHeadingItems.length + 1}` };
-            setAttributes({animatedHeadingItems: [...animatedHeadingItems, newItem] });
+            setAttributes({ animatedHeadingItems: [...animatedHeadingItems, newItem] });
         }
     };
 
     /** Start Global Padding */
     const animatedHeadingGlobalPaddingUnitsChange = (event, position) => {
         const value = event.target.value;
-        if (animatedHeadingGlobalPaddingLink) {  
+        if (animatedHeadingGlobalPaddingLink) {
             switch (deviceType) {
                 case 'Desktop':
                     setAttributes({
@@ -485,9 +485,9 @@ const Inspector = ({ attributes, setAttributes }) => {
     /** End Global Border Radius */
 
     /**
-	 * Inspector General Controls
-	 */
-	const generalControls = (
+     * Inspector General Controls
+     */
+    const generalControls = (
         <>
             <PanelBody title={__("General Info", "frontis-blocks")} initialOpen={true}>
 
@@ -495,13 +495,25 @@ const Inspector = ({ attributes, setAttributes }) => {
                     label={__("Animation Type", "frontis-blocks")}
                     value={animationType}
                     options={ANIMATION_TYPE}
-                    onChange={(value) => setAttributes({ animationType: value })}
+                    onChange={(value) => {
+                        const updates = { animationType: value };
+
+                        if (value === 'highlight' && !animatedHeadingAnimationTextBgColor) {
+                            // Default background color for highlight animation
+                            updates.animatedHeadingAnimationTextBgColor = '#FFE066';
+                        } else if (value !== 'highlight' && animatedHeadingAnimationTextBgColor === '#FFE066') {
+                            // Remove default color if switching to another type
+                            updates.animatedHeadingAnimationTextBgColor = '';
+                        }
+
+                        setAttributes(updates);
+                    }}
                 />
 
                 <FB_ResponsiveAlignmentControl
                     label={__("Alignment", "frontis-blocks")}
                     globalAlignment={animatedHeadingAlignment}
-                    setGlobalAlignment={(value) => setAttributes({animatedHeadingAlignment: value })}
+                    setGlobalAlignment={(value) => setAttributes({ animatedHeadingAlignment: value })}
                     deviceType={deviceType}
                     setAttributes={setAttributes}
                 />
@@ -509,14 +521,14 @@ const Inspector = ({ attributes, setAttributes }) => {
                 <FB_HtmlTagControl
                     label={__("Html Tag", "frontis-blocks")}
                     globalHtmlTag={animatedHeadingMainTag}
-                    setGlobalHtmlTag={(value) => setAttributes({animatedHeadingMainTag: value })}
+                    setGlobalHtmlTag={(value) => setAttributes({ animatedHeadingMainTag: value })}
                 />
 
                 <TextControl
                     label={__("Prefix Text", "frontis-blocks")}
                     value={animatedHeadingPrefix}
-                    onChange={(value) => setAttributes({animatedHeadingPrefix: value })}
-                    className="fb-animated-heading-prefix" 
+                    onChange={(value) => setAttributes({ animatedHeadingPrefix: value })}
+                    className="fb-animated-heading-prefix"
                     help={__("Keep empty to hide.", "frontis-blocks")}
                 />
 
@@ -550,17 +562,17 @@ const Inspector = ({ attributes, setAttributes }) => {
                 {animationType === "typing" && (
                     <>
                         <ToggleControl
-                                label={__("Cursor Switch", "frontis-blocks")}
+                            label={__("Cursor Switch", "frontis-blocks")}
                             checked={animatedHeadingCursorSwitch}
-                            onChange={(value) => setAttributes({animatedHeadingCursorSwitch: value })}
+                            onChange={(value) => setAttributes({ animatedHeadingCursorSwitch: value })}
                         />
 
                         {animatedHeadingCursorSwitch && (
                             <TextControl
                                 label={__("Cursor", "frontis-blocks")}
                                 value={animatedHeadingCursor}
-                                onChange={(value) => setAttributes({animatedHeadingCursor: value })}
-                                className="fb-animated-heading-cursor" 
+                                onChange={(value) => setAttributes({ animatedHeadingCursor: value })}
+                                className="fb-animated-heading-cursor"
                                 help={__("Keep empty to hide.", "frontis-blocks")}
                             />
                         )}
@@ -570,19 +582,19 @@ const Inspector = ({ attributes, setAttributes }) => {
                 <TextControl
                     label={__("Suffix Text", "frontis-blocks")}
                     value={animatedHeadingSuffix}
-                    onChange={(value) => setAttributes({animatedHeadingSuffix: value })}
-                    className="fb-animated-heading-suffix" 
+                    onChange={(value) => setAttributes({ animatedHeadingSuffix: value })}
+                    className="fb-animated-heading-suffix"
                     help={__("Keep empty to hide.", "frontis-blocks")}
                 />
 
-                {(animationType === "typing" || animationType === "reveal") && (
+                {(animationType === "typing" || animationType === "reveal" || animationType === "progress") && (
                     <FB_Range
                         min={0}
                         max={100}
                         label={__("Text Gap", "frontis-blocks")}
                         rangeValue={animatedHeadingGap}
-                        onChangeHandler={(value) => setAttributes({animatedHeadingGap: value })}
-                        rangeUnitHandler={(value) => setAttributes({animatedHeadingGapUnits: value })}
+                        onChangeHandler={(value) => setAttributes({ animatedHeadingGap: value })}
+                        rangeUnitHandler={(value) => setAttributes({ animatedHeadingGapUnits: value })}
                         deviceType={deviceType}
                         units={animatedHeadingGapUnits}
                         setAttributes={setAttributes}
@@ -592,7 +604,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                 )}
 
                 {animationType === "reveal" && (
-                    <>  
+                    <>
                         <SelectControl
                             label={__('Reveal Direction', 'frontis-blocks')}
                             value={animatedHeadingRevealDirection}
@@ -644,31 +656,31 @@ const Inspector = ({ attributes, setAttributes }) => {
                             max={1000}
                             step={50}
                         />
-                    
+
                     </>
                 )}
             </PanelBody>
 
         </>
-	);
+    );
 
-	/**
-	 * Inspector Style Controls
-	 */
-	const styleControls = (
+    /**
+     * Inspector Style Controls
+     */
+    const styleControls = (
         <>
             <PanelBody title={__("Normal Text Style", "frontis-blocks")} initialOpen={true}>
 
                 <FB_TypographyControl
                     globalTypoControlActive={true}
-                    globalTypoSwitcher={animatedHeadingNormalTextGlobalTypoSwitcher} 
+                    globalTypoSwitcher={animatedHeadingNormalTextGlobalTypoSwitcher}
                     storeGlobalTypographyData={(value) => setAttributes({ animatedHeadingNormalTextGlobalTypographyData: value })}
 
                     globalTypoType={animatedHeadingNormalTextGlobalTypoType}
                     onChangeGlobalTypoType={(value) => {
-                        setAttributes({ 
-                            animatedHeadingNormalTextGlobalTypoType: value, 
-                            animatedHeadingNormalTextGlobalTypoSwitcher: value === 'default' ? {...animatedHeadingNormalTextGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...animatedHeadingNormalTextGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+                        setAttributes({
+                            animatedHeadingNormalTextGlobalTypoType: value,
+                            animatedHeadingNormalTextGlobalTypoSwitcher: value === 'default' ? { ...animatedHeadingNormalTextGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...animatedHeadingNormalTextGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
                         })
                     }}
 
@@ -676,34 +688,34 @@ const Inspector = ({ attributes, setAttributes }) => {
                     onChangeGlobalTypoOption={(value) => setAttributes({ animatedHeadingNormalTextGlobalTypoOption: value })}
 
                     fontFamily={animatedHeadingNormalTextFontFamily}
-                    onChangeFontFamily={(value) => setAttributes({ animatedHeadingNormalTextFontFamily: value, animatedHeadingNormalTextGlobalTypoSwitcher: {...animatedHeadingNormalTextGlobalTypoSwitcher, fontFamily: value && false} })}
+                    onChangeFontFamily={(value) => setAttributes({ animatedHeadingNormalTextFontFamily: value, animatedHeadingNormalTextGlobalTypoSwitcher: { ...animatedHeadingNormalTextGlobalTypoSwitcher, fontFamily: value && false } })}
 
                     fontSize={animatedHeadingNormalTextFontSize}
-                    onChangeFontSize={(value) => setAttributes({ animatedHeadingNormalTextFontSize: value, animatedHeadingNormalTextGlobalTypoSwitcher: {...animatedHeadingNormalTextGlobalTypoSwitcher, fontSize: value && false} })}
+                    onChangeFontSize={(value) => setAttributes({ animatedHeadingNormalTextFontSize: value, animatedHeadingNormalTextGlobalTypoSwitcher: { ...animatedHeadingNormalTextGlobalTypoSwitcher, fontSize: value && false } })}
 
                     fontSizeUnits={animatedHeadingNormalTextFontSizeUnits}
                     onChangeFontSizeUnit={(value) => setAttributes({ animatedHeadingNormalTextFontSizeUnits: value })}
 
                     fontWeight={animatedHeadingNormalTextFontWeight}
-                    onChangeFontWeight={(value) => setAttributes({ animatedHeadingNormalTextFontWeight: value, animatedHeadingNormalTextGlobalTypoSwitcher: {...animatedHeadingNormalTextGlobalTypoSwitcher, fontWeight: value && false} })}
+                    onChangeFontWeight={(value) => setAttributes({ animatedHeadingNormalTextFontWeight: value, animatedHeadingNormalTextGlobalTypoSwitcher: { ...animatedHeadingNormalTextGlobalTypoSwitcher, fontWeight: value && false } })}
 
                     fontStyle={animatedHeadingNormalTextFontStyle}
-                    onChangeFontStyle={(value) => setAttributes({ animatedHeadingNormalTextFontStyle: value, animatedHeadingNormalTextGlobalTypoSwitcher: {...animatedHeadingNormalTextGlobalTypoSwitcher, fontStyle: value && false} })}
+                    onChangeFontStyle={(value) => setAttributes({ animatedHeadingNormalTextFontStyle: value, animatedHeadingNormalTextGlobalTypoSwitcher: { ...animatedHeadingNormalTextGlobalTypoSwitcher, fontStyle: value && false } })}
 
                     textTransform={animatedHeadingNormalTextTransform}
-                    onChangeTextTransform={(value) => setAttributes({ animatedHeadingNormalTextTransform: value, animatedHeadingNormalTextGlobalTypoSwitcher: {...animatedHeadingNormalTextGlobalTypoSwitcher, textTransform: value && false} })}
+                    onChangeTextTransform={(value) => setAttributes({ animatedHeadingNormalTextTransform: value, animatedHeadingNormalTextGlobalTypoSwitcher: { ...animatedHeadingNormalTextGlobalTypoSwitcher, textTransform: value && false } })}
 
                     textDecoration={animatedHeadingNormalTextDecoration}
-                    onChangeTextDecoration={(value) => setAttributes({ animatedHeadingNormalTextDecoration: value, animatedHeadingNormalTextGlobalTypoSwitcher: {...animatedHeadingNormalTextGlobalTypoSwitcher, textDecoration: value && false} })}
+                    onChangeTextDecoration={(value) => setAttributes({ animatedHeadingNormalTextDecoration: value, animatedHeadingNormalTextGlobalTypoSwitcher: { ...animatedHeadingNormalTextGlobalTypoSwitcher, textDecoration: value && false } })}
 
                     letterSpacing={animatedHeadingNormalTextLetterSpacing}
-                    onChangeLetterSpacing={(value) => setAttributes({ animatedHeadingNormalTextLetterSpacing: value, animatedHeadingNormalTextGlobalTypoSwitcher: {...animatedHeadingNormalTextGlobalTypoSwitcher, letterSpacing: value && false} })}
+                    onChangeLetterSpacing={(value) => setAttributes({ animatedHeadingNormalTextLetterSpacing: value, animatedHeadingNormalTextGlobalTypoSwitcher: { ...animatedHeadingNormalTextGlobalTypoSwitcher, letterSpacing: value && false } })}
 
                     letterSpacingUnits={animatedHeadingNormalTextLetterSpacingUnits}
                     onChangeLetterSpacingUnit={(value) => setAttributes({ animatedHeadingNormalTextLetterSpacingUnits: value })}
 
                     lineHeight={animatedHeadingNormalTextLineHeight}
-                    onChangeLineHeight={(value) => setAttributes({ animatedHeadingNormalTextLineHeight: value, animatedHeadingNormalTextGlobalTypoSwitcher: {...animatedHeadingNormalTextGlobalTypoSwitcher, lineHeight: value && false} })}
+                    onChangeLineHeight={(value) => setAttributes({ animatedHeadingNormalTextLineHeight: value, animatedHeadingNormalTextGlobalTypoSwitcher: { ...animatedHeadingNormalTextGlobalTypoSwitcher, lineHeight: value && false } })}
 
                     lineHeightUnits={animatedHeadingNormalTextLineHeightUnits}
                     onChangeLineHeightUnit={(value) => setAttributes({ animatedHeadingNormalTextLineHeightUnits: value })}
@@ -726,7 +738,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                     />
                 )}
 
-                {animatedHeadingNormalTextColorSwitcher === 'hover' && ( 
+                {animatedHeadingNormalTextColorSwitcher === 'hover' && (
                     <FB_ColorControl
                         label={__("Hover Color", "frontis-blocks")}
                         globalColor={animatedHeadingNormalTextHoverColor}
@@ -741,7 +753,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                     setGlobalSwitcher={(value) => setAttributes({ animatedHeadingNormalTextBgColorSwitcher: value })}
                 />
 
-                {animatedHeadingNormalTextBgColorSwitcher === 'normal' && ( 
+                {animatedHeadingNormalTextBgColorSwitcher === 'normal' && (
                     <FB_ColorControl
                         label={__("Normal Color", "frontis-blocks")}
                         globalColor={animatedHeadingNormalTextBgColor}
@@ -762,52 +774,52 @@ const Inspector = ({ attributes, setAttributes }) => {
 
                 <FB_TypographyControl
                     globalTypoControlActive={true}
-                    globalTypoSwitcher={animatedHeadingAnimationTextGlobalTypoSwitcher} 
-                    storeGlobalTypographyData={(value) => setAttributes({animatedHeadingAnimationTextGlobalTypographyData: value })}
+                    globalTypoSwitcher={animatedHeadingAnimationTextGlobalTypoSwitcher}
+                    storeGlobalTypographyData={(value) => setAttributes({ animatedHeadingAnimationTextGlobalTypographyData: value })}
 
                     globalTypoType={animatedHeadingAnimationTextGlobalTypoType}
                     onChangeGlobalTypoType={(value) => {
-                        setAttributes({ 
-                        animatedHeadingAnimationTextGlobalTypoType: value, 
-                        animatedHeadingAnimationTextGlobalTypoSwitcher: value === 'default' ? {...animatedHeadingAnimationTextGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...animatedHeadingAnimationTextGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+                        setAttributes({
+                            animatedHeadingAnimationTextGlobalTypoType: value,
+                            animatedHeadingAnimationTextGlobalTypoSwitcher: value === 'default' ? { ...animatedHeadingAnimationTextGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...animatedHeadingAnimationTextGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
                         })
                     }}
 
                     globalTypoOption={animatedHeadingAnimationTextGlobalTypoOption}
-                    onChangeGlobalTypoOption={(value) => setAttributes({animatedHeadingAnimationTextGlobalTypoOption: value })}
+                    onChangeGlobalTypoOption={(value) => setAttributes({ animatedHeadingAnimationTextGlobalTypoOption: value })}
 
                     fontFamily={animatedHeadingAnimationTextFontFamily}
-                    onChangeFontFamily={(value) => setAttributes({animatedHeadingAnimationTextFontFamily: value,animatedHeadingAnimationTextGlobalTypoSwitcher: {...animatedHeadingAnimationTextGlobalTypoSwitcher, fontFamily: value && false} })}
+                    onChangeFontFamily={(value) => setAttributes({ animatedHeadingAnimationTextFontFamily: value, animatedHeadingAnimationTextGlobalTypoSwitcher: { ...animatedHeadingAnimationTextGlobalTypoSwitcher, fontFamily: value && false } })}
 
                     fontSize={animatedHeadingAnimationTextFontSize}
-                    onChangeFontSize={(value) => setAttributes({animatedHeadingAnimationTextFontSize: value,animatedHeadingAnimationTextGlobalTypoSwitcher: {...animatedHeadingAnimationTextGlobalTypoSwitcher, fontSize: value && false} })}
+                    onChangeFontSize={(value) => setAttributes({ animatedHeadingAnimationTextFontSize: value, animatedHeadingAnimationTextGlobalTypoSwitcher: { ...animatedHeadingAnimationTextGlobalTypoSwitcher, fontSize: value && false } })}
 
                     fontSizeUnits={animatedHeadingAnimationTextFontSizeUnits}
-                    onChangeFontSizeUnit={(value) => setAttributes({animatedHeadingAnimationTextFontSizeUnits: value })}
+                    onChangeFontSizeUnit={(value) => setAttributes({ animatedHeadingAnimationTextFontSizeUnits: value })}
 
                     fontWeight={animatedHeadingAnimationTextFontWeight}
-                    onChangeFontWeight={(value) => setAttributes({animatedHeadingAnimationTextFontWeight: value,animatedHeadingAnimationTextGlobalTypoSwitcher: {...animatedHeadingAnimationTextGlobalTypoSwitcher, fontWeight: value && false} })}
+                    onChangeFontWeight={(value) => setAttributes({ animatedHeadingAnimationTextFontWeight: value, animatedHeadingAnimationTextGlobalTypoSwitcher: { ...animatedHeadingAnimationTextGlobalTypoSwitcher, fontWeight: value && false } })}
 
                     fontStyle={animatedHeadingAnimationTextFontStyle}
-                    onChangeFontStyle={(value) => setAttributes({animatedHeadingAnimationTextFontStyle: value,animatedHeadingAnimationTextGlobalTypoSwitcher: {...animatedHeadingAnimationTextGlobalTypoSwitcher, fontStyle: value && false} })}
+                    onChangeFontStyle={(value) => setAttributes({ animatedHeadingAnimationTextFontStyle: value, animatedHeadingAnimationTextGlobalTypoSwitcher: { ...animatedHeadingAnimationTextGlobalTypoSwitcher, fontStyle: value && false } })}
 
                     textTransform={animatedHeadingAnimationTextTransform}
-                    onChangeTextTransform={(value) => setAttributes({animatedHeadingAnimationTextTransform: value,animatedHeadingAnimationTextGlobalTypoSwitcher: {...animatedHeadingAnimationTextGlobalTypoSwitcher, textTransform: value && false} })}
+                    onChangeTextTransform={(value) => setAttributes({ animatedHeadingAnimationTextTransform: value, animatedHeadingAnimationTextGlobalTypoSwitcher: { ...animatedHeadingAnimationTextGlobalTypoSwitcher, textTransform: value && false } })}
 
                     textDecoration={animatedHeadingAnimationTextDecoration}
-                    onChangeTextDecoration={(value) => setAttributes({animatedHeadingAnimationTextDecoration: value,animatedHeadingAnimationTextGlobalTypoSwitcher: {...animatedHeadingAnimationTextGlobalTypoSwitcher, textDecoration: value && false} })}
+                    onChangeTextDecoration={(value) => setAttributes({ animatedHeadingAnimationTextDecoration: value, animatedHeadingAnimationTextGlobalTypoSwitcher: { ...animatedHeadingAnimationTextGlobalTypoSwitcher, textDecoration: value && false } })}
 
                     letterSpacing={animatedHeadingAnimationTextLetterSpacing}
-                    onChangeLetterSpacing={(value) => setAttributes({animatedHeadingAnimationTextLetterSpacing: value,animatedHeadingAnimationTextGlobalTypoSwitcher: {...animatedHeadingAnimationTextGlobalTypoSwitcher, letterSpacing: value && false} })}
+                    onChangeLetterSpacing={(value) => setAttributes({ animatedHeadingAnimationTextLetterSpacing: value, animatedHeadingAnimationTextGlobalTypoSwitcher: { ...animatedHeadingAnimationTextGlobalTypoSwitcher, letterSpacing: value && false } })}
 
                     letterSpacingUnits={animatedHeadingAnimationTextLetterSpacingUnits}
-                    onChangeLetterSpacingUnit={(value) => setAttributes({animatedHeadingAnimationTextLetterSpacingUnits: value })}
+                    onChangeLetterSpacingUnit={(value) => setAttributes({ animatedHeadingAnimationTextLetterSpacingUnits: value })}
 
                     lineHeight={animatedHeadingAnimationTextLineHeight}
-                    onChangeLineHeight={(value) => setAttributes({animatedHeadingAnimationTextLineHeight: value,animatedHeadingAnimationTextGlobalTypoSwitcher: {...animatedHeadingAnimationTextGlobalTypoSwitcher, lineHeight: value && false} })}
+                    onChangeLineHeight={(value) => setAttributes({ animatedHeadingAnimationTextLineHeight: value, animatedHeadingAnimationTextGlobalTypoSwitcher: { ...animatedHeadingAnimationTextGlobalTypoSwitcher, lineHeight: value && false } })}
 
                     lineHeightUnits={animatedHeadingAnimationTextLineHeightUnits}
-                    onChangeLineHeightUnit={(value) => setAttributes({animatedHeadingAnimationTextLineHeightUnits: value })}
+                    onChangeLineHeightUnit={(value) => setAttributes({ animatedHeadingAnimationTextLineHeightUnits: value })}
 
                     deviceType={deviceType}
                     setAttributes={setAttributes}
@@ -816,37 +828,36 @@ const Inspector = ({ attributes, setAttributes }) => {
                 <FB_SwitcherControl
                     label={__("Text Color", "frontis-blocks")}
                     globalSwitcher={animatedHeadingAnimationTextColorSwitcher}
-                    setGlobalSwitcher={(value) => setAttributes({animatedHeadingAnimationTextColorSwitcher: value })}
+                    setGlobalSwitcher={(value) => setAttributes({ animatedHeadingAnimationTextColorSwitcher: value })}
                 />
 
                 {animatedHeadingAnimationTextColorSwitcher === 'normal' && (
                     <FB_ColorControl
                         label={__("Normal Color", "frontis-blocks")}
                         globalColor={animatedHeadingAnimationTextColor}
-                        setGlobalColor={(value) => setAttributes({animatedHeadingAnimationTextColor: value === undefined ? '' : value })}
+                        setGlobalColor={(value) => setAttributes({ animatedHeadingAnimationTextColor: value === undefined ? '' : value })}
                     />
                 )}
 
-                {animatedHeadingAnimationTextColorSwitcher === 'hover' && ( 
+                {animatedHeadingAnimationTextColorSwitcher === 'hover' && (
                     <FB_ColorControl
                         label={__("Hover Color", "frontis-blocks")}
                         globalColor={animatedHeadingAnimationTextHoverColor}
-                        setGlobalColor={(value) => setAttributes({animatedHeadingAnimationTextHoverColor: value === undefined ? '' : value })}
+                        setGlobalColor={(value) => setAttributes({ animatedHeadingAnimationTextHoverColor: value === undefined ? '' : value })}
                     />
                 )}
-
 
                 <FB_SwitcherControl
                     label={__("Background Color", "frontis-blocks")}
                     globalSwitcher={animatedHeadingAnimationTextBgColorSwitcher}
-                    setGlobalSwitcher={(value) => setAttributes({animatedHeadingAnimationTextBgColorSwitcher: value })}
+                    setGlobalSwitcher={(value) => setAttributes({ animatedHeadingAnimationTextBgColorSwitcher: value })}
                 />
 
-                {animatedHeadingAnimationTextBgColorSwitcher === 'normal' && ( 
+                {animatedHeadingAnimationTextBgColorSwitcher === 'normal' && (
                     <FB_ColorControl
                         label={__("Normal Color", "frontis-blocks")}
                         globalColor={animatedHeadingAnimationTextBgColor}
-                        setGlobalColor={(value) => setAttributes({animatedHeadingAnimationTextBgColor: value === undefined ? '' : value })}
+                        setGlobalColor={(value) => setAttributes({ animatedHeadingAnimationTextBgColor: value === undefined ? '' : value })}
                     />
                 )}
 
@@ -854,26 +865,26 @@ const Inspector = ({ attributes, setAttributes }) => {
                     <FB_ColorControl
                         label={__("Hover Color", "frontis-blocks")}
                         globalColor={animatedHeadingAnimationTextBgColorHover}
-                        setGlobalColor={(value) => setAttributes({animatedHeadingAnimationTextBgColorHover: value })}
+                        setGlobalColor={(value) => setAttributes({ animatedHeadingAnimationTextBgColorHover: value })}
                     />
                 )}
-                                
+
             </PanelBody>
 
         </>
-	);
-		
-	/**
-	 * Inspector Advanced Controls
-	 */
-	const advancedControls = (
+    );
+
+    /**
+     * Inspector Advanced Controls
+     */
+    const advancedControls = (
         <>
             <div className="fb-setting-advanced-tab-wrapper">
                 <div className="fb-setting-inner-wrapper">
                     <PanelBody
                         title={__("Layout", "frontis-blocks")}
                         initialOpen={true}
-                        className='fb-setting-layout-header' 
+                        className='fb-setting-layout-header'
                     >
 
                         <FB_Range
@@ -881,7 +892,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                             max={10000000}
                             label={__("Z Index", "frontis-blocks")}
                             rangeValue={animatedHeadingGlobalZIndex}
-                            onChangeHandler={(value) => setAttributes({animatedHeadingGlobalZIndex: value === 0 ? undefined : value })}
+                            onChangeHandler={(value) => setAttributes({ animatedHeadingGlobalZIndex: value === 0 ? undefined : value })}
                             deviceType={deviceType}
                             setAttributes={setAttributes}
                             rangeStep={1}
@@ -893,17 +904,17 @@ const Inspector = ({ attributes, setAttributes }) => {
                         <FB_InputControl
                             label={__("CSS ID", "frontis-blocks")}
                             value={animatedHeadingGlobalWraperID}
-                            onChangeValue={(value) => setAttributes({animatedHeadingGlobalWraperID: value })}
+                            onChangeValue={(value) => setAttributes({ animatedHeadingGlobalWraperID: value })}
                             helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
                         />
 
                         <FB_InputControl
                             label={__("CSS Class", "frontis-blocks")}
                             value={animatedHeadingGlobalWraperClass}
-                            onChangeValue={(value) => setAttributes({animatedHeadingGlobalWraperClass: value })}
+                            onChangeValue={(value) => setAttributes({ animatedHeadingGlobalWraperClass: value })}
                             helpText={__("Separate with spaces key.", "frontis-blocks")}
                         />
-                        
+
                     </PanelBody>
 
                     <PanelBody
@@ -932,7 +943,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                             />
                         )}
                     </PanelBody>
-                    
+
                     <PanelBody title={__("Border & Border Radius", "frontis-blocks")} initialOpen={false}>
                         <SelectControl
                             label={__("Border Style", "frontis-blocks")}
@@ -1022,16 +1033,16 @@ const Inspector = ({ attributes, setAttributes }) => {
                         title={__("Custom CSS", "frontis-blocks")}
                         initialOpen={false}
                     >
-                        <FB_CustomCSSEditor  
-                            value={animatedHeadingCustomCSS} 
-                            onChangeValue={(value) => setAttributes({animatedHeadingCustomCSS: value })}
+                        <FB_CustomCSSEditor
+                            value={animatedHeadingCustomCSS}
+                            onChangeValue={(value) => setAttributes({ animatedHeadingCustomCSS: value })}
                         />
                     </PanelBody>
                 </div>
             </div>
         </>
-	);
-    
+    );
+
 
     return (
         <>

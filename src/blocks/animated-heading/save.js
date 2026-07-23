@@ -44,7 +44,7 @@ export default function save({ attributes }) {
                         />
                     )}
 
-                    {animationType === 'typing' && (
+                    {(animationType === 'typing' || animationType === 'highlight') && (
                         <>
                             <span className="fb-animated-headings">
                                 {animatedHeadingItems &&
@@ -54,7 +54,7 @@ export default function save({ attributes }) {
                                         </span>
                                     ))}
                             </span>
-                            {animatedHeadingCursorSwitch && animatedHeadingCursor && (
+                            {animationType === 'typing' && animatedHeadingCursorSwitch && animatedHeadingCursor && (
                                 <span className="fb-animated-heading-cursor">
                                     {animatedHeadingCursor}
                                 </span>
@@ -64,29 +64,58 @@ export default function save({ attributes }) {
 
                     {animationType === 'swirl' && (
                         <>
-                        <span className="fb-animated-heading-swirl-wrapper">
-                            <span className="fb-animated-heading-dynamic-wrapper" id="animated-heading-wrapper">
-                                {animatedHeadingItems && animatedHeadingItems.length > 0 &&
-                                    animatedHeadingItems.map((item, index) => (
-                                        <span key={index} className="fb-animated-heading-item">
-                                            {' '}{item.animatedHeadingTitle}{' '}
-                                        </span>
-                                    ))
-                                }
+                            <span className="fb-animated-heading-swirl-wrapper">
+                                <span className="fb-animated-heading-dynamic-wrapper" id="animated-heading-wrapper">
+                                    {animatedHeadingItems && animatedHeadingItems.length > 0 &&
+                                        animatedHeadingItems.map((item, index) => (
+                                            <span key={index} className="fb-animated-heading-item">
+                                                {' '}{item.animatedHeadingTitle}{' '}
+                                            </span>
+                                        ))
+                                    }
+                                </span>
                             </span>
-                        </span>
                         </>
                     )}
 
                     {animationType === 'reveal' && (
-                        <span 
-                            className="fb-animated-heading-reveal-wrapper" 
+                        <span
+                            className="fb-animated-heading-reveal-wrapper"
                             id="animated-heading-reveal-wrapper"
                             data-char-delay={animatedHeadingRevealCharDelay}
                             data-appear-duration={animatedHeadingRevealAppearDuration}
                             data-hide-duration={animatedHeadingRevealHideDuration}
                             data-visible-hold={animatedHeadingRevealVisibleHold}
                             data-reset-delay={animatedHeadingRevealResetDelay}>
+                            {animatedHeadingItems && animatedHeadingItems.length > 0 &&
+                                animatedHeadingItems.map((item, index) => (
+                                    <span key={index} className="fb-animated-heading-item">
+                                        {item.animatedHeadingTitle}
+                                    </span>
+                                ))
+                            }
+                        </span>
+                    )}
+
+                    {(animationType === 'zoom' || animationType === 'flip') && (
+                        <span className="fb-animated-heading-swap-wrapper" id="animated-heading-swap-wrapper">
+                            {animatedHeadingItems && animatedHeadingItems.length > 0 &&
+                                animatedHeadingItems.map((item, index) => (
+                                    <span key={index} className="fb-animated-heading-item">
+                                        {item.animatedHeadingTitle}
+                                    </span>
+                                ))
+                            }
+                        </span>
+                    )}
+
+                    {animationType === 'progress' && (
+                        <span className="fb-animated-heading-progress-wrapper" id="animated-heading-progress-wrapper">
+                            <span className="fb-animated-heading-progress-word"></span>
+                            <span className="fb-animated-heading-progress-track">
+                                <span className="fb-animated-heading-progress-fill"></span>
+                            </span>
+                            <span style={{ display: 'none' }}>
                                 {animatedHeadingItems && animatedHeadingItems.length > 0 &&
                                     animatedHeadingItems.map((item, index) => (
                                         <span key={index} className="fb-animated-heading-item">
@@ -94,6 +123,7 @@ export default function save({ attributes }) {
                                         </span>
                                     ))
                                 }
+                            </span>
                         </span>
                     )}
 
