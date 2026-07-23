@@ -1,20 +1,51 @@
 import generateBackgroundCSS from '@Config/generateBackgroundCSS';
 import { select } from '@wordpress/data';
 
-const backgroundCss = ( attributes, deviceType, clientId, pseudoElementOverlay = {} ) => {
-	let parentBlockNames = [];
-	// Get an array of parent block client IDs for the block with the specified ID.
-	const parentBlockClientIds = select( 'core/block-editor' ).getBlockParents( clientId );
+/** clientId -> { parentKey, hasLoopBuilder } */
+const loopBuilderParentCache = new Map();
+const LOOP_CACHE_MAX = 2500;
 
-	if ( parentBlockClientIds?.length > 0 ) {
-		// Iterate through the parent block client IDs array and get the name of each parent block.
-		parentBlockNames = parentBlockClientIds.map( ( ID ) => {
-			return select( 'core/block-editor' ).getBlockName( ID );
-		} );
+/**
+ * Cached ancestry check — backgroundCss runs from render + styling + frontend-style,
+ * so uncached parent walks are O(n²) on deep container trees.
+ */
+const hasLoopBuilderParent = ( clientId ) => {
+	if ( ! clientId ) {
+		return false;
 	}
 
-	// check if 'uagb/loop-builder' is present in parentBlockNames.
-	const isLoopBuilderPresent = parentBlockNames.includes( 'frontis-blocks/loop-builder' );
+	const coreBlockEditor = select( 'core/block-editor' );
+	if ( ! coreBlockEditor?.getBlockParents ) {
+		return false;
+	}
+
+	const parentBlockClientIds = coreBlockEditor.getBlockParents( clientId ) || [];
+	const parentKey = parentBlockClientIds.join( '|' );
+	const cached = loopBuilderParentCache.get( clientId );
+
+	if ( cached && cached.parentKey === parentKey ) {
+		return cached.hasLoopBuilder;
+	}
+
+	let hasLoopBuilder = false;
+	for ( let i = 0; i < parentBlockClientIds.length; i++ ) {
+		if ( coreBlockEditor.getBlockName( parentBlockClientIds[ i ] ) === 'frontis-blocks/loop-builder' ) {
+			hasLoopBuilder = true;
+			break;
+		}
+	}
+
+	if ( loopBuilderParentCache.size >= LOOP_CACHE_MAX ) {
+		const oldestKey = loopBuilderParentCache.keys().next().value;
+		loopBuilderParentCache.delete( oldestKey );
+	}
+	loopBuilderParentCache.set( clientId, { parentKey, hasLoopBuilder } );
+
+	return hasLoopBuilder;
+};
+
+const backgroundCss = ( attributes, deviceType, clientId, pseudoElementOverlay = {} ) => {
+	const isLoopBuilderPresent = hasLoopBuilderParent( clientId );
 
 	const placeHolderImage = isLoopBuilderPresent ? {
 		type: 'image',

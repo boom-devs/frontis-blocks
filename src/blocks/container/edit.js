@@ -1,5 +1,5 @@
 import {select, useSelect} from '@wordpress/data';
-import {useEffect, useMemo} from '@wordpress/element';
+import {useEffect, useMemo, useState} from '@wordpress/element';
 import { store as blockEditorStore } from '@wordpress/block-editor';
 import Inspector from './inspector';
 import {ColumnsPicker} from './variationPicker';
@@ -10,6 +10,9 @@ import styling from "@Blocks/container/styling";
 import frontEndStyle from "@Blocks/container/frontend-style";
 import {useDeviceType} from "@Config/displayType";
 import useIsInsideLoopBuilder from '@Utils/useIsInsideLoopBuilder';
+
+/** clientId -> last computed editor CSS (avoids sync restyle storms on deep trees) */
+const editorStyleCache = new Map();
 
 const Edit = (props) => {
 	let deviceType= useDeviceType();
@@ -65,55 +68,83 @@ const Edit = (props) => {
 		}
 	}, [isInsideLoopBuilder, loopAutoApplied]);
 
+	/**
+	 * Keep this selector cheap and stable.
+	 * - Dependency array limits re-subscription churn
+	 * - Shallow hasSelectedInnerBlock avoids O(depth) walks per store update
+	 * - Return primitives only (no getBlocksByClientId arrays) to reduce re-renders
+	 */
 	const {
 		isParentOfSelectedBlock,
+		parentIdsLength,
+		hasContainerParent,
+		parentLayout,
 		variations,
 		defaultVariation,
-		getBlockParents,
-		parentBlocks,
-		parentAttributes,
 	} = useSelect( ( select ) => {
 		const coreBlocks = select( 'core/blocks' );
 		const coreBlockEditor = select( 'core/block-editor' );
-		const getBlockParentStore = coreBlockEditor?.getBlockParents( clientId );
-		const parentClientId = coreBlockEditor.getBlockRootClientId( props.clientId );
+		const parentIds = coreBlockEditor.getBlockParents( clientId );
+		const parentClientId = coreBlockEditor.getBlockRootClientId( clientId );
+
+		let hasContainerParent = false;
+		for ( let i = 0; i < parentIds.length; i++ ) {
+			if ( coreBlockEditor.getBlockName( parentIds[ i ] ) === 'frontis-blocks/container' ) {
+				hasContainerParent = true;
+				break;
+			}
+		}
+
+		const parentAttributes = parentClientId
+			? coreBlockEditor.getBlockAttributes( parentClientId )
+			: null;
+
+		// Variations are only needed for the root variation picker.
+		const needsVariations = parentIds.length === 0;
+
 		return {
-			defaultVariation: coreBlocks?.getDefaultBlockVariation( name ),
-			variations: coreBlocks?.getBlockVariations( name ),
-			isParentOfSelectedBlock: coreBlockEditor?.hasSelectedInnerBlock( clientId, true ),
-			getBlockParents : getBlockParentStore,
-			parentBlocks : coreBlockEditor?.getBlocksByClientId( getBlockParentStore ),
-			parentAttributes : coreBlockEditor.getBlockAttributes( parentClientId ),
+			isParentOfSelectedBlock: coreBlockEditor.hasSelectedInnerBlock( clientId, false ),
+			parentIdsLength: parentIds.length,
+			hasContainerParent,
+			parentLayout: parentAttributes?.layout ?? null,
+			variations: needsVariations ? coreBlocks.getBlockVariations( name ) : undefined,
+			defaultVariation: needsVariations ? coreBlocks.getDefaultBlockVariation( name ) : undefined,
 		};
-	} );
+	}, [ clientId, name ] );
 
 	/**
 	 * Hide empty block inserter when this container has selected inner blocks.
 	 * Only runs when selection state changes, avoiding unnecessary DOM queries on every render.
 	 */
 	useEffect(() => {
-		if ( isParentOfSelectedBlock ) {
-			const emptyBlockInserter = document.querySelector( '.block-editor-block-list__empty-block-inserter' );
-			if ( emptyBlockInserter ) {
-				emptyBlockInserter.style.display = 'none';
-			}
+		if ( ! isParentOfSelectedBlock ) {
+			return;
 		}
+		const emptyBlockInserter = document.querySelector( '.block-editor-block-list__empty-block-inserter' );
+		if ( ! emptyBlockInserter ) {
+			return;
+		}
+		const previousDisplay = emptyBlockInserter.style.display;
+		emptyBlockInserter.style.display = 'none';
+		return () => {
+			emptyBlockInserter.style.display = previousDisplay;
+		};
 	}, [isParentOfSelectedBlock]);
 
 	useEffect( () => {
-		const gridCssInParent = 'grid' === parentAttributes?.layout;
+		const gridCssInParent = 'grid' === parentLayout;
 		// If the parent block is a grid block, then we need to set the grid item settings.
 		if ( gridCssInParent !== isGridCssInParent ) {
 			setAttributes( { isGridCssInParent: gridCssInParent } );
 		}
-	}, [ parentAttributes?.layout ] );
+	}, [ parentLayout, isGridCssInParent, setAttributes ] );
 
 	useEffect( () => {
 		// Check if a parent of this container is one of these special blocks.
 		const attributesToUpdate = {};
 
 		// Conditionally set the isBlockRootParent attribute
-		if (!parentBlocks || parentBlocks.length === 0 || !parentBlocks.some( parent => parent.name === 'frontis-blocks/container' )) {
+		if ( ! hasContainerParent ) {
 			if(formContainerSwitcher === false ) {
 				attributesToUpdate.isBlockRootParent = true;
 			} else {
@@ -127,13 +158,25 @@ const Edit = (props) => {
 			attributesToUpdate.backgroundVideoOpacity = 0;
 		}
 
-		// Compare with attribute and attributeToUpdate and update only if there is a change.
-		if (attributesToUpdate.isBlockRootParent !== attributes.isBlockRootParent
-			|| attributesToUpdate.hasPopupParent !== attributes.hasPopupParent
-			|| attributesToUpdate.hasSliderParent !== attributes.hasSliderParent
-			|| attributesToUpdate.backgroundVideoOpacity !== attributes.backgroundVideoOpacity
-		) {
-			setAttributes( attributesToUpdate );
+		// Only write when there is something to change — avoids empty setAttributes({}) storms.
+		if ( Object.keys( attributesToUpdate ).length > 0 ) {
+			const filteredUpdates = {};
+			if (
+				'isBlockRootParent' in attributesToUpdate &&
+				attributesToUpdate.isBlockRootParent !== isBlockRootParent
+			) {
+				filteredUpdates.isBlockRootParent = attributesToUpdate.isBlockRootParent;
+			}
+			if (
+				'backgroundVideoOpacity' in attributesToUpdate &&
+				attributesToUpdate.backgroundVideoOpacity !== backgroundVideoOpacity
+			) {
+				filteredUpdates.overlayOpacity = attributesToUpdate.overlayOpacity;
+				filteredUpdates.backgroundVideoOpacity = attributesToUpdate.backgroundVideoOpacity;
+			}
+			if ( Object.keys( filteredUpdates ).length > 0 ) {
+				setAttributes( filteredUpdates );
+			}
 		}
 
 		if( globalBlockStyleId ) {
@@ -168,7 +211,7 @@ const Edit = (props) => {
 				attributes
 			);
 		}
-	}, [formContainerSwitcher] );
+	}, [formContainerSwitcher, hasContainerParent, isBlockRootParent, backgroundType, backgroundVideoOpacity] );
 
 	useEffect( () => {
 		if ( hasDynamicContent && ! attributes?.context?.postId ) {
@@ -179,21 +222,84 @@ const Edit = (props) => {
 		}
 	}, [ hasDynamicContent, context?.postId ] );
 
-	const blockStyling = useMemo( () => styling( attributes, clientId, name, deviceType ), [ attributes, deviceType ] );
-	const blockFrontEndStyle = useMemo( () => frontEndStyle( attributes, clientId, name, deviceType ), [ attributes, deviceType ] );
+	const blockStylingLive = useMemo( () => {
+		// Selected / direct parent: compute immediately so inspector edits preview instantly.
+		if ( ! isSelected && ! isParentOfSelectedBlock ) {
+			return null;
+		}
+		return styling( attributes, clientId, name, deviceType );
+	}, [ isSelected, isParentOfSelectedBlock, attributes, deviceType, clientId, name ] );
 
-    // const customCss = getCustomCss(advancedHeadingCustomCSS, `.${blockId}`);
+	const [ deferredBlockStyling, setDeferredBlockStyling ] = useState( () =>
+		editorStyleCache.get( clientId ) || ''
+	);
 
-    useEffect(() => {
-        const newStyle = `${blockFrontEndStyle}`.replace(/\s+/g, ' ').trim();
-        // Only update if the style actually changed - prevents double render loop
-        if (attributes.blockStyle !== newStyle) {
-            setAttributes({blockStyle: newStyle});
-        }
-    }, [blockFrontEndStyle]);
+	// Unselected containers: reuse cache, refresh on idle to avoid 500+ sync styling() storms.
+	useEffect( () => {
+		if ( isSelected || isParentOfSelectedBlock ) {
+			if ( blockStylingLive ) {
+				editorStyleCache.set( clientId, blockStylingLive );
+				setDeferredBlockStyling( blockStylingLive );
+			}
+			return;
+		}
+
+		const cached = editorStyleCache.get( clientId );
+		if ( cached ) {
+			setDeferredBlockStyling( cached );
+		}
+
+		let idleId;
+		let timeoutId;
+		const computeDeferred = () => {
+			const css = styling( attributes, clientId, name, deviceType );
+			editorStyleCache.set( clientId, css );
+			setDeferredBlockStyling( css );
+			if ( editorStyleCache.size > 2500 ) {
+				const oldest = editorStyleCache.keys().next().value;
+				editorStyleCache.delete( oldest );
+			}
+		};
+
+		if ( typeof window !== 'undefined' && typeof window.requestIdleCallback === 'function' ) {
+			idleId = window.requestIdleCallback( computeDeferred, { timeout: 4000 } );
+		} else {
+			timeoutId = window.setTimeout( computeDeferred, 32 );
+		}
+
+		return () => {
+			if ( idleId != null && typeof window.cancelIdleCallback === 'function' ) {
+				window.cancelIdleCallback( idleId );
+			}
+			if ( timeoutId != null ) {
+				window.clearTimeout( timeoutId );
+			}
+		};
+	}, [ isSelected, isParentOfSelectedBlock, attributes, deviceType, clientId, name, blockStylingLive ] );
+
+	const blockStyling = blockStylingLive || deferredBlockStyling;
+
+	// Keep frontend CSS in memory only for the selected container (attribute is role:local —
+	// never written into post content). Meta sync / save persistence regenerates the rest.
+	const blockFrontEndStyle = useMemo( () => {
+		if ( ! isSelected ) {
+			return null;
+		}
+		return frontEndStyle( attributes, clientId, name, deviceType );
+	}, [ isSelected, attributes, deviceType, clientId, name ] );
+
+	useEffect( () => {
+		if ( ! isSelected || blockFrontEndStyle == null ) {
+			return;
+		}
+		const newStyle = `${ blockFrontEndStyle }`.replace( /\s+/g, ' ' ).trim();
+		if ( attributes.blockStyle !== newStyle ) {
+			setAttributes( { blockStyle: newStyle } );
+		}
+	}, [ isSelected, blockFrontEndStyle ] );
 
 	// Handle variation picker - show picker when no variation selected and block is root
-	const shouldShowVariationPicker = ! variationSelected && 0 === getBlockParents?.length;
+	const shouldShowVariationPicker = ! variationSelected && 0 === parentIdsLength;
 	
 	// Initialize global responsive settings
 	useEffect(() => {
@@ -272,7 +378,7 @@ const Edit = (props) => {
 
 	return (
 		<>
-			<DynamicCSSLoader { ...{ blockStyling } } />
+			{ blockStyling ? <DynamicCSSLoader { ...{ blockStyling } } /> : null }
 			{isSelected && <Inspector { ...props } /> }
 			<Render { ...props } />
 		</>

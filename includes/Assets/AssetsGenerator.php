@@ -432,6 +432,18 @@ class AssetsGenerator
 	{
 		$post_content = $this->post->post_content;
 
+		// Container CSS may live in post meta (editor no longer serializes huge blockStyle
+		// strings into nested block comments — that caused OOM with deep nesting).
+		$meta_css = get_post_meta($this->post_id, '_frontis_container_block_styles', true);
+		if (is_string($meta_css) && $meta_css !== '') {
+			$cleaned_meta_css = $this->clean_CSS($meta_css) . "\n";
+			if ($this->genrating_critical_css) {
+				$this->critical_css_content .= $cleaned_meta_css;
+			} else {
+				$this->css_content .= $cleaned_meta_css;
+			}
+		}
+
 		$blocks = parse_blocks($post_content);
 		$this->get_inner_blocks($blocks);
 	}

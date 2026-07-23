@@ -43,11 +43,11 @@ const Render = ( props ) => {
 
 	const { getBlockOrder } = select( 'core/block-editor' );
 
+	// Use getBlockOrder only — getBlocks() materializes the full subtree (O(n²) with deep nesting).
 	const hasChildBlocks = getBlockOrder( clientId ).length > 0;
 
 	const Tag = 'a' === htmlTag ? 'div' : `${ htmlTag }`;
-	const hasChildren = 0 !== select( 'core/block-editor' ).getBlocks( clientId ).length;
-	const hasChildrenClass = hasChildren ? 'frontis-blocks-container-has-children' : '';
+	const hasChildrenClass = hasChildBlocks ? 'frontis-blocks-container-has-children' : '';
 
 	const isRootContainerClass = isBlockRootParent ? `${ containerType === 'full-width' ? 'alignfull' : 'alignwide' } frontis-blocks-is-root-container` : `child ${containerGlobalCustomCSSClass}`;
 
@@ -64,11 +64,19 @@ const Render = ( props ) => {
 		mobileResponsiveClass = 'fb-mobile-responsive';
 	}
 
-	const blockProps = useBlockProps();
+	const devicePreviewClass = typeof deviceType === 'string'
+		? deviceType.toLowerCase()
+		: 'desktop';
+
+	// Single useBlockProps subscription per container (was called twice).
+	// Class must stay `frontis-blocks-block-block-${clientId}` — matches styling.js
+	// selectors that previously used `frontis-blocks-block-${useBlockProps().id}`
+	// where id is `block-${clientId}`.
 	const modifBlockProps = useBlockProps( {
-		className: `frontis-blocks-block-${ blockProps.id } ${ hasChildrenClass } frontis-blocks-editor-preview-mode-${ deviceType.toLowerCase } ${ isRootContainerClass } ${desktopResponsiveClass} ${tabletResponsiveClass} ${mobileResponsiveClass}`,
+		className: `frontis-blocks-block-block-${ clientId } ${ hasChildrenClass } frontis-blocks-editor-preview-mode-${ devicePreviewClass } ${ isRootContainerClass } ${desktopResponsiveClass} ${tabletResponsiveClass} ${mobileResponsiveClass}`,
 		style: getContainerBGStyle,
 	} );
+	const blockId = modifBlockProps.id;
 
 	/**
 	 * Generate and update Custom CSS.
@@ -83,16 +91,19 @@ const Render = ( props ) => {
 	 *   .heading { color: blue } → #block-id .heading { color: blue } (descendant)
 	 */
 	useEffect(() => {
+		if ( ! blockId ) {
+			return;
+		}
 		const selfClasses = !isBlockRootParent
 			? (containerGlobalCustomCSSClass || '').split(' ').filter(Boolean)
 			: [];
-		const customCss = getCustomCss(containerGlobalCustomCSS, `#${blockProps.id}`, ' ', selfClasses);
+		const customCss = getCustomCss(containerGlobalCustomCSS, `#${blockId}`, ' ', selfClasses);
 		// Only update if value actually changed
 		if (containerGlobalCustomCSSValue !== customCss) {
 			setAttributes({containerGlobalCustomCSSValue: customCss});
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [containerGlobalCustomCSS, blockProps.id, containerGlobalCustomCSSClass]);
+	}, [containerGlobalCustomCSS, blockId, containerGlobalCustomCSSClass]);
 
 	if (modifBlockProps.className && modifBlockProps.className.includes('alignfull') && containerType !== 'full-width') {
 		modifBlockProps.className = modifBlockProps.className
@@ -117,18 +128,18 @@ const Render = ( props ) => {
 	}
 
 	/**
-	 * Set p_block_id attribute only when it differs from blockProps.id
+	 * Set p_block_id attribute only when it differs from blockId
 	 * Avoids unnecessary setAttributes calls on every render
 	 */
 	useEffect(() => {
 		// Only set p_block_id if it's empty or different
-		if (clientId && typeof clientId === 'string' && attributes.p_block_id !== blockProps.id) {
+		if (clientId && typeof clientId === 'string' && blockId && attributes.p_block_id !== blockId) {
 			setAttributes({
-				p_block_id: blockProps.id,
+				p_block_id: blockId,
 			});
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [clientId, blockProps.id]);
+	}, [clientId, blockId]);
 
 	const rotateContainer = () => {
 		console.log("working on click ?");
@@ -141,7 +152,7 @@ const Render = ( props ) => {
 
 	return (
 		<>
-			<Tag { ...modifBlockProps } key={ blockProps.id }>
+			<Tag { ...modifBlockProps } key={ blockId }>
 				{ 'video' === backgroundType && (
 					<div className="frontis-blocks-container__video-wrap">
 						{ backgroundVideo && (

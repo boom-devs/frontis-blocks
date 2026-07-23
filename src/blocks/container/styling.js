@@ -209,6 +209,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 
 		containerBorder,
 		containerBorderColor,
+		containerBorderHoverColor,
 		containerBorderUnits,
 		containerDesktopBorderWidth,
 		containerTabBorderWidth,
@@ -219,6 +220,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		containerMobileBorderRadiusWidth,
 
 		containerGlobalBoxShadowCssValue,
+		containerGlobalHoverBoxShadowCssValue,
 		/** Normal Bg */
 		containerBgColorSwitcher,
 		containerBgNormalBackgroundType,
@@ -1353,6 +1355,8 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 
 		selectors[ '.wp-block-frontis-blocks-container:hover' ] = {
 			...getBackgroundHoverStyles('Desktop'),
+			'border-color': containerBorderHoverColor ? containerBorderHoverColor : undefined,
+			'box-shadow': containerGlobalHoverBoxShadowCssValue ? containerGlobalHoverBoxShadowCssValue : undefined,
 		};
 
 		tablet_selectors[ '.wp-block-frontis-blocks-container:not(.frontis-blocks-is-root-container)'] = {
@@ -1361,6 +1365,8 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		}
 		tablet_selectors[ '.wp-block-frontis-blocks-container:hover' ] = {
 			...getBackgroundHoverStyles('Tablet'),
+			'border-color': containerBorderHoverColor ? containerBorderHoverColor : undefined,
+			'box-shadow': containerGlobalHoverBoxShadowCssValue ? containerGlobalHoverBoxShadowCssValue : undefined,
 		};
 
 		mobile_selectors[ '.wp-block-frontis-blocks-container:not(.frontis-blocks-is-root-container)'] = {
@@ -1369,6 +1375,8 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		}
 		mobile_selectors[ '.wp-block-frontis-blocks-container:hover' ] = {
 			...getBackgroundHoverStyles('Mobile'),
+			'border-color': containerBorderHoverColor ? containerBorderHoverColor : undefined,
+			'box-shadow': containerGlobalHoverBoxShadowCssValue ? containerGlobalHoverBoxShadowCssValue : undefined,
 		};
 
 		selectors[ '.wp-block-frontis-blocks-container:after' ] = {

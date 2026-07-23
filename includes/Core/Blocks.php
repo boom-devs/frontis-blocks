@@ -28,6 +28,7 @@ class Blocks
 	public function __construct()
 	{
 		add_action('init', [$this, 'register_blocks']);
+		add_action('init', [$this, 'register_container_block_style_meta']);
 		add_filter('block_categories_all', [$this, 'register_block_categories'], 10, 1);
 		add_filter('render_block', [$this, 'render_block'], 10, 3);
 		add_action('save_post', [$this, 'get_blocks_on_save'], 10, 3);
@@ -39,6 +40,26 @@ class Blocks
 		add_action('delete_term', [Helper::class, 'clear_frontis_caches']);
 		add_action('profile_update', [Helper::class, 'clear_frontis_caches']);
 		add_action('user_register', [Helper::class, 'clear_frontis_caches']);
+	}
+
+	/**
+	 * Store container CSS outside block comments so deep nesting does not OOM the editor.
+	 * Frontend AssetsGenerator reads this meta when block attributes no longer embed blockStyle.
+	 */
+	public function register_container_block_style_meta()
+	{
+		$post_types = get_post_types(['show_in_rest' => true], 'names');
+		foreach ($post_types as $post_type) {
+			register_post_meta($post_type, '_frontis_container_block_styles', [
+				'type'              => 'string',
+				'single'            => true,
+				'show_in_rest'      => true,
+				'auth_callback'     => static function () {
+					return current_user_can('edit_posts');
+				},
+				'default'           => '',
+			]);
+		}
 	}
 
 	/**

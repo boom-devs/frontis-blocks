@@ -6,6 +6,7 @@ import Edit from './edit';
 import Save from './save';
 import deprecated from './deprecated.js';
 import './style.scss';
+import './blockStylePersistence';
 
 registerBlockType(metadata.name, {
 	...metadata,

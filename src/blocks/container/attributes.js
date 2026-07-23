@@ -23,8 +23,24 @@ const attributes = {
 	p_block_id: {
 		type: 'string',
 	},
+	// role:local — do NOT serialize into post content. Deep nesting (500+) with
+	// full CSS in each block comment causes editor OOM during serialize caching.
+	// Styles are synced to post meta `_frontis_container_block_styles` for frontend.
+	//
+	// Gutenberg docs (role / local):
+	// https://developer.wordpress.org/block-editor/reference-guides/block-api/block-attributes/#role
+	// — "Use `local` to mark the attribute as temporary and non-persistable.
+	//    Attributes marked as `local` are ignored by the Block Serializer and
+	//    never saved to post content."
+	//
+	// Introduced as __experimentalRole, later stabilized as `role`:
+	// https://github.com/WordPress/gutenberg/pull/63076
+	// https://github.com/WordPress/gutenberg/pull/65484
+	// __experimentalRole kept for older WP that predates stable `role`.
 	blockStyle: {
 		type: 'string',
+		role: 'local',
+		__experimentalRole: 'local',
 	},
 
 	formContainerSwitcher: {
