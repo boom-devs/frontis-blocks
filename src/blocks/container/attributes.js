@@ -1653,6 +1653,9 @@ const attributes = {
 	containerGlobalCustomCSSValue : {
 		type: 'string',
 		default: '',
+		// Derived CSS string — do not embed in block comments (same OOM class as blockStyle).
+		role: 'local',
+		__experimentalRole: 'local',
 	},
 	containerGlobalCustomCSSID : {
 		type: 'string',

@@ -41,6 +41,14 @@ class Blocks
 		add_action('added_post_meta', [$this, 'maybe_regenerate_assets_for_container_style_meta'], 10, 4);
 		add_action('updated_post_meta', [$this, 'maybe_regenerate_assets_for_container_style_meta'], 10, 4);
 		add_action('init', [$this, 'register_rest_after_insert_asset_hooks'], 20);
+		add_action('init', [$this, 'register_rest_prepare_content_strip_hooks'], 20);
+
+		// Before the block editor boots: permanently migrate legacy heavy CSS out of post_content.
+		// Without this, 400–500+ nested containers still OOM on open / template change / before Save is clickable.
+		add_action('load-post.php', [$this, 'migrate_container_styles_before_editor_boot']);
+		add_action('load-page.php', [$this, 'migrate_container_styles_before_editor_boot']);
+		// Backup if load-* is missed (some hosts / page builders).
+		add_action('admin_init', [$this, 'migrate_container_styles_before_editor_boot'], 0);
 
 		// Cache invalidation hooks - clear caches when content changes
 		add_action('save_post', [Helper::class, 'clear_frontis_caches'], 20);
@@ -125,6 +133,82 @@ class Blocks
 	}
 
 	/**
+	 * Strip heavy container CSS from REST `content.raw` before the block editor receives it.
+	 *
+	 * Why
+	 * ---
+	 * Legacy posts still store multi-MB `blockStyle` strings inside nested container
+	 * comments. Opening the editor, switching page templates, or any core-data refetch
+	 * pulls that raw content over REST. Parsing/serializing it again triggers the same
+	 * Chrome OOM pause ("Paused before potential out-of-memory crash") even when
+	 * `role: local` is registered — the damage is already in post_content on disk.
+	 *
+	 * This filter:
+	 * 1. Seeds `_frontis_container_block_styles` meta from embedded blockStyle if needed
+	 * 2. Returns a light `content.raw` (blockStyle / containerGlobalCustomCSSValue removed)
+	 *    so template changes and editor boot do not rehydrate multi-MB strings
+	 *
+	 * Frontend assets keep using meta + legacy attrs via AssetsGenerator; this only
+	 * affects what the editor downloads over REST.
+	 *
+	 * @return void
+	 */
+	public function register_rest_prepare_content_strip_hooks()
+	{
+		$post_types = get_post_types(['show_in_rest' => true], 'names');
+		foreach ($post_types as $post_type) {
+			add_filter("rest_prepare_{$post_type}", [$this, 'strip_heavy_container_styles_from_rest_response'], 10, 3);
+		}
+	}
+
+	/**
+	 * @param \WP_REST_Response $response Response object.
+	 * @param \WP_Post          $post     Post object.
+	 * @param \WP_REST_Request  $request  Request object.
+	 * @return \WP_REST_Response
+	 */
+	public function strip_heavy_container_styles_from_rest_response($response, $post, $request)
+	{
+		if (!$response instanceof \WP_REST_Response || !$post instanceof \WP_Post) {
+			return $response;
+		}
+
+		// Editor loads use context=edit and need content.raw. Skip irrelevant contexts.
+		$context = $request instanceof \WP_REST_Request ? $request->get_param('context') : null;
+		if ($context && $context !== 'edit') {
+			return $response;
+		}
+
+		$data = $response->get_data();
+		if (!is_array($data) || empty($data['content']['raw']) || !is_string($data['content']['raw'])) {
+			return $response;
+		}
+
+		$raw = $data['content']['raw'];
+		if (!$this->content_has_heavy_container_style_attrs($raw)) {
+			return $response;
+		}
+
+		$styles = $this->extract_container_block_styles_from_content($raw);
+		if ($styles !== '') {
+			$existing_meta = get_post_meta($post->ID, self::CONTAINER_BLOCK_STYLE_META_KEY, true);
+			if (!is_string($existing_meta) || $existing_meta === '') {
+				update_post_meta($post->ID, self::CONTAINER_BLOCK_STYLE_META_KEY, $styles);
+			}
+		}
+
+		$stripped = $this->strip_heavy_container_style_attrs_from_content_string($raw);
+		if (!is_string($stripped) || $stripped === '' || $stripped === $raw) {
+			return $response;
+		}
+
+		$data['content']['raw'] = $stripped;
+		$response->set_data($data);
+
+		return $response;
+	}
+
+	/**
 	 * Re-run page asset generation at the end of a REST create/update.
 	 *
 	 * @param \WP_Post         $post     Inserted or updated post.
@@ -180,11 +264,13 @@ class Blocks
 	}
 
 	/**
-	 * Before post_content is replaced, ensure container CSS lands in meta.
+	 * Before post_content is replaced, ensure container CSS lands in meta and strip
+	 * heavy `blockStyle` / derived CSS attrs from the content being saved.
 	 *
-	 * First save after upgrading (role:local): new content has no blockStyle, but the
-	 * previous DB content still does. Copy those strings into meta so save_post asset
-	 * generation and the frontend do not lose styles.
+	 * First save after upgrading (role:local): new content may still include legacy
+	 * blockStyle if the client WP build does not honor `role`. Always migrate those
+	 * strings into meta, then remove them from post_content so the next editor load
+	 * does not re-parse multi-MB nested comments (400+ containers → OOM).
 	 *
 	 * @param array $data    Sanitized post data to be inserted/updated.
 	 * @param array $postarr Raw post data.
@@ -212,30 +298,205 @@ class Blocks
 		$existing_meta = get_post_meta($post_id, self::CONTAINER_BLOCK_STYLE_META_KEY, true);
 		$has_meta = is_string($existing_meta) && $existing_meta !== '';
 
-		// Legacy content still embeds blockStyle — seed meta for the next role:local save.
 		if ($styles_in_new !== '') {
 			if (!$has_meta) {
 				update_post_meta($post_id, self::CONTAINER_BLOCK_STYLE_META_KEY, $styles_in_new);
 			}
-			return $data;
+		} elseif (!$has_meta) {
+			$old_content = get_post_field('post_content', $post_id);
+			$styles_from_old = $this->extract_container_block_styles_from_content($old_content);
+			if ($styles_from_old !== '') {
+				update_post_meta($post_id, self::CONTAINER_BLOCK_STYLE_META_KEY, $styles_from_old);
+			}
 		}
 
-		// role:local save: no blockStyle in new content. Keep existing meta, or migrate from old content.
-		if ($has_meta) {
-			return $data;
-		}
-
-		$old_content = get_post_field('post_content', $post_id);
-		$styles_from_old = $this->extract_container_block_styles_from_content($old_content);
-		if ($styles_from_old !== '') {
-			update_post_meta($post_id, self::CONTAINER_BLOCK_STYLE_META_KEY, $styles_from_old);
+		// Always strip heavy CSS attrs from saved content when present (legacy / old WP).
+		if ($this->content_has_heavy_container_style_attrs($new_content)) {
+			$stripped = $this->strip_heavy_container_style_attrs_from_content_string($new_content);
+			if (is_string($stripped) && $stripped !== '' && $stripped !== $new_content) {
+				$data['post_content'] = $stripped;
+			}
 		}
 
 		return $data;
 	}
 
 	/**
-	 * Collect all frontis-blocks/container blockStyle strings from serialized content.
+	 * Silently migrate legacy container CSS out of DB post_content before the editor loads.
+	 *
+	 * Problem
+	 * -------
+	 * Imported / old pages embed multi-MB `blockStyle` strings in every nested container
+	 * comment. The block editor preloads that raw content and Chrome pauses with
+	 * "Paused before potential out-of-memory crash" — often before Save is even clickable.
+	 * REST/JS stripping alone is too late if preload already hydrated multi-MB strings.
+	 *
+	 * Fix
+	 * ---
+	 * On editor boot (`load-post.php` / `admin_init`):
+	 * 1. Copy container `blockStyle` CSS into `_frontis_container_block_styles` meta (if empty)
+	 * 2. Strip heavy CSS JSON string values from post_content via fast regex + $wpdb
+	 *    (avoids parse_blocks on 500+ deep trees, which itself can exhaust memory)
+	 * 3. Regenerate page assets so frontend keeps styles from meta
+	 *
+	 * @return void
+	 */
+	public function migrate_container_styles_before_editor_boot()
+	{
+		if (!is_admin() || !current_user_can('edit_posts')) {
+			return;
+		}
+
+		global $pagenow;
+		$on_editor_screen = in_array($pagenow, ['post.php', 'post-new.php'], true)
+			|| (isset($_GET['action']) && $_GET['action'] === 'edit');
+		if (!$on_editor_screen && empty($_GET['fb_migrate_container_styles'])) {
+			return;
+		}
+
+		$post_id = isset($_GET['post']) ? absint($_GET['post']) : 0;
+		if ($post_id <= 0) {
+			return;
+		}
+
+		$post = get_post($post_id);
+		if (!$post instanceof \WP_Post || !is_string($post->post_content) || $post->post_content === '') {
+			return;
+		}
+
+		if (stripos($post->post_content, 'frontis-blocks/container') === false) {
+			return;
+		}
+
+		if (!$this->content_has_heavy_container_style_attrs($post->post_content)) {
+			return;
+		}
+
+		// Avoid repeat work in the same request.
+		static $migrated = [];
+		if (isset($migrated[$post_id])) {
+			return;
+		}
+		$migrated[$post_id] = true;
+
+		@ini_set('memory_limit', '512M');
+		@set_time_limit(120);
+
+		$styles = $this->extract_container_block_styles_from_content($post->post_content);
+		$existing_meta = get_post_meta($post_id, self::CONTAINER_BLOCK_STYLE_META_KEY, true);
+		$has_meta = is_string($existing_meta) && $existing_meta !== '';
+
+		if ($styles !== '' && !$has_meta) {
+			update_post_meta($post_id, self::CONTAINER_BLOCK_STYLE_META_KEY, $styles);
+			$has_meta = true;
+		}
+
+		$new_content = $this->strip_heavy_container_style_attrs_from_content_string($post->post_content);
+
+		if (!is_string($new_content) || $new_content === '' || $new_content === $post->post_content) {
+			return;
+		}
+
+		global $wpdb;
+		$updated = $wpdb->update(
+			$wpdb->posts,
+			['post_content' => $new_content],
+			['ID' => $post_id],
+			['%s'],
+			['%d']
+		);
+
+		if ($updated === false) {
+			return;
+		}
+
+		clean_post_cache($post_id);
+
+		// Keep frontend CSS files in sync with meta after content strip.
+		if ($has_meta || $styles !== '') {
+			$fresh = get_post($post_id);
+			if ($fresh instanceof \WP_Post) {
+				$critical_css_used = Helper::post_content_has_blocks_critical($fresh, $post_id);
+				AssetsGenerator::get_instance()->generate_page_assets($post_id, $fresh, $critical_css_used);
+			}
+		}
+	}
+
+	/**
+	 * @param string $content Post content.
+	 * @return bool
+	 */
+	private function content_has_heavy_container_style_attrs($content)
+	{
+		if (!is_string($content) || $content === '') {
+			return false;
+		}
+
+		return (
+			stripos($content, '"blockStyle"') !== false
+			|| stripos($content, '"containerGlobalCustomCSSValue"') !== false
+		);
+	}
+
+	/**
+	 * Fast path: blank heavy CSS JSON string values without parse_blocks().
+	 *
+	 * Deep 500+ trees can OOM PHP during parse_blocks/serialize_blocks. Emptying the
+	 * JSON string values keeps block comments valid and drops multi-MB payloads.
+	 *
+	 * @param string $content Post content.
+	 * @return string
+	 */
+	private function strip_heavy_container_style_attrs_from_content_string($content)
+	{
+		if (!$this->content_has_heavy_container_style_attrs($content)) {
+			return $content;
+		}
+
+		// JSON string values: "key":"..." with escaped quotes/backslashes inside.
+		$pattern = '/("(?:blockStyle|containerGlobalCustomCSSValue)"\s*:\s*)"(?:[^"\\\\]|\\\\.)*"/s';
+		$replaced = preg_replace($pattern, '$1""', $content);
+
+		return is_string($replaced) ? $replaced : $content;
+	}
+
+	/**
+	 * Remove blockStyle / containerGlobalCustomCSSValue from container attrs in a block tree.
+	 *
+	 * @param array $blocks Parsed blocks.
+	 * @return array
+	 */
+	private function strip_heavy_container_style_attrs_from_blocks($blocks)
+	{
+		if (!is_array($blocks)) {
+			return $blocks;
+		}
+
+		foreach ($blocks as &$block) {
+			if (!is_array($block)) {
+				continue;
+			}
+			if (
+				!empty($block['blockName'])
+				&& $block['blockName'] === 'frontis-blocks/container'
+				&& !empty($block['attrs'])
+				&& is_array($block['attrs'])
+			) {
+				unset($block['attrs']['blockStyle'], $block['attrs']['containerGlobalCustomCSSValue']);
+			}
+			if (!empty($block['innerBlocks']) && is_array($block['innerBlocks'])) {
+				$block['innerBlocks'] = $this->strip_heavy_container_style_attrs_from_blocks($block['innerBlocks']);
+			}
+		}
+		unset($block);
+
+		return $blocks;
+	}
+
+	/**
+	 * Collect all container blockStyle strings from serialized content.
+	 *
+	 * Uses regex first (safe on deep nests). Falls back to parse_blocks only if needed.
 	 *
 	 * @param string $content Post content.
 	 * @return string Combined CSS (may be empty).
@@ -246,6 +507,21 @@ class Blocks
 			return '';
 		}
 
+		$css_parts = [];
+		if (preg_match_all('/"blockStyle"\s*:\s*"((?:[^"\\\\]|\\\\.)*)"/s', $content, $matches)) {
+			foreach ($matches[1] as $encoded) {
+				$decoded = json_decode('"' . $encoded . '"');
+				if (is_string($decoded) && $decoded !== '') {
+					$css_parts[] = $decoded;
+				}
+			}
+		}
+
+		if (!empty($css_parts)) {
+			return implode("\n", $css_parts);
+		}
+
+		// Fallback for unusual encoding.
 		$blocks = parse_blocks($content);
 		return $this->collect_container_block_styles_from_blocks($blocks);
 	}
