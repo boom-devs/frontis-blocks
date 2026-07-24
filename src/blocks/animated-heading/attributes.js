@@ -51,6 +51,165 @@ const attributes = {
         }
     },
 
+    //animation heading progress style
+    animatedHeadingProgressBarBorderRadiusUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    animatedHeadingProgressBarDesktopBorderRadius: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    animatedHeadingProgressBarTabletBorderRadius: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    animatedHeadingProgressBarMobileBorderRadius: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    animatedHeadingProgressBarBorderRadiusLink: {
+        type: 'boolean',
+        default: true
+    },
+
+    animatedHeadingProgressBarHeight: {
+        type: 'object',
+        default: {
+            Desktop: '1',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    animatedHeadingProgressBarHeightUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    animatedHeadingProgressBarWidth: {
+        type: 'object',
+        default: {
+            Desktop: '100',
+            Tablet: '100',
+            Mobile: '100'
+        }
+    },
+    animatedHeadingProgressBarWidthUnits: {
+        type: 'object',
+        default: {
+            Desktop: '%',
+            Tablet: '%',
+            Mobile: '%'
+        }
+    },
+    animatedHeadingProgressBgColorType: {
+        type: 'string',
+        default: 'classic',
+    },
+    animatedHeadingProgressBgHoverColorType: {
+        type: 'string',
+        default: 'classic',
+    },
+    animatedHeadingProgressBgColorTypeSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
+    animatedHeadingProgressBgColor: {
+        type: 'string'
+    },
+    animatedHeadingProgressBgHoverColor: {
+        type: 'string',
+    },
+    animatedHeadingProgressBgGradientColor: {
+        type: 'string',
+        default: null
+    },
+    animatedHeadingProgressBgHoverGradientColor: {
+        type: 'string',
+        default: null
+    },
+    animatedHeadingProgressBgCustomGradientColorSwitcher: {
+        type: 'boolean',
+        default: false
+    },
+    animatedHeadingProgressBgCustomGradientColor: {
+        type: 'string',
+        default: ''
+    },
+    animatedHeadingProgressBgHoverCustomGradientColorSwitcher: {
+        type: 'boolean',
+        default: false
+    },
+    animatedHeadingProgressBgHoverCustomGradientColor: {
+        type: 'string',
+        default: ''
+    },
+
+    animatedHeadingProgressBgFillColorType: {
+        type: 'string',
+        default: 'classic',
+    },
+    animatedHeadingProgressBgFillHoverColorType: {
+        type: 'string',
+        default: 'classic',
+    },
+    animatedHeadingProgressBgFillColorTypeSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
+    animatedHeadingProgressBgFillColor: {
+        type: 'string'
+    },
+    animatedHeadingProgressBgFillHoverColor: {
+        type: 'string',
+    },
+    animatedHeadingProgressBgFillGradientColor: {
+        type: 'string',
+        default: null
+    },
+    animatedHeadingProgressBgFillHoverGradientColor: {
+        type: 'string',
+        default: null
+    },
+    animatedHeadingProgressBgFillCustomGradientColorSwitcher: {
+        type: 'boolean',
+        default: false
+    },
+    animatedHeadingProgressBgFillCustomGradientColor: {
+        type: 'string',
+        default: ''
+    },
+    animatedHeadingProgressBgFillHoverCustomGradientColorSwitcher: {
+        type: 'boolean',
+        default: false
+    },
+    animatedHeadingProgressBgFillHoverCustomGradientColor: {
+        type: 'string',
+        default: ''
+    },
+
     animatedHeadingPrefix: {
         type: 'string',
         default: 'We create'
@@ -347,7 +506,189 @@ const attributes = {
     },
     /** End Typing Text Style */
 
+    /** Start animated text Border */
+    animatedHeadingAnimatedTextBorder: {
+        type: 'string',
+        default: 'none',
+    },
+    animatedHeadingAnimatedTextBorderColorSwitcher: {
+        type: 'string',
+        default: 'normal'
+    },
+    animatedHeadingAnimatedTextBorderColor: {
+        type: 'string',
+        default: ''
+    },
+    animatedHeadingAnimatedTextBorderHoverColor: {
+        type: 'string',
+        default: ''
+    },
+    animatedHeadingAnimatedTextBorderUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    animatedHeadingAnimatedTextDesktopBorder: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    animatedHeadingAnimatedTextTabletBorder: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    animatedHeadingAnimatedTextMobileBorder: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    animatedHeadingAnimatedTextBorderLink: {
+        type: 'boolean',
+        default: true
+    },
+    animatedHeadingAnimatedTextBorderRadiusUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    animatedHeadingAnimatedTextDesktopBorderRadius: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    animatedHeadingAnimatedTextTabletBorderRadius: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    animatedHeadingAnimatedTextMobileBorderRadius: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    animatedHeadingAnimatedTextBorderRadiusLink: {
+        type: 'boolean',
+        default: true
+    },
+    /** End animated text Border */
+
+    /** Start animated text Margin & Padding */
+    animatedHeadingAnimatedTextPaddingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    animatedHeadingAnimatedTextDesktopPadding: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    animatedHeadingAnimatedTextTabletPadding: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    animatedHeadingAnimatedTextMobilePadding: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    animatedHeadingAnimatedTextPaddingLink: {
+        type: 'boolean',
+        default: true
+    },
+    animatedHeadingAnimatedTextMarginUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    animatedHeadingAnimatedTextDesktopMargin: {
+        type: 'object',
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    animatedHeadingAnimatedTextTabletMargin: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    animatedHeadingAnimatedTextMobileMargin: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    animatedHeadingAnimatedTextMarginLink: {
+        type: 'boolean',
+        default: true
+    },
+    /** End Animated Text Margin & Padding */
+
     /** Start reaval animation */
+    animatedHeadingAnimationDuration: {
+        type: 'number',
+        default: 1500
+    },
     animatedHeadingRevealCharDelay: {
         type: 'number',
         default: 200
