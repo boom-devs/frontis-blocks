@@ -27,6 +27,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         animatedHeadingSuffix,
 
         //reaval animation
+        animatedHeadingAnimationDuration,
         animatedHeadingRevealCharDelay,
         animatedHeadingRevealAppearDuration,
         animatedHeadingRevealHideDuration,
@@ -128,7 +129,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                         timeoutId = setTimeout(typeEffect, 100);
                     } else {
                         isDeleting = true;
-                        timeoutId = setTimeout(typeEffect, 1000);
+                        timeoutId = setTimeout(typeEffect, animatedHeadingAnimationDuration || 1000);
                     }
                 } else {
                     if (charIndex > 0) {
@@ -241,7 +242,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                 });
 
                 currentIndex = (currentIndex + 1) % texts.length;
-                const intervalId = setInterval(showNextWord, 3000);
+                const intervalId = setInterval(showNextWord, animatedHeadingAnimationDuration || 3000);
 
                 // Return Cleanup
                 return () => {
@@ -338,7 +339,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
             const wrapper = swapWrapperRef.current;
             if (!wrapper) return;
 
-            const HOLD = 2500;
+            const HOLD = animatedHeadingAnimationDuration || 2500;
             const DURATION = 500;
 
             let wordEl = wrapper.querySelector(".fb-animated-heading-swap-word");
@@ -394,7 +395,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
             const wrapper = progressWrapperRef.current;
             if (!wrapper) return;
 
-            const DURATION = 4200;
+            const DURATION = animatedHeadingAnimationDuration || 4200;
             const TRANS = 500;
 
             wrapper.style.setProperty("--progress-duration", `${DURATION}ms`);
@@ -463,7 +464,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                 clearTimeout(animTimerId);
             };
         }
-    }, [animatedHeadingItems, animationType, animatedHeadingMainTag, animatedHeadingRevealCharDelay, animatedHeadingRevealAppearDuration, animatedHeadingRevealHideDuration, animatedHeadingRevealVisibleHold, animatedHeadingRevealResetDelay, animatedHeadingRevealDirection]);
+    }, [animatedHeadingItems, animationType, animatedHeadingMainTag, animatedHeadingAnimationDuration, animatedHeadingRevealCharDelay, animatedHeadingRevealAppearDuration, animatedHeadingRevealHideDuration, animatedHeadingRevealVisibleHold, animatedHeadingRevealResetDelay, animatedHeadingRevealDirection]);
 
     const Tag = animatedHeadingMainTag ? animatedHeadingMainTag : "div";
 
@@ -496,12 +497,12 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                             />
                         )}
 
-                        {(animationType === "typing" || animationType === "highlight") && (
+                        {animationType === "typing" && (
                             <>
                                 {animatedHeadingItems && animatedHeadingItems.length > 0 && (
                                     <span className="fb-animated-headings" ref={typedTextRef}></span>
                                 )}
-                                {animationType === "typing" && animatedHeadingCursorSwitch && animatedHeadingCursor && (
+                                {animatedHeadingCursorSwitch && animatedHeadingCursor && (
                                     <span className="fb-animated-heading-cursor">
                                         {animatedHeadingCursor}
                                     </span>

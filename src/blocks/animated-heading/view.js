@@ -4,6 +4,8 @@
 
         containers.forEach((container) => {
             const animationType = container.getAttribute('data-animation-type');
+            const animationDurationAttr = container.getAttribute('data-animation-duration');
+            const animationDuration = animationDurationAttr ? parseInt(animationDurationAttr) : null;
 
             // Prevent multiple initializations
             if (container.hasAttribute('data-heading-initialized')) return;
@@ -34,7 +36,7 @@
                             setTimeout(typeEffect, 100);
                         } else {
                             isDeleting = true;
-                            setTimeout(typeEffect, 1000);
+                            setTimeout(typeEffect, animationDuration || 1000);
                         }
                     } else {
                         if (charIndex > 0) {
@@ -130,7 +132,7 @@
                 });
 
                 currentIndex = (currentIndex + 1) % texts.length;
-                setInterval(showNextWord, 3000);
+                setInterval(showNextWord, animationDuration || 3000);
             }
 
             // Handle Reveal Animation
@@ -214,7 +216,7 @@
                 const wrapper = container.querySelector('.fb-animated-heading-swap-wrapper');
                 if (!wrapper) return;
 
-                const HOLD = 2500;
+                const HOLD = animationDuration || 2500;
                 const DURATION = 500;
 
                 let wordEl = wrapper.querySelector('.fb-animated-heading-swap-word');
@@ -266,7 +268,7 @@
                 const wrapper = container.querySelector('.fb-animated-heading-progress-wrapper');
                 if (!wrapper) return;
 
-                const DURATION = 4200;
+                const DURATION = animationDuration || 4200;
                 const TRANS = 500;
 
                 wrapper.style.setProperty('--progress-duration', `${DURATION}ms`);

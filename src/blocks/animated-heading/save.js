@@ -14,6 +14,7 @@ export default function save({ attributes }) {
         animatedHeadingGlobalWraperClass,
 
         //reaval animation
+        animatedHeadingAnimationDuration,
         animatedHeadingRevealCharDelay,
         animatedHeadingRevealAppearDuration,
         animatedHeadingRevealHideDuration,
@@ -34,6 +35,7 @@ export default function save({ attributes }) {
                 className={`fb-animated-heading-container ${animatedHeadingGlobalWraperClass}`}
                 id={animatedHeadingGlobalWraperID}
                 data-animation-type={animationType}
+                data-animation-duration={animatedHeadingAnimationDuration}
             >
                 <Tag className={`fb-animated-heading-wrapper animated-type-${animationType}`}>
                     {animatedHeadingPrefix && (
@@ -44,7 +46,7 @@ export default function save({ attributes }) {
                         />
                     )}
 
-                    {(animationType === 'typing' || animationType === 'highlight') && (
+                    {animationType === 'typing' && (
                         <>
                             <span className="fb-animated-headings">
                                 {animatedHeadingItems &&
@@ -54,7 +56,7 @@ export default function save({ attributes }) {
                                         </span>
                                     ))}
                             </span>
-                            {animationType === 'typing' && animatedHeadingCursorSwitch && animatedHeadingCursor && (
+                            {animatedHeadingCursorSwitch && animatedHeadingCursor && (
                                 <span className="fb-animated-heading-cursor">
                                     {animatedHeadingCursor}
                                 </span>

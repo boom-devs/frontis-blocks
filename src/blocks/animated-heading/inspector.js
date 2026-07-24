@@ -24,6 +24,7 @@ import {
     ANIMATION_TYPE,
     REVEAL_DIRECTION,
 } from "@Constants/fbConstants";
+import FB_BackgroundColorControl from '@Components/background-color-control';
 import SortableItem from './sortableItem';
 import FB_Spacing from '@Components/spacing';
 import FB_Range from '@Components/range';
@@ -57,6 +58,42 @@ const Inspector = ({ attributes, setAttributes }) => {
         animatedHeadingCursorSwitch,
         animatedHeadingCursor,
         animatedHeadingSuffix,
+
+        animatedHeadingProgressBarWidth,
+        animatedHeadingProgressBarWidthUnits,
+        animatedHeadingProgressBarHeight,
+        animatedHeadingProgressBarHeightUnits,
+
+        animatedHeadingProgressBarBorderRadiusUnits,
+        animatedHeadingProgressBarDesktopBorderRadius,
+        animatedHeadingProgressBarTabletBorderRadius,
+        animatedHeadingProgressBarMobileBorderRadius,
+        animatedHeadingProgressBarBorderRadiusLink,
+
+        animatedHeadingProgressBgColorType,
+        animatedHeadingProgressBgHoverColorType,
+        animatedHeadingProgressBgColorTypeSwitcher,
+        animatedHeadingProgressBgColor,
+        animatedHeadingProgressBgHoverColor,
+        animatedHeadingProgressBgGradientColor,
+        animatedHeadingProgressBgHoverGradientColor,
+        animatedHeadingProgressBgCustomGradientColorSwitcher,
+        animatedHeadingProgressBgCustomGradientColor,
+        animatedHeadingProgressBgHoverCustomGradientColorSwitcher,
+        animatedHeadingProgressBgHoverCustomGradientColor,
+
+        animatedHeadingProgressBgFillColorType,
+        animatedHeadingProgressBgFillHoverColorType,
+        animatedHeadingProgressBgFillColorTypeSwitcher,
+        animatedHeadingProgressBgFillColor,
+        animatedHeadingProgressBgFillHoverColor,
+        animatedHeadingProgressBgFillGradientColor,
+        animatedHeadingProgressBgFillHoverGradientColor,
+        animatedHeadingProgressBgFillCustomGradientColorSwitcher,
+        animatedHeadingProgressBgFillCustomGradientColor,
+        animatedHeadingProgressBgFillHoverCustomGradientColorSwitcher,
+        animatedHeadingProgressBgFillHoverCustomGradientColor,
+
 
         // Normal Text Style
         animatedHeadingNormalTextGlobalTypographyData,
@@ -106,7 +143,35 @@ const Inspector = ({ attributes, setAttributes }) => {
         animatedHeadingAnimationTextBgColor,
         animatedHeadingAnimationTextBgColorHover,
 
+        animatedHeadingAnimatedTextPaddingUnits,
+        animatedHeadingAnimatedTextDesktopPadding,
+        animatedHeadingAnimatedTextTabletPadding,
+        animatedHeadingAnimatedTextMobilePadding,
+        animatedHeadingAnimatedTextPaddingLink,
+
+        animatedHeadingAnimatedTextMarginUnits,
+        animatedHeadingAnimatedTextDesktopMargin,
+        animatedHeadingAnimatedTextTabletMargin,
+        animatedHeadingAnimatedTextMobileMargin,
+        animatedHeadingAnimatedTextMarginLink,
+
+        animatedHeadingAnimatedTextBorder,
+        animatedHeadingAnimatedTextBorderColorSwitcher,
+        animatedHeadingAnimatedTextBorderColor,
+        animatedHeadingAnimatedTextBorderHoverColor,
+        animatedHeadingAnimatedTextBorderUnits,
+        animatedHeadingAnimatedTextDesktopBorder,
+        animatedHeadingAnimatedTextTabletBorder,
+        animatedHeadingAnimatedTextMobileBorder,
+        animatedHeadingAnimatedTextBorderLink,
+        animatedHeadingAnimatedTextBorderRadiusUnits,
+        animatedHeadingAnimatedTextDesktopBorderRadius,
+        animatedHeadingAnimatedTextTabletBorderRadius,
+        animatedHeadingAnimatedTextMobileBorderRadius,
+        animatedHeadingAnimatedTextBorderRadiusLink,
+
         //reaval animation
+        animatedHeadingAnimationDuration,
         animatedHeadingRevealCharDelay,
         animatedHeadingRevealAppearDuration,
         animatedHeadingRevealHideDuration,
@@ -199,6 +264,361 @@ const Inspector = ({ attributes, setAttributes }) => {
             setAttributes({ animatedHeadingItems: [...animatedHeadingItems, newItem] });
         }
     };
+
+    /** Start AnimatedText Border */
+    const animatedHeadingAnimatedTextBorderUnitsChange = (event, position) => {
+        const value = event.target.value;
+        if (animatedHeadingAnimatedTextBorderLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        animatedHeadingAnimatedTextDesktopBorder: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        animatedHeadingAnimatedTextTabletBorder: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        animatedHeadingAnimatedTextMobileBorder: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ animatedHeadingAnimatedTextDesktopBorder: { ...animatedHeadingAnimatedTextDesktopBorder, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ animatedHeadingAnimatedTextTabletBorder: { ...animatedHeadingAnimatedTextTabletBorder, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ animatedHeadingAnimatedTextMobileBorder: { ...animatedHeadingAnimatedTextMobileBorder, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    const animatedHeadingAnimatedTextBorderLinkBtn = () => {
+        setAttributes({
+            animatedHeadingAnimatedTextBorderLink: !animatedHeadingAnimatedTextBorderLink
+        });
+    };
+
+    const animatedHeadingAnimatedTextBorderUnitsHandler = (unit) => {
+        setAttributes({
+            animatedHeadingAnimatedTextBorderUnits: {
+                ...animatedHeadingAnimatedTextBorderUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+    /** End AnimatedText Border */
+
+    /** Start AnimatedText Border Radius */
+    const animatedHeadingProgressBarBorderRadiusUnitsChange = (event, position) => {
+        const value = event.target.value;
+        if (animatedHeadingAnimatedTextBorderRadiusLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        animatedHeadingProgressBarDesktopBorderRadius: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        animatedHeadingProgressBarTabletBorderRadius: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        animatedHeadingProgressBarMobileBorderRadius: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ animatedHeadingProgressBarDesktopBorderRadius: { ...animatedHeadingProgressBarDesktopBorderRadius, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ animatedHeadingProgressBarTabletBorderRadius: { ...animatedHeadingProgressBarTabletBorderRadius, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ animatedHeadingProgressBarMobileBorderRadius: { ...animatedHeadingProgressBarMobileBorderRadius, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    const animatedHeadingProgressBarBorderRadiusLinkBtn = () => {
+        setAttributes({
+            animatedHeadingProgressBarBorderRadiusLink: !animatedHeadingProgressBarBorderRadiusLink
+        });
+    };
+
+    const animatedHeadingProgressBarBorderRadiusUnitsHandler = (unit) => {
+        setAttributes({
+            animatedHeadingProgressBarBorderRadiusUnits: {
+                ...animatedHeadingProgressBarBorderRadiusUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+    /** End Animated Text Border Radius */
+
+    /** Start Animated progress bar Border Radius */
+    const animatedHeadingAnimatedTextBorderRadiusUnitsChange = (event, position) => {
+        const value = event.target.value;
+        if (animatedHeadingAnimatedTextBorderRadiusLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        animatedHeadingAnimatedTextDesktopBorderRadius: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        animatedHeadingAnimatedTextTabletBorderRadius: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        animatedHeadingAnimatedTextMobileBorderRadius: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ animatedHeadingAnimatedTextDesktopBorderRadius: { ...animatedHeadingAnimatedTextDesktopBorderRadius, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ animatedHeadingAnimatedTextTabletBorderRadius: { ...animatedHeadingAnimatedTextTabletBorderRadius, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ animatedHeadingAnimatedTextMobileBorderRadius: { ...animatedHeadingAnimatedTextMobileBorderRadius, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    const animatedHeadingAnimatedTextBorderRadiusLinkBtn = () => {
+        setAttributes({
+            animatedHeadingAnimatedTextBorderRadiusLink: !animatedHeadingAnimatedTextBorderRadiusLink
+        });
+    };
+
+    const animatedHeadingAnimatedTextBorderRadiusUnitsHandler = (unit) => {
+        setAttributes({
+            animatedHeadingAnimatedTextBorderRadiusUnits: {
+                ...animatedHeadingAnimatedTextBorderRadiusUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+    /** End Animated progress bar Border Radius */
+
+    /** Start AnimatedText Padding */
+    const animatedHeadingAnimatedTextPaddingUnitsChange = (event, position) => {
+        const value = event.target.value;
+        if (animatedHeadingAnimatedTextPaddingLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        animatedHeadingAnimatedTextDesktopPadding: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        animatedHeadingAnimatedTextTabletPadding: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        animatedHeadingAnimatedTextMobilePadding: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ animatedHeadingAnimatedTextDesktopPadding: { ...animatedHeadingAnimatedTextDesktopPadding, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ animatedHeadingAnimatedTextTabletPadding: { ...animatedHeadingAnimatedTextTabletPadding, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ animatedHeadingAnimatedTextMobilePadding: { ...animatedHeadingAnimatedTextMobilePadding, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    const animatedHeadingAnimatedTextPaddingLinkBtn = () => {
+        setAttributes({
+            animatedHeadingAnimatedTextPaddingLink: !animatedHeadingAnimatedTextPaddingLink
+        });
+    };
+
+    const animatedHeadingAnimatedTextPaddingUnitsHandler = (unit) => {
+        setAttributes({
+            animatedHeadingAnimatedTextPaddingUnits: {
+                ...animatedHeadingAnimatedTextPaddingUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+    /** End AnimatedText Padding */
+
+    /** Start AnimatedText Margin */
+    const animatedHeadingAnimatedTextMarginUnitsChange = (event, position) => {
+        const value = event.target.value;
+        if (animatedHeadingAnimatedTextMarginLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        animatedHeadingAnimatedTextDesktopMargin: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        animatedHeadingAnimatedTextTabletMargin: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        animatedHeadingAnimatedTextMobileMargin: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ animatedHeadingAnimatedTextDesktopMargin: { ...animatedHeadingAnimatedTextDesktopMargin, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ animatedHeadingAnimatedTextTabletMargin: { ...animatedHeadingAnimatedTextTabletMargin, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ animatedHeadingAnimatedTextMobileMargin: { ...animatedHeadingAnimatedTextMobileMargin, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    const animatedHeadingAnimatedTextMarginLinkBtn = () => {
+        setAttributes({
+            animatedHeadingAnimatedTextMarginLink: !animatedHeadingAnimatedTextMarginLink
+        });
+    };
+
+    const animatedHeadingAnimatedTextMarginUnitsHandler = (unit) => {
+        setAttributes({
+            animatedHeadingAnimatedTextMarginUnits: {
+                ...animatedHeadingAnimatedTextMarginUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+    /** End AnimatedText Margin */
 
     /** Start Global Padding */
     const animatedHeadingGlobalPaddingUnitsChange = (event, position) => {
@@ -495,19 +915,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                     label={__("Animation Type", "frontis-blocks")}
                     value={animationType}
                     options={ANIMATION_TYPE}
-                    onChange={(value) => {
-                        const updates = { animationType: value };
-
-                        if (value === 'highlight' && !animatedHeadingAnimationTextBgColor) {
-                            // Default background color for highlight animation
-                            updates.animatedHeadingAnimationTextBgColor = '#FFE066';
-                        } else if (value !== 'highlight' && animatedHeadingAnimationTextBgColor === '#FFE066') {
-                            // Remove default color if switching to another type
-                            updates.animatedHeadingAnimationTextBgColor = '';
-                        }
-
-                        setAttributes(updates);
-                    }}
+                    onChange={(value) => setAttributes({ animationType: value })}
                 />
 
                 <FB_ResponsiveAlignmentControl
@@ -603,6 +1011,17 @@ const Inspector = ({ attributes, setAttributes }) => {
                     />
                 )}
 
+                {animationType !== "reveal" && (
+                    <RangeControl
+                        label={__('Animation Duration(ms)', 'frontis-blocks')}
+                        value={animatedHeadingAnimationDuration}
+                        onChange={(value) => setAttributes({ animatedHeadingAnimationDuration: value })}
+                        min={100}
+                        max={10000}
+                        step={100}
+                    />
+                )}
+
                 {animationType === "reveal" && (
                     <>
                         <SelectControl
@@ -656,11 +1075,9 @@ const Inspector = ({ attributes, setAttributes }) => {
                             max={1000}
                             step={50}
                         />
-
                     </>
                 )}
             </PanelBody>
-
         </>
     );
 
@@ -869,8 +1286,197 @@ const Inspector = ({ attributes, setAttributes }) => {
                     />
                 )}
 
+                <SelectControl
+                    label={__("Border Style", "frontis-blocks")}
+                    value={animatedHeadingAnimatedTextBorder}
+                    options={BORDER_STYLES}
+                    onChange={(value) => setAttributes({ animatedHeadingAnimatedTextBorder: value })}
+                />
+
+                <FB_SwitcherControl
+                    label={__("Border Color", "frontis-blocks")}
+                    globalSwitcher={animatedHeadingAnimatedTextBorderColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ animatedHeadingAnimatedTextBorderColorSwitcher: value })}
+                />
+
+                {animatedHeadingAnimatedTextBorderColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={animatedHeadingAnimatedTextBorderColor}
+                        setGlobalColor={(value) => setAttributes({ animatedHeadingAnimatedTextBorderColor: value === undefined ? '' : value })}
+                    />
+                )}
+
+                {animatedHeadingAnimatedTextBorderColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={animatedHeadingAnimatedTextBorderHoverColor}
+                        setGlobalColor={(value) => setAttributes({ animatedHeadingAnimatedTextBorderHoverColor: value === undefined ? '' : value })}
+                    />
+                )}
+
+                <FB_Spacing
+                    label={__("Border", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={animatedHeadingAnimatedTextBorderUnitsHandler}
+                    spacingUnits={animatedHeadingAnimatedTextBorderUnits}
+                    spacingDesktop={animatedHeadingAnimatedTextDesktopBorder}
+                    spacingTablet={animatedHeadingAnimatedTextTabletBorder}
+                    spacingMobile={animatedHeadingAnimatedTextMobileBorder}
+                    handleSpacingUnitHandler={animatedHeadingAnimatedTextBorderUnitsChange}
+                    spacingCombineBtn={animatedHeadingAnimatedTextBorderLink}
+                    spacingCombineBtnHandler={animatedHeadingAnimatedTextBorderLinkBtn}
+                    setAttributes={setAttributes}
+                />
+                <FB_Spacing
+                    label={__("Border Radius", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={animatedHeadingAnimatedTextBorderRadiusUnitsHandler}
+                    spacingUnits={animatedHeadingAnimatedTextBorderRadiusUnits}
+                    spacingDesktop={animatedHeadingAnimatedTextDesktopBorderRadius}
+                    spacingTablet={animatedHeadingAnimatedTextTabletBorderRadius}
+                    spacingMobile={animatedHeadingAnimatedTextMobileBorderRadius}
+                    handleSpacingUnitHandler={animatedHeadingAnimatedTextBorderRadiusUnitsChange}
+                    spacingCombineBtn={animatedHeadingAnimatedTextBorderRadiusLink}
+                    spacingCombineBtnHandler={animatedHeadingAnimatedTextBorderRadiusLinkBtn}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_Spacing
+                    label={__("Padding", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={animatedHeadingAnimatedTextPaddingUnitsHandler}
+                    spacingUnits={animatedHeadingAnimatedTextPaddingUnits}
+                    spacingDesktop={animatedHeadingAnimatedTextDesktopPadding}
+                    spacingTablet={animatedHeadingAnimatedTextTabletPadding}
+                    spacingMobile={animatedHeadingAnimatedTextMobilePadding}
+                    handleSpacingUnitHandler={animatedHeadingAnimatedTextPaddingUnitsChange}
+                    spacingCombineBtn={animatedHeadingAnimatedTextPaddingLink}
+                    spacingCombineBtnHandler={animatedHeadingAnimatedTextPaddingLinkBtn}
+                    setAttributes={setAttributes}
+                />
+                <FB_Spacing
+                    label={__("Margin", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={animatedHeadingAnimatedTextMarginUnitsHandler}
+                    spacingUnits={animatedHeadingAnimatedTextMarginUnits}
+                    spacingDesktop={animatedHeadingAnimatedTextDesktopMargin}
+                    spacingTablet={animatedHeadingAnimatedTextTabletMargin}
+                    spacingMobile={animatedHeadingAnimatedTextMobileMargin}
+                    handleSpacingUnitHandler={animatedHeadingAnimatedTextMarginUnitsChange}
+                    spacingCombineBtn={animatedHeadingAnimatedTextMarginLink}
+                    spacingCombineBtnHandler={animatedHeadingAnimatedTextMarginLinkBtn}
+                    setAttributes={setAttributes}
+                />
             </PanelBody>
 
+            {animationType === "progress" && (
+                <PanelBody title={__("Progress Bar", "frontis-blocks")} initialOpen={false}>
+                    <>
+                        <FB_Range
+                            label={__("Width", "frontis-blocks")}
+                            rangeValue={animatedHeadingProgressBarWidth}
+                            onChangeHandler={(value) => setAttributes({ animatedHeadingProgressBarWidth: value })}
+                            rangeUnitHandler={(value) => setAttributes({ animatedHeadingProgressBarWidthUnits: value })}
+                            deviceType={deviceType}
+                            units={animatedHeadingProgressBarWidthUnits}
+                            setAttributes={setAttributes}
+                            rangeStep={1}
+                            resetFallbackValue={"2"}
+                        />
+
+                        <FB_Range
+                            label={__("Height", "frontis-blocks")}
+                            rangeValue={animatedHeadingProgressBarHeight}
+                            onChangeHandler={(value) => setAttributes({ animatedHeadingProgressBarHeight: value })}
+                            rangeUnitHandler={(value) => setAttributes({ animatedHeadingProgressBarHeightUnits: value })}
+                            deviceType={deviceType}
+                            units={animatedHeadingProgressBarHeightUnits}
+                            setAttributes={setAttributes}
+                            rangeStep={1}
+                            resetFallbackValue={"2"}
+                        />
+
+                        <FB_Spacing
+                            label={__("Border Radius", "frontis-blocks")}
+                            deviceType={deviceType}
+                            spacingUnitsHandler={animatedHeadingProgressBarBorderRadiusUnitsHandler}
+                            spacingUnits={animatedHeadingProgressBarBorderRadiusUnits}
+                            spacingDesktop={animatedHeadingProgressBarDesktopBorderRadius}
+                            spacingTablet={animatedHeadingProgressBarTabletBorderRadius}
+                            spacingMobile={animatedHeadingProgressBarMobileBorderRadius}
+                            handleSpacingUnitHandler={animatedHeadingProgressBarBorderRadiusUnitsChange}
+                            spacingCombineBtn={animatedHeadingProgressBarBorderRadiusLink}
+                            spacingCombineBtnHandler={animatedHeadingProgressBarBorderRadiusLinkBtn}
+                            setAttributes={setAttributes}
+                        />
+
+                        <FB_BackgroundColorControl
+                            label={__("Progress Track Color", "frontis-blocks")}
+                            bgColorSwitcher={animatedHeadingProgressBgColorTypeSwitcher}
+                            setBgColorSwitcher={(value) => setAttributes({ animatedHeadingProgressBgColorTypeSwitcher: value })}
+
+                            normalLabel={__("Background Color Type", "frontis-blocks")}
+                            normalBackgroundType={animatedHeadingProgressBgColorType}
+                            setNormalBackgroundType={(value) => setAttributes({ animatedHeadingProgressBgColorType: value })}
+                            normalClassicColor={animatedHeadingProgressBgColor}
+                            setNormalClassicColor={(value) => setAttributes({ animatedHeadingProgressBgColor: value === undefined ? '' : value })}
+                            normalGradientColor={animatedHeadingProgressBgGradientColor}
+                            setNormalGradientColor={(value) => setAttributes({ animatedHeadingProgressBgGradientColor: value === undefined ? null : value })}
+                            normalCustomGradientSwitcher={animatedHeadingProgressBgCustomGradientColorSwitcher}
+                            setNormalCustomGradientSwitcher={(value) => setAttributes({ animatedHeadingProgressBgCustomGradientColorSwitcher: value })}
+                            normalCustomGradientInputValue={animatedHeadingProgressBgCustomGradientColor}
+                            setNormalCustomGradientInputValue={(value) => setAttributes({ animatedHeadingProgressBgCustomGradientColor: value === undefined ? null : value })}
+
+                            hoverLabel={__("Background Color Type", "frontis-blocks")}
+                            hoverBackgroundType={animatedHeadingProgressBgHoverColorType}
+                            setHoverBackgroundType={(value) => setAttributes({ animatedHeadingProgressBgHoverColorType: value })}
+                            hoverClassicColor={animatedHeadingProgressBgHoverColor}
+                            setHoverClassicColor={(value) => setAttributes({ animatedHeadingProgressBgHoverColor: value === undefined ? '' : value })}
+                            hoverGradientColor={animatedHeadingProgressBgHoverGradientColor}
+                            setHoverGradientColor={(value) => setAttributes({ animatedHeadingProgressBgHoverGradientColor: value === undefined ? null : value })}
+                            hoverCustomGradientSwitcher={animatedHeadingProgressBgHoverCustomGradientColorSwitcher}
+                            setHoverCustomGradientSwitcher={(value) => setAttributes({ animatedHeadingProgressBgHoverCustomGradientColorSwitcher: value })}
+                            hoverCustomGradientInputValue={animatedHeadingProgressBgHoverCustomGradientColor}
+                            setHoverCustomGradientInputValue={(value) => setAttributes({ animatedHeadingProgressBgHoverCustomGradientColor: value === undefined ? null : value })}
+
+                            isBackgroundImage={false}
+                        />
+
+                        <FB_BackgroundColorControl
+                            label={__("Progress Fill Color", "frontis-blocks")}
+                            bgColorSwitcher={animatedHeadingProgressBgFillColorTypeSwitcher}
+                            setBgColorSwitcher={(value) => setAttributes({ animatedHeadingProgressBgFillColorTypeSwitcher: value })}
+
+                            normalLabel={__("Background Color Type", "frontis-blocks")}
+                            normalBackgroundType={animatedHeadingProgressBgFillColorType}
+                            setNormalBackgroundType={(value) => setAttributes({ animatedHeadingProgressBgFillColorType: value })}
+                            normalClassicColor={animatedHeadingProgressBgFillColor}
+                            setNormalClassicColor={(value) => setAttributes({ animatedHeadingProgressBgFillColor: value === undefined ? '' : value })}
+                            normalGradientColor={animatedHeadingProgressBgFillGradientColor}
+                            setNormalGradientColor={(value) => setAttributes({ animatedHeadingProgressBgFillGradientColor: value === undefined ? null : value })}
+                            normalCustomGradientSwitcher={animatedHeadingProgressBgFillCustomGradientColorSwitcher}
+                            setNormalCustomGradientSwitcher={(value) => setAttributes({ animatedHeadingProgressBgFillCustomGradientColorSwitcher: value })}
+                            normalCustomGradientInputValue={animatedHeadingProgressBgFillCustomGradientColor}
+                            setNormalCustomGradientInputValue={(value) => setAttributes({ animatedHeadingProgressBgFillCustomGradientColor: value === undefined ? null : value })}
+
+                            hoverLabel={__("Background Color Type", "frontis-blocks")}
+                            hoverBackgroundType={animatedHeadingProgressBgFillHoverColorType}
+                            setHoverBackgroundType={(value) => setAttributes({ animatedHeadingProgressBgFillHoverColorType: value })}
+                            hoverClassicColor={animatedHeadingProgressBgFillHoverColor}
+                            setHoverClassicColor={(value) => setAttributes({ animatedHeadingProgressBgFillHoverColor: value === undefined ? '' : value })}
+                            hoverGradientColor={animatedHeadingProgressBgFillHoverGradientColor}
+                            setHoverGradientColor={(value) => setAttributes({ animatedHeadingProgressBgFillHoverGradientColor: value === undefined ? null : value })}
+                            hoverCustomGradientSwitcher={animatedHeadingProgressBgFillHoverCustomGradientColorSwitcher}
+                            setHoverCustomGradientSwitcher={(value) => setAttributes({ animatedHeadingProgressBgFillHoverCustomGradientColorSwitcher: value })}
+                            hoverCustomGradientInputValue={animatedHeadingProgressBgFillHoverCustomGradientColor}
+                            setHoverCustomGradientInputValue={(value) => setAttributes({ animatedHeadingProgressBgFillHoverCustomGradientColor: value === undefined ? null : value })}
+
+                            isBackgroundImage={false}
+                        />
+                    </>
+                </PanelBody>
+            )}
         </>
     );
 
