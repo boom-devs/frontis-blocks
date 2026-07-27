@@ -12,8 +12,8 @@ const attributes = {
         type: 'string',
         default: 'typing'
     },
-    
-   animatedHeadingAlignment: {
+
+    animatedHeadingAlignment: {
         type: 'object',
         default: {
             Desktop: 'left',
@@ -30,11 +30,11 @@ const attributes = {
         default: '',
     },
 
-   animatedHeadingMainTag: {
+    animatedHeadingMainTag: {
         type: 'string',
         default: 'span'
     },
-   animatedHeadingGap: {
+    animatedHeadingGap: {
         type: 'object',
         default: {
             Desktop: '8',
@@ -42,7 +42,7 @@ const attributes = {
             Mobile: ''
         }
     },
-   animatedHeadingGapUnits: {
+    animatedHeadingGapUnits: {
         type: 'object',
         default: {
             Desktop: 'px',
@@ -51,28 +51,187 @@ const attributes = {
         }
     },
 
-   animatedHeadingPrefix: {
+    //animation heading progress style
+    animatedHeadingProgressBarBorderRadiusUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    animatedHeadingProgressBarDesktopBorderRadius: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    animatedHeadingProgressBarTabletBorderRadius: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    animatedHeadingProgressBarMobileBorderRadius: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    animatedHeadingProgressBarBorderRadiusLink: {
+        type: 'boolean',
+        default: true
+    },
+
+    animatedHeadingProgressBarHeight: {
+        type: 'object',
+        default: {
+            Desktop: '1',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    animatedHeadingProgressBarHeightUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    animatedHeadingProgressBarWidth: {
+        type: 'object',
+        default: {
+            Desktop: '100',
+            Tablet: '100',
+            Mobile: '100'
+        }
+    },
+    animatedHeadingProgressBarWidthUnits: {
+        type: 'object',
+        default: {
+            Desktop: '%',
+            Tablet: '%',
+            Mobile: '%'
+        }
+    },
+    animatedHeadingProgressBgColorType: {
+        type: 'string',
+        default: 'classic',
+    },
+    animatedHeadingProgressBgHoverColorType: {
+        type: 'string',
+        default: 'classic',
+    },
+    animatedHeadingProgressBgColorTypeSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
+    animatedHeadingProgressBgColor: {
+        type: 'string'
+    },
+    animatedHeadingProgressBgHoverColor: {
+        type: 'string',
+    },
+    animatedHeadingProgressBgGradientColor: {
+        type: 'string',
+        default: null
+    },
+    animatedHeadingProgressBgHoverGradientColor: {
+        type: 'string',
+        default: null
+    },
+    animatedHeadingProgressBgCustomGradientColorSwitcher: {
+        type: 'boolean',
+        default: false
+    },
+    animatedHeadingProgressBgCustomGradientColor: {
+        type: 'string',
+        default: ''
+    },
+    animatedHeadingProgressBgHoverCustomGradientColorSwitcher: {
+        type: 'boolean',
+        default: false
+    },
+    animatedHeadingProgressBgHoverCustomGradientColor: {
+        type: 'string',
+        default: ''
+    },
+
+    animatedHeadingProgressBgFillColorType: {
+        type: 'string',
+        default: 'classic',
+    },
+    animatedHeadingProgressBgFillHoverColorType: {
+        type: 'string',
+        default: 'classic',
+    },
+    animatedHeadingProgressBgFillColorTypeSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
+    animatedHeadingProgressBgFillColor: {
+        type: 'string'
+    },
+    animatedHeadingProgressBgFillHoverColor: {
+        type: 'string',
+    },
+    animatedHeadingProgressBgFillGradientColor: {
+        type: 'string',
+        default: null
+    },
+    animatedHeadingProgressBgFillHoverGradientColor: {
+        type: 'string',
+        default: null
+    },
+    animatedHeadingProgressBgFillCustomGradientColorSwitcher: {
+        type: 'boolean',
+        default: false
+    },
+    animatedHeadingProgressBgFillCustomGradientColor: {
+        type: 'string',
+        default: ''
+    },
+    animatedHeadingProgressBgFillHoverCustomGradientColorSwitcher: {
+        type: 'boolean',
+        default: false
+    },
+    animatedHeadingProgressBgFillHoverCustomGradientColor: {
+        type: 'string',
+        default: ''
+    },
+
+    animatedHeadingPrefix: {
         type: 'string',
         default: 'We create'
     },
-   animatedHeadingItems: {
+    animatedHeadingItems: {
         type: 'array',
         default: [
             {
                 id: 'item-1',
-               animatedHeadingTitle: 'WordPress Plugins',
+                animatedHeadingTitle: 'WordPress Plugins',
             },
             {
                 id: 'item-2',
-               animatedHeadingTitle: 'WordPress Themes',
+                animatedHeadingTitle: 'WordPress Themes',
             },
             {
                 id: 'item-3',
-               animatedHeadingTitle: 'WooCommerce Extensions',
+                animatedHeadingTitle: 'WooCommerce Extensions',
             },
             {
                 id: 'item-4',
-               animatedHeadingTitle: 'Custom Web Solutions',
+                animatedHeadingTitle: 'Custom Web Solutions',
             },
         ],
         items: {
@@ -82,7 +241,7 @@ const attributes = {
                     type: 'string',
                     default: ''
                 },
-               animatedHeadingTitle: {
+                animatedHeadingTitle: {
                     type: 'string',
                     default: 'WordPress Plugins'
                 },
@@ -90,17 +249,17 @@ const attributes = {
         }
     },
 
-   animatedHeadingCursorSwitch: {
+    animatedHeadingCursorSwitch: {
         type: 'boolean',
         default: true
     },
 
-   animatedHeadingCursor: {
+    animatedHeadingCursor: {
         type: 'string',
         default: '|'
     },
 
-   animatedHeadingSuffix: {
+    animatedHeadingSuffix: {
         type: 'string',
         default: ''
     },
@@ -129,7 +288,7 @@ const attributes = {
     },
     animatedHeadingNormalTextGlobalTypoOption: {
         type: 'object',
-        default: {label: 'Default', value: 'default'},
+        default: { label: 'Default', value: 'default' },
     },
     animatedHeadingNormalTextFontFamily: {
         type: 'string',
@@ -151,19 +310,19 @@ const attributes = {
             Mobile: 'px',
         }
     },
-    animatedHeadingNormalTextFontWeight : {
+    animatedHeadingNormalTextFontWeight: {
         type: 'string',
         default: ''
     },
-    animatedHeadingNormalTextFontStyle : {
+    animatedHeadingNormalTextFontStyle: {
         type: 'string',
         default: ''
     },
-    animatedHeadingNormalTextTransform : {
+    animatedHeadingNormalTextTransform: {
         type: 'string',
         default: ''
     },
-    animatedHeadingNormalTextDecoration : {
+    animatedHeadingNormalTextDecoration: {
         type: 'string',
         default: ''
     },
@@ -200,11 +359,11 @@ const attributes = {
         }
     },
 
-    animatedHeadingNormalTextColorSwitcher : {
+    animatedHeadingNormalTextColorSwitcher: {
         type: 'string',
         default: 'normal'
     },
-    animatedHeadingNormalTextColor : {
+    animatedHeadingNormalTextColor: {
         type: 'string',
         default: ''
     },
@@ -228,11 +387,11 @@ const attributes = {
 
 
     /** Start animated heading Text Style */
-   animatedHeadingAnimationTextGlobalTypographyData: {
+    animatedHeadingAnimationTextGlobalTypographyData: {
         type: 'object',
         default: {}
     },
-   animatedHeadingAnimationTextGlobalTypoSwitcher: {
+    animatedHeadingAnimationTextGlobalTypoSwitcher: {
         type: 'object',
         default: {
             fontFamily: false,
@@ -245,19 +404,19 @@ const attributes = {
             lineHeight: false,
         },
     },
-   animatedHeadingAnimationTextGlobalTypoType: {
+    animatedHeadingAnimationTextGlobalTypoType: {
         type: 'string',
         default: 'default',
     },
-   animatedHeadingAnimationTextGlobalTypoOption: {
+    animatedHeadingAnimationTextGlobalTypoOption: {
         type: 'object',
-        default: {label: 'Default', value: 'default'},
+        default: { label: 'Default', value: 'default' },
     },
-   animatedHeadingAnimationTextFontFamily: {
+    animatedHeadingAnimationTextFontFamily: {
         type: 'string',
         default: 'Default',
     },
-   animatedHeadingAnimationTextFontSize: {
+    animatedHeadingAnimationTextFontSize: {
         type: 'object',
         default: {
             Desktop: '',
@@ -265,7 +424,7 @@ const attributes = {
             Mobile: ''
         }
     },
-   animatedHeadingAnimationTextFontSizeUnits: {
+    animatedHeadingAnimationTextFontSizeUnits: {
         type: 'object',
         default: {
             Desktop: 'px',
@@ -273,23 +432,23 @@ const attributes = {
             Mobile: 'px',
         }
     },
-   animatedHeadingAnimationTextFontWeight : {
+    animatedHeadingAnimationTextFontWeight: {
         type: 'string',
         default: ''
     },
-   animatedHeadingAnimationTextFontStyle : {
+    animatedHeadingAnimationTextFontStyle: {
         type: 'string',
         default: ''
     },
-   animatedHeadingAnimationTextTransform : {
+    animatedHeadingAnimationTextTransform: {
         type: 'string',
         default: ''
     },
-   animatedHeadingAnimationTextDecoration : {
+    animatedHeadingAnimationTextDecoration: {
         type: 'string',
         default: ''
     },
-   animatedHeadingAnimationTextLetterSpacing: {
+    animatedHeadingAnimationTextLetterSpacing: {
         type: 'object',
         default: {
             Desktop: '',
@@ -297,7 +456,7 @@ const attributes = {
             Mobile: ''
         }
     },
-   animatedHeadingAnimationTextLetterSpacingUnits: {
+    animatedHeadingAnimationTextLetterSpacingUnits: {
         type: 'object',
         default: {
             Desktop: 'px',
@@ -305,7 +464,7 @@ const attributes = {
             Mobile: 'px',
         }
     },
-   animatedHeadingAnimationTextLineHeight: {
+    animatedHeadingAnimationTextLineHeight: {
         type: 'object',
         default: {
             Desktop: '',
@@ -313,7 +472,7 @@ const attributes = {
             Mobile: ''
         }
     },
-   animatedHeadingAnimationTextLineHeightUnits: {
+    animatedHeadingAnimationTextLineHeightUnits: {
         type: 'object',
         default: {
             Desktop: 'px',
@@ -321,35 +480,244 @@ const attributes = {
             Mobile: 'px',
         }
     },
-    animatedHeadingAnimationTextColorSwitcher : {
+    animatedHeadingAnimationTextColorSwitcher: {
         type: 'string',
         default: 'normal'
     },
-    animatedHeadingAnimationTextColor : {
+    animatedHeadingAnimationTextColor: {
         type: 'string',
         default: '#399CFF'
     },
-   animatedHeadingAnimationTextHoverColor: {
+    animatedHeadingAnimationTextHoverColor: {
         type: 'string',
         default: ''
     },
-   animatedHeadingAnimationTextBgColorSwitcher: {
+    animatedHeadingAnimationTextBgColorSwitcher: {
         type: 'string',
         default: 'normal'
     },
-   animatedHeadingAnimationTextBgColor: {
+    animatedHeadingAnimationTextBgColor: {
         type: 'string',
         default: ''
     },
-   animatedHeadingAnimationTextBgColorHover: {
+    animatedHeadingAnimationTextBgColorHover: {
         type: 'string',
         default: ''
     },
     /** End Typing Text Style */
 
+    /** Start animated text Border */
+    animatedHeadingAnimatedTextBorder: {
+        type: 'string',
+        default: 'none',
+    },
+    animatedHeadingAnimatedTextBorderColorSwitcher: {
+        type: 'string',
+        default: 'normal'
+    },
+    animatedHeadingAnimatedTextBorderColor: {
+        type: 'string',
+        default: ''
+    },
+    animatedHeadingAnimatedTextBorderHoverColor: {
+        type: 'string',
+        default: ''
+    },
+    animatedHeadingAnimatedTextBorderUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    animatedHeadingAnimatedTextDesktopBorder: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    animatedHeadingAnimatedTextTabletBorder: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    animatedHeadingAnimatedTextMobileBorder: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    animatedHeadingAnimatedTextBorderLink: {
+        type: 'boolean',
+        default: true
+    },
+    animatedHeadingAnimatedTextBorderRadiusUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    animatedHeadingAnimatedTextDesktopBorderRadius: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    animatedHeadingAnimatedTextTabletBorderRadius: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    animatedHeadingAnimatedTextMobileBorderRadius: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    animatedHeadingAnimatedTextBorderRadiusLink: {
+        type: 'boolean',
+        default: true
+    },
+    /** End animated text Border */
+
+    /** Start animated text Margin & Padding */
+    animatedHeadingAnimatedTextPaddingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    animatedHeadingAnimatedTextDesktopPadding: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    animatedHeadingAnimatedTextTabletPadding: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    animatedHeadingAnimatedTextMobilePadding: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    animatedHeadingAnimatedTextPaddingLink: {
+        type: 'boolean',
+        default: true
+    },
+    animatedHeadingAnimatedTextMarginUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    animatedHeadingAnimatedTextDesktopMargin: {
+        type: 'object',
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    animatedHeadingAnimatedTextTabletMargin: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    animatedHeadingAnimatedTextMobileMargin: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    animatedHeadingAnimatedTextMarginLink: {
+        type: 'boolean',
+        default: true
+    },
+    /** End Animated Text Margin & Padding */
+
+    /** Start reaval animation */
+    animatedHeadingAnimationDuration: {
+        type: 'number',
+        default: 1500
+    },
+    animatedHeadingRevealCharDelay: {
+        type: 'number',
+        default: 200
+    },
+    animatedHeadingRevealAppearDuration: {
+        type: 'number',
+        default: 800
+    },
+    animatedHeadingRevealHideDuration: {
+        type: 'number',
+        default: 700
+    },
+    animatedHeadingRevealVisibleHold: {
+        type: 'number',
+        default: 2000
+    },
+    animatedHeadingRevealResetDelay: {
+        type: 'number',
+        default: 300
+    },
+    animatedHeadingRevealDirection: {
+        type: 'string',
+        default: 'up'
+    },
+    /** End reaval animation */
+
 
     /** Start Global Z-Index */
-    animatedHeadingGlobalZIndex : {
+    animatedHeadingGlobalZIndex: {
         type: 'object',
         default: {
             Desktop: '',
@@ -360,16 +728,16 @@ const attributes = {
     /** End Global Z-Index */
 
     /** Start Class & ID Setting */
-    animatedHeadingGlobalWraperID : {
+    animatedHeadingGlobalWraperID: {
         type: 'string',
         default: ''
     },
-    animatedHeadingGlobalWraperClass : {
+    animatedHeadingGlobalWraperClass: {
         type: 'string',
         default: ''
     },
     /** End Class & ID Setting */
-    animatedHeadingCustomCSS : {
+    animatedHeadingCustomCSS: {
         type: 'string',
         default: '',
     },
@@ -400,8 +768,8 @@ const attributes = {
             Mobile: 'px'
         }
     },
-    animatedHeadingGlobalDesktopPadding: { 
-        type: 'object', 
+    animatedHeadingGlobalDesktopPadding: {
+        type: 'object',
         default: {
             top: '',
             bottom: '',
@@ -410,7 +778,7 @@ const attributes = {
         },
     },
     animatedHeadingGlobalTabletPadding: {
-        type: 'object', 
+        type: 'object',
         default: {
             top: '',
             bottom: '',
@@ -419,7 +787,7 @@ const attributes = {
         },
     },
     animatedHeadingGlobalMobilePadding: {
-        type: 'object', 
+        type: 'object',
         default: {
             top: '',
             bottom: '',
@@ -427,8 +795,8 @@ const attributes = {
             right: '',
         },
     },
-    animatedHeadingGlobalPaddingLink : {
-        type : 'boolean',
+    animatedHeadingGlobalPaddingLink: {
+        type: 'boolean',
         default: true
     },
     animatedHeadingGlobalMarginUnits: {
@@ -440,7 +808,7 @@ const attributes = {
         }
     },
     animatedHeadingGlobalDesktopMargin: {
-        type: 'object', 
+        type: 'object',
         default: {
             top: '0',
             bottom: '0',
@@ -449,7 +817,7 @@ const attributes = {
         },
     },
     animatedHeadingGlobalTabletMargin: {
-        type: 'object', 
+        type: 'object',
         default: {
             top: '',
             bottom: '',
@@ -458,7 +826,7 @@ const attributes = {
         },
     },
     animatedHeadingGlobalMobileMargin: {
-        type: 'object', 
+        type: 'object',
         default: {
             top: '',
             bottom: '',
@@ -466,8 +834,8 @@ const attributes = {
             right: '',
         },
     },
-    animatedHeadingGlobalMarginLink : {
-        type : 'boolean',
+    animatedHeadingGlobalMarginLink: {
+        type: 'boolean',
         default: true
     },
     /** End Global Margin & Padding */
@@ -477,7 +845,7 @@ const attributes = {
         type: 'string',
         default: 'none',
     },
-    animatedHeadingGlobalBorderColorSwitcher : {
+    animatedHeadingGlobalBorderColorSwitcher: {
         type: 'string',
         default: 'normal'
     },
@@ -498,7 +866,7 @@ const attributes = {
         }
     },
     animatedHeadingGlobalDesktopBorder: {
-        type: 'object', 
+        type: 'object',
         default: {
             top: '',
             bottom: '',
@@ -507,7 +875,7 @@ const attributes = {
         },
     },
     animatedHeadingGlobalTabletBorder: {
-        type: 'object', 
+        type: 'object',
         default: {
             top: '',
             bottom: '',
@@ -516,7 +884,7 @@ const attributes = {
         },
     },
     animatedHeadingGlobalMobileBorder: {
-        type: 'object', 
+        type: 'object',
         default: {
             top: '',
             bottom: '',
@@ -524,8 +892,8 @@ const attributes = {
             right: '',
         },
     },
-    animatedHeadingGlobalBorderLink : {
-        type : 'boolean',
+    animatedHeadingGlobalBorderLink: {
+        type: 'boolean',
         default: true
     },
     animatedHeadingGlobalBorderRadiusUnits: {
@@ -537,7 +905,7 @@ const attributes = {
         }
     },
     animatedHeadingGlobalDesktopBorderRadius: {
-        type: 'object', 
+        type: 'object',
         default: {
             top: '',
             bottom: '',
@@ -546,7 +914,7 @@ const attributes = {
         },
     },
     animatedHeadingGlobalTabletBorderRadius: {
-        type: 'object', 
+        type: 'object',
         default: {
             top: '',
             bottom: '',
@@ -555,7 +923,7 @@ const attributes = {
         },
     },
     animatedHeadingGlobalMobileBorderRadius: {
-        type: 'object', 
+        type: 'object',
         default: {
             top: '',
             bottom: '',
@@ -563,8 +931,8 @@ const attributes = {
             right: '',
         },
     },
-    animatedHeadingGlobalBorderRadiusLink : {
-        type : 'boolean',
+    animatedHeadingGlobalBorderRadiusLink: {
+        type: 'boolean',
         default: true
     },
     /** End Global Border */

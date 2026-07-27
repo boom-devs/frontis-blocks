@@ -18,6 +18,18 @@ export const NORMAL_HOVER = [
 export const ANIMATION_TYPE = [
 	{ label: __("Typing", "frontis-blocks"), value: "typing" },
 	{ label: __("Swirl", "frontis-blocks"), value: "swirl" },
+	{ label: __("Reveal", "frontis-blocks"), value: "reveal" },
+	{ label: __("Zoom", "frontis-blocks"), value: "zoom" },
+	{ label: __("Flip", "frontis-blocks"), value: "flip" },
+	{ label: __("Progress", "frontis-blocks"), value: "progress" },
+];
+
+export const REVEAL_DIRECTION = [
+	{ label: __('Up', 'frontis-blocks'), value: 'up' },
+	{ label: __('Down', 'frontis-blocks'), value: 'down' },
+	{ label: __('Left', 'frontis-blocks'), value: 'left' },
+	{ label: __('Right', 'frontis-blocks'), value: 'right' },
+	{ label: __('None (Fade Only)', 'frontis-blocks'), value: 'none' },
 ];
 
 export const OVERFLOW_OP = [
@@ -29,14 +41,14 @@ export const OVERFLOW_OP = [
 ];
 
 export const MEDIA_TYPES = [
-    { label: __("image", "frontis-blocks"), value: "image" },
-    { label: __("icon", "frontis-blocks"), value: "icon" },
-    { label: __("none", "frontis-blocks"), value: "none" },
+	{ label: __("image", "frontis-blocks"), value: "image" },
+	{ label: __("icon", "frontis-blocks"), value: "icon" },
+	{ label: __("none", "frontis-blocks"), value: "none" },
 ];
 
 export const LINK_TARGET_OPTIONS = [
-    { label: __("Same tab", "frontis-blocks"), value: "_self" },
-    { label: __("New tab", "frontis-blocks"), value: "_blank" },
+	{ label: __("Same tab", "frontis-blocks"), value: "_self" },
+	{ label: __("New tab", "frontis-blocks"), value: "_blank" },
 ];
 
 export const NAVIGATION_LAYOUT = [
@@ -176,10 +188,10 @@ export const BORDER_STYLES = [
 ];
 
 export const TITLE_ALIGNMENT = [
-    { label: __("Left", "frontis-blocks"), value: "left" },
-    { label: __("Center", "frontis-blocks"), value: "center" },
-    { label: __("Right", "frontis-blocks"), value: "right" },
-    { label: __("Between", "frontis-blocks"), value: "between" },
+	{ label: __("Left", "frontis-blocks"), value: "left" },
+	{ label: __("Center", "frontis-blocks"), value: "center" },
+	{ label: __("Right", "frontis-blocks"), value: "right" },
+	{ label: __("Between", "frontis-blocks"), value: "between" },
 ];
 
 export const ICON_POSITIONS = [
@@ -372,24 +384,24 @@ export const DYNAMIC_DATA_SOURCE_OPTIONS = [
 ];
 
 export const DYNAMIC_DATA_SOURCE_FIELD_OPTIONS = [
-    { label: __('Post Title', 'frontis-blocks'), value: 'post_title' },
-    { label: __('Post Excerpt', 'frontis-blocks'), value: 'post_excerpt' },
-    { label: __('Featured Image', 'frontis-blocks'), value: 'post_thumbnail' },
-    { label: __('Post Date', 'frontis-blocks'), value: 'post_date' },
-    { label: __('Post Time', 'frontis-blocks'), value: 'post_time' },
-    { label: __('Post Terms', 'frontis-blocks'), value: 'post_terms' },
-    { label: __('Post ID', 'frontis-blocks'), value: 'post_id' },
-    { label: __('Comments Number', 'frontis-blocks'), value: 'comments_number' },
+	{ label: __('Post Title', 'frontis-blocks'), value: 'post_title' },
+	{ label: __('Post Excerpt', 'frontis-blocks'), value: 'post_excerpt' },
+	{ label: __('Featured Image', 'frontis-blocks'), value: 'post_thumbnail' },
+	{ label: __('Post Date', 'frontis-blocks'), value: 'post_date' },
+	{ label: __('Post Time', 'frontis-blocks'), value: 'post_time' },
+	{ label: __('Post Terms', 'frontis-blocks'), value: 'post_terms' },
+	{ label: __('Post ID', 'frontis-blocks'), value: 'post_id' },
+	{ label: __('Comments Number', 'frontis-blocks'), value: 'comments_number' },
 
-    // ==== AUTHOR ====
-    { label: __('Author Name', 'frontis-blocks'), value: 'author_name' },
-    { label: __('Author First Name', 'frontis-blocks'), value: 'author_first_name' },
-    { label: __('Author Last Name', 'frontis-blocks'), value: 'author_last_name' },
-    { label: __('Author Nickname', 'frontis-blocks'), value: 'author_nickname' },
-    { label: __('Author Bio', 'frontis-blocks'), value: 'author_description' },
-    { label: __('Author Email', 'frontis-blocks'), value: 'author_email' },
-    { label: __('Author Website', 'frontis-blocks'), value: 'author_url' },
-    { label: __('Author Avatar URL', 'frontis-blocks'), value: 'author_avatar' },
+	// ==== AUTHOR ====
+	{ label: __('Author Name', 'frontis-blocks'), value: 'author_name' },
+	{ label: __('Author First Name', 'frontis-blocks'), value: 'author_first_name' },
+	{ label: __('Author Last Name', 'frontis-blocks'), value: 'author_last_name' },
+	{ label: __('Author Nickname', 'frontis-blocks'), value: 'author_nickname' },
+	{ label: __('Author Bio', 'frontis-blocks'), value: 'author_description' },
+	{ label: __('Author Email', 'frontis-blocks'), value: 'author_email' },
+	{ label: __('Author Website', 'frontis-blocks'), value: 'author_url' },
+	{ label: __('Author Avatar URL', 'frontis-blocks'), value: 'author_avatar' },
 ];
 
 export const DYNAMIC_FEATURED_IMAGE_OPTIONS = [
@@ -402,7 +414,7 @@ export const DYNAMIC_FEATURED_IMAGE_OPTIONS = [
 
 export const DYNAMIC_DATE_TIME_TYPE_OPTIONS = [
 	{ label: __('Post Published', 'frontis-blocks'), value: 'published' },
-	{ label: __('Post Modified',  'frontis-blocks'), value: 'modified' },
+	{ label: __('Post Modified', 'frontis-blocks'), value: 'modified' },
 ];
 
 export const DYNAMIC_TAXONOMY_OPTIONS = [
@@ -437,33 +449,33 @@ export const WP_IMAGE_SIZE_OPTIONS = [
 	{ label: __('Medium', 'frontis-blocks'), value: 'medium' },
 	{ label: __('Large', 'frontis-blocks'), value: 'large' },
 ];
-  
+
 export const getdynamicTextDateFormatOptions = (sampleDate = new Date()) => {
 
 	const fmt = (phpFmt) => dateI18n(phpFmt, sampleDate);
-  
+
 	return [
-	  { label: `${__('Default','frontis-blocks')}`, value: 'default' },
-	  { label: fmt('jS F Y'),   value: 'jS F Y' },
-	  { label: fmt('Y-m-d'),  value: 'Y-m-d' },
-	  { label: fmt('m/d/Y'),  value: 'm/d/Y' },
-	  { label: fmt('d/m/Y'),  value: 'd/m/Y' },
-	  
-	  { label: __('Human Readable','frontis-blocks'), value: 'human' },
+		{ label: `${__('Default', 'frontis-blocks')}`, value: 'default' },
+		{ label: fmt('jS F Y'), value: 'jS F Y' },
+		{ label: fmt('Y-m-d'), value: 'Y-m-d' },
+		{ label: fmt('m/d/Y'), value: 'm/d/Y' },
+		{ label: fmt('d/m/Y'), value: 'd/m/Y' },
+
+		{ label: __('Human Readable', 'frontis-blocks'), value: 'human' },
 	];
 };
 
 export const getdynamicTextTimeFormatOptions = (sampleDate = new Date()) => {
 
 	const d = sampleDate instanceof Date ? sampleDate : new Date(sampleDate);
-  
+
 	const fmt = (phpFmt) => dateI18n(phpFmt, d);
-  
+
 	return [
-	  { label: `${__('Default','frontis-blocks')}`, value: 'default' },
-	  { label: fmt('g:i A'),  value: 'g:i A' },
-	  { label: fmt('g:i'),    value: 'g:i' },
-	  { label: fmt('g:i:s a'),value: 'g:i:s a' },
+		{ label: `${__('Default', 'frontis-blocks')}`, value: 'default' },
+		{ label: fmt('g:i A'), value: 'g:i A' },
+		{ label: fmt('g:i'), value: 'g:i' },
+		{ label: fmt('g:i:s a'), value: 'g:i:s a' },
 
 	];
 };
@@ -514,79 +526,79 @@ export const LABEL_POSITION = [
 ];
 
 export const TITLE_POSITION = [
-    { label: __("Center", "frontis-block"), value: "center" },
-    { label: __("Center Left", "frontis-block"), value: "center-left" },
-    { label: __("Center Right", "frontis-block"), value: "center-right" },
-    { label: __("Top Left", "frontis-block"), value: "top-left" },
-    { label: __("Top Center", "frontis-block"), value: "top-center" },
-    { label: __("Top Right", "frontis-block"), value: "top-right" },
-    { label: __("Bottom Left", "frontis-block"), value: "bottom-left" },
-    { label: __("Bottom Center", "frontis-block"), value: "bottom-center" },
-    { label: __("Bottom Right", "frontis-block"), value: "bottom-right" },
-    { label: __("Vertically Center", "frontis-block"), value: "vertical-center" },
+	{ label: __("Center", "frontis-block"), value: "center" },
+	{ label: __("Center Left", "frontis-block"), value: "center-left" },
+	{ label: __("Center Right", "frontis-block"), value: "center-right" },
+	{ label: __("Top Left", "frontis-block"), value: "top-left" },
+	{ label: __("Top Center", "frontis-block"), value: "top-center" },
+	{ label: __("Top Right", "frontis-block"), value: "top-right" },
+	{ label: __("Bottom Left", "frontis-block"), value: "bottom-left" },
+	{ label: __("Bottom Center", "frontis-block"), value: "bottom-center" },
+	{ label: __("Bottom Right", "frontis-block"), value: "bottom-right" },
+	{ label: __("Vertically Center", "frontis-block"), value: "vertical-center" },
 ];
 
 export const IMAGE_STYLES = [
-    { label: __("Square", "frontis-block"), value: "square" },
-    { label: __("Octagon", "frontis-block"), value: "octagon" },
-    { label: __("Triangle", "frontis-block"), value: "triangle" },
-    { label: __("Rhombus", "frontis-block"), value: "rhombus" },
-    { label: __("Hexagon", "frontis-block"), value: "hexagon" },
-    { label: __("Bevel", "frontis-block"), value: "bevel" },
-    { label: __("Collage", "frontis-block"), value: "collage" },
-    { label: __("Abstract", "frontis-block"), value: "abstract" },
-    { label: __("Irregular Blob", "frontis-block"), value: "irregular" },
-    { label: __("Flower", "frontis-block"), value: "flower" },
-    { label: __("Organic Blob", "frontis-block"), value: "organic-blob" },
-    { label: __("Teardrop", "frontis-block"), value: "teardrop" },
-    { label: __("Triangle Blob", "frontis-block"), value: "triangle-blob" },
-    { label: __("Wavy Stripes", "frontis-block"), value: "wavy-stripes" },
-    { label: __("Token", "frontis-block"), value: "token" },
+	{ label: __("Square", "frontis-block"), value: "square" },
+	{ label: __("Octagon", "frontis-block"), value: "octagon" },
+	{ label: __("Triangle", "frontis-block"), value: "triangle" },
+	{ label: __("Rhombus", "frontis-block"), value: "rhombus" },
+	{ label: __("Hexagon", "frontis-block"), value: "hexagon" },
+	{ label: __("Bevel", "frontis-block"), value: "bevel" },
+	{ label: __("Collage", "frontis-block"), value: "collage" },
+	{ label: __("Abstract", "frontis-block"), value: "abstract" },
+	{ label: __("Irregular Blob", "frontis-block"), value: "irregular" },
+	{ label: __("Flower", "frontis-block"), value: "flower" },
+	{ label: __("Organic Blob", "frontis-block"), value: "organic-blob" },
+	{ label: __("Teardrop", "frontis-block"), value: "teardrop" },
+	{ label: __("Triangle Blob", "frontis-block"), value: "triangle-blob" },
+	{ label: __("Wavy Stripes", "frontis-block"), value: "wavy-stripes" },
+	{ label: __("Token", "frontis-block"), value: "token" },
 ];
 
 export const IMAGE_HOVER_EFFECTS = [
-    { label: __("No Effect", "frontis-blocks"), value: "no-effect", },
-    { label: __("Zoom In", "frontis-blocks"), value: "zoom-in", },
-    { label: __("Zoom Out", "frontis-blocks"), value: "zoom-out", },
-    { label: __("Slide", "frontis-blocks"), value: "slide", },
-    { label: __("Blur", "frontis-blocks"), value: "blur", },
-    { label: __("Overlay", "frontis-blocks"), value: "overlay", },
-    { label: __("Tilt", "frontis-blocks"), value: "tilt", },
-    { label: __("Skew", "frontis-blocks"), value: "skew", },
+	{ label: __("No Effect", "frontis-blocks"), value: "no-effect", },
+	{ label: __("Zoom In", "frontis-blocks"), value: "zoom-in", },
+	{ label: __("Zoom Out", "frontis-blocks"), value: "zoom-out", },
+	{ label: __("Slide", "frontis-blocks"), value: "slide", },
+	{ label: __("Blur", "frontis-blocks"), value: "blur", },
+	{ label: __("Overlay", "frontis-blocks"), value: "overlay", },
+	{ label: __("Tilt", "frontis-blocks"), value: "tilt", },
+	{ label: __("Skew", "frontis-blocks"), value: "skew", },
 ];
 
 export const IMAGE_AUTO_FIT = [
-    { label: __("Cover", "frontis-blocks"), value: "cover", },
-    { label: __("Fill", "frontis-blocks"), value: "fill", },
-    { label: __("Contain", "frontis-blocks"), value: "contain", },
+	{ label: __("Cover", "frontis-blocks"), value: "cover", },
+	{ label: __("Fill", "frontis-blocks"), value: "fill", },
+	{ label: __("Contain", "frontis-blocks"), value: "contain", },
 ];
 
 export const IMAGE_MASK_SIZE = [
-    { label: __("Cover", "frontis-blocks"), value: "cover" },
-    { label: __("Contain", "frontis-blocks"), value: "contain" },
-    { label: __("Auto", "frontis-blocks"), value: "auto" },
+	{ label: __("Cover", "frontis-blocks"), value: "cover" },
+	{ label: __("Contain", "frontis-blocks"), value: "contain" },
+	{ label: __("Auto", "frontis-blocks"), value: "auto" },
 ];
-export const IMAGE_MASK_POSITION = [ 
-    { label: __("Center", "frontis-blocks"), value: "center" },
-    { label: __("Top", "frontis-blocks"), value: "top" },
-    { label: __("Left", "frontis-blocks"), value: "left" },
-    { label: __("Right", "frontis-blocks"), value: "right" },
+export const IMAGE_MASK_POSITION = [
+	{ label: __("Center", "frontis-blocks"), value: "center" },
+	{ label: __("Top", "frontis-blocks"), value: "top" },
+	{ label: __("Left", "frontis-blocks"), value: "left" },
+	{ label: __("Right", "frontis-blocks"), value: "right" },
 ];
 export const IMAGE_MASK_REPEAT = [
-    { label: __("No Repeat", "frontis-blocks"), value: "no-repeat" },
-    { label: __("Repeat", "frontis-blocks"), value: "repeat" },
+	{ label: __("No Repeat", "frontis-blocks"), value: "no-repeat" },
+	{ label: __("Repeat", "frontis-blocks"), value: "repeat" },
 ];
 
 export const IMAGE_MASK_IMAEGS = {
-    'collage': FrontisBlocksData.pluginUrl + '/assets/images/photo-collage.svg',
-    'abstract': FrontisBlocksData.pluginUrl + '/assets/images/abstract.svg',
-    'irregular': FrontisBlocksData.pluginUrl + '/assets/images/irregular-blob.svg',
-    'flower': FrontisBlocksData.pluginUrl + '/assets/images/Flower.svg',
-    'organic-blob': FrontisBlocksData.pluginUrl + '/assets/images/organic-blob.svg',
-    'teardrop': FrontisBlocksData.pluginUrl + '/assets/images/teardrop.svg',
-    'triangle-blob': FrontisBlocksData.pluginUrl + '/assets/images/triangle-blob.svg',
-    'wavy-stripes': FrontisBlocksData.pluginUrl + '/assets/images/wavy-stripes.svg',
-    'token': FrontisBlocksData.pluginUrl + '/assets/images/token.svg',
+	'collage': FrontisBlocksData.pluginUrl + '/assets/images/photo-collage.svg',
+	'abstract': FrontisBlocksData.pluginUrl + '/assets/images/abstract.svg',
+	'irregular': FrontisBlocksData.pluginUrl + '/assets/images/irregular-blob.svg',
+	'flower': FrontisBlocksData.pluginUrl + '/assets/images/Flower.svg',
+	'organic-blob': FrontisBlocksData.pluginUrl + '/assets/images/organic-blob.svg',
+	'teardrop': FrontisBlocksData.pluginUrl + '/assets/images/teardrop.svg',
+	'triangle-blob': FrontisBlocksData.pluginUrl + '/assets/images/triangle-blob.svg',
+	'wavy-stripes': FrontisBlocksData.pluginUrl + '/assets/images/wavy-stripes.svg',
+	'token': FrontisBlocksData.pluginUrl + '/assets/images/token.svg',
 }
 export const ADVANCED_BUTTON_PRESETS = [
 	{ label: __("Preset 1", "frontis-blocks"), value: "preset-1" },
@@ -597,37 +609,37 @@ export const ADVANCED_BUTTON_PRESETS = [
 	{ label: __("Preset 6", "frontis-blocks"), value: "preset-6" },
 ];
 export const TIMEZONE = [
-    { label: 'Auto', value: 'auto' },
-    { label: 'Manual', value: 'manual' }
+	{ label: 'Auto', value: 'auto' },
+	{ label: 'Manual', value: 'manual' }
 ];
 export const WEEKENDDAY = [
-    { label: 'Sunday', value: '0' },
-    { label: 'Monday', value: '1' },
-    { label: 'Tuesday', value: '2' },
-    { label: 'Wednesday', value: '3' },
-    { label: 'Thursday', value: '4' },
-    { label: 'Friday', value: '5' },
-    { label: 'Saturday', value: '6' }
+	{ label: 'Sunday', value: '0' },
+	{ label: 'Monday', value: '1' },
+	{ label: 'Tuesday', value: '2' },
+	{ label: 'Wednesday', value: '3' },
+	{ label: 'Thursday', value: '4' },
+	{ label: 'Friday', value: '5' },
+	{ label: 'Saturday', value: '6' }
 ];
 export const timeFormatOptions = [
-    { label: '12-hour (hh:mm AM/PM)', value: 'hh:mm A' },
-    { label: '12-hour (hh:mm:ss AM/PM)', value: 'hh:mm:ss A' },
-    { label: '24-hour (HH:mm)', value: 'HH:mm' },
-    { label: '24-hour (HH:mm:ss)', value: 'HH:mm:ss' }
+	{ label: '12-hour (hh:mm AM/PM)', value: 'hh:mm A' },
+	{ label: '12-hour (hh:mm:ss AM/PM)', value: 'hh:mm:ss A' },
+	{ label: '24-hour (HH:mm)', value: 'HH:mm' },
+	{ label: '24-hour (HH:mm:ss)', value: 'HH:mm:ss' }
 ];
 export const monthOptions = [
-    { label: 'January', value: '0' },
-    { label: 'February', value: '1' },
-    { label: 'March', value: '2' },
-    { label: 'April', value: '3' },
-    { label: 'May', value: '4' },
-    { label: 'June', value: '5' },
-    { label: 'July', value: '6' },
-    { label: 'August', value: '7' },
-    { label: 'September', value: '8' },
-    { label: 'October', value: '9' },
-    { label: 'November', value: '10' },
-    { label: 'December', value: '11' }
+	{ label: 'January', value: '0' },
+	{ label: 'February', value: '1' },
+	{ label: 'March', value: '2' },
+	{ label: 'April', value: '3' },
+	{ label: 'May', value: '4' },
+	{ label: 'June', value: '5' },
+	{ label: 'July', value: '6' },
+	{ label: 'August', value: '7' },
+	{ label: 'September', value: '8' },
+	{ label: 'October', value: '9' },
+	{ label: 'November', value: '10' },
+	{ label: 'December', value: '11' }
 ];
 export const MEGA_MENU_TRIGGERS = [
 	{ label: __('Hover', 'frontis-blocks'), value: 'hover' },
@@ -635,11 +647,11 @@ export const MEGA_MENU_TRIGGERS = [
 ];
 
 /** POST CATEGORY BLOCK */
-export const POST_CATEGORY_PREMADE_STYLE  = [
-  { label: __('Style 1', 'frontis-blocks'), value: 'style-1' },
-  { label: __('Style 2', 'frontis-blocks'), value: 'style-2' },
-  { label: __('Style 3', 'frontis-blocks'), value: 'style-3' },
-  { label: __('Style 4', 'frontis-blocks'), value: 'style-4' },
+export const POST_CATEGORY_PREMADE_STYLE = [
+	{ label: __('Style 1', 'frontis-blocks'), value: 'style-1' },
+	{ label: __('Style 2', 'frontis-blocks'), value: 'style-2' },
+	{ label: __('Style 3', 'frontis-blocks'), value: 'style-3' },
+	{ label: __('Style 4', 'frontis-blocks'), value: 'style-4' },
 ];
 
 
@@ -668,36 +680,36 @@ export const LIST_STYLE_OPTIONS = [
 
 /** Post Featured Image */
 export const IMAGE_SIZES = [
-    { label: "Thumbnail", value: "thumbnail" },
-    { label: "Medium", value: "medium" },
-    { label: "Large", value: "large" },
-    { label: "Full", value: "full" },
+	{ label: "Thumbnail", value: "thumbnail" },
+	{ label: "Medium", value: "medium" },
+	{ label: "Large", value: "large" },
+	{ label: "Full", value: "full" },
 ];
 
 
 /** Post Comment Form */
 export const DEFAULT_TEXTS = {
-    formTitle: "Leave a Reply",
-    cancelReply: "Cancel reply",
-    loginText: "Logged in as",
-    logoutText: "Log out?",
-    buttonText: "Post Comment",
+	formTitle: "Leave a Reply",
+	cancelReply: "Cancel reply",
+	loginText: "Logged in as",
+	logoutText: "Log out?",
+	buttonText: "Post Comment",
 };
 
 export const FORM_LAYOUTS = [
-    { label: "Default", value: "default" },
-    { label: "Compact", value: "compact" },
-    { label: "Modern", value: "modern" },
+	{ label: "Default", value: "default" },
+	{ label: "Compact", value: "compact" },
+	{ label: "Modern", value: "modern" },
 ];
 
 /** Off canvas menu **/
 export const ANIMATION = [
-    { value: 'left', label: __('Slide Left', 'frontis-blocks') },
-    { value: 'right', label: __('Slide Right', 'frontis-blocks') },
-    { value: 'top', label: __('Slide Top', 'frontis-blocks') },
-    { value: 'bottom', label: __('Slide Bottom', 'frontis-blocks') },
-    { value: 'zoom', label: __('Zoom', 'frontis-blocks') },
-    { value: 'fade', label: __('Fade', 'frontis-blocks') },
+	{ value: 'left', label: __('Slide Left', 'frontis-blocks') },
+	{ value: 'right', label: __('Slide Right', 'frontis-blocks') },
+	{ value: 'top', label: __('Slide Top', 'frontis-blocks') },
+	{ value: 'bottom', label: __('Slide Bottom', 'frontis-blocks') },
+	{ value: 'zoom', label: __('Zoom', 'frontis-blocks') },
+	{ value: 'fade', label: __('Fade', 'frontis-blocks') },
 ];
 
 export const TOGGLE_TYPES = [
@@ -714,21 +726,21 @@ export const CONTENT_TYPES = [
 
 
 export const MENU_TYPE = [
-    { value: 'icon', label: __('Icon', 'frontis-blocks') },
-    { value: 'text', label: __('Text', 'frontis-blocks') },
-    { value: 'icon-text', label: __('Both', 'frontis-blocks') },
+	{ value: 'icon', label: __('Icon', 'frontis-blocks') },
+	{ value: 'text', label: __('Text', 'frontis-blocks') },
+	{ value: 'icon-text', label: __('Both', 'frontis-blocks') },
 ];
 
 export const LOTTIE_RENDER_TYPE = [
-    { value: 'canvas', label: __('Canvas', 'frontis-blocks') },
-    { value: 'svg', label: __('SVG', 'frontis-blocks') },
+	{ value: 'canvas', label: __('Canvas', 'frontis-blocks') },
+	{ value: 'svg', label: __('SVG', 'frontis-blocks') },
 ];
 
 export const LOTTIE_HOVER_STATE = [
-    { value: 'none', label: __('None', 'frontis-blocks') },
-    { value: 'pause', label: __('Pause', 'frontis-blocks') },
-    { value: 'play', label: __('Play', 'frontis-blocks') },
-    { value: 'reverse', label: __('Reverse', 'frontis-blocks') },
+	{ value: 'none', label: __('None', 'frontis-blocks') },
+	{ value: 'pause', label: __('Pause', 'frontis-blocks') },
+	{ value: 'play', label: __('Play', 'frontis-blocks') },
+	{ value: 'reverse', label: __('Reverse', 'frontis-blocks') },
 ];
 
 /** Start Container Layout Constants */
@@ -832,8 +844,8 @@ export const WIDTH_STYLES = [
 ];
 
 export const LAYOUT_ALIGNMENT = [
-    { label: __("Left", "frontis-block"), value: "start" },
-    { label: __("Center", "frontis-block"), value: "center" },
+	{ label: __("Left", "frontis-block"), value: "start" },
+	{ label: __("Center", "frontis-block"), value: "center" },
 	{ label: __("Right", "frontis-block"), value: "end" },
 	{ label: __("Between", "frontis-block"), value: "space-between" },
 ];
@@ -922,8 +934,8 @@ export const FLIP_ANIMATION = [
 ];
 
 export const FORM_FULL_LISTS =
-    FrontisBlocksData.fluent_form_lists &&
-    JSON.parse(FrontisBlocksData.fluent_form_lists);
+	FrontisBlocksData.fluent_form_lists &&
+	JSON.parse(FrontisBlocksData.fluent_form_lists);
 
 export const FORM_LISTS =
 	FORM_FULL_LISTS &&
@@ -1025,14 +1037,14 @@ export const BADGE_ALIGNMENT = [
 	{ label: __("Bottom Right", "frontis-block"), value: "bottom_right" },
 ];
 
-export const BADGE_POSITION  = [
+export const BADGE_POSITION = [
 	{ label: __("In Content", "frontis-block"), value: "content" },
 	{ label: __("In Image", "frontis-block"), value: "image" },
 ];
 
 export const CARD_WRAP_ALIGNMENT = [
-    { label: __("Left", "frontis-block"), value: "start" },
-    { label: __("Center", "frontis-block"), value: "center" },
+	{ label: __("Left", "frontis-block"), value: "start" },
+	{ label: __("Center", "frontis-block"), value: "center" },
 	{ label: __("Right", "frontis-block"), value: "end" },
 	{ label: __("Between", "frontis-block"), value: "space-between" },
 ];
@@ -1042,7 +1054,7 @@ export const CONTENT_POSITION = [
 	{ label: __("Right", "frontis-block"), value: "right" },
 	{ label: __("Bottom", "frontis-block"), value: "bottom" },
 	{ label: __("Left", "frontis-block"), value: "left" },
-    { label: __("In Image", "frontis-block"), value: "image" },
+	{ label: __("In Image", "frontis-block"), value: "image" },
 ];
 
 export const CONTENT_SOCIAL_ICON_POSITION = [
@@ -1079,10 +1091,10 @@ export const SOCIAL_ICON_TYPE = [
 
 // Form Builder Constants'
 export const FORM_ALIGN_ITEMS = [
-    { title: 'Flex Start',  label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.39385 12.142L16.5189 12.142" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M7.39385 7.15051L16.5189 7.15051" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 3L3 3" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 21L3 21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "left" },
-    { title: 'Center', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.5599 9.46875L7.42934 9.46875" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M16.5599 14.4974L7.42934 14.4974" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 3L3 3" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 21L3 21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "center" },
-    { title: 'Flex End', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.606 11.858L7.48088 11.858" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M16.606 16.8495L7.48088 16.8495" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 21L21 21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 3L21 3" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "right" },
-    { title: 'Stretch', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.00001 15.27L16.39 15.27" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M8.00001 9.27002L16.39 9.27002" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M20.51 4.03003L3.97001 4.03003" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M20.51 20.51L3.97001 20.51" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "stretch" }	
+	{ title: 'Flex Start', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.39385 12.142L16.5189 12.142" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M7.39385 7.15051L16.5189 7.15051" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 3L3 3" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 21L3 21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "left" },
+	{ title: 'Center', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.5599 9.46875L7.42934 9.46875" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M16.5599 14.4974L7.42934 14.4974" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 3L3 3" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 21L3 21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "center" },
+	{ title: 'Flex End', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.606 11.858L7.48088 11.858" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M16.606 16.8495L7.48088 16.8495" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 21L21 21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 3L21 3" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "right" },
+	{ title: 'Stretch', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.00001 15.27L16.39 15.27" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M8.00001 9.27002L16.39 9.27002" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M20.51 4.03003L3.97001 4.03003" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M20.51 20.51L3.97001 20.51" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "stretch" }
 ];
 
 export const FORM_SUBMIT_BTN_POSITION = [

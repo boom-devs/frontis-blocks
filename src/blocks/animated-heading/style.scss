@@ -1,5 +1,5 @@
 .fb-animated-heading-wrapper {
-    margin: 0;
+  margin: 0;
 }
 
 .fb-animated-heading-wrapper h1,
@@ -9,19 +9,20 @@
 .fb-animated-heading-wrapper h5,
 .fb-animated-heading-wrapper h6,
 .fb-animated-heading-wrapper p {
-    display: inline-block !important;
-    margin: 0;
+  display: inline-block !important;
+  margin: 0;
 }
 
 
 .fb-animated-heading-cursor {
-    font-size: 40px;
-    line-height: 40px;
-    display: inline-block;
-    vertical-align: middle;
+  font-size: 40px;
+  line-height: 40px;
+  display: inline-block;
+  vertical-align: middle;
 }
+
 .fb-animated-heading-item {
-    display: none;
+  display: none;
 }
 
 .fb-animated-heading-swirl-wrapper {
@@ -31,52 +32,132 @@
 }
 
 .fb-animated-heading-dynamic-wrapper {
-    display: inline-block;
-    position: relative;
-    perspective: 300px;
-    overflow: hidden;
-    vertical-align: bottom;
-  }
-  
-  .fb-animated-heading-dynamic-text {
-    transform: scaleX(1.0005);
-    white-space: nowrap;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-  }
-  
-  .fb-animated-heading-dynamic-text.fb-animated-heading-text-active {
-    position: relative;
-    opacity: 1;
-  }
-  
-  .fb-animated-heading-dynamic-letter {
-    backface-visibility: hidden;
-    display: inline-block;
-    transform-style: preserve-3d;
+  display: inline-block;
+  position: relative;
+  perspective: 300px;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+.fb-animated-heading-dynamic-text {
+  transform: scaleX(1.0005);
+  white-space: nowrap;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.fb-animated-heading-dynamic-text.fb-animated-heading-text-active {
+  position: relative;
+  opacity: 1;
+}
+
+.fb-animated-heading-dynamic-letter {
+  backface-visibility: hidden;
+  display: inline-block;
+  transform-style: preserve-3d;
+  opacity: 0;
+  transform: translateZ(-20px) rotateX(90deg);
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.fb-animated-heading-dynamic-letter.fb-animated-heading-animation-in {
+  animation: fb-animated-heading-swirl-in 0.4s forwards;
+}
+
+.fb-animated-heading-dynamic-letter.fb-animated-heading-animation-out {
+  animation: fb-animated-heading-swirl-out 0.4s forwards;
+}
+
+@keyframes fb-animated-heading-swirl-in {
+  0% {
     opacity: 0;
     transform: translateZ(-20px) rotateX(90deg);
-    transition: transform 0.5s ease, opacity 0.5s ease;
   }
-  
-  .fb-animated-heading-dynamic-letter.fb-animated-heading-animation-in {
-    animation: fb-animated-heading-swirl-in 0.4s forwards;
+
+  60% {
+    opacity: 1;
+    transform: translateZ(-20px) rotateX(-10deg);
   }
-  
-  .fb-animated-heading-dynamic-letter.fb-animated-heading-animation-out {
-    animation: fb-animated-heading-swirl-out 0.4s forwards;
+
+  100% {
+    opacity: 1;
+    transform: translateZ(-20px) rotateX(0deg);
   }
-  
-  @keyframes fb-animated-heading-swirl-in {
-    0% { opacity: 0; transform: translateZ(-20px) rotateX(90deg); }
-    60% { opacity: 1; transform: translateZ(-20px) rotateX(-10deg); }
-    100% { opacity: 1; transform: translateZ(-20px) rotateX(0deg); }
+}
+
+@keyframes fb-animated-heading-swirl-out {
+  0% {
+    opacity: 1;
+    transform: translateZ(-20px) rotateX(0);
   }
-  
-  @keyframes fb-animated-heading-swirl-out {
-    0% { opacity: 1; transform: translateZ(-20px) rotateX(0); }
-    60% { opacity: 0; transform: translateZ(-20px) rotateX(-100deg); }
-    100% { opacity: 0; transform: translateZ(-20px) rotateX(-90deg); }
+
+  60% {
+    opacity: 0;
+    transform: translateZ(-20px) rotateX(-100deg);
   }
+
+  100% {
+    opacity: 0;
+    transform: translateZ(-20px) rotateX(-90deg);
+  }
+}
+
+
+.fb-animated-heading-reveal-wrapper {
+  display: inline-flex;
+  flex-wrap: wrap;
+}
+
+.fb-animated-heading-char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(60px) scale(0.5) rotateX(30deg);
+  filter: blur(4px);
+  transform-origin: bottom center;
+  will-change: transform, opacity;
+  transition: opacity 0.7s cubic-bezier(0.6, 0.04, 0.98, 0.34),
+    transform 0.7s cubic-bezier(0.6, 0.04, 0.98, 0.34),
+    filter 0.7s cubic-bezier(0.6, 0.04, 0.98, 0.34);
+}
+
+.fb-animated-heading-char-space {
+  width: 0.35em;
+  min-width: 0.35em;
+}
+
+.fb-animated-heading-char.fb-animated-heading-char-appear {
+  opacity: 1;
+  transform: translateY(0) scale(1) rotateX(0);
+  filter: blur(0);
+  transition: opacity 0.8s cubic-bezier(0.34, 1.56, 0.64, 1),
+    transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1),
+    filter 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.fb-animated-heading-char.fb-animated-heading-char-hide {
+  opacity: 0;
+  transform: translateY(-40px) scale(0.3) rotateX(20deg);
+  filter: blur(6px);
+}
+
+/* Progress Bar Container Track */
+.fb-animated-heading-progress-track {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.fb-animated-heading-progress-fill {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background-color: currentColor;
+  border-radius: inherit;
+  will-change: width;
+}
