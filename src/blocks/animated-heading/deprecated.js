@@ -1,12 +1,11 @@
 import { useBlockProps, RichText } from '@wordpress/block-editor';
-import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import attributes from './attributes.js';
 
 /**
- * v1_1_8 - Old version with inline script and hardcoded ID
- * This is the oldest version that used inline scripts
+ * v1_2_4 - Oldest version with frontis-block prefix and fb-parent-wrapper
  */
-const v1_1_8 = {
+const v1_2_4 = {
+
     attributes,
 
     supports: {
@@ -27,17 +26,17 @@ const v1_1_8 = {
             animatedHeadingGlobalWraperID,
             animatedHeadingGlobalWraperClass,
         } = attributes;
-    
+
         const blockProps = useBlockProps.save({
-            className: `fb-animated-heading-main-wrapper ${blockID}`,
+            className: `frontis-block fb-animated-heading-main-wrapper ${blockID}`,
         });
-    
+
         const Tag = animatedHeadingMainTag || 'div';
-    
+
         return (
             <div {...blockProps}>
                 <div
-                    className={`fb-animated-heading-container ${animatedHeadingGlobalWraperClass}`}
+                    className={`fb-parent-wrapper fb-animated-heading-container ${animatedHeadingGlobalWraperClass}`}
                     id={animatedHeadingGlobalWraperID}
                     data-animation-type={animationType}
                 >
@@ -49,7 +48,7 @@ const v1_1_8 = {
                                 value={animatedHeadingPrefix}
                             />
                         )}
-    
+
                         {animationType === 'typing' && (
                             <>
                                 <span className="fb-animated-headings">
@@ -67,7 +66,7 @@ const v1_1_8 = {
                                 )}
                             </>
                         )}
-    
+
                         {animationType === 'swirl' && (
                             <>
                             <span className="fb-animated-heading-swirl-wrapper">
@@ -83,7 +82,7 @@ const v1_1_8 = {
                             </span>
                             </>
                         )}
-    
+
                         {animatedHeadingSuffix && (
                             <RichText.Content
                                 tagName="span"
@@ -98,5 +97,6 @@ const v1_1_8 = {
     },
 };
 
-// Export in reverse chronological order (newest first)
-export default [v1_1_8];
+const deprecated = [v1_2_4];
+
+export default deprecated;
