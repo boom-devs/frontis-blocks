@@ -88,7 +88,8 @@ export default function save({ attributes }) {
                             data-appear-duration={animatedHeadingRevealAppearDuration}
                             data-hide-duration={animatedHeadingRevealHideDuration}
                             data-visible-hold={animatedHeadingRevealVisibleHold}
-                            data-reset-delay={animatedHeadingRevealResetDelay}>
+                            data-reset-delay={animatedHeadingRevealResetDelay}
+                            data-reveal-direction={animatedHeadingRevealDirection}>
                             {animatedHeadingItems && animatedHeadingItems.length > 0 &&
                                 animatedHeadingItems.map((item, index) => (
                                     <span key={index} className="fb-animated-heading-item">
