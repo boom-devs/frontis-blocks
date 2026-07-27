@@ -310,10 +310,11 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                 // hide one by one
                 timeoutIds.push(setTimeout(() => {
                     spans.forEach((span, i) => {
+                        const delayIndex = animatedHeadingRevealDirection === 'right' ? (spans.length - 1 - i) : i;
                         timeoutIds.push(setTimeout(() => {
                             span.classList.remove('fb-animated-heading-char-appear');
                             span.classList.add('fb-animated-heading-char-hide');
-                        }, i * CHAR_DELAY));
+                        }, delayIndex * CHAR_DELAY));
                     });
                 }, hideStart));
 
