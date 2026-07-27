@@ -47,6 +47,41 @@ const generateSliderStyle = (attributes) => {
         sliderNavigationTransform,
         sliderNavigationTransformUnits,
 
+        sliderNavigationBgColorSwitcher,
+        sliderNavigationBgNormalBackgroundType,
+        sliderNavigationBgNormalClassicColor,
+        sliderNavigationBgNormalGradientColor,
+        sliderNavigationBgNormalCustomGradientSwitcher,
+        sliderNavigationBgNormalCustomGradientInputValue,
+        sliderNavigationBgHoverBackgroundType,
+        sliderNavigationBgHoverClassicColor,
+        sliderNavigationBgHoverGradientColor,
+        sliderNavigationBgHoverCustomGradientSwitcher,
+        sliderNavigationBgHoverCustomGradientInputValue,
+
+        sliderNavigationBorder,
+        sliderNavigationBorderColorSwitcher,
+        sliderNavigationBorderColor,
+        sliderNavigationBorderHoverColor,
+
+        sliderNavigationBorderUnits,
+        sliderNavigationBorderDesktop,
+        sliderNavigationBorderTablet,
+        sliderNavigationBorderMobile,
+        sliderNavigationBorderLink,
+
+        sliderNavigationBorderRadiusUnits,
+        sliderNavigationBorderRadiusDesktop,
+        sliderNavigationBorderRadiusTablet,
+        sliderNavigationBorderRadiusMobile,
+        sliderNavigationBorderRadiusLink,
+
+        sliderNavigationPaddingUnits,
+        sliderNavigationPaddingDesktop,
+        sliderNavigationPaddingTablet,
+        sliderNavigationPaddingMobile,
+        sliderNavigationPaddingLink,
+
         sliderArrowPositionTopOffset,
         sliderArrowPositionTopOffsetUnits,
         sliderArrowPositionLeftOffset,
@@ -273,6 +308,18 @@ const generateSliderStyle = (attributes) => {
         sliderVRBottomOffsetUnits,
     } = attributes;
 
+    const sliderNavigationBorderDesktopWidth = `${sliderNavigationBorderDesktop?.top}${sliderNavigationBorderUnits?.Desktop} ${sliderNavigationBorderDesktop?.right}${sliderNavigationBorderUnits?.Desktop} ${sliderNavigationBorderDesktop?.bottom}${sliderNavigationBorderUnits?.Desktop} ${sliderNavigationBorderDesktop?.left}${sliderNavigationBorderUnits?.Desktop}`;
+    const sliderNavigationBorderTabletWidth = `${sliderNavigationBorderTablet?.top}${sliderNavigationBorderUnits?.Tablet} ${sliderNavigationBorderTablet?.right}${sliderNavigationBorderUnits?.Tablet} ${sliderNavigationBorderTablet?.bottom}${sliderNavigationBorderUnits?.Tablet} ${sliderNavigationBorderTablet?.left}${sliderNavigationBorderUnits?.Tablet}`;
+    const sliderNavigationBorderMobileWidth = `${sliderNavigationBorderMobile?.top}${sliderNavigationBorderUnits?.Mobile} ${sliderNavigationBorderMobile?.right}${sliderNavigationBorderUnits?.Mobile} ${sliderNavigationBorderMobile?.bottom}${sliderNavigationBorderUnits?.Mobile} ${sliderNavigationBorderMobile?.left}${sliderNavigationBorderUnits?.Mobile}`;
+
+    const sliderNavigationBorderRadiusDesktopWidth = `${sliderNavigationBorderRadiusDesktop?.top}${sliderNavigationBorderRadiusUnits?.Desktop} ${sliderNavigationBorderRadiusDesktop?.right}${sliderNavigationBorderRadiusUnits?.Desktop} ${sliderNavigationBorderRadiusDesktop?.bottom}${sliderNavigationBorderRadiusUnits?.Desktop} ${sliderNavigationBorderRadiusDesktop?.left}${sliderNavigationBorderRadiusUnits?.Desktop}`;
+    const sliderNavigationBorderRadiusTabletWidth = `${sliderNavigationBorderRadiusTablet?.top}${sliderNavigationBorderRadiusUnits?.Tablet} ${sliderNavigationBorderRadiusTablet?.right}${sliderNavigationBorderRadiusUnits?.Tablet} ${sliderNavigationBorderRadiusTablet?.bottom}${sliderNavigationBorderRadiusUnits?.Tablet} ${sliderNavigationBorderRadiusTablet?.left}${sliderNavigationBorderRadiusUnits?.Tablet}`;
+    const sliderNavigationBorderRadiusMobileWidth = `${sliderNavigationBorderRadiusMobile?.top}${sliderNavigationBorderRadiusUnits?.Mobile} ${sliderNavigationBorderRadiusMobile?.right}${sliderNavigationBorderRadiusUnits?.Mobile} ${sliderNavigationBorderRadiusMobile?.bottom}${sliderNavigationBorderRadiusUnits?.Mobile} ${sliderNavigationBorderRadiusMobile?.left}${sliderNavigationBorderRadiusUnits?.Mobile}`;
+
+    const sliderNavigationPaddingDesktopWidth = `${sliderNavigationPaddingDesktop?.top}${sliderNavigationPaddingUnits?.Desktop} ${sliderNavigationPaddingDesktop?.right}${sliderNavigationPaddingUnits?.Desktop} ${sliderNavigationPaddingDesktop?.bottom}${sliderNavigationPaddingUnits?.Desktop} ${sliderNavigationPaddingDesktop?.left}${sliderNavigationPaddingUnits?.Desktop}`;
+    const sliderNavigationPaddingTabletWidth = `${sliderNavigationPaddingTablet?.top}${sliderNavigationPaddingUnits?.Tablet} ${sliderNavigationPaddingTablet?.right}${sliderNavigationPaddingUnits?.Tablet} ${sliderNavigationPaddingTablet?.bottom}${sliderNavigationPaddingUnits?.Tablet} ${sliderNavigationPaddingTablet?.left}${sliderNavigationPaddingUnits?.Tablet}`;
+    const sliderNavigationPaddingMobileWidth = `${sliderNavigationPaddingMobile?.top}${sliderNavigationPaddingUnits?.Mobile} ${sliderNavigationPaddingMobile?.right}${sliderNavigationPaddingUnits?.Mobile} ${sliderNavigationPaddingMobile?.bottom}${sliderNavigationPaddingUnits?.Mobile} ${sliderNavigationPaddingMobile?.left}${sliderNavigationPaddingUnits?.Mobile}`;
+
     const sliderArrowsBorderDesktopWidth = `${sliderArrowsBorderDesktop?.top}${sliderArrowsBorderUnits?.Desktop} ${sliderArrowsBorderDesktop?.right}${sliderArrowsBorderUnits?.Desktop} ${sliderArrowsBorderDesktop?.bottom}${sliderArrowsBorderUnits?.Desktop} ${sliderArrowsBorderDesktop?.left}${sliderArrowsBorderUnits?.Desktop}`;
     const sliderArrowsBorderTabletWidth = `${sliderArrowsBorderTablet?.top}${sliderArrowsBorderUnits?.Tablet} ${sliderArrowsBorderTablet?.right}${sliderArrowsBorderUnits?.Tablet} ${sliderArrowsBorderTablet?.bottom}${sliderArrowsBorderUnits?.Tablet} ${sliderArrowsBorderTablet?.left}${sliderArrowsBorderUnits?.Tablet}`;
     const sliderArrowsBorderMobileWidth = `${sliderArrowsBorderMobile?.top}${sliderArrowsBorderUnits?.Mobile} ${sliderArrowsBorderMobile?.right}${sliderArrowsBorderUnits?.Mobile} ${sliderArrowsBorderMobile?.bottom}${sliderArrowsBorderUnits?.Mobile} ${sliderArrowsBorderMobile?.left}${sliderArrowsBorderUnits?.Mobile}`;
@@ -378,6 +425,35 @@ const generateSliderStyle = (attributes) => {
             ` : ''}
         }
 
+        .${blockID} .fb-slider-default-icon-wrapper {
+            ${sliderNavigationBgNormalBackgroundType === 'gradient' ? `
+                background: ${sliderNavigationBgNormalCustomGradientSwitcher && sliderNavigationBgNormalCustomGradientInputValue
+                ? sliderNavigationBgNormalCustomGradientInputValue
+                : sliderNavigationBgNormalGradientColor || sliderNavigationBgNormalClassicColor
+            };
+            ` : `
+                background: ${sliderNavigationBgNormalClassicColor};
+            `}
+            ${sliderNavigationPaddingDesktopWidth ? `padding: ${sliderNavigationPaddingDesktopWidth};` : ''}
+            ${sliderNavigationBorder ? `border: ${sliderNavigationBorder};` : ''}
+            ${sliderNavigationBorderDesktopWidth ? `border-width: ${sliderNavigationBorderDesktopWidth};` : ''}
+            ${sliderNavigationBorderRadiusDesktopWidth ? `border-radius: ${sliderNavigationBorderRadiusDesktopWidth};` : ''}
+            ${sliderNavigationBorderColor ? `border-color: ${sliderNavigationBorderColor};` : ''}
+        }
+
+        .${blockID} .fb-slider-default-icon-wrapper:hover {
+            ${sliderNavigationBgHoverBackgroundType === 'gradient' ? `
+                background: ${sliderNavigationBgHoverCustomGradientSwitcher && sliderNavigationBgHoverCustomGradientInputValue
+                ? sliderNavigationBgHoverCustomGradientInputValue
+                : sliderNavigationBgHoverGradientColor || sliderNavigationBgHoverClassicColor
+            };
+            ` : `
+                background: ${sliderNavigationBgHoverClassicColor};
+            `}
+
+            ${sliderNavigationBorderHoverColor ? `border-color: ${sliderNavigationBorderHoverColor};` : ''}
+        }
+
         ${sliderArrowPosition && sliderArrowPosition !== 'center' ? `
 
             .${blockID} .fb-slider-default-icon-wrapper.${sliderArrowPositionType}.${sliderArrowPosition},
@@ -421,6 +497,8 @@ const generateSliderStyle = (attributes) => {
                     bottom: ${sliderArrowPositionBottomOffset?.Desktop ? `${sliderArrowPositionBottomOffset?.Desktop}${sliderArrowPositionBottomOffsetUnits?.Desktop}` : '0'};
                     right: ${sliderArrowPositionRightOffset?.Desktop ? `${sliderArrowPositionRightOffset?.Desktop}${sliderArrowPositionRightOffsetUnits?.Desktop}` : '0'};
                 ` : ''}
+
+                ${sliderNavigationTransform ? `transform: translateY(${sliderNavigationTransform.Desktop}${sliderNavigationTransformUnits.Desktop});` : ''}
             }
 
             .${blockID} .fb-slider-default-icon-wrapper.${sliderArrowPositionType}.${sliderArrowPosition} .swiper-button-prev,
@@ -573,6 +651,12 @@ const generateSliderStyle = (attributes) => {
                 ` : ''}
             }
 
+            .${blockID} .fb-slider-default-icon-wrapper {
+                ${sliderNavigationPaddingTabletWidth ? `padding: ${sliderNavigationPaddingTabletWidth};` : ''}
+                ${sliderNavigationBorderTabletWidth ? `border-width: ${sliderNavigationBorderTabletWidth};` : ''}
+                ${sliderNavigationBorderRadiusTabletWidth ? `border-radius: ${sliderNavigationBorderRadiusTabletWidth};` : ''}                                             
+            }
+
             ${sliderArrowPosition && sliderArrowPosition !== 'center' ? `
 
                 .${blockID} .fb-slider-default-icon-wrapper.${sliderArrowPositionType}.${sliderArrowPosition},
@@ -611,6 +695,8 @@ const generateSliderStyle = (attributes) => {
                         bottom: ${sliderArrowPositionBottomOffset?.Tablet ? `${sliderArrowPositionBottomOffset?.Tablet}${sliderArrowPositionBottomOffsetUnits?.Tablet}` : '0'};
                         right: ${sliderArrowPositionRightOffset?.Tablet ? `${sliderArrowPositionRightOffset?.Tablet}${sliderArrowPositionRightOffsetUnits?.Tablet}` : '0'};
                     ` : ''}
+
+                    ${sliderNavigationTransform ? `transform: translateY(${sliderNavigationTransform.Tablet}${sliderNavigationTransformUnits.Tablet});` : ''}
                 }
             ` : ''}
 
@@ -700,6 +786,12 @@ const generateSliderStyle = (attributes) => {
                 ` : ''}
             }
 
+            .${blockID} .fb-slider-default-icon-wrapper {
+                ${sliderNavigationPaddingMobileWidth ? `padding: ${sliderNavigationPaddingMobileWidth};` : ''}
+                ${sliderNavigationBorderMobileWidth ? `border-width: ${sliderNavigationBorderMobileWidth};` : ''}
+                ${sliderNavigationBorderRadiusMobileWidth ? `border-radius: ${sliderNavigationBorderRadiusMobileWidth};` : ''}                                             
+            }
+
             ${sliderArrowPosition && sliderArrowPosition !== 'center' ? `
 
                 .${blockID} .fb-slider-default-icon-wrapper.${sliderArrowPositionType}.${sliderArrowPosition},
@@ -738,6 +830,8 @@ const generateSliderStyle = (attributes) => {
                         bottom: ${sliderArrowPositionBottomOffset?.Mobile ? `${sliderArrowPositionBottomOffset?.Mobile}${sliderArrowPositionBottomOffsetUnits?.Mobile}` : '0'};
                         right: ${sliderArrowPositionRightOffset?.Mobile ? `${sliderArrowPositionRightOffset?.Mobile}${sliderArrowPositionRightOffsetUnits?.Mobile}` : '0'};
                     ` : ''}
+
+                     ${sliderNavigationTransform ? `transform: translateY(${sliderNavigationTransform.Mobile}${sliderNavigationTransformUnits.Mobile});` : ''}
                 }
             ` : ''}
 
