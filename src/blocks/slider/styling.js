@@ -11,7 +11,7 @@ import getCustomCss from '@Utils/getCustomCss';
  * @returns {string} CSS string
  */
 const generateSliderStyle = (attributes) => {
-     const {
+    const {
         blockID,
         sliderItems,
         blockStyle,
@@ -43,6 +43,9 @@ const generateSliderStyle = (attributes) => {
         sliderArrowDirection,
         sliderArrowGap,
         sliderArrowGapUnits,
+
+        sliderNavigationTransform,
+        sliderNavigationTransformUnits,
 
         sliderArrowPositionTopOffset,
         sliderArrowPositionTopOffsetUnits,
@@ -250,8 +253,8 @@ const generateSliderStyle = (attributes) => {
         /** End Global Setting */
 
         sliderDesktopSwitcher,
-		sliderTabletSwitcher,
-		sliderMobileSwitcher,
+        sliderTabletSwitcher,
+        sliderMobileSwitcher,
 
         sliderGlobalCustomCSS,
         sliderGlobalWraperClass,
@@ -333,11 +336,10 @@ const generateSliderStyle = (attributes) => {
             ${sliderGlobalBorderColor ? `border-color: ${sliderGlobalBorderColor};` : ''}
             ${sliderGlobalBoxShadowCssValue ? `box-shadow: ${sliderGlobalBoxShadowCssValue};` : ''}
             ${sliderGlobalBgNormalBackgroundType === 'gradient' ? `
-                background: ${
-                    sliderGlobalBgNormalCustomGradientSwitcher && sliderGlobalBgNormalCustomGradientInputValue
-                        ? sliderGlobalBgNormalCustomGradientInputValue
-                        : sliderGlobalBgNormalGradientColor || sliderGlobalBgNormalClassicColor
-                };
+                background: ${sliderGlobalBgNormalCustomGradientSwitcher && sliderGlobalBgNormalCustomGradientInputValue
+                ? sliderGlobalBgNormalCustomGradientInputValue
+                : sliderGlobalBgNormalGradientColor || sliderGlobalBgNormalClassicColor
+            };
             ` : `
                 background: ${sliderGlobalBgNormalClassicColor};
             `}
@@ -346,11 +348,10 @@ const generateSliderStyle = (attributes) => {
         }
         .${blockID}.fb-slider-container:hover{
             ${sliderGlobalBgHoverBackgroundType === 'gradient' ? `
-                background: ${
-                    sliderGlobalBgHoverCustomGradientSwitcher && sliderGlobalBgHoverCustomGradientInputValue
-                        ? sliderGlobalBgHoverCustomGradientInputValue
-                        : sliderGlobalBgHoverGradientColor || sliderGlobalBgHoverClassicColor
-                };
+                background: ${sliderGlobalBgHoverCustomGradientSwitcher && sliderGlobalBgHoverCustomGradientInputValue
+                ? sliderGlobalBgHoverCustomGradientInputValue
+                : sliderGlobalBgHoverGradientColor || sliderGlobalBgHoverClassicColor
+            };
             ` : `
                 background: ${sliderGlobalBgHoverClassicColor};
             `}
@@ -541,7 +542,7 @@ const generateSliderStyle = (attributes) => {
         }
 
         @media only screen and (max-width: 1024px) {
-            .${ blockID }.fb-slider-container{
+            .${blockID}.fb-slider-container{
                 ${sliderPositionType !== 'default' && sliderPositionType !== 'relative' && sliderHZOrientationType === 'left' && sliderHZLeftOffset?.Tablet !== undefined ? `left: ${sliderHZLeftOffset?.Tablet}${sliderHZLeftOffsetUnits?.Tablet};` : ''}
                 ${sliderPositionType !== 'default' && sliderPositionType !== 'relative' && sliderHZOrientationType === 'right' && sliderHZRightOffset?.Tablet !== undefined ? `right: ${sliderHZRightOffset?.Tablet}${sliderHZRightOffsetUnits?.Tablet};` : ''}
                 ${sliderPositionType !== 'default' && sliderPositionType !== 'relative' && sliderVROrientationType === 'top' && sliderVRTopOffset?.Tablet !== undefined ? `top: ${sliderVRTopOffset?.Tablet}${sliderVRTopOffsetUnits?.Tablet};` : ''}
@@ -668,7 +669,7 @@ const generateSliderStyle = (attributes) => {
         }
 
         @media only screen and (max-width: 767px) {
-            .${ blockID }.fb-slider-container{
+            .${blockID}.fb-slider-container{
                 ${sliderPositionType !== 'default' && sliderPositionType !== 'relative' && sliderHZOrientationType === 'left' && sliderHZLeftOffset?.Mobile !== undefined ? `left: ${sliderHZLeftOffset?.Mobile}${sliderHZLeftOffsetUnits?.Mobile};` : ''}
                 ${sliderPositionType !== 'default' && sliderPositionType !== 'relative' && sliderHZOrientationType === 'right' && sliderHZRightOffset?.Mobile !== undefined ? `right: ${sliderHZRightOffset?.Mobile}${sliderHZRightOffsetUnits?.Mobile};` : ''}
                 ${sliderPositionType !== 'default' && sliderPositionType !== 'relative' && sliderVROrientationType === 'top' && sliderVRTopOffset?.Mobile !== undefined ? `top: ${sliderVRTopOffset?.Mobile}${sliderVRTopOffsetUnits?.Mobile};` : ''}

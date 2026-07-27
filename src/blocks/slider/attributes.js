@@ -171,6 +171,22 @@ const attributes = {
 		type: 'string',
 		default: 'row',
 	},
+	sliderNavigationTransform: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
+		},
+	},
+	sliderNavigationTransformUnits: {
+		type: 'object',
+		default: {
+			Desktop: '%',
+			Tablet: '%',
+			Mobile: '%',
+		},
+	},
 	sliderArrowPositionTopOffset: {
 		type: 'object',
 		default: {
