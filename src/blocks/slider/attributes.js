@@ -335,6 +335,195 @@ const attributes = {
 		default: '',
 	},
 
+	/** Start Background */
+	sliderNavigationBgColorSwitcher: {
+		type: 'string',
+		default: 'normal'
+	},
+	sliderNavigationBgNormalBackgroundType: {
+		type: 'string',
+		default: 'classic',
+	},
+	sliderNavigationBgNormalClassicColor: {
+		type: 'string',
+		default: '',
+	},
+	sliderNavigationBgNormalGradientColor: {
+		type: 'string',
+		default: null,
+	},
+	sliderNavigationBgNormalCustomGradientSwitcher: {
+		type: 'boolean',
+		default: false,
+	},
+	sliderNavigationBgNormalCustomGradientInputValue: {
+		type: 'string',
+		default: '',
+	},
+
+	sliderNavigationBgHoverBackgroundType: {
+		type: 'string',
+		default: 'classic',
+	},
+	sliderNavigationBgHoverClassicColor: {
+		type: 'string',
+		default: '',
+	},
+	sliderNavigationBgHoverGradientColor: {
+		type: 'string',
+		default: null,
+	},
+	sliderNavigationBgHoverCustomGradientSwitcher: {
+		type: 'boolean',
+		default: false,
+	},
+	sliderNavigationBgHoverCustomGradientInputValue: {
+		type: 'string',
+		default: '',
+	},
+	/** End Background */
+
+	/** Start Border */
+	sliderNavigationBorder: {
+		type: 'string',
+		default: 'none',
+	},
+	sliderNavigationBorderColorSwitcher: {
+		type: 'string',
+		default: 'normal'
+	},
+	sliderNavigationBorderColor: {
+		type: 'string',
+		default: ''
+	},
+	sliderNavigationBorderHoverColor: {
+		type: 'string',
+	},
+	sliderNavigationBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	sliderNavigationBorderDesktop: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	sliderNavigationBorderTablet: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	sliderNavigationBorderMobile: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	sliderNavigationBorderLink: {
+		type: 'boolean',
+		default: true
+	},
+	/** End Border */
+
+	/** Start Border Radius */
+	sliderNavigationBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	sliderNavigationBorderRadiusDesktop: {
+		type: 'object',
+		default: {
+			top: '10',
+			bottom: '10',
+			left: '10',
+			right: '10',
+		},
+	},
+	sliderNavigationBorderRadiusTablet: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	sliderNavigationBorderRadiusMobile: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	sliderNavigationBorderRadiusLink: {
+		type: 'boolean',
+		default: true
+	},
+	/** End Border Radius */
+
+	/** Start Padding */
+	sliderNavigationPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	sliderNavigationPaddingDesktop: {
+		type: 'object',
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
+	},
+	sliderNavigationPaddingTablet: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	sliderNavigationPaddingMobile: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	sliderNavigationPaddingLink: {
+		type: 'boolean',
+		default: true
+	},
+	/** End Padding */
+
 	/** Start Arrows Style */
 	sliderArrowsSize: {
 		type: 'object',
