@@ -68,6 +68,14 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         sliderNavigationTransform,
         sliderNavigationTransformUnits,
 
+		sliderNavigationLeftIconRotateSwitcher,
+		sliderNavigationLeftIconRotate,
+		sliderNavigationLeftIconRotateHover,
+
+		sliderNavigationRightIconRotateSwitcher,
+		sliderNavigationRightIconRotate,
+		sliderNavigationRightIconRotateHover,
+
         sliderNavigationBgColorSwitcher,
         sliderNavigationBgNormalBackgroundType,
         sliderNavigationBgNormalClassicColor,
@@ -1496,6 +1504,77 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                             checked={sliderArrowsIconSwitcher}
                             onChange={(value) => setAttributes({ sliderArrowsIconSwitcher: value })}
                         />
+
+                        <FB_SwitcherControl
+                            label={__("Rotation Left Icon", "frontis-blocks")}
+                            globalSwitcher={sliderNavigationLeftIconRotateSwitcher}
+                            setGlobalSwitcher={(value) => setAttributes({ sliderNavigationLeftIconRotateSwitcher: value })}
+                        />
+                        {sliderNavigationLeftIconRotateSwitcher === 'normal' && (
+                            <FB_Range
+                                min={-360}
+                                max={360}
+                                label={__("Rotate", "frontis-blocks")}
+                                rangeValue={sliderNavigationLeftIconRotate}
+                                onChangeHandler={(value) => setAttributes({ sliderNavigationLeftIconRotate: value === 0 ? undefined : value })}
+                                deviceType={deviceType}
+                                setAttributes={setAttributes}
+                                rangeStep={1}
+                                resetFallbackValue={""}
+                                isRangeUnit={false}
+
+                            />
+                        )}
+                        {sliderNavigationLeftIconRotateSwitcher === 'hover' && (
+                            <FB_Range
+                                min={-360}
+                                max={360}
+                                label={__("Rotate", "frontis-blocks")}
+                                rangeValue={sliderNavigationLeftIconRotateHover}
+                                onChangeHandler={(value) => setAttributes({ sliderNavigationLeftIconRotateHover: value === 0 ? undefined : value })}
+                                deviceType={deviceType}
+                                setAttributes={setAttributes}
+                                rangeStep={1}
+                                resetFallbackValue={""}
+                                isRangeUnit={false}
+                            />
+                        )}
+
+                        <FB_SwitcherControl
+                            label={__("Rotation Right Icon", "frontis-blocks")}
+                            globalSwitcher={sliderNavigationRightIconRotateSwitcher}
+                            setGlobalSwitcher={(value) => setAttributes({ sliderNavigationRightIconRotateSwitcher: value })}
+                        />
+                        {sliderNavigationRightIconRotateSwitcher === 'normal' && (
+                            <FB_Range
+                                min={-360}
+                                max={360}
+                                label={__("Rotate", "frontis-blocks")}
+                                rangeValue={sliderNavigationRightIconRotate}
+                                onChangeHandler={(value) => setAttributes({ sliderNavigationRightIconRotate: value === 0 ? undefined : value })}
+                                deviceType={deviceType}
+                                setAttributes={setAttributes}
+                                rangeStep={1}
+                                resetFallbackValue={""}
+                                isRangeUnit={false}
+
+                            />
+                        )}
+                        {sliderNavigationRightIconRotateSwitcher === 'hover' && (
+                            <FB_Range
+                                min={-360}
+                                max={360}
+                                label={__("Rotate", "frontis-blocks")}
+                                rangeValue={sliderNavigationRightIconRotateHover}
+                                onChangeHandler={(value) => setAttributes({ sliderNavigationRightIconRotateHover: value === 0 ? undefined : value })}
+                                deviceType={deviceType}
+                                setAttributes={setAttributes}
+                                rangeStep={1}
+                                resetFallbackValue={""}
+                                isRangeUnit={false}
+                            />
+                        )}
+
 
                         {sliderArrowsIconSwitcher && (
                             <>

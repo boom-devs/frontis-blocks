@@ -157,7 +157,6 @@ const attributes = {
 		},
 	},
 
-
 	sliderArrowPositionType: {
 		type: 'string',
 		default: 'outside',
@@ -171,6 +170,48 @@ const attributes = {
 		type: 'string',
 		default: 'row',
 	},
+
+	sliderNavigationLeftIconRotateSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
+    sliderNavigationLeftIconRotate: {
+        type: 'object',
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        }
+    },
+    sliderNavigationLeftIconRotateHover: {
+        type: 'object',
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        }
+    },
+	sliderNavigationRightIconRotateSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
+    sliderNavigationRightIconRotate: {
+        type: 'object',
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        }
+    },
+    sliderNavigationRightIconRotateHover: {
+        type: 'object',
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        }
+    },
+
 	sliderNavigationTransform: {
 		type: 'object',
 		default: {
