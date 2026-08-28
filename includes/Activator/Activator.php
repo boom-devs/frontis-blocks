@@ -74,7 +74,8 @@ class Activator
 					}
 
 					// Insert job using your existing Helper method
-					Helper::insert_job($single_post_id, $single_post->post_name . $single_post_id);
+					$post_type = get_post_type($single_post_id) ?: 'post';
+					Helper::insert_job($single_post_id, $post_type . '_' . $single_post->post_name . '_' . $single_post_id);
 				}
 			}
 		} catch (Exception $e) {
