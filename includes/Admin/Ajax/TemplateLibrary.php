@@ -517,6 +517,7 @@ class TemplateLibrary extends AjaxBase
         $this->check_permission();
 
         $title           = sanitize_text_field($_POST['title']    ?? '');
+        $featured_image  = isset($_POST['featured_image']) ? esc_url_raw(wp_unslash($_POST['featured_image'])) : '';
         $slug            = sanitize_title($_POST['slug']           ?? '');
         $template        = sanitize_text_field($_POST['template']  ?? '');
         $uploads_updated = isset($_POST['uploads_updated'])
@@ -606,6 +607,16 @@ class TemplateLibrary extends AjaxBase
             update_post_meta($post_id, '_wp_page_template', $template);
         }
 
+        $thumbnail_id = 0;
+        if (!empty($featured_image)) {
+            $thumbnail_id = $this->resolve_attachment_id_from_media_url($featured_image);
+            if ($thumbnail_id > 0) {
+                set_post_thumbnail($post_id, $thumbnail_id);
+            } else {
+                error_log('FB Import: Could not resolve featured image for post "' . $title . '": ' . $featured_image);
+            }
+        }
+
         update_post_meta($post_id, 'fb_page_assets_generation', 'compiling');
 
         if (class_exists('FrontisBlocks\Utils\Helper')) {
@@ -613,12 +624,13 @@ class TemplateLibrary extends AjaxBase
         }
 
         wp_send_json_success([
-            'message'  => sprintf('Post "%s" has been %s successfully', $title, $action),
-            'post_id'  => $post_id,
-            'title'    => $title,
-            'slug'     => $slug,
-            'template' => $template ?: 'default',
-            'action'   => $action,
+            'message'       => sprintf('Post "%s" has been %s successfully', $title, $action),
+            'post_id'       => $post_id,
+            'title'         => $title,
+            'slug'          => $slug,
+            'template'      => $template ?: 'default',
+            'action'        => $action,
+            'thumbnail_id'  => $thumbnail_id,
         ]);
     }
 
@@ -1062,6 +1074,75 @@ class TemplateLibrary extends AjaxBase
     // =========================================================================
     // PRIVATE HELPERS
     // =========================================================================
+
+    /**
+     * Map a demo media URL to the local uploads URL (strip /sites/{id}/).
+     */
+    private function resolve_local_media_url( string $url ): string
+    {
+        if (empty($url)) {
+            return '';
+        }
+
+        $search_str = 'wp-content/uploads/';
+        $pos        = strpos($url, $search_str);
+
+        if ($pos === false) {
+            return $url;
+        }
+
+        $relative_path = substr($url, $pos + strlen($search_str));
+        $relative_path = rtrim($relative_path, '"\'\\ ');
+        $relative_path = preg_replace('/^sites\/\d+\//', '', $relative_path);
+
+        $upload_dir = wp_upload_dir();
+        return trailingslashit($upload_dir['baseurl']) . $relative_path;
+    }
+
+    /**
+     * Resolve an already-uploaded media URL to an attachment ID.
+     */
+    private function resolve_attachment_id_from_media_url( string $url ): int
+    {
+        if (empty($url)) {
+            return 0;
+        }
+
+        $local_url = $this->resolve_local_media_url($url);
+        if (empty($local_url)) {
+            return 0;
+        }
+
+        $attachment_id = attachment_url_to_postid($local_url);
+        if ($attachment_id > 0) {
+            error_log("FB Import: Featured image matched $url → $local_url (ID: $attachment_id)");
+            return (int) $attachment_id;
+        }
+
+        // Fallback: match by filename in the media library.
+        $filename = basename(parse_url($local_url, PHP_URL_PATH) ?: '');
+        if (empty($filename)) {
+            return 0;
+        }
+
+        global $wpdb;
+        $attachment_id = (int) $wpdb->get_var(
+            $wpdb->prepare(
+                "SELECT post_id FROM {$wpdb->postmeta}
+                 WHERE meta_key = '_wp_attached_file'
+                 AND meta_value LIKE %s
+                 ORDER BY post_id DESC
+                 LIMIT 1",
+                '%' . $wpdb->esc_like($filename)
+            )
+        );
+
+        if ($attachment_id > 0) {
+            error_log("FB Import: Featured image matched by filename $filename (ID: $attachment_id)");
+        }
+
+        return $attachment_id;
+    }
 
     /**
      * Replace external media URLs with local upload URLs.
