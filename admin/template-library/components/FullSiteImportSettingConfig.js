@@ -611,11 +611,10 @@ const FullSiteImportSettingConfig = ({
         const formData = new FormData();
         formData.append("action", "fb_posts_import");
         formData.append("security", nonce);
-        formData.append("title", post?.title || "Untitled");
-        formData.append("featured_image", post?.featured_image || "");
+        formData.append("title", post.title || "Untitled");
         formData.append("content", parsedContent);
-        formData.append("slug", post?.slug || "");
-        formData.append("template", post?.template || "");
+        formData.append("slug", post.slug || "");
+        formData.append("template", post.template || "");
         formData.append("uploads_updated", isUploadsUpdated);
         formData.append("site_url", template?.preview_url || window.location.origin);
 
