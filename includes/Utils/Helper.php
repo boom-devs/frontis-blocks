@@ -1310,6 +1310,67 @@ class Helper
         return 'single';
     }
 
+    /**
+     * Get post-type scoped asset directory/identifier for a post.
+     * e.g. "services/ai-saas-development", "post/ai-saas-development", "page/about-us"
+     * For WooCommerce templates (page-cart, page-checkout, order-confirmation, archive-product), retains template slug.
+     *
+     * @param int|object $post_id Post ID or WP_Post object.
+     * @return string
+     */
+    public static function get_asset_name_by_post($post_id)
+    {
+        if (empty($post_id)) {
+            return '';
+        }
+
+        $post = is_object($post_id) ? $post_id : get_post($post_id);
+        if (!$post) {
+            return '';
+        }
+
+        $actual_post_id = !empty($post->ID) ? absint($post->ID) : absint($post_id);
+        $template_name = self::resolve_template_slug($actual_post_id);
+        if (in_array($template_name, ['page-cart', 'page-checkout', 'order-confirmation', 'archive-product'], true)) {
+            return $template_name;
+        }
+
+        $post_type = !empty($post->post_type) ? $post->post_type : get_post_type($actual_post_id);
+        $post_name = !empty($post->post_name) ? $post->post_name : 'post-' . $actual_post_id;
+
+        if (!$post_type) {
+            $post_type = 'post';
+        }
+
+        return $post_type . '/' . $post_name;
+    }
+
+    /**
+     * Get legacy asset directory/identifier for backward compatibility fallback.
+     *
+     * @param int|object $post_id Post ID or WP_Post object.
+     * @return string
+     */
+    public static function get_legacy_asset_name_by_post($post_id)
+    {
+        if (empty($post_id)) {
+            return '';
+        }
+
+        $post = is_object($post_id) ? $post_id : get_post($post_id);
+        if (!$post) {
+            return '';
+        }
+
+        $actual_post_id = !empty($post->ID) ? absint($post->ID) : absint($post_id);
+        $template_name = self::resolve_template_slug($actual_post_id);
+        if (in_array($template_name, ['page-cart', 'page-checkout', 'order-confirmation', 'archive-product'], true)) {
+            return $template_name;
+        }
+
+        return !empty($post->post_name) ? $post->post_name : 'post-' . $actual_post_id;
+    }
+
     public static function get_template_content($post_id)
     {
         global $wpdb;

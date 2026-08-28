@@ -97,10 +97,9 @@ class AssetsGenerator
 			$this->generate_all_blocks_assets();
 			$this->combine_static_assets();
 
-			$page_name = $this->post->post_name;
-			$template_name = Helper::resolve_template_slug($post_id);
-			if (in_array($template_name, ['page-cart', 'page-checkout', 'order-confirmation', 'archive-product'], true)) {
-				$page_name = $template_name;
+			$page_name = Helper::get_asset_name_by_post($post_id);
+			if (!$page_name) {
+				$page_name = $this->post->post_name;
 			}
 			$this->combine_and_save_css_file($page_name);
 			$this->persist_page_google_fonts_url($this->block_fonts);
@@ -609,8 +608,10 @@ class AssetsGenerator
 				: $this->css_content .= $css_content;
 		}
 
+		$file_slug = basename($page_name);
+
 		// Minify main CSS content
-		$css_file_name = $page_name . '.min.css';
+		$css_file_name = $file_slug . '.min.css';
 		$css_file = $css_dir . $css_file_name;
 		$minified_css = (new CSS($this->css_content))->minify();
 		if (!file_put_contents($css_file, $minified_css)) {
@@ -619,7 +620,7 @@ class AssetsGenerator
 
 		// Handle critical CSS if applicable
 		if ($this->genrating_critical_css && !empty($this->critical_css_content)) {
-			$critical_css_filename = $page_name . '-critical.min.css';
+			$critical_css_filename = $file_slug . '-critical.min.css';
 			$critical_css_file = $css_dir . $critical_css_filename;
 			$critical_minified_css = (new CSS($this->critical_css_content))->minify();
 			if (!file_put_contents($critical_css_file, $critical_minified_css)) {
@@ -628,7 +629,7 @@ class AssetsGenerator
 		}
 
 		// Save JS file
-		$js_file_name = $page_name . '.js';
+		$js_file_name = $file_slug . '.js';
 		$js_file = $css_dir . $js_file_name;
 		if (!file_put_contents($js_file, $this->js_content)) {
 			error_log("Failed to write JS file: $js_file");
@@ -652,23 +653,9 @@ class AssetsGenerator
 		}
 
 		// Combine and save CSS files
-		$page_name = $this->post->post_name;
-		$template_name = Helper::resolve_template_slug($this->post->ID);
-		if (in_array($template_name, ['page-cart', 'page-checkout', 'order-confirmation', 'archive-product'], true)) {
-			$page_name = $template_name;
-		}
-
-		// Check if post or custom post then its should be post type instead of page name
-		if (Helper::is_custom_post_type($this->post->ID) || get_post_type($this->post->ID) === 'post') {
-
-			$frontis_used = get_post_meta($this->post->ID, 'frontis_blocks_used', true);
-
-			if ($frontis_used) {
-				$page_name = $this->post->post_name;
-				$this->get_template_css();
-			} else {
-				$page_name = get_post_type($this->post->ID);
-			}
+		$page_name = Helper::get_asset_name_by_post($this->post->ID);
+		if (!$page_name) {
+			$page_name = $this->post->post_name;
 		}
 
 		$this->combine_and_save_css_file($page_name);
