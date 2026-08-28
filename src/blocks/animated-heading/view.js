@@ -6,6 +6,7 @@
             const animationType = container.getAttribute('data-animation-type');
             const animationDurationAttr = container.getAttribute('data-animation-duration');
             const animationDuration = animationDurationAttr ? parseInt(animationDurationAttr) : null;
+            // console.log(animationDuration);
 
             // Prevent multiple initializations
             if (container.hasAttribute('data-heading-initialized')) return;
@@ -151,6 +152,7 @@
                 const HIDE_DURATION = parseInt(wrapper.dataset.hideDuration) || 700;
                 const VISIBLE_HOLD = parseInt(wrapper.dataset.visibleHold) || 2000;
                 const RESET_DELAY = parseInt(wrapper.dataset.resetDelay) || 300;
+                const REVEAL_DIRECTION = wrapper.dataset.revealDirection || 'left';
 
                 let currentIndex = 0;
 
@@ -189,10 +191,11 @@
 
                     setTimeout(() => {
                         spans.forEach((span, i) => {
+                            const delayIndex = REVEAL_DIRECTION === 'right' ? (spans.length - 1 - i) : i;
                             setTimeout(() => {
                                 span.classList.remove('fb-animated-heading-char-appear');
                                 span.classList.add('fb-animated-heading-char-hide');
-                            }, i * CHAR_DELAY);
+                            }, delayIndex * CHAR_DELAY);
                         });
                     }, hideStart);
 
