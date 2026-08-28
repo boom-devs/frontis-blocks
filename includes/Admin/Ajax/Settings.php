@@ -297,7 +297,7 @@ class Settings extends AjaxBase
 				}
 
 				AssetsGenerator::get_instance()->generate_page_assets($post->ID, $modified_post, $critical_css_used);
-				$generatedPages[] = $post->post_name;
+				$generatedPages[] = Helper::get_asset_name_by_post($post->ID) ?: $post->post_name;
 			}
 		}
 

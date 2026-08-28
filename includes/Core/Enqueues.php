@@ -80,20 +80,40 @@ class Enqueues
     private function get_current_page_asset_name($template_name)
     {
         $post_id = $this->get_current_post_id();
-        $current_post = $post_id ? get_post($post_id) : null;
-        $current_page_name = $current_post ? $current_post->post_name : '';
-        $frontis_used = $post_id ? get_post_meta($post_id, 'frontis_blocks_used', true) : false;
-        
-        if (in_array($template_name, ['page-cart', 'page-checkout', 'order-confirmation', 'archive-product'], true)) {
-            $current_page_name = $template_name;
+        if (!$post_id) {
+            return $template_name;
         }
 
-        $current_page_css_path = $current_page_name
-            ? $this->upload_dir['basedir'] . '/frontis-blocks/' . $current_page_name . '/' . $current_page_name . '.min.css'
-            : '';
+        $current_post = get_post($post_id);
+        if (!$current_post) {
+            return $template_name;
+        }
 
-        if (($frontis_used || ($current_page_css_path && file_exists($current_page_css_path))) && $current_page_name) {
-            return $current_page_name;
+        $scoped_page_name = Helper::get_asset_name_by_post($post_id);
+        $legacy_page_name = Helper::get_legacy_asset_name_by_post($post_id);
+        $frontis_used = get_post_meta($post_id, 'frontis_blocks_used', true);
+
+        // 1. Check if post-type scoped asset exists (e.g. services/ai-saas-development/ai-saas-development.min.css)
+        if ($scoped_page_name) {
+            $scoped_file_slug = basename($scoped_page_name);
+            $scoped_css_path = $this->upload_dir['basedir'] . '/frontis-blocks/' . trailingslashit($scoped_page_name) . $scoped_file_slug . '.min.css';
+            if (file_exists($scoped_css_path)) {
+                return $scoped_page_name;
+            }
+        }
+
+        // 2. Backward Compatibility Fallback: Check if legacy asset exists (e.g. ai-saas-development/ai-saas-development.min.css)
+        if ($legacy_page_name) {
+            $legacy_file_slug = basename($legacy_page_name);
+            $legacy_css_path = $this->upload_dir['basedir'] . '/frontis-blocks/' . trailingslashit($legacy_page_name) . $legacy_file_slug . '.min.css';
+            if (file_exists($legacy_css_path)) {
+                return $legacy_page_name;
+            }
+        }
+
+        // 3. If frontis blocks are used on this post, return scoped asset name so on-demand generation targets it
+        if ($frontis_used && $scoped_page_name) {
+            return $scoped_page_name;
         }
 
         return $template_name;
@@ -116,17 +136,17 @@ class Enqueues
             return;
         }
 
-        $page_name = $post->post_name;
-        $template_name = Helper::resolve_template_slug($post_id);
-        if (in_array($template_name, ['page-cart', 'page-checkout', 'order-confirmation', 'archive-product'], true)) {
-            $page_name = $template_name;
+        $page_name = Helper::get_asset_name_by_post($post_id);
+        if (!$page_name) {
+            $page_name = $post->post_name;
         }
 
         if (!$page_name) {
             return;
         }
 
-        $css_file_system_path = $this->upload_dir['basedir'] . '/frontis-blocks/' . $page_name . '/' . $page_name . '.min.css';
+        $file_slug = basename($page_name);
+        $css_file_system_path = $this->upload_dir['basedir'] . '/frontis-blocks/' . trailingslashit($page_name) . $file_slug . '.min.css';
         $page_compiling_mode = get_post_meta($post_id, 'fb_page_assets_generation', true);
         $frontis_used = get_post_meta($post_id, 'frontis_blocks_used', true);
 
@@ -443,16 +463,17 @@ class Enqueues
 
         $page_name = $this->get_page_template_name();
         $page_name = $this->get_current_page_asset_name($page_name);
-        $frontend_dir = $this->upload_dir['basedir'] . '/frontis-blocks/' . $page_name . '/';
-        $frontend_url = $this->upload_dir['baseurl'] . '/frontis-blocks/' . $page_name . '/';
+        $frontend_dir = $this->upload_dir['basedir'] . '/frontis-blocks/' . trailingslashit($page_name);
+        $frontend_url = $this->upload_dir['baseurl'] . '/frontis-blocks/' . trailingslashit($page_name);
+        $file_slug = basename($page_name);
 
-        // CSS file paths based on post_name
-        $css_file_system_path_page = $frontend_dir . $page_name . '.min.css';
-        $css_file_url_page = $frontend_url . $page_name . '.min.css';
+        // CSS file paths based on post_name / template_name
+        $css_file_system_path_page = $frontend_dir . $file_slug . '.min.css';
+        $css_file_url_page = $frontend_url . $file_slug . '.min.css';
 
-        // Critical CSS file paths based on post_name
-        $critical_css_file_system_path = $frontend_dir . $page_name . '-critical.min.css';
-        $critical_css_file_url = $frontend_url . $page_name . '-critical.min.css';
+        // Critical CSS file paths based on post_name / template_name
+        $critical_css_file_system_path = $frontend_dir . $file_slug . '-critical.min.css';
+        $critical_css_file_url = $frontend_url . $file_slug . '-critical.min.css';
 
         // Enqueue critical CSS in header if it exists
         if (($this->critical_css_page || $this->critical_css_template) && file_exists($critical_css_file_system_path)) {
@@ -481,10 +502,11 @@ class Enqueues
     {
         $page_name = $this->get_page_template_name();
         $page_name = $this->get_current_page_asset_name($page_name);
-        $frontend_dir_page_js = $this->upload_dir['basedir'] . '/frontis-blocks/' . $page_name . '/';
-        $frontend_url_page_js = $this->upload_dir['baseurl'] . '/frontis-blocks/' . $page_name . '/';
-        $file_system_path_page_js = $frontend_dir_page_js . $page_name . '.js';
-        $file_url_page_js = $frontend_url_page_js . $page_name . '.js';
+        $frontend_dir_page_js = $this->upload_dir['basedir'] . '/frontis-blocks/' . trailingslashit($page_name);
+        $frontend_url_page_js = $this->upload_dir['baseurl'] . '/frontis-blocks/' . trailingslashit($page_name);
+        $file_slug = basename($page_name);
+        $file_system_path_page_js = $frontend_dir_page_js . $file_slug . '.js';
+        $file_url_page_js = $frontend_url_page_js . $file_slug . '.js';
 
         // Enqueue JS in footer with defer
         if (file_exists($file_system_path_page_js)) {
