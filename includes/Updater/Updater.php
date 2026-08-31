@@ -32,15 +32,13 @@ class Updater
      */
     private function init(): void
     {
-        $slug = \FrontisBlocks\Plugin::SLUG;
-        $version = \FrontisBlocks\Plugin::VERSION;
-        $endpoint = 'https://wpmessiah.com/api/updates/' . $slug;
+        $endpoint = 'https://wpmessiah.com/api/updates/' . FB_SLUG;
 
         $adapter = new JsonAdapter(
             $endpoint,
-            $version,
+            FB_VERSION,
             FB_PLUGIN_FILE,
-            $slug
+            FB_SLUG
         );
 
         $manager = new UpdaterManager($adapter, FB_PLUGIN_FILE);
