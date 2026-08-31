@@ -22,8 +22,7 @@ use FrontisBlocks\Core\DemoContentImporter;
 use FrontisBlocks\RestApi\RestApi;
 use FrontisBlocks\BackgroundProcess\AssetsGenerationProcess;
 use FrontisBlocks\Assets\AssetsGenerationStatus;
-use FrontisBlocks\Updater\JsonApiAdapter;
-use FrontisBlocks\Updater\PluginUpdaterManager;
+use FrontisBlocks\Updater\Updater;
 
 final class Plugin
 {
@@ -167,22 +166,6 @@ final class Plugin
 		RestApi::get_instance();
 		AssetsGenerationStatus::get_instance();
 		AssetsGenerationProcess::get_instance();
-		$this->init_updater();
-	}
-
-	/**
-	 * Initialize Self-Hosted Plugin Updater (via Cloudflare Gateway)
-	 */
-	private function init_updater()
-	{
-		$adapter = new JsonApiAdapter(
-			'https://wpmessiah.com/api/updates/' . self::SLUG,
-			self::VERSION,
-			FB_PLUGIN_FILE,
-			self::SLUG
-		);
-
-		$updater = new PluginUpdaterManager($adapter, FB_PLUGIN_FILE);
-		$updater->register();
+		Updater::get_instance();
 	}
 }
