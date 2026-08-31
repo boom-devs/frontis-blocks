@@ -6,16 +6,16 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class PluginUpdaterManager
+ * Class UpdaterManager
  *
  * Connects the updater adapter to WordPress native update lifecycle hooks.
  *
  * @package FrontisBlocks\Updater
  */
-class PluginUpdaterManager
+class UpdaterManager
 {
-    /** @var PluginUpdateAdapterInterface */
-    private PluginUpdateAdapterInterface $adapter;
+    /** @var AdapterInterface */
+    private AdapterInterface $adapter;
 
     /** @var string Full path to main plugin file */
     private string $pluginFile;
@@ -24,12 +24,12 @@ class PluginUpdaterManager
     private string $pluginSlug;
 
     /**
-     * PluginUpdaterManager constructor.
+     * UpdaterManager constructor.
      *
-     * @param PluginUpdateAdapterInterface $adapter
+     * @param AdapterInterface $adapter
      * @param string $pluginFile
      */
-    public function __construct(PluginUpdateAdapterInterface $adapter, string $pluginFile)
+    public function __construct(AdapterInterface $adapter, string $pluginFile)
     {
         $this->adapter    = $adapter;
         $this->pluginFile = $pluginFile;
@@ -47,7 +47,7 @@ class PluginUpdaterManager
         // View details popup in plugins dashboard
         add_filter('plugins_api', [$this, 'injectPluginDetails'], 20, 3);
 
-        // Fix folder name after GitHub zip extraction
+        // Fix folder name after zip extraction
         add_filter('upgrader_source_selection', [$this, 'fixSourceDirectory'], 10, 4);
 
         // Clear cached transients after update completion
@@ -125,6 +125,7 @@ class PluginUpdaterManager
 
     /**
      * Clears transients when this plugin has finished updating.
+     * Delegates cache purging directly to the adapter instance.
      *
      * @param \WP_Upgrader $upgrader
      * @param array $options
@@ -141,9 +142,7 @@ class PluginUpdaterManager
         $plugins = $options['plugins'] ?? [];
 
         if (in_array(plugin_basename($this->pluginFile), $plugins, true)) {
-            $slugKey = sanitize_key($this->pluginSlug);
-            delete_transient($slugKey . '_gh_update');
-            delete_transient($slugKey . '_gh_rate_limited');
+            $this->adapter->clearCache();
         }
     }
 }

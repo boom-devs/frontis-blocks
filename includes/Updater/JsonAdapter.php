@@ -6,13 +6,13 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class JsonApiAdapter
+ * Class JsonAdapter
  *
  * Connects to the Cloudflare Worker / REST JSON update endpoint.
  *
  * @package FrontisBlocks\Updater
  */
-class JsonApiAdapter implements PluginUpdateAdapterInterface
+class JsonAdapter implements AdapterInterface
 {
     /** @var string Remote API endpoint URL */
     private string $apiUrl;
@@ -33,7 +33,7 @@ class JsonApiAdapter implements PluginUpdateAdapterInterface
     private int $cacheDuration;
 
     /**
-     * JsonApiAdapter constructor.
+     * JsonAdapter constructor.
      *
      * @param string $apiUrl
      * @param string $currentVersion
@@ -57,15 +57,29 @@ class JsonApiAdapter implements PluginUpdateAdapterInterface
     }
 
     /**
+     * Checks whether a forced update check is in progress.
+     *
+     * @return bool
+     */
+    private function isForceCheck(): bool
+    {
+        return !empty($_GET['force-check'])
+            || (isset($_GET['action']) && 'check-again' === $_GET['action']);
+    }
+
+    /**
      * Fetches remote update data with transient caching.
      *
      * @return object|null
      */
     private function fetchRemoteData(): ?object
     {
-        $cached = get_transient($this->cacheKey);
-        if (false !== $cached) {
-            return $cached;
+        // Bypass cache if user clicked "Check Again" in WP Dashboard
+        if (!$this->isForceCheck()) {
+            $cached = get_transient($this->cacheKey);
+            if (false !== $cached) {
+                return $cached;
+            }
         }
 
         $response = wp_remote_get($this->apiUrl, [
@@ -151,5 +165,13 @@ class JsonApiAdapter implements PluginUpdateAdapterInterface
                 'changelog'   => 'View release notes on WPmessiah.',
             ]),
         ];
+    }
+
+    /**
+     * Clears all cached transient data.
+     */
+    public function clearCache(): void
+    {
+        delete_transient($this->cacheKey);
     }
 }
