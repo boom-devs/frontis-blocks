@@ -17,7 +17,7 @@ use FrontisBlocks\Utils\Helper;
 class Activator
 {
 
-	const VERSION = '1.2.5-beta2';
+	const VERSION = '1.2.5-beta3';
 	const SLUG = 'frontis-blocks';
 
 	use Singleton;
