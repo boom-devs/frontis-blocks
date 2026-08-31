@@ -1,6 +1,6 @@
 {
   "name": "frontis-blocks",
-  "version": "1.2.5",
+  "version": "1.2.5-beta1",
   "description": "",
   "main": "index.js",
   "scripts": {
