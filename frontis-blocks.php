@@ -37,3 +37,14 @@ function frontis_blocks()
 }
 
 frontis_blocks();
+
+/**
+ * Visual Test Notice: Displays the currently active plugin version in WP Admin.
+ */
+add_action('admin_notices', function () {
+    echo '<div class="notice notice-info is-dismissible" style="border-left-color: #2271b1; padding: 10px 15px;">';
+    echo '<p style="margin: 0; font-size: 14px; font-weight: 600;">';
+    echo '🚀 Frontis Blocks Active Version: <span style="color: #2271b1;">' . esc_html(FrontisBlocks\Plugin::VERSION) . '</span> (Test Banner)';
+    echo '</p>';
+    echo '</div>';
+});
