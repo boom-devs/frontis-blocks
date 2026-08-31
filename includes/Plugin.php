@@ -165,5 +165,22 @@ final class Plugin
 		RestApi::get_instance();
 		AssetsGenerationStatus::get_instance();
 		AssetsGenerationProcess::get_instance();
+		$this->init_updater();
+	}
+
+	/**
+	 * Initialize Self-Hosted Plugin Updater (via Cloudflare Gateway)
+	 */
+	private function init_updater()
+	{
+		$adapter = new \FrontisBlocks\Updater\JsonApiAdapter(
+			'https://wpmessiah.com/api/updates/' . self::SLUG,
+			self::VERSION,
+			FB_PLUGIN_FILE,
+			self::SLUG
+		);
+
+		$updater = new \FrontisBlocks\Updater\PluginUpdaterManager($adapter, FB_PLUGIN_FILE);
+		$updater->register();
 	}
 }
