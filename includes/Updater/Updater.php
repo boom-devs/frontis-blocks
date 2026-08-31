@@ -30,18 +30,18 @@ class Updater
     /**
      * Initializes and registers the plugin updater.
      */
-    private function init()
+    private function init(): void
     {
         $endpoint = 'https://wpmessiah.com/api/updates/' . FB_SLUG;
 
-        $adapter = new JsonApiAdapter(
+        $adapter = new JsonAdapter(
             $endpoint,
             FB_VERSION,
             FB_PLUGIN_FILE,
             FB_SLUG
         );
 
-        $manager = new PluginUpdaterManager($adapter, FB_PLUGIN_FILE);
+        $manager = new UpdaterManager($adapter, FB_PLUGIN_FILE);
         $manager->register();
     }
 }

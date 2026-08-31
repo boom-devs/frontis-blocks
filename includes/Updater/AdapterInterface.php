@@ -6,13 +6,13 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Interface PluginUpdateAdapterInterface
+ * Interface AdapterInterface
  *
  * Contract for update source adapters.
  *
  * @package FrontisBlocks\Updater
  */
-interface PluginUpdateAdapterInterface
+interface AdapterInterface
 {
     /**
      * Checks if a new release/version is available.
@@ -29,4 +29,11 @@ interface PluginUpdateAdapterInterface
      * @return object|false
      */
     public function getPluginDetails(string $action, object $args);
+
+    /**
+     * Clears all cached transient data related to this update adapter.
+     *
+     * @return void
+     */
+    public function clearCache(): void;
 }

@@ -6,13 +6,13 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class GitHubApiAdapter
+ * Class GitHubAdapter
  *
  * Fetches update information and release assets directly from GitHub Releases.
  *
  * @package FrontisBlocks\Updater
  */
-class GitHubApiAdapter implements PluginUpdateAdapterInterface
+class GitHubAdapter implements AdapterInterface
 {
     /** @var string GitHub repository path (e.g. 'boom-devs/frontis-blocks') */
     private string $repoPath;
@@ -33,7 +33,7 @@ class GitHubApiAdapter implements PluginUpdateAdapterInterface
     private string $cacheKey;
 
     /**
-     * GitHubApiAdapter constructor.
+     * GitHubAdapter constructor.
      *
      * @param string $repoPath Repository path formatted as 'owner/repo'
      * @param string $currentVersion Current plugin version
@@ -57,15 +57,28 @@ class GitHubApiAdapter implements PluginUpdateAdapterInterface
     }
 
     /**
-     * Fetches latest release data from GitHub API (cached for 1 hour to respect rate limits).
+     * Checks whether a forced update check is in progress.
+     *
+     * @return bool
+     */
+    private function isForceCheck(): bool
+    {
+        return !empty($_GET['force-check'])
+            || (isset($_GET['action']) && 'check-again' === $_GET['action']);
+    }
+
+    /**
+     * Fetches latest release data from GitHub API.
      *
      * @return object|null Decoded release object or null
      */
     private function fetchLatestRelease(): ?object
     {
-        $cached = get_transient($this->cacheKey);
-        if (false !== $cached) {
-            return $cached;
+        if (!$this->isForceCheck()) {
+            $cached = get_transient($this->cacheKey);
+            if (false !== $cached) {
+                return $cached;
+            }
         }
 
         $endpoint = "https://api.github.com/repos/{$this->repoPath}/releases/latest";
@@ -119,7 +132,7 @@ class GitHubApiAdapter implements PluginUpdateAdapterInterface
      */
     public function getUpdateInfo(): ?object
     {
-        if (get_transient($this->cacheKey . '_rate_limited')) {
+        if (get_transient($this->cacheKey . '_rate_limited') && !$this->isForceCheck()) {
             return null;
         }
 
@@ -134,7 +147,6 @@ class GitHubApiAdapter implements PluginUpdateAdapterInterface
             return null;
         }
 
-        // Locate .zip asset or fallback to zipball_url
         $downloadUrl = $release->zipball_url ?? '';
 
         if (!empty($release->assets) && is_array($release->assets)) {
@@ -207,5 +219,14 @@ class GitHubApiAdapter implements PluginUpdateAdapterInterface
                 'changelog'   => $changelog ?: 'View full release notes on GitHub: ' . ($release->html_url ?? ''),
             ],
         ];
+    }
+
+    /**
+     * Clears all cached transient data.
+     */
+    public function clearCache(): void
+    {
+        delete_transient($this->cacheKey);
+        delete_transient($this->cacheKey . '_rate_limited');
     }
 }
