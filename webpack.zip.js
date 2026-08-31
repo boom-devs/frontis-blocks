@@ -23,6 +23,8 @@ const zip = async () => {
 
     archive.pipe(outputStream);
 
+    const pluginSlug = 'frontis-blocks';
+
     for (const item of filesAndFolders) {
         const fullPath = path.resolve(__dirname, item);
 
@@ -30,9 +32,9 @@ const zip = async () => {
             const stats = fs.statSync(fullPath);
 
             if (stats.isDirectory()) {
-                archive.directory(fullPath, item); // Add full directory
+                archive.directory(fullPath, `${pluginSlug}/${item}`); // Add directory under plugin folder
             } else {
-                archive.file(fullPath, { name: item }); // Add individual file
+                archive.file(fullPath, { name: `${pluginSlug}/${item}` }); // Add file under plugin folder
             }
         } else {
             console.warn(`Warning: ${item} does not exist and will not be included.`);

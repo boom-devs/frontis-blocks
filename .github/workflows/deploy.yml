@@ -1,13 +1,16 @@
-name: Deploy to WordPress.org
+name: Release Plugin
 
 on:
   release:
     types: [published]
 
 jobs:
-  deploy:
-    name: Deploy to WordPress.org
+  build-and-release:
+    name: Build & Attach Release ZIP
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -18,11 +21,17 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          tools: composer:v2
+
       - name: Install Composer dependencies
         run: composer install --no-dev --optimize-autoloader
 
       - name: Install npm dependencies
-        run: npm install
+        run: npm ci || npm install
 
       - name: Build blocks
         run: npm run build
@@ -30,19 +39,12 @@ jobs:
       - name: Build admin
         run: npm run admin:build
 
-      - name: WordPress Plugin Deploy
-        id: deploy
-        uses: 10up/action-wordpress-plugin-deploy@stable
-        with:
-          generate-zip: true
-        env:
-          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
-          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
-          SLUG: frontis-blocks
+      - name: Generate Plugin ZIP
+        run: npm run plugin-zip
 
-      - name: Upload release asset
+      - name: Upload Release Asset
         uses: softprops/action-gh-release@v2
         with:
-          files: ${{ steps.deploy.outputs.zip-path }}
+          files: frontis-blocks.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

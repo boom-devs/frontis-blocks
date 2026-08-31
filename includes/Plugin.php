@@ -22,6 +22,7 @@ use FrontisBlocks\Core\DemoContentImporter;
 use FrontisBlocks\RestApi\RestApi;
 use FrontisBlocks\BackgroundProcess\AssetsGenerationProcess;
 use FrontisBlocks\Assets\AssetsGenerationStatus;
+use FrontisBlocks\Updater\Updater;
 
 final class Plugin
 {
@@ -165,5 +166,6 @@ final class Plugin
 		RestApi::get_instance();
 		AssetsGenerationStatus::get_instance();
 		AssetsGenerationProcess::get_instance();
+		Updater::get_instance();
 	}
 }
