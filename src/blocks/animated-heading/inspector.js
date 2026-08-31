@@ -1015,7 +1015,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                     <RangeControl
                         label={__('Animation Duration(ms)', 'frontis-blocks')}
                         value={animatedHeadingAnimationDuration}
-                        onChange={(value) => setAttributes({ animatedHeadingAnimationDuration: value })}
+                        onChange={(value) => setAttributes({ animatedHeadingAnimationDuration: Number(value) })}
                         min={100}
                         max={10000}
                         step={100}
@@ -1034,7 +1034,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                         <RangeControl
                             label={__('Character Delay(ms)', 'frontis-blocks')}
                             value={animatedHeadingRevealCharDelay}
-                            onChange={(value) => setAttributes({ animatedHeadingRevealCharDelay: value })}
+                            onChange={(value) => setAttributes({ animatedHeadingRevealCharDelay: Number(value) })}
                             min={50}
                             max={500}
                             step={10}
@@ -1043,7 +1043,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                         <RangeControl
                             label={__('Appear Duration(ms)', 'frontis-blocks')}
                             value={animatedHeadingRevealAppearDuration}
-                            onChange={(value) => setAttributes({ animatedHeadingRevealAppearDuration: value })}
+                            onChange={(value) => setAttributes({ animatedHeadingRevealAppearDuration: Number(value) })}
                             min={200}
                             max={2000}
                             step={50}
@@ -1052,7 +1052,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                         <RangeControl
                             label={__('Hide Duration(ms)', 'frontis-blocks')}
                             value={animatedHeadingRevealHideDuration}
-                            onChange={(value) => setAttributes({ animatedHeadingRevealHideDuration: value })}
+                            onChange={(value) => setAttributes({ animatedHeadingRevealHideDuration: Number(value) })}
                             min={200}
                             max={2000}
                             step={50}
@@ -1061,7 +1061,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                         <RangeControl
                             label={__('Visible Hold Time(ms)', 'frontis-blocks')}
                             value={animatedHeadingRevealVisibleHold}
-                            onChange={(value) => setAttributes({ animatedHeadingRevealVisibleHold: value })}
+                            onChange={(value) => setAttributes({ animatedHeadingRevealVisibleHold: Number(value) })}
                             min={500}
                             max={5000}
                             step={100}
@@ -1070,7 +1070,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                         <RangeControl
                             label={__('Reset Delay(ms)', 'frontis-blocks')}
                             value={animatedHeadingRevealResetDelay}
-                            onChange={(value) => setAttributes({ animatedHeadingRevealResetDelay: value })}
+                            onChange={(value) => setAttributes({ animatedHeadingRevealResetDelay: Number(value) })}
                             min={0}
                             max={1000}
                             step={50}
