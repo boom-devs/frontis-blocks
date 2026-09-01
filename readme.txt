@@ -3,7 +3,7 @@ Contributors: wpmessiah
 Tags: block, blocks, blocks-editor, gutenberg,  gutenberg blocks,
 Requires at least: 6.0
 Tested up to: 7.0
-Stable tag: 1.2.5-beta4
+Stable tag: 1.2.5
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html 
