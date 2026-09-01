@@ -45,6 +45,14 @@ interface AdapterInterface
     public function wasRemoteCheckSuccessful(): bool;
 
     /**
+     * Returns compatibility metadata (requires, tested, requires_php, homepage).
+     * readme.txt values take priority over remote API.
+     *
+     * @return array{requires: string, tested: string, requires_php: string, homepage: string}
+     */
+    public function getCompatibilityMeta(): array;
+
+    /**
      * Clears all cached transient data related to this update adapter.
      *
      * @return void
