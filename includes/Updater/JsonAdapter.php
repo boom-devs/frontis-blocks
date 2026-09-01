@@ -39,6 +39,9 @@ class JsonAdapter implements AdapterInterface
     /** @var bool Tracks if the remote check was successful */
     private bool $remoteCheckSuccess = false;
 
+    /** @var PluginMetadata|null Lazy-loaded plugin metadata resolver */
+    private ?PluginMetadata $metadata = null;
+
     /**
      * JsonAdapter constructor.
      *
@@ -81,6 +84,30 @@ class JsonAdapter implements AdapterInterface
     public function wasRemoteCheckSuccessful(): bool
     {
         return $this->remoteCheckSuccess;
+    }
+
+    /**
+     * Returns compatibility metadata from readme.txt (priority) with API fallback.
+     *
+     * @return array{requires: string, tested: string, requires_php: string, homepage: string}
+     */
+    public function getCompatibilityMeta(): array
+    {
+        $data = $this->fetchRemoteData();
+
+        return $this->getMetadata()->getCompatibilityMeta(is_object($data) ? $data : null);
+    }
+
+    /**
+     * Returns the lazy-loaded metadata resolver.
+     */
+    private function getMetadata(): PluginMetadata
+    {
+        if (null === $this->metadata) {
+            $this->metadata = new PluginMetadata($this->pluginFile, $this->slug);
+        }
+
+        return $this->metadata;
     }
 
     /**
@@ -175,16 +202,18 @@ class JsonAdapter implements AdapterInterface
             return null;
         }
 
+        $meta = $this->getMetadata()->getCompatibilityMeta($data);
+
         return (object) [
             'id'           => plugin_basename($this->pluginFile),
             'slug'         => $this->slug,
             'plugin'       => plugin_basename($this->pluginFile),
             'new_version'  => $data->version,
-            'url'          => !empty($data->details_url) ? esc_url($data->details_url) : 'https://frontiswp.com/frontis-blocks/',
+            'url'          => !empty($data->details_url) ? esc_url($data->details_url) : $meta['homepage'],
             'package'      => esc_url_raw($data->download_url),
-            'tested'       => sanitize_text_field($data->tested ?? '6.7'),
-            'requires_php' => sanitize_text_field($data->requires_php ?? '7.4'),
-            'requires'     => sanitize_text_field($data->requires ?? '6.0'),
+            'tested'       => $meta['tested'],
+            'requires_php' => $meta['requires_php'],
+            'requires'     => $meta['requires'],
         ];
     }
 
@@ -207,10 +236,10 @@ class JsonAdapter implements AdapterInterface
             return false;
         }
 
-        // Dynamically parse readme.txt from plugin directory
-        $readmePath = dirname($this->pluginFile) . '/readme.txt';
-        $readme = new ReadmeParser($readmePath);
+        $metadata = $this->getMetadata();
+        $readme   = $metadata->getReadme();
         $sections = $readme->getSections();
+        $meta     = $metadata->getCompatibilityMeta($data);
 
         // If remote API provided latest release notes, prioritize as changelog
         if (!empty($data->sections) && is_object($data->sections) && !empty($data->sections->changelog)) {
@@ -219,18 +248,20 @@ class JsonAdapter implements AdapterInterface
             $sections['changelog'] = wp_kses_post($data->sections['changelog']);
         }
 
-        // Fallback default description if readme.txt wasn't found
         if (empty($sections['description'])) {
-            $sections['description'] = wp_kses_post('<p>Frontis Blocks is a modern Gutenberg block library for WordPress with 45+ blocks.</p>');
+            $sections['description'] = wp_kses_post(
+                '<p>' . esc_html($readme->getMeta('name', $this->slug)) . '</p>'
+            );
         }
 
-        // Format human readable date
-        $lastUpdated = !empty($data->last_updated) ? date('Y-m-d h:iA', strtotime($data->last_updated)) : date('Y-m-d');
+        $lastUpdated = !empty($data->last_updated)
+            ? gmdate('Y-m-d h:iA', strtotime($data->last_updated))
+            : gmdate('Y-m-d');
 
         return (object) [
-            'name'           => $readme->getMeta('name', 'Frontis Blocks — Block Library for the Block Editor'),
+            'name'           => $readme->getMeta('name', $this->slug),
             'slug'           => $this->slug,
-            'version'        => sanitize_text_field($data->version ?? '1.2.5'),
+            'version'        => sanitize_text_field($data->version ?? $this->currentVersion),
             'author'         => '<a href="https://wpmessiah.com" target="_blank">WPmessiah</a>',
             'author_profile' => 'https://wpmessiah.com',
             'contributors'   => [
@@ -240,21 +271,14 @@ class JsonAdapter implements AdapterInterface
                     'avatar'       => 'https://secure.gravatar.com/avatar/9c55b6a71d8be8d6268fae6da485d43d?s=96&d=monsterid&r=g',
                 ],
             ],
-            'homepage'       => 'https://frontiswp.com/frontis-blocks/',
-            'requires'       => sanitize_text_field($data->requires ?? $readme->getMeta('requires', '6.0')),
-            'tested'         => sanitize_text_field($data->tested ?? $readme->getMeta('tested', '7.1')),
-            'requires_php'   => sanitize_text_field($data->requires_php ?? $readme->getMeta('requires_php', '7.4')),
+            'homepage'       => $meta['homepage'],
+            'requires'       => $meta['requires'],
+            'tested'         => $meta['tested'],
+            'requires_php'   => $meta['requires_php'],
             'download_link'  => !empty($data->download_url) ? esc_url_raw($data->download_url) : '',
             'last_updated'   => $lastUpdated,
-            'added'          => '2023-01-15',
-            'banners'        => [
-                'low'  => 'https://wpmessiah.com/api/updates/frontis-blocks/assets/banner-772x250.gif',
-                'high' => 'https://wpmessiah.com/api/updates/frontis-blocks/assets/banner-1544x500.gif',
-            ],
-            'icons'          => [
-                '1x' => 'https://wpmessiah.com/api/updates/frontis-blocks/assets/icon-128x128.gif',
-                '2x' => 'https://wpmessiah.com/api/updates/frontis-blocks/assets/icon-128x128.gif',
-            ],
+            'banners'        => $metadata->getBanners(),
+            'icons'          => $metadata->getIcons(),
             'sections'       => $sections,
         ];
     }
