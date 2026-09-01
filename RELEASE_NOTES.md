@@ -1,4 +1,4 @@
-# Changelog - Version 1.2.5.1 (01 September 2026)
+# Changelog - Version 1.2.6 (01 September 2026)
 
 - **New**: Dynamic readme.txt parser (`ReadmeParser`) with 100% WordPress.org modal parity (Description, Installation, FAQ, Changelog).
 - **Security**: Complete protection of private credentials via Cloudflare Worker proxy.
