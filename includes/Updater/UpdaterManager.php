@@ -73,8 +73,8 @@ class UpdaterManager
 
         if ($update && !empty($update->package)) {
             $transient->response[$pluginBasename] = $update;
-        } else {
-            // WordPress 5.5+ no_update state
+        } elseif ($this->adapter->wasRemoteCheckSuccessful()) {
+            // WordPress 5.5+ no_update state (only when remote check succeeded and confirmed current version)
             if (!isset($transient->no_update)) {
                 $transient->no_update = [];
             }
@@ -85,7 +85,7 @@ class UpdaterManager
                 'new_version'   => $this->adapter->getCurrentVersion(),
                 'url'           => 'https://wpmessiah.com',
                 'package'       => '',
-                'tested'        => '7.0',
+                'tested'        => '6.7',
                 'requires_php'  => '7.4',
                 'requires'      => '6.0',
             ];
