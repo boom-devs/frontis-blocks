@@ -85,7 +85,7 @@ class UpdaterManager
                 'new_version'   => $this->adapter->getCurrentVersion(),
                 'url'           => 'https://wpmessiah.com',
                 'package'       => '',
-                'tested'        => '6.7',
+                'tested'        => '7.1',
                 'requires_php'  => '7.4',
                 'requires'      => '6.0',
             ];
