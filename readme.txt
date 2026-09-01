@@ -14,11 +14,7 @@ Frontis Blocks - WordPress block library for Gutenberg Editor with 45+ blocks, p
 
 **Frontis Blocks** is a block library with **45+ blocks,** global styles, sliders/galleries, CTAs, and map/form integrations, plus **ready-made patterns** to help you build pages faster in the Block Editor.
 
-[youtube https://youtu.be/8d0m7ZHNrzI]
-
 **BUILD MODERN, FAST-LOADING PAGES IN THE WORDPRESS BLOCK EDITOR (GUTENBERG) WITH 45+ BLOCKS AND READY-MADE PATTERNS. NO CODING REQUIRED.**
-
-**[You can try a live demo of Frontis](https://app.zipwp.com/wp?plugins=frontis-blocks)**
 
 Finally, a block library that lets you design beautiful, fast, and professional websites right inside WordPress. Frontis Blocks adds a wide set of powerful elements so you can build landing pages, blogs, portfolios, and stores in minutes. It works with **any theme** and pairs perfectly with the Frontis theme for a seamless full-site editing workflow.
 
@@ -156,25 +152,25 @@ This collection is designed to fit any project—whether you're building a portf
 
 == All Your Favorite Plugins—Supported ==
 
-WooCommerce
-Yoast SEO
-Rank Math
-All in One SEO
-SEOPress
-The SEO Framework
-WP Rocket
-WP-Optimize
-Smush
-Imagify
-Contact Form 7
-WPForms
-Fluent Forms
-Mailchimp for WordPress
-Advanced Custom Fields (ACF)
-LearnDash
-Tutor LMS
-WPML
-And More
+- WooCommerce
+- Yoast SEO
+- Rank Math
+- All in One SEO
+- SEOPress
+- The SEO Framework
+- WP Rocket
+- WP-Optimize
+- Smush
+- Imagify
+- Contact Form 7
+- WPForms
+- Fluent Forms
+- Mailchimp for WordPress
+- Advanced Custom Fields (ACF)
+- LearnDash
+- Tutor LMS
+- WPML
+- And More
 
 == Documentation ==
 

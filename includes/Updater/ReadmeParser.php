@@ -100,19 +100,17 @@ class ReadmeParser
                 }
 
                 if (in_array($sectionKey, $standardSections, true)) {
-                    if ('description' === $sectionKey && !empty($this->sections['description'])) {
-                        $this->sections[$sectionKey] .= $formattedBody;
-                    } else {
-                        $this->sections[$sectionKey] = $formattedBody;
-                    }
+                    $this->sections[$sectionKey] = $formattedBody;
                 } else {
-                    // Append description sub-sections to main description tab
+                    // Append description sub-sections to main description tab with heading
                     if (!isset($this->sections['description'])) {
                         $this->sections['description'] = '';
                     }
-                    if ('description' !== $sectionKey) {
-                        $this->sections['description'] .= '<h3>' . esc_html($titleRaw) . '</h3>';
+
+                    if (strtolower(trim($titleRaw)) !== 'description') {
+                        $this->sections['description'] .= "\n<h3>" . esc_html($titleRaw) . "</h3>\n";
                     }
+
                     $this->sections['description'] .= $formattedBody;
                 }
             }
@@ -157,13 +155,13 @@ class ReadmeParser
             return true;
         }
 
-        if (preg_match('/^=+.+=+$/', $titleRaw)) {
+        $pluginName = $this->meta['name'] ?? '';
+
+        if ('' !== $pluginName && (strpos($titleRaw, $pluginName) !== false || $titleRaw === $pluginName)) {
             return true;
         }
 
-        $pluginName = $this->meta['name'] ?? '';
-
-        return '' !== $pluginName && $titleRaw === $pluginName;
+        return false;
     }
 
     /**
@@ -202,11 +200,11 @@ class ReadmeParser
         if (strpos($lower, 'upgrade notice') !== false) {
             return 'upgrade_notice';
         }
-        if (strpos($lower, 'description') !== false) {
+        if (trim($lower) === 'description') {
             return 'description';
         }
 
-        return 'description'; // Default other subsections to description tab
+        return sanitize_key($title);
     }
 
     /**
