@@ -294,7 +294,7 @@ class GitHubAdapter implements AdapterInterface
             'version'        => sanitize_text_field($latestVersion),
             'author'         => '<a href="https://wpmessiah.com" target="_blank">WPmessiah</a>',
             'author_profile' => 'https://wpmessiah.com',
-            'homepage'       => "https://github.com/{$this->repoPath}",
+            'homepage'       => 'https://frontiswp.com/frontis-blocks/',
             'requires'       => '6.0',
             'tested'         => '7.1',
             'requires_php'   => '7.4',
