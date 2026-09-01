@@ -31,6 +31,13 @@ interface AdapterInterface
     public function getPluginDetails(string $action, object $args);
 
     /**
+     * Retrieves the currently installed version known to the adapter.
+     *
+     * @return string
+     */
+    public function getCurrentVersion(): string;
+
+    /**
      * Clears all cached transient data related to this update adapter.
      *
      * @return void
