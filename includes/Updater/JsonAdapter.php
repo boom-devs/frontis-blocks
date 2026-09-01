@@ -241,11 +241,13 @@ class JsonAdapter implements AdapterInterface
         $sections = $readme->getSections();
         $meta     = $metadata->getCompatibilityMeta($data);
 
-        // If remote API provided latest release notes, prioritize as changelog
-        if (!empty($data->sections) && is_object($data->sections) && !empty($data->sections->changelog)) {
-            $sections['changelog'] = wp_kses_post($data->sections->changelog);
-        } elseif (!empty($data->sections) && is_array($data->sections) && !empty($data->sections['changelog'])) {
-            $sections['changelog'] = wp_kses_post($data->sections['changelog']);
+        // Fallback changelog from remote API only if readme.txt has no changelog
+        if (empty($sections['changelog'])) {
+            if (!empty($data->sections) && is_object($data->sections) && !empty($data->sections->changelog)) {
+                $sections['changelog'] = wp_kses_post($data->sections->changelog);
+            } elseif (!empty($data->sections) && is_array($data->sections) && !empty($data->sections['changelog'])) {
+                $sections['changelog'] = wp_kses_post($data->sections['changelog']);
+            }
         }
 
         if (empty($sections['description'])) {
