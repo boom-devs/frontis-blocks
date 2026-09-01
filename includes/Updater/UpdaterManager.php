@@ -83,7 +83,7 @@ class UpdaterManager
                 'slug'          => $this->pluginSlug,
                 'plugin'        => $pluginBasename,
                 'new_version'   => $this->adapter->getCurrentVersion(),
-                'url'           => 'https://wpmessiah.com',
+                'url'           => 'https://frontiswp.com/frontis-blocks/',
                 'package'       => '',
                 'tested'        => '7.1',
                 'requires_php'  => '7.4',
