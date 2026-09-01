@@ -9,6 +9,7 @@ if (!defined('ABSPATH')) {
  * Class UpdaterManager
  *
  * Connects the updater adapter to WordPress native update lifecycle hooks.
+ * Includes filesystem initialization guards, no_update transient population, and cache management.
  *
  * @package FrontisBlocks\Updater
  */
@@ -56,6 +57,7 @@ class UpdaterManager
 
     /**
      * Injects update information into WordPress transient.
+     * Supports both response (update available) and no_update (up to date) states.
      *
      * @param object $transient
      * @return object
@@ -66,11 +68,27 @@ class UpdaterManager
             return $transient;
         }
 
+        $pluginBasename = plugin_basename($this->pluginFile);
         $update = $this->adapter->getUpdateInfo();
 
-        if ($update) {
-            $pluginBasename = plugin_basename($this->pluginFile);
+        if ($update && !empty($update->package)) {
             $transient->response[$pluginBasename] = $update;
+        } else {
+            // WordPress 5.5+ no_update state
+            if (!isset($transient->no_update)) {
+                $transient->no_update = [];
+            }
+            $transient->no_update[$pluginBasename] = (object) [
+                'id'            => $pluginBasename,
+                'slug'          => $this->pluginSlug,
+                'plugin'        => $pluginBasename,
+                'new_version'   => $this->adapter->getCurrentVersion(),
+                'url'           => 'https://wpmessiah.com',
+                'package'       => '',
+                'tested'        => '7.0',
+                'requires_php'  => '7.4',
+                'requires'      => '6.0',
+            ];
         }
 
         return $transient;
@@ -101,12 +119,20 @@ class UpdaterManager
      */
     public function fixSourceDirectory($source, $remote_source, $upgrader, $hook_extra)
     {
-        global $wp_filesystem;
-
         if (
             !isset($hook_extra['plugin'])
             || plugin_basename($this->pluginFile) !== $hook_extra['plugin']
         ) {
+            return $source;
+        }
+
+        global $wp_filesystem;
+        if (!is_object($wp_filesystem)) {
+            require_once ABSPATH . 'wp-admin/includes/file.php';
+            WP_Filesystem();
+        }
+
+        if (!is_object($wp_filesystem)) {
             return $source;
         }
 
