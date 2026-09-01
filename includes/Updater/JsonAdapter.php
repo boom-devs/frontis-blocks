@@ -304,18 +304,18 @@ class JsonAdapter implements AdapterInterface
             ],
             'homepage'       => 'https://wpmessiah.com/products/frontis-blocks/',
             'requires'       => sanitize_text_field($data->requires ?? '6.0'),
-            'tested'         => sanitize_text_field($data->tested ?? '6.7'),
+            'tested'         => sanitize_text_field($data->tested ?? '7.1'),
             'requires_php'   => sanitize_text_field($data->requires_php ?? '7.4'),
             'download_link'  => !empty($data->download_url) ? esc_url_raw($data->download_url) : '',
             'last_updated'   => $lastUpdated,
             'added'          => '2023-01-15',
             'banners'        => [
-                'low'  => 'https://raw.githubusercontent.com/boom-devs/frontis-blocks/main/.wordpress-org/banner-772x250.gif',
-                'high' => 'https://raw.githubusercontent.com/boom-devs/frontis-blocks/main/.wordpress-org/banner-1544x500.gif',
+                'low'  => 'https://wpmessiah.com/api/updates/frontis-blocks/assets/banner-772x250.gif',
+                'high' => 'https://wpmessiah.com/api/updates/frontis-blocks/assets/banner-1544x500.gif',
             ],
             'icons'          => [
-                '1x' => 'https://raw.githubusercontent.com/boom-devs/frontis-blocks/main/.wordpress-org/icon-128x128.gif',
-                '2x' => 'https://raw.githubusercontent.com/boom-devs/frontis-blocks/main/.wordpress-org/icon-128x128.gif',
+                '1x' => 'https://wpmessiah.com/api/updates/frontis-blocks/assets/icon-128x128.gif',
+                '2x' => 'https://wpmessiah.com/api/updates/frontis-blocks/assets/icon-128x128.gif',
             ],
             'sections'       => $sections,
         ];

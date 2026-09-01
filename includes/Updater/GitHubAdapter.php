@@ -296,7 +296,7 @@ class GitHubAdapter implements AdapterInterface
             'author_profile' => 'https://wpmessiah.com',
             'homepage'       => "https://github.com/{$this->repoPath}",
             'requires'       => '6.0',
-            'tested'         => '6.7',
+            'tested'         => '7.1',
             'requires_php'   => '7.4',
             'download_link'  => !empty($downloadUrl) ? esc_url_raw($downloadUrl) : '',
             'last_updated'   => sanitize_text_field($release->published_at ?? date('Y-m-d')),
