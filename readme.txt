@@ -188,9 +188,9 @@ Need help after checking the docs? Send us a message via **Frontis support.** Sh
 
 We're just a message away. Follow us for quick tips, release news, 60-second tutorials, and fast help from real humans. Got a question about **Frontis** or your setup? DM us — we'll jump in.
 
-- **Facebook Group:** https://www.facebook.com/groups/wpmessiah
-- **Discord:** https://discord.gg/wEVmDvRbad
-- **YouTube Tutorials:** https://www.youtube.com/@wpmessiahacademy
+- **[Facebook Group](https://www.facebook.com/groups/wpmessiah)** — Join our community for discussions & updates.
+- **[Discord](https://discord.gg/wEVmDvRbad)** — Connect directly with our team & fellow creators.
+- **[YouTube Tutorials](https://www.youtube.com/@wpmessiahacademy)** — Watch step-by-step video tutorials.
 
 == Frequently Asked Questions ==
 

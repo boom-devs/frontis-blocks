@@ -228,6 +228,11 @@ class ReadmeParser
         // Convert Links: [title](url) -> <a href="url" target="_blank">title</a>
         $text = preg_replace('/\[(.+?)\]\((https?:\/\/[^\s\)]+)\)/', '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>', $text);
 
+        // Auto-link bare URLs if not already inside an anchor
+        $text = preg_replace_callback('/(?<!href=["\'])(?<!">)(https?:\/\/[^\s<"\'\)]+)/i', function ($matches) {
+            return '<a href="' . esc_url($matches[1]) . '" target="_blank" rel="noopener noreferrer">' . esc_html($matches[1]) . '</a>';
+        }, $text);
+
         // Convert Bullet points (- or *) into lists
         $lines = explode("\n", $text);
         $inList = false;
