@@ -36,6 +36,9 @@ class GitHubAdapter implements AdapterInterface
     /** @var object|null In-memory request cache */
     private ?object $inMemoryCache = null;
 
+    /** @var bool Tracks if the remote check was successful */
+    private bool $remoteCheckSuccess = false;
+
     /**
      * GitHubAdapter constructor.
      *
@@ -71,6 +74,16 @@ class GitHubAdapter implements AdapterInterface
     }
 
     /**
+     * Checks whether the last remote API check was successful.
+     *
+     * @return bool
+     */
+    public function wasRemoteCheckSuccessful(): bool
+    {
+        return $this->remoteCheckSuccess;
+    }
+
+    /**
      * Checks whether a forced update check is in progress.
      *
      * @return bool
@@ -89,6 +102,7 @@ class GitHubAdapter implements AdapterInterface
     private function fetchLatestRelease(): ?object
     {
         if (null !== $this->inMemoryCache) {
+            $this->remoteCheckSuccess = true;
             return $this->inMemoryCache;
         }
 
@@ -96,14 +110,16 @@ class GitHubAdapter implements AdapterInterface
             $cached = get_transient($this->cacheKey);
             if (false !== $cached) {
                 if (is_object($cached) && isset($cached->is_error)) {
+                    $this->remoteCheckSuccess = false;
                     return null;
                 }
                 $this->inMemoryCache = is_object($cached) ? $cached : null;
+                $this->remoteCheckSuccess = (null !== $this->inMemoryCache);
                 return $this->inMemoryCache;
             }
         }
 
-        $endpoint = "https://api.github.com/repos/{$this->repoPath}/releases?per_page=1";
+        $endpoint = "https://api.github.com/repos/{$this->repoPath}/releases/latest";
 
         $args = [
             'timeout' => 10,
@@ -121,6 +137,7 @@ class GitHubAdapter implements AdapterInterface
 
         if (is_wp_error($response)) {
             set_transient($this->cacheKey, (object) ['is_error' => true], 15 * MINUTE_IN_SECONDS);
+            $this->remoteCheckSuccess = false;
             return null;
         }
 
@@ -130,26 +147,28 @@ class GitHubAdapter implements AdapterInterface
         if (403 === $responseCode) {
             set_transient($this->cacheKey . '_rate_limited', true, HOUR_IN_SECONDS);
             set_transient($this->cacheKey, (object) ['is_error' => true], 15 * MINUTE_IN_SECONDS);
+            $this->remoteCheckSuccess = false;
             return null;
         }
 
         if (200 !== $responseCode) {
             set_transient($this->cacheKey, (object) ['is_error' => true], 15 * MINUTE_IN_SECONDS);
+            $this->remoteCheckSuccess = false;
             return null;
         }
 
-        $releases = json_decode(wp_remote_retrieve_body($response));
+        $release = json_decode(wp_remote_retrieve_body($response));
 
-        if (!is_array($releases) || empty($releases[0]) || empty($releases[0]->tag_name)) {
+        if (!is_object($release) || empty($release->tag_name)) {
             set_transient($this->cacheKey, (object) ['is_error' => true], 15 * MINUTE_IN_SECONDS);
+            $this->remoteCheckSuccess = false;
             return null;
         }
-
-        $release = $releases[0];
 
         // Cache response for 1 hour
         set_transient($this->cacheKey, $release, HOUR_IN_SECONDS);
         $this->inMemoryCache = $release;
+        $this->remoteCheckSuccess = true;
 
         return $release;
     }
@@ -198,6 +217,9 @@ class GitHubAdapter implements AdapterInterface
             'new_version' => $latestVersion,
             'url'         => !empty($release->html_url) ? esc_url($release->html_url) : '',
             'package'     => esc_url_raw($downloadUrl),
+            'tested'      => '6.7',
+            'requires_php'=> '7.4',
+            'requires'    => '6.0',
         ];
     }
 
@@ -256,6 +278,7 @@ class GitHubAdapter implements AdapterInterface
     public function clearCache(): void
     {
         $this->inMemoryCache = null;
+        $this->remoteCheckSuccess = false;
         delete_transient($this->cacheKey);
         delete_transient($this->cacheKey . '_rate_limited');
     }

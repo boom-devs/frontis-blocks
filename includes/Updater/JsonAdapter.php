@@ -36,6 +36,9 @@ class JsonAdapter implements AdapterInterface
     /** @var object|null In-memory request cache to prevent duplicate HTTP calls */
     private ?object $inMemoryCache = null;
 
+    /** @var bool Tracks if the remote check was successful */
+    private bool $remoteCheckSuccess = false;
+
     /**
      * JsonAdapter constructor.
      *
@@ -71,6 +74,16 @@ class JsonAdapter implements AdapterInterface
     }
 
     /**
+     * Checks whether the last remote API check was successful.
+     *
+     * @return bool
+     */
+    public function wasRemoteCheckSuccessful(): bool
+    {
+        return $this->remoteCheckSuccess;
+    }
+
+    /**
      * Checks whether a forced update check is in progress.
      *
      * @return bool
@@ -90,6 +103,7 @@ class JsonAdapter implements AdapterInterface
     {
         // Return in-memory cached instance if already fetched in this lifecycle
         if (null !== $this->inMemoryCache) {
+            $this->remoteCheckSuccess = true;
             return $this->inMemoryCache;
         }
 
@@ -99,9 +113,11 @@ class JsonAdapter implements AdapterInterface
             if (false !== $cached) {
                 // If cached value is false/error flag from previous failure, return null
                 if (is_object($cached) && isset($cached->is_error)) {
+                    $this->remoteCheckSuccess = false;
                     return null;
                 }
                 $this->inMemoryCache = is_object($cached) ? $cached : null;
+                $this->remoteCheckSuccess = (null !== $this->inMemoryCache);
                 return $this->inMemoryCache;
             }
         }
@@ -114,23 +130,27 @@ class JsonAdapter implements AdapterInterface
         // Negative caching: Cache 15-minute failure state if API fails or server errors
         if (is_wp_error($response) || 200 !== wp_remote_retrieve_response_code($response)) {
             set_transient($this->cacheKey, (object) ['is_error' => true], 15 * MINUTE_IN_SECONDS);
+            $this->remoteCheckSuccess = false;
             return null;
         }
 
         $body = wp_remote_retrieve_body($response);
         if (empty($body)) {
             set_transient($this->cacheKey, (object) ['is_error' => true], 15 * MINUTE_IN_SECONDS);
+            $this->remoteCheckSuccess = false;
             return null;
         }
 
         $data = json_decode($body);
         if (!is_object($data) || empty($data->version)) {
             set_transient($this->cacheKey, (object) ['is_error' => true], 15 * MINUTE_IN_SECONDS);
+            $this->remoteCheckSuccess = false;
             return null;
         }
 
         set_transient($this->cacheKey, $data, $this->cacheDuration);
         $this->inMemoryCache = $data;
+        $this->remoteCheckSuccess = true;
 
         return $data;
     }
@@ -162,9 +182,9 @@ class JsonAdapter implements AdapterInterface
             'new_version'  => $data->version,
             'url'          => !empty($data->details_url) ? esc_url($data->details_url) : 'https://wpmessiah.com',
             'package'      => esc_url_raw($data->download_url),
-            'tested'       => sanitize_text_field($data->tested ?? ''),
-            'requires_php' => sanitize_text_field($data->requires_php ?? ''),
-            'requires'     => sanitize_text_field($data->requires ?? ''),
+            'tested'       => sanitize_text_field($data->tested ?? '6.7'),
+            'requires_php' => sanitize_text_field($data->requires_php ?? '7.4'),
+            'requires'     => sanitize_text_field($data->requires ?? '6.0'),
         ];
     }
 
@@ -186,9 +206,9 @@ class JsonAdapter implements AdapterInterface
             return false;
         }
 
-        // Sanitize sections against XSS
+        // Sanitize sections against XSS with explicit operator precedence
         $sections = [];
-        if (!empty($data->sections) && is_object($data->sections) || is_array($data->sections)) {
+        if (!empty($data->sections) && (is_object($data->sections) || is_array($data->sections))) {
             foreach ((array) $data->sections as $sectionKey => $sectionContent) {
                 $sections[sanitize_key($sectionKey)] = wp_kses_post($sectionContent);
             }
@@ -216,6 +236,7 @@ class JsonAdapter implements AdapterInterface
     public function clearCache(): void
     {
         $this->inMemoryCache = null;
+        $this->remoteCheckSuccess = false;
         delete_transient($this->cacheKey);
     }
 }
