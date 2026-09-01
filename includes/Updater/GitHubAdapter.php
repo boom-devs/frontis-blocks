@@ -298,17 +298,6 @@ class GitHubAdapter implements AdapterInterface
             'requires'       => '6.0',
             'tested'         => '6.7',
             'requires_php'   => '7.4',
-            'downloaded'     => 25000,
-            'active_installs'=> 10000,
-            'rating'         => 100,
-            'ratings'        => [
-                '5' => 150,
-                '4' => 0,
-                '3' => 0,
-                '2' => 0,
-                '1' => 0,
-            ],
-            'num_ratings'    => 150,
             'download_link'  => !empty($downloadUrl) ? esc_url_raw($downloadUrl) : '',
             'last_updated'   => sanitize_text_field($release->published_at ?? date('Y-m-d')),
             'banners'        => [
