@@ -1,8 +1,10 @@
-# Changelog - Version 1.2.5-beta4 (01 September 2026)
+# Changelog - Version 1.2.5 (01 September 2026)
 
-- **Improved**: Production hardened updater architecture with complete PSR-4 compliance.
-- **Improved**: Added failure negative caching (15-minute cooldown) to protect client sites from external API timeouts.
-- **Improved**: In-memory request deduplication within single execution lifecycles.
-- **Improved**: XSS defense-in-depth sanitization on changelog and description sections.
-- **Improved**: WordPress filesystem initialization guards for zip directory extraction.
-- **Improved**: Native WordPress 5.5+ `no_update` state support on successful version checks.
+- **New**: Enterprise-grade self-hosted automatic updater architecture powered by secure Cloudflare Gateway proxy (`https://wpmessiah.com/api/updates/*`).
+- **New**: PSR-4 compliant Singleton facade (`FrontisBlocks\Updater\Updater`) with flexible Adapter pattern (`JsonAdapter` & `GitHubAdapter`).
+- **Security**: Complete protection of private GitHub credentials — zero repository tokens or secret URLs exposed to client installations.
+- **Security**: Built-in XSS defense-in-depth HTML sanitization using WordPress standard `wp_kses_post` on release notes and descriptions.
+- **Performance**: High-efficiency caching system featuring 12-hour transient expiration, in-memory runtime request deduplication, and 15-minute negative caching for upstream network failure resiliency.
+- **Improved**: Full compatibility with WordPress 5.5+ update lifecycle and native `no_update` state recognition.
+- **Improved**: Robust filesystem initialization guards and automatic package directory normalization (`frontis-blocks/`).
+- **DevOps**: Fully automated GitHub Actions CI/CD pipeline building production artifacts and attaching `.zip` packages on release publish.
