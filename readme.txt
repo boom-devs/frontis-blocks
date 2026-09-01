@@ -3,7 +3,7 @@ Contributors: wpmessiah
 Tags: block, blocks, blocks-editor, gutenberg,  gutenberg blocks,
 Requires at least: 6.0
 Tested up to: 7.1
-Stable tag: 1.2.6
+Stable tag: 1.2.7
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html 
@@ -243,6 +243,13 @@ There is no prerequisites for installing **Frontis Blocks**. You can follow the 
 
 
 == Changelog ==
+
+= 1.2.7 =
+- **New**: Dynamic readme.txt parser (`ReadmeParser`) with 100% WordPress.org modal parity (Description, Installation, FAQ, Changelog).
+- **Security**: Complete protection of private credentials via Cloudflare Worker proxy.
+- **Improved**: Tested compatibility updated to WordPress 7.1.
+- **Improved**: Verified product URLs pointing to official landing page (`https://frontiswp.com/frontis-blocks/`).
+- **Improved**: Clean author sidebar and authentic metadata display.
 
 = 1.2.5 =
 - **Fixed**: Resolved CSS conflicts across different post types sharing identical slugs by scoping assets into post-type subfolders with zero-downtime backward compatibility fallback.
