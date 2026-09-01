@@ -9,6 +9,7 @@ if (!defined('ABSPATH')) {
  * Class GitHubAdapter
  *
  * Fetches update information and release assets directly from GitHub Releases.
+ * Includes in-memory caching, failure negative caching, XSS protection, and validation.
  *
  * @package FrontisBlocks\Updater
  */
@@ -26,11 +27,14 @@ class GitHubAdapter implements AdapterInterface
     /** @var string Plugin slug */
     private string $slug;
 
-    /** @var string|null GitHub Personal Access Token (for private repo if needed) */
+    /** @var string|null GitHub Personal Access Token */
     private ?string $accessToken;
 
     /** @var string Transient cache key */
     private string $cacheKey;
+
+    /** @var object|null In-memory request cache */
+    private ?object $inMemoryCache = null;
 
     /**
      * GitHubAdapter constructor.
@@ -57,6 +61,16 @@ class GitHubAdapter implements AdapterInterface
     }
 
     /**
+     * Returns the currently installed plugin version.
+     *
+     * @return string
+     */
+    public function getCurrentVersion(): string
+    {
+        return $this->currentVersion;
+    }
+
+    /**
      * Checks whether a forced update check is in progress.
      *
      * @return bool
@@ -74,14 +88,22 @@ class GitHubAdapter implements AdapterInterface
      */
     private function fetchLatestRelease(): ?object
     {
+        if (null !== $this->inMemoryCache) {
+            return $this->inMemoryCache;
+        }
+
         if (!$this->isForceCheck()) {
             $cached = get_transient($this->cacheKey);
             if (false !== $cached) {
-                return $cached;
+                if (is_object($cached) && isset($cached->is_error)) {
+                    return null;
+                }
+                $this->inMemoryCache = is_object($cached) ? $cached : null;
+                return $this->inMemoryCache;
             }
         }
 
-        $endpoint = "https://api.github.com/repos/{$this->repoPath}/releases/latest";
+        $endpoint = "https://api.github.com/repos/{$this->repoPath}/releases?per_page=1";
 
         $args = [
             'timeout' => 10,
@@ -98,29 +120,36 @@ class GitHubAdapter implements AdapterInterface
         $response = wp_remote_get($endpoint, $args);
 
         if (is_wp_error($response)) {
+            set_transient($this->cacheKey, (object) ['is_error' => true], 15 * MINUTE_IN_SECONDS);
             return null;
         }
 
         $responseCode = wp_remote_retrieve_response_code($response);
 
-        // Rate limit reached (403)
+        // Rate limit reached (403) or error
         if (403 === $responseCode) {
             set_transient($this->cacheKey . '_rate_limited', true, HOUR_IN_SECONDS);
+            set_transient($this->cacheKey, (object) ['is_error' => true], 15 * MINUTE_IN_SECONDS);
             return null;
         }
 
         if (200 !== $responseCode) {
+            set_transient($this->cacheKey, (object) ['is_error' => true], 15 * MINUTE_IN_SECONDS);
             return null;
         }
 
-        $release = json_decode(wp_remote_retrieve_body($response));
+        $releases = json_decode(wp_remote_retrieve_body($response));
 
-        if (!is_object($release) || empty($release->tag_name)) {
+        if (!is_array($releases) || empty($releases[0]) || empty($releases[0]->tag_name)) {
+            set_transient($this->cacheKey, (object) ['is_error' => true], 15 * MINUTE_IN_SECONDS);
             return null;
         }
+
+        $release = $releases[0];
 
         // Cache response for 1 hour
         set_transient($this->cacheKey, $release, HOUR_IN_SECONDS);
+        $this->inMemoryCache = $release;
 
         return $release;
     }
@@ -152,14 +181,14 @@ class GitHubAdapter implements AdapterInterface
         if (!empty($release->assets) && is_array($release->assets)) {
             foreach ($release->assets as $asset) {
                 if (!empty($asset->name) && 'zip' === strtolower(pathinfo($asset->name, PATHINFO_EXTENSION))) {
-                    $downloadUrl = $asset->browser_download_url;
+                    $downloadUrl = $asset->browser_download_url ?? '';
                     break;
                 }
             }
         }
 
-        if (!empty($this->accessToken) && strpos($downloadUrl, 'api.github.com') !== false) {
-            $downloadUrl = add_query_arg('access_token', $this->accessToken, $downloadUrl);
+        if (empty($downloadUrl)) {
+            return null;
         }
 
         return (object) [
@@ -167,8 +196,8 @@ class GitHubAdapter implements AdapterInterface
             'slug'        => $this->slug,
             'plugin'      => plugin_basename($this->pluginFile),
             'new_version' => $latestVersion,
-            'url'         => $release->html_url ?? '',
-            'package'     => $downloadUrl,
+            'url'         => !empty($release->html_url) ? esc_url($release->html_url) : '',
+            'package'     => esc_url_raw($downloadUrl),
         ];
     }
 
@@ -196,7 +225,7 @@ class GitHubAdapter implements AdapterInterface
         if (!empty($release->assets) && is_array($release->assets)) {
             foreach ($release->assets as $asset) {
                 if (!empty($asset->name) && 'zip' === strtolower(pathinfo($asset->name, PATHINFO_EXTENSION))) {
-                    $downloadUrl = $asset->browser_download_url;
+                    $downloadUrl = $asset->browser_download_url ?? '';
                     break;
                 }
             }
@@ -204,19 +233,19 @@ class GitHubAdapter implements AdapterInterface
 
         $changelog = '';
         if (!empty($release->body)) {
-            $changelog = wpautop(wp_kses_post($release->body));
+            $changelog = wp_kses_post(wpautop($release->body));
         }
 
         return (object) [
             'name'          => 'Frontis Blocks',
             'slug'          => $this->slug,
-            'version'       => $latestVersion,
-            'download_link' => $downloadUrl,
+            'version'       => sanitize_text_field($latestVersion),
+            'download_link' => !empty($downloadUrl) ? esc_url_raw($downloadUrl) : '',
             'homepage'      => "https://github.com/{$this->repoPath}",
-            'last_updated'  => $release->published_at ?? '',
+            'last_updated'  => sanitize_text_field($release->published_at ?? ''),
             'sections'      => [
-                'description' => 'A blocks library for the Gutenberg editor.',
-                'changelog'   => $changelog ?: 'View full release notes on GitHub: ' . ($release->html_url ?? ''),
+                'description' => wp_kses_post('A blocks library for the Gutenberg editor.'),
+                'changelog'   => $changelog ?: wp_kses_post('View full release notes on GitHub: ' . ($release->html_url ?? '')),
             ],
         ];
     }
@@ -226,6 +255,7 @@ class GitHubAdapter implements AdapterInterface
      */
     public function clearCache(): void
     {
+        $this->inMemoryCache = null;
         delete_transient($this->cacheKey);
         delete_transient($this->cacheKey . '_rate_limited');
     }
