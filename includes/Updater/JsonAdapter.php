@@ -266,13 +266,6 @@ class JsonAdapter implements AdapterInterface
             'version'        => sanitize_text_field($data->version ?? $this->currentVersion),
             'author'         => '<a href="https://wpmessiah.com" target="_blank">WPmessiah</a>',
             'author_profile' => 'https://wpmessiah.com',
-            'contributors'   => [
-                'wpmessiah' => [
-                    'display_name' => 'WPmessiah',
-                    'profile'      => 'https://wpmessiah.com',
-                    'avatar'       => 'https://secure.gravatar.com/avatar/9c55b6a71d8be8d6268fae6da485d43d?s=96&d=monsterid&r=g',
-                ],
-            ],
             'homepage'       => $meta['homepage'],
             'requires'       => $meta['requires'],
             'tested'         => $meta['tested'],
