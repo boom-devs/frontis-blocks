@@ -216,14 +216,21 @@ class ReadmeParser
      */
     private function formatMarkdown(string $text, string $sectionKey): string
     {
-        // Convert Sub-Headings: = Sub Heading = -> <h4>Sub Heading</h4>
-        $text = preg_replace('/^=\s*(.+?)\s*=\s*$/m', '<h4>$1</h4>', $text);
+        // Normalize line endings and trailing whitespace
+        $text = str_replace(["\r\n", "\r"], "\n", $text);
+        $text = preg_replace('/[ \t]+$/m', '', $text);
+
+        // Convert Sub-Headings: = Sub Heading = -> <h4>Sub Heading</h4> with block boundaries
+        $text = preg_replace('/^[ \t]*=[ \t]*(.+?)[ \t]*=[ \t]*$/m', "\n\n<h4>$1</h4>\n\n", $text);
 
         // Convert Bold: **text** -> <strong>text</strong>
         $text = preg_replace('/\*\*(.+?)\*\*/', '<strong>$1</strong>', $text);
 
         // Convert Italic: *text* -> <em>text</em>
         $text = preg_replace('/(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)/', '<em>$1</em>', $text);
+
+        // Convert Inline Code: `code` -> <code>code</code>
+        $text = preg_replace('/`([^`]+)`/', '<code>$1</code>', $text);
 
         // Convert Links: [title](url) -> <a href="url" target="_blank">title</a>
         $text = preg_replace('/\[(.+?)\]\((https?:\/\/[^\s\)]+)\)/', '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>', $text);
