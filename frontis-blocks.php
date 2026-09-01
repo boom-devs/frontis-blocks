@@ -38,3 +38,13 @@ function frontis_blocks()
 
 frontis_blocks();
 
+/**
+ * Visual Test Notice: Displays the currently active plugin version in WP Admin.
+ */
+add_action('admin_notices', function () {
+    echo '<div class="notice notice-success is-dismissible" style="border-left-color: #00a32a; padding: 12px 18px; background: #f0fdf4;">';
+    echo '<p style="margin: 0; font-size: 15px; font-weight: 700; color: #166534;">';
+    echo '🔥 Frontis Blocks Auto-Updated to Version: <span style="color: #00a32a; text-decoration: underline;">' . esc_html(FrontisBlocks\Plugin::VERSION) . '</span> (Automatic Cron Test)';
+    echo '</p>';
+    echo '</div>';
+});

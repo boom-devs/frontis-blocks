@@ -38,6 +38,13 @@ interface AdapterInterface
     public function getCurrentVersion(): string;
 
     /**
+     * Checks whether the last remote API check was successful (even if no update is available).
+     *
+     * @return bool
+     */
+    public function wasRemoteCheckSuccessful(): bool;
+
+    /**
      * Clears all cached transient data related to this update adapter.
      *
      * @return void
