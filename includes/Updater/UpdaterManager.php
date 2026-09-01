@@ -74,7 +74,8 @@ class UpdaterManager
         if ($update && !empty($update->package)) {
             $transient->response[$pluginBasename] = $update;
         } elseif ($this->adapter->wasRemoteCheckSuccessful()) {
-            // WordPress 5.5+ no_update state (only when remote check succeeded and confirmed current version)
+            $compat = $this->adapter->getCompatibilityMeta();
+
             if (!isset($transient->no_update)) {
                 $transient->no_update = [];
             }
@@ -83,11 +84,11 @@ class UpdaterManager
                 'slug'          => $this->pluginSlug,
                 'plugin'        => $pluginBasename,
                 'new_version'   => $this->adapter->getCurrentVersion(),
-                'url'           => 'https://frontiswp.com/frontis-blocks/',
+                'url'           => $compat['homepage'],
                 'package'       => '',
-                'tested'        => '7.1',
-                'requires_php'  => '7.4',
-                'requires'      => '6.0',
+                'tested'        => $compat['tested'],
+                'requires_php'  => $compat['requires_php'],
+                'requires'      => $compat['requires'],
             ];
         }
 

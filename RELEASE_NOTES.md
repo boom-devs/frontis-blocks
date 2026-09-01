@@ -1,10 +1,7 @@
-# Changelog - Version 1.2.5 (01 September 2026)
+# Changelog - Version 1.2.5.1 (01 September 2026)
 
-- **New**: Enterprise-grade self-hosted automatic updater architecture powered by secure Cloudflare Gateway proxy (`https://wpmessiah.com/api/updates/*`).
-- **New**: PSR-4 compliant Singleton facade (`FrontisBlocks\Updater\Updater`) with flexible Adapter pattern (`JsonAdapter` & `GitHubAdapter`).
-- **Security**: Complete protection of private GitHub credentials — zero repository tokens or secret URLs exposed to client installations.
-- **Security**: Built-in XSS defense-in-depth HTML sanitization using WordPress standard `wp_kses_post` on release notes and descriptions.
-- **Performance**: High-efficiency caching system featuring 12-hour transient expiration, in-memory runtime request deduplication, and 15-minute negative caching for upstream network failure resiliency.
-- **Improved**: Full compatibility with WordPress 5.5+ update lifecycle and native `no_update` state recognition.
-- **Improved**: Robust filesystem initialization guards and automatic package directory normalization (`frontis-blocks/`).
-- **DevOps**: Fully automated GitHub Actions CI/CD pipeline building production artifacts and attaching `.zip` packages on release publish.
+- **New**: Dynamic readme.txt parser (`ReadmeParser`) with 100% WordPress.org modal parity (Description, Installation, FAQ, Changelog).
+- **Security**: Complete protection of private credentials via Cloudflare Worker proxy.
+- **Improved**: Tested compatibility updated to WordPress 7.1.
+- **Improved**: Verified product URLs pointing to official landing page (`https://frontiswp.com/frontis-blocks/`).
+- **Improved**: Zero debug notices and clean metadata display.

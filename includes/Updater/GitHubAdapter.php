@@ -39,6 +39,9 @@ class GitHubAdapter implements AdapterInterface
     /** @var bool Tracks if the remote check was successful */
     private bool $remoteCheckSuccess = false;
 
+    /** @var PluginMetadata|null Lazy-loaded plugin metadata resolver */
+    private ?PluginMetadata $metadata = null;
+
     /**
      * GitHubAdapter constructor.
      *
@@ -81,6 +84,28 @@ class GitHubAdapter implements AdapterInterface
     public function wasRemoteCheckSuccessful(): bool
     {
         return $this->remoteCheckSuccess;
+    }
+
+    /**
+     * Returns compatibility metadata from readme.txt.
+     *
+     * @return array{requires: string, tested: string, requires_php: string, homepage: string}
+     */
+    public function getCompatibilityMeta(): array
+    {
+        return $this->getMetadata()->getCompatibilityMeta();
+    }
+
+    /**
+     * Returns the lazy-loaded metadata resolver.
+     */
+    private function getMetadata(): PluginMetadata
+    {
+        if (null === $this->metadata) {
+            $this->metadata = new PluginMetadata($this->pluginFile, $this->slug);
+        }
+
+        return $this->metadata;
     }
 
     /**
@@ -210,16 +235,18 @@ class GitHubAdapter implements AdapterInterface
             return null;
         }
 
+        $meta = $this->getMetadata()->getCompatibilityMeta();
+
         return (object) [
             'id'          => plugin_basename($this->pluginFile),
             'slug'        => $this->slug,
             'plugin'      => plugin_basename($this->pluginFile),
             'new_version' => $latestVersion,
-            'url'         => !empty($release->html_url) ? esc_url($release->html_url) : '',
+            'url'         => !empty($release->html_url) ? esc_url($release->html_url) : $meta['homepage'],
             'package'     => esc_url_raw($downloadUrl),
-            'tested'      => '6.7',
-            'requires_php'=> '7.4',
-            'requires'    => '6.0',
+            'tested'      => $meta['tested'],
+            'requires_php'=> $meta['requires_php'],
+            'requires'    => $meta['requires'],
         ];
     }
 
@@ -254,38 +281,35 @@ class GitHubAdapter implements AdapterInterface
             }
         }
 
-        $readmePath = dirname($this->pluginFile) . '/readme.txt';
-        $readme = new ReadmeParser($readmePath);
+        $metadata = $this->getMetadata();
+        $readme   = $metadata->getReadme();
         $sections = $readme->getSections();
+        $meta     = $metadata->getCompatibilityMeta();
 
         if (!empty($release->body)) {
             $sections['changelog'] = wp_kses_post(wpautop($release->body));
         }
 
         if (empty($sections['description'])) {
-            $sections['description'] = wp_kses_post('<p>Frontis Blocks is a modern Gutenberg block library for WordPress with 45+ blocks.</p>');
+            $sections['description'] = wp_kses_post(
+                '<p>' . esc_html($readme->getMeta('name', $this->slug)) . '</p>'
+            );
         }
 
         return (object) [
-            'name'           => $readme->getMeta('name', 'Frontis Blocks — Block Library for the Block Editor'),
+            'name'           => $readme->getMeta('name', $this->slug),
             'slug'           => $this->slug,
             'version'        => sanitize_text_field($latestVersion),
             'author'         => '<a href="https://wpmessiah.com" target="_blank">WPmessiah</a>',
             'author_profile' => 'https://wpmessiah.com',
-            'homepage'       => 'https://frontiswp.com/frontis-blocks/',
-            'requires'       => $readme->getMeta('requires', '6.0'),
-            'tested'         => $readme->getMeta('tested', '7.1'),
-            'requires_php'   => $readme->getMeta('requires_php', '7.4'),
+            'homepage'       => $meta['homepage'],
+            'requires'       => $meta['requires'],
+            'tested'         => $meta['tested'],
+            'requires_php'   => $meta['requires_php'],
             'download_link'  => !empty($downloadUrl) ? esc_url_raw($downloadUrl) : '',
-            'last_updated'   => sanitize_text_field($release->published_at ?? date('Y-m-d')),
-            'banners'        => [
-                'low'  => 'https://wpmessiah.com/api/updates/frontis-blocks/assets/banner-772x250.gif',
-                'high' => 'https://wpmessiah.com/api/updates/frontis-blocks/assets/banner-1544x500.gif',
-            ],
-            'icons'          => [
-                '1x' => 'https://wpmessiah.com/api/updates/frontis-blocks/assets/icon-128x128.gif',
-                '2x' => 'https://wpmessiah.com/api/updates/frontis-blocks/assets/icon-128x128.gif',
-            ],
+            'last_updated'   => sanitize_text_field($release->published_at ?? gmdate('Y-m-d')),
+            'banners'        => $metadata->getBanners(),
+            'icons'          => $metadata->getIcons(),
             'sections'       => $sections,
         ];
     }
