@@ -15,8 +15,8 @@ import Inspector from "./inspector";
 import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
 import generateVerticalTimelineStyle from "./styling";
 import { applyFilters } from '@wordpress/hooks';
-import UpgradeToProPopup from '@Utils/upgradeToProPopup';
 import getProActive from '@Utils/getProActive';
+
 
 const ALLOWED_BLOCKS = ["frontis-blocks/vertical-timeline-item"];
 
@@ -176,14 +176,9 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         className: `fb-vertical-timeline-main-wrapper ${blockID} ${verticalTimelineDesktopSwitcher ? 'fb-desktop-responsive' : ''} ${verticalTimelineTabletSwitcher ? 'fb-tablet-responsive' : ''} ${verticalTimelineMobileSwitcher ? 'fb-mobile-responsive' : ''}`.trim(),
     });
 
-    const isProActive = getProActive();
-    const verticalTimelineAvailable = applyFilters('frontisblocks-vertical-timeline-available', false);
+    const isProActive = true;
+    const verticalTimelineAvailable = true;
 
-    if(!verticalTimelineAvailable || !isProActive) {
-        return (
-            <UpgradeToProPopup />
-        )
-    }
 
     const addTimelineItem = () => {
         const innerBlocks = [

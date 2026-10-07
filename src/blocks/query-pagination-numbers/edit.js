@@ -68,9 +68,7 @@ export default function Edit({ attributes, setAttributes, clientId, }) {
 		className: `fb-page-numbers ${blockId}`,
 	} );
 
-	if (!isProActive) {
-		return null;
-	}
+
 
 	return (
 		<>

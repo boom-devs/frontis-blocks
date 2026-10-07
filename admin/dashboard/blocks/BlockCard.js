@@ -56,10 +56,8 @@ const BlockCard = ({ block, onChange }) => {
                         <FBSwitch
                             onChange={handleChange} 
                             checked={isChecked}
-                            disabled={
-                                isProActive === 'false' && block.package === 'pro' ? true : false
-                            }
                         />
+
 
                     : 
                     <span className={`fb-block-card-upcoming`}>Upcoming</span>}

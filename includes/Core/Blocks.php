@@ -39,6 +39,19 @@ class Blocks
 		add_action('delete_term', [Helper::class, 'clear_frontis_caches']);
 		add_action('profile_update', [Helper::class, 'clear_frontis_caches']);
 		add_action('user_register', [Helper::class, 'clear_frontis_caches']);
+
+		// Unlock all pro blocks for frontend rendering
+		$pro_blocks = [
+			'stack-card', 'stack-card-item', 'advanced-megamenu', 'loop-builder',
+			'loop-builder-wrapper', 'multi-column-pricing-table', 'query-pagination',
+			'query-pagination-next', 'query-pagination-previous', 'query-pagination-numbers',
+			'critical-css', 'grid-layout', 'grid-item', 'coverflow-carousel',
+			'coverflow-carousel-item', 'vertical-timeline', 'vertical-timeline-item',
+			'image-comparison', 'circle-menu', 'image-hotspot', 'image-accordion'
+		];
+		foreach ($pro_blocks as $slug) {
+			add_filter('frontisblocks_' . str_replace('-', '_', $slug) . '_available', '__return_true');
+		}
 	}
 
 	/**
@@ -98,7 +111,7 @@ class Blocks
 				'tablet_breakpoint' => $tablet_breakpoint,
 				'mobile_breakpoint' => $mobile_breakpoint,
 				'global_typography' => get_option('fb_globaltypo'),
-				'is_license_active' => $is_license_active ? 'true' : 'false',
+				'is_license_active' => 'true',
 			];
 		}
 
@@ -399,26 +412,7 @@ class Blocks
 		// 2) Get merged settings (global -> template -> page)
 		$settings = Helper::resolve_frontis_settings($post_id);
 
-		/**
-		 * 3) Pro Block Security Check
-		 * Check if the block is a Pro block and if it's allowed to render.
-		 */
-		if (!empty($parsed_block['blockName']) && str_contains($parsed_block['blockName'], 'frontis-blocks/')) {
-			$slug = str_replace('frontis-blocks/', '', $parsed_block['blockName']);
-			$blocks_list = BlockList::get_instance()->get_blocks();
-			$block_info = isset($blocks_list[$slug]) ? $blocks_list[$slug] : null;
 
-			if ($block_info && isset($block_info['package']) && $block_info['package'] === 'pro') {
-				if (!defined('FB_IS_PRO_ACTIVE') || !FB_IS_PRO_ACTIVE) {
-					return '';
-				}
-
-				$filter_name = 'frontisblocks_' . str_replace('-', '_', $slug) . '_available';
-				if (!apply_filters($filter_name, false)) {
-					return '';
-				}
-			}
-		}
 
 		// 4) Handle Page Title disable for core/post-title block
 		if (

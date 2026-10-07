@@ -11,8 +11,8 @@ import "./editor.scss";
 import { useDeviceType } from "@Config/displayType";
 import generateCircleMenuStyle from "./styling";
 import { applyFilters } from '@wordpress/hooks';
-import UpgradeToProPopup from '@Utils/upgradeToProPopup';
 import getProActive from '@Utils/getProActive';
+
 
 
 export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
@@ -136,14 +136,9 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		);
 	};
 
-	const isProActive = getProActive();
-	const circleMenuAvailable = applyFilters('frontisblocks-circle-menu-available', false);
+	const isProActive = true;
+	const circleMenuAvailable = true;
 
-	if (!circleMenuAvailable || !isProActive) {
-		return (
-			<UpgradeToProPopup />
-		)
-	}
 
 	/** Final Render Output for Block Editor */
 	return (

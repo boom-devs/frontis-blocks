@@ -35,9 +35,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		{ template: TEMPLATE }
 	);
 
-	if (!isProActive) {
-		return null;
-	}
+
 
   return (
     <>

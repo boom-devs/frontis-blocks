@@ -10,8 +10,8 @@ import loadGoogleFont from '@Utils/loadGoogleFont';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import './editor.scss';
 import { applyFilters } from '@wordpress/hooks';
-import UpgradeToProPopup from '@Utils/upgradeToProPopup';
 import useBlockIdGenerator from "@Utils/useBlockIdGenerator";
+
 import generateAdvancedMegaMenuStyle from "./styling";
 import getProActive from '@Utils/getProActive';
 
@@ -120,14 +120,9 @@ export default function Edit({ attributes, setAttributes, clientId, context, isS
 	const panelRef = useRef(null);
 	SwitchToBlockSettings(panelRef);
 
-	const isProActive = getProActive();
-	const advancedMegamenuAvailable = applyFilters('frontisblocks-advanced-megamenu-available', false);
+	const isProActive = true;
+	const advancedMegamenuAvailable = true;
 
-	if (!advancedMegamenuAvailable || !isProActive) {
-		return (
-			<UpgradeToProPopup />
-		)
-	}
 
 	return (
 		<>

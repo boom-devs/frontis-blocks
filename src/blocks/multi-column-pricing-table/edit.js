@@ -10,8 +10,8 @@ import useBlockIdGenerator from "@Utils/useBlockIdGenerator";
 import generatePricingTableStyle from "./styling";
 import { pricingPresetStyles } from './presets';
 import './editor.scss';
-import UpgradeToProPopup from '@Utils/upgradeToProPopup';
 import getProActive from '@Utils/getProActive';
+
 
 import LayoutOneEdit from './layouts/layout-one/edit';
 import LayoutTwoEdit from './layouts/layout-two/edit';
@@ -113,15 +113,9 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
     const panelRef = useRef(null);
     SwitchToBlockSettings(panelRef);
 
-    // Conditional rendering
-    const isProActive = getProActive();
-    const multiColumnPricingTableAvailable = applyFilters('frontisblocks-multi-column-pricing-table-available', false);
-    
-    if(!multiColumnPricingTableAvailable || !isProActive) {
-        return (
-            <UpgradeToProPopup />
-        )
-    }
+    const isProActive = true;
+    const multiColumnPricingTableAvailable = true;
+
 
     // Conditional rendering based on layout/preset
     const renderLayout = () => {

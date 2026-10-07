@@ -69,10 +69,7 @@ const TemplateHeader = ({
             return;
         }
 
-        if (tab.label === 'Template Library' && !isProPlugin) {
-            setIsPluginUpgradeModalOpen(true);
-            return;
-        }
+
 
         if (activeTab !== tab.id) {
             setActiveTab(tab.id);

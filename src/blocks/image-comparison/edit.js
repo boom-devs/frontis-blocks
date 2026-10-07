@@ -14,8 +14,8 @@ import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
 import imageComparisonStyle from "./styling";
 import { useDeviceType } from '@Config/displayType';
 import { applyFilters } from '@wordpress/hooks';
-import UpgradeToProPopup from '@Utils/upgradeToProPopup';
 import getProActive from '@Utils/getProActive';
+
 
 export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
     const deviceType = useDeviceType();
@@ -230,14 +230,9 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         className: `fb-image-comparison-main-wrapper ${blockID}`,
     });
 
-    const isProActive = getProActive();
-    const imageComparisonAvailable = applyFilters('frontisblocks-image-comparison-available', false);
+    const isProActive = true;
+    const imageComparisonAvailable = true;
 
-    if(!imageComparisonAvailable || !isProActive) {
-        return (
-            <UpgradeToProPopup />
-        )
-    }
 
     return (
         <>

@@ -4,16 +4,7 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-/**
- * Pro Security Check
- */
-if (!defined('FB_IS_PRO_ACTIVE') || !FB_IS_PRO_ACTIVE) {
-	return;
-}
 
-if (!apply_filters('frontisblocks_loop_builder_available', false)) {
-	return;
-}
 
 /**
  * Do not override in editor

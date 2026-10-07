@@ -5,8 +5,8 @@ import { useSelect } from '@wordpress/data';
 import { useEffect, useState } from '@wordpress/element';
 import { store as blockEditorStore } from '@wordpress/block-editor';
 import { applyFilters } from '@wordpress/hooks';
-import UpgradeToProPopup from '@Utils/upgradeToProPopup';
 import getProActive from '@Utils/getProActive';
+
 
 /**
  * Internal dependencies
@@ -27,11 +27,7 @@ const QueryEdit = ( props ) => {
 		[ clientId ]
 	);
 
-	if(!loopBuilderAvailable || !isProActive) {
-		return (
-			<UpgradeToProPopup />
-		)
-	}
+
 
 	const Component = hasInnerBlocks ? QueryContent : QueryPlaceholder;
 	return (
