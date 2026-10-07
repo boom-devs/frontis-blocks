@@ -131,7 +131,7 @@ const Blocks = () => {
 
 		const updatedBlocks = blocks.map(block => ({
 			...block,
-			status: (newStatus === '1' && isProActive === 'false' && block.package === 'pro') ? '0' : newStatus
+			status: newStatus
 		}));
 
 		setBlocks(updatedBlocks);
@@ -145,7 +145,7 @@ const Blocks = () => {
 			if (block.category === category) {
 				return { 
 					...block, 
-					status: (newStatus === '1' && isProActive === 'false' && block.package === 'pro') ? '0' : newStatus 
+					status: newStatus 
 				};
 			}
 			return block;

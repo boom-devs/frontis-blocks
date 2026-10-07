@@ -36,9 +36,7 @@ const Dashboard = () => {
         </div>
         <div className="fb-blocks-dashboard-right">
           <SystemRequirements />
-          <div className="fb-blocks-dashboard-right-bottom">
-              <ProUpgradeCard />
-          </div>
+
         </div>
       </div>
     </div>

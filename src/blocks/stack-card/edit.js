@@ -13,8 +13,8 @@ import {
 	getStackCardItemStyleSignature,
 } from '../stack-card-item/styling';
 import { applyFilters } from '@wordpress/hooks';
-import UpgradeToProPopup from '@Utils/upgradeToProPopup';
 import getProActive from '@Utils/getProActive';
+
 
 import {
 	bindStackCardPresetOverBehavior as bindPresetFourBehavior,
@@ -322,14 +322,9 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		return bindEditorStackCardScale(el);
 	}, [stackCardsPresetStyle, clientId, childBlocks.length, blockID, blockStyle]);
 
-	const isProActive = getProActive();
-	const stackCardAvailable = applyFilters('frontisblocks-stack-card-pro-available', false);
+	const isProActive = true;
+	const stackCardAvailable = true;
 
-	if(!stackCardAvailable || !isProActive) {
-		return (
-			<UpgradeToProPopup />
-		)
-	}
 
 	return (
 		<>

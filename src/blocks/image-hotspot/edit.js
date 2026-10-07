@@ -10,8 +10,8 @@ import renderSVG from "../../components/icon-picker/components/icon-picker/contr
 import { markerSvgs } from './preset';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import { applyFilters } from '@wordpress/hooks';
-import UpgradeToProPopup from '@Utils/upgradeToProPopup';
 import getProActive from '@Utils/getProActive';
+
 
 function Edit({ attributes, setAttributes, clientId, isSelected }) {
   const {
@@ -66,14 +66,9 @@ function Edit({ attributes, setAttributes, clientId, isSelected }) {
   const panelRef = useRef(null);
   SwitchToBlockSettings(panelRef);
 
-  const isProActive = getProActive();
-  const imageHotspotAvailable = applyFilters('frontisblocks-image-hotspot-available', false);
+  const isProActive = true;
+  const imageHotspotAvailable = true;
 
-  if (!imageHotspotAvailable || !isProActive) {
-    return (
-      <UpgradeToProPopup />
-    );
-  }
 
   return (
     <>

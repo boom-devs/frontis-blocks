@@ -9,9 +9,7 @@ import getProActive from '@Utils/getProActive';
 export default function Edit({ attributes, setAttributes, clientId, context }) {
 	const isProActive = getProActive();
 
-	if (!isProActive) {
-		return null;
-	}
+
 	
 	const {
 		blockId,

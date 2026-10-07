@@ -52,8 +52,8 @@ const PatternLibraryButton = () => {
     });
     const [isImporting, setIsImporting] = useState(false);
 
-    const licenseKey = FB_TLibrary.activationKey.length > 0 ? FB_TLibrary.activationKey : '';
-    const isProPlugin = FB_TLibrary.activationKey.length > 0 ? true : false;
+    const licenseKey = FB_TLibrary?.activationKey || '';
+    const isProPlugin = true;
     const [isPluginUpgradeModalOpen, setIsPluginUpgradeModalOpen] = useState(false);
 
     const userData = JSON.parse(localStorage.getItem("userData"));
