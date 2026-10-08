@@ -38,11 +38,9 @@ import { useDeviceType } from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
 import FB_InspectorControls from '@Components/InspectorControls';
-import getProToggleControls from '@Utils/getProToggleControls';
 import DynamicDataSourceControl from '@Components/dynamic-data-source-control';
 import DynamicDataLinkControl from '@Components/dynamic-data-link-control';
 import generateSvgIcon from '@Utils/generateSvgIcon';
-import getProActive from '@Utils/getProActive';
 import FB_Presets from '@Components/presets';
 import { dualButtonPresets } from './presets';
 
@@ -1703,38 +1701,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 		})
 	}, [ButtonIcon, ButtonTwoIcon]);
 
-	// Check if Pro is active
-	const getProActiveState = getProActive();
-	useEffect(() => {
-		if (!getProActiveState) { 
-			setAttributes({
-				dynamicBtnOneEnabled: false,
-				dynamicBtnOneEnableLink: false,
-				dynamicBtnTwoEnabled: false,
-				dynamicBtnTwoEnableLink: false,
-			});
-		}
-	}, [getProActiveState]);
 
-	const dynamicBtnOneContentToggleControls = getProToggleControls({ 
-		hook: 'frontisblocks-dual-button-one-toggle-controls', 
-		attributes,
-		setAttributes,
-		dynamicAttr: 'dynamicBtnOneEnabled',
-		label: __('Dynamic Content', 'frontis-blocks'),
-		keyPrefix: 'dual-button-dynamic-btn-one-content',
-		isProActive : getProActiveState
-	});
-
-	const dynamicBtnTwoContentToggleControls = getProToggleControls({ 
-		hook: 'frontisblocks-dual-button-two-toggle-controls', 
-		attributes,
-		setAttributes,
-		dynamicAttr: 'dynamicBtnTwoEnabled',
-		label: __('Dynamic Content', 'frontis-blocks'),
-		keyPrefix: 'dual-button-dynamic-btn-two-content',
-		isProActive : getProActiveState
-	});
 	
 
 	/**
@@ -1766,9 +1733,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 						initialOpen={false}
 					>
 
-						{dynamicBtnOneContentToggleControls.map((control, index) => (
-							<div key={control.key || index}>{control.comp}</div>
-						))}
+						<ToggleControl
+							label={__("Dynamic Content", "frontis-blocks")}
+							checked={dynamicBtnOneEnabled}
+							onChange={(value) => setAttributes({ dynamicBtnOneEnabled: value })}
+						/>
 		
 						<DynamicDataSourceControl
 							enabled={dynamicBtnOneEnabled}
@@ -1961,9 +1930,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 						initialOpen={false}
 					>
 
-						{dynamicBtnTwoContentToggleControls.map((control, index) => (
-							<div key={control.key || index}>{control.comp}</div>
-						))}
+						<ToggleControl
+							label={__("Dynamic Content", "frontis-blocks")}
+							checked={dynamicBtnTwoEnabled}
+							onChange={(value) => setAttributes({ dynamicBtnTwoEnabled: value })}
+						/>
 		
 						<DynamicDataSourceControl
 							enabled={dynamicBtnTwoEnabled}

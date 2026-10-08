@@ -43,11 +43,9 @@ import { useDeviceType } from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
 import FB_InspectorControls from '@Components/InspectorControls';
-import getProToggleControls from '@Utils/getProToggleControls';
 import DynamicDataSourceControl from '@Components/dynamic-data-source-control';
 import DynamicDataLinkControl from '@Components/dynamic-data-link-control';
 import generateSvgIcon from '@Utils/generateSvgIcon';
-import getProActive from '@Utils/getProActive';
 
 const Inspector = ({ attributes, setAttributes }) => {
 	const {
@@ -507,65 +505,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 		})
 	}, [btnIcon, btnTwoIcon]);
 
-	// Check if Pro is active
-	const getProActiveState = getProActive();
-	useEffect(() => {
-		if (!getProActiveState) {
-			setAttributes({
-				dynamicTitleEnabled: false,
-				dynamicTitleEnableLink: false,
-				dynamicDescriptionEnabled: false,
-				dynamicDescriptionEnableLink: false,
-				dynamicBtnOneEnabled: false,
-				dynamicBtnOneEnableLink: false,
-				dynamicBtnTwoEnabled: false,
-				dynamicBtnTwoEnableLink: false,
-			});
-		}
-	}, [getProActiveState]);
 
-	/**
-	 * Toggle Controls for Dynamic Content
-	 */
-	const dynamicTitleContentToggleControls = getProToggleControls({
-		hook: 'frontisblocks-call-to-action-title-toggle-controls',
-		attributes,
-		setAttributes,
-		dynamicAttr: 'dynamicTitleEnabled',
-		label: __('Dynamic Content', 'frontis-blocks'),
-		keyPrefix: 'call-to-action-dynamic-title-content',
-		isProActive: getProActiveState
-	});
-
-	const dynamicDescriptionContentToggleControls = getProToggleControls({
-		hook: 'frontisblocks-call-to-action-description-toggle-controls',
-		attributes,
-		setAttributes,
-		dynamicAttr: 'dynamicDescriptionEnabled',
-		label: __('Dynamic Content', 'frontis-blocks'),
-		keyPrefix: 'call-to-action-dynamic-description-content',
-		isProActive: getProActiveState
-	});
-
-	const dynamicBtnOneContentToggleControls = getProToggleControls({
-		hook: 'frontisblocks-call-to-action-btn-one-toggle-controls',
-		attributes,
-		setAttributes,
-		dynamicAttr: 'dynamicBtnOneEnabled',
-		label: __('Dynamic Content', 'frontis-blocks'),
-		keyPrefix: 'call-to-action-dynamic-btn-one-content',
-		isProActive: getProActiveState
-	});
-
-	const dynamicBtnTwoContentToggleControls = getProToggleControls({
-		hook: 'frontisblocks-call-to-action-btn-two-toggle-controls',
-		attributes,
-		setAttributes,
-		dynamicAttr: 'dynamicBtnTwoEnabled',
-		label: __('Dynamic Content', 'frontis-blocks'),
-		keyPrefix: 'call-to-action-dynamic-btn-two-content',
-		isProActive: getProActiveState
-	});
 
 	/** Start Heading padding */
 	const handleHeadingPaddingUnitChange = (event, position) => {
@@ -1976,9 +1916,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 						setGlobalHtmlTag={(value) => setAttributes({ headingTag: value })}
 					/>
 
-					{dynamicTitleContentToggleControls.map((control, index) => (
-						<div key={control.key || index}>{control.comp}</div>
-					))}
+					<ToggleControl
+						label={__("Dynamic Content", "frontis-blocks")}
+						checked={dynamicTitleEnabled}
+						onChange={(value) => setAttributes({ dynamicTitleEnabled: value })}
+					/>
 
 					<DynamicDataSourceControl
 						enabled={dynamicTitleEnabled}
@@ -2062,9 +2004,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 								setGlobalAlignment={(value) => setAttributes({ descAlignment: value })}
 							/>
 
-							{dynamicDescriptionContentToggleControls.map((control, index) => (
-								<div key={control.key || index}>{control.comp}</div>
-							))}
+							<ToggleControl
+								label={__("Dynamic Content", "frontis-blocks")}
+								checked={dynamicDescriptionEnabled}
+								onChange={(value) => setAttributes({ dynamicDescriptionEnabled: value })}
+							/>
 
 							<DynamicDataSourceControl
 								enabled={dynamicDescriptionEnabled}
@@ -2152,9 +2096,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 								setGlobalAlignment={(value) => setAttributes({ buttonAlignment: value })}
 							/>
 
-							{dynamicBtnOneContentToggleControls.map((control, index) => (
-								<div key={control.key || index}>{control.comp}</div>
-							))}
+							<ToggleControl
+								label={__("Dynamic Content", "frontis-blocks")}
+								checked={dynamicBtnOneEnabled}
+								onChange={(value) => setAttributes({ dynamicBtnOneEnabled: value })}
+							/>
 
 							<DynamicDataSourceControl
 								enabled={dynamicBtnOneEnabled}
@@ -2273,9 +2219,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 					{btnTwoSwitcher && (
 						<>
 
-							{dynamicBtnTwoContentToggleControls.map((control, index) => (
-								<div key={control.key || index}>{control.comp}</div>
-							))}
+							<ToggleControl
+								label={__("Dynamic Content", "frontis-blocks")}
+								checked={dynamicBtnTwoEnabled}
+								onChange={(value) => setAttributes({ dynamicBtnTwoEnabled: value })}
+							/>
 
 							<DynamicDataSourceControl
 								enabled={dynamicBtnTwoEnabled}

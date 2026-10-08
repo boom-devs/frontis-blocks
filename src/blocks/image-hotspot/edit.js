@@ -9,8 +9,7 @@ import { useDeviceType } from '@Config/displayType';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import { markerSvgs } from './preset';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
-import { applyFilters } from '@wordpress/hooks';
-import getProActive from '@Utils/getProActive';
+
 
 
 function Edit({ attributes, setAttributes, clientId, isSelected }) {
@@ -66,8 +65,7 @@ function Edit({ attributes, setAttributes, clientId, isSelected }) {
   const panelRef = useRef(null);
   SwitchToBlockSettings(panelRef);
 
-  const isProActive = true;
-  const imageHotspotAvailable = true;
+
 
 
   return (

@@ -55,10 +55,8 @@ import FB_ScaleControl from '@Components/scale-control';
 import FB_InspectorControls from '@Components/InspectorControls';
 import FB_BackgroundColorControl from '@Components/background-color-control';
 import generateSvgIcon from '@Utils/generateSvgIcon';
-import getProToggleControls from '@Utils/getProToggleControls';
 import DynamicDataSourceControl from '@Components/dynamic-data-source-control';
 import DynamicDataLinkControl from '@Components/dynamic-data-link-control';
-import getProActive from '@Utils/getProActive';
 import FB_Presets from '@Components/presets';
 import './editor.scss';
 import { advancedButtonPresets } from './preset';
@@ -1247,29 +1245,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 	}
 	/** End Icon Handler */
 
-	// Check if Pro is active
-	const getProActiveState = getProActive();
-	useEffect(() => {
-		if (!getProActiveState) {
-			setAttributes({
-				dynamicTextEnabled: false,
-				dynamicTextEnableLink: false,
-			});
-		}
-	}, [getProActiveState]);
 
-	/**
-	 * Toggle Controls for Dynamic Content
-	 */
-	const dynamicContentToggleControls = getProToggleControls({
-		hook: 'frontisblocks-advanced-button-dynamic-controls',
-		attributes,
-		setAttributes,
-		dynamicAttr: 'dynamicTextEnabled',
-		label: __('Dynamic Content', 'frontis-blocks'),
-		keyPrefix: 'advanced-button-dynamic-content',
-		isProActive: getProActiveState
-	});
 
 	/**
 	 * Inspector General Controls
@@ -1319,9 +1295,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 						onChange={(value) => setAttributes({ buttonTextSwitcher: value })}
 					/>
 
-					{dynamicContentToggleControls.map((control, index) => (
-						<div key={control.key || index}>{control.comp}</div>
-					))}
+					<ToggleControl
+						label={__("Dynamic Content", "frontis-blocks")}
+						checked={dynamicTextEnabled}
+						onChange={(value) => setAttributes({ dynamicTextEnabled: value })}
+					/>
 
 					<DynamicDataSourceControl
 						enabled={dynamicTextEnabled}

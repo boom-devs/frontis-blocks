@@ -10,8 +10,7 @@ import "./editor.scss";
 
 import { useDeviceType } from "@Config/displayType";
 import generateCircleMenuStyle from "./styling";
-import { applyFilters } from '@wordpress/hooks';
-import getProActive from '@Utils/getProActive';
+
 
 
 
@@ -136,8 +135,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		);
 	};
 
-	const isProActive = true;
-	const circleMenuAvailable = true;
+
 
 
 	/** Final Render Output for Block Editor */

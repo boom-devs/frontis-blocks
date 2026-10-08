@@ -11,7 +11,7 @@ import {
  * Internal dependencies
  */
 import Inspector from "./inspector";
-import getProActive from '@Utils/getProActive';
+
 
 const TEMPLATE = [
   ['frontis-blocks/query-pagination-previous'],
@@ -20,7 +20,7 @@ const TEMPLATE = [
 ];
 
 export default function Edit({ attributes, setAttributes, clientId }) {
-	const isProActive = getProActive();
+
 
 	const {
 		blockId,

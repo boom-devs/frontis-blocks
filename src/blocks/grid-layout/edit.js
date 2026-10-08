@@ -32,8 +32,7 @@ import { setDeviceType, useDeviceType } from '@Config/displayType';
 import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
 import Inspector from './inspector';
 import generateGridLayoutStyle from './styling';
-import getProActive from '@Utils/getProActive';
-import { applyFilters } from '@wordpress/hooks';
+
 
 
 const BREAKPOINTS = [ 'Desktop', 'Tablet', 'Mobile' ];
@@ -1074,8 +1073,7 @@ export default function Edit( { attributes, setAttributes, clientId, isSelected,
 		goToLayoutView();
 	};
 
-	const isProActive = true;
-	const gridLayoutAvailable = true;
+
 
 
 	return (

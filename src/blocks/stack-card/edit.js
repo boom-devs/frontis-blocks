@@ -12,8 +12,7 @@ import {
 	generateStackCardItemsAggregateCss,
 	getStackCardItemStyleSignature,
 } from '../stack-card-item/styling';
-import { applyFilters } from '@wordpress/hooks';
-import getProActive from '@Utils/getProActive';
+
 
 
 import {
@@ -322,8 +321,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		return bindEditorStackCardScale(el);
 	}, [stackCardsPresetStyle, clientId, childBlocks.length, blockID, blockStyle]);
 
-	const isProActive = true;
-	const stackCardAvailable = true;
+
 
 
 	return (
