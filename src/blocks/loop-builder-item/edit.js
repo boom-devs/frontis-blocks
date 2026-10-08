@@ -26,7 +26,7 @@ import { store as coreStore } from '@wordpress/core-data';
 import Inspector from "./inspector";
 import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
 import generateLoopBuilderItemStyle from './styling';
-import getProActive from '@Utils/getProActive';
+
 
 
 function PostTemplateInnerBlocks( { classList } ) {
@@ -76,7 +76,7 @@ function PostTemplateBlockPreview( {
 const MemoizedPostTemplateBlockPreview = memo( PostTemplateBlockPreview );
 
 export default function Edit({ attributes, setAttributes, clientId, context, isSelected }) {
-	const isProActive = getProActive();
+
 
 	const {
 		blockID,

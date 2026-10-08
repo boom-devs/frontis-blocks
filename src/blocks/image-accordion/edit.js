@@ -1,8 +1,7 @@
 import { __ } from "@wordpress/i18n";
 import { useBlockProps } from "@wordpress/block-editor";
 import { useEffect, useState, useRef } from "@wordpress/element";
-import { applyFilters } from "@wordpress/hooks";
-import getProActive from "@Utils/getProActive";
+
 
 
 import "./editor.scss";
@@ -226,8 +225,7 @@ export default function Edit({
 		);
 	};
 
-	const isProActive = true;
-	const imageAccordionAvailable = true;
+
 
 
 	return (

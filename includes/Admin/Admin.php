@@ -341,14 +341,6 @@ class Admin
                 admin_url('admin.php?page=frontis-blocks')
             );
             array_unshift($links, $settings_links);
-
-            if (!class_exists('FrontisBlocks\Pro\Plugin')) {
-                $go_pro_link = sprintf(
-                    '<a target="_blank" href="%1$s"><strong style="color:#5e2eff;display: inline-block;">Go Pro</strong></a>',
-                    FB_UPGRADE_PRO_URL
-                );
-                array_push($links, $go_pro_link);
-            }
         }
 
         return $links;

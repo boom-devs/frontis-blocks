@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 
-import { applyFilters } from "@wordpress/hooks";
+
 
 
 import {
@@ -74,10 +74,8 @@ import FB_GradientColorControl from '@Components/gradient-color-control';
 import FB_InspectorControls from '@Components/InspectorControls';
 import FB_BackgroundColorControl from '@Components/background-color-control';
 import generateSvgIcon from '@Utils/generateSvgIcon';
-import getProToggleControls from '@Utils/getProToggleControls';
 import DynamicDataSourceControl from '@Components/dynamic-data-source-control';
 import DynamicDataLinkControl from '@Components/dynamic-data-link-control';
-import getProActive from '@Utils/getProActive';
 import FB_Presets from '@Components/presets';
 
 import './editor.scss';
@@ -1787,41 +1785,7 @@ const Inspector = ({ attributes, setAttributes }) => {
         setAttributes({ separator: val });
     };
 
-    // Check if Pro is active
-    const getProActiveState = getProActive();
-    useEffect(() => {
-        if (!getProActiveState) {
-            setAttributes({
-                dynamicTextEnabled: false,
-                dynamicSubHeadingTextEnabled: false,
-                dynamicTextEnableLink: false,
-                dynamicSubHeadingTextEnableLink: false,
-            });
-        }
-    }, [getProActiveState]);
 
-    /**
-     * Toggle Controls for Dynamic Content
-     */
-    const dynamicHeadingContentToggleControls = getProToggleControls({
-        hook: 'frontisblocks-advanced-heading-toggle-controls',
-        attributes,
-        setAttributes,
-        dynamicAttr: 'dynamicTextEnabled',
-        label: __('Dynamic Content', 'frontis-blocks'),
-        keyPrefix: 'advanced-heading-dynamic-content',
-        isProActive: getProActiveState
-    });
-
-    const dynamicSubHeadingContentToggleControls = getProToggleControls({
-        hook: 'frontisblocks-advanced-sub-heading-toggle-controls',
-        attributes,
-        setAttributes,
-        dynamicAttr: 'dynamicSubHeadingTextEnabled',
-        label: __('Dynamic Content', 'frontis-blocks'),
-        keyPrefix: 'advanced-sub-heading-dynamic-content',
-        isProActive: getProActiveState
-    });
 
     /**
      * Inspector General Controls
@@ -1886,9 +1850,11 @@ const Inspector = ({ attributes, setAttributes }) => {
                         setGlobalHtmlTag={(value) => setAttributes({ headingTag: value })}
                     />
 
-                    {dynamicHeadingContentToggleControls.map((control, index) => (
-                        <div key={control.key || index}>{control.comp}</div>
-                    ))}
+                    <ToggleControl
+                        label={__("Dynamic Content", "frontis-blocks")}
+                        checked={dynamicTextEnabled}
+                        onChange={(value) => setAttributes({ dynamicTextEnabled: value })}
+                    />
 
                     <DynamicDataSourceControl
                         enabled={dynamicTextEnabled}
@@ -1976,9 +1942,11 @@ const Inspector = ({ attributes, setAttributes }) => {
                             setGlobalHtmlTag={(value) => setAttributes({ subHeadingTag: value })}
                         />
 
-                        {dynamicSubHeadingContentToggleControls.map((control, index) => (
-                            <div key={control.key || index}>{control.comp}</div>
-                        ))}
+                        <ToggleControl
+                            label={__("Dynamic Content", "frontis-blocks")}
+                            checked={dynamicSubHeadingTextEnabled}
+                            onChange={(value) => setAttributes({ dynamicSubHeadingTextEnabled: value })}
+                        />
 
                         <DynamicDataSourceControl
                             enabled={dynamicSubHeadingTextEnabled}

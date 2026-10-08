@@ -1,6 +1,5 @@
 import { __ } from "@wordpress/i18n";
-import { applyFilters } from '@wordpress/hooks';
-import getProActive from '@Utils/getProActive';
+
 
 
 import {
@@ -21,8 +20,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		className: `fb-icon-box-main-wrapper ${blockID} `,
 	});
 
-	const isProActive = true;
-	const criticalCssAvailable = true;
+
 
 
 	return (

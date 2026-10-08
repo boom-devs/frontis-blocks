@@ -45,11 +45,9 @@ import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
 import FB_InspectorControls from '@Components/InspectorControls';
 import FB_ImageControl from '@Components/image-control';
-import getProToggleControls from '@Utils/getProToggleControls';
 import DynamicDataSourceControl from '@Components/dynamic-data-source-control';
 import DynamicDataLinkControl from '@Components/dynamic-data-link-control';
 import generateSvgIcon from '@Utils/generateSvgIcon';
-import getProActive from '@Utils/getProActive';
 import FB_Presets from '@Components/presets';
 import { testimonialPresets } from './presets';
 
@@ -1282,65 +1280,7 @@ const Inspector = ({ attributes, setAttributes }) => {
         })
     }, [TestimonialRatingicon, TestimonialQuoteIcon]);
 
-    // Check if Pro is active
-    const getProActiveState = getProActive();
-    useEffect(() => {
-        if (!getProActiveState) {
-            setAttributes({
-                dynamicTitleEnabled: false,
-                dynamicTitleEnableLink: false,
-                dynamicDescriptionEnabled: false,
-                dynamicDescriptionEnableLink: false,
-                dynamicAuthorNameEnabled: false,
-                dynamicAuthorNameEnableLink: false,
-                dynamicAuthorDesignationEnabled: false,
-                dynamicAuthorDesignationEnableLink: false,
-            });
-        }
-    }, [getProActiveState]);
 
-    /**
-     * Toggle Controls for Dynamic Content
-     */
-    const dynamicTitleContentToggleControls = getProToggleControls({
-        hook: 'frontisblocks-testimonial-dynamic-title-toggle-controls',
-        attributes,
-        setAttributes,
-        dynamicAttr: 'dynamicTitleEnabled',
-        label: __('Dynamic Title', 'frontis-blocks'),
-        keyPrefix: 'testimonial-dynamic-title-content',
-        isProActive: getProActiveState
-    });
-
-    const dynamicDescriptionContentToggleControls = getProToggleControls({
-        hook: 'frontisblocks-testimonial-dynamic-description-toggle-controls',
-        attributes,
-        setAttributes,
-        dynamicAttr: 'dynamicDescriptionEnabled',
-        label: __('Dynamic Description', 'frontis-blocks'),
-        keyPrefix: 'testimonial-dynamic-description-content',
-        isProActive: getProActiveState
-    });
-
-    const dynamicAuthorNameContentToggleControls = getProToggleControls({
-        hook: 'frontisblocks-testimonial-dynamic-author-name-toggle-controls',
-        attributes,
-        setAttributes,
-        dynamicAttr: 'dynamicAuthorNameEnabled',
-        label: __('Dynamic Author Name', 'frontis-blocks'),
-        keyPrefix: 'testimonial-dynamic-author-name-content',
-        isProActive: getProActiveState
-    });
-
-    const dynamicAuthorDesignationContentToggleControls = getProToggleControls({
-        hook: 'frontisblocks-testimonial-dynamic-author-designation-toggle-controls',
-        attributes,
-        setAttributes,
-        dynamicAttr: 'dynamicAuthorDesignationEnabled',
-        label: __('Dynamic Author Designation', 'frontis-blocks'),
-        keyPrefix: 'testimonial-dynamic-author-designation-content',
-        isProActive: getProActiveState
-    });
 
     /**
      * Inspector General Controls
@@ -1422,9 +1362,11 @@ const Inspector = ({ attributes, setAttributes }) => {
                     </ButtonGroup>
                 </BaseControl>
 
-                {dynamicTitleContentToggleControls.map((control, index) => (
-                    <div key={control.key || index}>{control.comp}</div>
-                ))}
+                <ToggleControl
+                    label={__("Dynamic Title", "frontis-blocks")}
+                    checked={dynamicTitleEnabled}
+                    onChange={(value) => setAttributes({ dynamicTitleEnabled: value })}
+                />
 
                 <DynamicDataSourceControl
                     enabled={dynamicTitleEnabled}
@@ -1481,9 +1423,11 @@ const Inspector = ({ attributes, setAttributes }) => {
                     />
                 )}
 
-                {dynamicDescriptionContentToggleControls.map((control, index) => (
-                    <div key={control.key || index}>{control.comp}</div>
-                ))}
+                <ToggleControl
+                    label={__("Dynamic Description", "frontis-blocks")}
+                    checked={dynamicDescriptionEnabled}
+                    onChange={(value) => setAttributes({ dynamicDescriptionEnabled: value })}
+                />
 
                 <DynamicDataSourceControl
                     enabled={dynamicDescriptionEnabled}
@@ -1630,9 +1574,11 @@ const Inspector = ({ attributes, setAttributes }) => {
                     </BaseControl>
                 )}
 
-                {dynamicAuthorNameContentToggleControls.map((control, index) => (
-                    <div key={control.key || index}>{control.comp}</div>
-                ))}
+                <ToggleControl
+                    label={__("Dynamic Author Name", "frontis-blocks")}
+                    checked={dynamicAuthorNameEnabled}
+                    onChange={(value) => setAttributes({ dynamicAuthorNameEnabled: value })}
+                />
 
                 <DynamicDataSourceControl
                     enabled={dynamicAuthorNameEnabled}
@@ -1690,9 +1636,11 @@ const Inspector = ({ attributes, setAttributes }) => {
                     />
                 )}
 
-                {dynamicAuthorDesignationContentToggleControls.map((control, index) => (
-                    <div key={control.key || index}>{control.comp}</div>
-                ))}
+                <ToggleControl
+                    label={__("Dynamic Author Designation", "frontis-blocks")}
+                    checked={dynamicAuthorDesignationEnabled}
+                    onChange={(value) => setAttributes({ dynamicAuthorDesignationEnabled: value })}
+                />
 
                 <DynamicDataSourceControl
                     enabled={dynamicAuthorDesignationEnabled}

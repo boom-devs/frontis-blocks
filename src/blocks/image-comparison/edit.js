@@ -13,8 +13,7 @@ import Inspector from "./inspector";
 import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
 import imageComparisonStyle from "./styling";
 import { useDeviceType } from '@Config/displayType';
-import { applyFilters } from '@wordpress/hooks';
-import getProActive from '@Utils/getProActive';
+
 
 
 export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
@@ -230,8 +229,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         className: `fb-image-comparison-main-wrapper ${blockID}`,
     });
 
-    const isProActive = true;
-    const imageComparisonAvailable = true;
+
 
 
     return (
