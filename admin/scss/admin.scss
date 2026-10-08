@@ -40,10 +40,11 @@ body {
   min-width: 0px !important;
   position: relative !important;
   padding: 0 !important;
-  height: unset;
+  height: auto !important;
 
   &:before {
     background: transparent !important;
+    border: none !important;
   }
 
   &:focus {
@@ -120,6 +121,7 @@ body {
       &[aria-checked="true"] {
         background-color: $neutral-color-900 !important;
         color: $white-color !important;
+        border: none;
       }
     }
   }
