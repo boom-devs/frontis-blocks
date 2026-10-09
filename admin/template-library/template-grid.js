@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ClipLoader } from "react-spinners";
 import TemplateImport from "./template-import";
-import PluginUpgradeModal from "./plugin-upgrade";
 import { usePostDataMutation } from "./services/laravelapi";
 import { select, dispatch } from '@wordpress/data';
 import { createBlock, parse, rawHandler } from '@wordpress/blocks';
@@ -53,8 +52,6 @@ const TemplateGrid = ({
     setIsLoginModalOpen,
     isLoginModalOpen,
     isProPlugin,
-    isPluginUpgradeModalOpen,
-    setIsPluginUpgradeModalOpen,
     isImporting,
     setIsImporting,
     // setIsPladmin
@@ -110,43 +107,9 @@ const TemplateGrid = ({
             setIsLoginModalOpen(true);
             return;
         }
-        if (is_premium === true && !isProPlugin) {
-            setIsPluginUpgradeModalOpen(true);
-            return;
-        }
 
-        setIsImporting(true);
-
-        if (isProPlugin && is_premium) {
-            const verified = await verifySubscription();
-            console.log(id);
-
-
-            if (verified.status) {
-                console.log('Now import the pro pattern.');
-                setIsImporting(false);
-                setIsVisible(false);
-            } else {
-                toast(verified.message, {
-                    position: "top-right",
-                    autoClose: 3000,
-                    hideProgressBar: false,
-                    newestOnTop: false,
-                    closeOnClick: true,
-                    rtl: false,
-                    pauseOnFocusLoss: true,
-                    draggable: true,
-                    pauseOnHover: true,
-                    theme: "light"
-                });
-
-                setIsModalOpen(true);
-                setIsImporting(false);
-            }
-        } else {
-            setIsModalOpen(true);
-            setIsImporting(false);
-        }
+        setIsModalOpen(true);
+        setIsImporting(false);
     }, [is_premium, isLogedIn]);
 
     const handelPatterns = useCallback(() => {
@@ -198,69 +161,13 @@ const TemplateGrid = ({
         }
     };
 
-    const verifySubscription = async () => {
-        const apiBase = `${FB_TLibrary.wordpressSyncApi}/wp-json`;
-        const body = {
-            license_key: FB_TLibrary.activationKey,
-            domain_name: window.location.origin,
-        };
-
-        const response = await fetch(`${apiBase}/frontis-sync/v1/verify-subscription`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(body),
-        });
-
-        const responseData = await response.json();
-
-        console.log(responseData);
-
-        return responseData;
-    }
-
-
-
     const importPattern = async (id) => {
         if (!userData) {
             setIsLoginModalOpen(true);
             return;
         }
-        if (is_premium === true && !isProPlugin) {
-            setIsPluginUpgradeModalOpen(true);
-            return;
-        }
 
         setIsImporting(true);
-
-        if (is_premium) {
-            const verified = await verifySubscription();
-
-            if (verified.status) {
-                console.log("Now import the pro pattern.");
-                setIsImporting(false);
-                setIsVisible(false);
-            } else {
-                toast(verified.message, {
-                    position: "top-right",
-                    autoClose: 3000,
-                    hideProgressBar: false,
-                    newestOnTop: false,
-                    closeOnClick: true,
-                    rtl: false,
-                    pauseOnFocusLoss: true,
-                    draggable: true,
-                    pauseOnHover: true,
-                    theme: "light",
-                });
-
-                setIsImporting(false);
-                return;
-            }
-        } else {
-            console.log("Free pattern will be imported directly.");
-        }
 
         // 🔹 Fetch pattern from API
         const pattern = await getTemplatesData("import/pattern", "pattern_id", id);
@@ -296,21 +203,7 @@ const TemplateGrid = ({
             return;
         }
 
-        if (is_premium === true && !isProPlugin) {
-            setIsPluginUpgradeModalOpen(true);
-            return;
-        }
-
         setIsImporting(true);
-
-        if (is_premium) {
-            const verified = await verifySubscription();
-            if (!verified.status) {
-                toast(verified.message, { position: "top-right", autoClose: 3000 });
-                setIsImporting(false);
-                return;
-            }
-        }
 
         try {
             const page = await getTemplatesData("import/page", "page_id", id);

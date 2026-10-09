@@ -490,16 +490,6 @@ $dynamicTeamMemberDesignationTermsSeparator = fb_norm_str($attributes['dynamicTe
 $dynamicTeamMemberDesignationEnableLink = !empty($attributes['dynamicTeamMemberDesignationEnableLink']);
 $dynamicTeamMemberDesignationLinkSource = fb_norm_str($attributes['dynamicTeamMemberDesignationLinkSource'] ?? 'post_permalink');
 
-/* ---------- Pro gate ---------- */
-if (!Helper::isProActivated()) {
-	$dynamicDescriptionEnabled = false;
-	$dynamicDescriptionEnableLink = false;
-	$dynamicTeamMemberNameEnabled = false;
-	$dynamicTeamMemberNameEnableLink = false;
-	$dynamicTeamMemberDesignationEnabled = false;
-	$dynamicTeamMemberDesignationEnableLink = false;
-}
-
 /* ---------- compute dynamics ---------- */
 $description_dyn = fb_compute_dynamic_text([
 	'enabled' => $dynamicDescriptionEnabled,

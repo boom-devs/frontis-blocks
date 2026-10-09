@@ -39,19 +39,6 @@ class Blocks
 		add_action('delete_term', [Helper::class, 'clear_frontis_caches']);
 		add_action('profile_update', [Helper::class, 'clear_frontis_caches']);
 		add_action('user_register', [Helper::class, 'clear_frontis_caches']);
-
-		// Unlock all pro blocks for frontend rendering
-		$pro_blocks = [
-			'stack-card', 'stack-card-item', 'advanced-megamenu', 'loop-builder',
-			'loop-builder-wrapper', 'multi-column-pricing-table', 'query-pagination',
-			'query-pagination-next', 'query-pagination-previous', 'query-pagination-numbers',
-			'critical-css', 'grid-layout', 'grid-item', 'coverflow-carousel',
-			'coverflow-carousel-item', 'vertical-timeline', 'vertical-timeline-item',
-			'image-comparison', 'circle-menu', 'image-hotspot', 'image-accordion'
-		];
-		foreach ($pro_blocks as $slug) {
-			add_filter('frontisblocks_' . str_replace('-', '_', $slug) . '_available', '__return_true');
-		}
 	}
 
 	/**
@@ -78,21 +65,6 @@ class Blocks
 		$container_row_gap = is_array($container_row_gap) ? json_encode($container_row_gap) : $container_row_gap;
 		$container_padding = is_array($container_padding) ? json_encode($container_padding) : $container_padding;
 
-		// Pre-load all expensive data ONCE before the loop (Performance optimization)
-		$license_options = get_option('frontisblockspro_license_options');
-		$sc_license_id = is_array($license_options) && !empty($license_options['sc_license_id']) ? (string) $license_options['sc_license_id'] : '';
-		$sc_license_key = is_array($license_options) && !empty($license_options['sc_license_key']) ? (string) $license_options['sc_license_key'] : '';
-
-		// Check cached license status (from transients)
-		$cache_key = 'fb_sc_license_' . md5($sc_license_id . $sc_license_key);
-		$cached_status = get_transient($cache_key);
-		if ($cached_status !== false) {
-			$is_license_active = ($cached_status === 'active');
-		} else {
-			// Fallback: if keys are present and the Pro plugin exists, assume active until checked
-			$is_license_active = (class_exists('FrontisBlocks\\Pro\\Plugin') && !empty($sc_license_key) && !empty($sc_license_id));
-		}
-
 		// Pre-load admin data once (these are now cached via transients)
 		$admin_localize_array = [];
 		if (is_admin()) {
@@ -111,7 +83,6 @@ class Blocks
 				'tablet_breakpoint' => $tablet_breakpoint,
 				'mobile_breakpoint' => $mobile_breakpoint,
 				'global_typography' => get_option('fb_globaltypo'),
-				'is_license_active' => 'true',
 			];
 		}
 

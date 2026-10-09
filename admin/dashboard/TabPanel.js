@@ -27,10 +27,6 @@ const TabPanel = ({
         onSelect?.(tabName);
     };
 
-    const upgradeToPro = () => {
-        window.open(window.frontisBlocksAdmin.pro_url, '_blank');
-    }
-
     return (
         <>
             <div className={`fb-blocks-tab-panel ${className}`.trim()}>

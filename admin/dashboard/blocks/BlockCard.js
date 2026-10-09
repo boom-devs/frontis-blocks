@@ -5,8 +5,6 @@ import FBSwitch from '../../components/common/Switch';
 
 const BlockCard = ({ block, onChange }) => {
     const [ isChecked, setIsChecked ] = useState(block.status === '1' ? true : false);
-    
-    const { isProActive } = window.frontisBlocksAdmin;
 
     useEffect(() => {
         setIsChecked(block.status === '1' ? true : false);
@@ -44,21 +42,10 @@ const BlockCard = ({ block, onChange }) => {
             <div className="fb-block-card-switch">
                 <label htmlFor={`switch-${block.slug}`} className="fb-block-card-switch-label">
                     {block.complete === 'true' ? 
-                        // <Switch
-                        //     checked={isChecked}
-                        //     onChange={handleChange}
-                        //     className="fb-block-card-switch-input"
-                        //     id={`switch-${block.slug}`}
-                        //     disabled={
-                        //         isProActive === 'false' && block.package === 'pro' ? true : false
-                        //     }
-                        // />
                         <FBSwitch
                             onChange={handleChange} 
                             checked={isChecked}
                         />
-
-
                     : 
                     <span className={`fb-block-card-upcoming`}>Upcoming</span>}
                 </label>
