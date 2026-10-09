@@ -9,7 +9,6 @@ import { ToastContainer, toast } from "react-toastify";
 import { TemplateContentLoader, TemplateLoader } from "./template-loader";
 import { usePostDataMutation } from "./services/wpapi";
 import { ClipLoader } from "react-spinners";
-import PluginUpgradeModal from "./plugin-upgrade";
 import { useDispatch, useSelector } from "react-redux";
 import { setAttribute } from "./store/attributesSlice";
 
@@ -39,8 +38,6 @@ const TemplateContent = ({
     setIsLoginModalOpen,
     isLoginModalOpen,
     isProPlugin,
-    isPluginUpgradeModalOpen,
-    setIsPluginUpgradeModalOpen,
     currentPage,
     onPageChange,
     isImporting,
@@ -287,8 +284,6 @@ const TemplateContent = ({
                                             setIsLoginModalOpen={setIsLoginModalOpen}
                                             isLoginModalOpen={isLoginModalOpen}
                                             isProPlugin={isProPlugin}
-                                            isPluginUpgradeModalOpen={isPluginUpgradeModalOpen}
-                                            setIsPluginUpgradeModalOpen={setIsPluginUpgradeModalOpen}
                                             isImporting={isImporting}
                                             setIsImporting={setIsImporting}
                                         />
@@ -411,12 +406,6 @@ const TemplateContent = ({
                     onRequestClose={handleCloseLoginModal}
                     isLoginModalOpen={isLoginModalOpen}
                     setIsLoginModalOpen={setIsLoginModalOpen}
-                />
-            )}
-            {isPluginUpgradeModalOpen && (
-                <PluginUpgradeModal
-                    isPluginUpgradeModalOpen={isPluginUpgradeModalOpen}
-                    setIsPluginUpgradeModalOpen={setIsPluginUpgradeModalOpen}
                 />
             )}
         </>

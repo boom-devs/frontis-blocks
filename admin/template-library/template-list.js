@@ -10,7 +10,6 @@ import { ClipLoader } from "react-spinners";
 import { usePostDataMutation } from "./services/laravelapi";
 import TemplateImport from "./template-import";
 import LoginSignupModal from "./login-signup";
-import PluginUpgradeModal from "./plugin-upgrade";
 import { importBlocksFromApi } from "./components/importBlocks";
 
 const TemplateList = ({

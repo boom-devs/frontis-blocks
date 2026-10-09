@@ -518,18 +518,6 @@ $dynamicAuthorDesignationTermsSeparator = fb_norm_str($attributes['dynamicAuthor
 $dynamicAuthorDesignationEnableLink = !empty($attributes['dynamicAuthorDesignationEnableLink']);
 $dynamicAuthorDesignationLinkSource = fb_norm_str($attributes['dynamicAuthorDesignationLinkSource'] ?? 'post_permalink');
 
-/* ---------- Pro gate ---------- */
-if (!Helper::isProActivated()) {
-	$dynamicTitleEnabled = false;
-	$dynamicTitleEnableLink = false;
-	$dynamicDescriptionEnabled = false;
-	$dynamicDescriptionEnableLink = false;
-	$dynamicAuthorNameEnabled = false;
-	$dynamicAuthorNameEnableLink = false;
-	$dynamicAuthorDesignationEnabled = false;
-	$dynamicAuthorDesignationEnableLink = false;
-}
-
 /* ---------- compute dynamics ---------- */
 $title_dyn = fb_compute_dynamic_text([
 	'enabled' => $dynamicTitleEnabled,

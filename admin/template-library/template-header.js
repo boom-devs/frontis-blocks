@@ -46,7 +46,6 @@ const TemplateHeader = ({
     setResetCat = () => { },
     setLoading = () => { },
     setIsLoginModalOpen,
-    setIsPluginUpgradeModalOpen,
     disableMenu = false,
     isProPlugin = false,
     isImporting

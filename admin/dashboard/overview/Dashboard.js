@@ -1,6 +1,5 @@
 import { __ } from '@wordpress/i18n';
 import { ArrowRightIcon, CommunityIcon, DocumentationIcon, RateIcon, SupportIcon } from '../../icons';
-import ProUpgradeCard from './ProUpgradeCard';
 import FAQAccordion from './FAQAccordion';
 import SystemRequirements from './SystemRequirements';
 import VideoBanner from './VideoBanner';
@@ -11,7 +10,6 @@ const Dashboard = () => {
     <div className="fb-blocks-dashboard-container">
       <div className="fb-blocks-dashboard">
         <div className="fb-blocks-dashboard-left">
-          {/* {window.frontisBlocksAdmin.isProActive === 'false' && (<ProBanner />)} */}
           <VideoBanner />
 
           <div className="fb-blocks-dashboard-bottom">

@@ -360,10 +360,6 @@ export default function Edit({ attributes, setAttributes, clientId, context, isS
 		className: `${blockID || ''} fb-loop-builder-item-main-container ${postSwitcher === 'list' ? 'list-layout' : 'grid-layout'}`,
 	} );
 
-	if (!isProActive) {
-		return null;
-	}
-
 	if ( ! sortedPosts ) {
 		return (
 			<p { ...blockProps }>

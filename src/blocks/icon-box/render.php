@@ -488,16 +488,6 @@ $dynamicBtnTermsSeparator = fb_norm_str($attributes['dynamicBtnTermsSeparator'] 
 $dynamicBtnEnableLink = !empty($attributes['dynamicBtnEnableLink']);
 $dynamicBtnLinkSource = fb_norm_str($attributes['dynamicBtnLinkSource'] ?? 'post_permalink');
 
-/* ---------- Pro gate ---------- */
-if (!Helper::isProActivated()) {
-	$dynamicTitleEnabled = false;
-	$dynamicTitleEnableLink = false;
-	$dynamicDescriptionEnabled = false;
-	$dynamicDescriptionEnableLink = false;
-	$dynamicBtnEnabled = false;
-	$dynamicBtnEnableLink = false;
-}
-
 /* ---------- compute dynamics ---------- */
 $title_dyn = fb_compute_dynamic_text([
 	'enabled' => $dynamicTitleEnabled,
