@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/boom-devs/frontis-blocks">
-    <img src="assets/images/logo.png" alt="Frontis Blocks Logo" width="220" onerror="this.style.display='none'">
+    <img src="assets/images/logo.svg" alt="Frontis Blocks Logo" width="220">
   </a>
 </p>
 
@@ -169,7 +169,12 @@ We welcome contributions from human developers and AI assistants alike! Please r
 > **Issue-Driven Development:** Frontis Blocks strictly requires all pull requests to resolve an approved [GitHub Issue](https://github.com/boom-devs/frontis-blocks/issues) using `Closes #<issue_number>`.
 
 > [!CAUTION]
-> **Core Component Lock:** `src/components/` contains 35+ core UI design system controls shared across 30,000+ live sites. Changes to `src/components/` require maintainer authorization (`@noruzzamans`, `@boom-devs`).
+> **Strict Component Lock Policy (`src/components/`):**
+> `src/components/` contains 35+ core UI design system controls shared across **70+ blocks and 30,000+ live websites**.
+> 
+> - **MAINTAINERS ONLY**: Only repository maintainers (`@noruzzamans`, `@boom-devs`) are authorized to modify, update, or add files in `src/components/`.
+> - **NO EXTERNAL EDITS**: External contributors and autonomous AI agents are **strictly forbidden** from editing `src/components/`.
+> - **AUTOMATED REJECTION**: Any external pull request modifying `src/components/` will be immediately flagged with `needs: changes` and rejected by CI/CD guards.
 
 ---
 
@@ -186,34 +191,3 @@ it under the terms of the GNU General Public License as published by
 the Free Software Foundation; either version 2 of the License, or
 (at your option) any later version.
 ```
-
----
-
-## 👨‍💻 Maintainers & Credits
-
-<p align="center">
-  <img src="https://avatars.githubusercontent.com/noruzzamans" alt="Noruzzaman" width="90" height="90" style="border-radius: 50%;">
-</p>
-
-<p align="center">
-  <strong>Noruzzaman</strong><br>
-  WordPress Core & Gutenberg Engineer | Maintainer at <a href="https://github.com/boom-devs">BoomDevs</a>
-</p>
-
-<p align="center">
-  <a href="https://github.com/noruzzamans">
-    <img src="https://img.shields.io/badge/GitHub-@noruzzamans-181717?logo=github" alt="GitHub">
-  </a>
-  <a href="https://github.com/boom-devs">
-    <img src="https://img.shields.io/badge/Organization-@boom--devs-blue?logo=github" alt="BoomDevs">
-  </a>
-  <a href="https://profiles.wordpress.org/noruzzaman/">
-    <img src="https://img.shields.io/badge/WordPress.org-@noruzzaman-21759B?logo=wordpress" alt="WordPress Profile">
-  </a>
-</p>
-
----
-
-<p align="center">
-  Proudly crafted with ❤️ by the <a href="https://github.com/boom-devs">BoomDevs</a> engineering team.
-</p>

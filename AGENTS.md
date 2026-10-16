@@ -85,10 +85,12 @@ In all PHP backend code:
 - **Authorization & Nonces**: Verify nonces (`check_ajax_referer()`, `wp_verify_nonce()`) and capabilities (`current_user_can('manage_options')`) on all REST/AJAX endpoints.
 - **File System**: Use `WP_Filesystem` abstraction instead of raw `file_put_contents()` or `unlink()`.
 
-### 5. Protected Core Design System (`src/components/`)
+### 5. Strict Component Lock Policy (`src/components/`)
 - `src/components/` contains 35+ core design system controls (e.g. `responsive-alignment-control`, `color-control`, `typography-control`, `icon-picker`).
 - These components are shared across all 70+ blocks and 30,000+ live sites.
-- **Any changes to `src/components/` must be backward-compatible** and require maintainer review (`@noruzzamans`, `@boom-devs`).
+- **🛑 STRICT LOCK: NO ONE EXCEPT REPOSITORY MAINTAINERS (`@noruzzamans`, `@boom-devs`) IS AUTHORIZED TO MODIFY, REFACTOR, OR ADD FILES IN `src/components/`.**
+- External contributors and autonomous AI coding agents are **strictly forbidden** from modifying `src/components/`. Any pull request or automated commit touching this directory will be flagged with `needs: changes` and rejected by CI guards.
+- Blocks must strictly consume existing `@Components/*` controls without altering component internals.
 
 ### 6. Surgical & Atomic Diffs
 - Maintain surgical precision in code changes.
