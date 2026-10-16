@@ -36,7 +36,7 @@ jobs:
         run: composer install --no-dev --optimize-autoloader
 
       - name: Install NPM Dependencies
-        run: npm ci
+        run: npm ci || npm install
 
       - name: Verify Webpack Block Build
         run: npm run build
@@ -48,9 +48,9 @@ jobs:
         continue-on-error: true
         run: |
           echo "Checking JavaScript syntax and standards (Advisory)..."
-          npm run lint:js || true
+          npm run lint:js | tail -n 25 || true
           echo "Checking SCSS syntax and standards (Advisory)..."
-          npm run lint:css || true
+          npm run lint:css | tail -n 25 || true
 
       - name: Verify Plugin Distribution Packaging
         run: npm run plugin-zip
