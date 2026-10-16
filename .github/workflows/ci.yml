@@ -1,0 +1,91 @@
+name: CI & Quality Assurance
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-packaging:
+    name: Block Build, Admin Build & Packaging
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js (v20)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Setup PHP for Composer
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          tools: composer:v2
+
+      - name: Cache Composer Dependencies
+        uses: actions/cache@v4
+        with:
+          path: vendor
+          key: ${{ runner.os }}-composer-${{ hashFiles('composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Install Composer Dependencies
+        run: composer install --no-dev --optimize-autoloader --prefer-dist --no-progress
+
+      - name: Cache Node Modules
+        id: npm-cache
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-npm-modules-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-modules-
+
+      - name: Install NPM Dependencies
+        if: steps.npm-cache.outputs.cache-hit != 'true'
+        run: npm ci || npm install
+
+      - name: Verify Webpack Block Build
+        run: npm run build
+
+      - name: Verify Webpack Admin Build
+        run: npm run admin:build
+
+      - name: Verify Plugin Distribution Packaging
+        run: npm run plugin-zip
+
+  php-compatibility:
+    name: PHP Compatibility (PHP ${{ matrix.php-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version: ['7.4', '8.0', '8.1', '8.2', '8.3', '8.4']
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup PHP ${{ matrix.php-version }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          extensions: dom, json, libxml, mbstring
+          coverage: none
+
+      - name: Validate PHP Syntax (Lint All Files)
+        run: |
+          echo "Linting main plugin file..."
+          php -l frontis-blocks.php
+          echo "Linting includes and block PHP files..."
+          find includes src -name "*.php" -print0 | xargs -0 -n 1 php -l

@@ -1,0 +1,63 @@
+# .github/labeler.yml
+# Configuration for actions/labeler@v5 in Frontis Blocks
+
+'focus: php-backend':
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'includes/**/*.php'
+          - 'frontis-blocks.php'
+          - 'uninstall.php'
+
+'focus: blocks':
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'src/blocks/**/*'
+          - 'build/blocks/**/*'
+
+'focus: design-system':
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'src/components/**/*'
+
+'focus: admin-dashboard':
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'admin/**/*'
+
+'focus: forms':
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'includes/Forms/**/*'
+          - 'src/blocks/form-builder/**/*'
+          - 'src/blocks/*-field/**/*'
+          - 'src/blocks/fluent-form/**/*'
+          - 'src/blocks/contact-form-7/**/*'
+
+'focus: ci-cd':
+  - changed-files:
+      - any-glob-to-any-file:
+          - '.github/**/*'
+          - 'webpack*.js'
+          - 'package*.json'
+          - 'composer*.json'
+
+'focus: accessibility':
+  - changed-files:
+      - any-glob-to-any-file:
+          - '**/*a11y*'
+          - '**/*aria*'
+
+'focus: i18n':
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'languages/**/*'
+          - '**/*.pot'
+          - '**/*.po'
+
+'type: documentation':
+  - changed-files:
+      - any-glob-to-any-file:
+          - '**/*.md'
+          - 'docs/**/*'
+          - '.agents/**/*'
+          - 'readme.txt'
