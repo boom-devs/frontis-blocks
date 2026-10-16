@@ -1,59 +1,219 @@
-# === Frontis Blocks ===
+<p align="center">
+  <a href="https://github.com/boom-devs/frontis-blocks">
+    <img src="assets/images/logo.png" alt="Frontis Blocks Logo" width="220" onerror="this.style.display='none'">
+  </a>
+</p>
 
-Contributors: wpmessiah
-Tags: blocks, gutenberg, page builder
-Requires at least: 6.0
-Tested up to: 6.4
-Stable tag: 1.0.0
-Requires PHP: 7.4
-License: GPLv2 or later
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
+<h1 align="center">Frontis Blocks</h1>
 
-Enhance your WordPress Gutenberg editor with powerful and flexible custom blocks.
+<p align="center">
+  <strong>Next-Generation Modular Gutenberg Block Library & Design System for WordPress</strong><br>
+  Supercharge the WordPress Block Editor with 45+ high-performance blocks, dynamic CSS compiler, form builder, and full-site template cloud.
+</p>
 
-## Description
+<p align="center">
+  <a href="https://github.com/boom-devs/frontis-blocks/actions/workflows/ci.yml">
+    <img src="https://github.com/boom-devs/frontis-blocks/actions/workflows/ci.yml/badge.svg" alt="CI & Quality Assurance">
+  </a>
+  <img src="https://img.shields.io/badge/PHP-7.4%20|%208.0%20|%208.1%20|%208.2%20|%208.3%20|%208.4-777bb4?logo=php" alt="PHP Compatibility">
+  <img src="https://img.shields.io/badge/WordPress-6.0%2B-21759b?logo=wordpress" alt="WordPress Compatibility">
+  <img src="https://img.shields.io/badge/Active%20Installs-30%2C000%2B-brightgreen?logo=wordpress" alt="Active Installs">
+  <a href="https://github.com/boom-devs/frontis-blocks/blob/main/LICENSE">
+    <img src="https://img.shields.io/badge/License-GPL%20v2%2B-blue.svg" alt="License: GPL-2.0-or-later">
+  </a>
+  <img src="https://img.shields.io/badge/Code%20Review-Gemini%203.8%20Flash-4285F4?logo=google" alt="Gemini Code Review">
+</p>
 
-Frontis Blocks is a collection of custom Gutenberg blocks designed to extend the functionality of the WordPress block editor. Our blocks provide you with more design options and flexibility, allowing you to create stunning pages and posts with ease.
+---
 
-### Key Features
+## 📖 Overview
 
-- **Multiple Custom Blocks**: A variety of blocks for different purposes, from layout to content presentation.
-- **Easy to Use**: Intuitive controls that integrate seamlessly with the Gutenberg editor.
-- **Responsive Design**: All blocks are fully responsive and look great on any device.
-- **Performance Optimized**: Lightweight and fast-loading blocks that won't slow down your website.
-- **Regular Updates**: We're constantly improving and adding new features based on user feedback.
+**Frontis Blocks** is a high-performance WordPress Gutenberg plugin powering **30,000+ live websites**. It transforms the default WordPress Block Editor into an intuitive visual site builder without the performance overhead or vendor lock-in of traditional page builders (Elementor, Divi, WPBakery).
 
-## Installation
+All layout, spacing, and responsive design decisions are compiled dynamically into scoped inline CSS via Frontis Blocks' dynamic styling engine, ensuring **zero unused CSS** and industry-leading Core Web Vitals.
 
-1. Upload the plugin files to the `/wp-content/plugins/frontis-blocks` directory, or install the plugin through the WordPress plugins screen directly.
-2. Activate the plugin through the 'Plugins' screen in WordPress.
-3. Use the new blocks in the Gutenberg editor by searching for 'Frontis' in the block inserter.
+---
 
-## Frequently Asked Questions
+## ✨ Key Architectural Highlights
 
-### Is Frontis Blocks compatible with my theme?
+- **45+ Custom Gutenberg Blocks**: Sliders, accordions, form builder, coverflow carousel, interactive hotspots, flip boxes, animated headings, tabs, pricing tables, post grids, and timeline builders.
+- **35+ Core Design System Controls**: Shared React UI controls in `@Components/*` providing unified responsive typography, color pickers, box-shadows, and spacing controls across all blocks.
+- **Zero-Unused-CSS Style Engine**: Dynamic styles are generated via `styling.js` and loaded cleanly on demand — no monolithic CSS stylesheets loaded on pages that don't need them.
+- **Native Third-Party Form Integrations**: Built-in visual stylers for Fluent Forms and Contact Form 7.
+- **Template Cloud & Full-Site Import**: Integrated cloud template importer for pre-built block patterns and complete website templates.
+- **Multi-PHP Certified Matrix**: Automated GitHub Actions testing against **PHP 7.4 through PHP 8.4**.
 
-Yes, Frontis Blocks is designed to work with any WordPress theme that supports Gutenberg.
+---
 
-### Do I need coding knowledge to use Frontis Blocks?
+## 🏗️ Repository Architecture
 
-No, our blocks are designed to be user-friendly and don't require any coding knowledge.
+```text
+frontis-blocks/
+├── admin/                    # Admin dashboard, template library & settings UI
+│   ├── components/           # Admin-specific React components
+│   ├── dashboard/            # Plugin dashboard & settings UI
+│   ├── scss/                 # Admin styles & design tokens
+│   └── template-library/     # Cloud template library importer
+├── assets/                   # Public assets (icons, fonts, vendor libraries)
+├── build/                    # Compiled distribution assets (Webpack output)
+├── includes/                 # PHP Backend Architecture
+│   ├── Activator/            # Activation & migration hooks
+│   ├── Admin/                # WordPress admin menu & settings handlers
+│   ├── Core/                 # Core block registration & asset enqueueing
+│   ├── Forms/                # Form builder backend & submissions
+│   ├── RestApi/              # Custom WP REST API endpoints
+│   └── Plugin.php            # Main plugin singleton orchestrator
+├── languages/                # Translation POT & PO files
+├── src/                      # Source Code
+│   ├── blocks/               # 70+ Gutenberg Blocks (accordion, slider, grid, etc.)
+│   ├── components/           # 35+ Core Design System Controls (@Components/*)
+│   ├── config/               # Block configuration & presets
+│   └── utils/                # React hooks, helpers & color utilities
+├── .github/                  # GitHub Actions (CI/CD, PR & Issue triage, Gemini review)
+└── AGENTS.md                 # Contributor & AI Agent Operational Handbook
+```
 
-## Screenshots
+---
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Screenshots are stored in the /assets directory.
-2. This is the second screen shot
+## 💻 Local Development Setup
 
-## Changelog
+### Prerequisites
 
-### 1.0.0
-* Initial release
+| Requirement | Minimum Version | Recommended |
+| :--- | :--- | :--- |
+| **Node.js** | `>= 18.0.0` | `20.x LTS` |
+| **npm** | `>= 9.0.0` | `10.x` |
+| **PHP** | `>= 7.4.0` | `8.2 / 8.3` |
+| **WordPress** | `>= 6.0.0` | `6.7+` |
 
-## Upgrade Notice
+---
 
-### 1.0.0
-This is the first version of Frontis Blocks. Enjoy!
+### Option A: LocalWP (Recommended GUI Workflow)
 
-## Additional Information
+1. Open [Local](https://localwp.com/) and create a new WordPress site.
+2. Clone this repository directly into the site's plugin directory:
+   ```bash
+   cd ~/Local\ Sites/<site-name>/app/public/wp-content/plugins/
+   git clone https://github.com/boom-devs/frontis-blocks.git
+   cd frontis-blocks
+   ```
+3. Install dependencies and compile initial block assets:
+   ```bash
+   npm install
+   composer install
+   npm run build  # Compiles production block bundles into build/
+   npm run start  # Starts development watch mode
+   ```
+4. Activate **Frontis Blocks** from WP Admin → Plugins.
 
-For more information, please visit [Wpmessiah](https://wpmessiah.com).
+---
+
+### Option B: Docker via `@wordpress/env` (Zero-Config CLI)
+
+```bash
+# 1. Clone repository
+git clone https://github.com/boom-devs/frontis-blocks.git
+cd frontis-blocks
+
+# 2. Install dependencies & build
+npm install
+composer install
+npm run build
+
+# 3. Start WordPress in Docker (Port 8888)
+npx @wordpress/env start
+```
+
+- **Frontend:** [http://localhost:8888](http://localhost:8888)
+- **WP Admin:** [http://localhost:8888/wp-admin](http://localhost:8888/wp-admin) (`Username: admin`, `Password: password`)
+- **Stop Environment:** `npx @wordpress/env stop`
+
+---
+
+## ⚡ Essential NPM Scripts
+
+| Command | Purpose |
+| :--- | :--- |
+| `npm run start` | Watch mode for block development (`wp-scripts start`) |
+| `npm run build` | Compiles production assets into `build/` |
+| `npm run admin` | Watch mode for admin assets |
+| `npm run admin:build` | Compiles admin stylesheets for production |
+| `npm run format` | Auto-formats code according to WordPress standards |
+| `npm run lint:js` | Runs ESLint across JavaScript files |
+| `npm run lint:css` | Runs Stylelint across SCSS stylesheets |
+| `npm run zip` | Generates a clean, production-ready WordPress.org distributable zip |
+
+---
+
+## 🛡️ Testing & Continuous Integration
+
+Every pull request runs automated GitHub Actions workflows:
+- **Multi-PHP Syntax & Compatibility:** Parallel linting across **PHP 7.4, 8.0, 8.1, 8.2, 8.3, and 8.4**.
+- **Block & Admin Build Verification:** Compiles all 70+ block entry points and admin stylesheets with Webpack.
+- **Plugin Packaging:** Verifies distributable zip creation (`webpack.zip.js`).
+- **Dependency Caching:** Fast CI runs using `actions/cache@v4` for Composer and NPM modules.
+- **Native Gemini AI Review:** Pull requests are automatically inspected by Google Gemini 3.8 Flash for WordPress security, performance, and React best practices.
+
+---
+
+## 🤝 Contributing & Governance
+
+We welcome contributions from human developers and AI assistants alike! Please review our governance guidelines before submitting pull requests:
+
+- 📖 **[CONTRIBUTING.md](CONTRIBUTING.md)**: Contribution guidelines, branching model, and PR conventions.
+- 🤖 **[AGENTS.md](AGENTS.md)**: AI agent & contributor technical operational handbook.
+- 📜 **[CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)**: Contributor Covenant v2.1 code of conduct.
+- 🛡️ **[SECURITY.md](SECURITY.md)**: Vulnerability disclosure and security reporting policy.
+
+> [!IMPORTANT]
+> **Issue-Driven Development:** Frontis Blocks strictly requires all pull requests to resolve an approved [GitHub Issue](https://github.com/boom-devs/frontis-blocks/issues) using `Closes #<issue_number>`.
+
+> [!CAUTION]
+> **Core Component Lock:** `src/components/` contains 35+ core UI design system controls shared across 30,000+ live sites. Changes to `src/components/` require maintainer authorization (`@noruzzamans`, `@boom-devs`).
+
+---
+
+## 📄 License
+
+Frontis Blocks is open-source software licensed under the **GNU General Public License v2.0 or later (GPL-2.0-or-later)**.
+
+```
+Frontis Blocks - Next-Generation Gutenberg Block Library for WordPress
+Copyright (C) 2024-2026 BoomDevs
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+```
+
+---
+
+## 👨‍💻 Maintainers & Credits
+
+<p align="center">
+  <img src="https://avatars.githubusercontent.com/noruzzamans" alt="Noruzzaman" width="90" height="90" style="border-radius: 50%;">
+</p>
+
+<p align="center">
+  <strong>Noruzzaman</strong><br>
+  WordPress Core & Gutenberg Engineer | Maintainer at <a href="https://github.com/boom-devs">BoomDevs</a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/noruzzamans">
+    <img src="https://img.shields.io/badge/GitHub-@noruzzamans-181717?logo=github" alt="GitHub">
+  </a>
+  <a href="https://github.com/boom-devs">
+    <img src="https://img.shields.io/badge/Organization-@boom--devs-blue?logo=github" alt="BoomDevs">
+  </a>
+  <a href="https://profiles.wordpress.org/noruzzaman/">
+    <img src="https://img.shields.io/badge/WordPress.org-@noruzzaman-21759B?logo=wordpress" alt="WordPress Profile">
+  </a>
+</p>
+
+---
+
+<p align="center">
+  Proudly crafted with ❤️ by the <a href="https://github.com/boom-devs">BoomDevs</a> engineering team.
+</p>
