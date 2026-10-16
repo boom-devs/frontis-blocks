@@ -1,0 +1,7 @@
+build/
+vendor/
+assets/
+node_modules/
+*.min.js
+*.bundle.js
+frontis-blocks.zip

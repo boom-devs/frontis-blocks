@@ -1,0 +1,123 @@
+name: Issue Automation & Labeler
+
+on:
+  issues:
+    types: [opened, edited]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.issue.number }}
+  cancel-in-progress: true
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  auto-label-issue:
+    name: Auto-Label Issue
+    runs-on: ubuntu-latest
+    steps:
+      - name: Apply Intelligent Issue Labels
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const issue = context.payload.issue;
+            const author = issue.user.login;
+            const action = context.payload.action;
+            const title = issue.title;
+            const labelsToAdd = new Set();
+
+            // 0. Auto-assign issue author (or repo maintainer) on open
+            if (action === 'opened' && (!issue.assignees || issue.assignees.length === 0)) {
+              try {
+                await github.rest.issues.addAssignees({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issue.number,
+                  assignees: [author]
+                });
+                console.log(`Auto-assigned author @${author} to issue #${issue.number}`);
+              } catch (err) {
+                // If external contributor cannot be assigned directly, fallback to maintainer
+                try {
+                  await github.rest.issues.addAssignees({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: issue.number,
+                    assignees: ['noruzzamans']
+                  });
+                  console.log(`Assigned maintainer @noruzzamans to issue #${issue.number}`);
+                } catch (fallbackErr) {
+                  console.log(`Failed to assign fallback maintainer: ${fallbackErr.message}`);
+                }
+              }
+            }
+
+            // 1. Conventional Commits prefix parser
+            if (/^fix(\(.*\))?:/i.test(title)) labelsToAdd.add('type: bug');
+            if (/^feat(\(.*\))?:/i.test(title)) labelsToAdd.add('type: enhancement');
+            if (/^refactor(\(.*\))?:/i.test(title)) labelsToAdd.add('type: architecture');
+            if (/^perf(\(.*\))?:/i.test(title)) labelsToAdd.add('type: performance');
+            if (/^sec(urity)?(\(.*\))?:/i.test(title)) labelsToAdd.add('type: security');
+            if (/^docs(\(.*\))?:/i.test(title)) labelsToAdd.add('type: documentation');
+            if (/^(ci|chore|test)(\(.*\))?:/i.test(title)) labelsToAdd.add('focus: ci-cd');
+
+            // 2. Scope parser (e.g. feat(blocks): ..., refactor(design-system): ...)
+            const scopeMatch = title.match(/^[a-z]+(?:\(([^)]+)\))?:/i);
+            if (scopeMatch && scopeMatch[1]) {
+              const scope = scopeMatch[1].toLowerCase().trim();
+              if (scope.includes('design') || scope.includes('control') || scope.includes('component')) {
+                labelsToAdd.add('focus: design-system');
+              }
+              if (scope.includes('block')) {
+                labelsToAdd.add('focus: blocks');
+              }
+              if (scope.includes('form') || scope.includes('cf7') || scope.includes('fluent')) {
+                labelsToAdd.add('focus: forms');
+              }
+              if (scope.includes('admin') || scope.includes('dashboard') || scope.includes('sidebar')) {
+                labelsToAdd.add('focus: admin-dashboard');
+              }
+              if (scope.includes('core') || scope.includes('php') || scope.includes('backend')) {
+                labelsToAdd.add('focus: php-backend');
+              }
+              if (scope.includes('ci') || scope.includes('deps') || scope.includes('build') || scope.includes('release')) {
+                labelsToAdd.add('focus: ci-cd');
+              }
+              if (scope.includes('a11y') || scope.includes('accessibility')) {
+                labelsToAdd.add('focus: accessibility');
+              }
+              if (scope.includes('i18n') || scope.includes('translat')) {
+                labelsToAdd.add('focus: i18n');
+              }
+            }
+
+            // 3. Fallback title keywords if no conventional commit scope was matched
+            const lowerTitle = title.toLowerCase();
+            if (!labelsToAdd.has('focus: blocks') && (lowerTitle.includes('block') || lowerTitle.includes('gutenberg'))) {
+              labelsToAdd.add('focus: blocks');
+            }
+            if (!labelsToAdd.has('focus: forms') && (lowerTitle.includes('form') || lowerTitle.includes('cf7') || lowerTitle.includes('fluent form'))) {
+              labelsToAdd.add('focus: forms');
+            }
+            if (!labelsToAdd.has('focus: admin-dashboard') && (lowerTitle.includes('admin') || lowerTitle.includes('dashboard') || lowerTitle.includes('settings'))) {
+              labelsToAdd.add('focus: admin-dashboard');
+            }
+            if (!labelsToAdd.has('focus: design-system') && (lowerTitle.includes('component') || lowerTitle.includes('control') || lowerTitle.includes('styling'))) {
+              labelsToAdd.add('focus: design-system');
+            }
+
+            // Apply labels
+            const currentLabels = (issue.labels || []).map(l => l.name);
+            const finalAdditions = Array.from(labelsToAdd).filter(l => !currentLabels.includes(l));
+
+            if (finalAdditions.length > 0) {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                labels: finalAdditions
+              });
+              console.log(`Successfully added labels to issue #${issue.number}: ${finalAdditions.join(', ')}`);
+            }
