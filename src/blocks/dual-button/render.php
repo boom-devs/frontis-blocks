@@ -440,14 +440,6 @@ $dynamicBtnTwoTermsSeparator          = fb_norm_str($attributes['dynamicBtnTwoTe
 $dynamicBtnTwoEnableLink              = !empty($attributes['dynamicBtnTwoEnableLink']);
 $dynamicBtnTwoLinkSource              = fb_norm_str($attributes['dynamicBtnTwoLinkSource'] ?? 'post_permalink');
 
-/* ---------- Pro gate ---------- */
-if ( ! Helper::isProActivated() ) {
-    $dynamicBtnOneEnabled = false;
-	$dynamicBtnOneEnableLink = false;
-    $dynamicBtnTwoEnabled = false;
-	$dynamicBtnTwoEnableLink = false;
-}
-
 /* ---------- compute dynamics ---------- */
 $btnOneDynamic = fb_compute_dynamic_text( [
 	'enabled'             => $dynamicBtnOneEnabled,

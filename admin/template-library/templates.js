@@ -52,9 +52,8 @@ const PatternLibraryButton = () => {
     });
     const [isImporting, setIsImporting] = useState(false);
 
-    const licenseKey = FB_TLibrary.activationKey.length > 0 ? FB_TLibrary.activationKey : '';
-    const isProPlugin = FB_TLibrary.activationKey.length > 0 ? true : false;
-    const [isPluginUpgradeModalOpen, setIsPluginUpgradeModalOpen] = useState(false);
+    const licenseKey = FB_TLibrary?.activationKey || '';
+    const isProPlugin = true;
 
     const userData = JSON.parse(localStorage.getItem("userData"));
 
@@ -337,11 +336,6 @@ const PatternLibraryButton = () => {
             return;
         }
 
-        if (!isProPlugin) {
-            setIsPluginUpgradeModalOpen(true);
-            return;
-        }
-
         if (isAlreadySaved) return;
 
         if (loading) return;
@@ -470,7 +464,6 @@ const PatternLibraryButton = () => {
                                     setResetCat={setResetCat}
                                     setLoading={setLoading}
                                     setIsLoginModalOpen={setIsLoginModalOpen}
-                                    setIsPluginUpgradeModalOpen={setIsPluginUpgradeModalOpen}
                                     isProPlugin={isProPlugin}
                                     isImporting={isImporting}
                                 />
@@ -518,8 +511,6 @@ const PatternLibraryButton = () => {
                                         setIsLoginModalOpen={setIsLoginModalOpen}
                                         isLoginModalOpen={isLoginModalOpen}
                                         isProPlugin={isProPlugin}
-                                        isPluginUpgradeModalOpen={isPluginUpgradeModalOpen}
-                                        setIsPluginUpgradeModalOpen={setIsPluginUpgradeModalOpen}
                                         currentPage={currentPage[activeTab]}
                                         onPageChange={handlePageChange}
                                         isImporting={isImporting}

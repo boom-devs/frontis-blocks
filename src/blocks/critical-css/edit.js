@@ -1,7 +1,6 @@
 import { __ } from "@wordpress/i18n";
-import { applyFilters } from '@wordpress/hooks';
-import UpgradeToProPopup from '@Utils/upgradeToProPopup';
-import getProActive from '@Utils/getProActive';
+
+
 
 import {
 	useBlockProps
@@ -21,14 +20,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		className: `fb-icon-box-main-wrapper ${blockID} `,
 	});
 
-	const isProActive = getProActive();
-	const criticalCssAvailable = applyFilters('frontisblocks-critical-css-available', false);
 
-	if(!criticalCssAvailable || !isProActive) {
-		return (
-			<UpgradeToProPopup />
-		)
-	}
+
 
 	return (
 		<>

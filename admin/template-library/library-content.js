@@ -8,7 +8,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { ClipLoader } from "react-spinners";
 import TemplateImport from "./template-import";
 import LoginSignupModal from "./login-signup";
-import PluginUpgradeModal from "./plugin-upgrade";
 import TemplateGrid from "./template-grid";
 import TemplateList from "./template-list";
 import { TemplateContentLoader, TemplateLoader } from "./template-loader";

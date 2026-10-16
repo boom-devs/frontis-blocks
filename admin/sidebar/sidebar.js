@@ -1,5 +1,5 @@
 import { __ } from "@wordpress/i18n";
-import { PluginSidebar, PluginSidebarMoreMenuItem } from "@wordpress/editor";
+import { PluginSidebar } from "@wordpress/editor";
 import { useViewportMatch } from '@wordpress/compose';
 import {
 	__experimentalNavigatorProvider as NavigatorProvider,
@@ -21,7 +21,7 @@ import FrontisMetaBox from "./theme-settings/editor";
 import FrontisThemeSiteEditor from "./theme-settings/site-editor";
 import { addFilter } from '@wordpress/hooks';
 import { InspectorControls } from '@wordpress/block-editor';
-import { PanelBody, ToggleControl, Button, Spinner } from '@wordpress/components';
+import { PanelBody, ToggleControl, Button } from '@wordpress/components';
 import "./sidebar.scss";
 
 // Default color and gradient configurations
@@ -129,23 +129,23 @@ const defaultTypography = {
 		fontStyle: "Default",
 		textTransform: "Default",
 		textDecoration: "Default",
+		letterSpacing: { Desktop: "Default", Tablet: "Default", Mobile: "Default" },
+		letterSpacingUnit: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+	all: {
+		fontFamily: "Default",
+		lineHeight: { Desktop: "", Tablet: "", Mobile: "" },
+		lineHeightUnits: { Desktop: "px", Tablet: "px", Mobile: "px" },
+		fontSize: { Desktop: "", Tablet: "", Mobile: "" },
+		fontSizeUnit: { Desktop: "px", Tablet: "px", Mobile: "px" },
+		fontWeight: "Default",
+		fontStyle: "Default",
+		textTransform: "Default",
+		textDecoration: "Default",
 		letterSpacing: { Desktop: "", Tablet: "", Mobile: "" },
 		letterSpacingUnit: { Desktop: "px", Tablet: "px", Mobile: "px" },
 	},
 	heading: {
-		all: {
-			fontFamily: "Default",
-			lineHeight: { Desktop: "", Tablet: "", Mobile: "" },
-			lineHeightUnits: { Desktop: "px", Tablet: "px", Mobile: "px" },
-			fontSize: { Desktop: "", Tablet: "", Mobile: "" },
-			fontSizeUnit: { Desktop: "px", Tablet: "px", Mobile: "px" },
-			fontWeight: "Default",
-			fontStyle: "Default",
-			textTransform: "Default",
-			textDecoration: "Default",
-			letterSpacing: { Desktop: "", Tablet: "", Mobile: "" },
-			letterSpacingUnit: { Desktop: "px", Tablet: "px", Mobile: "px" },
-		},
 		h1: {
 			fontFamily: "Default",
 			lineHeight: { Desktop: "", Tablet: "", Mobile: "" },
@@ -179,7 +179,7 @@ const defaultTypography = {
 			fontSize: { Desktop: "", Tablet: "", Mobile: "" },
 			fontSizeUnit: {
 				Desktop: "px",
-				Tablet: "FrontisBlocksSidebar.jsx",
+				Tablet: "px",
 				Mobile: "px",
 			},
 			fontWeight: "Default",
@@ -287,6 +287,50 @@ const setStoredThemeOwnedSetting = (key, value, themePaletteHash) => {
 	setStoredSetting(getThemeOwnedStorageHashKey(key), themePaletteHash || "");
 };
 
+// Registered outside component to avoid repeated registration on every render
+function addCustomSettingsToCoreColumns(settings, name) {
+	if (name !== 'core/template-part') {
+		return settings;
+	}
+
+	return {
+		...settings,
+		attributes: {
+			...settings.attributes,
+			isReverseDirection: {
+				type: 'boolean',
+				default: false,
+			},
+		},
+		edit(props) {
+			const { attributes, setAttributes } = props;
+			const { isReverseDirection } = attributes;
+
+			return (
+				<>
+					<InspectorControls>
+						<PanelBody title="Custom Column Settings">
+							<ToggleControl
+								label="Reverse Direction on Mobile"
+								checked={isReverseDirection}
+								onChange={(value) =>
+									setAttributes({ isReverseDirection: value })
+								}
+							/>
+						</PanelBody>
+					</InspectorControls>
+				</>
+			);
+		},
+	};
+}
+
+addFilter(
+	'blocks.registerBlockType',
+	'frontis-blocks/add-custom-settings',
+	addCustomSettingsToCoreColumns
+);
+
 function FrontisBlocksSidebar() {
 	const deviceType = useDeviceType();
 	const defaultThemeColors = useMemo(
@@ -327,8 +371,8 @@ function FrontisBlocksSidebar() {
 	const [customGradientColors, setCustomGradientColors] = useState(() =>
 		normalizePaletteItems(getStoredSetting("fb_custom_gradient_colors", [])),
 	);
-	const [typography, setTypography] = useState(defaultTypography);
-	const [customTypography, setCustomTypography] = useState({});
+	const [typography, setTypography] = useState(() => getStoredSetting("fb_typography", defaultTypography));
+	const [customTypography, setCustomTypography] = useState(() => getStoredSetting("fb_custom_typography", {}));
 	const [fontFamilies, setFontFamilies] = useState({});
 	const [hasLoadedSettings, setHasLoadedSettings] = useState(false);
 	const [isSaving, setIsSaving] = useState(false);
@@ -337,13 +381,8 @@ function FrontisBlocksSidebar() {
 	const isSavingColorSettingsRef = useRef(false);
 	const hasPendingLocalColorChangesRef = useRef(false);
 
-
 	const mobilePopoverProps = { placement: 'bottom-start', offset: 8 };
-	// Memoized theme colors
-	const themeColors = useMemo(
-		() => defaultThemeColors,
-		[],
-	);
+	const themeColors = useMemo(() => defaultThemeColors, [defaultThemeColors]);
 
 	const isMobileViewport = useViewportMatch('small', '<');
 	const popoverProps = isMobileViewport ? mobilePopoverProps : undefined;
@@ -388,158 +427,103 @@ function FrontisBlocksSidebar() {
 
 	// Utility to extract font families
 	const getAllFontFamilies = useCallback((fontsObject) => {
-		const fontFamilies = [];
+		if (!fontsObject) return;
+		const fontFamiliesList = [];
 		const extractFonts = (obj) => {
 			Object.values(obj).forEach((value) => {
-				if (typeof value === "string") fontFamilies.push(value);
-				else if (typeof value === "object") extractFonts(value);
+				if (typeof value === "string") fontFamiliesList.push(value);
+				else if (typeof value === "object" && value !== null) extractFonts(value);
 			});
 		};
 		extractFonts(fontsObject);
-		const fontsString = fontFamilies.join(",");
-		loadGoogleFont(fontsString);
+		const fontsString = fontFamiliesList.join(",");
+		if (fontsString) loadGoogleFont(fontsString);
 	}, []);
 
+	// Fast parallel fetch for all global settings on mount
 	const handleUpdateState = useCallback(async () => {
 		setHasLoadedSettings(false);
-		const localStorageKeys = [
-			{
-				key: "fb_global_colors",
-				setter: setGlobalColors,
-				defaultValue: themeColors,
-				api: "fb_get_global_colors",
-			},
-			{
-				key: "fb_custom_colors",
-				setter: setCustomColors,
-				defaultValue: [],
-				api: "fb_get_custom_colors",
-			},
-			{
-				key: "fb_gradient_colors",
-				setter: setGradientColors,
-				defaultValue: frontisBlocksAdmin?.gradients_colors,
-				api: "fb_get_gradient_colors",
-			},
-			{
-				key: "fb_custom_gradient_colors",
-				setter: setCustomGradientColors,
-				defaultValue: [],
-				api: "fb_get_custom_gradient_colors",
-			},
-			{
-				key: "fb_typography",
-				setter: setTypography,
-				defaultValue: defaultTypography,
-				api: "fb_get_typography",
-			},
-			{
-				key: "fb_custom_typography",
-				setter: setCustomTypography,
-				defaultValue: [],
-				api: "fb_get_custom_typography",
-			},
-			{
-				key: "fb_fontfamilies",
-				setter: setFontFamilies,
-				defaultValue: [],
-				api: "fb_get_fontfamilies",
-				postProcess: getAllFontFamilies,
-			},
-			{
-				key: "fb_globaltypo",
-				setter: null,
-				defaultValue: null,
-				api: "fb_get_globaltypo",
-				postProcess: (data) => generateCSSVariables(data, deviceType),
-			},
-		];
 
 		try {
-			const loadedSettings = {
-				globalColors: normalizePaletteItems(
-					getStoredThemeOwnedSetting(
-						"fb_global_colors",
-						frontisBlocksAdmin?.global_colors,
-						themeColorPaletteHash,
-					),
-					themeColors,
+			const [
+				customColorsRes,
+				gradientColorsRes,
+				customGradientColorsRes,
+				typographyRes,
+				customTypographyRes,
+				fontFamiliesRes,
+				globalTypoRes,
+			] = await Promise.all([
+				getGlobalStyle("fb_get_custom_colors"),
+				getGlobalStyle("fb_get_gradient_colors"),
+				getGlobalStyle("fb_get_custom_gradient_colors"),
+				getGlobalStyle("fb_get_typography"),
+				getGlobalStyle("fb_get_custom_typography"),
+				getGlobalStyle("fb_get_fontfamilies"),
+				getGlobalStyle("fb_get_globaltypo"),
+			]);
+
+			const currentGlobalColors = normalizePaletteItems(
+				getStoredThemeOwnedSetting(
+					"fb_global_colors",
+					frontisBlocksAdmin?.global_colors,
+					themeColorPaletteHash,
 				),
-				customColors: normalizePaletteItems(getStoredSetting("fb_custom_colors", [])),
-				gradientColors: normalizePaletteItems(
-					getStoredThemeOwnedSetting(
-						"fb_gradient_colors",
-						frontisBlocksAdmin?.gradients_colors,
-						themeGradientPaletteHash,
-					),
-					defaultGradientColors,
-				),
-				customGradientColors: normalizePaletteItems(
-					getStoredSetting("fb_custom_gradient_colors", []),
-				),
-			};
-
-			for (const {
-				key,
-				setter,
-				defaultValue,
-				api,
-				postProcess,
-			} of localStorageKeys) {
-				if (key === "fb_global_colors") {
-					const currentGlobalColors = loadedSettings.globalColors;
-					if (!hasPendingLocalColorChangesRef.current) {
-						setter(currentGlobalColors);
-						setStoredThemeOwnedSetting(key, currentGlobalColors, themeColorPaletteHash);
-					}
-					loadedSettings.globalColors = currentGlobalColors;
-					if (postProcess) setTimeout(() => postProcess(currentGlobalColors), 1000);
-				} else {
-					const res = await getGlobalStyle(api);
-					const data = res.success ? res.data : defaultValue;
-
-					if (key === "fb_custom_colors") {
-						const normalizedCustomColors = normalizePaletteItems(data);
-						if (setter && !hasPendingLocalColorChangesRef.current) {
-							setter(normalizedCustomColors);
-							setStoredSetting(key, normalizedCustomColors);
-						}
-						loadedSettings.customColors = normalizedCustomColors;
-						if (postProcess) setTimeout(() => postProcess(normalizedCustomColors), 1000);
-						continue;
-					}
-
-					if (key === "fb_gradient_colors") {
-						const normalizedGradientColors = normalizePaletteItems(data, defaultGradientColors);
-						if (setter && !hasPendingLocalColorChangesRef.current) {
-							setter(normalizedGradientColors);
-							setStoredThemeOwnedSetting(
-								key,
-								normalizedGradientColors,
-								themeGradientPaletteHash,
-							);
-						}
-						loadedSettings.gradientColors = normalizedGradientColors;
-						if (postProcess) setTimeout(() => postProcess(normalizedGradientColors), 1000);
-						continue;
-					}
-
-					if (key === "fb_custom_gradient_colors") {
-						const normalizedCustomGradientColors = normalizePaletteItems(data);
-						if (setter && !hasPendingLocalColorChangesRef.current) {
-							setter(normalizedCustomGradientColors);
-							setStoredSetting(key, normalizedCustomGradientColors);
-						}
-						loadedSettings.customGradientColors = normalizedCustomGradientColors;
-						if (postProcess) setTimeout(() => postProcess(normalizedCustomGradientColors), 1000);
-						continue;
-					}
-
-					if (setter) setter(data);
-					setStoredSetting(key, data);
-					if (postProcess) setTimeout(() => postProcess(data), 1000);
-				}
+				themeColors,
+			);
+			if (!hasPendingLocalColorChangesRef.current) {
+				setGlobalColors(currentGlobalColors);
+				setStoredThemeOwnedSetting("fb_global_colors", currentGlobalColors, themeColorPaletteHash);
 			}
+
+			const customColorsData = normalizePaletteItems(customColorsRes?.success ? customColorsRes.data : []);
+			if (!hasPendingLocalColorChangesRef.current) {
+				setCustomColors(customColorsData);
+				setStoredSetting("fb_custom_colors", customColorsData);
+			}
+
+			const gradientColorsData = normalizePaletteItems(
+				gradientColorsRes?.success ? gradientColorsRes.data : frontisBlocksAdmin?.gradients_colors,
+				defaultGradientColors,
+			);
+			if (!hasPendingLocalColorChangesRef.current) {
+				setGradientColors(gradientColorsData);
+				setStoredThemeOwnedSetting("fb_gradient_colors", gradientColorsData, themeGradientPaletteHash);
+			}
+
+			const customGradientColorsData = normalizePaletteItems(customGradientColorsRes?.success ? customGradientColorsRes.data : []);
+			if (!hasPendingLocalColorChangesRef.current) {
+				setCustomGradientColors(customGradientColorsData);
+				setStoredSetting("fb_custom_gradient_colors", customGradientColorsData);
+			}
+
+			if (typographyRes?.success && typographyRes.data) {
+				setTypography(typographyRes.data);
+				setStoredSetting("fb_typography", typographyRes.data);
+			}
+
+			if (customTypographyRes?.success && customTypographyRes.data) {
+				setCustomTypography(customTypographyRes.data);
+				setStoredSetting("fb_custom_typography", customTypographyRes.data);
+			}
+
+			if (fontFamiliesRes?.success && fontFamiliesRes.data) {
+				setFontFamilies(fontFamiliesRes.data);
+				setStoredSetting("fb_fontfamilies", fontFamiliesRes.data);
+				getAllFontFamilies(fontFamiliesRes.data);
+			}
+
+			if (globalTypoRes?.success && globalTypoRes.data) {
+				generateCSSVariables(globalTypoRes.data, deviceType);
+				setStoredSetting("fb_globaltypo", globalTypoRes.data);
+			}
+
+			const loadedSettings = {
+				globalColors: currentGlobalColors,
+				customColors: customColorsData,
+				gradientColors: gradientColorsData,
+				customGradientColors: customGradientColorsData,
+			};
 			lastSavedColorSettingsRef.current = JSON.stringify(loadedSettings);
 		} catch (error) {
 			console.error("Error fetching global settings:", error);
@@ -555,12 +539,12 @@ function FrontisBlocksSidebar() {
 		themeGradientPaletteHash,
 	]);
 
-	// Initialize on mount and device type change
+	// Initialize on mount
 	useEffect(() => {
 		handleUpdateState();
 	}, [handleUpdateState]);
 
-	// Generate color variables
+	// Debounced generation of color variables (fast 60ms debounce)
 	useEffect(() => {
 		const mergedColors = [
 			...(customColors ?? []),
@@ -569,15 +553,21 @@ function FrontisBlocksSidebar() {
 			...(globalColors ?? (Array.isArray(themeColors) ? themeColors : [])),
 		];
 
-		setTimeout(() => generateColorsVariables(mergedColors, deviceType), 1000);
+		const timer = setTimeout(() => {
+			generateColorsVariables(mergedColors, deviceType);
+		}, 60);
+
+		return () => clearTimeout(timer);
 	}, [
 		globalColors,
 		customColors,
 		customGradientColors,
 		gradientColors,
 		deviceType,
+		themeColors,
 	]);
 
+	// Fast parallel saving of queued color settings
 	const flushQueuedColorSettings = useCallback(async () => {
 		if (isSavingColorSettingsRef.current) {
 			return;
@@ -590,52 +580,37 @@ function FrontisBlocksSidebar() {
 				const { settings, signature } = queuedColorSettingsRef.current;
 				queuedColorSettingsRef.current = null;
 
-				const settingsQueue = [
-					{
-						key: "fb_update_global_colors",
-						data: normalizePaletteItems(settings.globalColors, themeColors),
-						storeKey: "fb_global_colors",
-						themePaletteHash: themeColorPaletteHash,
-					},
-					{
-						key: "fb_update_custom_colors",
-						data: normalizePaletteItems(settings.customColors),
-						storeKey: "fb_custom_colors",
-					},
-					{
-						key: "fb_update_gradient_colors",
-						data: normalizePaletteItems(settings.gradientColors, defaultGradientColors),
-						storeKey: "fb_gradient_colors",
-						themePaletteHash: themeGradientPaletteHash,
-					},
-					{
-						key: "fb_update_custom_gradient_colors",
-						data: normalizePaletteItems(settings.customGradientColors),
-						storeKey: "fb_custom_gradient_colors",
-					},
+				const saveTasks = [
+					updateGlobalStyle(normalizePaletteItems(settings.globalColors, themeColors), "fb_update_global_colors").then((res) => {
+						if (!res?.success) throw new Error("Failed to update global colors");
+						const data = normalizePaletteItems(res.data?.data, settings.globalColors);
+						setStoredThemeOwnedSetting("fb_global_colors", data, themeColorPaletteHash);
+					}),
+					updateGlobalStyle(normalizePaletteItems(settings.customColors), "fb_update_custom_colors").then((res) => {
+						if (!res?.success) throw new Error("Failed to update custom colors");
+						const data = normalizePaletteItems(res.data?.data, settings.customColors);
+						setStoredSetting("fb_custom_colors", data);
+					}),
+					updateGlobalStyle(normalizePaletteItems(settings.gradientColors, defaultGradientColors), "fb_update_gradient_colors").then((res) => {
+						if (!res?.success) throw new Error("Failed to update gradient colors");
+						const data = normalizePaletteItems(res.data?.data, settings.gradientColors);
+						setStoredThemeOwnedSetting("fb_gradient_colors", data, themeGradientPaletteHash);
+					}),
+					updateGlobalStyle(normalizePaletteItems(settings.customGradientColors), "fb_update_custom_gradient_colors").then((res) => {
+						if (!res?.success) throw new Error("Failed to update custom gradient colors");
+						const data = normalizePaletteItems(res.data?.data, settings.customGradientColors);
+						setStoredSetting("fb_custom_gradient_colors", data);
+					}),
 				];
 
-				for (const { key, data, storeKey, themePaletteHash } of settingsQueue) {
-					const response = await updateGlobalStyle(data, key);
-					if (!response.success) {
-						throw new Error(`Failed to update ${key}`);
-					}
-
-					const normalizedStoredData = normalizePaletteItems(response.data?.data, data);
-
-					if (themePaletteHash) {
-						setStoredThemeOwnedSetting(storeKey, normalizedStoredData, themePaletteHash);
-						continue;
-					}
-
-					setStoredSetting(storeKey, normalizedStoredData);
-				}
+				await Promise.all(saveTasks);
 
 				lastSavedColorSettingsRef.current = signature;
 				hasPendingLocalColorChangesRef.current = false;
 			}
 		} catch (error) {
 			console.error("Error updating settings:", error);
+			throw error;
 		} finally {
 			isSavingColorSettingsRef.current = false;
 			setIsSaving(false);
@@ -660,34 +635,11 @@ function FrontisBlocksSidebar() {
 		};
 		setIsSaving(true);
 		flushQueuedColorSettings().then(() => {
-			toastSuccess("Color settings saved successfully!");
+			toastSuccess(__("Color settings saved successfully!", "frontis-blocks"));
 		}).catch(() => {
-			toastError("Failed to save color settings.");
+			toastError(__("Failed to save color settings.", "frontis-blocks"));
 		});
 	}, [buildColorSettings, flushQueuedColorSettings]);
-
-	// useEffect(() => {
-	// 	if (!hasLoadedSettings) {
-	// 		return;
-	// 	}
-
-	// 	const currentSettings = buildColorSettings();
-	// 	const currentSignature = JSON.stringify(currentSettings);
-
-	// 	if (currentSignature === lastSavedColorSettingsRef.current) {
-	// 		return;
-	// 	}
-
-	// 	const saveTimeout = setTimeout(() => {
-	// 		queuedColorSettingsRef.current = {
-	// 			settings: currentSettings,
-	// 			signature: currentSignature,
-	// 		};
-	// 		flushQueuedColorSettings();
-	// 	}, 800);
-
-	// 	return () => clearTimeout(saveTimeout);
-	// }, [buildColorSettings, flushQueuedColorSettings, hasLoadedSettings]);
 
 	useEffect(() => {
 		if (globalColors === undefined) {
@@ -695,63 +647,28 @@ function FrontisBlocksSidebar() {
 		}
 	}, [globalColors, themeColors]);
 
+	// Memoized editor mode checks to prevent unnecessary re-computations
+	const { isSiteEditor, isPagePost, onlyCanvasEditor } = useMemo(() => {
+		try {
+			const url = new URL(window.location.href);
+			const pValue = url.searchParams.get('p');
+			const canvas = url.searchParams.get('canvas');
 
-	function addCustomSettingsToCoreColumns(settings, name) {
-		if (name !== 'core/template-part') {
-			return settings;
+			return {
+				isSiteEditor:
+					window.location.href.includes('site-editor.php') &&
+					pValue?.includes('wp_template') &&
+					!pValue?.startsWith('/wp_template_part/'),
+				isPagePost: window.location.href.includes('post.php'),
+				onlyCanvasEditor:
+					window.location.pathname.includes('site-editor.php') &&
+					decodeURIComponent(pValue || '') === '/' &&
+					canvas === 'edit',
+			};
+		} catch (e) {
+			return { isSiteEditor: false, isPagePost: false, onlyCanvasEditor: false };
 		}
-
-		return {
-			...settings,
-			attributes: {
-				...settings.attributes,
-				isReverseDirection: {
-					type: 'boolean',
-					default: false,
-				},
-			},
-			edit(props) {
-				const { attributes, setAttributes } = props;
-				const { isReverseDirection } = attributes;
-
-				return (
-					<>
-						<InspectorControls>
-							<PanelBody title="Custom Column Settings">
-								<ToggleControl
-									label="Reverse Direction on Mobile"
-									checked={isReverseDirection}
-									onChange={(value) =>
-										setAttributes({ isReverseDirection: value })
-									}
-								/>
-							</PanelBody>
-						</InspectorControls>
-						{ /* Rest of the edit function to use the attribute */}
-					</>
-				);
-			},
-		};
-	}
-
-	addFilter(
-		'blocks.registerBlockType',
-		'my-plugin/add-custom-settings',
-		addCustomSettingsToCoreColumns
-	);
-
-	const url = new URL(window.location.href);
-	const pValue = url.searchParams.get('p');
-	const canvas = url.searchParams.get('canvas');
-
-	const isSiteEditor = window.location.href.includes('site-editor.php') &&
-		pValue?.includes('wp_template') &&
-		!pValue?.startsWith('/wp_template_part/');
-	const isPagePost = window.location.href.includes('post.php');
-
-	const onlyCanvasEditor = window.location.pathname.includes('site-editor.php') &&
-		decodeURIComponent(pValue) === '/' &&
-		canvas === 'edit';
+	}, []);
 
 	return (
 		<>
@@ -841,7 +758,7 @@ function FrontisBlocksSidebar() {
 										</p>
 									</div>
 								</div>
-								{/* Remove TabPanel and display options vertically */}
+								{/* Color options displayed vertically */}
 								<div className="fb-color-options-vertical">
 									{/* Solid Colors Section */}
 									<div className="fb-color-section-wrapper">
@@ -874,7 +791,7 @@ function FrontisBlocksSidebar() {
 
 									{/* Gradient Section */}
 									<div className="fb-color-section-wrapper">
-										{(gradientColors.length !== 0 || frontisBlocksAdmin?.gradients_colors.length !== 0) && (
+										{(gradientColors.length !== 0 || frontisBlocksAdmin?.gradients_colors?.length !== 0) && (
 											<div className="fb-color-section">
 												<div className="fb-palette-edit-panel fb-scrollable-palette fb-gradient-color-panel">
 													<PaletteEdit

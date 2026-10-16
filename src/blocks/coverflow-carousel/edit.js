@@ -15,9 +15,8 @@ import Inspector from "./inspector";
 import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
 import generatecoverflowCarouselNumberStyle from "./styling";
 import { useDeviceType } from "@Config/displayType";
-import { applyFilters } from '@wordpress/hooks';
-import UpgradeToProPopup from '@Utils/upgradeToProPopup';
-import getProActive from '@Utils/getProActive';
+
+
 
 export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
 	const {
@@ -335,15 +334,8 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		className: `fb-coverflowCarousel-main-wrapper ${blockID ? blockID : ''} ${coverflowCarouselDesktopSwitcher ? 'fb-desktop-responsive' : ''} ${coverflowCarouselTabletSwitcher ? 'fb-tablet-responsive' : ''} ${coverflowCarouselMobileSwitcher ? 'fb-mobile-responsive' : ''}`.trim(),
 	});
 
-	// Conditional rendering
-	const isProActive = getProActive();
-	const coverflowCarouselAvailable = applyFilters('frontisblocks-coverflow-carousel-available', false);
 
-	if(!coverflowCarouselAvailable || !isProActive) {
-		return (
-			<UpgradeToProPopup />
-		)
-	}
+
 
 	return (
 		<>

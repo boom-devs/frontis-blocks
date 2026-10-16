@@ -456,14 +456,6 @@ $dynamic_terms_separator = fb_norm_str(isset($attributes['dynamicTextTermsSepara
 $dynamic_enable_link = !empty($attributes['dynamicTextEnableLink']);
 $dynamic_link_source = fb_norm_str(isset($attributes['dynamicTextLinkSource']) ? $attributes['dynamicTextLinkSource'] : 'post_permalink');
 
-/**
- * Disable dynamic if not pro active
- */
-if (!Helper::isProActivated()) {
-	$dynamic_enabled = false;
-	$dynamic_enable_link = false;
-}
-
 /* ---------- compute dynamic via reusable function ---------- */
 $btn_dyn = fb_compute_dynamic_text([
 	'enabled' => $dynamic_enabled,

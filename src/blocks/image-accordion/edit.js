@@ -1,9 +1,8 @@
 import { __ } from "@wordpress/i18n";
 import { useBlockProps } from "@wordpress/block-editor";
 import { useEffect, useState, useRef } from "@wordpress/element";
-import { applyFilters } from "@wordpress/hooks";
-import UpgradeToProPopup from "@Utils/upgradeToProPopup";
-import getProActive from "@Utils/getProActive";
+
+
 
 import "./editor.scss";
 import Inspector from "./inspector";
@@ -226,12 +225,8 @@ export default function Edit({
 		);
 	};
 
-	const isProActive = getProActive();
-	const imageAccordionAvailable = applyFilters("frontisblocks-image-accordion-available", false);
 
-	if (!imageAccordionAvailable || !isProActive) {
-		return <UpgradeToProPopup />;
-	}
+
 
 	return (
 		<>
