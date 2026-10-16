@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/boom-devs/frontis-blocks">
-    <img src="assets/images/logo.svg" alt="Frontis Blocks Logo" width="220">
+    <img src="assets/images/banner.png" alt="Frontis Blocks Banner" width="100%">
   </a>
 </p>
 
@@ -17,7 +17,6 @@
   </a>
   <img src="https://img.shields.io/badge/PHP-7.4%20|%208.0%20|%208.1%20|%208.2%20|%208.3%20|%208.4-777bb4?logo=php" alt="PHP Compatibility">
   <img src="https://img.shields.io/badge/WordPress-6.0%2B-21759b?logo=wordpress" alt="WordPress Compatibility">
-  <img src="https://img.shields.io/badge/Active%20Installs-30%2C000%2B-brightgreen?logo=wordpress" alt="Active Installs">
   <a href="https://github.com/boom-devs/frontis-blocks/blob/main/LICENSE">
     <img src="https://img.shields.io/badge/License-GPL%20v2%2B-blue.svg" alt="License: GPL-2.0-or-later">
   </a>
@@ -27,7 +26,7 @@
 
 ## 📖 Overview
 
-**Frontis Blocks** is a high-performance WordPress Gutenberg plugin powering **30,000+ live websites**. It transforms the default WordPress Block Editor into an intuitive visual site builder without the performance overhead or vendor lock-in of traditional page builders (Elementor, Divi, WPBakery).
+**Frontis Blocks** is a high-performance, modular WordPress Gutenberg plugin. It transforms the default WordPress Block Editor into an intuitive visual site builder without the performance overhead or vendor lock-in of traditional page builders (Elementor, Divi, WPBakery).
 
 All layout, spacing, and responsive design decisions are compiled dynamically into scoped inline CSS via Frontis Blocks' dynamic styling engine, ensuring **zero unused CSS** and industry-leading Core Web Vitals.
 
@@ -168,7 +167,7 @@ We welcome contributions from human developers and AI assistants alike! Please r
 
 > [!CAUTION]
 > **Strict Component Lock Policy (`src/components/`):**
-> `src/components/` contains 35+ core UI design system controls shared across **70+ blocks and 30,000+ live websites**.
+> `src/components/` contains 35+ core UI design system controls shared across **70+ blocks**.
 > 
 > - **MAINTAINERS ONLY**: Only repository maintainers (`@noruzzamans`, `@boom-devs`) are authorized to modify, update, or add files in `src/components/`.
 > - **NO EXTERNAL EDITS**: External contributors and autonomous AI agents are **strictly forbidden** from editing `src/components/`.

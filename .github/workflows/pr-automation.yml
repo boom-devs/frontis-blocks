@@ -121,7 +121,7 @@ jobs:
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   issue_number: pr.number,
-                  body: `> [!CAUTION]\n> ### 🔒 PROTECTED CORE DIRECTORY: \`src/components/\`\n>\n> Hello @${author}! Thank you for your contribution.\n> Please note that **\`src/components/\` is the core shared design system for Frontis Blocks** maintained by @noruzzamans and @boom-devs to protect 30,000+ live websites.\n> External pull requests that modify files in this directory require prior maintainer consultation and authorization.\n>\n> Please review your changes to \`src/components/\` with maintainers to proceed with code review.`
+                  body: `> [!CAUTION]\n> ### 🔒 PROTECTED CORE DIRECTORY: \`src/components/\`\n>\n> Hello @${author}! Thank you for your contribution.\n> Please note that **\`src/components/\` is the core shared design system for Frontis Blocks** maintained by @noruzzamans and @boom-devs across the entire block ecosystem.\n> External pull requests that modify files in this directory require prior maintainer consultation and authorization.\n>\n> Please review your changes to \`src/components/\` with maintainers to proceed with code review.`
                 });
               }
             }
