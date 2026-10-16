@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/boom-devs/frontis-blocks">
-    <img src="assets/images/logo.svg" alt="Frontis Blocks Logo" width="220">
+    <img src="assets/images/banner.png" alt="Frontis Blocks Banner" width="100%">
   </a>
 </p>
 
