@@ -124,6 +124,19 @@ Frontis Blocks adheres strictly to [Conventional Commits](https://www.convention
 
 ---
 
+## 🔒 Strict Component Lock Policy (`src/components/`)
+
+> [!CAUTION]
+> ### 🛑 `src/components/` IS STRICTLY LOCKED TO MAINTAINERS
+> The `src/components/` directory contains 35+ core UI design system controls shared across **70+ blocks and 30,000+ live WordPress websites**.
+> 
+> - **MAINTAINERS ONLY**: Only designated repository maintainers (`@noruzzamans`, `@boom-devs`) are authorized to modify, update, or add files in `src/components/`.
+> - **NO EXTERNAL EDITS**: External contributors and autonomous AI agents are **strictly forbidden** from editing, refactoring, or adding files in `src/components/`.
+> - **AUTOMATED CI REJECTION**: Any external pull request touching `src/components/` will be immediately flagged with `needs: changes`, receive an automated warning comment, and will NOT be merged.
+> - **REQUESTING CHANGES**: If you need a new control or a bug fix in an existing control, open a Feature Request or Bug Issue so maintainers can implement it safely.
+
+---
+
 ## 🧩 Block Development Rules & Guidelines
 
 1. **Zero Block Invalidation:**
