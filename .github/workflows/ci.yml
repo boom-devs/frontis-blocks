@@ -32,10 +32,28 @@ jobs:
           php-version: '8.1'
           tools: composer:v2
 
+      - name: Cache Composer Dependencies
+        uses: actions/cache@v4
+        with:
+          path: vendor
+          key: ${{ runner.os }}-composer-${{ hashFiles('composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
       - name: Install Composer Dependencies
-        run: composer install --no-dev --optimize-autoloader
+        run: composer install --no-dev --optimize-autoloader --prefer-dist --no-progress
+
+      - name: Cache Node Modules
+        id: npm-cache
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-npm-modules-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-modules-
 
       - name: Install NPM Dependencies
+        if: steps.npm-cache.outputs.cache-hit != 'true'
         run: npm ci || npm install
 
       - name: Verify Webpack Block Build
@@ -43,14 +61,6 @@ jobs:
 
       - name: Verify Webpack Admin Build
         run: npm run admin:build
-
-      - name: Code Quality Advisory (JS & CSS Lint)
-        continue-on-error: true
-        run: |
-          echo "Checking JavaScript syntax and standards (Advisory)..."
-          npm run lint:js | tail -n 25 || true
-          echo "Checking SCSS syntax and standards (Advisory)..."
-          npm run lint:css | tail -n 25 || true
 
       - name: Verify Plugin Distribution Packaging
         run: npm run plugin-zip
