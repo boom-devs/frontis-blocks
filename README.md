@@ -21,7 +21,6 @@
   <a href="https://github.com/boom-devs/frontis-blocks/blob/main/LICENSE">
     <img src="https://img.shields.io/badge/License-GPL%20v2%2B-blue.svg" alt="License: GPL-2.0-or-later">
   </a>
-  <img src="https://img.shields.io/badge/Code%20Review-Gemini%203.8%20Flash-4285F4?logo=google" alt="Gemini Code Review">
 </p>
 
 ---
@@ -152,7 +151,6 @@ Every pull request runs automated GitHub Actions workflows:
 - **Block & Admin Build Verification:** Compiles all 70+ block entry points and admin stylesheets with Webpack.
 - **Plugin Packaging:** Verifies distributable zip creation (`webpack.zip.js`).
 - **Dependency Caching:** Fast CI runs using `actions/cache@v4` for Composer and NPM modules.
-- **Native Gemini AI Review:** Pull requests are automatically inspected by Google Gemini 3.8 Flash for WordPress security, performance, and React best practices.
 
 ---
 

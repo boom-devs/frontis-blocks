@@ -119,4 +119,3 @@ Frontis Blocks follows an automated Issue-Driven Development lifecycle:
   - `docs:` -> Automatically labeled `type: documentation`
   - `ci:` / `chore:` -> Automatically labeled `focus: ci-cd`
 - **Path Labeler**: Modifying `src/blocks/` adds `focus: blocks`, modifying `includes/` adds `focus: php-backend`, etc.
-- **Automated AI Review**: Native Gemini 3.8 Flash automatically performs code reviews on pull requests.
