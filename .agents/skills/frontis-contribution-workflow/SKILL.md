@@ -15,7 +15,7 @@ This skill documents the complete open-source workflow, issue/PR conventions, AI
 > [!CAUTION]
 > ## 🔒 PROTECTED CORE DIRECTORY: `src/components/` (Maintainer-Only)
 > **The 35+ UI controls in `src/components/` form the foundational Design System of Frontis Blocks.**
-> All 70+ Gutenberg blocks depend directly on these shared components. Any unauthorized modification can cause catastrophic cascading regressions across **30,000+ live websites**.
+> All 70+ Gutenberg blocks depend directly on these shared components. Any unauthorized modification can cause cascading regressions across the entire block ecosystem.
 >
 > 1. **Modification Lock:** **NO ONE EXCEPT REPOSITORY MAINTAINERS (`@noruzzamans`, `@boom-devs`) IS PERMITTED TO EDIT, REFACTOR, OR ADD CODE TO `src/components/`.**
 > 2. **Automatic Rejection:** Any external PR or autonomous AI contribution that touches files in `src/components/` **WILL BE AUTOMATICALLY FLAGGED WITH `needs: changes` AND REJECTED** by GitHub Actions automated triage.
@@ -94,7 +94,7 @@ Closes #<issue_number>
 - [x] **Strict Design System:** Uses ONLY approved `@Components/*` controls without altering internals.
 - [x] **Zero Regressions:** Existing blocks load with 0 block invalidation errors.
 - [x] **PHP Standards:** Sanitization, escaping, and nonces are 100% compliant.
-- [x] **30,000+ Sites Protection:** Zero breaking changes to attributes or saved markup.
+- [x] **Production Safety:** Zero breaking changes to attributes, database schemas, or saved markup.
 ```
 
 ---
