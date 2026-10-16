@@ -50,11 +50,9 @@ import FB_InspectorControls from '@Components/InspectorControls';
 import FB_ImageControl from '@Components/image-control';
 import FB_UrlControl from '@Components/url-control';
 import FB_BackgroundColorControl from '@Components/background-color-control';
-import getProToggleControls from '@Utils/getProToggleControls';
 import DynamicDataSourceControl from '@Components/dynamic-data-source-control';
 import DynamicDataLinkControl from '@Components/dynamic-data-link-control';
 import generateSvgIcon from '@Utils/generateSvgIcon';
-import getProActive from '@Utils/getProActive';
 
 const Inspector = ({ attributes, setAttributes }) => {
 	const {

@@ -32,9 +32,8 @@ import { setDeviceType, useDeviceType } from '@Config/displayType';
 import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
 import Inspector from './inspector';
 import generateGridLayoutStyle from './styling';
-import UpgradeToProPopup from '@Utils/upgradeToProPopup';
-import getProActive from '@Utils/getProActive';
-import { applyFilters } from '@wordpress/hooks';
+
+
 
 const BREAKPOINTS = [ 'Desktop', 'Tablet', 'Mobile' ];
 const BREAKPOINT_ICONS = {
@@ -1074,15 +1073,8 @@ export default function Edit( { attributes, setAttributes, clientId, isSelected,
 		goToLayoutView();
 	};
 
-	// upgrade popup if pro is not active
-	const isProActive = getProActive();
-	const gridLayoutAvailable = applyFilters('frontisblocks-grid-layout-pro-available', false);
 
-	if(!gridLayoutAvailable || !isProActive) {
-		return (
-			<UpgradeToProPopup />
-		)
-	}
+
 
 	return (
 		<>

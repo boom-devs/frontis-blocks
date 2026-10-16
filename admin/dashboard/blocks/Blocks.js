@@ -13,7 +13,7 @@ const Blocks = () => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [selectedCategory, setSelectedCategory] = useState('all');
 	const [searchTerm, setSearchTerm] = useState('');
-	const { ajaxUrl, nonce, blocks: allBlocks, completedBlocks, isProActive } = window.frontisBlocksAdmin;
+	const { ajaxUrl, nonce, blocks: allBlocks, completedBlocks } = window.frontisBlocksAdmin;
 	const [blocks, setBlocks] = useState([]);
 
 	const handleChange = () => {
@@ -131,7 +131,7 @@ const Blocks = () => {
 
 		const updatedBlocks = blocks.map(block => ({
 			...block,
-			status: (newStatus === '1' && isProActive === 'false' && block.package === 'pro') ? '0' : newStatus
+			status: newStatus
 		}));
 
 		setBlocks(updatedBlocks);
@@ -145,7 +145,7 @@ const Blocks = () => {
 			if (block.category === category) {
 				return { 
 					...block, 
-					status: (newStatus === '1' && isProActive === 'false' && block.package === 'pro') ? '0' : newStatus 
+					status: newStatus 
 				};
 			}
 			return block;

@@ -53,11 +53,9 @@ import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import { useDeviceType } from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
-import getProToggleControls from '@Utils/getProToggleControls';
 import DynamicDataSourceControl from '@Components/dynamic-data-source-control';
 import DynamicDataLinkControl from '@Components/dynamic-data-link-control';
 import generateSvgIcon from '@Utils/generateSvgIcon';
-import getProActive from '@Utils/getProActive';
 
 const Inspector = ({ attributes, setAttributes }) => {
 	const {
@@ -4236,87 +4234,7 @@ const Inspector = ({ attributes, setAttributes }) => {
         })
     }, [icon, btnIcon, iconBack, btnIconBack]);
     
-    // Check if Pro is active
-    const getProActiveState = getProActive();
-    useEffect(() => {
-        if (!getProActiveState) { 
-            setAttributes({
-                dynamicTitleEnabled: false,
-                dynamicDescriptionEnabled: false,
-                dynamicBtnEnabled: false,
 
-                dynamicBackTitleEnabled: false,
-                dynamicBackTitleEnableLink: false,
-                dynamicBackDescriptionEnabled: false,
-                dynamicBackDescriptionEnableLink: false,
-                dynamicBackBtnEnabled: false,
-                dynamicBackBtnEnableLink: false,
-            });
-        }
-    }, [getProActiveState]);
-
-	/**
-	 * Toggle Controls for Dynamic Content
-	 */
-	const dynamicTitleContentToggleControls = getProToggleControls({
-		hook: 'frontisblocks-flip-box-dynamic-title-toggle-controls',
-		attributes,
-		setAttributes,
-		dynamicAttr: 'dynamicTitleEnabled',
-		label: __('Dynamic Content', 'frontis-blocks'),
-		keyPrefix: 'flip-box-dynamic-title-content',
-		isProActive : getProActiveState
-	});
-
-	const dynamicDescriptionContentToggleControls = getProToggleControls({
-		hook: 'frontisblocks-flip-box-dynamic-description-toggle-controls',
-		attributes,
-		setAttributes,
-		dynamicAttr: 'dynamicDescriptionEnabled',
-		label: __('Dynamic Content', 'frontis-blocks'),
-		keyPrefix: 'flip-box-dynamic-description-content',
-		isProActive : getProActiveState
-	});
-
-	const dynamicBtnContentToggleControls = getProToggleControls({ 
-		hook: 'frontisblocks-flip-box-dynamic-btn-toggle-controls',
-		attributes,
-		setAttributes,
-		dynamicAttr: 'dynamicBtnEnabled',
-		label: __('Dynamic Content', 'frontis-blocks'),
-		keyPrefix: 'flip-box-dynamic-btn-content',
-		isProActive : getProActiveState
-	});
-
-	const dynamicBackTitleContentToggleControls = getProToggleControls({
-		hook: 'frontisblocks-flip-box-dynamic-back-title-toggle-controls',
-		attributes,
-		setAttributes,
-		dynamicAttr: 'dynamicBackTitleEnabled',
-		label: __('Dynamic Content', 'frontis-blocks'),
-		keyPrefix: 'flip-box-dynamic-back-title-content',
-		isProActive : getProActiveState
-	});
-
-	const dynamicBackDescriptionContentToggleControls = getProToggleControls({
-		hook: 'frontisblocks-flip-box-dynamic-back-description-toggle-controls',
-		attributes,
-		setAttributes,
-		dynamicAttr: 'dynamicBackDescriptionEnabled',
-		label: __('Dynamic Content', 'frontis-blocks'),
-		keyPrefix: 'flip-box-dynamic-back-description-content',
-		isProActive : getProActiveState
-	});
-
-	const dynamicBackBtnContentToggleControls = getProToggleControls({ 
-		hook: 'frontisblocks-flip-box-dynamic-back-btn-toggle-controls',
-		attributes,
-		setAttributes,
-		dynamicAttr: 'dynamicBackBtnEnabled',
-		label: __('Dynamic Content', 'frontis-blocks'),
-		keyPrefix: 'flip-box-dynamic-back-btn-content',
-		isProActive : getProActiveState
-	});
 
 	return (
 		<>
@@ -4646,9 +4564,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 																	setGlobalHtmlTag={(value) => setAttributes({ headingTag: value })}
 																/>
 
-																{dynamicTitleContentToggleControls.map((control, index) => (
-																	<div key={control.key || index}>{control.comp}</div>
-																))}
+																<ToggleControl
+																	label={__("Dynamic Content", "frontis-blocks")}
+																	checked={dynamicTitleEnabled}
+																	onChange={(value) => setAttributes({ dynamicTitleEnabled: value })}
+																/>
 												
 																<DynamicDataSourceControl
 																	enabled={dynamicTitleEnabled}
@@ -4724,9 +4644,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 																	setGlobalAlignment={(value) => setAttributes({ descAlignment: value })}
 																/>
 
-																{dynamicDescriptionContentToggleControls.map((control, index) => (
-																	<div key={control.key || index}>{control.comp}</div>
-																))}
+																<ToggleControl
+																	label={__("Dynamic Content", "frontis-blocks")}
+																	checked={dynamicDescriptionEnabled}
+																	onChange={(value) => setAttributes({ dynamicDescriptionEnabled: value })}
+																/>
 
 																<DynamicDataSourceControl
 																	enabled={dynamicDescriptionEnabled}
@@ -4803,9 +4725,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 																	globalAlignment={buttonAlignment}
 																	setGlobalAlignment={(value) => setAttributes({ buttonAlignment: value })}
 																/>
-																{dynamicBtnContentToggleControls.map((control, index) => (
-																	<div key={control.key || index}>{control.comp}</div>
-																))}
+																<ToggleControl
+																	label={__("Dynamic Content", "frontis-blocks")}
+																	checked={dynamicBtnEnabled}
+																	onChange={(value) => setAttributes({ dynamicBtnEnabled: value })}
+																/>
 												
 																<DynamicDataSourceControl
 																	enabled={dynamicBtnEnabled}
@@ -5124,9 +5048,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 																	setGlobalHtmlTag={(value) => setAttributes({ headingTagBack: value })}
 																/>
 
-																{dynamicBackTitleContentToggleControls.map((control, index) => (
-																	<div key={control.key || index}>{control.comp}</div>
-																))}
+																<ToggleControl
+																	label={__("Dynamic Content", "frontis-blocks")}
+																	checked={dynamicBackTitleEnabled}
+																	onChange={(value) => setAttributes({ dynamicBackTitleEnabled: value })}
+																/>
 												
 																<DynamicDataSourceControl
 																	enabled={dynamicBackTitleEnabled}
@@ -5211,9 +5137,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 																	setGlobalAlignment={(value) => setAttributes({ descAlignmentBack: value })}
 																/>
 
-																{dynamicBackDescriptionContentToggleControls.map((control, index) => (
-																	<div key={control.key || index}>{control.comp}</div>
-																))}
+																<ToggleControl
+																	label={__("Dynamic Content", "frontis-blocks")}
+																	checked={dynamicBackDescriptionEnabled}
+																	onChange={(value) => setAttributes({ dynamicBackDescriptionEnabled: value })}
+																/>
 
 																<DynamicDataSourceControl
 																	enabled={dynamicBackDescriptionEnabled}
@@ -5300,9 +5228,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 																	setGlobalAlignment={(value) => setAttributes({ buttonAlignmentBack: value })}
 																/>
 
-																{dynamicBackBtnContentToggleControls.map((control, index) => (
-																	<div key={control.key || index}>{control.comp}</div>
-																))}
+																<ToggleControl
+																	label={__("Dynamic Content", "frontis-blocks")}
+																	checked={dynamicBackBtnEnabled}
+																	onChange={(value) => setAttributes({ dynamicBackBtnEnabled: value })}
+																/>
 												
 																<DynamicDataSourceControl
 																	enabled={dynamicBackBtnEnabled}

@@ -26,7 +26,7 @@ import { store as coreStore } from '@wordpress/core-data';
 import Inspector from "./inspector";
 import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
 import generateLoopBuilderItemStyle from './styling';
-import getProActive from '@Utils/getProActive';
+
 
 
 function PostTemplateInnerBlocks( { classList } ) {
@@ -76,7 +76,7 @@ function PostTemplateBlockPreview( {
 const MemoizedPostTemplateBlockPreview = memo( PostTemplateBlockPreview );
 
 export default function Edit({ attributes, setAttributes, clientId, context, isSelected }) {
-	const isProActive = getProActive();
+
 
 	const {
 		blockID,
@@ -359,10 +359,6 @@ export default function Edit({ attributes, setAttributes, clientId, context, isS
 	const blockProps = useBlockProps( {
 		className: `${blockID || ''} fb-loop-builder-item-main-container ${postSwitcher === 'list' ? 'list-layout' : 'grid-layout'}`,
 	} );
-
-	if (!isProActive) {
-		return null;
-	}
 
 	if ( ! sortedPosts ) {
 		return (

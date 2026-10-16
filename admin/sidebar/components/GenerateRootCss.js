@@ -1,22 +1,216 @@
-const generateCSSVariables = (data, deviceType) => {
-    // Helper to find the correct editor document
-    const getEditorDocument = () => {
-        const path = window.location.pathname;
-        const fileName = path.substring(path.lastIndexOf('/') + 1);
-        const isPostEditor = fileName === 'post.php' || fileName === 'post-new.php';
+// Helper to find all current editor iframes in the DOM across Post Editor, Site Editor, and Template Editor
+const getEditorIframes = () => {
+    const iframes = [];
+    const selectors = [
+        'iframe[name="editor-canvas"]',
+        'iframe.edit-site-visual-editor__editor-canvas',
+        '.edit-site-visual-editor iframe',
+        '.editor-canvas-container iframe',
+        '.edit-post-visual-editor iframe',
+        'iframe[title*="canvas" i]',
+        'iframe[title*="editor" i]',
+    ];
 
-        let iframe = null;
-        if (isPostEditor) {
-            iframe = document.querySelector('iframe[name="editor-canvas"]');
-        } else {
-            // Site Editor
-            iframe = document.querySelector("iframe.edit-site-visual-editor__editor-canvas");
+    selectors.forEach((sel) => {
+        try {
+            document.querySelectorAll(sel).forEach((el) => {
+                if (el && !iframes.includes(el)) iframes.push(el);
+            });
+        } catch (e) {}
+    });
+
+    try {
+        document.querySelectorAll('iframe').forEach((iframe) => {
+            try {
+                const name = iframe.getAttribute('name') || '';
+                const className = iframe.className || '';
+                if (
+                    name.toLowerCase().includes('canvas') ||
+                    name.toLowerCase().includes('editor') ||
+                    (typeof className === 'string' && (className.includes('canvas') || className.includes('editor')))
+                ) {
+                    if (!iframes.includes(iframe)) iframes.push(iframe);
+                }
+            } catch (e) {}
+        });
+    } catch (e) {}
+
+    return iframes;
+};
+
+// Safe helper to apply a style element to any document
+const applyStyleToDocument = (doc, styleId, cssContent) => {
+    if (!doc || !cssContent) return false;
+    try {
+        const head = doc.head || doc.getElementsByTagName('head')?.[0] || doc.body;
+        if (!head) return false;
+
+        let styleTag = doc.getElementById(styleId);
+        if (!styleTag) {
+            styleTag = doc.createElement('style');
+            styleTag.id = styleId;
+            head.appendChild(styleTag);
         }
+        if (styleTag.textContent !== cssContent) {
+            styleTag.textContent = cssContent;
+        }
+        return true;
+    } catch (e) {
+        return false;
+    }
+};
 
-        return iframe?.contentDocument || iframe?.contentWindow?.document || document;
+// Safe helper to apply Google Fonts link tag to any document
+const applyFontLinkToDocument = (doc, fontUrl) => {
+    if (!doc || !fontUrl) return false;
+    try {
+        const head = doc.head || doc.getElementsByTagName('head')?.[0] || doc.body;
+        if (!head) return false;
+
+        let linkElement = doc.getElementById('frontis-blocks-google-fonts');
+        if (!linkElement) {
+            linkElement = doc.createElement('link');
+            linkElement.id = 'frontis-blocks-google-fonts';
+            linkElement.rel = 'stylesheet';
+            head.appendChild(linkElement);
+        }
+        if (linkElement.href !== fontUrl) {
+            linkElement.href = fontUrl;
+        }
+        return true;
+    } catch (e) {
+        return false;
+    }
+};
+
+const listenedIframes = new WeakSet();
+
+const attachIframeListener = (iframe, onReady) => {
+    if (!iframe || listenedIframes.has(iframe)) return;
+    listenedIframes.add(iframe);
+
+    try {
+        iframe.addEventListener('load', () => {
+            try {
+                const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
+                if (iframeDoc) {
+                    onReady(iframeDoc);
+                }
+            } catch (e) {}
+        });
+    } catch (e) {}
+};
+
+let lastTypoStyles = '';
+let lastFontUrl = '';
+
+const syncTypoStylesToAll = (styles, fontUrl) => {
+    const finalStyles = styles || lastTypoStyles;
+    const finalFontUrl = fontUrl !== undefined ? fontUrl : lastFontUrl;
+    if (!finalStyles) return;
+
+    // 1. Main window document
+    applyStyleToDocument(document, 'global-typo', finalStyles);
+    if (finalFontUrl) applyFontLinkToDocument(document, finalFontUrl);
+
+    // 2. All editor iframes
+    const iframes = getEditorIframes();
+    iframes.forEach((iframe) => {
+        attachIframeListener(iframe, (iframeDoc) => {
+            applyStyleToDocument(iframeDoc, 'global-typo', finalStyles);
+            if (finalFontUrl) applyFontLinkToDocument(iframeDoc, finalFontUrl);
+        });
+
+        try {
+            const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
+            if (iframeDoc) {
+                applyStyleToDocument(iframeDoc, 'global-typo', finalStyles);
+                if (finalFontUrl) applyFontLinkToDocument(iframeDoc, finalFontUrl);
+            }
+        } catch (e) {}
+    });
+};
+
+let typoObserverStarted = false;
+
+const startTypoObserver = () => {
+    if (typeof window === 'undefined' || typoObserverStarted) return;
+    typoObserverStarted = true;
+
+    const onCheck = () => {
+        if (lastTypoStyles) {
+            syncTypoStylesToAll(lastTypoStyles, lastFontUrl);
+        }
     };
 
-    const targetDocument = getEditorDocument();
+    // 1. Observe DOM changes for added template iframes
+    try {
+        const observer = new MutationObserver((mutations) => {
+            let hasNewNode = false;
+            for (const m of mutations) {
+                if (m.addedNodes && m.addedNodes.length > 0) {
+                    hasNewNode = true;
+                    break;
+                }
+            }
+            if (hasNewNode) {
+                onCheck();
+            }
+        });
+
+        const root = document.documentElement || document.body;
+        if (root) {
+            observer.observe(root, { childList: true, subtree: true });
+        }
+    } catch (e) {}
+
+    // 2. WordPress Gutenberg store subscription
+    if (window.wp?.data?.subscribe) {
+        let prevCanvas = null;
+        let prevPostId = null;
+        window.wp.data.subscribe(() => {
+            try {
+                const editSite = window.wp.data.select('core/edit-site');
+                const canvas = editSite?.getCanvasMode?.();
+                const postId = editSite?.getEditedPostId?.() || window.wp.data.select('core/editor')?.getCurrentPostId?.();
+                if (canvas !== prevCanvas || postId !== prevPostId) {
+                    prevCanvas = canvas;
+                    prevPostId = postId;
+                    onCheck();
+                }
+            } catch (e) {}
+        });
+    }
+
+    // 3. Periodic fallback poll for initial loading transitions
+    let counter = 0;
+    const interval = setInterval(() => {
+        counter++;
+        onCheck();
+        if (counter >= 30) {
+            clearInterval(interval);
+        }
+    }, 1000);
+};
+
+const generateCSSVariables = (data, deviceType) => {
+    startTypoObserver();
+
+    if (!data) {
+        data = window.frontisBlocksAdmin?.global_typography || 
+               (() => {
+                   try {
+                       const stored = localStorage.getItem("fb_globaltypo");
+                       return stored && stored !== "null" ? JSON.parse(stored) : null;
+                   } catch (e) {
+                       return null;
+                   }
+               })();
+    }
+
+    if (!data) {
+        return false;
+    }
 
     const createValueWithUnit = (value, unit) => {
         if (!value || value === 'Default') return '0px';
@@ -62,9 +256,7 @@ const generateCSSVariables = (data, deviceType) => {
     let heading6Styles = '';
 
     let combinedHeadingStyles = ''; // Combined styles for "all" headings
-    if(!data) {
-        return false;
-    }
+
     const arrayKeys = Object.keys(data);
 
     // Loop through the data to generate CSS for each tag
@@ -77,7 +269,6 @@ const generateCSSVariables = (data, deviceType) => {
             let typoValue = data[key][prop];
 
             if (value !== null) {
-
                 if(typoValue) {
                     rootStyles += `${typoValue.variable}: ${value};\n`;
                     
@@ -228,215 +419,116 @@ const generateCSSVariables = (data, deviceType) => {
         });
     });
 
+    let fontUrl = '';
     if(fontFamilies.size > 0) {
         const fontFamily = Array.from(fontFamilies).map(font => font.replace(' ', '+')).join('|');
-        const fontUrl = `https://fonts.googleapis.com/css?family=${fontFamily}:100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic`;
-
-        // Reuse or create font link tag in the target document
-        let linkElement = targetDocument.getElementById('frontis-blocks-google-fonts');
-        if (!linkElement) {
-            linkElement = targetDocument.createElement('link');
-            linkElement.id = 'frontis-blocks-google-fonts';
-            linkElement.rel = 'stylesheet';
-            targetDocument.head.appendChild(linkElement);
-        }
-        linkElement.href = fontUrl;
+        fontUrl = `https://fonts.googleapis.com/css?family=${fontFamily}:100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic`;
     }
 
     if(rootStyles === '' && desktopStyles === '' && paragraphStyles === '') {
         return false;
     }
 
-    const path = window.location.pathname;
-    const fileName = path.substring(path.lastIndexOf('/') + 1);
-
-    let headingGrouped = '';
-    let allCombinedStyles = '';
-    let styles = '';
-
-    if(fileName === 'post.php' || fileName === 'post-new.php') {
-        headingGrouped = `
-            .is-root-container h1, .editor-styles-wrapper h1 {
-                ${heading1Styles}
-            }
-            .is-root-container h2, .editor-styles-wrapper h2 {
-                ${heading2Styles}
-            }
-            .is-root-container h3, .editor-styles-wrapper h3 {
-                ${heading3Styles}
-            }
-            .is-root-container h4, .editor-styles-wrapper h4 {
-                ${heading4Styles}
-            }
-            .is-root-container h5, .editor-styles-wrapper h5 {
-                ${heading5Styles}
-            }
-            .is-root-container h6, .editor-styles-wrapper h6 {
-                ${heading6Styles}
-            }
-        `;
-
-        // Styles for the "all" combined typography
-        allCombinedStyles = `
-            .is-root-container h1, .editor-styles-wrapper h1 {
-                ${combinedHeadingStyles}
-            }
-            .is-root-container h2, .editor-styles-wrapper h2 {
-                ${combinedHeadingStyles}
-            }
-            .is-root-container h3, .editor-styles-wrapper h3 {
-                ${combinedHeadingStyles}
-            }
-            .is-root-container h4, .editor-styles-wrapper h4 {
-                ${combinedHeadingStyles}
-            }
-            .is-root-container h5, .editor-styles-wrapper h5 {
-                ${combinedHeadingStyles}
-            }
-            .is-root-container h6, .editor-styles-wrapper h6 {
-                ${combinedHeadingStyles}
-            }
-        `;
-
-        styles = `
-            :root, .is-root-container, .editor-styles-wrapper {
-                ${rootStyles}
-                ${desktopStyles}
-            }
-            @media (max-width: 1024px) {
-                :root, .is-root-container, .editor-styles-wrapper {
-                    ${tabletStyles}
-                }
-            }
-            @media (max-width: 767px) {
-                :root, .is-root-container, .editor-styles-wrapper {
-                    ${mobileStyles}
-                }
-            }
-
-            .is-root-container p, .editor-styles-wrapper p {
-                ${paragraphStyles}
-            }
-
-            .is-root-container a, .editor-styles-wrapper a, .is-root-container p a, .editor-styles-wrapper p a {
-                ${linkStyles}
-            }
-            .is-root-container .wp-block-button__link, .editor-styles-wrapper .wp-block-button__link {
-                ${buttonStyles}
-            }
-            :root :where(.wp-element-button, .wp-block-button__link), .editor-styles-wrapper :where(.wp-element-button, .wp-block-button__link) {
-				${buttonStyles}
-            }
-            .is-root-container button, .editor-styles-wrapper button {
-                ${buttonStyles}
-            }
-
-            .is-root-container figcaption, .editor-styles-wrapper figcaption {
-                ${captionStyles}
-            }
-            :root :where(.wp-element-caption, .wp-block-audio figcaption, .wp-block-embed figcaption, .wp-block-gallery figcaption, .wp-block-image figcaption, .wp-block-table figcaption, .wp-block-video figcaption), .editor-styles-wrapper :where(.wp-element-caption, .wp-block-audio figcaption, .wp-block-embed figcaption, .wp-block-gallery figcaption, .wp-block-image figcaption, .wp-block-table figcaption, .wp-block-video figcaption) {
-                ${captionStyles}
-            }
-            ${allCombinedStyles}
-            ${headingGrouped}
-        `;
-    } else {
-
-        // Apply individual styles for each heading (h1, h2, h3, etc.)
-        headingGrouped = `
-            .wp-site-blocks h1, .editor-styles-wrapper h1 {
-                ${heading1Styles}
-            }
-            .wp-site-blocks h2, .editor-styles-wrapper h2 {
-                ${heading2Styles}
-            }
-            .wp-site-blocks h3, .editor-styles-wrapper h3 {
-                ${heading3Styles}
-            }
-            .wp-site-blocks h4, .editor-styles-wrapper h4 {
-                ${heading4Styles}
-            }
-            .wp-site-blocks h5, .editor-styles-wrapper h5 {
-                ${heading5Styles}
-            }
-            .wp-site-blocks h6, .editor-styles-wrapper h6 {
-                ${heading6Styles}
-            }
-        `;
-
-        // Styles for the "all" combined typography
-        allCombinedStyles = `
-            .wp-site-blocks h1, .editor-styles-wrapper h1,
-            .wp-site-blocks h2, .editor-styles-wrapper h2,
-            .wp-site-blocks h3, .editor-styles-wrapper h3,
-            .wp-site-blocks h4, .editor-styles-wrapper h4,
-            .wp-site-blocks h5, .editor-styles-wrapper h5,
-            .wp-site-blocks h6, .editor-styles-wrapper h6 {
-                ${combinedHeadingStyles}
-            }
-        `;
-
-        styles = `
-            :root, .wp-site-blocks, .editor-styles-wrapper {
-                ${rootStyles}
-                ${desktopStyles}
-            }
-            @media (max-width: 1024px) {
-                :root, .wp-site-blocks, .editor-styles-wrapper {
-                    ${tabletStyles}
-                }
-            }
-            @media (max-width: 767px) {
-                :root, .wp-site-blocks, .editor-styles-wrapper {
-                    ${mobileStyles}
-                }
-            }
-
-            .wp-site-blocks p, .editor-styles-wrapper p {
-                ${paragraphStyles}
-            }
-
-            .wp-site-blocks a, .editor-styles-wrapper a, .wp-site-blocks p a, .editor-styles-wrapper p a {
-                ${linkStyles}
-            }
-
-            .wp-site-blocks .wp-block-button__link, .editor-styles-wrapper .wp-block-button__link, .wp-site-blocks button, .editor-styles-wrapper button {
-                ${buttonStyles}
-            }
-
-            .wp-site-blocks figcaption, .editor-styles-wrapper figcaption {
-                ${captionStyles}
-            }
-            :root :where(.wp-element-caption, .wp-block-audio figcaption, .wp-block-embed figcaption, .wp-block-gallery figcaption, .wp-block-image figcaption, .wp-block-table figcaption, .wp-block-video figcaption), .editor-styles-wrapper :where(.wp-element-caption, .wp-block-audio figcaption, .wp-block-embed figcaption, .wp-block-gallery figcaption, .wp-block-image figcaption, .wp-block-table figcaption, .wp-block-video figcaption) {
-                ${captionStyles}
-            }
-            ${allCombinedStyles}
-            ${headingGrouped}
-        `;
-    }
-
-    let styleTag = targetDocument.getElementById("global-typo");
-
-    if (!styleTag) {
-        styleTag = targetDocument.createElement("style");
-        styleTag.id = "global-typo";
-        targetDocument.head.appendChild(styleTag);
-    }
-
-    styleTag.textContent = styles;
-
-    // Also update main document if the target was an iframe (to ensure sidebar consistency)
-    if (targetDocument !== document) {
-        let mainStyleTag = document.getElementById("global-typo");
-        if (!mainStyleTag) {
-            mainStyleTag = document.createElement("style");
-            mainStyleTag.id = "global-typo";
-            document.head.appendChild(mainStyleTag);
+    // Heading styles matching both post editor (.is-root-container) and template/site editor (.wp-site-blocks, .editor-styles-wrapper)
+    const headingGrouped = `
+        .wp-site-blocks h1, .is-root-container h1, .editor-styles-wrapper h1 {
+            ${heading1Styles}
         }
-        mainStyleTag.textContent = styles;
-    }
+        .wp-site-blocks h2, .is-root-container h2, .editor-styles-wrapper h2 {
+            ${heading2Styles}
+        }
+        .wp-site-blocks h3, .is-root-container h3, .editor-styles-wrapper h3 {
+            ${heading3Styles}
+        }
+        .wp-site-blocks h4, .is-root-container h4, .editor-styles-wrapper h4 {
+            ${heading4Styles}
+        }
+        .wp-site-blocks h5, .is-root-container h5, .editor-styles-wrapper h5 {
+            ${heading5Styles}
+        }
+        .wp-site-blocks h6, .is-root-container h6, .editor-styles-wrapper h6 {
+            ${heading6Styles}
+        }
+    `;
+
+    // Styles for the "all" combined typography
+    const allCombinedStyles = `
+        .wp-site-blocks h1, .is-root-container h1, .editor-styles-wrapper h1,
+        .wp-site-blocks h2, .is-root-container h2, .editor-styles-wrapper h2,
+        .wp-site-blocks h3, .is-root-container h3, .editor-styles-wrapper h3,
+        .wp-site-blocks h4, .is-root-container h4, .editor-styles-wrapper h4,
+        .wp-site-blocks h5, .is-root-container h5, .editor-styles-wrapper h5,
+        .wp-site-blocks h6, .is-root-container h6, .editor-styles-wrapper h6 {
+            ${combinedHeadingStyles}
+        }
+    `;
+
+    const styles = `
+        :root, .wp-site-blocks, .is-root-container, .editor-styles-wrapper {
+            ${rootStyles}
+            ${desktopStyles}
+        }
+        @media (max-width: 1024px) {
+            :root, .wp-site-blocks, .is-root-container, .editor-styles-wrapper {
+                ${tabletStyles}
+            }
+        }
+        @media (max-width: 767px) {
+            :root, .wp-site-blocks, .is-root-container, .editor-styles-wrapper {
+                ${mobileStyles}
+            }
+        }
+
+        .wp-site-blocks p, .is-root-container p, .editor-styles-wrapper p {
+            ${paragraphStyles}
+        }
+
+        .wp-site-blocks a, .is-root-container a, .editor-styles-wrapper a, .wp-site-blocks p a, .is-root-container p a, .editor-styles-wrapper p a {
+            ${linkStyles}
+        }
+
+        .wp-site-blocks .wp-block-button__link, .is-root-container .wp-block-button__link, .editor-styles-wrapper .wp-block-button__link, .wp-site-blocks button, .is-root-container button, .editor-styles-wrapper button {
+            ${buttonStyles}
+        }
+        :root :where(.wp-element-button, .wp-block-button__link), .editor-styles-wrapper :where(.wp-element-button, .wp-block-button__link) {
+            ${buttonStyles}
+        }
+
+        .wp-site-blocks figcaption, .is-root-container figcaption, .editor-styles-wrapper figcaption {
+            ${captionStyles}
+        }
+        :root :where(.wp-element-caption, .wp-block-audio figcaption, .wp-block-embed figcaption, .wp-block-gallery figcaption, .wp-block-image figcaption, .wp-block-table figcaption, .wp-block-video figcaption), .editor-styles-wrapper :where(.wp-element-caption, .wp-block-audio figcaption, .wp-block-embed figcaption, .wp-block-gallery figcaption, .wp-block-image figcaption, .wp-block-table figcaption, .wp-block-video figcaption) {
+            ${captionStyles}
+        }
+        ${allCombinedStyles}
+        ${headingGrouped}
+    `;
+
+    lastTypoStyles = styles;
+    lastFontUrl = fontUrl;
+
+    syncTypoStylesToAll(styles, fontUrl);
 
     return styles;
 };
+
+// Auto-initialize if data exists in localized script or localStorage
+if (typeof window !== 'undefined') {
+    startTypoObserver();
+    setTimeout(() => {
+        const autoInitData = window.frontisBlocksAdmin?.global_typography || (() => {
+            try {
+                const stored = localStorage.getItem("fb_globaltypo");
+                return stored && stored !== "null" ? JSON.parse(stored) : null;
+            } catch (e) {
+                return null;
+            }
+        })();
+
+        if (autoInitData) {
+            generateCSSVariables(autoInitData);
+        }
+    }, 0);
+}
 
 export default generateCSSVariables;

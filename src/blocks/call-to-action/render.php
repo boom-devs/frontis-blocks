@@ -524,18 +524,6 @@ $dynamicBtnTwoTermsSeparator = fb_norm_str($attributes['dynamicBtnTwoTermsSepara
 $dynamicBtnTwoEnableLink = !empty($attributes['dynamicBtnTwoEnableLink']);
 $dynamicBtnTwoLinkSource = fb_norm_str($attributes['dynamicBtnTwoLinkSource'] ?? 'post_permalink');
 
-/* ---------- Pro gate ---------- */
-if (!Helper::isProActivated()) {
-	$dynamicTitleEnabled = false;
-	$dynamicTitleEnableLink = false;
-	$dynamicDescriptionEnabled = false;
-	$dynamicDescriptionEnableLink = false;
-	$dynamicBtnOneEnabled = false;
-	$dynamicBtnOneEnableLink = false;
-	$dynamicBtnTwoEnabled = false;
-	$dynamicBtnTwoEnableLink = false;
-}
-
 /* ---------- compute dynamics ---------- */
 $title_dyn = fb_compute_dynamic_text([
 	'enabled' => $dynamicTitleEnabled,

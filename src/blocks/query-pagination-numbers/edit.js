@@ -14,7 +14,7 @@ import './editor.scss';
  * Internal dependencies
  */
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';
-import getProActive from '@Utils/getProActive';
+
 
 const createPaginationItem = ( content, Tag = 'a', extraClass = '' ) => (
 	<Tag key={ content } className={ `page-numbers ${ extraClass }` }>
@@ -50,7 +50,7 @@ const previewPaginationNumbers = ( midSize ) => {
 };
 
 export default function Edit({ attributes, setAttributes, clientId, }) {
-	const isProActive = getProActive();
+
 	
 	const {
 		blockId,
@@ -68,9 +68,7 @@ export default function Edit({ attributes, setAttributes, clientId, }) {
 		className: `fb-page-numbers ${blockId}`,
 	} );
 
-	if (!isProActive) {
-		return null;
-	}
+
 
 	return (
 		<>

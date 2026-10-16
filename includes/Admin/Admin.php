@@ -246,8 +246,6 @@ class Admin
             'restUrl' => get_rest_url(),
             'pluginUrl' => FB_PLUGIN_URL,
             'version' => FB_VERSION,
-            'pro_url' => FB_UPGRADE_PRO_URL,
-            'isProActive' => FB_IS_PRO_ACTIVE ? 'true' : 'false',
             'logo' => FB_PLUGIN_URL . 'assets/images/logo.svg',
             'global_styles' => wp_get_global_styles(),
             'global_typography' => get_option('fb_globaltypo'),
@@ -273,11 +271,6 @@ class Admin
             $tl_script_asset = file_exists($tl_script_asset_path) ? require($tl_script_asset_path) : array('dependencies' => array(), 'version' => FB_VERSION);
             $tl_script_asset['dependencies'][] = 'jquery';
 
-            $activation_key = get_option('frontisblockspro_license_options');
-            if (is_array($activation_key) && $activation_key && count($activation_key) > 0 && isset($activation_key['sc_license_key']) && $activation_key['sc_license_key'] !== '') {
-                $activation_key = $activation_key['sc_license_key'];
-            }
-
             wp_enqueue_style('frontis-template-library', FB_PLUGIN_URL . 'assets/admin/style-tlibrary.css', array(), '1.0.0');
             wp_enqueue_script('frontis-template-library', FB_PLUGIN_URL . 'assets/admin/tlibrary.js', $tl_script_asset['dependencies'], '1.0.0', true);
             wp_localize_script(
@@ -286,7 +279,7 @@ class Admin
                 array(
                     'ajaxUrl' => admin_url('admin-ajax.php'),
                     'nonce' => wp_create_nonce('fb_settings_nonce'),
-                    'activationKey' => $activation_key,
+                    'activationKey' => '',
                     'portalApi' => PORTAL_API,
                     'wordpressSyncApi' => WORDPRESS_SYNC_API
                 )
@@ -341,14 +334,6 @@ class Admin
                 admin_url('admin.php?page=frontis-blocks')
             );
             array_unshift($links, $settings_links);
-
-            if (!class_exists('FrontisBlocks\Pro\Plugin')) {
-                $go_pro_link = sprintf(
-                    '<a target="_blank" href="%1$s"><strong style="color:#5e2eff;display: inline-block;">Go Pro</strong></a>',
-                    FB_UPGRADE_PRO_URL
-                );
-                array_push($links, $go_pro_link);
-            }
         }
 
         return $links;
@@ -482,14 +467,6 @@ class Admin
             'callback' => [$this, 'save_option_endpoint'],
             'permission_callback' => function () {
                 return current_user_can('manage_options');
-            },
-        ]);
-
-        register_rest_route('frontis-blocks/v1', '/verify-surecart', [
-            'methods'             => 'POST',
-            'callback'            => [$this, 'verify_surecart_endpoint'],
-            'permission_callback' => function () {
-                return current_user_can('edit_posts');
             },
         ]);
 
@@ -1116,67 +1093,5 @@ class Admin
 
             echo $body; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             exit;
-    }
-
-    /**
-     * Securely forwards license checks to the portal's verify-surecart-license endpoint.
-     */
-    public function verify_surecart_endpoint($request)
-    {
-        $license_options = get_option('frontisblockspro_license_options');
-        $license_id = is_array($license_options) && !empty($license_options['sc_license_id']) ? (string) $license_options['sc_license_id'] : '';
-        $license_key = is_array($license_options) && !empty($license_options['sc_license_key']) ? (string) $license_options['sc_license_key'] : '';
-
-        if (empty($license_id) || empty($license_key)) {
-            return new \WP_REST_Response(['status' => false, 'message' => 'License is not activated'], 200);
-        }
-
-        // Cache setup (using transients for 12 hours)
-        $cache_key = 'fb_sc_license_' . md5($license_id . $license_key);
-        $cached_status = get_transient($cache_key);
-        if ($cached_status !== false) {
-            return new \WP_REST_Response(['status' => $cached_status === 'active'], 200);
-        }
-
-        $portal_url = defined('PORTAL_API') ? PORTAL_API : 'https://template-library.frontiswp.com';
-
-        // Secure server-to-server POST to portal's new endpoint
-        $response = wp_remote_post($portal_url . '/api/verify-surecart-license', [
-            'headers' => [
-                'Content-Type'  => 'application/json',
-                'Accept'        => 'application/json',
-            ],
-            'body' => json_encode([
-                'license_id'  => $license_id,
-                'license_key' => $license_key,
-            ]),
-            'timeout' => 15,
-        ]);
-
-        if (is_wp_error($response)) {
-            return new \WP_REST_Response([
-                'status'  => false,
-                'message' => 'Portal connection failed: ' . $response->get_error_message()
-            ], 500);
-        }
-
-        $code = wp_remote_retrieve_response_code($response);
-        $body = wp_remote_retrieve_body($response);
-        
-        $start = strpos($body, '{');
-        $end = strrpos($body, '}');
-        if ($start !== false && $end !== false && $end > $start) {
-            $body = substr($body, $start, $end - $start + 1);
-        }
-        
-        $data = json_decode($body, true);
-
-        $status = ($code === 200 && isset($data['status']) && $data['status'] === true);
-        set_transient($cache_key, $status ? 'active' : 'inactive', 12 * HOUR_IN_SECONDS);
-
-        return new \WP_REST_Response([
-            'status'  => $status,
-            'message' => $data['message'] ?? ($status ? 'Verification successful' : 'Verification failed'),
-        ], $code);
     }
 }

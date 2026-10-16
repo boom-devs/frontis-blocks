@@ -42,11 +42,9 @@ import FB_VisibilityControl from '@Components/visibility-control';
 import FB_ImageControl from '@Components/image-control';
 import FB_InspectorControls from '@Components/InspectorControls';
 import FB_ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
-import getProToggleControls from '@Utils/getProToggleControls';
 import DynamicDataSourceControl from '@Components/dynamic-data-source-control';
 import DynamicDataLinkControl from '@Components/dynamic-data-link-control';
 import generateSvgIcon from '@Utils/generateSvgIcon';
-import getProActive from '@Utils/getProActive';
 import './editor.scss';
 
 const Inspector = ({ attributes, setAttributes }) => {
@@ -2620,53 +2618,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 		})
 	}, [socialIconBtnIcon]);
 
-	// Check if Pro is active
-	const getProActiveState = getProActive();
-	useEffect(() => {
-		if (!getProActiveState) { 
-			setAttributes({
-				dynamicDescriptionEnabled: false,
-				dynamicDescriptionEnableLink: false,
-				dynamicTeamMemberNameEnabled: false,
-				dynamicTeamMemberNameEnableLink: false,
-				dynamicTeamMemberDesignationEnabled: false,
-				dynamicTeamMemberDesignationEnableLink: false,
-			});
-		}
-	}, [getProActiveState]);
 
-	/**
-	 * Toggle Controls for Dynamic Content
-	 */
-	const dynamicDescriptionContentToggleControls = getProToggleControls({
-		hook: 'frontisblocks-team-member-dynamic-description-toggle-controls',
-		attributes,
-		setAttributes,
-		dynamicAttr: 'dynamicDescriptionEnabled',
-		label: __('Dynamic Content', 'frontis-blocks'),
-		keyPrefix: 'team-member-dynamic-description-content',
-		isProActive : getProActiveState
-	});
-
-	const dynamicTeamMemberNameContentToggleControls = getProToggleControls({
-		hook: 'frontisblocks-team-member-dynamic-team-member-name-toggle-controls',
-		attributes,
-		setAttributes,
-		dynamicAttr: 'dynamicTeamMemberNameEnabled',
-		label: __('Dynamic Team Member Name', 'frontis-blocks'),
-		keyPrefix: 'team-member-dynamic-team-member-name-content',
-		isProActive : getProActiveState
-	});
-
-	const dynamicTeamMemberDesignationContentToggleControls = getProToggleControls({
-		hook: 'frontisblocks-team-member-dynamic-team-member-designation-toggle-controls',
-		attributes,
-		setAttributes,
-		dynamicAttr: 'dynamicTeamMemberDesignationEnabled',
-		label: __('Dynamic Team Member Designation', 'frontis-blocks'),
-		keyPrefix: 'team-member-dynamic-team-member-designation-content',
-		isProActive : getProActiveState
-	});
 
 	/**
 	 * Inspector General Controls
@@ -2745,9 +2697,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 			<PanelBody title={__("Name & Designation", "frontis-blocks")} initialOpen={false}>
 
-				{dynamicTeamMemberNameContentToggleControls.map((control, index) => (
-					<div key={control.key || index}>{control.comp}</div>
-				))}
+				<ToggleControl
+					label={__('Dynamic Team Member Name', 'frontis-blocks')}
+					checked={dynamicTeamMemberNameEnabled}
+					onChange={(value) => setAttributes({ dynamicTeamMemberNameEnabled: value })}
+				/>
 
 				<DynamicDataSourceControl
 					enabled={dynamicTeamMemberNameEnabled}  
@@ -2813,9 +2767,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 					setGlobalHtmlTag={(value) => setAttributes({ teamMemberNameHeadingTag: value })}
 				/>
 
-				{dynamicTeamMemberDesignationContentToggleControls.map((control, index) => (
-					<div key={control.key || index}>{control.comp}</div>
-				))}
+				<ToggleControl
+					label={__('Dynamic Team Member Designation', 'frontis-blocks')}
+					checked={dynamicTeamMemberDesignationEnabled}
+					onChange={(value) => setAttributes({ dynamicTeamMemberDesignationEnabled: value })}
+				/>
 
 				<DynamicDataSourceControl
 					enabled={dynamicTeamMemberDesignationEnabled}  
@@ -2881,9 +2837,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 					onChange={(value) => setAttributes({ teamMemberDescSwitcher: value })}
 				/>
 
-				{dynamicDescriptionContentToggleControls.map((control, index) => (
-					<div key={control.key || index}>{control.comp}</div>
-				))}
+				<ToggleControl
+					label={__('Dynamic Content', 'frontis-blocks')}
+					checked={dynamicDescriptionEnabled}
+					onChange={(value) => setAttributes({ dynamicDescriptionEnabled: value })}
+				/>
 
 				<DynamicDataSourceControl
 					enabled={dynamicDescriptionEnabled}
