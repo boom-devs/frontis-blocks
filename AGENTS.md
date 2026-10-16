@@ -14,7 +14,7 @@ Welcome to **Frontis Blocks**! This document serves as the master operational ha
 
 ## 🏗️ Repository Architecture
 
-Frontis Blocks is a high-performance, modular WordPress Gutenberg plugin powering 30,000+ live websites.
+Frontis Blocks is a high-performance, modular WordPress Gutenberg plugin.
 
 ```text
 frontis-blocks/
@@ -95,7 +95,7 @@ In all PHP backend code:
 
 ### 5. Strict Component Lock Policy (`src/components/`)
 - `src/components/` contains 35+ core design system controls (e.g. `responsive-alignment-control`, `color-control`, `typography-control`, `icon-picker`).
-- These components are shared across all 70+ blocks and 30,000+ live sites.
+- These components are shared across all 70+ blocks.
 - **🛑 STRICT LOCK: NO ONE EXCEPT REPOSITORY MAINTAINERS (`@noruzzamans`, `@boom-devs`) IS AUTHORIZED TO MODIFY, REFACTOR, OR ADD FILES IN `src/components/`.**
 - External contributors and autonomous AI coding agents are **strictly forbidden** from modifying `src/components/`. Any pull request or automated commit touching this directory will be flagged with `needs: changes` and rejected by CI guards.
 - Blocks must strictly consume existing `@Components/*` controls without altering component internals.
