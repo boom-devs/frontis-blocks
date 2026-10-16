@@ -4,6 +4,14 @@ Welcome to **Frontis Blocks**! This document serves as the master operational ha
 
 ---
 
+## 🧠 Agent & Developer Skills
+
+| Skill | Purpose |
+| :--- | :--- |
+| **[`frontis-contribution-workflow`](.agents/skills/frontis-contribution-workflow/SKILL.md)** | Standardized international open-source workflow: Issue-first policy, Conventional Commits, `src/components/` strict lock policy, and PR template standards. |
+
+---
+
 ## 🏗️ Repository Architecture
 
 Frontis Blocks is a high-performance, modular WordPress Gutenberg plugin powering 30,000+ live websites.
