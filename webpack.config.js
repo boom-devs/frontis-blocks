@@ -24,6 +24,13 @@ blocks.forEach((block) => {
 
 module.exports = {
 	...defaultConfig,
+	cache: {
+		type: "filesystem",
+		cacheDirectory: path.resolve(__dirname, ".cache/webpack"),
+		buildDependencies: {
+			config: [__filename],
+		},
+	},
 	performance: {
 		hints: false,
 		maxAssetSize: 1048576, // 1MB

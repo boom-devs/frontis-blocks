@@ -6,6 +6,13 @@ const path = require('path');
 
 module.exports = {
 	...defaultConfig,
+	cache: {
+		type: "filesystem",
+		cacheDirectory: path.resolve(__dirname, ".cache/webpack-admin"),
+		buildDependencies: {
+			config: [__filename],
+		},
+	},
 	resolve: {
 		alias: {
 			...defaultConfig.resolve.alias,
