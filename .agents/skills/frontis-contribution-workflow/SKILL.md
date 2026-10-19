@@ -82,19 +82,13 @@ Every PR must strictly follow `.github/PULL_REQUEST_TEMPLATE.md`:
 Closes #<issue_number>
 
 ### Changes proposed in this Pull Request:
-- Concise, bulleted list of specific changes made.
+- Provide an in-depth, comprehensive explanation of the technical changes, architecture rationale, and problem solved.
+- Detail any specific functions, files, or configuration altered.
 
 ### Testing instructions:
 1. Open the WordPress Block Editor (Gutenberg).
-2. Insert the affected block.
-3. Verify behavior matches expectations.
-
-### 🛡️ Frontis Quality & Safety Checklist:
-- [x] **Protected Directory:** Did NOT modify `src/components/` (maintained exclusively by @noruzzamans, @boom-devs).
-- [x] **Strict Design System:** Uses ONLY approved `@Components/*` controls without altering internals.
-- [x] **Zero Regressions:** Existing blocks load with 0 block invalidation errors.
-- [x] **PHP Standards:** Sanitization, escaping, and nonces are 100% compliant.
-- [x] **Production Safety:** Zero breaking changes to attributes, database schemas, or saved markup.
+2. Insert or inspect the affected block/component.
+3. Verify behavior matches expectations across Desktop, Tablet, and Mobile.
 ```
 
 ---
