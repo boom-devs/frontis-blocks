@@ -392,12 +392,6 @@ Contributions of any kind are welcome! See our [Contributing Guide](CONTRIBUTING
 ## 👨‍💻 Maintainers & Credits
 
 <table width="100%">
-  <thead>
-    <tr>
-      <th width="50%" align="center">🛠️ Core Maintainer & Backend Architect</th>
-      <th width="50%" align="center">👑 Lead Maintainer & Main Committer</th>
-    </tr>
-  </thead>
   <tbody>
     <tr>
       <td align="center" width="50%" valign="top">
@@ -415,9 +409,6 @@ Contributions of any kind are welcome! See our [Contributing Guide](CONTRIBUTING
           </a>
           <a href="https://profiles.wordpress.org/enamulhaq/" title="WordPress.org Profile">
             <img src="https://img.shields.io/badge/--21759B?style=for-the-badge&logo=wordpress&logoColor=white" alt="WordPress Profile">
-          </a>
-          <a href="https://boomdevs.com" title="BoomDevs">
-            <img src="https://img.shields.io/badge/--0366D6?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Website">
           </a>
         </p>
       </td>
