@@ -389,32 +389,61 @@ Contributions of any kind are welcome! See our [Contributing Guide](CONTRIBUTING
 
 ---
 
-## 👨‍💻 Maintainer & Credits
+## 👨‍💻 Maintainers & Credits
+
+<table>
+  <tbody>
+    <tr>
+      <td align="center" width="50%" valign="top">
+        <a href="https://github.com/noruzzamans">
+          <img src="https://avatars.githubusercontent.com/noruzzamans" alt="Noruzzaman" width="90" height="90" style="border-radius: 50%;">
+        </a>
+        <br>
+        <strong>Noruzzaman</strong><br>
+        <sub>Lead Maintainer & Main Committer<br>WordPress Core & Gutenberg Engineer</sub>
+        <br><br>
+        <p align="center">
+          <a href="https://github.com/noruzzamans" title="GitHub">
+            <img src="https://img.shields.io/badge/--181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
+          </a>
+          <a href="https://linkedin.com/in/noruzzaman" title="LinkedIn">
+            <img src="https://img.shields.io/badge/--0A66C2?style=for-the-badge&logo=data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiPjxwYXRoIGQ9Ik0xOSAwaC0xNGMtMi43NjIgMC01IDIuMjM4LTUgNXYxNGMwIDIuNzYyIDIuMjM4IDUgNSA1aDE0YzIuNzYyIDAgNS0yLjIzOCA1LTV2LTE0YzAtMi43NjItMi4yMzgtNS01LTV6bS0xMSAxOWgtM3YtMTBoM3YxMHptLTEuNS0xMS4yNjhjLS45NjYgMC0xLjc1LS43OS0xLjc1LTEuNzY0cy43ODQtMS43NjQgMS43NS0xLjc2NCAxLjc1Ljc5IDEuNzUgMS43NjQtLjc4MyAxLjc2NC0xLjc1IDEuNzY0em0xMy41IDExLjI2OGgtM3YtNS42MDRjMC0zLjM2OC00LTMuMTEzLTQtMHY1LjYwNGgtM3YtMTBoM3YxLjMwOWMxLjM5Ni0yLjU4NiA3LTIuNzc3IDcgMi40NzZ2Ni4yMTV6Ii8+PC9zdmc+" alt="LinkedIn">
+          </a>
+          <a href="https://x.com/Noruzzamanwp" title="X (Twitter)">
+            <img src="https://img.shields.io/badge/--000000?style=for-the-badge&logo=x&logoColor=white" alt="X (Twitter)">
+          </a>
+          <a href="https://profiles.wordpress.org/noruzzaman/" title="WordPress.org Profile">
+            <img src="https://img.shields.io/badge/--21759B?style=for-the-badge&logo=wordpress&logoColor=white" alt="WordPress Profile">
+          </a>
+        </p>
+      </td>
+      <td align="center" width="50%" valign="top">
+        <a href="https://github.com/EnamulHaq">
+          <img src="https://avatars.githubusercontent.com/EnamulHaq" alt="Md. Enamul Haq" width="90" height="90" style="border-radius: 50%;">
+        </a>
+        <br>
+        <strong>Md. Enamul Haq</strong><br>
+        <sub>Core Maintainer & Backend Architect<br>WordPress & PHP Engineer</sub>
+        <br><br>
+        <p align="center">
+          <a href="https://github.com/EnamulHaq" title="GitHub">
+            <img src="https://img.shields.io/badge/--181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
+          </a>
+          <a href="https://profiles.wordpress.org/enamulhaq/" title="WordPress.org Profile">
+            <img src="https://img.shields.io/badge/--21759B?style=for-the-badge&logo=wordpress&logoColor=white" alt="WordPress Profile">
+          </a>
+          <a href="https://boomdevs.com" title="BoomDevs">
+            <img src="https://img.shields.io/badge/Website-boomdevs.com-0366d6?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Website">
+          </a>
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <p align="center">
-  <img src="https://avatars.githubusercontent.com/noruzzamans" alt="Noruzzaman" width="90" height="90" style="border-radius: 50%;">
-</p>
-
-<p align="center">
-  <strong>Noruzzaman</strong><br>
-  WordPress Core & Gutenberg Engineer | Open Source Maintainer
-</p>
-
-<p align="center">
-  <a href="https://github.com/noruzzamans" title="GitHub">
-    <img src="https://img.shields.io/badge/--181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
-  </a>
-  <a href="https://linkedin.com/in/noruzzaman" title="LinkedIn">
-    <img src="https://img.shields.io/badge/--0A66C2?style=for-the-badge&logo=data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiPjxwYXRoIGQ9Ik0xOSAwaC0xNGMtMi43NjIgMC01IDIuMjM4LTUgNXYxNGMwIDIuNzYyIDIuMjM4IDUgNSA1aDE0YzIuNzYyIDAgNS0yLjIzOCA1LTV2LTE0YzAtMi43NjItMi4yMzgtNS01LTV6bS0xMSAxOWgtM3YtMTBoM3YxMHptLTEuNS0xMS4yNjhjLS45NjYgMC0xLjc1LS43OS0xLjc1LTEuNzY0cy43ODQtMS43NjQgMS43NS0xLjc2NCAxLjc1Ljc5IDEuNzUgMS43NjQtLjc4MyAxLjc2NC0xLjc1IDEuNzY0em0xMy41IDExLjI2OGgtM3YtNS42MDRjMC0zLjM2OC00LTMuMTEzLTQtMHY1LjYwNGgtM3YtMTBoM3YxLjMwOWMxLjM5Ni0yLjU4NiA3LTIuNzc3IDcgMi40NzZ2Ni4yMTV6Ii8+PC9zdmc+" alt="LinkedIn">
-  </a>
-  <a href="https://x.com/Noruzzamanwp" title="X (Twitter)">
-    <img src="https://img.shields.io/badge/--000000?style=for-the-badge&logo=x&logoColor=white" alt="X (Twitter)">
-  </a>
-  <a href="https://profiles.wordpress.org/noruzzaman/" title="WordPress.org Profile">
-    <img src="https://img.shields.io/badge/--21759B?style=for-the-badge&logo=wordpress&logoColor=white" alt="WordPress Profile">
-  </a>
   <a href="https://github.com/boom-devs" title="BoomDevs Organization">
-    <img src="https://img.shields.io/badge/BoomDevs-Organization-0366d6?style=for-the-badge&logo=github&logoColor=white" alt="BoomDevs">
+    <img src="https://img.shields.io/badge/Sponsored%20by-BoomDevs-0366d6?style=for-the-badge&logo=github&logoColor=white" alt="BoomDevs">
   </a>
 </p>
 
