@@ -353,9 +353,6 @@ Contributions of any kind are welcome! See our [Contributing Guide](CONTRIBUTING
           <a href="https://profiles.wordpress.org/noruzzaman/" title="WordPress.org Profile">
             <img src="https://img.shields.io/badge/--21759B?style=for-the-badge&logo=wordpress&logoColor=white" alt="WordPress Profile">
           </a>
-          <a href="https://noruzzaman.com/" title="Personal Website">
-            <img src="https://img.shields.io/badge/--4285F4?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Personal Website">
-          </a>
         </p>
         <br>
         <img src="assets/images/transparent.png" width="440" height="1" alt="">
