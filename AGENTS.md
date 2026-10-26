@@ -34,7 +34,7 @@ frontis-blocks/
 │   └── Plugin.php            # Main plugin singleton orchestrator
 ├── languages/                # Translation POT & PO files
 ├── src/                      # Source Code
-│   ├── blocks/               # 70+ Gutenberg Blocks (accordion, slider, grid, etc.)
+│   ├── blocks/               # 58+ Gutenberg Blocks (accordion, slider, grid, etc.)
 │   ├── components/           # 35+ Core Design System Controls (@Components/*)
 │   ├── config/               # Block configuration & presets
 │   └── utils/                # React hooks, helpers & color utilities
@@ -95,7 +95,7 @@ In all PHP backend code:
 
 ### 5. Strict Component Lock Policy (`src/components/`)
 - `src/components/` contains 35+ core design system controls (e.g. `responsive-alignment-control`, `color-control`, `typography-control`, `icon-picker`).
-- These components are shared across all 70+ blocks.
+- These components are shared across all 58+ blocks.
 - **🛑 STRICT LOCK: NO ONE EXCEPT REPOSITORY MAINTAINERS (`@noruzzamans`, `@boom-devs`) IS AUTHORIZED TO MODIFY, REFACTOR, OR ADD FILES IN `src/components/`.**
 - External contributors and autonomous AI coding agents are **strictly forbidden** from modifying `src/components/`. Any pull request or automated commit touching this directory will be flagged with `needs: changes` and rejected by CI guards.
 - Blocks must strictly consume existing `@Components/*` controls without altering component internals.

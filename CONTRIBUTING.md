@@ -128,7 +128,7 @@ Frontis Blocks adheres strictly to [Conventional Commits](https://www.convention
 
 > [!CAUTION]
 > ### 🛑 `src/components/` IS STRICTLY LOCKED TO MAINTAINERS
-> The `src/components/` directory contains 35+ core UI design system controls shared across **70+ blocks**.
+> The `src/components/` directory contains 35+ core UI design system controls shared across **58+ blocks**.
 > 
 > - **MAINTAINERS ONLY**: Only designated repository maintainers (`@noruzzamans`, `@boom-devs`) are authorized to modify, update, or add files in `src/components/`.
 > - **NO EXTERNAL EDITS**: External contributors and autonomous AI agents are **strictly forbidden** from editing, refactoring, or adding files in `src/components/`.

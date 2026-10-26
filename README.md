@@ -8,7 +8,7 @@
 
 <p align="center">
   <strong>⚡ The Enterprise Modular Gutenberg Block Suite & Design System for WordPress</strong><br>
-  Supercharge the WordPress Block Editor with 74+ production-ready blocks, 38 design system controls, dynamic zero-unused CSS engine, visual form builder, and cloud template library.
+  Supercharge the WordPress Block Editor with 58+ production-ready blocks, 38 design system controls, dynamic zero-unused CSS engine, visual form builder, and cloud template library.
 </p>
 
 <p align="center">
@@ -66,7 +66,7 @@ Every layout, spacing, typography, and responsive decision is compiled dynamical
 | Feature | Frontis Blocks | Generic Block Addons (Spectra / Kadence) | Traditional Builders (Elementor / Divi) |
 | :--- | :---: | :---: | :---: |
 | **Gutenberg Native** | ✅ 100% Native Block Canvas | ⚠️ Often bloated wrapper blocks | ❌ Completely proprietary builder iframe |
-| **Block Diversity** | ✅ **74+ Blocks** (All Free) | ⚠️ 20–30 Free, rest paywalled behind Pro | ❌ Requires costly annual Pro subscriptions |
+| **Block Diversity** | ✅ **58+ Blocks** (All Free) | ⚠️ 20–30 Free, rest paywalled behind Pro | ❌ Requires costly annual Pro subscriptions |
 | **Design Controls** | ✅ **38 Core Controls** (`@Components/*`) | ⚠️ Fragmented, block-specific settings | ❌ Monolithic proprietary inspector |
 | **CSS Delivery Engine** | ✅ **Zero Unused CSS** via dynamic queue | ⚠️ Monolithic global CSS stylesheets | ❌ Heavy CSS/JS runtime loaded sitewide |
 | **Form Builder** | ✅ Built-in visual form builder + stylers | ⚠️ Basic contact forms or external plugins | ❌ Bloated form widgets |
@@ -80,13 +80,13 @@ Every layout, spacing, typography, and responsive decision is compiled dynamical
 ```mermaid
 flowchart LR
     Editor["WordPress Block Editor (Gutenberg)"] --> Components["38 Core Design Controls (@Components/*)"]
-    Components --> Blocks["74+ Custom Blocks (src/blocks/*)"]
+    Components --> Blocks["58+ Custom Blocks (src/blocks/*)"]
     Blocks --> Engine["Dynamic CSS Compiler (styling.js)"]
     Engine --> Frontend["Zero-Unused-CSS Frontend Render"]
     Blocks --> Cloud["Template Cloud Importer (admin/template-library)"]
 ```
 
-* **74+ Production-Grade Gutenberg Blocks:** Comprehensive coverage spanning containers, sliders, accordions, dynamic query loop builders, multi-column pricing, interactive modals, and forms.
+* **58+ Production-Grade Gutenberg Blocks:** Comprehensive coverage spanning containers, sliders, accordions, dynamic query loop builders, multi-column pricing, interactive modals, and forms.
 * **38 Unified Core Design System Controls:** Shared React controls located in `src/components/` ensuring 100% consistent typography, responsive spacing, color swatches, box shadows, and icon selectors across all blocks.
 * **Zero-Unused-CSS Style Engine:** Dynamic CSS rules are compiled on-demand in `styling.js` and injected directly into the page header. No massive sitewide stylesheets are ever enqueued.
 * **Integrated Form Builder:** Design custom interactive lead generation forms with text, textarea, and select dropdown fields, alongside visual stylers for Fluent Forms and Contact Form 7.
@@ -115,7 +115,7 @@ frontis-blocks/
 │   └── Plugin.php            # Main plugin singleton orchestrator
 ├── languages/                # Translation POT & PO files
 ├── src/                      # Source Code
-│   ├── blocks/               # 74+ Gutenberg Blocks (accordion, slider, grid, etc.)
+│   ├── blocks/               # 58 Gutenberg Blocks (accordion, slider, grid, etc.)
 │   ├── components/           # 38 Core Design System Controls (@Components/*)
 │   ├── config/               # Block configuration & presets
 │   └── utils/                # React hooks, helpers & color utilities
@@ -201,7 +201,7 @@ npx @wordpress/env start
 
 Every pull request runs automated GitHub Actions workflows:
 * **Multi-PHP Syntax & Compatibility:** Parallel linting across **PHP 7.4, 8.0, 8.1, 8.2, 8.3, and 8.4**.
-* **Block & Admin Build Verification:** Compiles all 74+ block entry points and admin stylesheets with Webpack 5.
+* **Block & Admin Build Verification:** Compiles all 58+ block entry points and admin stylesheets with Webpack 5.
 * **Webpack 5 Persistent Cache:** Fast CI builds powered by persistent filesystem caching (`.cache/webpack`).
 * **Packaging & Archive Audit:** Verifies distributable zip creation (`webpack.zip.js`) with zero missing dependencies.
 * **Dependency Caching:** Instant CI runs using `actions/cache@v4` for Composer and NPM modules.
@@ -222,7 +222,7 @@ We welcome contributions from developers, designers, and documentation writers! 
 
 > [!CAUTION]
 > **Strict Component Lock Policy (`src/components/`):**
-> `src/components/` contains 38 core UI design system controls shared across **74+ blocks**.
+> `src/components/` contains 38 core UI design system controls shared across **58+ blocks**.
 > 
 > * **MAINTAINERS ONLY**: Only repository maintainers (`@noruzzamans`, `@boom-devs`) are authorized to modify, refactor, or add files in `src/components/`.
 > * **NO EXTERNAL EDITS**: External contributors and autonomous AI agents are **strictly forbidden** from editing `src/components/`.
