@@ -46,6 +46,9 @@
   <a href="#-local-development-setup">Setup</a> •
   <a href="#-essential-npm-scripts">Scripts</a> •
   <a href="#-contributing--governance">Contributing</a> •
+  <a href="#-support-the-project">Support ⭐</a> •
+  <a href="#-contributors">Contributors</a> •
+  <a href="#-maintainer--credits">Credits</a> •
   <a href="#-license">License</a>
 </p>
 
@@ -336,10 +339,91 @@ We welcome contributions from developers, designers, and documentation writers! 
 
 ---
 
-## 👥 Lead Maintainers & Credits
+---
 
-* **Lead Maintainer & Main Committer:** Noruzzaman ([@noruzzamans](https://github.com/noruzzamans))
-* **Organization & Sponsor:** BoomDevs ([@boom-devs](https://github.com/boom-devs))
+## ⭐ Support the Project
+
+If you find **Frontis Blocks** valuable or use it in your projects, please consider giving it a star on GitHub! It takes just a second and helps the project gain visibility across the WordPress & open-source community, attract more contributors, and motivates ongoing active development.
+
+<p align="center">
+  <a href="https://github.com/boom-devs/frontis-blocks">
+    <img src="https://img.shields.io/badge/⭐_Star_on_GitHub-frontis--blocks-yellow?style=for-the-badge&logo=github" alt="Star on GitHub">
+  </a>
+</p>
+
+- **Star this repository** to bookmark it for future use.
+- **Share it** with fellow WordPress developers, agencies, and friends.
+- **Contribute** code, docs, or ideas to our open [Issues](https://github.com/boom-devs/frontis-blocks/issues).
+
+---
+
+<a id="contributors"></a>
+## 👥 Contributors
+
+Thank you to all the amazing people who contribute to Frontis Blocks!
+
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/noruzzamans"><img src="https://avatars.githubusercontent.com/u/46926901?v=4" width="100px;" alt="Noruzzaman"/><br /><sub><b>Noruzzaman</b></sub></a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Mehedi2509"><img src="https://avatars.githubusercontent.com/u/47184759?v=4" width="100px;" alt="Mehedi2509"/><br /><sub><b>Mehedi2509</b></sub></a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/ashrafulislamsaon"><img src="https://avatars.githubusercontent.com/u/70936583?v=4" width="100px;" alt="ashrafulislamsaon"/><br /><sub><b>ashrafulislamsaon</b></sub></a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/EnamulHaq"><img src="https://avatars.githubusercontent.com/u/35990207?v=4" width="100px;" alt="EnamulHaq"/><br /><sub><b>EnamulHaq</b></sub></a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/shagib"><img src="https://avatars.githubusercontent.com/u/71404750?v=4" width="100px;" alt="shagib"/><br /><sub><b>shagib</b></sub></a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/MD-ANIKS"><img src="https://avatars.githubusercontent.com/u/108365392?v=4" width="100px;" alt="MD-ANIKS"/><br /><sub><b>MD-ANIKS</b></sub></a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Shiddik"><img src="https://avatars.githubusercontent.com/u/8155560?v=4" width="100px;" alt="Shiddik"/><br /><sub><b>Shiddik</b></sub></a></td>
+    </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/sheikhshartho"><img src="https://avatars.githubusercontent.com/u/197633041?v=4" width="100px;" alt="sheikhshartho"/><br /><sub><b>sheikhshartho</b></sub></a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/ikamal7"><img src="https://avatars.githubusercontent.com/u/26425593?v=4" width="100px;" alt="ikamal7"/><br /><sub><b>ikamal7</b></sub></a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/tarekhossain0043-dot"><img src="https://avatars.githubusercontent.com/u/230377866?v=4" width="100px;" alt="tarekhossain0043-dot"/><br /><sub><b>tarekhossain0043-dot</b></sub></a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Muttakin96"><img src="https://avatars.githubusercontent.com/u/160908847?v=4" width="100px;" alt="Muttakin96"/><br /><sub><b>Muttakin96</b></sub></a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/irfat-ifti"><img src="https://avatars.githubusercontent.com/u/197045488?v=4" width="100px;" alt="irfat-ifti"/><br /><sub><b>irfat-ifti</b></sub></a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/alihasandeveloper"><img src="https://avatars.githubusercontent.com/u/138684631?v=4" width="100px;" alt="alihasandeveloper"/><br /><sub><b>alihasandeveloper</b></sub></a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Mehedi-42"><img src="https://avatars.githubusercontent.com/u/182376015?v=4" width="100px;" alt="Mehedi-42"/><br /><sub><b>Mehedi-42</b></sub></a></td>
+    </tr>
+  </tbody>
+</table>
+
+Contributions of any kind are welcome! See our [Contributing Guide](CONTRIBUTING.md) to get started.
+
+---
+
+## 👨‍💻 Maintainer & Credits
+
+<p align="center">
+  <img src="https://avatars.githubusercontent.com/noruzzamans" alt="Noruzzaman" width="90" height="90" style="border-radius: 50%;">
+</p>
+
+<p align="center">
+  <strong>Noruzzaman</strong><br>
+  WordPress Core & Gutenberg Engineer | Open Source Maintainer
+</p>
+
+<p align="center">
+  <a href="https://github.com/noruzzamans" title="GitHub">
+    <img src="https://img.shields.io/badge/--181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
+  </a>
+  <a href="https://linkedin.com/in/noruzzaman" title="LinkedIn">
+    <img src="https://img.shields.io/badge/--0A66C2?style=for-the-badge&logo=data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiPjxwYXRoIGQ9Ik0xOSAwaC0xNGMtMi43NjIgMC01IDIuMjM4LTUgNXYxNGMwIDIuNzYyIDIuMjM4IDUgNSA1aDE0YzIuNzYyIDAgNS0yLjIzOCA1LTV2LTE0YzAtMi43NjItMi4yMzgtNS01LTV6bS0xMSAxOWgtM3YtMTBoM3YxMHptLTEuNS0xMS4yNjhjLS45NjYgMC0xLjc1LS43OS0xLjc1LTEuNzY0cy43ODQtMS43NjQgMS43NS0xLjc2NCAxLjc1Ljc5IDEuNzUgMS43NjQtLjc4MyAxLjc2NC0xLjc1IDEuNzY0em0xMy41IDExLjI2OGgtM3YtNS42MDRjMC0zLjM2OC00LTMuMTEzLTQtMHY1LjYwNGgtM3YtMTBoM3YxLjMwOWMxLjM5Ni0yLjU4NiA3LTIuNzc3IDcgMi40NzZ2Ni4yMTV6Ii8+PC9zdmc+" alt="LinkedIn">
+  </a>
+  <a href="https://x.com/Noruzzamanwp" title="X (Twitter)">
+    <img src="https://img.shields.io/badge/--000000?style=for-the-badge&logo=x&logoColor=white" alt="X (Twitter)">
+  </a>
+  <a href="https://profiles.wordpress.org/noruzzaman/" title="WordPress.org Profile">
+    <img src="https://img.shields.io/badge/--21759B?style=for-the-badge&logo=wordpress&logoColor=white" alt="WordPress Profile">
+  </a>
+  <a href="https://github.com/boom-devs" title="BoomDevs Organization">
+    <img src="https://img.shields.io/badge/BoomDevs-Organization-0366d6?style=for-the-badge&logo=github&logoColor=white" alt="BoomDevs">
+  </a>
+</p>
+
+### Special Credits
+- [WordPress Gutenberg](https://github.com/WordPress/gutenberg) — Block editor framework.
+- [React](https://reactjs.org/) — Declarative UI component engine.
+- [Swiper.js](https://swiperjs.com/) — High-performance modern touch slider library.
+- [Lottie](https://airbnb.io/lottie/) & [Rive](https://rive.app/) — Next-generation vector animation engines.
+- [Appsero](https://appsero.com/) — Telemetry and plugin analytics.
 
 ---
 
