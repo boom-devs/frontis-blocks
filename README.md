@@ -315,7 +315,8 @@ Contributions of any kind are welcome! See our [Contributing Guide](CONTRIBUTING
         <br><br>
         <h3 align="center">Md. Enamul Haq</h3>
         <p align="center">
-          WordPress & PHP Backend Engineer
+          <strong>WordPress & PHP Backend Engineer</strong><br>
+          Core Architecture & Systems Engineering
         </p>
         <p align="center">
           <a href="https://github.com/EnamulHaq" title="GitHub">
@@ -331,12 +332,13 @@ Contributions of any kind are welcome! See our [Contributing Guide](CONTRIBUTING
       <td align="center" width="50%" valign="top">
         <br>
         <a href="https://github.com/noruzzamans">
-          <img src="https://avatars.githubusercontent.com/noruzzamans" alt="Noruzzaman" width="110" height="110" style="border-radius: 50%;">
+          <img src="https://avatars.githubusercontent.com/noruzzamans" alt="Md. Noruzzaman" width="110" height="110" style="border-radius: 50%;">
         </a>
         <br><br>
-        <h3 align="center">Noruzzaman</h3>
+        <h3 align="center">Md. Noruzzaman</h3>
         <p align="center">
-          WordPress Core & Gutenberg Engineer
+          <strong>Senior WordPress Systems & Core Engineer</strong><br>
+          WordPress 7.2 Release Squad (Test Lead) · Core Contributor (6.6–7.2)
         </p>
         <p align="center">
           <a href="https://github.com/noruzzamans" title="GitHub">
@@ -350,6 +352,9 @@ Contributions of any kind are welcome! See our [Contributing Guide](CONTRIBUTING
           </a>
           <a href="https://profiles.wordpress.org/noruzzaman/" title="WordPress.org Profile">
             <img src="https://img.shields.io/badge/--21759B?style=for-the-badge&logo=wordpress&logoColor=white" alt="WordPress Profile">
+          </a>
+          <a href="https://noruzzaman.com/" title="Personal Website">
+            <img src="https://img.shields.io/badge/--4285F4?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Personal Website">
           </a>
         </p>
         <br>
