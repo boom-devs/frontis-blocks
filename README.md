@@ -391,14 +391,42 @@ Contributions of any kind are welcome! See our [Contributing Guide](CONTRIBUTING
 
 ## 👨‍💻 Maintainers & Credits
 
-<table>
+<table width="100%">
+  <thead>
+    <tr>
+      <th width="50%" align="center">🛠️ Core Maintainer & Backend Architect</th>
+      <th width="50%" align="center">👑 Lead Maintainer & Main Committer</th>
+    </tr>
+  </thead>
   <tbody>
     <tr>
       <td align="center" width="50%" valign="top">
-        <a href="https://github.com/noruzzamans">
-          <img src="https://avatars.githubusercontent.com/noruzzamans" alt="Noruzzaman" width="90" height="90" style="border-radius: 50%;">
-        </a>
         <br>
+        <a href="https://github.com/EnamulHaq">
+          <img src="https://avatars.githubusercontent.com/EnamulHaq" alt="Md. Enamul Haq" width="105" height="105" style="border-radius: 50%;">
+        </a>
+        <br><br>
+        <strong>Md. Enamul Haq</strong><br>
+        <sub>Core Maintainer & Backend Architect<br>WordPress & PHP Engineer</sub>
+        <br><br>
+        <p align="center">
+          <a href="https://github.com/EnamulHaq" title="GitHub">
+            <img src="https://img.shields.io/badge/--181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
+          </a>
+          <a href="https://profiles.wordpress.org/enamulhaq/" title="WordPress.org Profile">
+            <img src="https://img.shields.io/badge/--21759B?style=for-the-badge&logo=wordpress&logoColor=white" alt="WordPress Profile">
+          </a>
+          <a href="https://boomdevs.com" title="BoomDevs">
+            <img src="https://img.shields.io/badge/--0366D6?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Website">
+          </a>
+        </p>
+      </td>
+      <td align="center" width="50%" valign="top">
+        <br>
+        <a href="https://github.com/noruzzamans">
+          <img src="https://avatars.githubusercontent.com/noruzzamans" alt="Noruzzaman" width="105" height="105" style="border-radius: 50%;">
+        </a>
+        <br><br>
         <strong>Noruzzaman</strong><br>
         <sub>Lead Maintainer & Main Committer<br>WordPress Core & Gutenberg Engineer</sub>
         <br><br>
@@ -414,26 +442,6 @@ Contributions of any kind are welcome! See our [Contributing Guide](CONTRIBUTING
           </a>
           <a href="https://profiles.wordpress.org/noruzzaman/" title="WordPress.org Profile">
             <img src="https://img.shields.io/badge/--21759B?style=for-the-badge&logo=wordpress&logoColor=white" alt="WordPress Profile">
-          </a>
-        </p>
-      </td>
-      <td align="center" width="50%" valign="top">
-        <a href="https://github.com/EnamulHaq">
-          <img src="https://avatars.githubusercontent.com/EnamulHaq" alt="Md. Enamul Haq" width="90" height="90" style="border-radius: 50%;">
-        </a>
-        <br>
-        <strong>Md. Enamul Haq</strong><br>
-        <sub>Core Maintainer & Backend Architect<br>WordPress & PHP Engineer</sub>
-        <br><br>
-        <p align="center">
-          <a href="https://github.com/EnamulHaq" title="GitHub">
-            <img src="https://img.shields.io/badge/--181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
-          </a>
-          <a href="https://profiles.wordpress.org/enamulhaq/" title="WordPress.org Profile">
-            <img src="https://img.shields.io/badge/--21759B?style=for-the-badge&logo=wordpress&logoColor=white" alt="WordPress Profile">
-          </a>
-          <a href="https://boomdevs.com" title="BoomDevs">
-            <img src="https://img.shields.io/badge/Website-boomdevs.com-0366d6?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Website">
           </a>
         </p>
       </td>
