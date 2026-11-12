@@ -46,7 +46,9 @@ const FB_SidebarTypography = ({
 	heading
 }) => {
 
-	const [fontOptions, setFontOptions] = useState(frontisBlocksAdmin?.google_fonts);
+	const [fontOptions, setFontOptions] = useState(
+		Array.isArray(frontisBlocksAdmin?.google_fonts) ? frontisBlocksAdmin.google_fonts : []
+	);
 	const [selectedFontFamilyOption, setSelectedFontFamilyOption] = useState();
 	const [availableFontWeights, setAvailableFontWeights] = useState([]);
 
