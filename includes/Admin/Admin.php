@@ -233,6 +233,9 @@ class Admin
         }
 
         $google_fonts = get_transient('google_fonts_data');
+        if (!is_array($google_fonts) || empty($google_fonts)) {
+            $google_fonts = $this->store_google_fonts();
+        }
 
         $blocks = BlockList::get_instance()->get_blocks();
         $localizeArray = array(
@@ -349,24 +352,23 @@ class Admin
         // Check if transient exists
         $cached_data = get_transient($transient_key);
 
-        if ($cached_data !== false) {
+        if (is_array($cached_data) && !empty($cached_data)) {
             // Return cached data if available
             return $cached_data;
         }
 
-        // Replace with the actual URL to your google-fonts.json file
-        $plugin_url = FB_PLUGIN_URL . 'assets/google-fonts/google-fonts.json';
+        // Read directly from the local plugin file to avoid loopback HTTP failures on live servers
+        $google_fonts_path = FB_PLUGIN_PATH . 'assets/google-fonts/google-fonts.json';
 
-        // Fetch the JSON file
-        $response = wp_remote_get($plugin_url);
-
-        // Check for errors
-        if (is_wp_error($response)) {
+        if (!file_exists($google_fonts_path)) {
             return [];
         }
 
-        // Get the response body
-        $body = wp_remote_retrieve_body($response);
+        $body = file_get_contents($google_fonts_path);
+
+        if ($body === false) {
+            return [];
+        }
 
         // Decode JSON data
         $data = json_decode($body, true);
