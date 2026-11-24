@@ -43,11 +43,10 @@ const Render = ( props ) => {
 
 	const { getBlockOrder } = select( 'core/block-editor' );
 
-	const hasChildBlocks = getBlockOrder( clientId ).length > 0;
+	const hasChildBlocks = ( getBlockOrder( clientId ) || [] ).length > 0;
 
 	const Tag = 'a' === htmlTag ? 'div' : `${ htmlTag }`;
-	const hasChildren = 0 !== select( 'core/block-editor' ).getBlocks( clientId ).length;
-	const hasChildrenClass = hasChildren ? 'frontis-blocks-container-has-children' : '';
+	const hasChildrenClass = hasChildBlocks ? 'frontis-blocks-container-has-children' : '';
 
 	const isRootContainerClass = isBlockRootParent ? `${ containerType === 'full-width' ? 'alignfull' : 'alignwide' } frontis-blocks-is-root-container` : `child ${containerGlobalCustomCSSClass}`;
 
@@ -117,18 +116,17 @@ const Render = ( props ) => {
 	}
 
 	/**
-	 * Set p_block_id attribute only when it differs from blockProps.id
-	 * Avoids unnecessary setAttributes calls on every render
+	 * Set p_block_id attribute only if not set (for new blocks).
+	 * Preserves existing saved p_block_id on page load to prevent cascading re-render loops.
 	 */
 	useEffect(() => {
-		// Only set p_block_id if it's empty or different
-		if (clientId && typeof clientId === 'string' && attributes.p_block_id !== blockProps.id) {
+		if (clientId && typeof clientId === 'string' && !attributes.p_block_id) {
 			setAttributes({
 				p_block_id: blockProps.id,
 			});
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [clientId, blockProps.id]);
+	}, [clientId, blockProps.id, attributes.p_block_id]);
 
 	const rotateContainer = () => {
 		console.log("working on click ?");
