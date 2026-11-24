@@ -9,6 +9,7 @@ import generateCSSUnit from '@Config/generateCSSUnit';
 import { getFallbackNumber } from '@Config/getAttributeFallback';
 import gridCssObject from '@Config/gridCssCreator';
 import backgroundCss from './backgroundCss';
+import getCustomCss from '@Utils/getCustomCss';
 
 function styling( attributes, clientId, name, deviceType, gbsSelector = false ) {
 	const blockName = name.replace( 'frotins-blocks/', '' );
@@ -275,6 +276,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 
 		customWidthUnits,
 
+		containerGlobalCustomCSS,
 		containerGlobalCustomCSSValue,
 		containerGlobalCustomCSSClass,
 
@@ -1589,7 +1591,17 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 
 		}
 	}
-	styling_css += containerGlobalCustomCSSValue;
+	if ( containerGlobalCustomCSS ) {
+		const selfClasses = ! isBlockRootParent
+			? ( containerGlobalCustomCSSClass || '' ).split( ' ' ).filter( Boolean )
+			: [];
+		styling_css += getCustomCss( containerGlobalCustomCSS, `#block-${ clientId }`, ' ', selfClasses );
+	} else if ( containerGlobalCustomCSSValue ) {
+		const editorCustomCss = attributes?.p_block_id
+			? containerGlobalCustomCSSValue.split( attributes.p_block_id ).join( `block-${ clientId }` )
+			: containerGlobalCustomCSSValue;
+		styling_css += editorCustomCss;
+	}
 
 	// Minify CSS: collapse multiple whitespace into single space, remove leading/trailing whitespace
 	// This is safe - only affects whitespace, not CSS values or selectors

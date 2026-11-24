@@ -3,7 +3,7 @@ Contributors: wpmessiah
 Tags: block, blocks, blocks-editor, gutenberg,  gutenberg blocks,
 Requires at least: 6.0
 Tested up to: 7.1
-Stable tag: 1.2.8
+Stable tag: 1.2.9
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html 
@@ -243,6 +243,10 @@ There is no prerequisites for installing **Frontis Blocks**. You can follow the 
 
 
 == Changelog ==
+
+= 1.2.9 =
+- **Fixed**: Resolved custom CSS preview in Gutenberg block editor for existing container blocks by scoping editor styles to active client ID.
+- **Improved**: Ensured robust custom CSS inheritance across both editor canvas and frontend rendering.
 
 = 1.2.8 =
 - **Fixed**: Resolved Gutenberg block editor out-of-memory crash and infinite serialization loop caused by transient client ID mismatch in Container block dynamic styling.
