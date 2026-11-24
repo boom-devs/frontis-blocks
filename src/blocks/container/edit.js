@@ -70,22 +70,22 @@ const Edit = (props) => {
 		variations,
 		defaultVariation,
 		getBlockParents,
-		parentBlocks,
-		parentAttributes,
+		hasContainerParent,
+		parentLayout,
 	} = useSelect( ( select ) => {
 		const coreBlocks = select( 'core/blocks' );
 		const coreBlockEditor = select( 'core/block-editor' );
 		const getBlockParentStore = coreBlockEditor?.getBlockParents( clientId );
-		const parentClientId = coreBlockEditor.getBlockRootClientId( props.clientId );
+		const parentClientId = coreBlockEditor?.getBlockRootClientId( props.clientId );
 		return {
 			defaultVariation: coreBlocks?.getDefaultBlockVariation( name ),
 			variations: coreBlocks?.getBlockVariations( name ),
 			isParentOfSelectedBlock: coreBlockEditor?.hasSelectedInnerBlock( clientId, true ),
 			getBlockParents : getBlockParentStore,
-			parentBlocks : coreBlockEditor?.getBlocksByClientId( getBlockParentStore ),
-			parentAttributes : coreBlockEditor.getBlockAttributes( parentClientId ),
+			hasContainerParent : getBlockParentStore?.some( id => coreBlockEditor?.getBlockName( id ) === 'frontis-blocks/container' ),
+			parentLayout : parentClientId ? coreBlockEditor?.getBlockAttributes( parentClientId )?.layout : null,
 		};
-	} );
+	}, [ clientId, props.clientId, name ] );
 
 	/**
 	 * Hide empty block inserter when this container has selected inner blocks.
@@ -101,24 +101,21 @@ const Edit = (props) => {
 	}, [isParentOfSelectedBlock]);
 
 	useEffect( () => {
-		const gridCssInParent = 'grid' === parentAttributes?.layout;
+		const gridCssInParent = 'grid' === parentLayout;
 		// If the parent block is a grid block, then we need to set the grid item settings.
 		if ( gridCssInParent !== isGridCssInParent ) {
 			setAttributes( { isGridCssInParent: gridCssInParent } );
 		}
-	}, [ parentAttributes?.layout ] );
+	}, [ parentLayout, isGridCssInParent ] );
 
 	useEffect( () => {
 		// Check if a parent of this container is one of these special blocks.
 		const attributesToUpdate = {};
 
 		// Conditionally set the isBlockRootParent attribute
-		if (!parentBlocks || parentBlocks.length === 0 || !parentBlocks.some( parent => parent.name === 'frontis-blocks/container' )) {
-			if(formContainerSwitcher === false ) {
-				attributesToUpdate.isBlockRootParent = true;
-			} else {
-				attributesToUpdate.isBlockRootParent = false;
-			}
+		const expectedRootParent = !hasContainerParent && formContainerSwitcher === false;
+		if ( attributes.isBlockRootParent !== expectedRootParent ) {
+			attributesToUpdate.isBlockRootParent = expectedRootParent;
 		}
 
 		// If the legacy video overlay opacity for video background was set, migrate it.
@@ -127,12 +124,8 @@ const Edit = (props) => {
 			attributesToUpdate.backgroundVideoOpacity = 0;
 		}
 
-		// Compare with attribute and attributeToUpdate and update only if there is a change.
-		if (attributesToUpdate.isBlockRootParent !== attributes.isBlockRootParent
-			|| attributesToUpdate.hasPopupParent !== attributes.hasPopupParent
-			|| attributesToUpdate.hasSliderParent !== attributes.hasSliderParent
-			|| attributesToUpdate.backgroundVideoOpacity !== attributes.backgroundVideoOpacity
-		) {
+		// Update only if there is an actual change
+		if ( Object.keys( attributesToUpdate ).length > 0 ) {
 			setAttributes( attributesToUpdate );
 		}
 
