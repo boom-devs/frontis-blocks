@@ -85,13 +85,14 @@ const Render = ( props ) => {
 		const selfClasses = !isBlockRootParent
 			? (containerGlobalCustomCSSClass || '').split(' ').filter(Boolean)
 			: [];
-		const customCss = getCustomCss(containerGlobalCustomCSS, `#${blockProps.id}`, ' ', selfClasses);
+		const containerId = attributes.p_block_id || blockProps.id;
+		const customCss = getCustomCss(containerGlobalCustomCSS, `#${containerId}`, ' ', selfClasses);
 		// Only update if value actually changed
 		if (containerGlobalCustomCSSValue !== customCss) {
 			setAttributes({containerGlobalCustomCSSValue: customCss});
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [containerGlobalCustomCSS, blockProps.id, containerGlobalCustomCSSClass]);
+	}, [containerGlobalCustomCSS, attributes.p_block_id, blockProps.id, containerGlobalCustomCSSClass]);
 
 	if (modifBlockProps.className && modifBlockProps.className.includes('alignfull') && containerType !== 'full-width') {
 		modifBlockProps.className = modifBlockProps.className

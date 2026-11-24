@@ -10,6 +10,9 @@ import { getFallbackNumber } from '@Config/getAttributeFallback';
 import gridCssObject from '@Config/gridCssCreator';
 import backgroundCss from './backgroundCss';
 function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = false) {
+	if (attributes?.p_block_id) {
+		clientId = attributes.p_block_id.replace(/^block-/, '');
+	}
 	const blockName = name.replace('frotins-blocks/', '');
 	let {
 		directionDesktop,

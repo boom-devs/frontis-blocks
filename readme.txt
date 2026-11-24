@@ -3,7 +3,7 @@ Contributors: wpmessiah
 Tags: block, blocks, blocks-editor, gutenberg,  gutenberg blocks,
 Requires at least: 6.0
 Tested up to: 7.1
-Stable tag: 1.2.7
+Stable tag: 1.2.8
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html 
@@ -243,6 +243,10 @@ There is no prerequisites for installing **Frontis Blocks**. You can follow the 
 
 
 == Changelog ==
+
+= 1.2.8 =
+- **Fixed**: Resolved Gutenberg block editor out-of-memory crash and infinite serialization loop caused by transient client ID mismatch in Container block dynamic styling.
+- **Improved**: Ensured persistent `p_block_id` scoping for container styles and cache busting for compiled assets.
 
 = 1.2.7 =
 - **New**: Dynamic readme.txt parser (`ReadmeParser`) with 100% WordPress.org modal parity (Description, Installation, FAQ, Changelog).
