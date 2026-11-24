@@ -9,6 +9,7 @@ import generateCSSUnit from '@Config/generateCSSUnit';
 import { getFallbackNumber } from '@Config/getAttributeFallback';
 import gridCssObject from '@Config/gridCssCreator';
 import backgroundCss from './backgroundCss';
+import getCustomCss from '@Utils/getCustomCss';
 function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = false) {
 	if (attributes?.p_block_id) {
 		clientId = attributes.p_block_id.replace(/^block-/, '');
@@ -297,7 +298,9 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		containerBgOverlayHoverBackgroundImageRepeat,
 		containerBgOverlayHoverBackgroundImageSize,
 
+		containerGlobalCustomCSS,
 		containerGlobalCustomCSSValue,
+		containerGlobalCustomCSSClass,
 
 	} = attributes;
 
@@ -1761,7 +1764,15 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 	);
 
 	styling_css += generateCSS(widthSelectorsMobile, ' ', true, 'mobile', fullWidthContentBoxedWidthHasEdited, fullWidthContentBoxedWidth.Mobile);
-	styling_css += containerGlobalCustomCSSValue;
+	if (containerGlobalCustomCSS) {
+		const selfClasses = !isBlockRootParent
+			? (containerGlobalCustomCSSClass || '').split(' ').filter(Boolean)
+			: [];
+		const targetId = attributes?.p_block_id || `block-${clientId}`;
+		styling_css += getCustomCss(containerGlobalCustomCSS, `#${targetId.replace(/^#/, '')}`, ' ', selfClasses);
+	} else if (containerGlobalCustomCSSValue) {
+		styling_css += containerGlobalCustomCSSValue;
+	}
 	return styling_css;
 }
 
